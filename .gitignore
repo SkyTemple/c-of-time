@@ -1,0 +1,11 @@
+/build
+
+overlay_0036.bin
+overlay_0036.elf
+overlay_0036.asm
+
+rom.nds
+out.nds
+*.nds.skytemple
+
+symbols.ld

@@ -1,0 +1,3 @@
+[submodule "pmdsky-debug"]
+	path = pmdsky-debug
+	url = https://github.com/UsernameFodder/pmdsky-debug
