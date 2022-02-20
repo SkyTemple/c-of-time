@@ -14,14 +14,17 @@ include $(DEVKITARM)/ds_rules
 # SOURCES is a list of directories containing source code
 # INCLUDES is a list of directories containing extra header files
 #---------------------------------------------------------------------------------
-REGION := NA # <-- Change to EU if required
+
+#             <-- Change to EU if required
+REGION := NA
 ROM := rom.nds
 ROM_OUT := out.nds
 
-TARGET		:=	overlay_0036
+TARGET		:=	out
 BUILD		:=	build
 SOURCES		:=	src  
 INCLUDES	:=	include pmdsky-debug/headers
+OPT_LEVEL := -O2
 
 PYTHON := python3
 
@@ -30,7 +33,7 @@ PYTHON := python3
 #---------------------------------------------------------------------------------
 ARCH	:=	-marm -mno-thumb-interwork
 
-CFLAGS	:=	-g -Wall -O2 \
+CFLAGS	:=	-g -Wall $(OPT_LEVEL) \
  			-march=armv5te -mtune=arm946e-s -fomit-frame-pointer -fno-short-enums \
 			-ffast-math \
 			$(ARCH)
@@ -39,7 +42,9 @@ CFLAGS	+=	$(INCLUDE) -DARM9
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
 
 ASFLAGS	:=	-g $(ARCH)
-LDFLAGS	=	-T $(CURDIR)/../symbols.ld -T $(CURDIR)/../symbols_custom.ld -T $(CURDIR)/../linker.ld -g $(ARCH) -Wl,-Map,$(notdir $*.map) -Xlinker -no-enum-size-warning
+LDFLAGS	=	-T $(CURDIR)/../symbols/generated_$(REGION).ld \
+			-T $(CURDIR)/../symbols/custom_$(REGION).ld -T $(CURDIR)/../linker.ld \
+			-g $(ARCH) -Wl,-Map,$(notdir $*.map) -Xlinker -no-enum-size-warning -nostdlib
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
@@ -95,7 +100,7 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
  
 #---------------------------------------------------------------------------------
 .PHONY: $(BUILD)
-$(BUILD): symbols.ld
+$(BUILD): symbols/generated_$(REGION).ld
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
  
@@ -103,7 +108,7 @@ $(BUILD): symbols.ld
 .PHONY: clean
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).bin $(TARGET).asm $(ROM_OUT).nds symbols.ld
+	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).bin $(TARGET).asm $(ROM_OUT).nds symbols/generated_*.ld
  
 #---------------------------------------------------------------------------------
 else
@@ -125,12 +130,12 @@ $(OUTPUT).elf	:	$(OFILES)
 endif
 #---------------------------------------------------------------------------------------
 
-symbols.ld:
+symbols/generated_$(REGION).ld:
 	$(PYTHON) scripts/generate_linkerscript.py $(REGION)
 
 .PHONY: patch
 patch: build
-	$(PYTHON) scripts/patch.py $(ROM) $(OUTPUT).bin $(OUTPUT).elf $(ROM_OUT)
+	$(PYTHON) scripts/patch.py $(REGION) $(ROM) $(OUTPUT).bin $(OUTPUT).elf $(ROM_OUT)
 
 .PHONY: asmdump
 asmdump: build

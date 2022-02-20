@@ -51,7 +51,7 @@ for yaml_file_path in glob.glob("pmdsky-debug/symbols/*.yml"):
           linkerscript_lines.append(f"{name} = {hex(addr)};")
           all_symbols.add(name)
 
-with open('symbols.ld', 'w') as f:
+with open(f"symbols/generated_{region}.ld", "w") as f:
   for line in linkerscript_lines:
     f.write(line)
     f.write('\n')

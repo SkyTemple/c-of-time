@@ -4,4 +4,4 @@
 // execution will continue after the call to GetMovePower once our function returns.
 // The offset +0 is hexadeximal.
 GetMovePower+0:
-  B customGetMovePower
+  B CustomGetMovePower

@@ -10,10 +10,15 @@ import glob
 
 OVERLAY_INDEX = 36
 
-rom_path = sys.argv[1]
-overlay_bin_path = sys.argv[2]
-overlay_elf_path = sys.argv[3]
-rom_out_path = sys.argv[4]
+# Overlay load address + offset to common area
+# see https://docs.google.com/document/d/1Rs4icdYtiM6KYnWxMkdlw7jpWrH7qw5v6LOfDWIiYho
+START_ADDRESS = 0x23D7FF0 
+
+region = sys.argv[1]
+rom_path = sys.argv[2]
+overlay_bin_path = sys.argv[3]
+overlay_elf_path = sys.argv[4]
+rom_out_path = sys.argv[5]
 
 tool_path = os.path.join(os.environ["DEVKITARM"], "bin")
 
@@ -27,7 +32,7 @@ linkerscript_file_regex = re.compile('\/\* !file (arm9|overlay(\d\d?))', re.IGNO
 linkerscript_symbol_regex = re.compile('(.+) = 0x(.+);', re.IGNORECASE)
 
 def load_linkerscript_symbols():
-  for file in ["symbols.ld", "symbols_custom.ld"]:    
+  for file in [f"symbols/generated_{region}.ld", f"symbols/custom_{region}.ld"]:    
     with open(file, 'r') as f:
       overlay_index = None
       for line in f:
@@ -85,16 +90,24 @@ def apply_overlay():
   assert OVERLAY_INDEX in overlays, "No overlay 36 found, apply the ExtraSpace patch first."
   overlay = overlays[OVERLAY_INDEX]
   assert overlay.ramAddress == 0x023A7080, "Unexpected RAM start address"
+  assert overlay.ramSize == 0x38F80, "Unexpected overlay RAM size"
+  overlay_bytes = rom.files[overlay.fileID]
 
   with open(overlay_bin_path, "rb") as f:
-    overlay_bytes = f.read()
+    custom_code_bytes = f.read()
 
-  overlay.data = overlay_bytes
+  # Combine the existing overlay bytes with the custom code
+  padding = START_ADDRESS - overlay.ramAddress
+  new_overlay_bytes = bytearray(padding + len(custom_code_bytes))
+  new_overlay_bytes[0:len(overlay_bytes)] = overlay_bytes
+  new_overlay_bytes[padding:padding + len(custom_code_bytes)] = custom_code_bytes
+
+  overlay.data = new_overlay_bytes
   overlay.staticInitStart = overlay_symbols_lookup['__init_array_start']
   overlay.staticInitEnd = overlay_symbols_lookup['__init_array_end']
-  overlay.bssSize = overlay_symbols_lookup['__bss_end__'] - overlay_symbols_lookup['__bss_start__']
+  overlay.bssSize = 0 # .bss is included in the binary
   overlay.save()
-  rom.files[overlay.fileID] = overlay_bytes
+  rom.files[overlay.fileID] = new_overlay_bytes
   rom.arm9OverlayTable = ndspy.code.saveOverlayTable(overlays)
 
 def apply_binary_patches():

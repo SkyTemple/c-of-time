@@ -2,7 +2,7 @@
 #include <cot_basedefs.h>
 
 // This function is called from a patch in patches/patch.cotpatch
-int customGetMovePower(struct entity* entity, struct move* move) {
+int CustomGetMovePower(struct entity* entity, struct move* move) {
   // Randomize move power
   int rolledPower = RandRange(1, 100);
 

@@ -1,6 +1,6 @@
 OUTPUT_ARCH(arm)
 MEMORY {
-        overlay36     : ORIGIN = 0x023A7080, LENGTH = 0x38F80
+        out     : ORIGIN = 0x23D7FF0, LENGTH = 0x8010
 }
 
 SECTIONS {
@@ -21,22 +21,21 @@ SECTIONS {
                 
                 *(.init)
                 *(.text)
+                *(.fini)
                 *(.ctors)
                 *(.dtors)
                 *(.rodata)
-                *(.fini)
+                *(.rodata.*)
+                *(.data)
+                *(.data.*)
                 *(COMMON)
                 __text_end  = . ;
                 . = ALIGN(4);
-        } >overlay36 = 0xff
-
-        .bss : {
                 __bss_start__ = . ;
                 *(.bss)
                 __bss_end__ = . ;
 
                 _end = __bss_end__ ;
                 __end__ = __bss_end__ ;
-                . = ALIGN(4);
-        } >overlay36 = 0xff
+        } >out = 0xff
 }

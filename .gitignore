@@ -1,11 +1,10 @@
 /build
 
-overlay_0036.bin
-overlay_0036.elf
-overlay_0036.asm
+out.bin
+out.elf
+out.asm
 
-rom.nds
-out.nds
+*.nds
 *.nds.skytemple
 
-symbols.ld
+symbols/generated_*.ld
