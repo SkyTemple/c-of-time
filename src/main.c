@@ -7,8 +7,9 @@ int CustomGetMovePower(struct entity* entity, struct move* move) {
   int rolledPower = RandRange(1, 100);
 
   // Print the rolled value to the message log
-  char messageBuffer[20];
-  Sprintf(messageBuffer, "Rolled move power %d!", rolledPower);
+  char messageBuffer[32];
+  Snprintf(messageBuffer, 32, "Rolled move power %d!", rolledPower);
+  
   LogMessage(entity, messageBuffer, true);
 
   return rolledPower;
