@@ -49,7 +49,7 @@ SomeOtherDungeonFunction = 0x22DEEFF;
 
 ## Code size constraints
 
-The built code gets injected into the custom overlay 36. The entire overlay is 228 KB big, most of which is reserved for common patches provided by SkyTemple. Your code will be placed in the last 32 KB, which are considered the "common area" . If the binary is greater than 32 KB, you will get the following linker error: 
+The built code gets injected into the custom overlay 36. The entire overlay is 228 KB big, most of which is reserved for common patches provided by SkyTemple. Your code will be placed in the last 32 KB, which are considered the "common area" . If the binary is larger than 32 KB, you will get the following linker error: 
 ```
 error "section '.text' will not fit in region 'out'"
 ```

@@ -80,7 +80,7 @@ def load_overlay_symbols():
 def resolve_symbol(symbol):
   # Returns address and overlay ID
   if symbol in overlay_symbols_lookup:
-    return (overlay_symbols_lookup[symbol], 36)
+    return (overlay_symbols_lookup[symbol], OVERLAY_INDEX)
   if symbol in rom_symbols_lookup:
     return rom_symbols_lookup[symbol]
 
