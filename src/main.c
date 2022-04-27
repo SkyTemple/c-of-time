@@ -17,11 +17,11 @@ int CustomGetMovePower(struct entity* entity, struct move* move) {
 
 // This function isn't in pmdsky-debug yet, so we have to declare it
 // here and add its offset in "symbols/custom_[region].ld".
-extern void ChangeGlobalBorderColor(bool isPink);
+extern void ChangeGlobalBorderColor(int color_type);
 
 // Special process 100: Change border color
 int SpChangeBorderColor(short arg1) {
-  ChangeGlobalBorderColor(arg1 != 0);
+  ChangeGlobalBorderColor(arg1);
   return 0;
 }
 
