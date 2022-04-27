@@ -29,10 +29,10 @@ If you want to check the generated assembly, run `make asmdump`. A file `out.asm
 ## Usage
 Patches can be added to `.cotpatch` files inside the `patches` directory. These patch files contain offsets into functions that should be patched and assembly instructions, which allow calling into custom code. See `src/main.c` and `patches/patches.cotpatch` for examples.
 
-### Logging
-You can use the logging macros `COT_LOG`, `COT_WARN` and `COT_ERROR`. To view the logs, open the ROM in the SkyTemple debugger and check "Game Internal" in the log window.
+### Logging and assertions
+You can use the logging macros `COT_LOG`, `COT_WARN` and `COT_ERROR`. To view the logs, open the ROM in the SkyTemple debugger and check "Game Internal" in the log window. A macro for assertions `COT_ASSERT(expr)` is also available.
 
-To disable logging globally and save some performance, change `RELEASE_CONFIG` in `Makefile`.
+To disable assertions and logging globally and save some performance, change `RELEASE_CONFIG` in `Makefile`.
 
 ### Custom special processes
 To create custom special processes, add them into the `switch` statement in `CustomScriptSpecialProcessCall`. This function is only called for special process ID 100 and greater for compatibility with existing patches.
