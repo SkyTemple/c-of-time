@@ -47,7 +47,8 @@ for yaml_file_path in glob.glob("pmdsky-debug/symbols/*.yml"):
               continue
             addr = addr[0]
 
-          assert not name in all_symbols, f"Duplicate symbol: '{name}'"
+          if name in all_symbols:
+            print(f"Warning: Duplicate symbol: '{name}'")
           linkerscript_lines.append(f"{name} = {hex(addr)};")
           all_symbols.add(name)
 

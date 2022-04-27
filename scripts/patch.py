@@ -55,7 +55,9 @@ def load_linkerscript_symbols():
               "Add a comment: '/* !file overlayXX */' or '/* !file arm9 */'"
             symbol_name, offset_str = match.groups()
             offset = int(offset_str, 16)
-            assert not symbol_name in rom_symbols_lookup, f"Duplicate symbol: '{symbol_name}'"
+
+            if symbol_name in rom_symbols_lookup:
+              print(f"Warning: Duplicate symbol: '{symbol_name}'")
             rom_symbols_lookup[symbol_name] = (offset, overlay_index)
 
 def load_overlay_symbols():
@@ -161,7 +163,10 @@ def apply_binary_patch(file_path, overlay_bytes):
 
           if not split_line[1].isnumeric() and not split_line[1].startswith("0x") and not split_line[1].endswith("h"):
             # The branch is not numeric, so it points to a symbol
-            sym_offset, _ = resolve_symbol(split_line[1])
+            resolved = resolve_symbol(split_line[1])
+            assert resolved, f"Failed to resolve symbol: '{split_line[1]}'"
+
+            sym_offset, _ = resolved
             if sym_offset:
               line = f"{split_line[0]} {hex(sym_offset - current_offset)}"
 

@@ -1,0 +1,3 @@
+// Internally used patches
+ScriptSpecialProcessCall+0:
+  B cotInternalTrampolineScriptSpecialProcessCall
