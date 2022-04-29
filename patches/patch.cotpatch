@@ -3,5 +3,7 @@
 // replaced with our own. The "B" instruction doesn't modify the link register, so
 // execution will continue after the call to GetMovePower once our function returns.
 // The offset +0 is hexadeximal.
-GetMovePower+0:
-  B CustomGetMovePower
+
+// Remove the comment to enable this example:
+// GetMovePower+0:
+//  B CustomGetMovePower

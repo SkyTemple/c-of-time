@@ -34,8 +34,13 @@ You can use the logging macros `COT_LOG`, `COT_WARN` and `COT_ERROR`. To view th
 
 To disable assertions and logging globally and save some performance, change `RELEASE_CONFIG` in `Makefile`.
 
-### Custom special processes
+### Custom move/item effects and special processes
 To create custom special processes, add them into the `switch` statement in `CustomScriptSpecialProcessCall`. This function is only called for special process ID 100 and greater for compatibility with existing patches.
+
+You can add custom item or move effects in `CustomApplyItemEffect` and `CustomApplyMoveEffect`.
+
+#### Compatiblity with existing patches
+This project aims to keep compatibility with existing patches for move, item and special process effects to some degree. Special process effects using the `ExtractSpCode` patch can be reused without problems if they were imported with an ID lower than 100. Compatiblity with the `ExtractMoveCode` has not been thoroughly tested yet and might potentially cause issues with the *Metronome* move.
 
 ## Updating symbol definitions and headers
 To update symbol data from `pmdsky-debug`, run `git submodule foreach git pull origin master`,

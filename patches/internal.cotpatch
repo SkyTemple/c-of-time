@@ -1,3 +1,9 @@
 // Internally used patches
 ScriptSpecialProcessCall+0:
   B cotInternalTrampolineScriptSpecialProcessCall
+
+ApplyItemEffect+0:
+  B cotInternalTrampolineApplyItemEffect
+
+ApplyMoveEffectHookAddr+0:
+  B cotInternalTrampolineApplyMoveEffect
