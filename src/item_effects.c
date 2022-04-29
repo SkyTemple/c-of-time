@@ -25,7 +25,7 @@ bool CustomApplyItemEffect(
 ) {
   COT_LOGFMT(COT_LOG_CAT_EFFECTS, "Running item effect %d", item->id.val);
   switch (item->id.val) {
-    case 99:
+    case ITEM_MAX_ELIXIR:
       // Replace item 99 (Max Elixir) with custom Elixir effect
       ItemElixir(target);
       // Return true to signal that we've handled the effect

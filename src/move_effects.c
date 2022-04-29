@@ -26,7 +26,7 @@ bool CustomApplyMoveEffect(
 ) {
   COT_LOGFMT(COT_LOG_CAT_EFFECTS, "Running move effect %d", data->move_id);
   switch (data->move_id) {
-    case 260:
+    case MOVE_SCRATCH:
       // Replace move 260 (Scratch) with custom Body Press effect
       data->out_dealt_damage = MoveBodyPress(user, target, move);
       // Return true to signal that we've handled the effect
