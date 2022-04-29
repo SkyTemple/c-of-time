@@ -5,7 +5,7 @@
 // Based on https://github.com/Adex-8x/EoS-ASM-Effects/blob/main/moves/gen8/body_press.asm
 // Deals damage based on the user's defense instead of attack stat
 static bool MoveBodyPress(struct entity* user, struct entity* target, struct move* move) {
-  if (target->type == ENTITY_MONSTER) {
+  if (user->type == ENTITY_MONSTER) {
     struct monster* user_monster = (struct monster*) user->info;
 
     int old_attack = user_monster->atk;
