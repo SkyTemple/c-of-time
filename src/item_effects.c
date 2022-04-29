@@ -1,7 +1,7 @@
 #include <pmdsky.h>
 #include <cot.h>
 
-// Item 1399: Elixir: Refills 10 PP of each move
+// Elixir: Refills 10 PP of each move
 static void ItemElixir(struct entity* target) {
   if (target->type == ENTITY_MONSTER) {
     struct monster* target_monster = (struct monster*) target->info;
