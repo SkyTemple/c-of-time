@@ -1,9 +1,2 @@
-// Replace the "GetMovePower" function with a custom one.
-// Since a branch is inserted at the start of the function, the function is practically
-// replaced with our own. The "B" instruction doesn't modify the link register, so
-// execution will continue after the call to GetMovePower once our function returns.
-// The offset +0 is hexadeximal.
-
-// Remove the comment to enable this example:
-// GetMovePower+0:
-//  B CustomGetMovePower
+ApplyMoveEffectJumpAddr+0:
+  b TrampolineAfterApplyMoveEffect

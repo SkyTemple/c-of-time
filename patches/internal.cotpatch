@@ -7,3 +7,4 @@ ApplyItemEffectHookAddr+0:
 
 ApplyMoveEffectHookAddr+0:
   B cotInternalTrampolineApplyMoveEffect
+
