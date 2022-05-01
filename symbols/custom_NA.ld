@@ -9,3 +9,6 @@ ApplyItemEffectJumpAddr = 0x0231CB14;
 
 /* !file arm9 */
 ChangeGlobalBorderColor = 0x02027A80;
+
+/* !file overlay36 */
+ManualModeOn = 0x023A7090;

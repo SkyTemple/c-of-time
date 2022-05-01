@@ -46,7 +46,6 @@ def load_linkerscript_symbols():
             overlay_index = -1
           elif overlay_id_str:
             overlay_index = int(overlay_id_str)
-            assert overlay_index != OVERLAY_INDEX, "Linker script must not contain symbols from the custom overlay."
 
         else:
           match = linkerscript_symbol_regex.match(line)

@@ -12,6 +12,14 @@ static int SpChangeBorderColor(short arg1) {
   return 0;
 }
 
+extern uint8_t ManualModeOn;
+
+// Enable or disable Complete Team Control
+static int SpSetCtcEnabled(short arg1) {
+  ManualModeOn = arg1 != 0;
+  return 0;
+}
+
 // Called for special process IDs 100 and greater
 int CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_process_id, short arg1, short arg2) {
   // TODO: arg2 doesn't seem to match the argument in the script engine?
@@ -21,6 +29,8 @@ int CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_process
   switch (special_process_id) {
     case 100:
       return SpChangeBorderColor(arg1);
+    case 101:
+      return SpSetCtcEnabled(arg1);
 
     // Add your own SP's here...  
 
