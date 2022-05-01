@@ -5,7 +5,6 @@
 static void ItemElixir(struct entity* target) {
   if (target->type == ENTITY_MONSTER) {
     struct monster* target_monster = (struct monster*) target->info;
-
     for (int i = 0; i < 4; i++) {
       struct move* current_move = &target_monster->moves[i];
       uint8_t max_pp = GetMaxPp(current_move);
@@ -20,8 +19,7 @@ static void ItemElixir(struct entity* target) {
 
 // Called when using items. Should return true if a custom effect was applied.
 bool CustomApplyItemEffect(
-  undefined4 unknown_1, undefined4 unknown_2, undefined4 unknown_3,
-  struct entity* user, struct entity* target, struct item* item
+  struct entity* user, struct entity* target, struct item* item, bool is_thrown
 ) {
   COT_LOGFMT(COT_LOG_CAT_EFFECTS, "Running item effect %d", item->id.val);
   switch (item->id.val) {

@@ -1,6 +1,6 @@
 .align 4
 cotInternalTrampolineScriptSpecialProcessCall:
-  // If the special process ID is >= 1000, handle it as a custom special process
+  // If the special process ID is >= 100, handle it as a custom special process
   cmp r1, #100
   bge CustomScriptSpecialProcessCall
 
@@ -12,56 +12,33 @@ cotInternalTrampolineScriptSpecialProcessCall:
 .align 4
 cotInternalTrampolineApplyItemEffect:
   // Backup registers
-  ldr r6, =reg_backup
-  str r0, [r6]
-  str r1, [r6, #0x4]
-  str r2, [r6, #0x8]
-  str r3, [r6, #0xC]
-  str r4, [r6, #0x10]
-  str r5, [r6, #0x14]
-  str lr, [r6, #0x18]
+  push {r0-r9, r11, r12}
 
   // Call the hook function
+  mov r0, r8
+  mov r1, r7
+  mov r2, r6
+  mov r3, r9
   bl CustomApplyItemEffect
   // Check if true was returned
   cmp r0, #1
 
-  // If yes, exit the original function by jumping to the link register
-  ldr r6, =reg_backup
-  ldreq lr, [r6, #0x18]
-  bxeq lr
-
   // Load saved registers
-  ldr r0, [r6]
-  ldr r1, [r6, #0x4]
-  ldr r2, [r6, #0x8]
-  ldr r3, [r6, #0xC]
-  ldr r4, [r6, #0x10]
-  ldr r5, [r6, #0x14]
-  ldr lr, [r6, #0x18]
+  popeq {r0-r9, r11, r12}
+
+  // If yes, exit the original function by jumping to the link register
+  beq ApplyItemEffectJumpAddr
+
+  pop {r0-r9, r11, r12}
 
   // Restore the instruction that was replaced with the patch and call the original function
-  push {r3, r4, r5, r6, r7, r8, r9, r10, lr}
-  b ApplyItemEffect+4
+  cmp r0, #0
+  b ApplyItemEffectHookAddr+4
 
 .align 4
 cotInternalTrampolineApplyMoveEffect:
   // Backup registers
-  ldr r10, =reg_backup
-  str r0, [r10]
-  str r1, [r10, #0x4]
-  str r2, [r10, #0x8]
-  str r3, [r10, #0xC]
-  str r4, [r10, #0x10]
-  str r5, [r10, #0x14]
-  str r6, [r10, #0x18]
-  str r7, [r10, #0x1C]
-  str r8, [r10, #0x20]
-  str r9, [r10, #0x24]
-  str r11, [r10, #0x28]
-  str r12, [r10, #0x2C]
-  str r13, [r10, #0x30]
-  str lr, [r10, #0x34]
+  push {r0-r9, r11, r12}
 
   // Setup move_effect_input struct
   ldr r10, =move_effect_input
@@ -76,39 +53,24 @@ cotInternalTrampolineApplyMoveEffect:
   mov r2, r4
   mov r3, r8
   bl CustomApplyMoveEffect
+
   // Check if true was returned
   cmp r0, #1
 
-  // If yes, exit the original function by jumping to the link register
-  ldr r10, =reg_backup
-  ldreq lr, [r10, #0x34]
+  // Load saved registers
+  popeq {r0-r9, r11, r12}
+  ldreq r10, =move_effect_input_out_dealt_damage
+
+  // If yes, exit the original function
   beq ApplyMoveEffectJumpAddr
 
-  // Load saved registers
-  ldr r0, [r10]
-  ldr r1, [r10, #0x4]
-  ldr r2, [r10, #0x8]
-  ldr r3, [r10, #0xC]
-  ldr r4, [r10, #0x10]
-  ldr r5, [r10, #0x14]
-  ldr r6, [r10, #0x18]
-  ldr r7, [r10, #0x1C]
-  ldr r8, [r10, #0x20]
-  ldr r9, [r10, #0x24]
-  ldr r11, [r10, #0x28]
-  ldr r12, [r10, #0x2C]
-  ldr r13, [r10, #0x30]
-  ldr lr, [r10, #0x34]
-
-  ldr r10, =move_effect_input_out_dealt_damage
+  pop {r0-r9, r11, r12}
 
   // Restore the instruction that was replaced with the patch and call the original function
   mov r1, #0x1
   b ApplyMoveEffectHookAddr+4
 
 .align 4
-reg_backup:
-  .space 0x40
 move_effect_input:
   .word 0
   .word 0
