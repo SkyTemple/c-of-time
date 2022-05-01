@@ -26,7 +26,7 @@ cotInternalTrampolineApplyItemEffect:
   // Load saved registers
   popeq {r0-r9, r11, r12}
 
-  // If yes, exit the original function by jumping to the link register
+  // If yes, exit the original function
   beq ApplyItemEffectJumpAddr
 
   pop {r0-r9, r11, r12}
