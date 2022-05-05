@@ -8,6 +8,10 @@ SECTIONS {
 
                 FILL (0xABCD)
 
+                __exidx_start = .;
+                __exidx_end = .;
+                abort = .;
+
                 __text_start = . ;
 
                 __init_array_start = .;
