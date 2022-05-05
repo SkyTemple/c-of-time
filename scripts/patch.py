@@ -132,6 +132,7 @@ offset_regex = re.compile('(.+)\+(\d):', re.IGNORECASE)
 branch_regex = re.compile('^bl?(eq|ne|cs|hs|cc|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)?$', re.IGNORECASE)
 
 def apply_binary_patch(file_path, overlay_bytes):
+  print("Applying binary patch: " + file_path)
   assembler = keystone.Ks(keystone.KS_ARCH_ARM, keystone.KS_MODE_ARM)
 
   with open(file_path, 'r') as f:
@@ -161,7 +162,7 @@ def apply_binary_patch(file_path, overlay_bytes):
         if branch_regex.match(split_line[0]):
           assert len(split_line) >= 2, "Branch must have an operand"
 
-          if not split_line[1].isnumeric() and not split_line[1].startswith("0x") and not split_line[1].endswith("h"):
+          if not split_line[1].isnumeric() and not split_line[1].startswith("0x"):
             # The branch is not numeric, so it points to a symbol
             resolved = resolve_symbol(split_line[1])
             assert resolved, f"Failed to resolve symbol: '{split_line[1]}'"
