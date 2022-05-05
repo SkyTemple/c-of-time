@@ -1,0 +1,34 @@
+cargo-features = ["different-binary-name"]
+
+[package]
+name = "your-eos-rust-project"
+description = "..."
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "your-eos-rust-project"
+# Don't change this:
+filename = "eos-rs-bin.elf"
+
+[workspace]
+members = ["cargo-cot", "eos-rs", "eos-rs/patches-def", "eos-rs/proc", "eos-rs/build"]
+
+[dependencies]
+eos-rs = { path = "./eos-rs" }
+
+[build-dependencies]
+eos-rs-build = { path = "./eos-rs/build" }
+
+[profile.release]
+strip = false  # DON'T strip the symbols. This will be done right before burning the patch.
+opt-level = "z"  # Optimize for size.
+panic = "abort"
+lto = "fat"
+
+[profile.dev]
+strip = false  # DON'T strip the symbols. This will be done right before burning the patch.
+opt-level = "z"  # Optimize for size.
+panic = "abort"
+lto = "fat"
+overflow-checks = false  # Bug: https://github.com/rust-lang/compiler-builtins/issues/347
