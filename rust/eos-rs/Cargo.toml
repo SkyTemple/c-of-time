@@ -1,0 +1,21 @@
+[package]
+name = "eos-rs"
+description = "Rust bindings and FFI for Explorers of Sky"
+authors = ["Marco 'Capypara' Köpcke <hello@capypara.de>"]
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["rlib"]
+
+[dependencies]
+# This fork removes float support, int support and math support from the compiler builtins.
+# This is because (a) they aren't needed and (b) there are some issues with dependencies on the
+# core crate when linking. See: https://github.com/rust-lang/compiler-builtins/issues/347
+# Normally this would conflict with the default compiler_builtin pulled by Cargo,
+# but due to a small hack in .cargo/config.toml, and the naming below this works.
+compiler_builtins_local = { git = "https://github.com/theCapypara/compiler-builtins", branch = "nds-eos", package = "compiler_builtins" }
+# This fork forces atomics to be off, which is required to compile against the NDS.
+log = { git = "https://github.com/theCapypara/log", branch = "master" }
+eos-rs-proc = { path = "./proc" }
+fixed = "1"

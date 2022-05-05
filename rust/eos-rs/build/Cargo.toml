@@ -1,0 +1,11 @@
+[package]
+name = "eos-rs-build"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+quote = { version = "1" }
+syn = { version = "1", features = ["full", "visit"] }
+glob = "0.3"
+which = "4"
+eos-rs-patches-def = { path = "../patches-def" }
