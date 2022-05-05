@@ -42,6 +42,10 @@ CFLAGS	:=	-g -Wall $(OPT_LEVEL) $(RELEASE_CONFIG) $(SP_EFFECT_COMPAT) \
 			$(ARCH)
 
 CFLAGS	+=	$(INCLUDE) -DARM9 -flto
+
+# Those are to be set by command line arguments.
+CFLAGS  +=  $(EXTRA_CFLAGS)
+
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
 
 ASFLAGS	:=	-g $(ARCH)
@@ -67,7 +71,7 @@ LIBDIRS	:=
 #---------------------------------------------------------------------------------
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 #---------------------------------------------------------------------------------
- 
+
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
  
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir))
@@ -106,6 +110,11 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 $(BUILD): symbols/generated_$(REGION).ld
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+
+.PHONY: buildobjs
+buildobjs:
+	@[ -d $(BUILD) ] || mkdir -p $(BUILD)
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile buildobjs
  
 #---------------------------------------------------------------------------------
 .PHONY: clean
@@ -126,6 +135,9 @@ $(OUTPUT).bin : $(OUTPUT).elf
 	$(DEVKITARM)/bin/arm-none-eabi-objcopy -O binary $(OUTPUT).elf $(OUTPUT).bin
 
 $(OUTPUT).elf	:	$(OFILES)
+
+.PHONY: buildobjs
+buildobjs: $(OFILES)
 
 -include $(DEPENDS)
  
