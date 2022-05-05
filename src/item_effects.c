@@ -29,7 +29,12 @@ bool CustomApplyItemEffect(
       // Return true to signal that we've handled the effect
       return true;
     default:
-      // Return false to use the game's normal effect
+#ifdef COT_RUST
+      // If the Rust runtime of c-of-time is used, ask the Rust implementation to process the effect.
+      return eos_rs_apply_item_effect(user, target, item, is_thrown);
+#else
+      // Otherwise: Return false to use the game's normal effect
       return false;
+#endif
   }
 }
