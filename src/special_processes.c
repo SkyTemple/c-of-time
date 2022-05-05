@@ -25,7 +25,13 @@ int CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_process
     // Add your own SP's here...  
 
     default:
+#ifdef COT_RUST
+      // If the Rust runtime of c-of-time is used, ask it to take over from here.
+      eos_rs_call_special_process(unknown, special_process_id, arg1, arg2);
+#else
+      // Otherwise: Log a warning that the special processed went unhandled.
       COT_WARNFMT(COT_LOG_CAT_SPECIAL_PROCESS, "Unhandled special process ID %d", special_process_id);
+#endif
   }
 
   return 0;
