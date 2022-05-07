@@ -2,18 +2,14 @@ use core::panic::PanicInfo;
 use log::error;
 
 #[panic_handler]
-#[cfg(not(debug_assertions))]
-/// Panic by aborting.
+/// Panic by logging the panic and then calling the game's
+/// built-in function for hanging it.
 fn panic(panic: &PanicInfo<'_>) -> ! {
     error!("{}", panic);
-    core::intrinsics::abort()
+    unsafe { WaitForever() }
 }
 
-#[panic_handler]
-#[cfg(debug_assertions)]
-/// Panic by halting using an infinite loop.
-/// This is easier to debug than the release panic handler.
-fn panic(panic: &PanicInfo<'_>) -> ! {
-    error!("{}", panic);
-    loop {}
+extern "C" {
+    #[allow(clashing_extern_declarations)]
+    pub(crate) fn WaitForever() -> !;
 }

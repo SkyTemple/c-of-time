@@ -1,10 +1,15 @@
+//! Module for dealing with the load-state of Nintendo DS overlays.
+
 use crate::ffi;
 
 /// This represents a promise to the compiler that while a reference
-/// to this struct exists, the overlay N is loaded. This is used as
-/// a parameter in functions that need a given overlay to be loaded.
+/// to this struct exists, the overlay N is loaded.
+///
+/// This is used as a parameter in functions that need a given overlay to be loaded.
+///
 /// Dropping the lease does *not* unload an overlay, but you can use
-/// the `unload` method on a lease to do so.
+/// the [`Self::unload`] method on a lease to do so.
+///
 /// You can clone a lease, but you will have the responsibility to make
 /// sure the overlay is not unloaded while clone lease is in use too.
 #[derive(Clone)]
@@ -13,7 +18,7 @@ pub struct OverlayLoadLease<const N: u32>(());
 impl<const N: u32> OverlayLoadLease<N> {
     /// Gets a lease on a loaded overlay.
     ///
-    /// This is a checked version of acquire_unchecked.
+    /// This is a runtime checked version of `acquire_unchecked`.
     /// It will panic if the overlay is not loaded.
     ///
     /// # Important

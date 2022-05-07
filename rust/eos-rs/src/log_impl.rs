@@ -1,3 +1,5 @@
+//! [`log`] crate logging implementation for EoS.
+
 use alloc::ffi::CString;
 use alloc::format;
 use crate::ctypes::c_char;
@@ -7,6 +9,7 @@ use crate::ffi;
 static LOGGER: EoSLogger = EoSLogger;
 static mut LOGGER_INIT: bool = false;
 
+/// Registers the logger at the [`log`] crate. This is safe to be called multiple times.
 pub fn register_logger() {
     // We will ignore errors during logger setup.
     // SAFETY: We only have one thread, we are sure we are the only ones calling this.
@@ -28,10 +31,12 @@ impl log::Log for EoSLogger {
     fn log(&self, record: &Record) {
         if self.enabled(record.metadata()) {
             let c_str = CString::new(format!(
-                "[rs] {} : {} -- {}",
+                "[rs] {} : {} -- {} [{}:{}]",
                 record.level(),
                 record.target(),
-                record.args()
+                record.args(),
+                record.module_path().unwrap_or("?"),
+                record.line().unwrap_or_default()
             )).unwrap();
             let c_ptr = c_str.as_ptr() as *const c_char;
             unsafe {

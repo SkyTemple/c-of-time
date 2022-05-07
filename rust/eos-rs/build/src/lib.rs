@@ -55,10 +55,6 @@ pub fn compile_c_code(makefile: &Path) {
     remove_file(makefile_dir.join("out.elf")).ok();
     remove_file(makefile_dir.join("out.bin")).ok();
 
-    // Do NOT remove unused functions, enable LTO - make sure LTO is also enabled in the build.
-    println!("cargo:rustc-link-arg=-Wl,--no-gc-sections");
-    println!("cargo:rustc-link-arg=-flto");
-
     // This will create .o files in the build directory.
     for obj in glob(&format!("{}/*.o", makefile_dir.join("build").to_str().unwrap())).unwrap().flatten() {
         println!("cargo:rustc-link-arg={}", obj.to_str().unwrap());
