@@ -4,20 +4,20 @@
 extern crate eos_rs;
 
 use eos_rs::prelude::*;
-use eos_rs::api::alias::*;
-use eos_rs::api::dungeon_mode::{DungeonEffectsEmitter, entity_is_valid, DungeonEntityExt, LogMessageBuilder, dungeon_rand_100};
+use eos_rs::api::objects::*;
+use eos_rs::api::dungeon_mode::{DungeonEffectsEmitter, DungeonEntityExt, DungeonRng, LogMessageBuilder};
 use eos_rs::api::fixed::I24F8;
 use eos_rs::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use eos_rs::api::random;
 use eos_rs::ffi;
 use eos_rs::log_impl::register_logger;
 
-/// This defines the patches that will be written to the game, the syntax should hopefully
-/// be somewhat self-explanatory.
-/// Note that only this file (`main.rs`) must contain a call to this macro. And only once.
+// This defines the patches that will be written to the game, the syntax should hopefully
+// be somewhat self-explanatory.
+// Note that only this file (`main.rs`) must contain a call to this macro. And only once.
 patches! {
     has_high_health,
-    manipulate_assembly_and_roster: special_process 101,
+    print_args: special_process 101,
     just_panic: special_process 102,
     oran_berry_burn: item_effect item_catalog::ITEM_ORAN_BERRY,
     cut_badly_poisoned: move_effect move_catalog::MOVE_CUT,
@@ -57,12 +57,33 @@ pub extern "C" fn has_high_health(
     // This is only required for non-special process / effects patches.
     register_logger();
     info!("In has_high_health");
-    // Get reference from raw pointer
-    let entity = unsafe { &mut *entity };
 
     // We don't really need to do this, since the entity will
     // (hopefully) always be valid when this function is called,
     // but for demo purposes, lets say we want to check this.
+    assert!(DungeonEntity::is_valid(entity));
+
+    // Alternatively you can also use the low-level functions of the game
+    // directly, those are in the `ffi` module.
+    // They are all completely outside of the management of Rust and are unsafe.
+    // You need to make sure it's actually ok to call them like this:
+    unsafe { assert!(ffi::EntityIsValid(entity) > 0); }
+
+    // Get reference from raw pointer. You can generally assume that the game
+    // gives you valid pointers. In some cases it might be a good idea to at least
+    // do some null-pointer checks, but we don't need this here, especially since
+    // we already asserted the entity is valid.
+    let entity = unsafe { &mut *entity };
+
+    // We get the info for monsters. This will return None, if the entity isn't a monster.
+    // You can also check the type in entity.type_.
+    let monster_info = entity
+        .info_for_monster()
+        .expect("Entity is not a monster");
+    let high_hp = monster_info.hp >= monster_info.max_hp_stat / 4;
+
+    // The dungeon mode has it's own RNG function, we use that one here.
+    // (For the general one, use the `random` module as shown in `cut_badly_poisoned`.)
     //
     // Doing so requires calling a function from overlay 29. We need
     // to promise the compiler that overlay 29 is loaded.
@@ -71,23 +92,11 @@ pub extern "C" fn has_high_health(
     // which we can pass to the API function that checks if the entity is valid.
     // We can also get a lease on an overlay in a safe way, by using
     // `acquire`, this checks at runtime if the overlay is actually loaded.
+    //
+    // We will also need that lease for the `LogMessageBuilder` below.
     let ov29 = unsafe { OverlayLoadLease::<29>::acquire_unchecked() };
-    assert!(entity_is_valid(entity, &ov29));
 
-    // Alternatively you can also always use the low-level functions of the game
-    // directly, those are in the `ffi` module. You won't need a lease for those,
-    // but they are all completely outside of the management of Rust and are unsafe.
-    // You need to make sure it's actually ok to call them like this:
-    unsafe { assert!(ffi::EntityIsValid(entity as *mut DungeonEntity) > 0); }
-
-    // We get the info for monsters. This will return None, if the entity isn't a monster.
-    // You can also check the type in entity.type_.
-    let monster_info = entity.info_for_monster().expect("Entity is not a monster");
-    let high_hp = monster_info.hp >= monster_info.max_hp_stat / 4;
-
-    // The dungeon mode has it's own RNG function, we use that one here. For the general one,
-    // use the `random` module as shown in `cut_badly_poisoned`.
-    if high_hp && unsafe { dungeon_rand_100(&ov29) == 0 } {
+    if high_hp && DungeonRng::new(ov29.clone()).rand100() == 0 {
         LogMessageBuilder::new(ov29)
             .check_user_fainted()
             .popup()
@@ -98,16 +107,9 @@ pub extern "C" fn has_high_health(
     high_hp as ffi::bool_
 }
 
-/// This manipulates the assembly and roster to add a random
-/// new monster to the roster, and name it one of 10 random
-/// nicknames. The monster is added to the roster; if the team
-/// is already full, the fourth member is replaced by this new
-/// monster.
-/// Special process functions get passed a lease on overlay 11, since
-/// we always know overlay 11 will be loaded when a special process is run.
-pub fn manipulate_assembly_and_roster(arg1: i16, arg2: i16, ov11: &OverlayLoadLease<11>) {
-    info!("Running special process 101...");
-    //todo!()
+/// This just prints the parameters to the log.
+pub fn print_args(arg1: i16, arg2: i16, _ov11: &OverlayLoadLease<11>) {
+    info!("Running special process 101... You put in these parameters: {}, {}", arg1, arg2);
 }
 
 /// This demonstrates panics.
@@ -122,7 +124,7 @@ pub fn oran_berry_burn(
     user: &mut DungeonEntity,
     target: &mut DungeonEntity,
     used_item: &mut DungeonItem,
-    is_thrown: bool
+    _is_thrown: bool
 ) {
     info!("oran_berry_burn called.");
     // We check if the item is actually Oran Berry. This isn't really needed,
@@ -143,7 +145,7 @@ pub fn cut_badly_poisoned(
     effects: &DungeonEffectsEmitter,
     user: &mut DungeonEntity,
     target: &mut DungeonEntity,
-    used_move: &mut DungeonMove
+    used_move: &mut Move
 ) -> bool {
     info!("cut_badly_poisoned called.");
     // We check if the move is actually Cut. This isn't really needed,

@@ -5,7 +5,9 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 bindgen \
-  --raw-line "//! This module contains the 'raw' functions and types from the game. They are generatd by bindgen." \
+  --raw-line '//! This module contains the "raw" functions and types from the game. They are generatd by bindgen. It is generally recommended to try and use [`crate::api`] instead.' \
+  --raw-line "//!" \
+  --raw-line "//! For the documentation, see the symbol YAML files of pmdsky-debug at <https://github.com/UsernameFodder/pmdsky-debug/tree/master/symbols>." \
   --raw-line "#![allow(non_upper_case_globals)]" \
   --raw-line "#![allow(non_camel_case_types)]" \
   --raw-line "#![allow(non_snake_case)]" \
