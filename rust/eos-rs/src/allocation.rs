@@ -1,9 +1,12 @@
 //! Module related to allocating data on the heap.
 
 use core::alloc::{GlobalAlloc, Layout};
-use crate::ctypes::{c_char, c_void};
-use crate::{ffi, panic};
+use crate::ctypes;
+use crate::ffi;
+#[cfg(not(test))]
+use crate::panic;
 
+#[cfg(not(test))]
 #[global_allocator]
 /// Global allocator.
 pub static ALLOCATOR: EoSAllocator = EoSAllocator;
@@ -19,14 +22,15 @@ unsafe impl GlobalAlloc for EoSAllocator {
     }
 
     unsafe fn dealloc(&self, ptr: *mut u8, _layout: Layout) {
-        ffi::MemFree(ptr as *mut c_void);
+        ffi::MemFree(ptr as *mut ctypes::c_void);
     }
 }
 
+#[cfg(not(test))]
 #[alloc_error_handler]
 fn alloc_error_handler(_: Layout) -> ! {
     let err = b"[rs] OUT OF MEMORY!\0";
-    unsafe { ffi::DebugPrint(2, err.as_ptr() as *const c_char); }
+    unsafe { ffi::DebugPrint(2, err.as_ptr() as *const ctypes::c_char); }
     unsafe { panic::WaitForever() }
 }
 
