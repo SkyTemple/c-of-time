@@ -206,8 +206,7 @@ impl DungeonGridMutator {
     pub unsafe fn merge_rooms_vertically<'a>(&mut self, x: i32, y: i32, dy: i32) {
         assert!(x >= 0 && y >= 0 && dy >= 0);
         assert!(x as usize <= self.width && y as usize <= self.height && (y+dy) as usize <= self.height);
-        // SAFETY: We checked the coordinates.
-        unsafe { ffi::MergeRoomsVertically(x, y, dy, self.cells.as_mut_ptr()) }
+        ffi::MergeRoomsVertically(x, y, dy, self.cells.as_mut_ptr())
     }
 
     /// Generate extra hallways on the floor via a series of random walks.
@@ -217,14 +216,11 @@ impl DungeonGridMutator {
     /// random turns, leaving open terrain in its wake. The random walk stops when it reaches open
     /// terrain, goes out of bounds, or reaches an impassable obstruction.
     pub unsafe fn generate_extra_hallways(&mut self, number_extra_hallways: i32) {
-        // SAFETY: We checked the grid size.
-        unsafe {
-            ffi::GenerateExtraHallways(
-                self.cells.as_mut_ptr(),
-                self.width as i32, self.height as i32,
-                number_extra_hallways
-            )
-        }
+        ffi::GenerateExtraHallways(
+            self.cells.as_mut_ptr(),
+            self.width as i32, self.height as i32,
+            number_extra_hallways
+        )
     }
 
     /// Get the grid cell positions for a given set of floor grid dimensions. Width and height
@@ -234,13 +230,10 @@ impl DungeonGridMutator {
         let mut x_positions = vec![0; width as usize];
         let mut y_positions = vec![0; height as usize];
 
-        // SAFETY: We made sure the positions vectors are big enough.
-        unsafe {
-            ffi::GetGridPositions(
-                x_positions.as_mut_ptr(), y_positions.as_mut_ptr(),
-                width, height
-            );
-        }
+        ffi::GetGridPositions(
+            x_positions.as_mut_ptr(), y_positions.as_mut_ptr(),
+            width, height
+        );
 
         (x_positions, y_positions)
     }
@@ -258,12 +251,11 @@ impl DungeonGridMutator {
     /// `number_rooms` is the number of rooms; if positive, a random value between
     /// \[n_rooms, n_rooms+2\] will be used. If negative, |n_rooms| will be used exactly.
     pub unsafe fn assign_rooms(&mut self, number_rooms: i32) {
-        // SAFETY: We checked the grid size.
-        unsafe { ffi::AssignRooms(
+        ffi::AssignRooms(
             self.cells.as_mut_ptr(),
             self.width as i32, self.height as i32,
             number_rooms
-        ) }
+        )
     }
 
     /// Creates rooms and hallway anchors in each grid cell as designated by [`Self::assign_rooms`].
@@ -280,14 +272,11 @@ impl DungeonGridMutator {
     /// * `room_flags` - Only uses bit 2 (mask: 0b100), which enables room imperfections
     pub unsafe fn create_rooms_and_anchors(&mut self, starts_x: &mut [i32], starts_y: &mut [i32], room_flags: u32) {
         Self::assert_start_positions_valid(starts_x, starts_y);
-        // SAFETY: We checked the grid size & start positions.
-        unsafe {
-            ffi::CreateRoomsAndAnchors(
-                self.cells.as_mut_ptr(),
-                self.width as i32, self.height as i32,
-                starts_x.as_mut_ptr(), starts_y.as_mut_ptr(), room_flags
-            )
-        }
+        ffi::CreateRoomsAndAnchors(
+            self.cells.as_mut_ptr(),
+            self.width as i32, self.height as i32,
+            starts_x.as_mut_ptr(), starts_y.as_mut_ptr(), room_flags
+        )
     }
     /// Try to generate secondary structures in flagged rooms.
     ///
@@ -307,11 +296,10 @@ impl DungeonGridMutator {
     /// If the room isn't the right shape, dimension, or otherwise doesn't support the selected
     /// secondary structure, it is left untouched.
     pub unsafe fn generate_secondary_structures(&mut self, number_rooms: i32) {
-        // SAFETY: We checked the grid size.
-        unsafe{ ffi::GenerateSecondaryStructures(
+        ffi::GenerateSecondaryStructures(
             self.cells.as_mut_ptr(),
             self.width as i32, self.height as i32,
-        ) }
+        )
     }
 
     /// Randomly assigns connections between adjacent grid cells.
@@ -334,12 +322,11 @@ impl DungeonGridMutator {
     /// Panics if the cursor positions are out of bounds.
     pub unsafe fn assign_grid_cell_connections(&mut self, cursor_x: i32, cursor_y: i32, floor_properties: &ffi::floor_properties) {
         assert!(cursor_x >= 0 && (cursor_x as usize) < self.width && cursor_y >= 0 && (cursor_y as usize) < self.height);
-        // SAFETY: We checked the grid size and cursor positions.
-        unsafe { ffi::AssignGridCellConnections(
+        ffi::AssignGridCellConnections(
             self.cells.as_mut_ptr(),
             self.width as i32, self.height as i32,
             cursor_x, cursor_y, force_mut_ptr!(floor_properties)
-        ) }
+        )
     }
 
     /// Create grid cell connections either by creating hallways or merging rooms.
@@ -354,15 +341,12 @@ impl DungeonGridMutator {
     /// being merged). A room can only participate in a merge once.
     pub unsafe fn create_grid_cell_connections(&mut self, starts_x: &mut [i32], starts_y: &mut [i32], enable_room_merging: bool) {
         Self::assert_start_positions_valid(starts_x, starts_y);
-        // SAFETY: We checked the grid size & start positions.
-        unsafe {
-            ffi::CreateGridCellConnections(
-                self.cells.as_mut_ptr(),
-                self.width as i32, self.height as i32,
-                starts_x.as_mut_ptr(), starts_y.as_mut_ptr(),
-                (!enable_room_merging) as ffi::bool_
-            )
-        }
+        ffi::CreateGridCellConnections(
+            self.cells.as_mut_ptr(),
+            self.width as i32, self.height as i32,
+            starts_x.as_mut_ptr(), starts_y.as_mut_ptr(),
+            (!enable_room_merging) as ffi::bool_
+        )
     }
 
     /// Attempt to generate room imperfections for each room in the floor layout, if enabled.
@@ -372,7 +356,7 @@ impl DungeonGridMutator {
     /// inwards for a certain number of iterations, starting from the corners.
     pub unsafe fn generate_room_imperfections(&mut self) {
         // SAFETY: We checked the grid size.
-        unsafe { ffi::GenerateRoomImperfections(self.cells.as_mut_ptr(), self.width as i32, self.height as i32) }
+        ffi::GenerateRoomImperfections(self.cells.as_mut_ptr(), self.width as i32, self.height as i32)
     }
 
     /// Ensure the grid forms a connected graph (all valid cells are reachable) by adding hallways
@@ -381,11 +365,10 @@ impl DungeonGridMutator {
     /// If a grid cell cannot be connected for some reason, remove it entirely.
     pub unsafe fn ensure_connected_grid(&mut self, starts_x: &mut [i32], starts_y: &mut [i32]) {
         Self::assert_start_positions_valid(starts_x, starts_y);
-        // SAFETY: We checked the grid size & start positions.
-        unsafe { ffi::EnsureConnectedGrid(
+        ffi::EnsureConnectedGrid(
             self.cells.as_mut_ptr(), self.width as i32, self.height as i32,
             starts_x.as_mut_ptr(), starts_y.as_mut_ptr()
-        ) }
+        )
     }
 
     //// A Kecleon shop will be generated with a probability determined by the Kecleon shop spawn
@@ -396,12 +379,11 @@ impl DungeonGridMutator {
     /// room interior, leaving a one tile margin from the room walls.
     pub unsafe fn generate_kecleon_shop(&mut self, spawn_chance: u8) {
         assert!(spawn_chance <= 100);
-        // SAFETY: We checked the grid size.
-        unsafe { ffi::GenerateKecleonShop(
+        ffi::GenerateKecleonShop(
             self.cells.as_mut_ptr(),
             self.width as i32, self.height as i32,
             spawn_chance as c_int
-        ) }
+        )
     }
 
     //// Possibly generate a Monster House on the floor.
@@ -414,12 +396,11 @@ impl DungeonGridMutator {
     /// `spawn_chance` is the percentage chance that a Monster House will be generated (0-100).
     pub unsafe fn generate_monster_house(&mut self, spawn_chance: u8) {
         assert!(spawn_chance <= 100);
-        // SAFETY: We checked the grid size.
-        unsafe { ffi::GenerateMonsterHouse(
+        ffi::GenerateMonsterHouse(
             self.cells.as_mut_ptr(),
             self.width as i32, self.height as i32,
             spawn_chance as c_int
-        ) }
+        )
     }
 
     /// Possibly generate a maze room on the floor.
@@ -431,12 +412,11 @@ impl DungeonGridMutator {
     /// `spawn_chance` is the percentage chance that a Monster House will be generated (0-100).
     pub unsafe fn generate_maze_room(&mut self, spawn_chance: u8) {
         assert!(spawn_chance <= 100);
-        // SAFETY: We checked the grid size.
-        unsafe { ffi::GenerateMazeRoom(
+        ffi::GenerateMazeRoom(
             self.cells.as_mut_ptr(),
             self.width as i32, self.height as i32,
             spawn_chance as c_int
-        ) }
+        )
     }
 
     /// Generate a maze room within a given grid cell.
