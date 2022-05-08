@@ -150,7 +150,7 @@ impl DungeonGridMutator {
         unsafe {
             cells = repeat_with(|| Default::default())
                 .take(min_grid_size).collect::<Vec<DungeonGridCell>>();
-            ffi::InitDungeonGrid(raw_grid.as_mut_ptr() as *mut _, height as i32, width as i32);
+            ffi::InitDungeonGrid(raw_grid.as_mut_ptr() as *mut _, width as i32, height as i32);
         }
         Self { cells, width, height, _lease: ov29 }
     }
@@ -168,7 +168,6 @@ impl DungeonGridMutator {
     /// Panics if the coordinates are out of bounds.
     pub fn get(&self, x: usize, y: usize) -> &DungeonGridCell {
         debug_assert!(cells.len() == GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
-        todo!(); // Incorrect indexing!
         let coords = Self::get_coords(x, y);
         if coords >= self.cells.len() {
             panic!("Grid cell at ({}, {}) is out of bounds", x, y);
@@ -186,7 +185,6 @@ impl DungeonGridMutator {
     /// Panics if the coordinates are out of bounds.
     pub fn get_mut(&mut self, x: usize, y: usize) -> &mut DungeonGridCell {
         debug_assert!(cells.len() == GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
-        todo!(); // Incorrect indexing!
         let coords = Self::get_coords(x, y);
         if coords >= self.cells.len() {
             panic!("Grid cell at ({}, {}) is out of bounds", x, y);
@@ -227,7 +225,7 @@ impl DungeonGridMutator {
         unsafe {
             ffi::GenerateExtraHallways(
                 self.cells.as_mut_ptr(),
-                self.height as i32, self.width as i32,
+                self.width as i32, self.height as i32,
                 number_extra_hallways
             )
         }
@@ -267,7 +265,7 @@ impl DungeonGridMutator {
         /// SAFETY: We checked the grid size.
         unsafe { ffi::AssignRooms(
             self.cells.as_mut_ptr(),
-            self.height as i32, self.width as i32,
+            self.width as i32, self.height as i32,
             number_rooms
         ) }
     }
@@ -290,7 +288,7 @@ impl DungeonGridMutator {
         unsafe {
             ffi::CreateRoomsAndAnchors(
                 self.cells.as_mut_ptr(),
-                self.height as i32, self.width as i32,
+                self.width as i32, self.height as i32,
                 starts_x.as_mut_ptr(), starts_y.as_mut_ptr(), room_flags
             )
         }
@@ -316,7 +314,7 @@ impl DungeonGridMutator {
         /// SAFETY: We checked the grid size.
         unsafe{ ffi::GenerateSecondaryStructures(
             self.cells.as_mut_ptr(),
-            self.height as i32, self.width as i32,
+            self.width as i32, self.height as i32,
         ) }
     }
 
@@ -343,7 +341,7 @@ impl DungeonGridMutator {
         /// SAFETY: We checked the grid size and cursor positions.
         unsafe { ffi::AssignGridCellConnections(
             self.cells.as_mut_ptr(),
-            self.height as i32, self.width as i32,
+            self.width as i32, self.height as i32,
             cursor_x, cursor_y, force_mut_ptr!(floor_properties)
         ) }
     }
@@ -364,7 +362,7 @@ impl DungeonGridMutator {
         unsafe {
             ffi::CreateGridCellConnections(
                 self.cells.as_mut_ptr(),
-                self.height as i32, self.width as i32,
+                self.width as i32, self.height as i32,
                 starts_x.as_mut_ptr(), starts_y.as_mut_ptr(),
                 (!enable_room_merging) as ffi::bool_
             )
@@ -378,7 +376,7 @@ impl DungeonGridMutator {
     /// inwards for a certain number of iterations, starting from the corners.
     pub unsafe fn generate_room_imperfections(&mut self) {
         /// SAFETY: We checked the grid size.
-        unsafe { ffi::GenerateRoomImperfections(self.cells.as_mut_ptr(), self.height as i32, self.width as i32) }
+        unsafe { ffi::GenerateRoomImperfections(self.cells.as_mut_ptr(), self.width as i32, self.height as i32) }
     }
 
     /// Ensure the grid forms a connected graph (all valid cells are reachable) by adding hallways
@@ -389,7 +387,7 @@ impl DungeonGridMutator {
         Self::assert_start_positions_valid(starts_x, starts_y);
         /// SAFETY: We checked the grid size & start positions.
         unsafe { ffi::EnsureConnectedGrid(
-            self.cells.as_mut_ptr(), self.height as i32, self.width as i32,
+            self.cells.as_mut_ptr(), self.width as i32, self.height as i32,
             starts_x.as_mut_ptr(), starts_y.as_mut_ptr()
         ) }
     }
@@ -405,7 +403,7 @@ impl DungeonGridMutator {
         /// SAFETY: We checked the grid size.
         unsafe { ffi::GenerateKecleonShop(
             self.cells.as_mut_ptr(),
-            self.height as i32, self.width as i32,
+            self.width as i32, self.height as i32,
             spawn_chance as c_int
         ) }
     }
@@ -423,7 +421,7 @@ impl DungeonGridMutator {
         /// SAFETY: We checked the grid size.
         unsafe { ffi::GenerateMonsterHouse(
             self.cells.as_mut_ptr(),
-            self.height as i32, self.width as i32,
+            self.width as i32, self.height as i32,
             spawn_chance as c_int
         ) }
     }
@@ -440,7 +438,7 @@ impl DungeonGridMutator {
         /// SAFETY: We checked the grid size.
         unsafe { ffi::GenerateMazeRoom(
             self.cells.as_mut_ptr(),
-            self.height as i32, self.width as i32,
+            self.width as i32, self.height as i32,
             spawn_chance as c_int
         ) }
     }
