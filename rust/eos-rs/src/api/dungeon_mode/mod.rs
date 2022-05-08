@@ -2,20 +2,14 @@
 
 pub mod dungeon_generator;
 
-use alloc::vec;
-use alloc::vec::Vec;
 use core::ffi::CStr;
 use core::fmt::Debug;
-use core::iter::repeat_with;
-use core::mem::MaybeUninit;
 use crate::api::fixed::I24F8;
 use crate::api::moves::{HealingMoveType, MoveRange, MoveTarget};
 use crate::api::objects::*;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use crate::ctypes::*;
 use crate::ffi;
-use crate::ffi::ability_id::Type;
-use crate::ffi::{undefined, undefined4};
 use crate::string_util::str_to_cstring;
 
 #[repr(i32)]
@@ -389,14 +383,14 @@ pub trait DungeonMonsterExtRead {
     fn calc_recoil_damage_fixed(
         &self,
         fixed_damage: i32,
-        param_3: undefined4,
-        damage_out: *mut undefined4,
+        param_3: ffi::undefined4,
+        damage_out: *mut ffi::undefined4,
         move_id: move_catalog::Type,
         attack_type: type_catalog::Type,
         param_7: i16,
-        message_type: undefined4,
-        param_9: undefined4,
-        param_10: undefined4,
+        message_type: ffi::undefined4,
+        param_9: ffi::undefined4,
+        param_10: ffi::undefined4,
     );
 
     /// Appears to calculate damage from a fixed-damage effect.
@@ -408,14 +402,14 @@ pub trait DungeonMonsterExtRead {
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
-        param_4: undefined4,
-        damage_out: *mut undefined4,
+        param_4: ffi::undefined4,
+        damage_out: *mut ffi::undefined4,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
-        message_type: undefined4,
-        param_10: undefined4,
-        param_11: undefined4,
+        message_type: ffi::undefined4,
+        param_10: ffi::undefined4,
+        param_11: ffi::undefined4,
     );
 
     /// A wrapper around [`Self::calc_damage_fixed`] with the move category
@@ -426,13 +420,13 @@ pub trait DungeonMonsterExtRead {
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
-        param_4: undefined4,
-        damage_out: *mut undefined4,
+        param_4: ffi::undefined4,
+        damage_out: *mut ffi::undefined4,
         attack_type: type_catalog::Type,
         param_7: i16,
-        message_type: undefined4,
-        param_9: undefined4,
-        param_10: undefined4,
+        message_type: ffi::undefined4,
+        param_9: ffi::undefined4,
+        param_10: ffi::undefined4,
     );
 
     /// A wrapper (with potential side effects...?) around [`Self::calc_damage_fixed`].
@@ -442,14 +436,14 @@ pub trait DungeonMonsterExtRead {
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
-        param_4: undefined4,
-        damage_out: *mut undefined4,
+        param_4: ffi::undefined4,
+        damage_out: *mut ffi::undefined4,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
-        param_9: undefined4,
-        param_10: undefined4,
-        param_11: undefined4
+        param_9: ffi::undefined4,
+        param_10: ffi::undefined4,
+        param_11: ffi::undefined4
     );
 
     /// Appears to calculate damage from a variable-damage projectile.
@@ -462,8 +456,8 @@ pub trait DungeonMonsterExtRead {
         defender: &DungeonEntity,
         used_move: &Move,
         move_power: i32,
-        param_5: undefined4,
-        param_6: undefined4
+        param_5: ffi::undefined4,
+        param_6: ffi::undefined4
     );
 
     /// Checks if a monster is holding an aura bow that isn't disabled by Klutz.
@@ -595,14 +589,14 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
     fn calc_recoil_damage_fixed(
         &self,
         fixed_damage: i32,
-        param_3: undefined4,
-        damage_out: *mut undefined4,
+        param_3: ffi::undefined4,
+        damage_out: *mut ffi::undefined4,
         move_id: move_catalog::Type,
         attack_type: type_catalog::Type,
         param_7: i16,
-        message_type: undefined4,
-        param_9: undefined4,
-        param_10: undefined4,
+        message_type: ffi::undefined4,
+        param_9: ffi::undefined4,
+        param_10: ffi::undefined4,
     ) {
         unsafe { ffi::CalcRecoilDamageFixed(
             force_mut_ptr!(self.1), fixed_damage, param_3, damage_out,
@@ -614,14 +608,14 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
-        param_4: undefined4,
-        damage_out: *mut undefined4,
+        param_4: ffi::undefined4,
+        damage_out: *mut ffi::undefined4,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
-        message_type: undefined4,
-        param_10: undefined4,
-        param_11: undefined4,
+        message_type: ffi::undefined4,
+        param_10: ffi::undefined4,
+        param_11: ffi::undefined4,
     ) {
         unsafe { ffi::CalcDamageFixed(
             force_mut_ptr!(self.1), force_mut_ptr!(defender),
@@ -635,13 +629,13 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
-        param_4: undefined4,
-        damage_out: *mut undefined4,
+        param_4: ffi::undefined4,
+        damage_out: *mut ffi::undefined4,
         attack_type: type_catalog::Type,
         param_7: i16,
-        message_type: undefined4,
-        param_9: undefined4,
-        param_10: undefined4,
+        message_type: ffi::undefined4,
+        param_9: ffi::undefined4,
+        param_10: ffi::undefined4,
     ) {
         unsafe { ffi::CalcDamageFixedNoCategory(
             force_mut_ptr!(self.1), force_mut_ptr!(defender),
@@ -655,14 +649,14 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
-        param_4: undefined4,
-        damage_out: *mut undefined4,
+        param_4: ffi::undefined4,
+        damage_out: *mut ffi::undefined4,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
-        param_9: undefined4,
-        param_10: undefined4,
-        param_11: undefined4
+        param_9: ffi::undefined4,
+        param_10: ffi::undefined4,
+        param_11: ffi::undefined4
     ) {
         unsafe { ffi::CalcDamageFixedWrapper(
             force_mut_ptr!(self.1), force_mut_ptr!(defender),
@@ -677,8 +671,8 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         defender: &DungeonEntity,
         used_move: &Move,
         move_power: i32,
-        param_5: undefined4,
-        param_6: undefined4
+        param_5: ffi::undefined4,
+        param_6: ffi::undefined4
     ) {
         unsafe { ffi::CalcDamageProjectile(
             force_mut_ptr!(self.1), force_mut_ptr!(defender),
@@ -768,7 +762,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         self.as_ref().is_iq_skill_enabled(iq_skill_id)
     }
 
-    fn is_defender_ability_active(&self, defender: &DungeonEntity, defender_ability_id: Type, own_ability_is_active: bool) -> bool {
+    fn is_defender_ability_active(&self, defender: &DungeonEntity, defender_ability_id: ability_catalog::Type, own_ability_is_active: bool) -> bool {
         self.as_ref().is_defender_ability_active(defender, defender_ability_id, own_ability_is_active)
     }
 
@@ -784,27 +778,27 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         self.as_ref().get_type_matchup(defender, target_type_index, attack_type)
     }
 
-    fn calc_damage(&self, defender: &DungeonEntity, attack_type: type_catalog::Type, attack_power: i32, crit_chance: i32, damage_out: *mut undefined4, damage_multiplier: I24F8, move_id: move_catalog::Type, param_9: i32) {
+    fn calc_damage(&self, defender: &DungeonEntity, attack_type: type_catalog::Type, attack_power: i32, crit_chance: i32, damage_out: *mut ffi::undefined4, damage_multiplier: I24F8, move_id: move_catalog::Type, param_9: i32) {
         self.as_ref().calc_damage(defender, attack_type, attack_power, crit_chance, damage_out, damage_multiplier, move_id, param_9)
     }
 
-    fn calc_recoil_damage_fixed(&self, fixed_damage: i32, param_3: undefined4, damage_out: *mut undefined4, move_id: move_catalog::Type, attack_type: type_catalog::Type, param_7: i16, message_type: undefined4, param_9: undefined4, param_10: undefined4) {
+    fn calc_recoil_damage_fixed(&self, fixed_damage: i32, param_3: ffi::undefined4, damage_out: *mut ffi::undefined4, move_id: move_catalog::Type, attack_type: type_catalog::Type, param_7: i16, message_type: ffi::undefined4, param_9: ffi::undefined4, param_10: ffi::undefined4) {
         self.as_ref().calc_recoil_damage_fixed(fixed_damage, param_3, damage_out, move_id, attack_type, param_7, message_type, param_9, param_10)
     }
 
-    fn calc_damage_fixed(&self, defender: &DungeonEntity, fixed_damage: i32, param_4: undefined4, damage_out: *mut undefined4, attack_type: type_catalog::Type, move_category: MoveCategory, param_8: i16, message_type: undefined4, param_10: undefined4, param_11: undefined4) {
+    fn calc_damage_fixed(&self, defender: &DungeonEntity, fixed_damage: i32, param_4: ffi::undefined4, damage_out: *mut ffi::undefined4, attack_type: type_catalog::Type, move_category: MoveCategory, param_8: i16, message_type: ffi::undefined4, param_10: ffi::undefined4, param_11: ffi::undefined4) {
         self.as_ref().calc_damage_fixed(defender, fixed_damage, param_4, damage_out, attack_type, move_category, param_8, message_type, param_10, param_11)
     }
 
-    fn calc_damage_fixed_no_category(&self, defender: &DungeonEntity, fixed_damage: i32, param_4: undefined4, damage_out: *mut undefined4, attack_type: type_catalog::Type, param_7: i16, message_type: undefined4, param_9: undefined4, param_10: undefined4) {
+    fn calc_damage_fixed_no_category(&self, defender: &DungeonEntity, fixed_damage: i32, param_4: ffi::undefined4, damage_out: *mut ffi::undefined4, attack_type: type_catalog::Type, param_7: i16, message_type: ffi::undefined4, param_9: ffi::undefined4, param_10: ffi::undefined4) {
         self.as_ref().calc_damage_fixed_no_category(defender, fixed_damage, param_4, damage_out, attack_type, param_7, message_type, param_9, param_10)
     }
 
-    fn calc_damage_fixed_wrapper(&self, defender: &DungeonEntity, fixed_damage: i32, param_4: undefined4, damage_out: *mut undefined4, attack_type: type_catalog::Type, move_category: MoveCategory, param_8: i16, param_9: undefined4, param_10: undefined4, param_11: undefined4) {
+    fn calc_damage_fixed_wrapper(&self, defender: &DungeonEntity, fixed_damage: i32, param_4: ffi::undefined4, damage_out: *mut ffi::undefined4, attack_type: type_catalog::Type, move_category: MoveCategory, param_8: i16, param_9: ffi::undefined4, param_10: ffi::undefined4, param_11: ffi::undefined4) {
         self.as_ref().calc_damage_fixed_wrapper(defender, fixed_damage, param_4, damage_out, attack_type, move_category, param_8, param_9, param_10, param_11)
     }
 
-    fn calc_damage_projectile(&self, defender: &DungeonEntity, used_move: &Move, move_power: i32, param_5: undefined4, param_6: undefined4) {
+    fn calc_damage_projectile(&self, defender: &DungeonEntity, used_move: &Move, move_power: i32, param_5: ffi::undefined4, param_6: ffi::undefined4) {
         self.as_ref().calc_damage_projectile(defender, used_move, move_power, param_5, param_6)
     }
 
@@ -955,7 +949,7 @@ impl GlobalDungeonData {
     /// Seems to initialize the dungeon struct from specified dungeon data.
     ///
     /// The signature will be updated once we know more about this function.
-    pub unsafe fn initialize_dungeon(&mut self, dungeon_data: *mut undefined, dungeon: *mut ffi::dungeon) -> i32 {
+    pub unsafe fn initialize_dungeon(&mut self, dungeon_data: *mut ffi::undefined, dungeon: *mut ffi::dungeon) -> i32 {
         ffi::InitializeDungeon(dungeon_data, dungeon)
     }
 
@@ -2133,7 +2127,7 @@ impl DungeonRng {
 
 /// Seems to zero some damage description struct, which is output by the damage
 /// calculation function.
-pub unsafe fn reset_damage_desc(damage_desc: *mut undefined4, _ov29: &OverlayLoadLease<29>) {
+pub unsafe fn reset_damage_desc(damage_desc: *mut ffi::undefined4, _ov29: &OverlayLoadLease<29>) {
     ffi::ResetDamageDesc(damage_desc);
 }
 
