@@ -13,6 +13,7 @@ use crate::ffi;
 /// The capacity of the dungeon grid in both X and Y directions.
 pub const GRID_CAPACITY_DIM: usize = 15;
 
+#[allow(clippy::derivable_impls)]
 impl Default for ffi::dungeon_grid_cell {
     fn default() -> Self {
         Self {
@@ -146,7 +147,7 @@ impl DungeonGridMutator {
         // SAFETY: We know the grid vector will be big enough.
         //         We also know the height is at least 15, so all cells will be initialized.
         unsafe {
-            cells = repeat_with(|| Default::default())
+            cells = repeat_with(Default::default)
                 .take(min_grid_size).collect::<Vec<DungeonGridCell>>();
             ffi::InitDungeonGrid(cells.as_mut_ptr() as *mut _, width as i32, height as i32);
         }
@@ -166,7 +167,7 @@ impl DungeonGridMutator {
     /// Panics if the coordinates are out of bounds.
     pub fn get(&self, x: usize, y: usize) -> &DungeonGridCell {
         debug_assert!(self.cells.len() == GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
-        let coords = Self::get_coords(x, y);
+        let coords = self.get_coords(x, y);
         if coords >= self.cells.len() {
             panic!("Grid cell at ({}, {}) is out of bounds", x, y);
         }
@@ -176,14 +177,14 @@ impl DungeonGridMutator {
     /// Get the cell at the given coordinates, no extra checking is done, just normal slice
     /// indexing is done. This is UB if overflow checks are disabled and the coordinates are oob.
     pub unsafe fn get_unchecked(&self, x: usize, y: usize) -> &DungeonGridCell {
-        &self.cells[Self::get_coords(x, y)]
+        &self.cells[self.get_coords(x, y)]
     }
 
     /// Get the cell at the given coordinates, mutably.
     /// Panics if the coordinates are out of bounds.
     pub fn get_mut(&mut self, x: usize, y: usize) -> &mut DungeonGridCell {
         debug_assert!(self.cells.len() == GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
-        let coords = Self::get_coords(x, y);
+        let coords = self.get_coords(x, y);
         if coords >= self.cells.len() {
             panic!("Grid cell at ({}, {}) is out of bounds", x, y);
         }
@@ -193,8 +194,9 @@ impl DungeonGridMutator {
     /// Get the cell at the given coordinates, mutable, no extra checking is done, just normal
     /// slice  indexing is done. This is UB if overflow checks are disabled and the coordinates are
     /// oob.
-    pub unsafe fn get_mut_unchecked(&self, x: usize, y: usize) -> &mut DungeonGridCell {
-        &mut self.cells[Self::get_coords(x, y)]
+    pub unsafe fn get_mut_unchecked(&mut self, x: usize, y: usize) -> &mut DungeonGridCell {
+        let coords = self.get_coords(x, y);
+        &mut self.cells[coords]
     }
 
     /// Merges two vertically stacked rooms into one larger room.
@@ -203,7 +205,7 @@ impl DungeonGridMutator {
     /// * `x` - x grid coordinate of the rooms to merge
     /// * `y` - y grid coordinate of the rooms to merge
     /// * `dy` - dy, where the lower room has a y grid coordinate of y+dy
-    pub unsafe fn merge_rooms_vertically<'a>(&mut self, x: i32, y: i32, dy: i32) {
+    pub unsafe fn merge_rooms_vertically(&mut self, x: i32, y: i32, dy: i32) {
         assert!(x >= 0 && y >= 0 && dy >= 0);
         assert!(x as usize <= self.width && y as usize <= self.height && (y+dy) as usize <= self.height);
         ffi::MergeRoomsVertically(x, y, dy, self.cells.as_mut_ptr())
@@ -271,7 +273,7 @@ impl DungeonGridMutator {
     /// * `start_y` - Array of the starting y coordinates of each grid row
     /// * `room_flags` - Only uses bit 2 (mask: 0b100), which enables room imperfections
     pub unsafe fn create_rooms_and_anchors(&mut self, starts_x: &mut [i32], starts_y: &mut [i32], room_flags: u32) {
-        Self::assert_start_positions_valid(starts_x, starts_y);
+        self.assert_start_positions_valid(starts_x, starts_y);
         ffi::CreateRoomsAndAnchors(
             self.cells.as_mut_ptr(),
             self.width as i32, self.height as i32,
@@ -295,7 +297,7 @@ impl DungeonGridMutator {
     ///
     /// If the room isn't the right shape, dimension, or otherwise doesn't support the selected
     /// secondary structure, it is left untouched.
-    pub unsafe fn generate_secondary_structures(&mut self, number_rooms: i32) {
+    pub unsafe fn generate_secondary_structures(&mut self, _number_rooms: i32) {
         ffi::GenerateSecondaryStructures(
             self.cells.as_mut_ptr(),
             self.width as i32, self.height as i32,
@@ -340,7 +342,7 @@ impl DungeonGridMutator {
     /// into a single larger room (9.75% comes from two 5% rolls, one for each of the two rooms
     /// being merged). A room can only participate in a merge once.
     pub unsafe fn create_grid_cell_connections(&mut self, starts_x: &mut [i32], starts_y: &mut [i32], enable_room_merging: bool) {
-        Self::assert_start_positions_valid(starts_x, starts_y);
+        self.assert_start_positions_valid(starts_x, starts_y);
         ffi::CreateGridCellConnections(
             self.cells.as_mut_ptr(),
             self.width as i32, self.height as i32,
@@ -355,7 +357,6 @@ impl DungeonGridMutator {
     /// room imperfections. Imperfections are generated by randomly growing the walls of the room
     /// inwards for a certain number of iterations, starting from the corners.
     pub unsafe fn generate_room_imperfections(&mut self) {
-        // SAFETY: We checked the grid size.
         ffi::GenerateRoomImperfections(self.cells.as_mut_ptr(), self.width as i32, self.height as i32)
     }
 
@@ -364,7 +365,7 @@ impl DungeonGridMutator {
     ///
     /// If a grid cell cannot be connected for some reason, remove it entirely.
     pub unsafe fn ensure_connected_grid(&mut self, starts_x: &mut [i32], starts_y: &mut [i32]) {
-        Self::assert_start_positions_valid(starts_x, starts_y);
+        self.assert_start_positions_valid(starts_x, starts_y);
         ffi::EnsureConnectedGrid(
             self.cells.as_mut_ptr(), self.width as i32, self.height as i32,
             starts_x.as_mut_ptr(), starts_y.as_mut_ptr()
@@ -434,5 +435,13 @@ impl DungeonGridMutator {
     /// Set spawn flag 5 (0b100000 or 0x20) on all tiles in a room.
     pub fn set_spawn_flag_5<'a>(&'a self, cell: &'a mut ffi::dungeon_grid_cell) {
         unsafe { ffi::SetSpawnFlag5(cell as *mut _) }
+    }
+
+    fn get_coords(&self, _x: usize, _y: usize) -> usize {
+        todo!()
+    }
+
+    fn assert_start_positions_valid(&self, _starts_x: &mut [i32], _starts_y: &mut [i32]) {
+        todo!()
     }
 }

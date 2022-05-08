@@ -23,11 +23,15 @@
 //! with Nintendo, The Pokémon Company, Spike Chunsoft or any of their
 //! affiliates. This is an unofficial fan project.
 
-#![no_std]
+// Allow std for tests. Make sure to NOT cross-compile when using tests.
+#![cfg_attr(not(test), no_std)]
 #![feature(alloc_error_handler)]
 // This will be stable pretty soon:
 #![feature(alloc_c_string)]
 #![feature(core_c_str)]
+
+#![allow(clippy::missing_safety_doc)]
+#![allow(clippy::too_many_arguments)]
 
 extern crate alloc;
 extern crate compiler_builtins_local;
@@ -40,8 +44,10 @@ pub mod ffi;
 pub mod log_impl;
 pub mod api;
 pub mod string_util;
+
 pub mod allocation;
 
 pub use eos_rs_proc::patches;
 
+#[cfg(not(test))]
 mod panic;

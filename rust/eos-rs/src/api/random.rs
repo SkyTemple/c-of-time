@@ -15,7 +15,7 @@ pub fn set_seed(seed: u16) {
 /// Generates a random number between the beginning and end of the range.
 /// If the range is unbounded, min and/or max values are bound to 0 and the
 /// maximum 16-bit unsigned integer value respectively.
-pub fn rand_u16<R: RangeBounds<u16>>(range: R) -> u16 {
+pub fn rand_u16<R: RangeBounds<u16>>(_range: R) -> u16 {
     todo!()
 }
 

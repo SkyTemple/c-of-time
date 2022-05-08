@@ -125,12 +125,10 @@ impl GlobalDungeonStructureGenerator {
     /// * `middle_x` - Middle x coordinate for kinked horizontal hallways.
     /// * `middle_y` - Middle y coordinate for kinked vertical hallways.
     pub unsafe fn create_hallway(&mut self, start_x: i32, start_y: i32, end_x: i32, end_y: i32, is_vertical: bool, middle_x: i32, middle_y: i32) {
-        unsafe {
-            ffi::CreateHallway(
-                start_x, start_y, end_x, end_y, is_vertical as ffi::bool_,
-                middle_x, middle_y
-            )
-        }
+        ffi::CreateHallway(
+            start_x, start_y, end_x, end_y, is_vertical as ffi::bool_,
+            middle_x, middle_y
+        )
     }
 
 //     - name: SetTerrainObstacleChecked

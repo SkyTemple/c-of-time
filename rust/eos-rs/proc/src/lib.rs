@@ -156,6 +156,7 @@ use eos_rs_patches_def::PatchesDef;
 #[proc_macro]
 pub fn patches(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     // This may SEEM silly, but for whatever reason it won't work without.
+    #[allow(clippy::useless_conversion)]
     let input: proc_macro::TokenStream = input.into();
     let def: PatchesDef = parse_macro_input!(input as PatchesDef);
 

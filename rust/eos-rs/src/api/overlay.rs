@@ -72,6 +72,7 @@ impl<const N: u32> OverlayLoadLease<N> {
 /// Trait for all structs that require a lease to be created (but nothing else).
 pub trait CreatableWithLease<const N: u32> where Self: Sized {
     /// Internal constructor that needs to be implemented. Don't call this directly.
+    #[doc(hidden)]
     fn _create(lease: OverlayLoadLease<N>) -> Self;
 
     /// Create a new instance by providing a lease.

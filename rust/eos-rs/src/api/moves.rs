@@ -1,6 +1,6 @@
 //! Functions related to getting information about monster moves.
 
-use crate::api::objects::{Move, move_catalog};
+use crate::api::objects::{Move};
 use crate::ffi;
 use crate::ffi::move_target_and_range;
 
