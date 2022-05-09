@@ -4,6 +4,7 @@ pub mod dungeon_generator;
 
 use core::ffi::CStr;
 use core::fmt::Debug;
+use crate::api::dungeon_mode::dungeon_generator::DungeonFloorGeneration;
 use crate::api::fixed::I24F8;
 use crate::api::moves::{HealingMoveType, MoveRange, MoveTarget};
 use crate::api::objects::*;
@@ -881,7 +882,9 @@ impl DungeonTileExt for DungeonTile {
 
 /// Helper struct for dealing with the current floor and global dungeon and mission state.
 ///
-/// To generate dungeons, see the [`dungeon_generator`] module.
+/// To generate dungeons and manipulate floors layouts, you can get the game's
+/// builtin generator with [`Self::get_builtin_dungeon_generator`], or configure the global
+/// state of the current floor correctly and use [`Self::generate_floor`].
 ///
 /// # Safety
 /// A lot of methods on this struct are unsafe because they work on/with the global dungeon pointer
@@ -954,6 +957,31 @@ impl GlobalDungeonData {
         ffi::InitializeDungeon(dungeon_data, dungeon)
     }
 
+    /// Returns ab abstraction over the game's builtin dungeon generator. This
+    /// struct implements [`dungeon_generator::DungeonFloorGeneration`], which is the
+    /// recommended way to work with it, see the documentation of [`dungeon_generator`].
+    ///
+    /// # Safety
+    /// This is unsafe, since most the game's builtin generator directly works on the global
+    /// dungeon struct, so all functions of the dungeon generation traits will be unsafe
+    /// on the returned struct, please take caution. You will also need to make sure the
+    /// global dungeon pointer is valid and the struct is in a state that allows generation.
+    pub unsafe fn get_builtin_dungeon_generator(&mut self) -> dungeon_generator::game_builtin::GlobalDungeonStructureGenerator {
+        dungeon_generator::game_builtin::GlobalDungeonStructureGenerator(self.0.clone())
+    }
+
+    /// Generates a dungeon floor.
+    ///
+    /// If not changed by a patch, this function will use the game's default built in generator
+    /// and generate the floor based on the current global configuration for the floor.
+    ///
+    /// For more granular control over the floor generation, you can get an abstraction over
+    /// the builtin generator with [`Self::get_builtin_dungeon_generator`].
+    ///
+    pub unsafe fn generate_floor(&mut self) {
+        self.get_builtin_dungeon_generator().generate_floor_internal();
+    }
+
     /// Gets the floor type. Returns None if the global dungeon struct contains invalid data.
     pub fn get_floor_type(&self) -> Option<FloorType> {
         unsafe { ffi::GetFloorType() }.try_into().ok()
@@ -1013,20 +1041,6 @@ impl GlobalDungeonData {
     /// Checks if a fixed room ID corresponds to a fixed, full-floor layout.
     pub fn is_full_floor_fixed_rooms(&self, fixed_room_id: fixed_room_catalog::Type) -> bool {
         unsafe { ffi::IsNotFullFloorFixedRoom(fixed_room_id) == 0 }
-    }
-
-    /// This is the master function that generates the dungeon floor.
-    ///
-    /// Very loosely speaking, this function first tries to generate a valid floor layout.
-    /// Then it tries to spawn entities in a valid configuration. Finally, it performs cleanup
-    /// and post-processing depending on the dungeon.
-    ///
-    /// If a spawn configuration is invalid, the entire floor layout is scrapped and regenerated.
-    /// If the generated floor layout is invalid 10 times in a row, or a valid spawn configuration
-    /// isn't generated within 10 attempts, the generation algorithm aborts and the default
-    /// one-room Monster House floor is generated as a fallback.
-    pub unsafe fn generate_floor(&mut self) {
-        ffi::GenerateFloor()
     }
 
     //     - name: PosIsOutOfBounds
@@ -1222,6 +1236,14 @@ impl GlobalDungeonData {
     //
     //         r0: mission destination info pointer
     //         return: bool
+    //     - name: LoadFixedRoomData
+    //       address:
+    //         NA: 0x2343D90
+    //         EU: 0x2344974
+    //       description: |-
+    //         Loads fixed room data from BALANCE/fixed.bin into the buffer pointed to by FIXED_ROOM_DATA_PTR.
+    //
+    //         No params.
 }
 
 /// Helper struct for emitting move and item effects.
