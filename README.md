@@ -80,5 +80,6 @@ Subtract the amount of additional bytes you want to allocate from `ORIGIN` and a
 ### Optimizing for size
 You can also change the compiler flags to optimize for size instead of speed. To do so, set `OPT_LEVEL := Os` in `Makefile`. Effectiveness varies per project.
 
-## License
-This repository is licensed under GPLv3. Review the file `LICENSE` for more information. 
+## Licensing
+- Build scripts (everything under the `tools`) are licensed under GPLv3. Review the file `LICENSE_GPLv3` for more information.
+- All other code is licensed under MIT. Review the file `LICENSE_MIT` for more information.
