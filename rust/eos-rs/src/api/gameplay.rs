@@ -87,12 +87,12 @@ pub fn apply_exclusive_item_stat_boosts(item_id: item_catalog::Type, atk_to_modi
 }
 
 /// Sets the bit for an exclusive item effect.
-pub fn set_exclusive_item_effect(effect_flags: *mut u32, effect_id: exclusive_item_effect_id::Type) {
+pub fn set_exclusive_item_effect(effect_flags: &mut u32, effect_id: exclusive_item_effect_id::Type) {
     unsafe { ffi::SetExclusiveItemEffect(effect_flags, effect_id) }
 }
 
 /// Tests the exclusive item bitvector for a specific exclusive item effect.
-pub fn test_exclusive_item_effect_flag(effect_flags: *mut u32, effect_id: exclusive_item_effect_id::Type) -> bool {
+pub fn test_exclusive_item_effect_flag(effect_flags: &mut u32, effect_id: exclusive_item_effect_id::Type) -> bool {
     unsafe { ffi::ExclusiveItemEffectFlagTest(effect_flags, effect_id) > 0 }
 }
 

@@ -13,13 +13,15 @@ use crate::ctypes::c_char;
 use crate::ffi;
 use crate::string_util::str_to_cstring;
 
+static mut NULL: c_char = 0;
+
 enum PreprocessorArgs<'a> {
     Owned(ffi::preprocessor_args),
     Borrowed(&'a mut ffi::preprocessor_args)
 }
 
 impl<'a> PreprocessorArgs<'a> {
-    pub fn as_mut(&'a mut self) -> &'a mut ffi::preprocessor_args {
+    pub fn as_mut<'b>(&'b mut self) -> &'b mut ffi::preprocessor_args where 'a: 'b {
         match self {
             PreprocessorArgs::Owned(args) => args,
             PreprocessorArgs::Borrowed(args) => args
@@ -42,6 +44,23 @@ pub struct GameStringBuilder<'a> {
 }
 
 impl<'a> GameStringBuilder<'a> {
+    pub fn new() -> Self {
+        // SAFETY: We assume the game won't try to change the strings values.
+        unsafe {
+            Self {
+                output_size: None,
+                flags: ffi::preprocessor_flags { _bitfield_align_1: [], _bitfield_1: Default::default() },
+                args: PreprocessorArgs::Owned(ffi::preprocessor_args {
+                    flag_vals: [0, 0, 0, 0],
+                    id_vals: [0, 0, 0, 0, 0],
+                    number_vals: [0, 0, 0, 0, 0],
+                    strings: [&mut NULL, &mut NULL, &mut NULL, &mut NULL, &mut NULL],
+                    speaker_id: 0
+                })
+            }
+        }
+    }
+
     /// Sets the unknown0 value of the preprocessor flags.
     pub fn set_flag_unknown0(&mut self, value: u16) -> &mut Self {
         self.flags.set_unknown0(value);
@@ -219,6 +238,12 @@ impl<'a> GameStringBuilder<'a> {
 
             CString::from_vec_with_nul_unchecked(output)
         }
+    }
+}
+
+impl<'a> Default for GameStringBuilder<'a> {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
