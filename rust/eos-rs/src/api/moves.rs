@@ -1,5 +1,6 @@
 //! Functions related to getting information about monster moves.
 
+use crate::api::dungeon_mode::MoveCategory;
 use crate::api::objects::{Move};
 use crate::ffi;
 use crate::ffi::move_target_and_range;
@@ -101,14 +102,58 @@ impl TryInto<HealingMoveType> for ffi::healing_move_type::Type {
 
 /// Game functions related to [`Move`]s.
 pub trait MoveExt {
-    // get_target_and_range
-    /*/// The fourth field in the returned tuple seems unused.
-    /// The values in the returned tuple are None, if they are invalid (or we don't know them yet).
-    /// See [`Move::get_target_and_range`] for more information.*/
+    /// Gets the move target-and-range field. See struct move_target_and_range in the C headers.
+    fn get_target_and_range(&self, is_ai: bool) -> (Option<MoveTarget>, Option<MoveRange>, Option<HealingMoveType>, u16);
+
+    /// Gets the base power of the move.
+    fn get_base_power(&self) -> i32;
+
+    /// Gets the maximum PP for the move.
+    ///
+    /// Returns max PP for the given move, capped at 99.
+    fn get_max_pp(&self) -> i32;
+
+    /// Gets the critical hit chance of the move.
+    fn get_crit_chance(&self) -> i32;
+
+    /// Checks if the move is a recoil move (affected by Reckless).
+    fn is_recoil_move(&self) -> bool;
+
+    /// Checks if the move is a punch move (affected by Iron Fist).
+    fn is_punch_move(&self) -> bool;
+
+    /// Gets a move's category (physical, special, status). Returns None if the catgeory is invalid.
+    fn get_category(&self) -> Option<MoveCategory>;
 }
 
 impl MoveExt for Move {
+    fn get_target_and_range(&self, is_ai: bool) -> (Option<MoveTarget>, Option<MoveRange>, Option<HealingMoveType>, u16) {
+        unsafe { ffi::GetMoveTargetAndRange(force_mut_ptr!(self), is_ai as ffi::bool_) }.into()
+    }
 
+    fn get_base_power(&self) -> i32 {
+        unsafe { ffi::GetMoveBasePower(force_mut_ptr!(self)) }
+    }
+
+    fn get_max_pp(&self) -> i32 {
+        unsafe { ffi::GetMaxPp(force_mut_ptr!(self)) }
+    }
+
+    fn get_crit_chance(&self) -> i32 {
+        unsafe { ffi::GetMoveCritChance(force_mut_ptr!(self)) }
+    }
+
+    fn is_recoil_move(&self) -> bool {
+        unsafe { ffi::IsRecoilMove(self.id.val()) > 0 }
+    }
+
+    fn is_punch_move(&self) -> bool {
+        unsafe { ffi::IsPunchMove(self.id.val()) > 0 }
+    }
+
+    fn get_category(&self) -> Option<MoveCategory> {
+        unsafe { ffi::GetMoveCategory(self.id.val()) }.try_into().ok()
+    }
 }
 
 impl From<move_target_and_range> for (Option<MoveTarget>, Option<MoveRange>, Option<HealingMoveType>, u16) {

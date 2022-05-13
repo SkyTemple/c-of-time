@@ -1,5 +1,22 @@
 //! Traits, structs and functions related to ground mode.
 
+use crate::api::objects::monster_catalog;
+use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
+use crate::ffi;
+
+/// Misc. and general ground mode functions, guarded by this struct.
+pub struct GroundModeContext(OverlayLoadLease<11>);
+
+impl CreatableWithLease<11> for GroundModeContext {
+    fn _create(lease: OverlayLoadLease<11>) -> Self {
+        Self(lease)
+    }
+
+    fn lease(&self) -> &OverlayLoadLease<11> {
+        &self.0
+    }
+}
+
 //   functions:
 //     - name: ScriptSpecialProcessCall
 //       address:
@@ -13,17 +30,17 @@
 //         r2: first argument, if relevant? Probably corresponds to the second parameter of OPCODE_PROCESS_SPECIAL
 //         r3: second argument, if relevant? Probably corresponds to the third parameter of OPCODE_PROCESS_SPECIAL
 //         return: return value of the special process if it has one, otherwise 0
-//     - name: GetSpecialRecruitmentSpecies
-//       address:
-//         NA: 0x22E803C
-//         EU: 0x22E897C
-//       description: |-
-//         Returns an entry from RECRUITMENT_TABLE_SPECIES.
-//
-//         Note: This indexes without doing bounds checking.
-//
-//         r0: index into RECRUITMENT_TABLE_SPECIES
-//         return: enum monster_id
+
+impl GroundModeContext {
+    /// Returns an entry from RECRUITMENT_TABLE_SPECIES.
+    ///
+    /// # Safety
+    /// This indexes without doing bounds checking.
+    pub unsafe fn get_special_recruitment_species(&self, index: i32) -> monster_catalog::Type {
+        unsafe { ffi::GetSpecialRecruitmentSpecies(index) }
+    }
+}
+
 //     - name: PrepareMenuAcceptTeamMember
 //       address:
 //         NA: 0x22E8080

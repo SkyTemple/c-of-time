@@ -8,6 +8,11 @@ edition = "2021"
 [lib]
 crate-type = ["rlib"]
 
+[features]
+default = ["global_allocator", "io"]
+global_allocator = []
+io = []
+
 [dependencies]
 # This fork removes float support, int support and math support from the compiler builtins.
 # This is because (a) they aren't needed and (b) there are some issues with dependencies on the
@@ -18,4 +23,6 @@ compiler_builtins_local = { git = "https://github.com/theCapypara/compiler-built
 # This fork forces atomics to be off, which is required to compile against the NDS.
 log = { git = "https://github.com/theCapypara/log", branch = "master" }
 eos-rs-proc = { path = "./proc" }
+acid_io = { git = "https://github.com/theCapypara/acid_io", branch = "main", features = ["alloc"] }
 fixed = "1"
+az = "1.2"

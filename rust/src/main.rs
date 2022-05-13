@@ -48,8 +48,9 @@ HasLowHealth+0:
 /// This also shows, that even though things are marked "technically safe" here in Rust
 /// land, you should probably double check if you can really do everything in the context
 /// of the function you patch.
-/// If you want to test the item and move effects bundled with this as an example, you probably
-/// want to comment out the logic that logs messages in this function first.
+/// If you want to test the item and move effects bundled with this `main.rs`, you probably
+/// want to comment out the logic that logs messages in this function first (otherwise good luck
+/// using an item or move ;) ).
 #[no_mangle]
 pub extern "C" fn has_high_health(
     entity: *mut DungeonEntity,
@@ -132,9 +133,9 @@ pub fn oran_berry_burn(
     // but for demonstration purposes we do it anyway.
     if used_item.id.val() == item_catalog::ITEM_ORAN_BERRY {
         info!("oran_berry_burn detected Oran Berry.");
-        match effects.try_inflict_burn(user, target, false, true, false) {
+        match effects.try_inflict_burn_status(user, target, false, true, false) {
             true => info!("oran_berry_burn successfully burned."),
-            false => info!("oran_berry_burn failed to burn."),
+            false => warn!("oran_berry_burn failed to burn."),
         }
     }
 }
@@ -155,9 +156,9 @@ pub fn cut_badly_poisoned(
         info!("cut_badly_poisoned detected Cut.");
         if random::rand_i32(0..4) == 0 {
             info!("cut_badly_poisoned rolled a 0.");
-            match effects.try_inflict_bad_poison(user, target, true, false) {
+            match effects.try_inflict_badly_poisoned_status(user, target, true, false) {
                 true => info!("cut_badly_poisoned successfully poisoned."),
-                false => info!("cut_badly_poisoned failed to poison."),
+                false => warn!("cut_badly_poisoned failed to poison."),
             }
         }
         // At the end we deal the actual damage.

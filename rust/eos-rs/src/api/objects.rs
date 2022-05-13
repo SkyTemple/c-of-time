@@ -17,7 +17,9 @@ pub use ffi::iq_skill_id as iq_skill_catalog;
 pub use ffi::iq_group_id as iq_group_catalog;
 pub use ffi::exclusive_item_effect_id as exclusive_item_effect_catalog;
 pub use ffi::dungeon_id as dungeon_catalog;
+pub use ffi::dungeon_group_id as dungeon_group_catalog;
 pub use ffi::fixed_room_id as fixed_room_catalog;
+pub use ffi::monster_id as monster_catalog;
 
 /// A monster move.
 pub type Move = ffi::move_;

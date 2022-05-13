@@ -15,7 +15,7 @@
 //! it is recommended to work with the [`DungeonFloorGeneration`] and related traits instead of
 //! implementation-specific code.
 
-use crate::api::objects::fixed_room_catalog;
+use crate::api::dungeon_mode::GlobalDungeonData;
 use crate::ffi;
 
 pub mod game_builtin;
@@ -29,46 +29,18 @@ pub type DungeonGridCell = ffi::dungeon_grid_cell;
 pub trait DungeonFloorGeneration
 {
     type EntityGenerator: DungeonEntityGeneration;
-    type PiecesGenerator: DungeonPiecesGeneration;
     type LayoutGenerator: ?Sized;
 
     /// Generates a floor using the specified floor properties. This will create a fully working
     /// layout, including entities.
     ///
-    /// Whether a standard floor or a fixed floor is generated is taken from the properties,
-    /// same goes for the layout. To force a specific behaviour, see the other functions.
+    /// Whether a fixed floor or a floor using a layout is generated is taken from the properties.
     fn generate_floor(&mut self, width: usize, height: usize, properties: &ffi::floor_properties) -> &mut Self;
 
-    /// Generates a standard floor using the specified floor properties.
+    /// Generates a floor using the specified layout. This will create a fully working layout.
     ///
-    /// A standard floor is a floor that is not generated from a single fixed room.
-    /// It will usually be a combination of applying a
-    /// layout ([`Self::generate_layout`]) and adding bits and pieces to it ([`Self::pieces`]).
-    ///
-    /// Entities are not spawned (TODO: is that true?).
-    fn generate_standard_floor(&mut self, width: usize, height: usize, properties: &ffi::floor_properties) -> &mut Self;
-
-    /// Generates a fixed floor using the specified floor properties.
-    ///
-    /// A fixed floor is a floor that is generated from a single fixed room.
-    ///
-    /// Entities are not spawned (TODO: is that true?).
-    fn generate_fixed_floor(&mut self, fixed_room_id: fixed_room_catalog::Type, properties: &ffi::floor_properties) -> &mut Self;
-
-    /// Generates a new dungeon floor using a specific layout.
-    ///
-    /// This will most likely not be fully finished standard floor, see [`Self::pieces`] to finish
-    /// the layout.
-    ///
-    /// Entities are not spawned (TODO: is that true?).
-    fn generate_layout(&mut self, width: usize, height: usize, layout: &mut Self::LayoutGenerator, properties: &ffi::floor_properties) -> &mut Self;
-
-    /// Generate individual bits and pieces, the callback will receive
-    /// [`Self::PiecesGenerator`] to generate them.
-    ///
-    /// # Implementors
-    /// Implementations must call `cb`.
-    fn pieces<F: FnOnce(&mut Self::PiecesGenerator)>(&mut self, cb: F) -> &mut Self;
+    /// Entities are not spawned.
+    fn generate_layout(&mut self, layout: &mut Self::LayoutGenerator, properties: &ffi::floor_properties) -> &mut Self;
 
     /// Generate entities, the callback will receive [`Self::EntityGenerator`] to generate them.
     ///
@@ -80,19 +52,41 @@ pub trait DungeonFloorGeneration
     ///
     /// **Important:** For the builtin generator, see the note at
     /// [`game_builtin::GlobalDungeonStructureGenerator::generate`].
-    ///
-    /// # Safety
-    /// The caller needs to make sure the global dungeon can currently be safely
-    /// replaced with a new dungeon.
-    unsafe fn generate(self);
-}
-
-/// Utility generator to manually generate little bits and pieces into a dungeon floor.
-pub trait DungeonPiecesGeneration {
-
+    fn generate(self, global_dungeon: &mut GlobalDungeonData);
 }
 
 /// Generator for entities on a dungeon floor.
 pub trait DungeonEntityGeneration {
+    /// Spawn all non-enemy entities, which includes stairs, items, traps, and the player.
+    ///
+    /// Most entities are spawned randomly on a subset of permissible tiles.
+    ///
+    /// Stairs are spawned if they don't already exist on the floor, and hidden stairs of the
+    /// specified type are also spawned if configured as long as there are at least 2 floors left
+    /// in the dungeon. Stairs can spawn on any tile that has open terrain, is in a room, isn't in
+    /// a Kecleon shop, doesn't already have an enemy spawn, isn't a hallway junction, and isn't a
+    /// special tile like a Key door.
+    ///
+    /// Items are spawned both normally in rooms, as well as in walls and Monster Houses. Normal
+    /// items can spawn on any tile that has open terrain, is in a room, isn't in a Kecleon shop
+    /// or Monster House, isn't a hallway junction, and isn't a special tile like a Key door.
+    /// Buried items can spawn on any wall tile. Monster House items can spawn on any Monster House
+    /// tile that isn't in a Kecleon shop and isn't a hallway junction.
+    ///
+    /// Traps are similarly spawned both normally in rooms, as well as in Monster Houses. Normal
+    /// traps can spawn on any tile that has open terrain, is in a room, isn't in a Kecleon shop,
+    /// doesn't already have an item or enemy spawn, and isn't a special tile like a Key door.
+    /// Monster House traps follow the same conditions as Monster House items.
+    ///
+    /// The player can spawn on any tile that has open terrain, is in a room, isn't in a Kecleon
+    /// shop, isn't a hallway junction, doesn't already have an item, enemy, or trap spawn, and
+    /// isn't a special tile like a Key door.
+    fn spawn_non_enemies(&mut self, floor_properties: &ffi::floor_properties, empty_monster_house: bool);
 
+    /// Spawn all enemies, which includes normal enemies and those in Monster Houses.
+    ///
+    /// Normal enemies can spawn on any tile that has open terrain, isn't in a Kecleon shop, doesn't already have another entity spawn, and isn't a special tile like a Key door.
+    ///
+    /// Monster House enemies can spawn on any Monster House tile that isn't in a Kecleon shop, isn't where the player spawns, and isn't a special tile like a Key door.
+    fn spawn_enemies(&mut self, floor_properties: &ffi::floor_properties, empty_monster_house: bool);
 }
