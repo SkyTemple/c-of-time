@@ -6,6 +6,7 @@
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
+#![allow(clippy::missing_safety_doc)]
 
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
@@ -4258,9 +4259,9 @@ pub struct file_stream {
     pub field_0x18: undefined4,
     pub field_0x1c: undefined4,
     pub field_0x20: undefined4,
-    pub field_0x24: undefined4,
-    pub field_0x28: undefined4,
-    pub field_0x2c: undefined4,
+    pub start_address: *mut crate::ctypes::c_void,
+    pub end_address: *mut crate::ctypes::c_void,
+    pub current_address: *mut crate::ctypes::c_void,
     pub field_0x30: undefined4,
     pub field_0x34: undefined4,
     pub field_0x38: undefined4,

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Generates the bindings for the pmdsky-debug headers.
-# Note that rust-bindgen needs to be in the path and pmdsky-debug needs to be checkout out.
+# Note that bindgen needs to be in the path and pmdsky-debug needs to be checkout out.
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -11,6 +11,7 @@ bindgen \
   --raw-line "#![allow(non_upper_case_globals)]" \
   --raw-line "#![allow(non_camel_case_types)]" \
   --raw-line "#![allow(non_snake_case)]" \
+  --raw-line "#![allow(clippy::missing_safety_doc)]" \
   --ctypes-prefix "crate::ctypes" \
   --use-core \
   --no-layout-tests \

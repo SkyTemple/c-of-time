@@ -7,6 +7,8 @@
 //! a low level API in the [`ffi`] module (consisting of `bindgen` generated bindings to known
 //! functions in the base game).
 //!
+//! This crate also contains a replacement implementation of `std::io` inside [`api::io`].
+//!
 //! Pulling in this crate will also configure the allocator to use the game's allocation functions
 //! and sets up a panic handler.
 //!
@@ -29,8 +31,9 @@
 // This will be stable pretty soon:
 #![feature(alloc_c_string)]
 #![feature(core_c_str)]
+#![feature(allocator_api)]
+#![feature(nonnull_slice_from_raw_parts)]
 
-#![allow(clippy::missing_safety_doc)]
 #![allow(clippy::too_many_arguments)]
 
 extern crate alloc;

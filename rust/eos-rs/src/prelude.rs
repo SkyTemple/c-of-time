@@ -10,3 +10,5 @@ pub use crate::panic::*;
 #[doc(hidden)]  // So it's not documented twice.
 pub use crate::patches;
 pub use log::{debug, error, info, trace, warn};
+#[cfg(feature = "io")]
+pub use crate::api::io::prelude::*;

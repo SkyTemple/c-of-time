@@ -39,3 +39,10 @@ pub fn rand_i32<R: RangeBounds<i32>>(range: R) -> i32 {
         }
     }
 }
+
+// uint16_t Rand16Bit(void);
+// uint32_t RandInt(uint32_t n);
+// int RandRange(int x, int y);
+// uint32_t Rand32Bit(void);
+// uint32_t RandIntSafe(uint32_t n);
+// int RandRangeSafe(int x, int y);
