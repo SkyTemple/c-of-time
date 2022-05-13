@@ -44,9 +44,6 @@ pub trait DungeonMonsterExtRead {
     /// Checks if a certain exclusive item effect is active for the monster.
     fn is_exclusive_item_effect_active(&self, item_id: exclusive_item_effect_catalog::Type) -> bool;
 
-    /// Checks if the monster is a team member under the effects of a certain exclusive item effect.
-    fn is_exclusive_item_effect_is_active_for_team_member(&self, item_id: exclusive_item_effect_catalog::Type) -> bool;
-
     /// Gets the type matchup for a given combat interaction. Attacker is self.
     /// Note that the actual monster's types on the attacker and defender are not used;
     /// the entities are only used to check conditions. The actual type matchup table lookup is
@@ -203,6 +200,18 @@ pub trait DungeonMonsterExtRead {
     /// * `effects` - flag for whether or not to factor in the Self Curer IQ skill and the
     ///               Natural Cure ability
     fn calc_status_duration(&self, turn_range: &[u16; 2], effects: bool) -> i32;
+
+    /// Returns the number of attacks that a monster can do in one turn (1 or 2).
+    ///
+    /// Checks for the abilities Swift Swim, Chlorophyll, Unburden, and for exclusive items.
+    fn get_number_of_attacks(&self) -> i32;
+
+    /// Checks if a monster is levitating (has the effect of Levitate and Gravity is not active).
+    fn is_levitating(&self) -> bool;
+
+    /// Checks if the monster is under the effect of Conversion 2 (its type was changed). Returns
+    /// `None` if the value is invalid.
+    fn is_conversion2_active(&self) -> Option<Conversion2Status>;
 }
 
 /// Extension trait for [`DungeonMonsterMut`] (write operations).
@@ -214,6 +223,15 @@ pub trait DungeonMonsterExtRead {
 pub trait DungeonMonsterExtWrite {
     /// Updates the PP of any moves that were used the a monster, if PP should be consumed.
     fn update_move_pp(&mut self, should_consume_pp: bool);
+
+    /// Checks if the monster has the ability Truant, and if so tries to apply the pause status
+    /// to it.
+    fn try_activate_truant(&mut self);
+
+    /// Tries to change a monster into one of its weather-related alternative forms.
+    ///
+    /// Applies to Castform and Cherrim, and checks for their unique abilities.
+    fn try_weather_form_change(&mut self);
 }
 
 impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
@@ -258,10 +276,6 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
 
     fn is_exclusive_item_effect_active(&self, effect_id: exclusive_item_effect_catalog::Type) -> bool {
         unsafe { ffi::ExclusiveItemEffectIsActive(force_mut_ptr!(self.1), effect_id) > 0 }
-    }
-
-    fn is_exclusive_item_effect_is_active_for_team_member(&self, effect_id: exclusive_item_effect_catalog::Type) -> bool {
-        unsafe { ffi::TeamExclusiveItemEffectIsActive(force_mut_ptr!(self.1), effect_id) > 0 }
     }
 
     fn get_type_matchup(&self, defender: &DungeonEntity, target_type_index: TargetTypeIndex, attack_type: type_catalog::Type) -> Option<DungeonTypeMatchup> {
@@ -430,6 +444,18 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
             effects as ffi::bool_
         ) }
     }
+
+    fn get_number_of_attacks(&self) -> i32 {
+        unsafe { ffi::GetNumberOfAttacks(force_mut_ptr!(self.1)) }
+    }
+
+    fn is_levitating(&self) -> bool {
+        unsafe { ffi::LevitateIsActive(force_mut_ptr!(self.1)) > 0 }
+    }
+
+    fn is_conversion2_active(&self) -> Option<Conversion2Status> {
+        unsafe { ffi::Conversion2IsActive(force_mut_ptr!(self.1)) }.try_into().ok()
+    }
 }
 
 impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
@@ -471,10 +497,6 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
 
     fn is_exclusive_item_effect_active(&self, item_id: exclusive_item_effect_catalog::Type) -> bool {
         self.as_ref().is_exclusive_item_effect_active(item_id)
-    }
-
-    fn is_exclusive_item_effect_is_active_for_team_member(&self, item_id: exclusive_item_effect_catalog::Type) -> bool {
-        self.as_ref().is_exclusive_item_effect_is_active_for_team_member(item_id)
     }
 
     fn get_type_matchup(&self, defender: &DungeonEntity, target_type_index: TargetTypeIndex, attack_type: type_catalog::Type) -> Option<DungeonTypeMatchup> {
@@ -540,10 +562,30 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
     fn calc_status_duration(&self, turn_range: &[u16; 2], effects: bool) -> i32 {
         self.as_ref().calc_status_duration(turn_range, effects)
     }
+
+    fn get_number_of_attacks(&self) -> i32 {
+        self.as_ref().get_number_of_attacks()
+    }
+
+    fn is_levitating(&self) -> bool {
+        self.as_ref().is_levitating()
+    }
+
+    fn is_conversion2_active(&self) -> Option<Conversion2Status> {
+        self.as_ref().is_conversion2_active()
+    }
 }
 
 impl<'a> DungeonMonsterExtWrite for DungeonMonsterMut<'a> {
     fn update_move_pp(&mut self, should_consume_pp: bool) {
         unsafe { ffi::UpdateMovePp(self.1 as *mut _, should_consume_pp as ffi::bool_) }
+    }
+
+    fn try_activate_truant(&mut self) {
+        unsafe { ffi::TryActivateTruant(self.1 as *mut _) }
+    }
+
+    fn try_weather_form_change(&mut self) {
+        unsafe { ffi::TryWeatherFormChange(self.1 as *mut _) }
     }
 }

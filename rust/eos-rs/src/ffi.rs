@@ -4592,6 +4592,36 @@ pub struct move_data {
 pub struct move_data_table {
     pub entries: [move_data; 559usize],
 }
+#[repr(C)]
+pub struct dungeon_floor_pair {
+    pub dungeon_id: u8,
+    pub floor_id: u8,
+}
+#[repr(C)]
+pub struct adventure_log {
+    pub completion_flags: [u32; 4usize],
+    pub nb_dungeons_cleared: u32,
+    pub nb_friend_rescues: u32,
+    pub nb_evolutions: u32,
+    pub nb_eggs_hatched: u32,
+    pub successful_steals: u32,
+    pub nb_faints: u32,
+    pub nb_victories_on_one_floor: u32,
+    pub pokemon_joined_counter: u32,
+    pub pokemon_battled_counter: u32,
+    pub moves_learned_counter: u32,
+    pub nb_big_treasure_wins: u32,
+    pub nb_recycled: u32,
+    pub nb_gifts_sent: u32,
+    pub pokemon_joined_flags: [u32; 37usize],
+    pub pokemon_battled_flags: [u32; 37usize],
+    pub moves_learned_flags: [u32; 17usize],
+    pub items_acquired_flags: [u32; 44usize],
+    pub special_challenge_flags: u32,
+    pub sentry_duty_game_points: [u32; 5usize],
+    pub current_floor: dungeon_floor_pair,
+    pub padding: u16,
+}
 pub mod direction_id {
     pub type Type = crate::ctypes::c_uint;
     pub const DIR_DOWN: Type = 0;
@@ -6254,7 +6284,7 @@ pub struct statuses {
     pub terrified: bool_,
     pub terrified_turns: u8,
     pub perish_song_turns: u8,
-    pub field_0x5e: undefined,
+    pub no_slip_cap_counter: u8,
     pub field_0x5f: undefined,
     pub field_0x60: undefined,
     pub field_0x61: undefined,
@@ -12238,10 +12268,10 @@ pub struct dungeon {
     pub field_0x3e31: undefined,
     pub field_0x3e32: undefined,
     pub field_0x3e33: undefined,
-    pub field_0x3e34: undefined,
-    pub field_0x3e35: undefined,
-    pub field_0x3e36: undefined,
-    pub field_0x3e37: undefined,
+    pub enemy_plus_is_active: bool_,
+    pub team_plus_is_active: bool_,
+    pub enemy_minus_is_active: bool_,
+    pub team_minus_is_active: bool_,
     pub field_0x3e38: undefined,
     pub field_0x3e39: undefined,
     pub field_0x3e3a: undefined,
@@ -110747,6 +110777,15 @@ pub struct script_object {
     pub field_0x8: u8,
     pub unused: [u8; 3usize],
 }
+#[repr(C)]
+pub struct main_ground_data {
+    pub script: *mut undefined,
+    pub partner_follow_data: *mut undefined,
+    pub actors: *mut undefined,
+    pub objects: *mut undefined,
+    pub performers: *mut undefined,
+    pub events: *mut undefined,
+}
 extern "C" {
     pub fn InitMemAllocTable();
 }
@@ -111226,13 +111265,124 @@ extern "C" {
     pub fn InitDungeonListScriptVars();
 }
 extern "C" {
-    pub fn ScriptSpecialProcess0x3A();
+    pub fn SetAdventureLogStructLocation();
 }
 extern "C" {
-    pub fn ScriptSpecialProcess0x3B();
+    pub fn SetAdventureLogDungeonFloor(dungeon_floor: dungeon_floor_pair);
 }
 extern "C" {
-    pub fn SendSkyGiftToGuildmaster();
+    pub fn GetAdventureLogDungeonFloor() -> dungeon_floor_pair;
+}
+extern "C" {
+    pub fn ClearAdventureLogStruct();
+}
+extern "C" {
+    pub fn SetAdventureLogCompleted(entry_id: u32);
+}
+extern "C" {
+    pub fn IsAdventureLogNotEmpty() -> bool_;
+}
+extern "C" {
+    pub fn GetAdventureLogCompleted(entry_id: u32) -> bool_;
+}
+extern "C" {
+    pub fn IncrementNbDungeonsCleared();
+}
+extern "C" {
+    pub fn GetNbDungeonsCleared() -> u32;
+}
+extern "C" {
+    pub fn IncrementNbFriendRescues();
+}
+extern "C" {
+    pub fn GetNbFriendRescues() -> u32;
+}
+extern "C" {
+    pub fn IncrementNbEvolutions();
+}
+extern "C" {
+    pub fn GetNbEvolutions() -> u32;
+}
+extern "C" {
+    pub fn IncrementNbSteals();
+}
+extern "C" {
+    pub fn IncrementNbEggsHatched();
+}
+extern "C" {
+    pub fn GetNbEggsHatched() -> u32;
+}
+extern "C" {
+    pub fn GetNbPokemonJoined() -> u32;
+}
+extern "C" {
+    pub fn GetNbMovesLearned() -> u32;
+}
+extern "C" {
+    pub fn SetVictoriesOnOneFloor(nb_victories: u32);
+}
+extern "C" {
+    pub fn GetVictoriesOnOneFloor() -> u32;
+}
+extern "C" {
+    pub fn SetPokemonJoined(monster_id: monster_id::Type);
+}
+extern "C" {
+    pub fn SetPokemonBattled(monster_id: monster_id::Type);
+}
+extern "C" {
+    pub fn GetNbPokemonBattled() -> u32;
+}
+extern "C" {
+    pub fn IncrementNbBigTreasureWins();
+}
+extern "C" {
+    pub fn SetNbBigTreasureWins(nb_big_treasure_wins: u32);
+}
+extern "C" {
+    pub fn GetNbBigTreasureWins() -> u32;
+}
+extern "C" {
+    pub fn SetNbRecycled(nb_recycled: u32);
+}
+extern "C" {
+    pub fn GetNbRecycled() -> u32;
+}
+extern "C" {
+    pub fn IncrementNbSkyGiftsSent();
+}
+extern "C" {
+    pub fn SetNbSkyGiftsSent(nb_sky_gifts_sent: u32);
+}
+extern "C" {
+    pub fn GetNbSkyGiftsSent() -> u32;
+}
+extern "C" {
+    pub fn ComputeSpecialCounters();
+}
+extern "C" {
+    pub fn RecruitSpecialPokemonLog(monster_id: monster_id::Type);
+}
+extern "C" {
+    pub fn IncrementNbFainted();
+}
+extern "C" {
+    pub fn GetNbFainted() -> u32;
+}
+extern "C" {
+    pub fn SetItemAcquired(item_id: item_id::Type);
+}
+extern "C" {
+    pub fn GetNbItemAcquired() -> u32;
+}
+extern "C" {
+    pub fn SetChallengeLetterCleared(challenge_id: u32);
+}
+extern "C" {
+    pub fn GetSentryDutyGamePoints(rank: i32) -> u32;
+}
+extern "C" {
+    pub fn SetSentryDutyGamePoints(points: u32) -> i32;
 }
 extern "C" {
     pub fn SubFixedPoint(val_fp: u32, dec_fp: u32) -> u32;
@@ -111563,6 +111713,9 @@ extern "C" {
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn EntityIsValid(entity: *mut entity) -> bool_;
+}
+extern "C" {
     pub fn GetFloorType() -> floor_type::Type;
 }
 extern "C" {
@@ -111574,6 +111727,9 @@ extern "C" {
         entity: *mut entity,
         param_3: undefined4,
     );
+}
+extern "C" {
+    pub fn ItemIsActive(entity: *mut entity, item_id: item_id::Type) -> bool_;
 }
 extern "C" {
     pub fn GenerateDungeonRngSeed() -> u32;
@@ -111619,13 +111775,39 @@ extern "C" {
     pub fn DungeonRngSetPrimary();
 }
 extern "C" {
-    pub fn EntityIsValid(entity: *mut entity) -> bool_;
+    pub fn TrySwitchPlace(user: *mut entity, target: *mut entity);
 }
 extern "C" {
     pub fn ResetDamageDesc(damage_desc: *mut undefined4);
 }
 extern "C" {
     pub fn FloorNumberIsEven() -> bool_;
+}
+extern "C" {
+    pub fn TryActivateSlowStart();
+}
+extern "C" {
+    pub fn TryActivateArtificialWeatherAbilities();
+}
+extern "C" {
+    pub fn DefenderAbilityIsActive(
+        attacker: *mut entity,
+        defender: *mut entity,
+        ability_id: ability_id::Type,
+        attacker_ability_enabled: bool_,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn IsMonster(entity: *mut entity) -> bool_;
+}
+extern "C" {
+    pub fn TryActivateTruant(entity: *mut entity);
+}
+extern "C" {
+    pub fn ExclusiveItemEffectIsActive(
+        entity: *mut entity,
+        effect_id: exclusive_item_effect_id::Type,
+    ) -> bool_;
 }
 extern "C" {
     pub fn HasLowHealth(entity: *mut entity) -> bool_;
@@ -111637,16 +111819,16 @@ extern "C" {
     pub fn IsExperienceLocked(monster: *mut monster) -> bool_;
 }
 extern "C" {
-    pub fn ItemIsActive(entity: *mut entity, item_id: item_id::Type) -> bool_;
-}
-extern "C" {
-    pub fn IsMonster(entity: *mut entity) -> bool_;
+    pub fn GetNumberOfAttacks(entity: *mut entity) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn NoGastroAcidStatus(entity: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn AbilityIsActive(entity: *mut entity, ability_id: ability_id::Type) -> bool_;
+}
+extern "C" {
+    pub fn LevitateIsActive(entity: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn MonsterIsType(entity: *mut entity, type_id: type_id::Type) -> bool_;
@@ -111663,23 +111845,6 @@ extern "C" {
         defender: *mut entity,
         base_exp: crate::ctypes::c_int,
     );
-}
-extern "C" {
-    pub fn PptrIsValid(pptr: *mut *mut crate::ctypes::c_void) -> bool_;
-}
-extern "C" {
-    pub fn DefenderAbilityIsActive(
-        attacker: *mut entity,
-        defender: *mut entity,
-        ability_id: ability_id::Type,
-        attacker_ability_enabled: bool_,
-    ) -> bool_;
-}
-extern "C" {
-    pub fn ExclusiveItemEffectIsActive(
-        entity: *mut entity,
-        effect_id: exclusive_item_effect_id::Type,
-    ) -> bool_;
 }
 extern "C" {
     pub fn GetTypeMatchup(
@@ -111777,6 +111942,12 @@ extern "C" {
         entity: *mut entity,
         move_category_idx: crate::ctypes::c_int,
     ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn TickNoSlipCap(entity: *mut entity);
+}
+extern "C" {
+    pub fn TickStatusAndHealthRegen(entity: *mut entity);
 }
 extern "C" {
     pub fn InflictSleepStatusSingle(entity: *mut entity, turns: crate::ctypes::c_int);
@@ -111968,12 +112139,6 @@ extern "C" {
     ) -> bool_;
 }
 extern "C" {
-    pub fn TeamExclusiveItemEffectIsActive(
-        entity: *mut entity,
-        effect_id: exclusive_item_effect_id::Type,
-    ) -> bool_;
-}
-extern "C" {
     pub fn BoostSpeed(
         user: *mut entity,
         target: *mut entity,
@@ -112061,6 +112226,9 @@ extern "C" {
 }
 extern "C" {
     pub fn HasConditionalGroundImmunity(entity: *mut entity) -> bool_;
+}
+extern "C" {
+    pub fn Conversion2IsActive(entity: *mut entity) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetEntityMoveTargetAndRange(
@@ -112158,6 +112326,9 @@ extern "C" {
 }
 extern "C" {
     pub fn GetApparentWeather(entity: *mut entity) -> weather_id::Type;
+}
+extern "C" {
+    pub fn TryWeatherFormChange(entity: *mut entity);
 }
 extern "C" {
     pub fn GetTile(x: crate::ctypes::c_int, y: crate::ctypes::c_int) -> *mut tile;
@@ -112573,8 +112744,4 @@ pub struct move_effect_input {
     pub move_id: crate::ctypes::c_int,
     pub item_id: crate::ctypes::c_int,
     pub out_dealt_damage: bool_,
-}
-
-pub(crate) unsafe fn IncrementNbDungeonsCleared() {
-    todo!()
 }
