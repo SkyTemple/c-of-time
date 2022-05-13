@@ -277,6 +277,31 @@ impl TryFrom<ffi::warp_type::Type> for WarpType {
     }
 }
 
+#[repr(i32)]
+#[derive(PartialEq, Clone, Copy)]
+/// The status of a monster's Conversion 2 state.
+pub enum Conversion2Status {
+    /// The monster is not under the effect of Conversion 2.
+    None = 0,
+    /// The monster is under the effect of Conversion 2 from a status.
+    FromStatus = 1,
+    /// The monster is under the effect of Conversion 2 from an exclusive item.
+    FromExclusiveItem = 2
+}
+
+impl TryFrom<i32> for Conversion2Status {
+    type Error = ();
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        match value {
+            0 => Ok(Conversion2Status::None),
+            1 => Ok(Conversion2Status::FromStatus),
+            2 => Ok(Conversion2Status::FromExclusiveItem),
+            _ => Err(()),
+        }
+    }
+}
+
 #[repr(u32)]
 #[derive(PartialEq, Clone, Copy)]
 /// Group of mission type on a dungeon floor.

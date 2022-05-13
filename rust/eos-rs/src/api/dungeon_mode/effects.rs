@@ -986,4 +986,34 @@ impl DungeonEffectsEmitter {
             base_exp
         ) }
     }
+
+    /// The user entity attempts to switch places with the target entity (i.e. by the effect of the
+    /// Switcher Orb).
+    ///
+    /// The function checks for the Suction Cups ability for both the user and the target, and for
+    /// the Mold Breaker ability on the user.
+    pub fn try_switch_place(
+        &self,
+        attacker: &mut DungeonEntity,
+        defender: &mut DungeonEntity
+    ) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::TrySwitchPlace(
+            attacker as *mut _, defender as *mut _
+        ) }
+    }
+
+    /// Runs a check over all monsters on the field for the ability Slow Start, and lowers the
+    /// speed of those who have it.
+    pub fn try_activate_slow_start(&self) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::TryActivateSlowStart() }
+    }
+
+    /// Runs a check over all monsters on the field for abilities that affect the weather and
+    /// changes the floor's weather accordingly.
+    pub fn try_activate_artificial_weather_abilities(&self) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::TryActivateArtificialWeatherAbilities() }
+    }
 }
