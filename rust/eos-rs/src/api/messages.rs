@@ -71,7 +71,7 @@ impl<'a> GameStringBuilder<'a> {
     ///
     /// Sets the speaker value of the preprocessor flags to true.
     ///
-    /// If [`Self::set_speaker_name`] was not called, this will probably(...?) show the speech
+    /// If [`Self::set_speaker`] was not called, this will probably(...?) show the speech
     /// bubble icon as the speaker.
     pub fn show_speaker(&mut self) -> &mut Self {
         self.flags.set_show_speaker(true as ffi::bool_);
