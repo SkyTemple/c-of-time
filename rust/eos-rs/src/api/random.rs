@@ -26,17 +26,19 @@ impl Rng for GameRng {
     }
 }
 
+/// Gets the game's general PRNG seed.
 pub fn get_seed() -> u16 {
     unsafe { ffi::GetRngSeed() }
 }
 
+/// Sets the games general PRNG seed.
 pub fn set_seed(seed: u16) {
     unsafe { ffi::SetRngSeed(seed) }
 }
 
 /// Generates a random number between the beginning and end of the range.
 /// If the range is unbounded, min and/or max values are bound to
-/// 0 (u16::MIN) and u16::MAX respectively.
+/// 0 ([`u16::MIN`]) and [`u16::MAX`] respectively.
 ///
 /// The range must contain at least one element, or this will panic.
 /// Same if the start bound is excluded.
@@ -46,7 +48,7 @@ pub fn rand_u16<R: RangeBounds<u16>>(range: R) -> u16 {
 
 /// Generates a random number between the beginning and end of the range.
 /// If the range is unbounded, min and/or max values are bound to
-/// i32::MIN and i32::MAX respectively.
+/// [`i32::MIN`] and [`i32::MAX`] respectively.
 ///
 /// The range must contain at least one element, or this will panic.
 /// Same if the start bound is excluded.
@@ -59,8 +61,8 @@ pub(crate) fn rand_u16_internal<T: Rng, R: RangeBounds<u16>>(rng: &mut T, range:
 
     let (min, max) = match (range.start_bound(), range.end_bound()) {
         (Bound::Unbounded, Bound::Unbounded) => return rng.rand16(),
-        (Bound::Unbounded, Bound::Included(u)) => (0, *u),
-        (Bound::Unbounded, Bound::Excluded(u)) => (0, *u - 1),
+        (Bound::Unbounded, Bound::Included(u)) => (u16::MIN, *u),
+        (Bound::Unbounded, Bound::Excluded(u)) => (u16::MIN, *u - 1),
         (Bound::Included(l), Bound::Unbounded) => (*l, u16::MAX),
         (Bound::Included(l), Bound::Included(u)) => (*l, *u),
         (Bound::Included(l), Bound::Excluded(u)) => (*l, *u - 1),
