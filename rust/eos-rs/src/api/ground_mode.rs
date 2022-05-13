@@ -37,7 +37,7 @@ impl GroundModeContext {
     /// # Safety
     /// This indexes without doing bounds checking.
     pub unsafe fn get_special_recruitment_species(&self, index: i32) -> monster_catalog::Type {
-        unsafe { ffi::GetSpecialRecruitmentSpecies(index) }
+        ffi::GetSpecialRecruitmentSpecies(index)
     }
 }
 

@@ -112574,3 +112574,7 @@ pub struct move_effect_input {
     pub item_id: crate::ctypes::c_int,
     pub out_dealt_damage: bool_,
 }
+
+pub(crate) unsafe fn IncrementNbDungeonsCleared() {
+    todo!()
+}
