@@ -1,8 +1,17 @@
 //! General gameplay related functions that are always available.
 
+use core::ptr;
 use crate::api::objects::item_catalog;
 use crate::ffi;
 use crate::ffi::{exclusive_item_effect_id, item_id_16};
+use crate::util::OwnedSlice;
+
+/// Describes an active team setup
+#[non_exhaustive]
+pub enum TeamSetup {
+    HeroOnly,
+    HeroAndPartnerOnly
+}
 
 /// Initializes the key wait process.
 ///
@@ -128,12 +137,12 @@ pub fn init_main_team_after_quiz() {
     unsafe { ffi::InitMainTeamAfterQuiz() }
 }
 
-/// Implements SPECIAL_PROC_0x3 (see ScriptSpecialProcessCall).
+/// Implements SPECIAL_PROC_0x3.
 pub fn script_special_process_3() {
     unsafe { ffi::ScriptSpecialProcess0x3() }
 }
 
-/// Implements SPECIAL_PROC_0x3 (see ScriptSpecialProcessCall).
+/// Implements SPECIAL_PROC_0x4.
 pub fn script_special_process_4() {
     unsafe { ffi::ScriptSpecialProcess0x4() }
 }
@@ -159,174 +168,6 @@ pub fn get_game_mode() -> i32 {
     unsafe { ffi::GetGameMode() }
 }
 
-//     - name: InitScriptVariableValues
-//       address:
-//         NA: 0x204B04C
-//         EU: 0x204B384
-//       description: |-
-//         Initialize the script variable values table (SCRIPT_VARS_VALUES).
-//
-//         The whole table is first zero-initialized. Then, all script variable values are first initialized to their defaults, after which some of them are overwritten with other hard-coded values.
-//
-//         No params.
-//     - name: InitEventFlagScriptVars
-//       address:
-//         NA: 0x204B304
-//         EU: 0x204B63C
-//       description: |-
-//         Initializes an assortment of event flag script variables (see the code for an exhaustive list).
-//
-//         No params.
-//     - name: ZinitScriptVariable
-//       address:
-//         NA: 0x204B434
-//         EU: 0x204B76C
-//       description: |-
-//         Zero-initialize the values of the given script variable.
-//
-//         r0: pointer to the local variable table (only needed if id >= VAR_LOCAL0)
-//         r1: script variable ID
-//     - name: LoadScriptVariableRaw
-//       address:
-//         NA: 0x204B49C
-//         EU: 0x204B7D4
-//       description: |-
-//         Loads a script variable descriptor for a given ID.
-//
-//         r0: [output] script variable descriptor pointer
-//         r1: pointer to the local variable table (doesn't need to be valid; just controls the output value pointer)
-//         r2: script variable ID
-//     - name: LoadScriptVariableValue
-//       address:
-//         NA: 0x204B4EC
-//         EU: 0x204B824
-//       description: |-
-//         Loads the value of a script variable.
-//
-//         r0: pointer to the local variable table (only needed if id >= VAR_LOCAL0)
-//         r1: script variable ID
-//         return: value
-//     - name: LoadScriptVariableValueAtIndex
-//       address:
-//         NA: 0x204B678
-//         EU: 0x204B9B0
-//       description: |-
-//         Loads the value of a script variable at some index (for script variables that are arrays).
-//
-//         r0: pointer to the local variable table (only needed if id >= VAR_LOCAL0)
-//         r1: script variable ID
-//         r2: value index for the given script var
-//         return: value
-//     - name: SaveScriptVariableValue
-//       address:
-//         NA: 0x204B820
-//         EU: 0x204BB58
-//       description: |-
-//         Saves the given value to a script variable.
-//
-//         r0: pointer to local variable table (only needed if id >= VAR_LOCAL0)
-//         r1: script variable ID
-//         r2: value to save
-//     - name: SaveScriptVariableValueAtIndex
-//       address:
-//         NA: 0x204B988
-//         EU: 0x204BCC0
-//       description: |-
-//         Saves the given value to a script variable at some index (for script variables that are arrays).
-//
-//         r0: pointer to local variable table (only needed if id >= VAR_LOCAL0)
-//         r1: script variable ID
-//         r2: value index for the given script var
-//         r3: value to save
-//     - name: LoadScriptVariableValueSum
-//       address:
-//         NA: 0x204BB00
-//         EU: 0x204BE38
-//       description: |-
-//         Loads the sum of all values of a given script variable (for script variables that are arrays).
-//
-//         r0: pointer to the local variable table (only needed if id >= VAR_LOCAL0)
-//         r1: script variable ID
-//         return: sum of values
-//     - name: LoadScriptVariableValueBytes
-//       address:
-//         NA: 0x204BB64
-//         EU: 0x204BE9C
-//       description: |-
-//         Loads some number of bytes from the value of a given script variable.
-//
-//         r0: script variable ID
-//         r1: [output] script variable value bytes
-//         r2: number of bytes to load
-//     - name: SaveScriptVariableValueBytes
-//       address:
-//         NA: 0x204BBCC
-//         EU: 0x204BF04
-//       description: |-
-//         Saves some number of bytes to the given script variable.
-//
-//         r0: script variable ID
-//         r1: bytes to save
-//         r2: number of bytes
-//     - name: ScriptVariablesEqual
-//       address:
-//         NA: 0x204BC18
-//         EU: 0x204BF50
-//       description: |-
-//         Checks if two script variables have equal values. For arrays, compares elementwise for the length of the first variable.
-//
-//         r0: pointer to the local variable table (only needed if id >= VAR_LOCAL0)
-//         r1: script variable ID 1
-//         r2: script variable ID 2
-//         return: true if values are equal, false otherwise
-//     - name: EventFlagBackup
-//       address:
-//         NA: 0x204C1E4
-//         EU: 0x204C51C
-//       description: |-
-//         Saves event flag script variables (see the code for an exhaustive list) to their respective BACKUP script variables, but only in certain game modes.
-//
-//         This function prints the debug string "EventFlag BackupGameMode %d" with the game mode.
-//
-//         No params.
-//     - name: DumpScriptVariableValues
-//       address:
-//         NA: 0x204C408
-//         EU: 0x204C740
-//       description: |-
-//         Runs EventFlagBackup, then copies the script variable values table (SCRIPT_VARS_VALUES) to the given pointer.
-//
-//         r0: destination pointer for the data dump
-//         return: always 1
-//     - name: RestoreScriptVariableValues
-//       address:
-//         NA: 0x204C430
-//         EU: 0x204C768
-//       description: |-
-//         Restores the script variable values table (SCRIPT_VARS_VALUES) with the given data. The source data is assumed to be exactly 1024 bytes in length.
-//
-//         r0: raw data to copy to the values table
-//         return: whether the restored value for VAR_VERSION is equal to its default value
-//     - name: InitScenarioScriptVars
-//       address:
-//         NA: 0x204C488
-//         EU: 0x204C7C0
-//       description: |-
-//         Initializes most of the SCENARIO_* script variables (except SCENARIO_TALK_BIT_FLAG for some reason). Also initializes the PLAY_OLD_GAME variable.
-//
-//         No params.
-//     - name: SetScenarioScriptVar
-//       address:
-//         NA: 0x204C618
-//         EU: 0x204C950
-//       description: |-
-//         Sets the given SCENARIO_* script variable with a given pair of values [val0, val1].
-//
-//         In the special case when the ID is VAR_SCENARIO_MAIN, and the set value is different from the old one, the REQUEST_CLEAR_COUNT script variable will be set to 0.
-//
-//         r0: script variable ID
-//         r1: val0
-//         r2: val1
 //     - name: GetSpecialEpisodeType
 //       address:
 //         NA: 0x204C8EC
@@ -343,22 +184,6 @@ pub fn get_game_mode() -> i32 {
 //         Saves scenario flag script variables (SCENARIO_SELECT, SCENARIO_MAIN_BIT_FLAG) to their respective BACKUP script variables, but only in certain game modes.
 //
 //         This function prints the debug string "ScenarioFlag BackupGameMode %d" with the game mode.
-//
-//         No params.
-//     - name: InitWorldMapScriptVars
-//       address:
-//         NA: 0x204CD88
-//         EU: 0x204D0C0
-//       description: |-
-//         Initializes the WORLD_MAP_* script variable values (IDs 0x55-0x57).
-//
-//         No params.
-//     - name: InitDungeonListScriptVars
-//       address:
-//         NA: 0x204CE90
-//         EU: 0x204D1C8
-//       description: |-
-//         Initializes the DUNGEON_*_LIST script variable values (IDs 0x4f-0x54).
 //
 //         No params.
 //    - name: SetAdventureLogStructLocation
@@ -570,16 +395,12 @@ pub fn increment_number_dungeons_cleared() {
 //         Gets the number of different pokémon that battled against you.
 //
 //         return: the number of different pokémon that battled against you
-//     - name: IncrementNbBigTreasureWins
-//       address:
-//         NA: 0x204FEC8
-//         EU: 0x2050200
-//       description: |-
-//         Increments by 1 the number of big treasure wins.
-//
-//         Implements SPECIAL_PROC_0x3B (see ScriptSpecialProcessCall).
-//
-//         No params.
+
+/// Increments by 1 the number of big treasure wins.
+pub fn increment_number_of_big_treasure_wins() {
+    unsafe { ffi::IncrementNbBigTreasureWins() };
+}
+
 //    - name: SetNbBigTreasureWins
 //       address:
 //         NA: 0x204FEE8
@@ -616,16 +437,12 @@ pub fn increment_number_dungeons_cleared() {
 //         Gets the number of items recycled.
 //
 //         return: the number of items recycled
-//     - name: IncrementNbSkyGiftsSent
-//       address:
-//         NA: 0x204FF80
-//         EU: 0x20502B8
-//       description: |-
-//         Increments by 1 the number of sky gifts sent.
-//
-//         Implements SPECIAL_PROC_SEND_SKY_GIFT_TO_GUILDMASTER (see ScriptSpecialProcessCall).
-//
-//         No params.
+
+/// Increments by 1 the number of sky gifts sent.
+pub fn increment_number_of_gifts_sent() {
+    unsafe { ffi::IncrementNbSkyGiftsSent() };
+}
+
 //    - name: SetNbSkyGiftsSent
 //       address:
 //         NA: 0x204FFA0
@@ -794,31 +611,31 @@ pub fn increment_number_dungeons_cleared() {
 //         r0: monster ID
 //         r1: ?
 //         return: bool
-//     - name: SetTeamSetupHeroAndPartnerOnly
-//       address:
-//         NA: 0x20569CC
-//         EU: 0x2056D48
-//       description: |-
-//         Implements SPECIAL_PROC_SET_TEAM_SETUP_HERO_AND_PARTNER_ONLY (see ScriptSpecialProcessCall).
-//
-//         No params.
-//     - name: SetTeamSetupHeroOnly
-//       address:
-//         NA: 0x2056AB0
-//         EU: 0x2056E2C
-//       description: |-
-//         Implements SPECIAL_PROC_SET_TEAM_SETUP_HERO_ONLY (see ScriptSpecialProcessCall).
-//
-//         No params.
-//     - name: GetPartyMembers
-//       address:
-//         NA: 0x2056C20
-//         EU: 0x2056F9C
-//       description: |-
-//         Appears to get the team's active party members. Implements most of SPECIAL_PROC_IS_TEAM_SETUP_SOLO (see ScriptSpecialProcessCall).
-//
-//         r0: [output] Array of 4 2-byte values (they seem to be indexes of some sort) describing each party member, which will be filled in by the function. The input can be a null pointer if the party members aren't needed
-//         return: Number of party members
+
+pub fn set_team_setup(team_setup: TeamSetup) {
+    match team_setup {
+        TeamSetup::HeroOnly => unsafe { ffi::SetTeamSetupHeroOnly() }
+        TeamSetup::HeroAndPartnerOnly => unsafe { ffi::SetTeamSetupHeroAndPartnerOnly() }
+    }
+}
+
+/// Appears to get the team's active party members.
+///
+/// Output is a slice-like of 2-byte values (they seem to be indexes of some sort) describing each
+/// party member.
+pub fn get_party_members() -> impl AsRef<[u16]> {
+    unsafe {
+        let mut party_members: [u16; 4] = [0; 4];
+        let nb = ffi::GetPartyMembers(party_members.as_mut_ptr());
+        OwnedSlice::new(party_members, 0, nb as usize)
+    }
+}
+
+/// Counts the number of monsters in the active team.
+pub fn count_party_members() -> i32 {
+    unsafe { ffi::GetPartyMembers(ptr::null_mut()) }
+}
+
 //     - name: IqSkillFlagTest
 //       address:
 //         NA: 0x2058F04
@@ -829,77 +646,41 @@ pub fn increment_number_dungeons_cleared() {
 //         r0: IQ skill bitvector to test
 //         r1: IQ skill ID
 //         return: bool
-//     - name: GetSosMailCount
-//       address:
-//         NA: 0x205B97C
-//         EU: 0x205BCF8
-//       description: |-
-//         Implements SPECIAL_PROC_GET_SOS_MAIL_COUNT (see ScriptSpecialProcessCall).
-//
-//         r0: ?
-//         r1: some flag?
-//         return: SOS mail count
-//     - name: DungeonRequestsDone
-//       address:
-//         NA: 0x205EDA4
-//         EU: 0x205F120
-//       description: |-
-//         Seems to return the number of missions completed.
-//
-//         Part of the implementation for SPECIAL_PROC_DUNGEON_HAD_REQUEST_DONE (see ScriptSpecialProcessCall).
-//
-//         r0: ?
-//         r1: some flag?
-//         return: number of missions completed
-//     - name: DungeonRequestsDoneWrapper
-//       address:
-//         NA: 0x205EE10
-//       description: |-
-//         Calls DungeonRequestsDone with the second argument set to false.
-//
-//         r0: ?
-//         return: number of mission completed
-//     - name: AnyDungeonRequestsDone
-//       address:
-//         NA: 0x205EE20
-//         EU: 0x205F19C
-//       description: |-
-//         Calls DungeonRequestsDone with the second argument set to true, and converts the integer output to a boolean.
-//
-//         r0: ?
-//         return: bool: whether the number of missions completed is greater than 0
-//     - name: ScriptSpecialProcess0x3D
-//       address:
-//         NA: 0x2065B50
-//         EU: 0x2065ECC
-//       description: |-
-//         Implements SPECIAL_PROC_0x3D (see ScriptSpecialProcessCall).
-//
-//         No params.
-//     - name: ScriptSpecialProcess0x3E
-//       address:
-//         NA: 0x2065B60
-//         EU: 0x2065EDC
-//       description: |-
-//         Implements SPECIAL_PROC_0x3E (see ScriptSpecialProcessCall).
-//
-//         No params.
-//     - name: ScriptSpecialProcess0x17
-//       address:
-//         NA: 0x2065C48
-//         EU: 0x2065FC4
-//       description: |-
-//         Implements SPECIAL_PROC_0x17 (see ScriptSpecialProcessCall).
-//
-//         No params.
-//     - name: ItemAtTableIdx
-//       address:
-//         NA: 0x2065CF8
-//         EU: 0x2066074
-//       description: |-
-//         Gets info about the item at a given item table (not sure what this table is...) index.
-//
-//         Used by SPECIAL_PROC_COUNT_TABLE_ITEM_TYPE_IN_BAG and friends (see ScriptSpecialProcessCall).
-//
-//         r0: table index
-//         r1: [output] pointer to an owned_item
+
+/// Returns the number of SOS mails.
+pub fn get_sos_mail_count(param_1: i32, param_2: bool) -> i32 {
+    unsafe { ffi::GetSosMailCount(param_1, param_2 as ffi::bool_) }
+}
+
+/// Returns the number of missions completed.
+pub fn dungeon_had_request_done(param_1: i32, param_2: bool) -> i32 {
+    unsafe { ffi::GetSosMailCount(param_1, param_2 as ffi::bool_) }
+}
+
+/// Implements SPECIAL_PROC_0x3D.
+pub fn script_special_process_x3d() {
+    unsafe { ffi::ScriptSpecialProcess0x3D() }
+}
+
+/// Implements SPECIAL_PROC_0x3E.
+pub fn script_special_process_x3e() {
+    unsafe { ffi::ScriptSpecialProcess0x3E() }
+}
+
+/// Implements SPECIAL_PROC_0x17.
+pub fn script_special_process_x17() {
+    unsafe { ffi::ScriptSpecialProcess0x17() }
+}
+
+/// Gets info about the item at a given item table (not sure what this table is...) index.
+///
+/// Once we find out more about the item table, this function will probably move to a wrapper
+/// struct.
+pub fn item_at_table_idx(table_idx: i32) -> ffi::owned_item {
+    let mut out = ffi::owned_item {
+        id: item_id_16 { _bitfield_align_1: [], _bitfield_1: Default::default() },
+        amount: 0
+    };
+    unsafe { ffi::ItemAtTableIdx(table_idx, &mut out) }
+    out
+}

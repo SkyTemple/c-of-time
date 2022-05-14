@@ -47,6 +47,7 @@ pub mod ffi;
 pub mod log_impl;
 pub mod api;
 pub mod string_util;
+mod util;
 
 pub mod allocation;
 

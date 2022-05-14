@@ -15,3 +15,4 @@ pub mod gameplay;
 pub mod sir0;
 pub mod wte;
 pub mod messages;
+pub mod script_vars;
