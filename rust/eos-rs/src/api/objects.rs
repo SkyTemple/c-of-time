@@ -20,6 +20,9 @@ pub use ffi::dungeon_id as dungeon_catalog;
 pub use ffi::dungeon_group_id as dungeon_group_catalog;
 pub use ffi::fixed_room_id as fixed_room_catalog;
 pub use ffi::monster_id as monster_catalog;
+pub use ffi::script_opcode_id as script_opcode_catalog;
+pub use ffi::special_process_id as special_process_catalog;
+pub use ffi::script_var_id as script_var_catalog;
 
 /// A monster move.
 pub type Move = ffi::move_;
