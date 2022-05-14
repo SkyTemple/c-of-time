@@ -11,13 +11,14 @@
 //! To get an instance of the generator, use
 //! [`crate::api::dungeon_mode::GlobalDungeonData::get_builtin_dungeon_generator`].
 
-
 mod grid;
 
-use crate::api::dungeon_mode::GlobalDungeonData;
 pub use self::grid::DungeonGridMutator;
+use crate::api::dungeon_mode::GlobalDungeonData;
 
-use crate::api::dungeon_mode::dungeon_generator::{DungeonEntityGeneration, DungeonFloorGeneration};
+use crate::api::dungeon_mode::dungeon_generator::{
+    DungeonEntityGeneration, DungeonFloorGeneration,
+};
 use crate::api::objects::fixed_room_catalog;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ctypes::c_int;
@@ -29,7 +30,10 @@ use crate::ffi;
 ///
 /// To create instances of this struct use
 /// [`crate::api::dungeon_mode::GlobalDungeonData::get_builtin_dungeon_generator`].
-pub struct GlobalDungeonStructureGenerator<'a>(pub(crate) OverlayLoadLease<29>, pub(crate) &'a mut GlobalDungeonData<'a>);
+pub struct GlobalDungeonStructureGenerator<'a>(
+    pub(crate) OverlayLoadLease<29>,
+    pub(crate) &'a mut GlobalDungeonData<'a>,
+);
 
 impl<'a> GlobalDungeonStructureGenerator<'a> {
     #[doc(hidden)]
@@ -39,7 +43,11 @@ impl<'a> GlobalDungeonStructureGenerator<'a> {
     }
 
     /// Handles fixed room generation if the floor contains a fixed room.
-    pub fn generate_fixed_room(&mut self, fixed_room_id: fixed_room_catalog::Type, properties: &ffi::floor_properties) -> bool {
+    pub fn generate_fixed_room(
+        &mut self,
+        fixed_room_id: fixed_room_catalog::Type,
+        properties: &ffi::floor_properties,
+    ) -> bool {
         // SAFETY: We have a mutable reference to the dungeon.
         unsafe { ffi::GenerateFixedRoom(fixed_room_id, force_mut_ptr!(properties)) > 0 }
     }
@@ -71,12 +79,26 @@ impl<'a> GlobalDungeonStructureGenerator<'a> {
     /// * `is_vertical` - vertical flag (true for vertical hallway, false for horizontal).
     /// * `middle_x` - Middle x coordinate for kinked horizontal hallways.
     /// * `middle_y` - Middle y coordinate for kinked vertical hallways.
-    pub fn create_hallway(&mut self, start_x: i32, start_y: i32, end_x: i32, end_y: i32, is_vertical: bool, middle_x: i32, middle_y: i32) {
+    pub fn create_hallway(
+        &mut self,
+        start_x: i32,
+        start_y: i32,
+        end_x: i32,
+        end_y: i32,
+        is_vertical: bool,
+        middle_x: i32,
+        middle_y: i32,
+    ) {
         // SAFETY: We have a mutable reference to the dungeon.
         unsafe {
             ffi::CreateHallway(
-                start_x, start_y, end_x, end_y, is_vertical as ffi::bool_,
-                middle_x, middle_y
+                start_x,
+                start_y,
+                end_x,
+                end_y,
+                is_vertical as ffi::bool_,
+                middle_x,
+                middle_y,
             )
         }
     }
@@ -124,16 +146,27 @@ impl<'a> GlobalDungeonStructureGenerator<'a> {
     /// in-bounds.
     pub fn generate_maze_line(
         &mut self,
-        x0: i32, y0: i32,
-        x_min: i32, y_min: i32,
-        x_max: i32, y_max: i32,
+        x0: i32,
+        y0: i32,
+        x_min: i32,
+        y_min: i32,
+        x_max: i32,
+        y_max: i32,
         use_secondary_terrain: bool,
-        room: u8
+        room: u8,
     ) {
-        unsafe { ffi::GenerateMazeLine(
-            x0, y0, x_min, y_min, x_max, y_max,
-            use_secondary_terrain as ffi::bool_, room
-        ) }
+        unsafe {
+            ffi::GenerateMazeLine(
+                x0,
+                y0,
+                x_min,
+                y_min,
+                x_max,
+                y_max,
+                use_secondary_terrain as ffi::bool_,
+                room,
+            )
+        }
     }
 
     /// Checks if a tile position is either in a hallway or next to one.
@@ -192,7 +225,11 @@ impl<'a> GlobalDungeonStructureGenerator<'a> {
     /// * `test_flag` - bit index to test in the floor properties room flag bitvector
     ///                 (formations are only generated if the bit is set)
     /// * `floor_props` - floor properties
-    pub fn generate_secondary_terrain_formations(&mut self, test_flag: u8, floor_props: &ffi::floor_properties) {
+    pub fn generate_secondary_terrain_formations(
+        &mut self,
+        test_flag: u8,
+        floor_props: &ffi::floor_properties,
+    ) {
         // SAFETY: We have a mutable reference to the dungeon.
         unsafe { ffi::GenerateSecondaryTerrainFormations(test_flag, force_mut_ptr!(floor_props)) }
     }
@@ -206,9 +243,16 @@ impl<'a> GlobalDungeonStructureGenerator<'a> {
     ///
     /// If `mark_unreachable` is true, this function will instead always return true, but set a
     /// special bit on all walkable tiles that aren't reachable from the stairs.
-    pub fn stairs_are_always_reachable(&mut self, x_stairs: i32, y_stairs: i32, mark_unreachable: bool) -> bool {
+    pub fn stairs_are_always_reachable(
+        &mut self,
+        x_stairs: i32,
+        y_stairs: i32,
+        mark_unreachable: bool,
+    ) -> bool {
         // SAFETY: We have a mutable reference to the dungeon.
-        unsafe { ffi::StairsAlwaysReachable(x_stairs, y_stairs, mark_unreachable as ffi::bool_) > 0 }
+        unsafe {
+            ffi::StairsAlwaysReachable(x_stairs, y_stairs, mark_unreachable as ffi::bool_) > 0
+        }
     }
 
     /// Reset the inner boundary tile rows (y == 1 and y == 30) to their initial state of all wall
@@ -224,12 +268,21 @@ impl<'a> GlobalDungeonStructureGenerator<'a> {
     ///
     /// If spawning normal stairs and the current floor is a rescue floor, the room containing
     /// the stairs will be converted into a Monster House.
-    pub fn spawn_stairs(&mut self, x: u8, y: u8, gen_info: &ffi::dungeon_generation_info, is_hidden_stairs: bool) {
+    pub fn spawn_stairs(
+        &mut self,
+        x: u8,
+        y: u8,
+        gen_info: &ffi::dungeon_generation_info,
+        is_hidden_stairs: bool,
+    ) {
         // SAFETY: We have a mutable reference to the dungeon.
-        unsafe { ffi::SpawnStairs(
-            [x, y].as_mut_ptr(), force_mut_ptr!(gen_info),
-            is_hidden_stairs as ffi::bool_
-        ) }
+        unsafe {
+            ffi::SpawnStairs(
+                [x, y].as_mut_ptr(),
+                force_mut_ptr!(gen_info),
+                is_hidden_stairs as ffi::bool_,
+            )
+        }
     }
 }
 
@@ -251,10 +304,9 @@ impl GlobalDungeonEntityGenerator {
     /// Randomly shuffle an array of spawn positions.
     pub fn shuffle_spawn_positions(&self, spawn_positions: &mut [ffi::spawn_position]) {
         // SAFETY: We have a mutable reference to the dungeon.
-        unsafe { ffi::ShuffleSpawnPositions(
-            spawn_positions.as_mut_ptr(),
-            spawn_positions.len() as c_int
-        ) }
+        unsafe {
+            ffi::ShuffleSpawnPositions(spawn_positions.as_mut_ptr(), spawn_positions.len() as c_int)
+        }
     }
 }
 
@@ -285,26 +337,53 @@ impl<'a> DungeonFloorGeneration for GlobalDungeonStructureGenerator<'a> {
     /// and generate the floor based on the current global configuration for the floor.
     // TODO: Is there a function one level higher in the game that does actually take
     //       these three parameters? Can we maybe just set up the global struct?
-    fn generate_floor(&mut self, _width: usize, _height: usize, _properties: &ffi::floor_properties) -> &mut Self {
+    fn generate_floor(
+        &mut self,
+        _width: usize,
+        _height: usize,
+        _properties: &ffi::floor_properties,
+    ) -> &mut Self {
         self.generate_floor_internal();
         self
     }
 
     /// Width and height are ignored for most layouts.
-    fn generate_layout(&mut self, layout: &mut Self::LayoutGenerator, properties: &ffi::floor_properties) -> &mut Self {
-        unsafe { match layout {
-            BuiltinDungeonLayoutGenerators::Standard { width, height } =>
-                ffi::GenerateStandardFloor(*width, *height, force_mut_ptr!(properties)),
-            BuiltinDungeonLayoutGenerators::OuterRing => ffi::GenerateOuterRingFloor(force_mut_ptr!(properties)),
-            BuiltinDungeonLayoutGenerators::Crossroads => ffi::GenerateCrossroadsFloor(force_mut_ptr!(properties)),
-            BuiltinDungeonLayoutGenerators::Line => ffi::GenerateLineFloor(force_mut_ptr!(properties)),
-            BuiltinDungeonLayoutGenerators::Cross => ffi::GenerateCrossFloor(force_mut_ptr!(properties)),
-            BuiltinDungeonLayoutGenerators::Beetle => ffi::GenerateBeetleFloor(force_mut_ptr!(properties)),
-            BuiltinDungeonLayoutGenerators::OuterRooms { width, height } =>
-                ffi::GenerateOuterRoomsFloor(*width, *height, force_mut_ptr!(properties)),
-            BuiltinDungeonLayoutGenerators::TwoRoomsMonsterHouse => ffi::GenerateTwoRoomsWithMonsterHouseFloor(),
-            BuiltinDungeonLayoutGenerators::OneRoomMonsterHouse => ffi::GenerateOneRoomMonsterHouseFloor()
-        } }
+    fn generate_layout(
+        &mut self,
+        layout: &mut Self::LayoutGenerator,
+        properties: &ffi::floor_properties,
+    ) -> &mut Self {
+        unsafe {
+            match layout {
+                BuiltinDungeonLayoutGenerators::Standard { width, height } => {
+                    ffi::GenerateStandardFloor(*width, *height, force_mut_ptr!(properties))
+                }
+                BuiltinDungeonLayoutGenerators::OuterRing => {
+                    ffi::GenerateOuterRingFloor(force_mut_ptr!(properties))
+                }
+                BuiltinDungeonLayoutGenerators::Crossroads => {
+                    ffi::GenerateCrossroadsFloor(force_mut_ptr!(properties))
+                }
+                BuiltinDungeonLayoutGenerators::Line => {
+                    ffi::GenerateLineFloor(force_mut_ptr!(properties))
+                }
+                BuiltinDungeonLayoutGenerators::Cross => {
+                    ffi::GenerateCrossFloor(force_mut_ptr!(properties))
+                }
+                BuiltinDungeonLayoutGenerators::Beetle => {
+                    ffi::GenerateBeetleFloor(force_mut_ptr!(properties))
+                }
+                BuiltinDungeonLayoutGenerators::OuterRooms { width, height } => {
+                    ffi::GenerateOuterRoomsFloor(*width, *height, force_mut_ptr!(properties))
+                }
+                BuiltinDungeonLayoutGenerators::TwoRoomsMonsterHouse => {
+                    ffi::GenerateTwoRoomsWithMonsterHouseFloor()
+                }
+                BuiltinDungeonLayoutGenerators::OneRoomMonsterHouse => {
+                    ffi::GenerateOneRoomMonsterHouseFloor()
+                }
+            }
+        }
         self
     }
 
@@ -321,16 +400,32 @@ impl<'a> DungeonFloorGeneration for GlobalDungeonStructureGenerator<'a> {
 
 /// Builtin generator for entities on a dungeon floor.
 impl DungeonEntityGeneration for GlobalDungeonEntityGenerator {
-    fn spawn_non_enemies(&mut self, floor_properties: &ffi::floor_properties, empty_monster_house: bool) {
+    fn spawn_non_enemies(
+        &mut self,
+        floor_properties: &ffi::floor_properties,
+        empty_monster_house: bool,
+    ) {
         // SAFETY: We have a mutable reference to the dungeon.
-        unsafe { ffi::SpawnNonEnemies(
-            force_mut_ptr!(floor_properties), empty_monster_house as ffi::bool_
-        ) }
+        unsafe {
+            ffi::SpawnNonEnemies(
+                force_mut_ptr!(floor_properties),
+                empty_monster_house as ffi::bool_,
+            )
+        }
     }
 
-    fn spawn_enemies(&mut self, floor_properties: &ffi::floor_properties, empty_monster_house: bool) {
+    fn spawn_enemies(
+        &mut self,
+        floor_properties: &ffi::floor_properties,
+        empty_monster_house: bool,
+    ) {
         // SAFETY: We have a mutable reference to the dungeon.
-        unsafe { ffi::SpawnEnemies(force_mut_ptr!(floor_properties), empty_monster_house as ffi::bool_) }
+        unsafe {
+            ffi::SpawnEnemies(
+                force_mut_ptr!(floor_properties),
+                empty_monster_house as ffi::bool_,
+            )
+        }
     }
 }
 

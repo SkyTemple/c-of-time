@@ -12,12 +12,12 @@ pub use acid_io::*;
 pub mod file {
     //! File related operations.
 
+    use super::{Read, Seek, SeekFrom};
+    use crate::ctypes::c_void;
+    use crate::ffi;
     use alloc::vec::Vec;
     use core::ffi::CStr;
     use core::mem::MaybeUninit;
-    use crate::ctypes::c_void;
-    use crate::ffi;
-    use super::{Read, Seek, SeekFrom};
 
     /// Loads a file from ROM by filepath into a heap-allocated buffer.
     ///
@@ -33,7 +33,9 @@ pub mod file {
         ffi::DataTransferStop();
         let iov = iov_raw.assume_init();
         Vec::from_raw_parts(
-            iov.iov_base as *mut u8, iov.iov_len as usize, iov.iov_len as usize
+            iov.iov_base as *mut u8,
+            iov.iov_len as usize,
+            iov.iov_len as usize,
         )
     }
 
@@ -69,7 +71,11 @@ pub mod file {
         fn read(&mut self, dst: &mut [u8]) -> super::Result<usize> {
             unsafe {
                 ffi::DataTransferInit();
-                let len = ffi::FileRead(&mut self.0, dst.as_mut_ptr() as *mut c_void, dst.len() as u32) as usize;
+                let len = ffi::FileRead(
+                    &mut self.0,
+                    dst.as_mut_ptr() as *mut c_void,
+                    dst.len() as u32,
+                ) as usize;
                 ffi::DataTransferStop();
                 Ok(len)
             }

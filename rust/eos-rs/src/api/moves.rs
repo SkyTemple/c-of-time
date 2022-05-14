@@ -1,7 +1,7 @@
 //! Functions related to getting information about monster moves.
 
 use crate::api::dungeon_mode::MoveCategory;
-use crate::api::objects::{Move};
+use crate::api::objects::Move;
 use crate::ffi;
 use crate::ffi::move_target_and_range;
 
@@ -67,7 +67,9 @@ impl TryInto<MoveRange> for ffi::move_range::Type {
             ffi::move_range::RANGE_FRONT_10 => Ok(MoveRange::Front10),
             ffi::move_range::RANGE_FLOOR => Ok(MoveRange::Floor),
             ffi::move_range::RANGE_USER => Ok(MoveRange::User),
-            ffi::move_range::RANGE_FRONT_WITH_CORNER_CUTTING => Ok(MoveRange::FrontWithCornerCutting),
+            ffi::move_range::RANGE_FRONT_WITH_CORNER_CUTTING => {
+                Ok(MoveRange::FrontWithCornerCutting)
+            }
             ffi::move_range::RANGE_ICE_SHARD => Ok(MoveRange::IceShard),
             ffi::move_range::RANGE_SPECIAL => Ok(MoveRange::Special),
             _ => Err(()),
@@ -103,7 +105,15 @@ impl TryInto<HealingMoveType> for ffi::healing_move_type::Type {
 /// Game functions related to [`Move`]s.
 pub trait MoveExt {
     /// Gets the move target-and-range field. See struct move_target_and_range in the C headers.
-    fn get_target_and_range(&self, is_ai: bool) -> (Option<MoveTarget>, Option<MoveRange>, Option<HealingMoveType>, u16);
+    fn get_target_and_range(
+        &self,
+        is_ai: bool,
+    ) -> (
+        Option<MoveTarget>,
+        Option<MoveRange>,
+        Option<HealingMoveType>,
+        u16,
+    );
 
     /// Gets the base power of the move.
     fn get_base_power(&self) -> i32;
@@ -127,7 +137,15 @@ pub trait MoveExt {
 }
 
 impl MoveExt for Move {
-    fn get_target_and_range(&self, is_ai: bool) -> (Option<MoveTarget>, Option<MoveRange>, Option<HealingMoveType>, u16) {
+    fn get_target_and_range(
+        &self,
+        is_ai: bool,
+    ) -> (
+        Option<MoveTarget>,
+        Option<MoveRange>,
+        Option<HealingMoveType>,
+        u16,
+    ) {
         unsafe { ffi::GetMoveTargetAndRange(force_mut_ptr!(self), is_ai as ffi::bool_) }.into()
     }
 
@@ -152,11 +170,20 @@ impl MoveExt for Move {
     }
 
     fn get_category(&self) -> Option<MoveCategory> {
-        unsafe { ffi::GetMoveCategory(self.id.val()) }.try_into().ok()
+        unsafe { ffi::GetMoveCategory(self.id.val()) }
+            .try_into()
+            .ok()
     }
 }
 
-impl From<move_target_and_range> for (Option<MoveTarget>, Option<MoveRange>, Option<HealingMoveType>, u16) {
+impl From<move_target_and_range>
+    for (
+        Option<MoveTarget>,
+        Option<MoveRange>,
+        Option<HealingMoveType>,
+        u16,
+    )
+{
     fn from(tr: move_target_and_range) -> Self {
         (
             tr.target().try_into().ok(),

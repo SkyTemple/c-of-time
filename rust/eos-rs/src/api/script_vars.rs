@@ -1,16 +1,16 @@
 //! Code for handling script variables.
 
+use crate::api::objects::script_var_catalog;
+use crate::ctypes::c_void;
+use crate::ffi;
+use crate::ffi::script_var_id::Type;
+use crate::ffi::script_var_type;
 use alloc::ffi::CString;
 use alloc::vec;
 use alloc::vec::Vec;
 use core::ffi::CStr;
 use core::marker::PhantomData;
 use core::ptr;
-use crate::api::objects::script_var_catalog;
-use crate::ctypes::c_void;
-use crate::ffi;
-use crate::ffi::script_var_id::Type;
-use crate::ffi::script_var_type;
 
 /// Value types of script variables.
 ///
@@ -79,7 +79,7 @@ impl ScriptVariableValue {
             ScriptVariableValue::I8(_) => ScriptVariableValueType::I8,
             ScriptVariableValue::I16(_) => ScriptVariableValueType::I16,
             ScriptVariableValue::I32(_) => ScriptVariableValueType::I32,
-            ScriptVariableValue::Special(_) => ScriptVariableValueType::Special
+            ScriptVariableValue::Special(_) => ScriptVariableValueType::Special,
         }
     }
 
@@ -94,14 +94,14 @@ impl ScriptVariableValue {
                 } else {
                     value.as_bytes()[0] as i32
                 }
-            },
+            }
             ScriptVariableValue::U8(value) => *value as i32,
             ScriptVariableValue::U16(value) => *value as i32,
             ScriptVariableValue::U32(value) => *value as i32,
             ScriptVariableValue::I8(value) => *value as i32,
             ScriptVariableValue::I16(value) => *value as i32,
             ScriptVariableValue::I32(value) => *value,
-            ScriptVariableValue::Special(value) => *value
+            ScriptVariableValue::Special(value) => *value,
         }
     }
 }
@@ -119,91 +119,118 @@ pub trait UnwrapScriptVariableValueAs<T> {
 
 impl UnwrapScriptVariableValueAs<()> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) {
-        assert!(as_type == ScriptVariableValueType::None, "Invalid use of `unwrap_as`");
+        assert!(
+            as_type == ScriptVariableValueType::None,
+            "Invalid use of `unwrap_as`"
+        );
         match self {
             ScriptVariableValue::None => (),
-            _ => panic!("Invalid use of `unwrap_as`")
+            _ => panic!("Invalid use of `unwrap_as`"),
         }
     }
 }
 
 impl UnwrapScriptVariableValueAs<bool> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> bool {
-        assert!(as_type == ScriptVariableValueType::Bit, "Invalid use of `unwrap_as`");
+        assert!(
+            as_type == ScriptVariableValueType::Bit,
+            "Invalid use of `unwrap_as`"
+        );
         match self {
             ScriptVariableValue::Bit(v) => v,
-            _ => panic!("Invalid use of `unwrap_as`")
+            _ => panic!("Invalid use of `unwrap_as`"),
         }
     }
 }
 
 impl UnwrapScriptVariableValueAs<CString> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> CString {
-        assert!(as_type == ScriptVariableValueType::String, "Invalid use of `unwrap_as`");
+        assert!(
+            as_type == ScriptVariableValueType::String,
+            "Invalid use of `unwrap_as`"
+        );
         match self {
             ScriptVariableValue::String(v) => v,
-            _ => panic!("Invalid use of `unwrap_as`")
+            _ => panic!("Invalid use of `unwrap_as`"),
         }
     }
 }
 
 impl UnwrapScriptVariableValueAs<u8> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> u8 {
-        assert!(as_type == ScriptVariableValueType::U8, "Invalid use of `unwrap_as`");
+        assert!(
+            as_type == ScriptVariableValueType::U8,
+            "Invalid use of `unwrap_as`"
+        );
         match self {
             ScriptVariableValue::U8(v) => v,
-            _ => panic!("Invalid use of `unwrap_as`")
+            _ => panic!("Invalid use of `unwrap_as`"),
         }
     }
 }
 
 impl UnwrapScriptVariableValueAs<u16> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> u16 {
-        assert!(as_type == ScriptVariableValueType::U16, "Invalid use of `unwrap_as`");
+        assert!(
+            as_type == ScriptVariableValueType::U16,
+            "Invalid use of `unwrap_as`"
+        );
         match self {
             ScriptVariableValue::U16(v) => v,
-            _ => panic!("Invalid use of `unwrap_as`")
+            _ => panic!("Invalid use of `unwrap_as`"),
         }
     }
 }
 
 impl UnwrapScriptVariableValueAs<u32> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> u32 {
-        assert!(as_type == ScriptVariableValueType::U32, "Invalid use of `unwrap_as`");
+        assert!(
+            as_type == ScriptVariableValueType::U32,
+            "Invalid use of `unwrap_as`"
+        );
         match self {
             ScriptVariableValue::U32(v) => v,
-            _ => panic!("Invalid use of `unwrap_as`")
+            _ => panic!("Invalid use of `unwrap_as`"),
         }
     }
 }
 
 impl UnwrapScriptVariableValueAs<i8> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> i8 {
-        assert!(as_type == ScriptVariableValueType::I8, "Invalid use of `unwrap_as`");
+        assert!(
+            as_type == ScriptVariableValueType::I8,
+            "Invalid use of `unwrap_as`"
+        );
         match self {
             ScriptVariableValue::I8(v) => v,
-            _ => panic!("Invalid use of `unwrap_as`")
+            _ => panic!("Invalid use of `unwrap_as`"),
         }
     }
 }
 
 impl UnwrapScriptVariableValueAs<i16> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> i16 {
-        assert!(as_type == ScriptVariableValueType::I16, "Invalid use of `unwrap_as`");
+        assert!(
+            as_type == ScriptVariableValueType::I16,
+            "Invalid use of `unwrap_as`"
+        );
         match self {
             ScriptVariableValue::I16(v) => v,
-            _ => panic!("Invalid use of `unwrap_as`")
+            _ => panic!("Invalid use of `unwrap_as`"),
         }
     }
 }
 
 impl UnwrapScriptVariableValueAs<i32> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> i32 {
-        assert!(as_type == ScriptVariableValueType::I32, "Invalid use of `unwrap_as`");
+        assert!(
+            as_type == ScriptVariableValueType::I32,
+            "Invalid use of `unwrap_as`"
+        );
         match self {
             ScriptVariableValue::I32(v) => v,
             ScriptVariableValue::Special(v) => v,
-            _ => panic!("Invalid use of `unwrap_as`")
+            _ => panic!("Invalid use of `unwrap_as`"),
         }
     }
 }
@@ -214,8 +241,8 @@ pub struct ScriptVariables;
 impl ScriptVariables {
     /// Initialize the script variable values table (SCRIPT_VARS_VALUES).
     ///
-    /// The whole table is first zero-initialized. Then, all script variable values are first 
-    /// initialized to their defaults, after which some of them are overwritten with other 
+    /// The whole table is first zero-initialized. Then, all script variable values are first
+    /// initialized to their defaults, after which some of them are overwritten with other
     /// hard-coded values.
     pub fn init(&mut self) {
         // SAFETY: This modifies global data, but it contains primitive values only.
@@ -231,7 +258,10 @@ impl ScriptVariables {
 
     /// Get a mutable reference to the global variable. This must not be used
     /// for local variables.
-    pub fn global_variable_mut(&mut self, var_id: script_var_catalog::Type) -> GlobalScriptVariableMut {
+    pub fn global_variable_mut(
+        &mut self,
+        var_id: script_var_catalog::Type,
+    ) -> GlobalScriptVariableMut {
         assert!(!(is_local(var_id)));
         GlobalScriptVariableMut(var_id, PhantomData)
     }
@@ -241,7 +271,11 @@ impl ScriptVariables {
     ///
     /// # Safety
     /// The pointer to the local variable table must be valid.
-    pub unsafe fn local_variable(&self, local_var_vals: *mut c_void, var_id: script_var_catalog::Type) -> LocalScriptVariableRef {
+    pub unsafe fn local_variable(
+        &self,
+        local_var_vals: *mut c_void,
+        var_id: script_var_catalog::Type,
+    ) -> LocalScriptVariableRef {
         assert!(is_local(var_id));
         LocalScriptVariableRef(local_var_vals, var_id, PhantomData)
     }
@@ -251,7 +285,11 @@ impl ScriptVariables {
     ///
     /// # Safety
     /// The pointer to the local variable table must be valid.
-    pub unsafe fn local_variable_mut(&mut self, local_var_vals: *mut c_void, var_id: script_var_catalog::Type) -> LocalScriptVariableMut {
+    pub unsafe fn local_variable_mut(
+        &mut self,
+        local_var_vals: *mut c_void,
+        var_id: script_var_catalog::Type,
+    ) -> LocalScriptVariableMut {
         assert!(is_local(var_id));
         LocalScriptVariableMut(local_var_vals, var_id, PhantomData)
     }
@@ -272,7 +310,9 @@ impl ScriptVariables {
     /// [`ffi::DumpScriptVariableValues`] directly.
     pub fn dump_script_variable_values(&mut self) -> [u8; 1024] {
         let mut data = [0; 1024];
-        unsafe { ffi::DumpScriptVariableValues(data.as_mut_ptr() as *mut c_void); }
+        unsafe {
+            ffi::DumpScriptVariableValues(data.as_mut_ptr() as *mut c_void);
+        }
         data
     }
 
@@ -345,14 +385,14 @@ impl ScriptVariables {
 /// Reference to a global script variable, see [`ScriptVariableRead`].
 pub struct GlobalScriptVariableRef<'a>(script_var_catalog::Type, PhantomData<&'a ()>);
 
-/// Mutable reference to a global script variable, see 
+/// Mutable reference to a global script variable, see
 /// [`ScriptVariableRead`] and [`ScriptVariableWrite`].
 pub struct GlobalScriptVariableMut<'a>(script_var_catalog::Type, PhantomData<&'a ()>);
 
 /// Reference to a local script variable, see [`ScriptVariableRead`].
 pub struct LocalScriptVariableRef<'a>(*mut c_void, script_var_catalog::Type, PhantomData<&'a ()>);
 
-/// Mutable reference to a local script variable, see 
+/// Mutable reference to a local script variable, see
 /// [`ScriptVariableRead`] and [`ScriptVariableWrite`].
 pub struct LocalScriptVariableMut<'a>(*mut c_void, script_var_catalog::Type, PhantomData<&'a ()>);
 
@@ -364,14 +404,14 @@ pub trait ScriptVariableRead: PartialEq + Eq {
 
     /// Returns the variable ID
     fn id(&self) -> script_var_catalog::Type;
-    
+
     /// Loads a script variable descriptor for a given ID.
     fn descriptor(&self) -> &ffi::script_var {
         let mut out = ffi::script_var_desc {
             desc: ptr::null_mut(),
             value: ptr::null_mut(),
         };
-        unsafe { 
+        unsafe {
             ffi::LoadScriptVariableRaw(&mut out, self.internal_local_var_table(), self.id());
             let ffi::script_var_desc { desc, .. } = out;
             &*desc
@@ -386,7 +426,10 @@ pub trait ScriptVariableRead: PartialEq + Eq {
     /// Returns the type of the variable
     fn var_type(&self) -> ScriptVariableValueType {
         let desc = self.descriptor();
-        desc.type_.val().try_into().expect("The variable has a corrupted type.")
+        desc.type_
+            .val()
+            .try_into()
+            .expect("The variable has a corrupted type.")
     }
 
     /// Returns whether or not the variable is an array.
@@ -399,7 +442,7 @@ pub trait ScriptVariableRead: PartialEq + Eq {
         let desc = self.descriptor();
         desc.n_values as usize
     }
-    
+
     /// Returns the name of the variable.
     fn name(&self) -> &str {
         let desc = self.descriptor();
@@ -421,7 +464,9 @@ pub trait ScriptVariableRead: PartialEq + Eq {
     ///
     /// This will return the value of the variable as a `i32`, no matter the type of the variable.
     fn value_raw_indexed(&self, index: i32) -> i32 {
-        unsafe { ffi::LoadScriptVariableValueAtIndex(self.internal_local_var_table(), self.id(), index) }
+        unsafe {
+            ffi::LoadScriptVariableValueAtIndex(self.internal_local_var_table(), self.id(), index)
+        }
     }
 
     /// Loads the value of a script variable.
@@ -443,17 +488,22 @@ pub trait ScriptVariableRead: PartialEq + Eq {
     /// ```
     fn value(&self) -> ScriptVariableValue {
         let desc = self.descriptor();
-        let typ: ScriptVariableValueType = desc.type_.val().try_into().expect("The variable has a corrupted type.");
+        let typ: ScriptVariableValueType = desc
+            .type_
+            .val()
+            .try_into()
+            .expect("The variable has a corrupted type.");
         let capacity = desc.n_values as i32;
         match typ {
             ScriptVariableValueType::None => ScriptVariableValue::None,
             ScriptVariableValueType::Bit => ScriptVariableValue::Bit(self.value_raw() > 0),
-            ScriptVariableValueType::String =>
-                unsafe {
-                    ScriptVariableValue::String(CString::from_vec_unchecked((0..capacity).map(|i| {
-                        self.value_raw_indexed(i) as u8
-                    }).collect::<Vec<u8>>()))
-                }
+            ScriptVariableValueType::String => unsafe {
+                ScriptVariableValue::String(CString::from_vec_unchecked(
+                    (0..capacity)
+                        .map(|i| self.value_raw_indexed(i) as u8)
+                        .collect::<Vec<u8>>(),
+                ))
+            },
             ScriptVariableValueType::U8 => ScriptVariableValue::U8(self.value_raw() as u8),
             ScriptVariableValueType::U16 => ScriptVariableValue::U16(self.value_raw() as u16),
             ScriptVariableValueType::U32 => ScriptVariableValue::U32(self.value_raw() as u32),
@@ -475,29 +525,44 @@ pub trait ScriptVariableRead: PartialEq + Eq {
     /// see [`Self::value`] for more information.
     fn value_indexed(&self, index: i32) -> ScriptVariableValue {
         let desc = self.descriptor();
-        let typ = desc.type_.val().try_into().expect("The variable has a corrupted type.");
+        let typ = desc
+            .type_
+            .val()
+            .try_into()
+            .expect("The variable has a corrupted type.");
         let capacity = desc.n_values;
         assert!(index <= capacity as i32, "Out-of-bounds.");
         match typ {
             ScriptVariableValueType::None => ScriptVariableValue::None,
-            ScriptVariableValueType::Bit => ScriptVariableValue::Bit(self.value_raw_indexed(index) > 0),
-            ScriptVariableValueType::String =>
-                unsafe {
-                    let val = self.value_raw_indexed(index) as u8;
-                    if val == 0 {
-                        return ScriptVariableValue::String(CString::default());
-                    }
-                    ScriptVariableValue::String(
-                        CString::from_vec_with_nul_unchecked(vec![val, 0])
-                    )
+            ScriptVariableValueType::Bit => {
+                ScriptVariableValue::Bit(self.value_raw_indexed(index) > 0)
+            }
+            ScriptVariableValueType::String => unsafe {
+                let val = self.value_raw_indexed(index) as u8;
+                if val == 0 {
+                    return ScriptVariableValue::String(CString::default());
                 }
-            ScriptVariableValueType::U8 => ScriptVariableValue::U8(self.value_raw_indexed(index) as u8),
-            ScriptVariableValueType::U16 => ScriptVariableValue::U16(self.value_raw_indexed(index) as u16),
-            ScriptVariableValueType::U32 => ScriptVariableValue::U32(self.value_raw_indexed(index) as u32),
-            ScriptVariableValueType::I8 => ScriptVariableValue::I8(self.value_raw_indexed(index) as i8),
-            ScriptVariableValueType::I16 => ScriptVariableValue::I16(self.value_raw_indexed(index) as i16),
+                ScriptVariableValue::String(CString::from_vec_with_nul_unchecked(vec![val, 0]))
+            },
+            ScriptVariableValueType::U8 => {
+                ScriptVariableValue::U8(self.value_raw_indexed(index) as u8)
+            }
+            ScriptVariableValueType::U16 => {
+                ScriptVariableValue::U16(self.value_raw_indexed(index) as u16)
+            }
+            ScriptVariableValueType::U32 => {
+                ScriptVariableValue::U32(self.value_raw_indexed(index) as u32)
+            }
+            ScriptVariableValueType::I8 => {
+                ScriptVariableValue::I8(self.value_raw_indexed(index) as i8)
+            }
+            ScriptVariableValueType::I16 => {
+                ScriptVariableValue::I16(self.value_raw_indexed(index) as i16)
+            }
             ScriptVariableValueType::I32 => ScriptVariableValue::I32(self.value_raw_indexed(index)),
-            ScriptVariableValueType::Special => ScriptVariableValue::Special(self.value_raw_indexed(index)),
+            ScriptVariableValueType::Special => {
+                ScriptVariableValue::Special(self.value_raw_indexed(index))
+            }
         }
     }
 
@@ -516,9 +581,9 @@ pub trait ScriptVariableRead: PartialEq + Eq {
         if is_local(self.id()) != (is_local(other_id)) {
             return false;
         }
-        unsafe { ffi::ScriptVariablesEqual(
-            self.internal_local_var_table(), self.id(), other_id
-        ) > 0 }
+        unsafe {
+            ffi::ScriptVariablesEqual(self.internal_local_var_table(), self.id(), other_id) > 0
+        }
     }
 }
 
@@ -545,7 +610,14 @@ pub trait ScriptVariableWrite: ScriptVariableRead {
         let capacity = desc.n_values;
         assert!(index <= capacity as i32, "Out-of-bounds.");
         // SAFETY: We make sure the variable in an array, the index is in bound & the game makes sure the value fits.
-        unsafe { ffi::SaveScriptVariableValueAtIndex(self.internal_local_var_table(), self.id(), index, value) }
+        unsafe {
+            ffi::SaveScriptVariableValueAtIndex(
+                self.internal_local_var_table(),
+                self.id(),
+                index,
+                value,
+            )
+        }
     }
 
     /// Writes the given value to a script variable.
@@ -557,8 +629,16 @@ pub trait ScriptVariableWrite: ScriptVariableRead {
     /// If the value type doesn't match, this panics.
     fn write(&mut self, value: ScriptVariableValue) {
         let desc = self.descriptor();
-        let typ = desc.type_.val().try_into().expect("The variable has a corrupted type.");
-        assert_eq!(value.var_type(), typ, "The type of the value to write doesn't match the variable's type.");
+        let typ = desc
+            .type_
+            .val()
+            .try_into()
+            .expect("The variable has a corrupted type.");
+        assert_eq!(
+            value.var_type(),
+            typ,
+            "The type of the value to write doesn't match the variable's type."
+        );
         if let ScriptVariableValue::String(value) = value {
             let value = value.as_bytes();
             if value.len() > desc.n_values as usize {
@@ -591,8 +671,16 @@ pub trait ScriptVariableWrite: ScriptVariableRead {
     /// Only the character at the specified index is changed.
     fn write_indexed(&mut self, index: i32, value: ScriptVariableValue) {
         let desc = self.descriptor();
-        let typ = desc.type_.val().try_into().expect("The variable has a corrupted type.");
-        assert_eq!(value.var_type(), typ, "The type of the value to write doesn't match the variable's type.");
+        let typ = desc
+            .type_
+            .val()
+            .try_into()
+            .expect("The variable has a corrupted type.");
+        assert_eq!(
+            value.var_type(),
+            typ,
+            "The type of the value to write doesn't match the variable's type."
+        );
         let capacity = desc.n_values;
         assert!(index <= capacity as i32, "Out-of-bounds.");
         self.write_raw_indexed(index, value.as_raw())

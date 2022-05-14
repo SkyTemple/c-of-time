@@ -1,8 +1,8 @@
 //! Functions for generating random numbers.
 
-use core::ops::{Bound, RangeBounds};
 use crate::ctypes::*;
 use crate::ffi;
+use core::ops::{Bound, RangeBounds};
 
 /// Internal trait for test mocking.
 pub(crate) trait Rng {
@@ -16,7 +16,7 @@ impl Rng for GameRng {
     fn rand16(&mut self) -> u16 {
         unsafe { ffi::Rand16Bit() }
     }
-    
+
     fn rand32(&mut self) -> u32 {
         unsafe { ffi::Rand32Bit() }
     }
@@ -66,7 +66,9 @@ pub(crate) fn rand_u16_internal<T: Rng, R: RangeBounds<u16>>(rng: &mut T, range:
         (Bound::Included(l), Bound::Unbounded) => (*l, u16::MAX),
         (Bound::Included(l), Bound::Included(u)) => (*l, *u),
         (Bound::Included(l), Bound::Excluded(u)) => (*l, *u - 1),
-        (Bound::Excluded(_), _) => { panic!("Excluded start ranges not supported.") }
+        (Bound::Excluded(_), _) => {
+            panic!("Excluded start ranges not supported.")
+        }
     };
 
     let range = 1 + max - min;
@@ -76,23 +78,24 @@ pub(crate) fn rand_u16_internal<T: Rng, R: RangeBounds<u16>>(rng: &mut T, range:
     loop {
         let r = rng.rand16();
         if r < limit {
-            return min + (r / buckets)
+            return min + (r / buckets);
         }
     }
-
 }
 
 pub(crate) fn rand_i32_internal<T: Rng, R: RangeBounds<i32>>(rng: &mut T, range: R) -> i32 {
     <i32 as RangeCheckable>::check_range(&range);
     match (range.start_bound(), range.end_bound()) {
-        (Bound::Unbounded, Bound::Unbounded) => rng.rand32() as i32,  // overflow is ok for us here.
+        (Bound::Unbounded, Bound::Unbounded) => rng.rand32() as i32, // overflow is ok for us here.
         (Bound::Unbounded, Bound::Included(u)) => rng.rand_range32(i32::MIN, u + 1),
         (Bound::Unbounded, Bound::Excluded(u)) => rng.rand_range32(i32::MIN, *u),
         // Note, this will never roll i32::MAX!
         (Bound::Included(l), Bound::Unbounded) => rng.rand_range32(*l, i32::MAX),
         (Bound::Included(l), Bound::Included(u)) => rng.rand_range32(*l, u + 1),
         (Bound::Included(l), Bound::Excluded(u)) => rng.rand_range32(*l, *u),
-        (Bound::Excluded(_), _) => { panic!("Excluded start ranges not supported.") }
+        (Bound::Excluded(_), _) => {
+            panic!("Excluded start ranges not supported.")
+        }
     }
 }
 
@@ -106,7 +109,7 @@ impl RangeCheckable for i32 {
         match (range.start_bound(), range.end_bound()) {
             (Bound::Included(l), Bound::Included(u)) => assert!(l <= u),
             (Bound::Included(l), Bound::Excluded(u)) => assert!(l < u),
-            _ => ()
+            _ => (),
         }
     }
 }
@@ -116,18 +119,18 @@ impl RangeCheckable for u16 {
         match (range.start_bound(), range.end_bound()) {
             (Bound::Included(l), Bound::Included(u)) => assert!(l <= u),
             (Bound::Included(l), Bound::Excluded(u)) => assert!(l < u),
-            _ => ()
+            _ => (),
         }
     }
 }
 
 #[cfg(test)]
 mod test {
-    use alloc::vec::Vec;
-    use core::ops::{Bound, RangeBounds};
     use super::*;
     use crate::ctypes::c_int;
-    
+    use alloc::vec::Vec;
+    use core::ops::{Bound, RangeBounds};
+
     const RAND_16_RETURN: u16 = 2000;
     const RAND_32_RETURN: i32 = 1234;
 
@@ -158,7 +161,10 @@ mod test {
     }
 
     /// For testing panic behaviour.
-    struct ExcludedStartRange<'a, T> { end_bound: Bound<&'a T>, excluded_start: T }
+    struct ExcludedStartRange<'a, T> {
+        end_bound: Bound<&'a T>,
+        excluded_start: T,
+    }
 
     impl<'a, T> RangeBounds<T> for ExcludedStartRange<'a, T> {
         fn start_bound(&self) -> Bound<&T> {
@@ -229,7 +235,10 @@ mod test {
     fn test_rand_i32_excluded_unbounded() {
         rand_i32_internal(
             &mut MockRng(Vec::new()),
-            ExcludedStartRange { end_bound: Bound::Unbounded, excluded_start: 0 }
+            ExcludedStartRange {
+                end_bound: Bound::Unbounded,
+                excluded_start: 0,
+            },
         );
     }
 
@@ -238,7 +247,10 @@ mod test {
     fn test_rand_i32_excluded_included() {
         rand_i32_internal(
             &mut MockRng(Vec::new()),
-            ExcludedStartRange { end_bound: Bound::Included(&0), excluded_start: 0 }
+            ExcludedStartRange {
+                end_bound: Bound::Included(&0),
+                excluded_start: 0,
+            },
         );
     }
 
@@ -247,7 +259,10 @@ mod test {
     fn test_rand_i32_excluded_excluded() {
         rand_i32_internal(
             &mut MockRng(Vec::new()),
-            ExcludedStartRange { end_bound: Bound::Excluded(&0), excluded_start: 0 }
+            ExcludedStartRange {
+                end_bound: Bound::Excluded(&0),
+                excluded_start: 0,
+            },
         );
     }
 
@@ -342,7 +357,10 @@ mod test {
     fn test_rand_u16_excluded_unbounded() {
         rand_u16_internal(
             &mut MockRng(Vec::new()),
-            ExcludedStartRange { end_bound: Bound::Unbounded, excluded_start: 0 }
+            ExcludedStartRange {
+                end_bound: Bound::Unbounded,
+                excluded_start: 0,
+            },
         );
     }
 
@@ -351,7 +369,10 @@ mod test {
     fn test_rand_u16_excluded_included() {
         rand_u16_internal(
             &mut MockRng(Vec::new()),
-            ExcludedStartRange { end_bound: Bound::Included(&0), excluded_start: 0 }
+            ExcludedStartRange {
+                end_bound: Bound::Included(&0),
+                excluded_start: 0,
+            },
         );
     }
 
@@ -360,7 +381,10 @@ mod test {
     fn test_rand_u16_excluded_excluded() {
         rand_u16_internal(
             &mut MockRng(Vec::new()),
-            ExcludedStartRange { end_bound: Bound::Excluded(&0), excluded_start: 0 }
+            ExcludedStartRange {
+                end_bound: Bound::Excluded(&0),
+                excluded_start: 0,
+            },
         );
     }
 
@@ -395,5 +419,4 @@ mod test {
         assert_eq!((3..=2).into_iter().count(), 0);
         rand_u16_internal(&mut MockRng(Vec::new()), 3..=2);
     }
-
 }

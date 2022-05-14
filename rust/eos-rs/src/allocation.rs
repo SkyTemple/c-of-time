@@ -1,11 +1,11 @@
 //! Module related to allocating data on the heap.
 
-use core::alloc::{Allocator, AllocError, GlobalAlloc, Layout};
-use core::ptr::NonNull;
 use crate::ctypes;
 use crate::ffi;
 #[cfg(not(test))]
 use crate::panic;
+use core::alloc::{AllocError, Allocator, GlobalAlloc, Layout};
+use core::ptr::NonNull;
 
 #[cfg(feature = "global_allocator")]
 #[cfg(not(test))]
@@ -38,7 +38,6 @@ unsafe impl Allocator for EoSDefaultAllocator {
             let raw_ptr = ffi::MemAlloc(layout.size() as u32, 0) as *mut u8;
             let ptr = NonNull::new(raw_ptr).ok_or(AllocError)?;
             Ok(NonNull::slice_from_raw_parts(ptr, layout.size()))
-
         }
     }
 
@@ -106,6 +105,8 @@ pub unsafe fn create_mem_arena(mem: *mut ffi::iovec, max_blocks: u32) -> *mut ff
 #[alloc_error_handler]
 pub fn alloc_error_handler(_: Layout) -> ! {
     let err = b"[rs] OUT OF MEMORY!\0";
-    unsafe { ffi::DebugPrint(2, err.as_ptr() as *const ctypes::c_char); }
+    unsafe {
+        ffi::DebugPrint(2, err.as_ptr() as *const ctypes::c_char);
+    }
     unsafe { panic::WaitForever() }
 }

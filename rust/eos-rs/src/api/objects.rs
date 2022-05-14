@@ -6,23 +6,23 @@
 //! that exist in the base game. The `Type` item of these catalogs specifies
 //! the type of the IDs.
 
-use core::ops::{Deref, DerefMut};
 use crate::ffi;
+use core::ops::{Deref, DerefMut};
 
-pub use ffi::item_id as item_catalog;
-pub use ffi::move_id as move_catalog;
 pub use ffi::ability_id as ability_catalog;
-pub use ffi::type_id as type_catalog;
-pub use ffi::iq_skill_id as iq_skill_catalog;
-pub use ffi::iq_group_id as iq_group_catalog;
-pub use ffi::exclusive_item_effect_id as exclusive_item_effect_catalog;
-pub use ffi::dungeon_id as dungeon_catalog;
 pub use ffi::dungeon_group_id as dungeon_group_catalog;
+pub use ffi::dungeon_id as dungeon_catalog;
+pub use ffi::exclusive_item_effect_id as exclusive_item_effect_catalog;
 pub use ffi::fixed_room_id as fixed_room_catalog;
+pub use ffi::iq_group_id as iq_group_catalog;
+pub use ffi::iq_skill_id as iq_skill_catalog;
+pub use ffi::item_id as item_catalog;
 pub use ffi::monster_id as monster_catalog;
+pub use ffi::move_id as move_catalog;
 pub use ffi::script_opcode_id as script_opcode_catalog;
-pub use ffi::special_process_id as special_process_catalog;
 pub use ffi::script_var_id as script_var_catalog;
+pub use ffi::special_process_id as special_process_catalog;
+pub use ffi::type_id as type_catalog;
 
 /// A monster move.
 pub type Move = ffi::move_;

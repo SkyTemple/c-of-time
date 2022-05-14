@@ -8,7 +8,7 @@ use core::mem;
 pub(crate) struct OwnedSlice<const MAX: usize, T> {
     data: [T; MAX],
     start: usize,
-    end: usize
+    end: usize,
 }
 
 impl<const MAX: usize, T> OwnedSlice<MAX, T> {

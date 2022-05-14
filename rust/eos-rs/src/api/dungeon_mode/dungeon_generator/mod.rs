@@ -26,8 +26,7 @@ pub mod reimplementation;
 pub type DungeonGridCell = ffi::dungeon_grid_cell;
 
 /// High-level trait for generating new dungeons and replacing the current global dungeon.
-pub trait DungeonFloorGeneration
-{
+pub trait DungeonFloorGeneration {
     type EntityGenerator: DungeonEntityGeneration;
     type LayoutGenerator: ?Sized;
 
@@ -35,12 +34,21 @@ pub trait DungeonFloorGeneration
     /// layout, including entities.
     ///
     /// Whether a fixed floor or a floor using a layout is generated is taken from the properties.
-    fn generate_floor(&mut self, width: usize, height: usize, properties: &ffi::floor_properties) -> &mut Self;
+    fn generate_floor(
+        &mut self,
+        width: usize,
+        height: usize,
+        properties: &ffi::floor_properties,
+    ) -> &mut Self;
 
     /// Generates a floor using the specified layout. This will create a fully working layout.
     ///
     /// Entities are not spawned.
-    fn generate_layout(&mut self, layout: &mut Self::LayoutGenerator, properties: &ffi::floor_properties) -> &mut Self;
+    fn generate_layout(
+        &mut self,
+        layout: &mut Self::LayoutGenerator,
+        properties: &ffi::floor_properties,
+    ) -> &mut Self;
 
     /// Generate entities, the callback will receive [`Self::EntityGenerator`] to generate them.
     ///
@@ -81,12 +89,20 @@ pub trait DungeonEntityGeneration {
     /// The player can spawn on any tile that has open terrain, is in a room, isn't in a Kecleon
     /// shop, isn't a hallway junction, doesn't already have an item, enemy, or trap spawn, and
     /// isn't a special tile like a Key door.
-    fn spawn_non_enemies(&mut self, floor_properties: &ffi::floor_properties, empty_monster_house: bool);
+    fn spawn_non_enemies(
+        &mut self,
+        floor_properties: &ffi::floor_properties,
+        empty_monster_house: bool,
+    );
 
     /// Spawn all enemies, which includes normal enemies and those in Monster Houses.
     ///
     /// Normal enemies can spawn on any tile that has open terrain, isn't in a Kecleon shop, doesn't already have another entity spawn, and isn't a special tile like a Key door.
     ///
     /// Monster House enemies can spawn on any Monster House tile that isn't in a Kecleon shop, isn't where the player spawns, and isn't a special tile like a Key door.
-    fn spawn_enemies(&mut self, floor_properties: &ffi::floor_properties, empty_monster_house: bool);
+    fn spawn_enemies(
+        &mut self,
+        floor_properties: &ffi::floor_properties,
+        empty_monster_house: bool,
+    );
 }

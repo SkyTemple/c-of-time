@@ -1,7 +1,7 @@
-use core::slice;
 use crate::api::dungeon_mode::*;
 use crate::api::objects::*;
 use crate::ffi;
+use core::slice;
 
 /// Extension trait for [`DungeonTile`].
 ///
@@ -33,13 +33,19 @@ impl DungeonTileExt for DungeonTile {
     }
 
     fn get_terrain(&self) -> Option<TerrainType> {
-        unsafe { ffi::GetTileTerrain(force_mut_ptr!(self)) }.try_into().ok()
+        unsafe { ffi::GetTileTerrain(force_mut_ptr!(self)) }
+            .try_into()
+            .ok()
     }
 
-    fn set_terrain_obstacle_checked(&mut self, secondary_terrain: bool, room_index: u8)  {
-        unsafe { ffi::SetTerrainObstacleChecked(
-            self as *mut _, secondary_terrain as ffi::bool_, room_index
-        ) }
+    fn set_terrain_obstacle_checked(&mut self, secondary_terrain: bool, room_index: u8) {
+        unsafe {
+            ffi::SetTerrainObstacleChecked(
+                self as *mut _,
+                secondary_terrain as ffi::bool_,
+                room_index,
+            )
+        }
     }
 
     fn set_secondary_terrain_on_wall(&mut self) {
@@ -69,11 +75,17 @@ pub trait DungeonTileGridWrite<const W: usize, const H: usize>: DungeonTileGridR
 }
 
 /// See [`DungeonTileGridRead`].
-pub struct DungeonTileGridRef<'a, const W: usize, const H: usize>(pub(crate) &'a [[*mut ffi::tile; W]; H]);
+pub struct DungeonTileGridRef<'a, const W: usize, const H: usize>(
+    pub(crate) &'a [[*mut ffi::tile; W]; H],
+);
 /// See [`DungeonTileGridRead`] and [`DungeonTileGridWrite`].
-pub struct DungeonTileGridMut<'a, const W: usize, const H: usize>(pub(crate) &'a mut [[*mut ffi::tile; W]; H]);
+pub struct DungeonTileGridMut<'a, const W: usize, const H: usize>(
+    pub(crate) &'a mut [[*mut ffi::tile; W]; H],
+);
 
-impl<'a, const W: usize, const H: usize> DungeonTileGridRead<W, H> for DungeonTileGridRef<'a, W, H> {
+impl<'a, const W: usize, const H: usize> DungeonTileGridRead<W, H>
+    for DungeonTileGridRef<'a, W, H>
+{
     fn get(&self, x: usize, y: usize) -> Option<&DungeonTile> {
         unsafe { self.0[y][x].as_ref().map(|tile| &*tile) }
     }
@@ -82,12 +94,14 @@ impl<'a, const W: usize, const H: usize> DungeonTileGridRead<W, H> for DungeonTi
         DungeonTileGridIter {
             tiles_iter: self.0.iter(),
             cur_row: None,
-            cur_row_iter: None
+            cur_row_iter: None,
         }
     }
 }
 
-impl<'a, const W: usize, const H: usize> DungeonTileGridRead<W, H> for DungeonTileGridMut<'a, W, H> {
+impl<'a, const W: usize, const H: usize> DungeonTileGridRead<W, H>
+    for DungeonTileGridMut<'a, W, H>
+{
     fn get(&self, x: usize, y: usize) -> Option<&DungeonTile> {
         unsafe { self.0[y][x].as_ref().map(|tile| &*tile) }
     }
@@ -96,18 +110,20 @@ impl<'a, const W: usize, const H: usize> DungeonTileGridRead<W, H> for DungeonTi
         DungeonTileGridIter {
             tiles_iter: self.0.iter(),
             cur_row: None,
-            cur_row_iter: None
+            cur_row_iter: None,
         }
     }
 }
 
-impl<'a, const W: usize, const H: usize> DungeonTileGridWrite<W, H> for DungeonTileGridMut<'a, W, H> {
+impl<'a, const W: usize, const H: usize> DungeonTileGridWrite<W, H>
+    for DungeonTileGridMut<'a, W, H>
+{
     fn get_mut(&mut self, x: usize, y: usize) -> Option<&mut DungeonTile> {
         unsafe { self.0[y][x].as_mut().map(|tile| &mut *tile) }
     }
 
     fn insert(&mut self, x: usize, y: usize, tile: DungeonTile) {
-        let mut otile = unsafe { &mut*self.0[y][x] };
+        let mut otile = unsafe { &mut *self.0[y][x] };
         otile._bitfield_align_1 = tile._bitfield_align_1;
         otile._bitfield_1 = tile._bitfield_1;
         otile.spawn_or_visibility_flags = tile.spawn_or_visibility_flags;
@@ -123,7 +139,7 @@ impl<'a, const W: usize, const H: usize> DungeonTileGridWrite<W, H> for DungeonT
         DungeonTileGridIterMut {
             tiles_iter: self.0.iter(),
             cur_row: None,
-            cur_row_iter: None
+            cur_row_iter: None,
         }
     }
     // TODO

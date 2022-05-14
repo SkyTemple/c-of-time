@@ -1,10 +1,10 @@
 //! Traits, structs and functions related to ground mode.
 
-use crate::api::objects::*;
-#[allow(unused_imports)] // for easier reference in the docs of script_special_process_call
-use crate::api::objects::special_process_catalog::*;
 #[allow(unused_imports)] // for easier reference in the docs of script_special_process_call
 use crate::api::gameplay;
+#[allow(unused_imports)] // for easier reference in the docs of script_special_process_call
+use crate::api::objects::special_process_catalog::*;
+use crate::api::objects::*;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use crate::ffi;
 
@@ -22,13 +22,12 @@ impl CreatableWithLease<11> for GroundModeContext {
 }
 
 impl GroundModeContext {
-
     /// Processes calls to the [`script_opcode_catalog::OPCODE_PROCESS_SPECIAL`] script opcode.
-    /// 
+    ///
     /// Returns result value of the special process if it has one, otherwise 0.
-    /// 
+    ///
     /// Some built-in special processes include:
-    /// 
+    ///
     /// - [`SPECIAL_PROC_KEY_WAIT_INIT`] : [`gameplay::key_wait_init`]
     /// - [`SPECIAL_PROC_IS_BAG_FULL`] : [`gameplay::is_bag_full`]
     /// - [`SPECIAL_PROC_COUNT_ITEM_TYPE_IN_BAG`] : [`gameplay::count_item_type_in_bag`]
@@ -73,7 +72,13 @@ impl GroundModeContext {
     ///               [`script_opcode_catalog::OPCODE_PROCESS_SPECIAL`]
     /// * `arg2`    - second argument, if relevant? Probably corresponds to the third parameter of
     ///               [`script_opcode_catalog::OPCODE_PROCESS_SPECIAL`]
-    pub fn script_special_process_call(&mut self, param_1: &mut ffi::undefined4, id: special_process_catalog::Type, arg1: i32, arg2: i32) -> i32 {
+    pub fn script_special_process_call(
+        &mut self,
+        param_1: &mut ffi::undefined4,
+        id: special_process_catalog::Type,
+        arg1: i32,
+        arg2: i32,
+    ) -> i32 {
         unsafe { ffi::ScriptSpecialProcessCall(param_1, id, arg1, arg2) }
     }
 
@@ -166,7 +171,11 @@ impl GroundModeContext {
     /// * `size` - initial memory arena pointer, or null.
     /// * `flags` - `MemAlloc` flags.
     #[allow(clippy::not_unsafe_ptr_arg_deref)]
-    pub fn get_alloc_arena_ground(&self, arena: *mut ffi::mem_arena, flags: u32) -> *mut ffi::mem_arena {
+    pub fn get_alloc_arena_ground(
+        &self,
+        arena: *mut ffi::mem_arena,
+        flags: u32,
+    ) -> *mut ffi::mem_arena {
         unsafe { ffi::GetAllocArenaGround(arena, flags) }
     }
 
@@ -178,8 +187,11 @@ impl GroundModeContext {
     /// * `size` - initial memory arena pointer, or null.
     /// * `flags` - `MemAlloc` flags.
     #[allow(clippy::not_unsafe_ptr_arg_deref)]
-    pub fn get_free_arena_ground(&self, arena: *mut ffi::mem_arena, flags: u32) -> *mut ffi::mem_arena {
+    pub fn get_free_arena_ground(
+        &self,
+        arena: *mut ffi::mem_arena,
+        flags: u32,
+    ) -> *mut ffi::mem_arena {
         unsafe { ffi::GetFreeArenaGround(arena, flags) }
     }
-
 }

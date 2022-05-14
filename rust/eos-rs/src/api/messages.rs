@@ -1,30 +1,33 @@
 //! Functions for formatting and printing game messages and other "message box" and menu related
 //! operations.
 
+use crate::ctypes::c_char;
+use crate::ffi;
+use crate::string_util::str_to_cstring;
 use alloc::borrow::ToOwned;
 use alloc::ffi::CString;
 use alloc::string::String;
 use alloc::vec;
 use alloc::vec::Vec;
+use az::SaturatingAs;
 use core::ffi::CStr;
 use core::mem::ManuallyDrop;
-use az::SaturatingAs;
-use crate::ctypes::c_char;
-use crate::ffi;
-use crate::string_util::str_to_cstring;
 
 static mut NULL: c_char = 0;
 
 enum PreprocessorArgs<'a> {
     Owned(ffi::preprocessor_args),
-    Borrowed(&'a mut ffi::preprocessor_args)
+    Borrowed(&'a mut ffi::preprocessor_args),
 }
 
 impl<'a> PreprocessorArgs<'a> {
-    pub fn as_mut<'b>(&'b mut self) -> &'b mut ffi::preprocessor_args where 'a: 'b {
+    pub fn as_mut<'b>(&'b mut self) -> &'b mut ffi::preprocessor_args
+    where
+        'a: 'b,
+    {
         match self {
             PreprocessorArgs::Owned(args) => args,
-            PreprocessorArgs::Borrowed(args) => args
+            PreprocessorArgs::Borrowed(args) => args,
         }
     }
 }
@@ -38,7 +41,7 @@ impl<'a> PreprocessorArgs<'a> {
 ///
 /// See <https://textbox.skytemple.org> for a reference about message tags and a preview tool.
 pub struct GameStringBuilder<'a> {
-    output_size: Option<i32>,  // Note: Auto
+    output_size: Option<i32>, // Note: Auto
     flags: ffi::preprocessor_flags,
     args: PreprocessorArgs<'a>,
 }
@@ -49,14 +52,17 @@ impl<'a> GameStringBuilder<'a> {
         unsafe {
             Self {
                 output_size: None,
-                flags: ffi::preprocessor_flags { _bitfield_align_1: [], _bitfield_1: Default::default() },
+                flags: ffi::preprocessor_flags {
+                    _bitfield_align_1: [],
+                    _bitfield_1: Default::default(),
+                },
                 args: PreprocessorArgs::Owned(ffi::preprocessor_args {
                     flag_vals: [0, 0, 0, 0],
                     id_vals: [0, 0, 0, 0, 0],
                     number_vals: [0, 0, 0, 0, 0],
                     strings: [&mut NULL, &mut NULL, &mut NULL, &mut NULL, &mut NULL],
-                    speaker_id: 0
-                })
+                    speaker_id: 0,
+                }),
             }
         }
     }
@@ -139,7 +145,7 @@ impl<'a> GameStringBuilder<'a> {
     pub fn args(&self) -> &ffi::preprocessor_args {
         match &self.args {
             PreprocessorArgs::Owned(args) => args,
-            PreprocessorArgs::Borrowed(_) => panic!("Invalid `args` call.")
+            PreprocessorArgs::Borrowed(_) => panic!("Invalid `args` call."),
         }
     }
 
@@ -156,7 +162,7 @@ impl<'a> GameStringBuilder<'a> {
     pub fn set_flags(&mut self, flags: &ffi::preprocessor_flags) -> &mut Self {
         self.flags = ffi::preprocessor_flags {
             _bitfield_align_1: flags._bitfield_align_1,
-            _bitfield_1: flags._bitfield_1
+            _bitfield_1: flags._bitfield_1,
         };
         self
     }
@@ -181,10 +187,15 @@ impl<'a> GameStringBuilder<'a> {
     #[allow(clippy::needless_return)]
     pub fn build<S: AsRef<str>>(self, format: S) -> String {
         #[cfg(debug_assertions)]
-        return self.build_from_cstr_as_cstring(str_to_cstring(format.as_ref())).into_string().expect("Failed to convert game string to String (invalid UTF-8)");
+        return self
+            .build_from_cstr_as_cstring(str_to_cstring(format.as_ref()))
+            .into_string()
+            .expect("Failed to convert game string to String (invalid UTF-8)");
         // Save some precious size in release mode
         #[cfg(not(debug_assertions))]
-        self.build_from_cstr_as_cstring(str_to_cstring(format.as_ref())).into_string().unwrap()
+        self.build_from_cstr_as_cstring(str_to_cstring(format.as_ref()))
+            .into_string()
+            .unwrap()
     }
 
     /// Converts the format string to the formatted string.
@@ -193,10 +204,15 @@ impl<'a> GameStringBuilder<'a> {
     #[allow(clippy::needless_return)]
     pub fn build_from_cstr<S: AsRef<CStr>>(self, format: S) -> String {
         #[cfg(debug_assertions)]
-        return self.build_from_cstr_as_cstring(format.as_ref()).into_string().expect("Failed to convert game string to String (invalid UTF-8)");
+        return self
+            .build_from_cstr_as_cstring(format.as_ref())
+            .into_string()
+            .expect("Failed to convert game string to String (invalid UTF-8)");
         // Save some precious size in release mode
         #[cfg(not(debug_assertions))]
-        self.build_from_cstr_as_cstring(format.as_ref()).into_string().unwrap()
+        self.build_from_cstr_as_cstring(format.as_ref())
+            .into_string()
+            .unwrap()
     }
 
     /// Converts the format string to the formatted string.
@@ -211,7 +227,9 @@ impl<'a> GameStringBuilder<'a> {
     /// Builds CString from a CStr. The input is the format string to use.
     pub fn build_from_cstr_as_cstring<S: AsRef<CStr>>(self, format: S) -> CString {
         let Self {
-            output_size, flags, mut args
+            output_size,
+            flags,
+            mut args,
         } = self;
 
         let output_size = match output_size {
@@ -227,13 +245,15 @@ impl<'a> GameStringBuilder<'a> {
                 output_size,
                 format.as_ref().as_ptr(),
                 flags,
-                args.as_mut()
+                args.as_mut(),
             );
             output.truncate(size as usize + 1); // + 1 for the null byte.
 
             // Convert output from Vec<i8> to Vec<u8> at no cost.
             let output = Vec::from_raw_parts(
-                output.as_mut_ptr() as *mut u8, output.len(), output.capacity()
+                output.as_mut_ptr() as *mut u8,
+                output.len(),
+                output.capacity(),
             );
 
             CString::from_vec_with_nul_unchecked(output)

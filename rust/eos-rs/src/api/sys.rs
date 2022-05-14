@@ -17,7 +17,9 @@ pub unsafe fn task_proc_boot() {
 /// This just calls (in Ghidra terminology) coproc_moveto_Wait_for_interrupt(0).
 /// See <https://en.wikipedia.org/wiki/ARM_architecture_family#Coprocessors>.
 pub fn wait_for_interrupt() {
-    unsafe { ffi::WaitForInterrupt(); }
+    unsafe {
+        ffi::WaitForInterrupt();
+    }
 }
 
 /// Sets the Interrupt Master Enable (IME) register to 1, which enables all CPU interrupts

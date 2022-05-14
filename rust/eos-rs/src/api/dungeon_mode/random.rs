@@ -1,9 +1,9 @@
-use core::ops::RangeBounds;
 use crate::api::objects::DungeonEntity;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use crate::api::random::{rand_i32_internal, rand_u16_internal, Rng};
 use crate::ctypes::c_int;
 use crate::ffi;
+use core::ops::RangeBounds;
 
 /// Helper struct for dungeon RNG.
 pub struct DungeonRng(OverlayLoadLease<29>);
@@ -142,8 +142,19 @@ impl DungeonRng {
     /// whether or not either entity has fainted.
     ///
     /// A percentage of 0 is treated specially and guarantees success.
-    pub fn rand_outcome_user_target_interaction(&self, user: &DungeonEntity, target: &DungeonEntity, success_percentage: i32) -> bool {
-        unsafe { ffi::DungeonRandOutcomeUserTargetInteraction(force_mut_ptr!(user), force_mut_ptr!(target), success_percentage) > 0 }
+    pub fn rand_outcome_user_target_interaction(
+        &self,
+        user: &DungeonEntity,
+        target: &DungeonEntity,
+        success_percentage: i32,
+    ) -> bool {
+        unsafe {
+            ffi::DungeonRandOutcomeUserTargetInteraction(
+                force_mut_ptr!(user),
+                force_mut_ptr!(target),
+                success_percentage,
+            ) > 0
+        }
     }
 
     /// Like [`Self::rand_outcome`], but specifically for user actions.
