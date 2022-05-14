@@ -42,7 +42,7 @@ impl DungeonRng {
     /// relation used in the primary LCG to generate two pseudorandom 32-bit numbers x1 and x2.
     /// The output seed is then computed as
     ///
-    /// ```
+    /// ```text
     /// seed = (x1 & 0xFF0000) | (x2 >> 0x10) | 1
     /// ```
     ///
@@ -91,7 +91,7 @@ impl DungeonRng {
     ///
     /// So, for example, the primary LCG uses the recurrence relation:
     ///
-    /// ```
+    /// ```text
     /// x = (1566083941 * x_prev + 1) % 2^32
     /// ```
     ///
