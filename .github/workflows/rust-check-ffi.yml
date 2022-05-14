@@ -1,0 +1,36 @@
+on: [push, pull_request]
+
+name: eos-rs - ffi check
+
+jobs:
+  ffi-check:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+
+      - name: Install bindgen
+        uses: actions-rs/install@v0.1
+        with:
+          crate: bindgen
+          version: latest
+          use-tool-cache: true
+
+      - name: Set up Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
+
+      - name: Run bindgen
+        working-directory: rust/eos-rs
+        run: ./generate-bindings.sh
+
+      - name: Check if the bindings changed. If this fails, run generate-bindings.sh in rust/eos-rs and commit to fix.
+        run:
+          git diff --exit-code rust/eos-rs/src/ffi.rs
