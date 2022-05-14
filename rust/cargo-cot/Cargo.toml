@@ -2,6 +2,7 @@
 name         = "cargo-cot"
 description  = "c-of-time extension for cargo"
 version      = "0.1.0"
+license      = "MIT"
 authors      = ["Marco 'Capypara' Köpcke <hello@capypara.de>"]
 edition      = "2021"
 

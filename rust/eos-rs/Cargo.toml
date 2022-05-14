@@ -3,6 +3,7 @@ name = "eos-rs"
 description = "Rust bindings and FFI for Explorers of Sky"
 authors = ["Marco 'Capypara' Köpcke <hello@capypara.de>"]
 version = "0.1.0"
+license = "MIT"
 edition = "2021"
 
 [lib]
