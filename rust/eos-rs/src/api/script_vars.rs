@@ -305,6 +305,41 @@ impl ScriptVariables {
     pub fn init_dungeon_list_script_vars(&mut self) {
         unsafe { ffi::InitDungeonListScriptVars() }
     }
+
+    /// Saves scenario flag script variables (SCENARIO_SELECT, SCENARIO_MAIN_BIT_FLAG) to their
+    /// respective BACKUP script variables, but only in certain game modes.
+    ///
+    /// This function prints the debug string "ScenarioFlag BackupGameMode %d" with the game mode.
+    pub fn scenario_flag_backup(&mut self) {
+        unsafe { ffi::ScenarioFlagBackup() }
+    }
+
+    /// Gets the language type.
+    ///
+    /// This is the value backing the special LANGUAGE_TYPE script variable.
+    pub fn get_language_type(&self) -> i32 {
+        unsafe { ffi::GetLanguageType() }
+    }
+
+    /// Returns the current value of the NOTIFY_NOTE script variable.
+    pub fn get_notify_note(&self) -> bool {
+        unsafe { ffi::GetNotifyNote() > 0 }
+    }
+
+    /// Sets the current value of the NOTIFY_NOTE script variable.
+    pub fn set_notify_note(&mut self, value: bool) {
+        unsafe { ffi::SetNotifyNote(value as ffi::bool_) }
+    }
+
+    /// Gets the value of the GAME_MODE script variable.
+    pub fn get_game_mode(&self) -> i32 {
+        unsafe { ffi::GetGameMode() }
+    }
+
+    /// Gets the special episode type from the SPECIAL_EPISODE_TYPE script variable.
+    pub fn get_special_episode_type(&self) -> i32 {
+        unsafe { ffi::GetSpecialEpisodeType() }
+    }
 }
 
 /// Reference to a global script variable, see [`ScriptVariableRead`].

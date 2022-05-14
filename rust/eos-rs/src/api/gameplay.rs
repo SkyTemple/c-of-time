@@ -1,7 +1,7 @@
 //! General gameplay related functions that are always available.
 
 use core::ptr;
-use crate::api::objects::item_catalog;
+use crate::api::objects::*;
 use crate::ffi;
 use crate::ffi::{exclusive_item_effect_id, item_id_16};
 use crate::util::OwnedSlice;
@@ -11,6 +11,39 @@ use crate::util::OwnedSlice;
 pub enum TeamSetup {
     HeroOnly,
     HeroAndPartnerOnly
+}
+
+#[repr(i32)]
+#[derive(PartialEq, Clone, Copy)]
+/// Move index of a monster, used by some functions.
+pub enum TargetTypeIndex {
+    FirstType = 0, SecondType = 1
+}
+
+#[repr(u32)]
+#[derive(Clone, Copy, PartialOrd, Ord, PartialEq, Eq)]
+/// The rank a player scored in the sentry duty (footprint) minigame.
+pub enum SentryGameRank {
+    First = 0,
+    Second = 1,
+    Third = 2,
+    Fourth = 3,
+    Fifth = 4,
+}
+
+impl TryFrom<i32> for SentryGameRank {
+    type Error = ();
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        match value {
+            0 => Ok(SentryGameRank::First),
+            1 => Ok(SentryGameRank::Second),
+            2 => Ok(SentryGameRank::Third),
+            3 => Ok(SentryGameRank::Fourth),
+            4 => Ok(SentryGameRank::Fifth),
+            _ => Err(()),
+        }
+    }
 }
 
 /// Initializes the key wait process.
@@ -105,13 +138,6 @@ pub fn test_exclusive_item_effect_flag(effect_flags: &mut u32, effect_id: exclus
     unsafe { ffi::ExclusiveItemEffectFlagTest(effect_flags, effect_id) > 0 }
 }
 
-/// Gets the language type.
-///
-/// This is the value backing the special LANGUAGE_TYPE script variable.
-pub fn get_language_type() -> i32 {
-    unsafe { ffi::GetLanguageType() }
-}
-
 /// Gets the single-byte language ID of the current program.
 ///
 /// The language ID appears to be used to index some global tables.
@@ -119,16 +145,6 @@ pub fn get_language_type() -> i32 {
 /// It is probably the firmware language ID...?
 pub fn get_language() -> i32 {
     unsafe { ffi::GetLanguage() }
-}
-
-/// Returns the current value of the NOTIFY_NOTE script variable.
-pub fn get_notify_note() -> bool {
-    unsafe { ffi::GetNotifyNote() > 0 }
-}
-
-/// Sets the current value of the NOTIFY_NOTE script variable.
-pub fn set_notify_note(value: bool) {
-    unsafe { ffi::SetNotifyNote(value as ffi::bool_) }
 }
 
 /// Initializes the main team. If the personality quest was just passed, the data will be taken
@@ -163,455 +179,255 @@ pub fn note_load_base() -> i32 {
     unsafe { ffi::NoteLoadBase() }
 }
 
-/// Gets the value of the GAME_MODE script variable.
-pub fn get_game_mode() -> i32 {
-    unsafe { ffi::GetGameMode() }
+/// Adventure log helper
+pub struct AdventureLog;
+
+impl AdventureLog {
+    /// Sets the location of the adventure log struct in memory.
+    ///
+    /// Sets it in a static memory location.
+    pub fn set_struct_location(&mut self) {
+        unsafe { ffi::SetAdventureLogStructLocation() }
+    }
+
+    /// Clears the adventure log structure.
+    pub fn clear_struct(&mut self) {
+        unsafe { ffi::ClearAdventureLogStruct() }
+    }
+
+    /// Sets the current dungeon floor pair.
+    pub fn get_dungeon_floor(&self) -> ffi::dungeon_floor_pair {
+        unsafe { ffi::GetAdventureLogDungeonFloor() }
+    }
+
+    /// Sets the current dungeon floor pair.
+    pub fn set_dungeon_floor(&mut self, dungeon_floor: ffi::dungeon_floor_pair) {
+        unsafe { ffi::SetAdventureLogDungeonFloor(dungeon_floor) }
+    }
+
+    /// Checks if one adventure log entry is completed.
+    pub fn is_entry_completed(&self, entry_id: u32) -> bool {
+        unsafe { ffi::GetAdventureLogCompleted(entry_id) > 0 }
+    }
+
+    /// Marks one of the adventure log entry as completed.
+    pub fn mark_entry_completed(&mut self, entry_id: u32) {
+        unsafe { ffi::SetAdventureLogCompleted(entry_id) }
+    }
+
+    /// Checks if none of of the adventure log entry is completed.
+    pub fn is_empty(&self) -> bool {
+        unsafe { ffi::IsAdventureLogNotEmpty() == 0 }
+    }
+
+    /// Gets the number of dungeons cleared.
+    pub fn get_number_dungeons_cleared(&self) -> u32 {
+        unsafe { ffi::GetNbDungeonsCleared() }
+    }
+
+    /// Increments by 1 the number of dungeons cleared.
+    pub fn increment_number_dungeons_cleared() {
+        unsafe { ffi::IncrementNbDungeonsCleared() };
+    }
+
+    /// Gets the number of successful friend rescues.
+    pub fn get_number_friend_rescues(&self) -> u32 {
+        unsafe { ffi::GetNbFriendRescues() }
+    }
+
+    /// Increments by 1 the number of successful friend rescues.
+    pub fn increment_number_friend_rescues(&mut self) {
+        unsafe { ffi::IncrementNbFriendRescues() };
+    }
+
+    /// Gets the number of evolutions.
+    pub fn get_number_evolutions(&self) -> u32 {
+        unsafe { ffi::GetNbEvolutions() }
+    }
+
+    /// Increments by 1 the number of evolutions.
+    pub fn increment_number_evolutions(&mut self) {
+        unsafe { ffi::IncrementNbEvolutions() };
+    }
+
+    /// Leftover from Time & Darkness. Does not do anything.
+    ///
+    /// Calls to this matches the ones for incrementing the number of successful steals in Time & Darkness.
+    pub fn increment_number_steals(&mut self) {
+        unsafe { ffi::IncrementNbSteals() };
+    }
+
+    /// Gets the number of eggs hatched.
+    pub fn get_number_eggs_hatched(&self) -> u32 {
+        unsafe { ffi::GetNbEggsHatched() }
+    }
+
+    /// Increments by 1 the number of eggs hatched.
+    pub fn increment_number_eggs_hatched(&mut self) {
+        unsafe { ffi::IncrementNbEggsHatched() };
+    }
+
+    /// Gets the number of different monsters that joined.
+    pub fn get_number_monsters_joined(&self) -> u32 {
+        unsafe { ffi::GetNbPokemonJoined() }
+    }
+
+    /// Gets the number of different moves learned.
+    pub fn get_number_moves_learned(&self) -> u32 {
+        unsafe { ffi::GetNbMovesLearned() }
+    }
+
+    /// Gets the record of victories on one floor.
+    pub fn get_victories_on_one_floor(&self) -> u32 {
+        unsafe { ffi::GetVictoriesOnOneFloor() }
+    }
+
+    /// Sets the record of victories on one floor.
+    pub fn set_victories_on_one_floor(&mut self, victories: u32) {
+        unsafe { ffi::SetVictoriesOnOneFloor(victories) };
+    }
+
+    /// Gets the number of different monsters that battled against you.
+    pub fn get_number_monsters_battled(&self) -> u32 {
+        unsafe { ffi::GetNbPokemonBattled() }
+    }
+
+    /// Marks one monster as battled.
+    pub fn set_monster_battled(&mut self, monster_id: u32) {
+        unsafe { ffi::SetPokemonBattled(monster_id) };
+    }
+
+    /// Marks one monster as joined.
+    pub fn set_monster_joined(&mut self, monster_id: u32) {
+        unsafe { ffi::SetPokemonJoined(monster_id) };
+    }
+
+    /// Gets the number of big treasure wins.
+    pub fn get_number_big_treasure_wins(&self) -> u32 {
+        unsafe { ffi::GetNbBigTreasureWins() }
+    }
+
+    /// Increments by 1 the number of big treasure wins.
+    pub fn increment_number_of_big_treasure_wins() {
+        unsafe { ffi::IncrementNbBigTreasureWins() };
+    }
+
+    /// Sets the number of big treasure wins.
+    pub fn set_number_big_treasure_wins(&mut self, number: u32) {
+        unsafe { ffi::SetNbBigTreasureWins(number) };
+    }
+
+    /// Gets the number of items recycled.
+    pub fn get_number_recycled(&mut self) -> u32 {
+        unsafe { ffi::GetNbRecycled() }
+    }
+
+    /// Sets the number of items recycled.
+    pub fn set_number_recycled(&mut self, number: u32) {
+        unsafe { ffi::SetNbRecycled(number) };
+    }
+
+    /// Gets the number of Sky Gifts sent.
+    pub fn get_number_sky_gifts_sent(&self) -> u32 {
+        unsafe { ffi::GetNbSkyGiftsSent() }
+    }
+
+    /// Increments by 1 the number of sky gifts sent.
+    pub fn increment_number_of_gifts_sent() {
+        unsafe { ffi::IncrementNbSkyGiftsSent() };
+    }
+
+    /// Sets the number of Sky Gifts sent.
+    pub fn set_number_sky_gifts_sent(&mut self, number: u32) {
+        unsafe { ffi::SetNbSkyGiftsSent(number) };
+    }
+
+    /// Computes the counters from the bit fields in the adventure log, as they are not updated
+    /// automatically when bit fields are altered.
+    ///
+    /// Affects [`Self::get_number_monsters_joined`], [`Self::get_number_moves_learned`],
+    /// [`Self::get_number_monsters_battled`] and [`Self::get_number_items_acquired`].
+    pub fn compute_special_counters(&mut self) {
+        unsafe { ffi::ComputeSpecialCounters() };
+    }
+
+    /// Marks a specified special monster as recruited in the adventure log.
+    pub fn set_special_monster_recruited(&mut self, monster_id: u32) {
+        unsafe { ffi::RecruitSpecialPokemonLog(monster_id) };
+    }
+
+    /// Gets the number of times the player fainted.
+    pub fn get_number_fainted(&self) -> u32 {
+        unsafe { ffi::GetNbFainted() }
+    }
+
+    /// Increments by 1 the number of times the player fainted.
+    pub fn increment_number_of_fainted() {
+        unsafe { ffi::IncrementNbFainted() };
+    }
+
+    /// Gets the number of items acquired.
+    pub fn get_number_items_acquired(&self) -> u32 {
+        unsafe { ffi::GetNbItemAcquired() }
+    }
+
+    /// Marks one specific item as acquired.
+    pub fn set_item_acquired(&mut self, item_id: u32) {
+        unsafe { ffi::SetItemAcquired(item_id) };
+    }
+
+    /// Sets a challenge letter as cleared.
+    pub fn set_challenge_letter_cleared(&mut self, challenge_letter: u32) {
+        unsafe { ffi::SetChallengeLetterCleared(challenge_letter) };
+    }
+
+    /// Gets the points for the associated rank in the footprints minigame.
+    pub fn get_sentry_duty_game_points(&self, rank: SentryGameRank) -> u32 {
+        unsafe { ffi::GetSentryDutyGamePoints(rank as i32) }
+    }
+
+    /// Sets the points for the associated rank in the footprints minigame.
+    pub fn set_sentry_duty_game_points(&mut self, points: u32) -> Option<SentryGameRank> {
+        unsafe { ffi::SetSentryDutyGamePoints(points) }.try_into().ok()
+    }
 }
 
-//     - name: GetSpecialEpisodeType
-//       address:
-//         NA: 0x204C8EC
-//         EU: 0x204CC24
-//       description: |-
-//         Gets the special episode type from the SPECIAL_EPISODE_TYPE script variable.
-//
-//         return: special episode type
-//     - name: ScenarioFlagBackup
-//       address:
-//         NA: 0x204CCB8
-//         EU: 0x204CFF0
-//       description: |-
-//         Saves scenario flag script variables (SCENARIO_SELECT, SCENARIO_MAIN_BIT_FLAG) to their respective BACKUP script variables, but only in certain game modes.
-//
-//         This function prints the debug string "ScenarioFlag BackupGameMode %d" with the game mode.
-//
-//         No params.
-//    - name: SetAdventureLogStructLocation
-//       address:
-//         NA: 0x204FA24
-//         EU: 0x204FD5C
-//         JP: 0x204FD70
-//       description: |-
-//         Sets the location of the adventure log struct in memory.
-//
-//         Sets it in a static memory location (At 0x22AB69C [US], 0x22ABFDC [EU], 0x22ACE58 [JP])
-//
-//         No params.
-//     - name: SetAdventureLogDungeonFloor
-//       address:
-//         NA: 0x204FA3C
-//         EU: 0x204FD74
-//         JP: 0x204FD88
-//       description: |-
-//         Sets the current dungeon floor pair.
-//
-//         r0: struct dungeon_floor_pair
-//     - name: GetAdventureLogDungeonFloor
-//       address:
-//         NA: 0x204FA5C
-//         EU: 0x204FD94
-//         JP: 0x204FDA8
-//       description: |-
-//         Gets the current dungeon floor pair.
-//
-//         return: struct dungeon_floor_pair
-//     - name: ClearAdventureLogStruct
-//       address:
-//         NA: 0x204FA70
-//         EU: 0x204FDA8
-//         JP: 0x204FDBC
-//       description: |-
-//         Clears the adventure log structure.
-//
-//         No params.
-//     - name: SetAdventureLogCompleted
-//       address:
-//         NA: 0x204FB9C
-//         EU: 0x204FED4
-//         JP: 0x204FEE8
-//       description: |-
-//         Marks one of the adventure log entry as completed.
-//
-//         r0: entry ID
-//     - name: IsAdventureLogNotEmpty
-//       address:
-//         NA: 0x204FBC4
-//         EU: 0x204FEFC
-//         JP: 0x204FF10
-//       description: |-
-//         Checks if at least one of the adventure log entry is completed.
-//
-//         return: bool
-//     - name: GetAdventureLogCompleted
-//       address:
-//         NA: 0x204FBFC
-//         EU: 0x204FF34
-//         JP: 0x204FF48
-//       description: |-
-//         Checks if one adventure log entry is completed.
-//
-//         r0: entry ID
-//         return: bool
-
-/// Increments by 1 the number of dungeons cleared.
-pub fn increment_number_dungeons_cleared() {
-    unsafe { ffi::IncrementNbDungeonsCleared() };
+/// Returns whether the specified dungeon is considered as going upward or not
+pub fn dungeon_goes_up(dungeon_id: dungeon_catalog::Type) -> bool {
+    unsafe { ffi::DungeonGoesUp(dungeon_id) > 0 }
 }
 
-//    - name: GetNbDungeonsCleared
-//       address:
-//         NA: 0x204FC6C
-//         EU: 0x204FFA4
-//         JP: 0x204FFB8
-//       description: |-
-//         Gets the number of dungeons cleared.
-//
-//         return: the number of dungeons cleared
-//     - name: IncrementNbFriendRescues
-//       address:
-//         NA: 0x204FC80
-//         EU: 0x204FFB8
-//         JP: 0x204FFCC
-//       description: |-
-//         Increments by 1 the number of successful friend rescues.
-//
-//         No params.
-//     - name: GetNbFriendRescues
-//       address:
-//         NA: 0x204FCC8
-//         EU: 0x2050000
-//         JP: 0x2050014
-//       description: |-
-//         Gets the number of successful friend rescues.
-//
-//         return: the number of successful friend rescues
-//     - name: IncrementNbEvolutions
-//       address:
-//         NA: 0x204FCDC
-//         EU: 0x2050014
-//         JP: 0x2050028
-//       description: |-
-//         Increments by 1 the number of evolutions.
-//
-//         No params.
-//     - name: GetNbEvolutions
-//       address:
-//         NA: 0x204FD24
-//         EU: 0x205005C
-//         JP: 0x2050070
-//       description: |-
-//         Gets the number of evolutions.
-//
-//         return: the number of evolutions
-//     - name: IncrementNbSteals
-//       address:
-//         NA: 0x204FD38
-//         EU: 0x2050070
-//         JP: 0x2050084
-//       description: |-
-//         Leftover from Time & Darkness. Does not do anything.
-//
-//         Calls to this matches the ones for incrementing the number of successful steals in Time & Darkness.
-//
-//         No params.
-//     - name: IncrementNbEggsHatched
-//       address:
-//         NA: 0x204FD3C
-//         EU: 0x2050074
-//         JP: 0x2050088
-//       description: |-
-//         Increments by 1 the number of eggs hatched.
-//
-//         No params.
-//     - name: GetNbEggsHatched
-//       address:
-//         NA: 0x204FD78
-//         EU: 0x20500B0
-//         JP: 0x20500C4
-//       description: |-
-//         Gets the number of eggs hatched.
-//
-//         return: the number of eggs hatched
-//     - name: GetNbPokemonJoined
-//       address:
-//         NA: 0x204FD8C
-//         EU: 0x20500C4
-//         JP: 0x20500D8
-//       description: |-
-//         Gets the number of different pokémon that joined.
-//
-//         return: the number of different pokémon that joined
-//     - name: GetNbMovesLearned
-//       address:
-//         NA: 0x204FDA0
-//         EU: 0x20500D8
-//         JP: 0x20500EC
-//       description: |-
-//         Gets the number of different moves learned.
-//
-//         return: the number of different moves learned
-//     - name: SetVictoriesOnOneFloor
-//       address:
-//         NA: 0x204FDB4
-//         EU: 0x20500EC
-//         JP: 0x2050100
-//       description: |-
-//         Sets the record of victories on one floor.
-//
-//         r0: the new record of victories
-//     - name: GetVictoriesOnOneFloor
-//       address:
-//         NA: 0x204FDE8
-//         EU: 0x2050120
-//         JP: 0x2050134
-//       description: |-
-//         Gets the record of victories on one floor.
-//
-//         return: the record of victories
-//     - name: SetPokemonJoined
-//       address:
-//         NA: 0x204FDFC
-//         EU: 0x2050134
-//         JP: 0x2050148
-//       description: |-
-//         Marks one pokémon as joined.
-//
-//         r0: monster ID
-//     - name: SetPokemonBattled
-//       address:
-//         NA: 0x204FE58
-//         EU: 0x2050190
-//         JP: 0x20501A4
-//       description: |-
-//         Marks one pokémon as battled.
-//
-//         r0: monster ID
-//     - name: GetNbPokemonBattled
-//       address:
-//         NA: 0x204FEB4
-//         EU: 0x20501EC
-//         JP: 0x2050200
-//       description: |-
-//         Gets the number of different pokémon that battled against you.
-//
-//         return: the number of different pokémon that battled against you
-
-/// Increments by 1 the number of big treasure wins.
-pub fn increment_number_of_big_treasure_wins() {
-    unsafe { ffi::IncrementNbBigTreasureWins() };
+/// Checks if a monster ID is an Unown.
+pub fn is_unown(monster_id: monster_catalog::Type) -> bool {
+    unsafe { ffi::IsUnown(monster_id) > 0 }
 }
 
-//    - name: SetNbBigTreasureWins
-//       address:
-//         NA: 0x204FEE8
-//         EU: 0x2050220
-//         JP: 0x2050234
-//       description: |-
-//         Sets the number of big treasure wins.
-//
-//         r0: the new number of big treasure wins
-//     - name: GetNbBigTreasureWins
-//       address:
-//         NA: 0x204FF20
-//         EU: 0x2050258
-//         JP: 0x205026C
-//       description: |-
-//         Gets the number of big treasure wins.
-//
-//         return: the number of big treasure wins
-//     - name: SetNbRecycled
-//       address:
-//         NA: 0x204FF34
-//         EU: 0x205026C
-//         JP: 0x2050280
-//       description: |-
-//         Sets the number of items recycled.
-//
-//         r0: the new number of items recycled
-//     - name: GetNbRecycled
-//       address:
-//         NA: 0x204FF6C
-//         EU: 0x20502A4
-//         JP: 0x20502B8
-//       description: |-
-//         Gets the number of items recycled.
-//
-//         return: the number of items recycled
-
-/// Increments by 1 the number of sky gifts sent.
-pub fn increment_number_of_gifts_sent() {
-    unsafe { ffi::IncrementNbSkyGiftsSent() };
+/// Checks if a monster ID is a Shaymin.
+pub fn is_shaymin(monster_id: monster_catalog::Type) -> bool {
+    unsafe { ffi::IsShaymin(monster_id) > 0 }
 }
 
-//    - name: SetNbSkyGiftsSent
-//       address:
-//         NA: 0x204FFA0
-//         EU: 0x20502D8
-//         JP: 0x20502EC
-//       description: |-
-//         Sets the number of Sky Gifts sent.
-//
-//         return: the number of Sky Gifts sent
-//     - name: GetNbSkyGiftsSent
-//       address:
-//         NA: 0x204FFD8
-//         EU: 0x2050310
-//         JP: 0x2050324
-//       description: |-
-//         Gets the number of Sky Gifts sent.
-//
-//         return: the number of Sky Gifts sent
-//     - name: ComputeSpecialCounters
-//       address:
-//         NA: 0x204FFEC
-//         EU: 0x2050324
-//         JP: 0x2050338
-//       description: |-
-//         Computes the counters from the bit fields in the adventure log, as they are not updated automatically when bit fields are altered.
-//
-//         Affects GetNbPokemonJoined, GetNbMovesLearned, GetNbPokemonBattled and GetNbItemAcquired.
-//
-//         No params.
-//     - name: RecruitSpecialPokemonLog
-//       address:
-//         NA: 0x2050244
-//         EU: 0x205057C
-//         JP: 0x2050590
-//       description: |-
-//         Marks a specified special pokémon as recruited in the adventure log.
-//
-//         r0: monster ID
-//     - name: IncrementNbFainted
-//       address:
-//         NA: 0x20502B0
-//         EU: 0x20505E8
-//         JP: 0x20505FC
-//       description: |-
-//         Increments by 1 the number of times you fainted.
-//
-//         No params.
-//     - name: GetNbFainted
-//       address:
-//         NA: 0x20502EC
-//         EU: 0x2050624
-//         JP: 0x2050638
-//       description: |-
-//         Gets the number of times you fainted.
-//
-//         return: the number of times you fainted
-//     - name: SetItemAcquired
-//       address:
-//         NA: 0x2050300
-//         EU: 0x2050638
-//         JP: 0x205064C
-//       description: |-
-//         Marks one specific item as acquired.
-//
-//         r0: item ID
-//     - name: GetNbItemAcquired
-//       address:
-//         NA: 0x20503CC
-//         EU: 0x2050704
-//         JP: 0x2050718
-//       description: |-
-//         Gets the number of items acquired.
-//
-//         return: the number of items acquired
-//     - name: SetChallengeLetterCleared
-//       address:
-//         NA: 0x2050420
-//         EU: 0x2050758
-//         JP: 0x205076C
-//       description: |-
-//         Sets a challenge letter as cleared.
-//
-//         r0: challenge ID
-//     - name: GetSentryDutyGamePoints
-//       address:
-//         NA: 0x20504A4
-//         EU: 0x20507DC
-//         JP: 0x20507F0
-//       description: |-
-//         Gets the points for the associated rank in the footprints minigame.
-//
-//         r0: the rank (range 0-4, 1st to 5th)
-//         return: points
-//     - name: SetSentryDutyGamePoints
-//       address:
-//         NA: 0x20504BC
-//         EU: 0x20507F4
-//         JP: 0x2050808
-//       description: |-
-//         Sets a new record in the footprints minigame.
-//
-//         r0: points
-//         return: the rank (range 0-4, 1st to 5th; -1 if out of ranking)
+/// Checks if a monster ID is a Castform.
+pub fn is_castform(monster_id: monster_catalog::Type) -> bool {
+    unsafe { ffi::IsCastform(monster_id) > 0 }
+}
 
-//     - name: DungeonGoesUp
-//       address:
-//         NA: 0x2051288
-//         EU: 0x20515C0
-//       description: |-
-//         Returns whether the specified dungeon is considered as going upward or not
-//
-//         r0: dungeon id
-//         return: bool
-//     - name: IsUnown
-//       address:
-//         NA: 0x2054A88
-//         EU: 0x2054E04
-//       description: |-
-//         Checks if a monster ID is an Unown.
-//
-//         r0: monster ID
-//         return: bool
-//     - name: IsShaymin
-//       address:
-//         NA: 0x2054AA4
-//         EU: 0x2054E20
-//       description: |-
-//         Checks if a monster ID is a Shaymin form.
-//
-//         r0: monster ID
-//         return: bool
-//     - name: IsCastform
-//       address:
-//         NA: 0x2054AD4
-//         EU: 0x2054E50
-//       description: |-
-//         Checks if a monster ID is a Castform form.
-//
-//         r0: monster ID
-//         return: bool
-//     - name: IsCherrim
-//       address:
-//         NA: 0x2054B2C
-//         EU: 0x2054EA8
-//       description: |-
-//         Checks if a monster ID is a Cherrim form.
-//
-//         r0: monster ID
-//         return: bool
-//     - name: IsDeoxys
-//       address:
-//         NA: 0x2054B74
-//         EU: 0x2054EF0
-//       description: |-
-//         Checks if a monster ID is a Deoxys form.
-//
-//         r0: monster ID
-//         return: bool
-//     - name: IsMonsterOnTeam
-//       address:
-//         NA: 0x2055148
-//         EU: 0x20554C4
-//       description: |-
-//         Checks if a given monster is on the exploration team (not necessarily the active party)?
-//
-//         r0: monster ID
-//         r1: ?
-//         return: bool
+/// Checks if a monster ID is a Cherrim.
+pub fn is_cherrim(monster_id: monster_catalog::Type) -> bool {
+    unsafe { ffi::IsCherrim(monster_id) > 0 }
+}
 
+/// Checks if a monster ID is a Deoxys.
+pub fn is_deoxys(monster_id: monster_catalog::Type) -> bool {
+    unsafe { ffi::IsDeoxys(monster_id) > 0 }
+}
+
+/// Checks if a given monster is on the exploration team (not necessarily the active party)?
+pub fn is_monster_on_team(monster_id: monster_catalog::Type, param_2: i32) -> bool {
+    unsafe { ffi::IsMonsterOnTeam(monster_id, param_2) > 0 }
+}
+
+/// Sets the team setup of the currently active party.
 pub fn set_team_setup(team_setup: TeamSetup) {
     match team_setup {
         TeamSetup::HeroOnly => unsafe { ffi::SetTeamSetupHeroOnly() }
@@ -636,16 +452,10 @@ pub fn count_party_members() -> i32 {
     unsafe { ffi::GetPartyMembers(ptr::null_mut()) }
 }
 
-//     - name: IqSkillFlagTest
-//       address:
-//         NA: 0x2058F04
-//         EU: 0x2059280
-//       description: |-
-//         Tests whether an IQ skill with a given ID is active.
-//
-//         r0: IQ skill bitvector to test
-//         r1: IQ skill ID
-//         return: bool
+/// Tests whether an IQ skill with a given ID is active.
+pub fn iq_skill_flag_test(iq_skill_flags: &mut u32, iq_id: iq_skill_catalog::Type) -> bool {
+    unsafe { ffi::IqSkillFlagTest(iq_skill_flags, iq_id) > 0 }
+}
 
 /// Returns the number of SOS mails.
 pub fn get_sos_mail_count(param_1: i32, param_2: bool) -> i32 {
