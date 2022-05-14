@@ -33,19 +33,19 @@
 #![feature(core_c_str)]
 #![feature(allocator_api)]
 #![feature(nonnull_slice_from_raw_parts)]
-
 #![allow(clippy::too_many_arguments)]
 
 extern crate alloc;
 extern crate compiler_builtins_local;
 
-#[macro_use] mod macros;
+#[macro_use]
+mod macros;
 
-pub mod prelude;
+pub mod api;
 pub mod ctypes;
 pub mod ffi;
 pub mod log_impl;
-pub mod api;
+pub mod prelude;
 pub mod string_util;
 mod util;
 

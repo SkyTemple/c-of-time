@@ -1,23 +1,24 @@
 //! General gameplay related functions that are always available.
 
-use core::ptr;
 use crate::api::objects::*;
 use crate::ffi;
 use crate::ffi::{exclusive_item_effect_id, item_id_16};
 use crate::util::OwnedSlice;
+use core::ptr;
 
 /// Describes an active team setup
 #[non_exhaustive]
 pub enum TeamSetup {
     HeroOnly,
-    HeroAndPartnerOnly
+    HeroAndPartnerOnly,
 }
 
 #[repr(i32)]
 #[derive(PartialEq, Clone, Copy)]
 /// Move index of a monster, used by some functions.
 pub enum TargetTypeIndex {
-    FirstType = 0, SecondType = 1
+    FirstType = 0,
+    SecondType = 1,
 }
 
 #[repr(u32)]
@@ -50,7 +51,9 @@ impl TryFrom<i32> for SentryGameRank {
 ///
 /// Implements (most of?) SPECIAL_PROC_KEY_WAIT_INIT (see ScriptSpecialProcessCall).
 pub fn key_wait_init() {
-    unsafe { ffi::KeyWaitInit(); }
+    unsafe {
+        ffi::KeyWaitInit();
+    }
 }
 
 /// Checks if an item is one of the aura bows received at the start of the game.
@@ -83,9 +86,15 @@ pub fn count_item_type_in_bag(item_id: item_catalog::Type) -> i32 {
 /// Adds the specified amount of an item to the player's bag. Returns whether or not any
 /// items could be added.
 pub fn add_item_to_bag(item_id: item_catalog::Type, amount: u16) -> bool {
-    unsafe { ffi::AddItemToBag(
-        &mut ffi::owned_item { id: item_id_16 { _bitfield_align_1: [], _bitfield_1: item_id_16::new_bitfield_1(item_id) }, amount }
-    ) > 0 }
+    unsafe {
+        ffi::AddItemToBag(&mut ffi::owned_item {
+            id: item_id_16 {
+                _bitfield_align_1: [],
+                _bitfield_1: item_id_16::new_bitfield_1(item_id),
+            },
+            amount,
+        }) > 0
+    }
 }
 
 /// Special process 0x39.
@@ -97,24 +106,42 @@ pub fn is_storage_full() -> bool {
 
 /// Count the amount of the specified item in the player's storage.
 pub fn count_item_type_in_storage(item_id: item_catalog::Type) -> i32 {
-    unsafe { ffi::CountItemTypeInStorage(
-        &mut ffi::owned_item { id: item_id_16 { _bitfield_align_1: [], _bitfield_1: item_id_16::new_bitfield_1(item_id) }, amount: 0 }
-    ) }
+    unsafe {
+        ffi::CountItemTypeInStorage(&mut ffi::owned_item {
+            id: item_id_16 {
+                _bitfield_align_1: [],
+                _bitfield_1: item_id_16::new_bitfield_1(item_id),
+            },
+            amount: 0,
+        })
+    }
 }
 
 /// Removes (the specified amount...?) of the given item type from the storage.
 pub fn remove_items_type_in_storage(item_id: item_catalog::Type, amount: u16) -> bool {
-    unsafe { ffi::RemoveItemsTypeInStorage(
-        &mut ffi::owned_item { id: item_id_16 { _bitfield_align_1: [], _bitfield_1: item_id_16::new_bitfield_1(item_id) }, amount }
-    ) > 0 }
+    unsafe {
+        ffi::RemoveItemsTypeInStorage(&mut ffi::owned_item {
+            id: item_id_16 {
+                _bitfield_align_1: [],
+                _bitfield_1: item_id_16::new_bitfield_1(item_id),
+            },
+            amount,
+        }) > 0
+    }
 }
 
 /// Adds (the specified amount...?) of the given item type to the storage. Returns whether or not
 /// any items could be added.
 pub fn add_item_to_storage(item_id: item_catalog::Type, amount: u16) -> bool {
-    unsafe { ffi::AddItemToStorage(
-        &mut ffi::owned_item { id: item_id_16 { _bitfield_align_1: [], _bitfield_1: item_id_16::new_bitfield_1(item_id) }, amount }
-    ) > 0 }
+    unsafe {
+        ffi::AddItemToStorage(&mut ffi::owned_item {
+            id: item_id_16 {
+                _bitfield_align_1: [],
+                _bitfield_1: item_id_16::new_bitfield_1(item_id),
+            },
+            amount,
+        }) > 0
+    }
 }
 
 /// Gets the exclusive item offset, which is the item ID relative to that of the first exclusive
@@ -124,17 +151,37 @@ pub fn get_exclusive_item_offset(item_id: item_catalog::Type) -> i32 {
 }
 
 /// Applies stat boosts from an exclusive item.
-pub fn apply_exclusive_item_stat_boosts(item_id: item_catalog::Type, atk_to_modify: &mut u8, sp_atk_to_modify: &mut u8, def_to_modify: &mut u8, sp_def_to_modify: &mut u8) {
-    unsafe { ffi::ApplyExclusiveItemStatBoosts(item_id, atk_to_modify, sp_atk_to_modify, def_to_modify, sp_def_to_modify) }
+pub fn apply_exclusive_item_stat_boosts(
+    item_id: item_catalog::Type,
+    atk_to_modify: &mut u8,
+    sp_atk_to_modify: &mut u8,
+    def_to_modify: &mut u8,
+    sp_def_to_modify: &mut u8,
+) {
+    unsafe {
+        ffi::ApplyExclusiveItemStatBoosts(
+            item_id,
+            atk_to_modify,
+            sp_atk_to_modify,
+            def_to_modify,
+            sp_def_to_modify,
+        )
+    }
 }
 
 /// Sets the bit for an exclusive item effect.
-pub fn set_exclusive_item_effect(effect_flags: &mut u32, effect_id: exclusive_item_effect_id::Type) {
+pub fn set_exclusive_item_effect(
+    effect_flags: &mut u32,
+    effect_id: exclusive_item_effect_id::Type,
+) {
     unsafe { ffi::SetExclusiveItemEffect(effect_flags, effect_id) }
 }
 
 /// Tests the exclusive item bitvector for a specific exclusive item effect.
-pub fn test_exclusive_item_effect_flag(effect_flags: &mut u32, effect_id: exclusive_item_effect_id::Type) -> bool {
+pub fn test_exclusive_item_effect_flag(
+    effect_flags: &mut u32,
+    effect_id: exclusive_item_effect_id::Type,
+) -> bool {
     unsafe { ffi::ExclusiveItemEffectFlagTest(effect_flags, effect_id) > 0 }
 }
 
@@ -388,7 +435,9 @@ impl AdventureLog {
 
     /// Sets the points for the associated rank in the footprints minigame.
     pub fn set_sentry_duty_game_points(&mut self, points: u32) -> Option<SentryGameRank> {
-        unsafe { ffi::SetSentryDutyGamePoints(points) }.try_into().ok()
+        unsafe { ffi::SetSentryDutyGamePoints(points) }
+            .try_into()
+            .ok()
     }
 }
 
@@ -430,8 +479,8 @@ pub fn is_monster_on_team(monster_id: monster_catalog::Type, param_2: i32) -> bo
 /// Sets the team setup of the currently active party.
 pub fn set_team_setup(team_setup: TeamSetup) {
     match team_setup {
-        TeamSetup::HeroOnly => unsafe { ffi::SetTeamSetupHeroOnly() }
-        TeamSetup::HeroAndPartnerOnly => unsafe { ffi::SetTeamSetupHeroAndPartnerOnly() }
+        TeamSetup::HeroOnly => unsafe { ffi::SetTeamSetupHeroOnly() },
+        TeamSetup::HeroAndPartnerOnly => unsafe { ffi::SetTeamSetupHeroAndPartnerOnly() },
     }
 }
 
@@ -488,8 +537,11 @@ pub fn script_special_process_x17() {
 /// struct.
 pub fn item_at_table_idx(table_idx: i32) -> ffi::owned_item {
     let mut out = ffi::owned_item {
-        id: item_id_16 { _bitfield_align_1: [], _bitfield_1: Default::default() },
-        amount: 0
+        id: item_id_16 {
+            _bitfield_align_1: [],
+            _bitfield_1: Default::default(),
+        },
+        amount: 0,
     };
     unsafe { ffi::ItemAtTableIdx(table_idx, &mut out) }
     out

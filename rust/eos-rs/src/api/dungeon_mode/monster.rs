@@ -1,7 +1,7 @@
-use fixed::types::I24F8;
 use crate::api::dungeon_mode::*;
 use crate::api::moves::*;
 use crate::api::objects::*;
+use fixed::types::I24F8;
 
 /// Extension trait for [`DungeonMonsterRef`] (read operations).
 ///
@@ -39,10 +39,16 @@ pub trait DungeonMonsterExtRead {
 
     /// Checks if a defender has an active ability that isn't disabled by an attacker's (self)
     /// Mold Breaker.
-    fn is_defender_ability_active(&self, defender: &DungeonEntity, defender_ability_id: ability_catalog::Type, own_ability_is_active: bool) -> bool;
+    fn is_defender_ability_active(
+        &self,
+        defender: &DungeonEntity,
+        defender_ability_id: ability_catalog::Type,
+        own_ability_is_active: bool,
+    ) -> bool;
 
     /// Checks if a certain exclusive item effect is active for the monster.
-    fn is_exclusive_item_effect_active(&self, item_id: exclusive_item_effect_catalog::Type) -> bool;
+    fn is_exclusive_item_effect_active(&self, item_id: exclusive_item_effect_catalog::Type)
+        -> bool;
 
     /// Gets the type matchup for a given combat interaction. Attacker is self.
     /// Note that the actual monster's types on the attacker and defender are not used;
@@ -50,7 +56,12 @@ pub trait DungeonMonsterExtRead {
     /// done solely using the attack and target type parameters.
     ///
     /// This factors in some conditional effects like exclusive items, statuses, etc.
-    fn get_type_matchup(&self, defender: &DungeonEntity, target_type_index: TargetTypeIndex, attack_type: type_catalog::Type) -> Option<DungeonTypeMatchup>;
+    fn get_type_matchup(
+        &self,
+        defender: &DungeonEntity,
+        target_type_index: TargetTypeIndex,
+        attack_type: type_catalog::Type,
+    ) -> Option<DungeonTypeMatchup>;
 
     /// Probably the damage calculation function.
     /// The result seems to get written to the unknown struct behind the pointer provided by
@@ -141,7 +152,7 @@ pub trait DungeonMonsterExtRead {
         param_8: i16,
         param_9: ffi::undefined4,
         param_10: ffi::undefined4,
-        param_11: ffi::undefined4
+        param_11: ffi::undefined4,
     );
 
     /// Appears to calculate damage from a variable-damage projectile.
@@ -155,7 +166,7 @@ pub trait DungeonMonsterExtRead {
         used_move: &Move,
         move_power: i32,
         param_5: ffi::undefined4,
-        param_6: ffi::undefined4
+        param_6: ffi::undefined4,
     );
 
     /// Checks if a monster is holding an aura bow that isn't disabled by Klutz.
@@ -180,7 +191,16 @@ pub trait DungeonMonsterExtRead {
     /// The values in the returned tuple are None, if they are invalid (or we don't know them yet).
     ///
     /// See [`Move::get_target_and_range`] for more information.
-    fn get_move_target_and_range(&self, the_move: &Move, is_ai: bool) -> (Option<MoveTarget>, Option<MoveRange>, Option<HealingMoveType>, u16);
+    fn get_move_target_and_range(
+        &self,
+        the_move: &Move,
+        is_ai: bool,
+    ) -> (
+        Option<MoveTarget>,
+        Option<MoveRange>,
+        Option<HealingMoveType>,
+        u16,
+    );
 
     /// Get the weather, as experienced by the monster.
     fn get_apparent_weather(&self) -> Option<Weather>;
@@ -215,7 +235,7 @@ pub trait DungeonMonsterExtRead {
 }
 
 /// Extension trait for [`DungeonMonsterMut`] (write operations).
-/// 
+///
 /// You may find more operations in [`DungeonEffectsEmitter`].
 ///
 /// # Important safety note
@@ -267,22 +287,45 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         unsafe { ffi::IqSkillIsEnabled(force_mut_ptr!(self.1), iq_skill_id) > 0 }
     }
 
-    fn is_defender_ability_active(&self, defender: &DungeonEntity, defender_ability_id: ability_catalog::Type, own_ability_is_active: bool) -> bool {
-        unsafe { ffi::DefenderAbilityIsActive(
-            force_mut_ptr!(self.1), force_mut_ptr!(defender),
-            defender_ability_id, own_ability_is_active as ffi::bool_
-        ) > 0 }
+    fn is_defender_ability_active(
+        &self,
+        defender: &DungeonEntity,
+        defender_ability_id: ability_catalog::Type,
+        own_ability_is_active: bool,
+    ) -> bool {
+        unsafe {
+            ffi::DefenderAbilityIsActive(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(defender),
+                defender_ability_id,
+                own_ability_is_active as ffi::bool_,
+            ) > 0
+        }
     }
 
-    fn is_exclusive_item_effect_active(&self, effect_id: exclusive_item_effect_catalog::Type) -> bool {
+    fn is_exclusive_item_effect_active(
+        &self,
+        effect_id: exclusive_item_effect_catalog::Type,
+    ) -> bool {
         unsafe { ffi::ExclusiveItemEffectIsActive(force_mut_ptr!(self.1), effect_id) > 0 }
     }
 
-    fn get_type_matchup(&self, defender: &DungeonEntity, target_type_index: TargetTypeIndex, attack_type: type_catalog::Type) -> Option<DungeonTypeMatchup> {
-        unsafe { ffi::GetTypeMatchup(
-            force_mut_ptr!(self.1), force_mut_ptr!(defender),
-            target_type_index as i32, attack_type
-        ).try_into().ok() }
+    fn get_type_matchup(
+        &self,
+        defender: &DungeonEntity,
+        target_type_index: TargetTypeIndex,
+        attack_type: type_catalog::Type,
+    ) -> Option<DungeonTypeMatchup> {
+        unsafe {
+            ffi::GetTypeMatchup(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(defender),
+                target_type_index as i32,
+                attack_type,
+            )
+            .try_into()
+            .ok()
+        }
     }
 
     fn calc_damage(
@@ -296,11 +339,19 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         move_id: move_catalog::Type,
         param_9: i32,
     ) {
-        unsafe { ffi::CalcDamage(
-            force_mut_ptr!(self.1), force_mut_ptr!(defender),
-            attack_type, attack_power, crit_chance, damage_out as *mut _,
-            damage_multiplier.to_bits() as c_int, move_id, param_9
-        ) }
+        unsafe {
+            ffi::CalcDamage(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(defender),
+                attack_type,
+                attack_power,
+                crit_chance,
+                damage_out as *mut _,
+                damage_multiplier.to_bits() as c_int,
+                move_id,
+                param_9,
+            )
+        }
     }
 
     fn calc_recoil_damage_fixed(
@@ -315,10 +366,20 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         param_9: ffi::undefined4,
         param_10: ffi::undefined4,
     ) {
-        unsafe { ffi::CalcRecoilDamageFixed(
-            force_mut_ptr!(self.1), fixed_damage, param_3, damage_out as *mut _,
-            move_id, attack_type, param_7, message_type, param_9, param_10
-        ) }
+        unsafe {
+            ffi::CalcRecoilDamageFixed(
+                force_mut_ptr!(self.1),
+                fixed_damage,
+                param_3,
+                damage_out as *mut _,
+                move_id,
+                attack_type,
+                param_7,
+                message_type,
+                param_9,
+                param_10,
+            )
+        }
     }
 
     fn calc_damage_fixed(
@@ -334,12 +395,21 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         param_10: ffi::undefined4,
         param_11: ffi::undefined4,
     ) {
-        unsafe { ffi::CalcDamageFixed(
-            force_mut_ptr!(self.1), force_mut_ptr!(defender),
-            fixed_damage, param_4, damage_out as *mut _,
-            attack_type, move_category as move_catalog::Type, param_8, message_type,
-            param_10, param_11
-        ) }
+        unsafe {
+            ffi::CalcDamageFixed(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(defender),
+                fixed_damage,
+                param_4,
+                damage_out as *mut _,
+                attack_type,
+                move_category as move_catalog::Type,
+                param_8,
+                message_type,
+                param_10,
+                param_11,
+            )
+        }
     }
 
     fn calc_damage_fixed_no_category(
@@ -354,12 +424,20 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         param_9: ffi::undefined4,
         param_10: ffi::undefined4,
     ) {
-        unsafe { ffi::CalcDamageFixedNoCategory(
-            force_mut_ptr!(self.1), force_mut_ptr!(defender),
-            fixed_damage, param_4, damage_out as *mut _,
-            attack_type, param_7, message_type,
-            param_9, param_10
-        ) }
+        unsafe {
+            ffi::CalcDamageFixedNoCategory(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(defender),
+                fixed_damage,
+                param_4,
+                damage_out as *mut _,
+                attack_type,
+                param_7,
+                message_type,
+                param_9,
+                param_10,
+            )
+        }
     }
 
     fn calc_damage_fixed_wrapper(
@@ -373,14 +451,23 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         param_8: i16,
         param_9: ffi::undefined4,
         param_10: ffi::undefined4,
-        param_11: ffi::undefined4
+        param_11: ffi::undefined4,
     ) {
-        unsafe { ffi::CalcDamageFixedWrapper(
-            force_mut_ptr!(self.1), force_mut_ptr!(defender),
-            fixed_damage, param_4, damage_out as *mut _,
-            attack_type, move_category as move_catalog::Type, param_8,
-            param_9, param_10, param_11
-        ) }
+        unsafe {
+            ffi::CalcDamageFixedWrapper(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(defender),
+                fixed_damage,
+                param_4,
+                damage_out as *mut _,
+                attack_type,
+                move_category as move_catalog::Type,
+                param_8,
+                param_9,
+                param_10,
+                param_11,
+            )
+        }
     }
 
     fn calc_damage_projectile(
@@ -389,13 +476,18 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         used_move: &Move,
         move_power: i32,
         param_5: ffi::undefined4,
-        param_6: ffi::undefined4
+        param_6: ffi::undefined4,
     ) {
-        unsafe { ffi::CalcDamageProjectile(
-            force_mut_ptr!(self.1), force_mut_ptr!(defender),
-            force_mut_ptr!(used_move), move_power,
-            param_5, param_6
-        ) }
+        unsafe {
+            ffi::CalcDamageProjectile(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(defender),
+                force_mut_ptr!(used_move),
+                move_power,
+                param_5,
+                param_6,
+            )
+        }
     }
 
     fn is_aura_bow_active(&self) -> bool {
@@ -420,14 +512,30 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         unsafe { ffi::HasConditionalGroundImmunity(force_mut_ptr!(self.1)) > 0 }
     }
 
-    fn get_move_target_and_range(&self, the_move: &Move, is_ai: bool) -> (Option<MoveTarget>, Option<MoveRange>, Option<HealingMoveType>, u16) {
-        unsafe { ffi::GetEntityMoveTargetAndRange(
-            force_mut_ptr!(self.1), force_mut_ptr!(the_move), is_ai as ffi::bool_
-        ) }.into()
+    fn get_move_target_and_range(
+        &self,
+        the_move: &Move,
+        is_ai: bool,
+    ) -> (
+        Option<MoveTarget>,
+        Option<MoveRange>,
+        Option<HealingMoveType>,
+        u16,
+    ) {
+        unsafe {
+            ffi::GetEntityMoveTargetAndRange(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(the_move),
+                is_ai as ffi::bool_,
+            )
+        }
+        .into()
     }
 
     fn get_apparent_weather(&self) -> Option<Weather> {
-        unsafe { ffi::GetApparentWeather(force_mut_ptr!(self.1)) }.try_into().ok()
+        unsafe { ffi::GetApparentWeather(force_mut_ptr!(self.1)) }
+            .try_into()
+            .ok()
     }
 
     fn has_held_item(&self, item_id: item_catalog::Type) -> bool {
@@ -439,10 +547,13 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
     }
 
     fn calc_status_duration(&self, turn_range: &[u16; 2], effects: bool) -> i32 {
-        unsafe { ffi::CalcStatusDuration(
-            force_mut_ptr!(self.1), force_mut_ptr!(turn_range.as_ptr()),
-            effects as ffi::bool_
-        ) }
+        unsafe {
+            ffi::CalcStatusDuration(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(turn_range.as_ptr()),
+                effects as ffi::bool_,
+            )
+        }
     }
 
     fn get_number_of_attacks(&self) -> i32 {
@@ -454,7 +565,9 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
     }
 
     fn is_conversion2_active(&self) -> Option<Conversion2Status> {
-        unsafe { ffi::Conversion2IsActive(force_mut_ptr!(self.1)) }.try_into().ok()
+        unsafe { ffi::Conversion2IsActive(force_mut_ptr!(self.1)) }
+            .try_into()
+            .ok()
     }
 }
 
@@ -491,40 +604,173 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         self.as_ref().is_iq_skill_enabled(iq_skill_id)
     }
 
-    fn is_defender_ability_active(&self, defender: &DungeonEntity, defender_ability_id: ability_catalog::Type, own_ability_is_active: bool) -> bool {
-        self.as_ref().is_defender_ability_active(defender, defender_ability_id, own_ability_is_active)
+    fn is_defender_ability_active(
+        &self,
+        defender: &DungeonEntity,
+        defender_ability_id: ability_catalog::Type,
+        own_ability_is_active: bool,
+    ) -> bool {
+        self.as_ref().is_defender_ability_active(
+            defender,
+            defender_ability_id,
+            own_ability_is_active,
+        )
     }
 
-    fn is_exclusive_item_effect_active(&self, item_id: exclusive_item_effect_catalog::Type) -> bool {
+    fn is_exclusive_item_effect_active(
+        &self,
+        item_id: exclusive_item_effect_catalog::Type,
+    ) -> bool {
         self.as_ref().is_exclusive_item_effect_active(item_id)
     }
 
-    fn get_type_matchup(&self, defender: &DungeonEntity, target_type_index: TargetTypeIndex, attack_type: type_catalog::Type) -> Option<DungeonTypeMatchup> {
-        self.as_ref().get_type_matchup(defender, target_type_index, attack_type)
+    fn get_type_matchup(
+        &self,
+        defender: &DungeonEntity,
+        target_type_index: TargetTypeIndex,
+        attack_type: type_catalog::Type,
+    ) -> Option<DungeonTypeMatchup> {
+        self.as_ref()
+            .get_type_matchup(defender, target_type_index, attack_type)
     }
 
-    fn calc_damage(&self, defender: &DungeonEntity, attack_type: type_catalog::Type, attack_power: i32, crit_chance: i32, damage_out: &mut ffi::undefined4, damage_multiplier: I24F8, move_id: move_catalog::Type, param_9: i32) {
-        self.as_ref().calc_damage(defender, attack_type, attack_power, crit_chance, damage_out, damage_multiplier, move_id, param_9)
+    fn calc_damage(
+        &self,
+        defender: &DungeonEntity,
+        attack_type: type_catalog::Type,
+        attack_power: i32,
+        crit_chance: i32,
+        damage_out: &mut ffi::undefined4,
+        damage_multiplier: I24F8,
+        move_id: move_catalog::Type,
+        param_9: i32,
+    ) {
+        self.as_ref().calc_damage(
+            defender,
+            attack_type,
+            attack_power,
+            crit_chance,
+            damage_out,
+            damage_multiplier,
+            move_id,
+            param_9,
+        )
     }
 
-    fn calc_recoil_damage_fixed(&self, fixed_damage: i32, param_3: ffi::undefined4, damage_out: &mut ffi::undefined4, move_id: move_catalog::Type, attack_type: type_catalog::Type, param_7: i16, message_type: ffi::undefined4, param_9: ffi::undefined4, param_10: ffi::undefined4) {
-        self.as_ref().calc_recoil_damage_fixed(fixed_damage, param_3, damage_out, move_id, attack_type, param_7, message_type, param_9, param_10)
+    fn calc_recoil_damage_fixed(
+        &self,
+        fixed_damage: i32,
+        param_3: ffi::undefined4,
+        damage_out: &mut ffi::undefined4,
+        move_id: move_catalog::Type,
+        attack_type: type_catalog::Type,
+        param_7: i16,
+        message_type: ffi::undefined4,
+        param_9: ffi::undefined4,
+        param_10: ffi::undefined4,
+    ) {
+        self.as_ref().calc_recoil_damage_fixed(
+            fixed_damage,
+            param_3,
+            damage_out,
+            move_id,
+            attack_type,
+            param_7,
+            message_type,
+            param_9,
+            param_10,
+        )
     }
 
-    fn calc_damage_fixed(&self, defender: &DungeonEntity, fixed_damage: i32, param_4: ffi::undefined4, damage_out: &mut ffi::undefined4, attack_type: type_catalog::Type, move_category: MoveCategory, param_8: i16, message_type: ffi::undefined4, param_10: ffi::undefined4, param_11: ffi::undefined4) {
-        self.as_ref().calc_damage_fixed(defender, fixed_damage, param_4, damage_out, attack_type, move_category, param_8, message_type, param_10, param_11)
+    fn calc_damage_fixed(
+        &self,
+        defender: &DungeonEntity,
+        fixed_damage: i32,
+        param_4: ffi::undefined4,
+        damage_out: &mut ffi::undefined4,
+        attack_type: type_catalog::Type,
+        move_category: MoveCategory,
+        param_8: i16,
+        message_type: ffi::undefined4,
+        param_10: ffi::undefined4,
+        param_11: ffi::undefined4,
+    ) {
+        self.as_ref().calc_damage_fixed(
+            defender,
+            fixed_damage,
+            param_4,
+            damage_out,
+            attack_type,
+            move_category,
+            param_8,
+            message_type,
+            param_10,
+            param_11,
+        )
     }
 
-    fn calc_damage_fixed_no_category(&self, defender: &DungeonEntity, fixed_damage: i32, param_4: ffi::undefined4, damage_out: &mut ffi::undefined4, attack_type: type_catalog::Type, param_7: i16, message_type: ffi::undefined4, param_9: ffi::undefined4, param_10: ffi::undefined4) {
-        self.as_ref().calc_damage_fixed_no_category(defender, fixed_damage, param_4, damage_out, attack_type, param_7, message_type, param_9, param_10)
+    fn calc_damage_fixed_no_category(
+        &self,
+        defender: &DungeonEntity,
+        fixed_damage: i32,
+        param_4: ffi::undefined4,
+        damage_out: &mut ffi::undefined4,
+        attack_type: type_catalog::Type,
+        param_7: i16,
+        message_type: ffi::undefined4,
+        param_9: ffi::undefined4,
+        param_10: ffi::undefined4,
+    ) {
+        self.as_ref().calc_damage_fixed_no_category(
+            defender,
+            fixed_damage,
+            param_4,
+            damage_out,
+            attack_type,
+            param_7,
+            message_type,
+            param_9,
+            param_10,
+        )
     }
 
-    fn calc_damage_fixed_wrapper(&self, defender: &DungeonEntity, fixed_damage: i32, param_4: ffi::undefined4, damage_out: &mut ffi::undefined4, attack_type: type_catalog::Type, move_category: MoveCategory, param_8: i16, param_9: ffi::undefined4, param_10: ffi::undefined4, param_11: ffi::undefined4) {
-        self.as_ref().calc_damage_fixed_wrapper(defender, fixed_damage, param_4, damage_out, attack_type, move_category, param_8, param_9, param_10, param_11)
+    fn calc_damage_fixed_wrapper(
+        &self,
+        defender: &DungeonEntity,
+        fixed_damage: i32,
+        param_4: ffi::undefined4,
+        damage_out: &mut ffi::undefined4,
+        attack_type: type_catalog::Type,
+        move_category: MoveCategory,
+        param_8: i16,
+        param_9: ffi::undefined4,
+        param_10: ffi::undefined4,
+        param_11: ffi::undefined4,
+    ) {
+        self.as_ref().calc_damage_fixed_wrapper(
+            defender,
+            fixed_damage,
+            param_4,
+            damage_out,
+            attack_type,
+            move_category,
+            param_8,
+            param_9,
+            param_10,
+            param_11,
+        )
     }
 
-    fn calc_damage_projectile(&self, defender: &DungeonEntity, used_move: &Move, move_power: i32, param_5: ffi::undefined4, param_6: ffi::undefined4) {
-        self.as_ref().calc_damage_projectile(defender, used_move, move_power, param_5, param_6)
+    fn calc_damage_projectile(
+        &self,
+        defender: &DungeonEntity,
+        used_move: &Move,
+        move_power: i32,
+        param_5: ffi::undefined4,
+        param_6: ffi::undefined4,
+    ) {
+        self.as_ref()
+            .calc_damage_projectile(defender, used_move, move_power, param_5, param_6)
     }
 
     fn is_aura_bow_active(&self) -> bool {
@@ -532,18 +778,29 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
     }
 
     fn get_exclusive_item_offense_boost(&self, move_category: MoveCategory) -> i32 {
-        self.as_ref().get_exclusive_item_offense_boost(move_category)
+        self.as_ref()
+            .get_exclusive_item_offense_boost(move_category)
     }
 
     fn get_exclusive_item_defense_boost(&self, move_category: MoveCategory) -> i32 {
-        self.as_ref().get_exclusive_item_defense_boost(move_category)
+        self.as_ref()
+            .get_exclusive_item_defense_boost(move_category)
     }
 
     fn has_conditional_ground_immunity(&self) -> bool {
         self.as_ref().has_conditional_ground_immunity()
     }
 
-    fn get_move_target_and_range(&self, the_move: &Move, is_ai: bool) -> (Option<MoveTarget>, Option<MoveRange>, Option<HealingMoveType>, u16) {
+    fn get_move_target_and_range(
+        &self,
+        the_move: &Move,
+        is_ai: bool,
+    ) -> (
+        Option<MoveTarget>,
+        Option<MoveRange>,
+        Option<HealingMoveType>,
+        u16,
+    ) {
         self.as_ref().get_move_target_and_range(the_move, is_ai)
     }
 

@@ -1,10 +1,10 @@
-use core::ffi::CStr;
-use core::fmt::Debug;
 use crate::api::objects::*;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use crate::ctypes::*;
 use crate::ffi;
 use crate::string_util::str_to_cstring;
+use core::ffi::CStr;
+use core::fmt::Debug;
 
 /// Builder for creating dungeon message log messages.
 ///
@@ -19,7 +19,7 @@ pub struct LogMessageBuilder<'a> {
     _lease: OverlayLoadLease<29>,
     popup: bool,
     check_user: bool,
-    target_check_fainted: Option<&'a DungeonEntity>
+    target_check_fainted: Option<&'a DungeonEntity>,
 }
 
 impl<'a> CreatableWithLease<29> for LogMessageBuilder<'a> {
@@ -28,7 +28,7 @@ impl<'a> CreatableWithLease<29> for LogMessageBuilder<'a> {
             _lease: lease,
             popup: false,
             check_user: false,
-            target_check_fainted: None
+            target_check_fainted: None,
         }
     }
 
@@ -72,9 +72,9 @@ impl<'a> LogMessageBuilder<'a> {
     /// at a later time.
     pub fn string(&mut self, string_id: u16, entity: &DungeonEntity) -> &mut Self {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::SubstitutePlaceholderStringTags(
-            string_id as c_int, force_mut_ptr!(entity), 0
-        ) }
+        unsafe {
+            ffi::SubstitutePlaceholderStringTags(string_id as c_int, force_mut_ptr!(entity), 0)
+        }
         self
     }
 
@@ -84,10 +84,22 @@ impl<'a> LogMessageBuilder<'a> {
         unsafe {
             match (self.popup, self.check_user, self.target_check_fainted) {
                 (false, false, None) => ffi::LogMessageByIdQuiet(force_mut_ptr!(user), message_id),
-                (_,     true,  None) => ffi::LogMessageByIdWithPopupCheckUser(force_mut_ptr!(user), message_id),
-                (false, _,     Some(target)) => ffi::LogMessageByIdQuietCheckUserTarget(force_mut_ptr!(user), force_mut_ptr!(target), message_id,),
-                (true,  false, None) => ffi::LogMessageByIdWithPopup(force_mut_ptr!(user), message_id),
-                (true,  _,     Some(target)) => ffi::LogMessageByIdWithPopupCheckUserTarget(force_mut_ptr!(user), force_mut_ptr!(target), message_id,),
+                (_, true, None) => {
+                    ffi::LogMessageByIdWithPopupCheckUser(force_mut_ptr!(user), message_id)
+                }
+                (false, _, Some(target)) => ffi::LogMessageByIdQuietCheckUserTarget(
+                    force_mut_ptr!(user),
+                    force_mut_ptr!(target),
+                    message_id,
+                ),
+                (true, false, None) => {
+                    ffi::LogMessageByIdWithPopup(force_mut_ptr!(user), message_id)
+                }
+                (true, _, Some(target)) => ffi::LogMessageByIdWithPopupCheckUserTarget(
+                    force_mut_ptr!(user),
+                    force_mut_ptr!(target),
+                    message_id,
+                ),
             }
         }
     }
@@ -102,9 +114,13 @@ impl<'a> LogMessageBuilder<'a> {
         unsafe {
             match (self.popup, self.check_user, self.target_check_fainted) {
                 (false, false, None) => ffi::LogMessageQuiet(force_mut_ptr!(user), message),
-                (_,     true,  None) => ffi::LogMessageWithPopupCheckUser(force_mut_ptr!(user), message),
-                (true,  false, None) => ffi::LogMessageWithPopup(force_mut_ptr!(user), message),
-                (_,     _,     Some(target)) => ffi::LogMessageWithPopupCheckUserTarget(force_mut_ptr!(user), force_mut_ptr!(target), message,),
+                (_, true, None) => ffi::LogMessageWithPopupCheckUser(force_mut_ptr!(user), message),
+                (true, false, None) => ffi::LogMessageWithPopup(force_mut_ptr!(user), message),
+                (_, _, Some(target)) => ffi::LogMessageWithPopupCheckUserTarget(
+                    force_mut_ptr!(user),
+                    force_mut_ptr!(target),
+                    message,
+                ),
             }
         }
     }

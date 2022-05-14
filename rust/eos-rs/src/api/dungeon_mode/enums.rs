@@ -5,7 +5,8 @@ use crate::ffi::type_matchup::Type;
 #[derive(PartialEq, Clone, Copy)]
 /// Move index of a monster, used by some functions.
 pub enum TargetTypeIndex {
-    FirstType = 0, SecondType = 1
+    FirstType = 0,
+    SecondType = 1,
 }
 
 #[repr(u32)]
@@ -24,7 +25,9 @@ impl TryFrom<ffi::type_matchup::Type> for DungeonTypeMatchup {
     fn try_from(value: Type) -> Result<Self, Self::Error> {
         match value {
             ffi::type_matchup::MATCHUP_IMMUNE => Ok(DungeonTypeMatchup::Immune),
-            ffi::type_matchup::MATCHUP_NOT_VERY_EFFECTIVE => Ok(DungeonTypeMatchup::NotVeryEffective),
+            ffi::type_matchup::MATCHUP_NOT_VERY_EFFECTIVE => {
+                Ok(DungeonTypeMatchup::NotVeryEffective)
+            }
             ffi::type_matchup::MATCHUP_NEUTRAL => Ok(DungeonTypeMatchup::Neutral),
             ffi::type_matchup::MATCHUP_SUPER_EFFECTIVE => Ok(DungeonTypeMatchup::SuperEffective),
             _ => Err(()),
@@ -65,7 +68,7 @@ pub enum MoveCategory {
     None = ffi::move_category::CATEGORY_NONE,
     Physical = ffi::move_category::CATEGORY_PHYSICAL,
     Special = ffi::move_category::CATEGORY_SPECIAL,
-    Status = ffi::move_category::CATEGORY_STATUS
+    Status = ffi::move_category::CATEGORY_STATUS,
 }
 
 impl TryFrom<ffi::move_category::Type> for MoveCategory {
@@ -165,7 +168,7 @@ pub enum Weather {
     Hail = ffi::weather_id::WEATHER_HAIL,
     Fog = ffi::weather_id::WEATHER_FOG,
     Snow = ffi::weather_id::WEATHER_SNOW,
-    Random = ffi::weather_id::WEATHER_RANDOM
+    Random = ffi::weather_id::WEATHER_RANDOM,
 }
 
 impl TryFrom<ffi::weather_id::Type> for Weather {
@@ -286,7 +289,7 @@ pub enum Conversion2Status {
     /// The monster is under the effect of Conversion 2 from a status.
     FromStatus = 1,
     /// The monster is under the effect of Conversion 2 from an exclusive item.
-    FromExclusiveItem = 2
+    FromExclusiveItem = 2,
 }
 
 impl TryFrom<i32> for Conversion2Status {
@@ -318,7 +321,7 @@ pub enum MissionTypeGroup {
     TakeItemFromOutlaw = ffi::mission_type::MISSION_TAKE_ITEM_FROM_OUTLAW,
     ArrestOutlaw = ffi::mission_type::MISSION_ARREST_OUTLAW,
     ChallengeRequest = ffi::mission_type::MISSION_CHALLENGE_REQUEST,
-    TreasureMemo = ffi::mission_type::MISSION_TREASURE_MEMO
+    TreasureMemo = ffi::mission_type::MISSION_TREASURE_MEMO,
 }
 
 impl TryFrom<ffi::mission_type::Type> for MissionTypeGroup {
@@ -329,13 +332,19 @@ impl TryFrom<ffi::mission_type::Type> for MissionTypeGroup {
             ffi::mission_type::MISSION_RESCUE_CLIENT => Ok(MissionTypeGroup::RescueClient),
             ffi::mission_type::MISSION_RESCUE_TARGET => Ok(MissionTypeGroup::RescueTarget),
             ffi::mission_type::MISSION_ESCORT_TO_TARGET => Ok(MissionTypeGroup::EscortToTarget),
-            ffi::mission_type::MISSION_EXPLORE_WITH_CLIENT => Ok(MissionTypeGroup::ExploreWithClient),
-            ffi::mission_type::MISSION_PROSPECT_WITH_CLIENT => Ok(MissionTypeGroup::ProspectWithClient),
+            ffi::mission_type::MISSION_EXPLORE_WITH_CLIENT => {
+                Ok(MissionTypeGroup::ExploreWithClient)
+            }
+            ffi::mission_type::MISSION_PROSPECT_WITH_CLIENT => {
+                Ok(MissionTypeGroup::ProspectWithClient)
+            }
             ffi::mission_type::MISSION_GUIDE_CLIENT => Ok(MissionTypeGroup::GuideClient),
             ffi::mission_type::MISSION_FIND_ITEM => Ok(MissionTypeGroup::FindItem),
             ffi::mission_type::MISSION_DELIVER_ITEM => Ok(MissionTypeGroup::DeliverItem),
             ffi::mission_type::MISSION_SEARCH_FOR_TARGET => Ok(MissionTypeGroup::SearchForTarget),
-            ffi::mission_type::MISSION_TAKE_ITEM_FROM_OUTLAW => Ok(MissionTypeGroup::TakeItemFromOutlaw),
+            ffi::mission_type::MISSION_TAKE_ITEM_FROM_OUTLAW => {
+                Ok(MissionTypeGroup::TakeItemFromOutlaw)
+            }
             ffi::mission_type::MISSION_ARREST_OUTLAW => Ok(MissionTypeGroup::ArrestOutlaw),
             ffi::mission_type::MISSION_CHALLENGE_REQUEST => Ok(MissionTypeGroup::ChallengeRequest),
             ffi::mission_type::MISSION_TREASURE_MEMO => Ok(MissionTypeGroup::TreasureMemo),
@@ -359,7 +368,7 @@ pub enum MissionType {
     TakeItemFromOutlaw(MissionSubtypeTakeItem),
     ArrestOutlaw(MissionSubtypeOutlaw),
     ChallengeRequest(MissionSubtypeChallenge),
-    TreasureMemo
+    TreasureMemo,
 }
 
 impl MissionType {
@@ -378,7 +387,7 @@ impl MissionType {
             MissionType::TakeItemFromOutlaw(_) => MissionTypeGroup::TakeItemFromOutlaw,
             MissionType::ArrestOutlaw(_) => MissionTypeGroup::ArrestOutlaw,
             MissionType::ChallengeRequest(_) => MissionTypeGroup::ChallengeRequest,
-            MissionType::TreasureMemo => MissionTypeGroup::TreasureMemo
+            MissionType::TreasureMemo => MissionTypeGroup::TreasureMemo,
         }
     }
 
@@ -392,17 +401,19 @@ impl MissionType {
             match self {
                 MissionType::ExploreWithClient(v) => {
                     *mission_subtype.explore.as_mut() = (*v) as ffi::mission_subtype_explore::Type;
-                },
+                }
                 MissionType::TakeItemFromOutlaw(v) => {
-                    *mission_subtype.take_item.as_mut() = (*v) as ffi::mission_subtype_take_item::Type;
-                },
+                    *mission_subtype.take_item.as_mut() =
+                        (*v) as ffi::mission_subtype_take_item::Type;
+                }
                 MissionType::ArrestOutlaw(v) => {
                     *mission_subtype.outlaw.as_mut() = (*v) as ffi::mission_subtype_outlaw::Type;
-                },
+                }
                 MissionType::ChallengeRequest(v) => {
-                    *mission_subtype.challenge.as_mut() = (*v) as ffi::mission_subtype_challenge::Type;
-                },
-                _ => *mission_subtype.none.as_mut() = 0
+                    *mission_subtype.challenge.as_mut() =
+                        (*v) as ffi::mission_subtype_challenge::Type;
+                }
+                _ => *mission_subtype.none.as_mut() = 0,
             }
         }
         mission_subtype
@@ -423,9 +434,15 @@ impl TryFrom<ffi::mission_subtype_explore::Type> for MissionSubtypeExplore {
 
     fn try_from(value: ffi::mission_subtype_explore::Type) -> Result<Self, Self::Error> {
         match value {
-            ffi::mission_subtype_explore::MISSION_EXPLORE_NORMAL => Ok(MissionSubtypeExplore::Normal),
-            ffi::mission_subtype_explore::MISSION_EXPLORE_SEALED_CHAMBER => Ok(MissionSubtypeExplore::SealedChamber),
-            ffi::mission_subtype_explore::MISSION_EXPLORE_GOLDEN_CHAMBER => Ok(MissionSubtypeExplore::GoldenChamber),
+            ffi::mission_subtype_explore::MISSION_EXPLORE_NORMAL => {
+                Ok(MissionSubtypeExplore::Normal)
+            }
+            ffi::mission_subtype_explore::MISSION_EXPLORE_SEALED_CHAMBER => {
+                Ok(MissionSubtypeExplore::SealedChamber)
+            }
+            ffi::mission_subtype_explore::MISSION_EXPLORE_GOLDEN_CHAMBER => {
+                Ok(MissionSubtypeExplore::GoldenChamber)
+            }
             _ => Err(()),
         }
     }
@@ -454,9 +471,15 @@ impl TryFrom<ffi::mission_subtype_take_item::Type> for MissionSubtypeTakeItem {
 
     fn try_from(value: ffi::mission_subtype_take_item::Type) -> Result<Self, Self::Error> {
         match value {
-            ffi::mission_subtype_take_item::MISSION_TAKE_ITEM_NORMAL_OUTLAW => Ok(MissionSubtypeTakeItem::NormalOutlaw),
-            ffi::mission_subtype_take_item::MISSION_TAKE_ITEM_HIDDEN_OUTLAW => Ok(MissionSubtypeTakeItem::HiddenOutlaw),
-            ffi::mission_subtype_take_item::MISSION_TAKE_ITEM_FLEEING_OUTLAW => Ok(MissionSubtypeTakeItem::FleeingOutlaw),
+            ffi::mission_subtype_take_item::MISSION_TAKE_ITEM_NORMAL_OUTLAW => {
+                Ok(MissionSubtypeTakeItem::NormalOutlaw)
+            }
+            ffi::mission_subtype_take_item::MISSION_TAKE_ITEM_HIDDEN_OUTLAW => {
+                Ok(MissionSubtypeTakeItem::HiddenOutlaw)
+            }
+            ffi::mission_subtype_take_item::MISSION_TAKE_ITEM_FLEEING_OUTLAW => {
+                Ok(MissionSubtypeTakeItem::FleeingOutlaw)
+            }
             _ => Err(()),
         }
     }
@@ -490,14 +513,28 @@ impl TryFrom<ffi::mission_subtype_take_item::Type> for MissionSubtypeOutlaw {
 
     fn try_from(value: ffi::mission_subtype_outlaw::Type) -> Result<Self, Self::Error> {
         match value {
-            ffi::mission_subtype_outlaw::MISSION_OUTLAW_NORMAL_0 => Ok(MissionSubtypeOutlaw::Normal0),
-            ffi::mission_subtype_outlaw::MISSION_OUTLAW_NORMAL_1 => Ok(MissionSubtypeOutlaw::Normal1),
-            ffi::mission_subtype_outlaw::MISSION_OUTLAW_NORMAL_2 => Ok(MissionSubtypeOutlaw::Normal2),
-            ffi::mission_subtype_outlaw::MISSION_OUTLAW_NORMAL_3 => Ok(MissionSubtypeOutlaw::Normal3),
+            ffi::mission_subtype_outlaw::MISSION_OUTLAW_NORMAL_0 => {
+                Ok(MissionSubtypeOutlaw::Normal0)
+            }
+            ffi::mission_subtype_outlaw::MISSION_OUTLAW_NORMAL_1 => {
+                Ok(MissionSubtypeOutlaw::Normal1)
+            }
+            ffi::mission_subtype_outlaw::MISSION_OUTLAW_NORMAL_2 => {
+                Ok(MissionSubtypeOutlaw::Normal2)
+            }
+            ffi::mission_subtype_outlaw::MISSION_OUTLAW_NORMAL_3 => {
+                Ok(MissionSubtypeOutlaw::Normal3)
+            }
             ffi::mission_subtype_outlaw::MISSION_OUTLAW_ESCORT => Ok(MissionSubtypeOutlaw::Escort),
-            ffi::mission_subtype_outlaw::MISSION_OUTLAW_FLEEING => Ok(MissionSubtypeOutlaw::Fleeing),
-            ffi::mission_subtype_outlaw::MISSION_OUTLAW_HIDEOUT => Ok(MissionSubtypeOutlaw::Hideout),
-            ffi::mission_subtype_outlaw::MISSION_OUTLAW_MONSTER_HOUSE => Ok(MissionSubtypeOutlaw::MonsterHouse),
+            ffi::mission_subtype_outlaw::MISSION_OUTLAW_FLEEING => {
+                Ok(MissionSubtypeOutlaw::Fleeing)
+            }
+            ffi::mission_subtype_outlaw::MISSION_OUTLAW_HIDEOUT => {
+                Ok(MissionSubtypeOutlaw::Hideout)
+            }
+            ffi::mission_subtype_outlaw::MISSION_OUTLAW_MONSTER_HOUSE => {
+                Ok(MissionSubtypeOutlaw::MonsterHouse)
+            }
             _ => Err(()),
         }
     }
@@ -529,12 +566,24 @@ impl TryFrom<ffi::mission_subtype_take_item::Type> for MissionSubtypeChallenge {
 
     fn try_from(value: ffi::mission_subtype_challenge::Type) -> Result<Self, Self::Error> {
         match value {
-            ffi::mission_subtype_challenge::MISSION_CHALLENGE_NORMAL => Ok(MissionSubtypeChallenge::Normal),
-            ffi::mission_subtype_challenge::MISSION_CHALLENGE_MEWTWO => Ok(MissionSubtypeChallenge::Mewtwo),
-            ffi::mission_subtype_challenge::MISSION_CHALLENGE_ENTEI => Ok(MissionSubtypeChallenge::Entei),
-            ffi::mission_subtype_challenge::MISSION_CHALLENGE_RAIKOU => Ok(MissionSubtypeChallenge::Raikou),
-            ffi::mission_subtype_challenge::MISSION_CHALLENGE_SUICUNE => Ok(MissionSubtypeChallenge::Suicune),
-            ffi::mission_subtype_challenge::MISSION_CHALLENGE_JIRACHI => Ok(MissionSubtypeChallenge::Jirachi),
+            ffi::mission_subtype_challenge::MISSION_CHALLENGE_NORMAL => {
+                Ok(MissionSubtypeChallenge::Normal)
+            }
+            ffi::mission_subtype_challenge::MISSION_CHALLENGE_MEWTWO => {
+                Ok(MissionSubtypeChallenge::Mewtwo)
+            }
+            ffi::mission_subtype_challenge::MISSION_CHALLENGE_ENTEI => {
+                Ok(MissionSubtypeChallenge::Entei)
+            }
+            ffi::mission_subtype_challenge::MISSION_CHALLENGE_RAIKOU => {
+                Ok(MissionSubtypeChallenge::Raikou)
+            }
+            ffi::mission_subtype_challenge::MISSION_CHALLENGE_SUICUNE => {
+                Ok(MissionSubtypeChallenge::Suicune)
+            }
+            ffi::mission_subtype_challenge::MISSION_CHALLENGE_JIRACHI => {
+                Ok(MissionSubtypeChallenge::Jirachi)
+            }
             _ => Err(()),
         }
     }

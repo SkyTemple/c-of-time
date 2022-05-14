@@ -1,8 +1,8 @@
-use alloc::vec::Vec;
 use crate::api::dungeon_mode::*;
 use crate::api::objects::*;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ffi;
+use alloc::vec::Vec;
 
 /// The Rust-safe wrapped master struct that contains the state of the dungeon.
 /// Can be owned or mutably borrowed from a low-level [`ffi::dungeon`].
@@ -170,7 +170,7 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
     /// Enemy spawn counter.
     ///
     /// Counts from 0-35, spawns happen at 0.
-    pub fn get_enemy_spawn_counter(&self) ->u16 {
+    pub fn get_enemy_spawn_counter(&self) -> u16 {
         self.0.as_ref().enemy_spawn_counter
     }
 
@@ -248,29 +248,32 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
 
     /// Set objective of the current dungeon
     pub fn set_dungeon_objective(&mut self, objective: DungeonObjective) {
-        self.0.as_mut().dungeon_objective.set_val(objective as ffi::dungeon_objective::Type)
+        self.0
+            .as_mut()
+            .dungeon_objective
+            .set_val(objective as ffi::dungeon_objective::Type)
     }
-    
+
     /// Gets the number of times the player can still be rescued in this dungeon.
     pub fn get_rescue_attempts_left(&self) -> u8 {
         self.0.as_ref().rescue_attempts_left
     }
-    
+
     /// Sets the number of times the player can still be rescued in this dungeon.
     pub fn set_rescue_attempts_left(&mut self, value: u8) {
         self.0.as_mut().rescue_attempts_left = value
     }
-    
+
     /// Dungeon generation info.
     pub fn get_dungeon_generation_info(&self) -> &ffi::dungeon_generation_info {
         &self.0.as_ref().gen_info
     }
-    
+
     /// Dungeon generation info.
     pub fn get_dungeon_generation_info_mut(&mut self) -> &mut ffi::dungeon_generation_info {
         &mut self.0.as_mut().gen_info
     }
-    
+
     /// Get the current weather. Returns None if the weather is invalid.
     pub fn get_weather(&self) -> Option<Weather> {
         self.0.as_ref().weather.val().try_into().ok()
@@ -278,7 +281,10 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
 
     /// Sets the current weather
     pub fn set_weather(&mut self, weather: Weather) {
-        self.0.as_mut().weather.set_val(weather as ffi::weather_id::Type)
+        self.0
+            .as_mut()
+            .weather
+            .set_val(weather as ffi::weather_id::Type)
     }
 
     /// Get the natural weather of this floor. Returns None if the weather is invalid.
@@ -288,9 +294,12 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
 
     /// sets the natural weather of this floor.
     pub fn set_natural_weather(&mut self, weather: Weather) {
-        self.0.as_mut().weather.set_val(weather as ffi::weather_id::Type)
+        self.0
+            .as_mut()
+            .weather
+            .set_val(weather as ffi::weather_id::Type)
     }
-    
+
     /// Turns left for each weather type in enum weather_id (except [`Weather::Random`]). If
     /// multiple of these are nonzero, the one with the highest number of turns left is chosen.
     /// Ties are broken in enum order
@@ -304,7 +313,7 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
     pub fn get_weather_turns_mut(&mut self) -> &mut [u16; 8] {
         &mut self.0.as_mut().weather_turns
     }
-    
+
     /// Turns left for artificial permaweather from weather-setting abilities like Drought,
     /// Sand Stream, Drizzle, and Snow Warning; one counter for each weather type in enum
     /// weather_id (except WEATHER_RANDOM). Any nonzero value triggers that weather condition
@@ -491,7 +500,7 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Zeros out the struct pointed to by the global dungeon pointer.
-    /// 
+    ///
     /// # Safety
     /// This is unsafe, since it updates the global dungeon struct (essentially a `static mut`).
     pub unsafe fn z_init(&mut self) {
@@ -521,7 +530,11 @@ impl<'a> GlobalDungeonData<'a> {
     /// Seems to initialize the dungeon struct from specified dungeon data.
     ///
     /// The signature will be updated once we know more about this function.
-    pub fn initialize_dungeon(&mut self, dungeon_data: &mut ffi::undefined, dungeon: &mut ffi::dungeon) -> i32 {
+    pub fn initialize_dungeon(
+        &mut self,
+        dungeon_data: &mut ffi::undefined,
+        dungeon: &mut ffi::dungeon,
+    ) -> i32 {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::InitializeDungeon(dungeon_data as *mut _, dungeon as *mut _) }
     }
@@ -532,11 +545,10 @@ impl<'a> GlobalDungeonData<'a> {
     ///
     /// # Note
     /// Note that the builtin dungeon generator works on the global dungeon struct directly.
-    pub fn get_builtin_dungeon_generator(&'a mut self) -> dungeon_generator::game_builtin::GlobalDungeonStructureGenerator<'a> {
-        dungeon_generator::game_builtin::GlobalDungeonStructureGenerator(
-            self.0.clone(),
-            self
-        )
+    pub fn get_builtin_dungeon_generator(
+        &'a mut self,
+    ) -> dungeon_generator::game_builtin::GlobalDungeonStructureGenerator<'a> {
+        dungeon_generator::game_builtin::GlobalDungeonStructureGenerator(self.0.clone(), self)
     }
 
     /// Generates a dungeon floor.
@@ -548,7 +560,8 @@ impl<'a> GlobalDungeonData<'a> {
     /// the builtin generator with [`Self::get_builtin_dungeon_generator`].
     ///
     pub fn generate_floor(&'a mut self) {
-        self.get_builtin_dungeon_generator().generate_floor_internal();
+        self.get_builtin_dungeon_generator()
+            .generate_floor_internal();
     }
 
     /// Gets the floor type. Returns None if the global dungeon struct contains invalid data.
@@ -581,7 +594,7 @@ impl<'a> GlobalDungeonData<'a> {
     /// Returns the tile at the given coordinates.
     pub fn get_tile_mut(&mut self, x: i32, y: i32) -> &mut DungeonTile {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
-        unsafe { &mut*ffi::GetTile(x, y) }
+        unsafe { &mut *ffi::GetTile(x, y) }
     }
 
     /// Checks if gravity is active on the floor.
@@ -640,14 +653,15 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::IsCurrentMissionType(mission_type_group as ffi::mission_type::Type) > 0 }
     }
 
-
     /// Checks if the current floor is an active mission destination of a given type.
     pub fn is_current_mission_type_exact(&self, mission_type: MissionType) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::IsCurrentMissionTypeExact(
-            mission_type.group() as ffi::mission_type::Type,
-            mission_type.c_subtype()
-            ) > 0 }
+        unsafe {
+            ffi::IsCurrentMissionTypeExact(
+                mission_type.group() as ffi::mission_type::Type,
+                mission_type.c_subtype(),
+            ) > 0
+        }
     }
 
     /// Checks if the current floor is a mission destination for a Monster House outlaw mission.
@@ -676,13 +690,13 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Checks if the current floor is a mission destination floor with a special monster.
-    /// 
+    ///
     /// See [`Self::floor_has_mission_monster`] for details.
     pub fn is_destination_floor_with_monster(&self) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::IsDestinationFloorWithMonster() > 0 }
     }
-    
+
     /// Checks if a given floor is a mission destination with a special monster, either a target to rescue or an enemy to defeat.
     ///
     /// Mission types with a monster on the destination floor:
@@ -695,14 +709,14 @@ impl<'a> GlobalDungeonData<'a> {
     /// - Arrest outlaw
     /// - Challenge Request
     pub fn floor_has_mission_monster(&self) -> bool {
-        Self::floor_has_mission_monster_static(
-            &self.1.inner().mission_destination,
-            self.0
-        )
+        Self::floor_has_mission_monster_static(&self.1.inner().mission_destination, self.0)
     }
 
     /// Static version of [`Self::floor_has_mission_monster`]. See it for details.
-    pub fn floor_has_mission_monster_static(mission_destination: &ffi::mission_destination_info, _ov29: &OverlayLoadLease<29>) -> bool {
+    pub fn floor_has_mission_monster_static(
+        mission_destination: &ffi::mission_destination_info,
+        _ov29: &OverlayLoadLease<29>,
+    ) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::FloorHasMissionMonster(force_mut_ptr!(mission_destination)) > 0 }
     }

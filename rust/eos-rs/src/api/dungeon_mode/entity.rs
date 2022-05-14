@@ -59,7 +59,12 @@ impl DungeonEntityExt for DungeonEntity {
 
     fn info_for_monster(&self) -> Option<DungeonMonsterRef> {
         if self.entity_type() == Some(DungeonEntityType::Monster) {
-            unsafe { Some(DungeonMonsterRef(&*(self.info as *const ffi::monster), self)) }
+            unsafe {
+                Some(DungeonMonsterRef(
+                    &*(self.info as *const ffi::monster),
+                    self,
+                ))
+            }
         } else {
             None
         }
@@ -83,7 +88,12 @@ impl DungeonEntityExt for DungeonEntity {
 
     fn info_for_monster_mut(&mut self) -> Option<DungeonMonsterMut> {
         if self.entity_type() == Some(DungeonEntityType::Monster) {
-            unsafe { Some(DungeonMonsterMut(&mut *(self.info as *mut ffi::monster), self)) }
+            unsafe {
+                Some(DungeonMonsterMut(
+                    &mut *(self.info as *mut ffi::monster),
+                    self,
+                ))
+            }
         } else {
             None
         }
