@@ -2,8 +2,9 @@ cargo-features = ["different-binary-name"]
 
 [package]
 name = "your-eos-rust-project"
-description = "..."
+description = "Dummy example project for writing EoS patches in Rust."
 version = "0.1.0"
+license = "MIT"
 edition = "2021"
 
 [[bin]]
