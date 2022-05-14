@@ -4,6 +4,7 @@ name: eos-rs - check and test
 
 jobs:
   format-check:
+    name: Rustfmt Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,7 +23,7 @@ jobs:
           args: --manifest-path rust/eos-rs/Cargo.toml --verbose -- --check
 
   test:
-    name: Test Suite
+    name: Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
