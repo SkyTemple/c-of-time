@@ -7,6 +7,12 @@ This project is loosely based on [EternalCode's template](https://github.com/Ete
 
 Special thanks to [UsernameFodder](https://github.com/UsernameFodder) for the [pmdsky-debug](https://github.com/UsernameFodder/pmdsky-debug) project, [End45](https://github.com/End45) for the *ExtraSpace* patch and irdkwia for their research on item, move and special process effects.
 
+## Rust subsystem
+c-of-time can also be used with Rust projects. If you want to use Rust (including mixed Rust + C projects),
+continue reading the `README.md` in the `rust` directory.
+
+If you want to build pure C projects, continue below.
+
 ## Project setup
 1. Install [Python](https://www.python.org/downloads/) and [devkitpro](https://devkitpro.org/wiki/Getting_Started).
     - If you're using Windows, follow the next steps within MSYS (refer to the installation guide for instructions on how to launch it)

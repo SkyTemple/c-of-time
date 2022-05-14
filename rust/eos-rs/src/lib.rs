@@ -12,8 +12,11 @@
 //! Pulling in this crate will also configure the allocator to use the game's allocation functions
 //! and sets up a panic handler.
 //!
-//! Please note that this entire crate relies on reverse-engineering efforts of the `pmdsky-debug`,
-//! `c-of-time` and `SkyTemple` teams. There is going to be a lot of things missing, some functions
+//! Please note that this entire crate relies on reverse-engineering efforts of the
+//! [pmdsky-debug](https://github.com/UsernameFodder/pmdsky-debug),
+//! [c-of-time](https://github.com/tech-ticks/c-of-time) and
+//! [SkyTemple](https://skytemple.org)
+//! teams. There is going to be a lot of things missing, some functions
 //! could have unintended side effects or be unsafe to call in some situations, even if marked safe,
 //! and lastly both the low-level and high-level APIs are not stable, they WILL change when we find
 //! out new things.
