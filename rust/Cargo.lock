@@ -114,7 +114,7 @@ dependencies = [
 [[package]]
 name = "compiler_builtins"
 version = "0.1.72"
-source = "git+https://github.com/theCapypara/compiler-builtins?branch=nds-eos#63cb023f0fbbb05058fe6d81752e4c80299def47"
+source = "git+https://github.com/theCapypara/compiler-builtins?branch=nds-eos#d728c5e6bb4e69e77f0ae62105dd6ef194c8d733"
 
 [[package]]
 name = "either"
@@ -299,9 +299,9 @@ checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
 
 [[package]]
 name = "syn"
-version = "1.0.93"
+version = "1.0.94"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "04066589568b72ec65f42d65a1a52436e954b168773148893c020269563decf2"
+checksum = "a07e33e919ebcd69113d5be0e4d70c5707004ff45188910106854f38b960df4a"
 dependencies = [
  "proc-macro2",
  "quote",

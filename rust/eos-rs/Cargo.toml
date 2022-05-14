@@ -8,6 +8,7 @@ edition = "2021"
 
 [lib]
 crate-type = ["rlib"]
+doctest = false  # Doctests don't seem to run with this weird no-std setup; even with the cfg(test) gates.
 
 [features]
 default = ["global_allocator", "io"]
