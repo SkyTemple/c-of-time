@@ -1,6 +1,6 @@
 # eos-rs
 
-API for working with Rust codebases embeded into the
+API for working with Rust codebases embedded into the
 ROM for Pokémon Mystery Dungeon Explorers of Sky.
 
 This is meant to be used as part of the `c-of-time` repository, with the crate in the parent directory.
