@@ -335,8 +335,7 @@ impl<'a> DungeonFloorGeneration for GlobalDungeonStructureGenerator<'a> {
     ///
     /// If not changed by a patch, this function will use the game's default built in generator
     /// and generate the floor based on the current global configuration for the floor.
-    // TODO: Is there a function one level higher in the game that does actually take
-    //       these three parameters? Can we maybe just set up the global struct?
+    // TODO: Set up global struct here to take param into account?
     fn generate_floor(
         &mut self,
         _width: usize,
