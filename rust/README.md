@@ -133,7 +133,7 @@ You can find instructions in the repository's
 [contribution docs](https://github.com/UsernameFodder/pmdsky-debug/blob/master/docs/contributing.md).
 
 For quick testing, you can also add symbols to `../symbols/custom_[region].ld`. 
-See the README.md in the parent directory and the note above Updating symbol definitions and headers for 
+See the README.md in the parent directory and the note above "Updating symbol definitions and headers" for 
 more information.
 
 ## Code size constraints
