@@ -55,7 +55,7 @@ impl Default for ffi::dungeon_grid_cell {
 ///
 /// It can also take ownership of existing `Vec<DungeonGridCell>` and manipulate them.
 ///
-/// Finally you can convert this struct into it's inner `Vec<DungeonGridCell>` using
+/// Finally you can convert this struct into its inner `Vec<DungeonGridCell>` using
 /// [`Self::into_inner()`]. See the notes on [`Self::new()`] for more information.
 ///
 /// The cell grid is used in one phase of the dungeon generation. Note that most
@@ -83,13 +83,14 @@ impl DungeonGridMutator {
     /// the rest of the array will be uninitialised as well.
     ///
     /// This helper will abstract for you over this, if you query a cell via eg. [`Self::get`],
-    /// however [`Self::into_inner()`] ill still return a vector with 15 x 15 cells, with all
+    /// however [`Self::into_inner()`] will still return a vector with 15 x 15 cells, with all
     /// missing values initialized with defaults.
     ///
     /// Note that the game usually works with the assumption that there are exactly 15 rows.
     /// Using other row sizes may or may not lead to UB with some methods.
     ///
-    /// The maximum values for `width` and `height` are `15`, otherwise this function will panic.
+    /// The maximum values for `width` and `height` are [`GRID_CAPACITY_DIM`],
+    /// otherwise this function will panic.
     pub fn new_from_vec(
         in_cells: Vec<DungeonGridCell>,
         width: usize,
@@ -168,10 +169,11 @@ impl DungeonGridMutator {
         }
     }
 
-    /// Extract the grid from the mutator, along with it's width and height.
+    /// Extract the grid from the mutator, along with its width and height.
     ///
-    /// The grid will always be a 15x15 matrix, you need to ignore other cells, see
-    /// the notes for [`Self::new()`] for more information.
+    /// The grid will always be a matrix with 15 rows per column and it might contain extra
+    /// dangling rows, you need to ignore cells outside of the grid's actual width and height,
+    /// see the notes for [`Self::new()`] for more information.
     pub fn into_inner(self) -> (Vec<DungeonGridCell>, usize, usize) {
         debug_assert!(self.cells.len() == GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
         (self.cells, self.width, self.height)
@@ -322,8 +324,8 @@ impl DungeonGridMutator {
     /// Panics if any start position is invalid.
     ///
     /// # Arguments
-    /// * `start_x` - Array of the starting x coordinates of each grid column
-    /// * `start_y` - Array of the starting y coordinates of each grid row
+    /// * `starts_x` - Array of the starting x coordinates of each grid column
+    /// * `starts_y` - Array of the starting y coordinates of each grid row
     /// * `room_flags` - Only uses bit 2 (mask: 0b100), which enables room imperfections
     pub fn create_rooms_and_anchors(
         &mut self,
@@ -577,11 +579,16 @@ impl DungeonGridMutator {
         unsafe { ffi::SetSpawnFlag5(cell as *mut _) }
     }
 
-    fn get_coords(&self, _x: usize, _y: usize) -> usize {
-        todo!()
+    fn get_coords(&self, x: usize, y: usize) -> usize {
+        x * GRID_CAPACITY_DIM + y
     }
 
-    fn assert_start_positions_valid(&self, _starts_x: &mut [i32], _starts_y: &mut [i32]) {
-        todo!()
+    fn assert_start_positions_valid(&self, starts_x: &[i32], starts_y: &[i32]) {
+        for x in starts_x {
+            assert!(*x >= 0 && *x < self.width as i32);
+        }
+        for y in starts_y {
+            assert!(*y >= 0 && *y < self.height as i32);
+        }
     }
 }
