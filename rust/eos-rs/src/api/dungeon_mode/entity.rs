@@ -10,7 +10,7 @@ use crate::api::objects::*;
 /// trait.
 /// If you use the DungeonEntity structs manually outside of dungeon mode, this trait will be
 /// unsafe to use.
-/// The trait and its functions are marked safe for convenience, since in it's intended use case,
+/// The trait and its functions are marked safe for convenience, since in its intended use case,
 /// overlay 29 will always be loaded.
 pub trait DungeonEntityExt {
     /// Checks if a given entity is actually valid.

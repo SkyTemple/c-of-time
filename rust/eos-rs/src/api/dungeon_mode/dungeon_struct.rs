@@ -539,7 +539,7 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::InitializeDungeon(dungeon_data as *mut _, dungeon as *mut _) }
     }
 
-    /// Returns ab abstraction over the game's builtin dungeon generator. This
+    /// Returns an abstraction over the game's builtin dungeon generator. This
     /// struct implements [`dungeon_generator::DungeonFloorGeneration`], which is the
     /// recommended way to work with it, see the documentation of [`dungeon_generator`].
     ///

@@ -97,7 +97,7 @@ use eos_rs_patches_def::PatchesDef;
 /// /// This function is called from C code of `c-of-time` (see `src/item_effects.c` in the
 /// /// `c-of-time` repository).
 /// /// It will select all item effects defined in this macro for the related item and call it.
-/// /// This function will also setup the logger.
+/// /// This function will also set up the logger.
 /// /// It will log a warning if it can't find any item effects.
 /// ///
 /// /// NOTE: By default `src/item_effects.c` is written in a way that will only call

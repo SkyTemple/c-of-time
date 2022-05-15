@@ -20,7 +20,7 @@ fn main() {
     // Python 3 must be in the PATH.
     generate_symbols_for_linker(parent_dir);
 
-    // This collects the glue code from the !patches macro and dumps it into a .cotpatch file
+    // This collects the glue code from the `patches!` macro and dumps it into a .cotpatch file
     generate_cotpatch(parent_dir.join("patches/generated_by_rust.cotpatch").as_path());
 
     // To patch the ROM, use cargo-cot (eg. `cargo cot burn na rom.nds out.nds`).
