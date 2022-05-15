@@ -242,7 +242,7 @@ impl AdventureLog {
         unsafe { ffi::ClearAdventureLogStruct() }
     }
 
-    /// Sets the current dungeon floor pair.
+    /// Returns the current dungeon floor pair.
     pub fn get_dungeon_floor(&self) -> ffi::dungeon_floor_pair {
         unsafe { ffi::GetAdventureLogDungeonFloor() }
     }
