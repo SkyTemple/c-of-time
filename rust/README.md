@@ -28,7 +28,8 @@ To build the project, run `cargo cot build <region>`, where `<region>` is either
 ROM's region.
 
 To write the project to a ROM, run `cargo cot burn <region> <input_rom_path> <output_rom_path>`. Make sure the ROM
-at `<input_rom_path>` is patched with the `ExtraSpace` patch. This command will also run `cargo cot build` before.
+at `<input_rom_path>` is patched with the `ExtraSpace` patch. This command will also run `cargo cot build` 
+beforehand.
 
 It is recommended for the final build of your ROM to use `release` mode. Pass `--release` to the `build` and `burn`
 commands to do so.
@@ -46,7 +47,7 @@ into overlay 36. This includes both the Rust code in `./src` and the C code in `
 Most of the logic of the Rust subsystem is in the `eos-rs` crate. The documentation for this crate is available
 at <https://eosrs.pmdcollab.org/>.
 
-Broadly speaking this crate provides two APIs:
+Broadly speaking, this crate provides two APIs:
 
 - The "high-level" API: This is a "handwritten" Rust-idiomatic way of interacting with the game's functions and data.
   It is generally recommended to use this API.
@@ -58,13 +59,13 @@ This entire subsystem is highly unstable, every update may entirely change the s
 to the fact that we are still very much in the process of reverse-engineering the game's code.
 
 Also note that a lot of code in the subsystem isn't actually fully tested yet. If you run into bugs, please report
-an issue. If it's simple to fix, consider fixing it and opening a Pull Request.
+an issue. If it's simple to fix, consider fixing it and opening a pull request.
 
 ## Usage
 To get started, read the instructions and explanations in `src/main.rs`. This file will also contain a `patches!` macro
 invocation. 
 
-One thing to note about this is, that the last entry of this macro contains the string:
+One thing to note about this is that the last entry of this macro contains the string:
 ```
 HasLowHealth+0:
   B has_high_health
@@ -95,7 +96,7 @@ that other people can use!
 Not that the entire subsystem does not have `std` available.
 
 ### Removing example code
-This repository contains a lot of example code. To remove it and getting started with your own patches:
+This repository contains a lot of example code. To remove it and get started with your own patches:
 
 - Remove all the example code from `src/main.rs`. At the bare minimum, you will need the crate attributes 
   (`#![no_std]`, etc.) and the `patches!` macro, where you can insert your own patch definitions.
@@ -105,7 +106,7 @@ This repository contains a lot of example code. To remove it and getting started
   from the switch case in `CustomApplyItemEffect`. Leave everything else as it is.
 - From `../src/move_effects.c`, remove the `MoveBodyPress` function. This is an example move effect. Also remove it
   from the switch case in `CustomApplyMoveEffect`. Leave everything else as it is.
-- From `../src/move_effects.c`, remove the `SpChangeBorderColor` function. This is an example special process. 
+- From `../src/special_processes.c`, remove the `SpChangeBorderColor` function. This is an example special process. 
   Also remove it from the switch case in `CustomScriptSpecialProcessCall`. Leave everything else as it is.
 
 
@@ -131,8 +132,9 @@ If you've found symbols that are currently missing, consider contributing them t
 You can find instructions in the repository's 
 [contribution docs](https://github.com/UsernameFodder/pmdsky-debug/blob/master/docs/contributing.md).
 
-For quick testing, you can also add symbols to `../symbols/custom_[region].ld`, see the README.md in the parent 
-directory for more information and the note above at `Updating symbol definitions and headers`.
+For quick testing, you can also add symbols to `../symbols/custom_[region].ld`. 
+See the README.md in the parent directory and the note above Updating symbol definitions and headers for 
+more information.
 
 ## Code size constraints
 
