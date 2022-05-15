@@ -1,10 +1,10 @@
 use crate::api::objects::DungeonEntity;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
-use crate::api::random::{rand_i32_internal, rand_u16_internal, Rng};
+use crate::api::random::{rand_u16_internal, Rng};
 use crate::ctypes::c_int;
 use crate::ffi;
-use core::ops::RangeBounds;
 use core::hint::unreachable_unchecked;
+use core::ops::RangeBounds;
 
 /// Helper struct for dungeon RNG.
 pub struct DungeonRng(OverlayLoadLease<29>);
