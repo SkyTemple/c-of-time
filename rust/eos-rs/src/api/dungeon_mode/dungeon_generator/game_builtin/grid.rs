@@ -175,14 +175,14 @@ impl DungeonGridMutator {
     /// dangling rows, you need to ignore cells outside of the grid's actual width and height,
     /// see the notes for [`Self::new()`] for more information.
     pub fn into_inner(self) -> (Vec<DungeonGridCell>, usize, usize) {
-        debug_assert!(self.cells.len() == GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
+        debug_assert!(self.cells.len() <= GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
         (self.cells, self.width, self.height)
     }
 
     /// Get the cell at the given coordinates.
     /// Panics if the coordinates are out of bounds.
     pub fn get(&self, x: usize, y: usize) -> &DungeonGridCell {
-        debug_assert!(self.cells.len() == GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
+        debug_assert!(self.cells.len() <= GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
         let coords = self.get_coords(x, y);
         if coords >= self.cells.len() {
             panic!("Grid cell at ({}, {}) is out of bounds", x, y);
@@ -202,7 +202,7 @@ impl DungeonGridMutator {
     /// Get the cell at the given coordinates, mutably.
     /// Panics if the coordinates are out of bounds.
     pub fn get_mut(&mut self, x: usize, y: usize) -> &mut DungeonGridCell {
-        debug_assert!(self.cells.len() == GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
+        debug_assert!(self.cells.len() <= GRID_CAPACITY_DIM * GRID_CAPACITY_DIM);
         let coords = self.get_coords(x, y);
         if coords >= self.cells.len() {
             panic!("Grid cell at ({}, {}) is out of bounds", x, y);
