@@ -4,6 +4,7 @@ use crate::api::random::{rand_i32_internal, rand_u16_internal, Rng};
 use crate::ctypes::c_int;
 use crate::ffi;
 use core::ops::RangeBounds;
+use core::hint::unreachable_unchecked;
 
 /// Helper struct for dungeon RNG.
 pub struct DungeonRng(OverlayLoadLease<29>);
@@ -25,12 +26,16 @@ impl Rng for DungeonRngImpl {
         unsafe { ffi::DungeonRand16Bit() as u16 }
     }
 
+    /// NOT SUPPORTED BY THIS.
     fn rand32(&mut self) -> u32 {
-        unsafe { ffi::DungeonRandInt(u32::MAX) }
+        // SAFETY: This will never be called. It is not used in this module and it is not exposed.
+        unsafe { unreachable_unchecked() }
     }
 
-    fn rand_range32(&mut self, x: c_int, y: c_int) -> c_int {
-        unsafe { ffi::DungeonRandRange(x, y) }
+    /// NOT SUPPORTED BY THIS.
+    fn rand_range32(&mut self, _x: c_int, _y: c_int) -> c_int {
+        // SAFETY: This will never be called. It is not used in this module and it is not exposed.
+        unsafe { unreachable_unchecked() }
     }
 }
 
@@ -106,20 +111,6 @@ impl DungeonRng {
     /// Same if the start bound is excluded.
     pub fn rand_u16<R: RangeBounds<u16>>(&self, range: R) -> u16 {
         rand_u16_internal(&mut DungeonRngImpl, range)
-    }
-
-    /// Generates a random number between the beginning and end of the range.
-    /// If the range is unbounded, min and/or max values are bound to
-    /// [`i32::MIN`] and [`i32::MAX`] respectively.
-    ///
-    /// Note that this uses the dungeon PRNG as opposed to the functions in [`crate::api::random`].
-    ///
-    /// For details see [`Self::rand_u16`].
-    ///
-    /// The range must contain at least one element, or this will panic.
-    /// Same if the start bound is excluded.
-    pub fn rand_i32<R: RangeBounds<i32>>(&self, range: R) -> i32 {
-        rand_i32_internal(&mut DungeonRngImpl, range)
     }
 
     /// Compute a pseudorandom integer on the interval [0, 100) using the dungeon PRNG.
