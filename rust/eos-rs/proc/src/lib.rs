@@ -44,6 +44,8 @@ use eos_rs_patches_def::PatchesDef;
 /// ### Syntax of argument
 /// `<Function Name; Rust Identifier>: item_effect <Item ID; Literal number or Path>`
 ///
+/// Item ID is the ID of the item itself, not an internal item effect ID.
+///
 /// ### Signature of raw patch functions registered this way:
 /// ```
 /// pub fn function(
@@ -51,15 +53,17 @@ use eos_rs_patches_def::PatchesDef;
 ///     user: &mut eos_rs::api::objects::DungeonEntity,
 ///     target: &mut eos_rs::api::objects::DungeonEntity,
 ///     used_item: &mut eos_rs::api::objects::DungeonItem,
-///     _is_thrown: bool
+///     is_thrown: bool
 /// ) { /* ... */ }
 /// ```
 ///
 /// ## Move Effect
-/// Registers a function that will be called for the defined moved when it is used in a dungeon.
+/// Registers a function that will be called for the defined move when it is used in a dungeon.
 ///
 /// ### Syntax of argument
 /// `<Function Name; Rust Identifier>: move_effect <Move ID; Literal number or Path>`
+///
+/// Move ID is the ID of the move itself, not an internal move effect ID.
 ///
 /// ### Signature of raw patch functions registered this way:
 /// ```
@@ -77,6 +81,9 @@ use eos_rs_patches_def::PatchesDef;
 ///
 /// ### Syntax of argument
 /// `<Function Name; Rust Identifier>: special_process <Process ID; Literal number>`
+///
+/// Process ID is the ID as used in the script engine (first parameter to the `ProcessSpecial`
+/// opcode).
 ///
 /// ### Signature of raw patch functions registered this way:
 /// ```
