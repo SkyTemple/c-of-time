@@ -460,7 +460,7 @@ impl Default for ffi::dungeon {
 
 /// Helper struct for dealing with the current floor, the global dungeon and the mission state.
 ///
-/// This is essential an extension and wrapper of [`Dungeon`] that works on the
+/// This is essentially an extension and wrapper of [`Dungeon`] that works on the
 /// global dungeon struct only.
 ///
 /// To generate dungeons and manipulate floors layouts, you can get the game's
