@@ -1,8 +1,8 @@
-# c-of-time Rust subsystem
+# Rust of Darkness
 
 An environment for hooking and linking to Pokémon Mystery Dungeon: Explorers of Sky: Rust subsystem.
 
-The Rust subsystem extends c-of-time with the ability to compile and link Rust code into
+The c-of-time Rust subsystem extends c-of-time with the ability to compile and link Rust code into
 the game.
 
 Everything you need to get started is in this repository.
@@ -42,6 +42,17 @@ cargo cot burn na --release  input.nds output.nds
 After running this command, the ROM at `input.nds` will be copied to `output.nds`, and `c-of-time` will be written
 into overlay 36. This includes both the Rust code in `./src` and the C code in `../src`. 
 `cotpatch` patches in `../patches` are also applied (see below).
+
+### Region in Cargo.toml
+Alternatively you can also specify the region in the Cargo.toml:
+
+```toml
+[workspace.metadata.cot]
+region = "NA"
+```
+
+If you do this, not specifying a region with `cargo cot build` or `cargo cot burn` will read the region from
+the Cargo.toml.
 
 ## Documentation
 Most of the logic of the Rust subsystem is in the `eos-rs` crate. The documentation for this crate is available

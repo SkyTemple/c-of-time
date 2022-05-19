@@ -15,6 +15,11 @@ filename = "eos-rs-bin.elf"
 [workspace]
 members = ["cargo-cot", "eos-rs", "eos-rs/patches-def", "eos-rs/proc", "eos-rs/build"]
 
+# If you want, you can specify the region directly in this Cargo.toml.
+# You will not need to pass a region to `cargo cot` then.
+#[workspace.metadata.cot]
+#region = "NA"
+
 [dependencies]
 eos-rs = { path = "./eos-rs" }
 

@@ -2,10 +2,12 @@ use std::ffi::{OsStr, OsString};
 use std::path::{Path, PathBuf};
 use std::{env, fs, process};
 use std::env::current_dir;
+use std::io::Read;
 use std::iter::once;
 use std::process::{Command, Stdio};
 use ansi_term::{Color, Style};
 use clap::{AppSettings, Parser, Subcommand};
+use serde_json::Value;
 use eos_rs_build::target_region::TargetRegion;
 use which::which;
 
@@ -43,7 +45,10 @@ enum Commands {
     /// where XX is the region specified.
     Build {
         /// The region to build for; `eu`, `na` or `jp`.
-        region: String,
+        ///
+        /// If not specified the region will be taken from `workspace.metadata.cot.region` in the
+        /// Cargo.toml (if it is specified).
+        region: Option<String>,
 
         /// Build artifacts in release mode, with optimization.
         #[clap(short, long)]
@@ -59,7 +64,10 @@ enum Commands {
     /// code from the `patches!` macro).
     Burn {
         /// The region to build for; `eu`, `na` or `jp`.
-        region: String,
+        ///
+        /// If not specified the region will be taken from `workspace.metadata.cot.region` in the
+        /// Cargo.toml (if it is specified).
+        region: Option<String>,
 
         /// Path to the input ROM to patch.
         rom_path: PathBuf,
@@ -103,12 +111,25 @@ fn main() -> ! {
         }
     }
 
+    let manifest_dir = get_manifest_dir(&build_cargo_args);
+    assert!(manifest_dir.exists(), "The manifest directory must exist: {:?}", manifest_dir);
+
+    let build_region_str = match build_region_str {
+        None => {
+            // Try to read the build region from the Cargo.toml
+            match cargo_metadata_region(manifest_dir.as_path()) {
+                None => {
+                    eprintln!("{}", Color::Red.paint("Error: A region must be specified."));
+                    process::exit(1)
+                }
+                Some(build_region_str) => build_region_str
+            }
+        }
+        Some(build_region_str) => build_region_str
+    };
+
     match TargetRegion::from_str(build_region_str) {
         Ok(build_region) => {
-
-            let manifest_dir = get_manifest_dir(&build_cargo_args);
-            assert!(manifest_dir.exists(), "The manifest directory must exist: {:?}", manifest_dir);
-
             cargo_build(manifest_dir.as_path(), &build_region, build_release, build_cargo_args);
             if let Some(rom_path) = burn_rom_path {
                 burn(
@@ -126,12 +147,40 @@ fn main() -> ! {
     }
 }
 
+fn cargo_metadata_region(manifest_dir: &Path) -> Option<String> {
+    let cargo = env::var_os("CARGO").unwrap_or_else(|| OsString::from("cargo"));
+    let mut child = Command::new(cargo)
+        .args(["metadata", "--no-deps", "--manifest-path", manifest_dir.join("Cargo.toml").to_string_lossy().as_ref(), "--format-version", "1"])
+        .stdout(Stdio::piped())
+        .stderr(Stdio::inherit())
+        .spawn()
+        .unwrap();
+    let exit = child.wait().unwrap();
+    if !exit.success() {
+        process::exit(exit.code().unwrap_or(1));
+    }
+    let mut output = vec![];
+    child.stdout.take().unwrap().read_to_end(&mut output).unwrap();
+    let output_parsed: Value = serde_json::from_str(&String::from_utf8(output).unwrap()).unwrap();
+
+    if let Value::Object(package) = output_parsed {
+        if let Some(Value::Object(metadata)) = package.get("metadata") {
+            if let Some(Value::Object(cot)) = metadata.get("cot") {
+                if let Some(Value::String(region)) = cot.get("region") {
+                    return Some(region.clone());
+                }
+            }
+        }
+    }
+    None
+}
+
 fn cargo_build(manifest_dir: &Path, build_region: &TargetRegion, build_release: bool, build_cargo_args: Vec<OsString>) {
     let target_fname = build_region.target_str();
     let target_file = manifest_dir.join(&format!("{}.json", target_fname));
     if !target_file.exists() {
         eprintln!("{}", Color::Red.paint(
-            format!("Error: The target file '{}' was not found in the manifest directory.", target_fname)
+            format!("Error: The target file '{}.json' was not found in the manifest directory.", target_fname)
         ));
         process::exit(1)
     };
@@ -147,7 +196,7 @@ fn cargo_build(manifest_dir: &Path, build_region: &TargetRegion, build_release: 
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .status()
-        .unwrap_or_else(|_| process::exit(1));
+        .unwrap();
     if !exit.success() {
         process::exit(exit.code().unwrap_or(1));
     }
@@ -231,7 +280,7 @@ fn get_python_interpreter(base_dir: &Path) -> PathBuf {
     }
 
     print_note(format!("Using Python interpreter at: {}", interpreter_path.to_string_lossy()));
-    return interpreter_path;
+    interpreter_path
 }
 
 fn burn_run<S: AsRef<OsStr>>(cmd: S, args: &[&str], dir: &Path) {

@@ -19,8 +19,14 @@ USAGE:
     cargo cot build [OPTIONS] <REGION> [-- <CARGO_ARGS>...]
 
 ARGS:
-    <REGION>           The region to build for; `eu`, `na` or `jp`
-    <CARGO_ARGS>...    Any additional argument after '--' will be forwarded to cargo build
+    <REGION>
+            The region to build for; `eu`, `na` or `jp`.
+
+            If not specified the region will be taken from `workspace.metadata.cot.region` in the
+            Cargo.toml (if it is specified).
+
+    <CARGO_ARGS>...
+            Any additional argument after '--' will be forwarded to cargo build
 
 OPTIONS:
     -h, --help       Print help information
@@ -39,10 +45,20 @@ USAGE:
     cargo cot burn [OPTIONS] <REGION> <ROM_PATH> <OUT_PATH> [-- <CARGO_ARGS>...]
 
 ARGS:
-    <REGION>           The region to build for; `eu`, `na` or `jp`
-    <ROM_PATH>         Path to the input ROM to patch
-    <OUT_PATH>         Path where the patched ROM should be saved
-    <CARGO_ARGS>...    Any additional argument after '--' will be forwarded to cargo build
+    <REGION>
+            The region to build for; `eu`, `na` or `jp`.
+
+            If not specified the region will be taken from `workspace.metadata.cot.region` in the
+            Cargo.toml (if it is specified).
+
+    <ROM_PATH>
+            Path to the input ROM to patch
+
+    <OUT_PATH>
+            Path where the patched ROM should be saved
+
+    <CARGO_ARGS>...
+            Any additional argument after '--' will be forwarded to cargo build
 
 OPTIONS:
     -h, --help       Print help information
