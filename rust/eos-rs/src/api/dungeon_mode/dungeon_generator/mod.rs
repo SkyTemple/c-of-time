@@ -66,29 +66,6 @@ pub trait DungeonFloorGeneration {
 /// Generator for entities on a dungeon floor.
 pub trait DungeonEntityGeneration {
     /// Spawn all non-enemy entities, which includes stairs, items, traps, and the player.
-    ///
-    /// Most entities are spawned randomly on a subset of permissible tiles.
-    ///
-    /// Stairs are spawned if they don't already exist on the floor, and hidden stairs of the
-    /// specified type are also spawned if configured as long as there are at least 2 floors left
-    /// in the dungeon. Stairs can spawn on any tile that has open terrain, is in a room, isn't in
-    /// a Kecleon shop, doesn't already have an enemy spawn, isn't a hallway junction, and isn't a
-    /// special tile like a Key door.
-    ///
-    /// Items are spawned both normally in rooms, as well as in walls and Monster Houses. Normal
-    /// items can spawn on any tile that has open terrain, is in a room, isn't in a Kecleon shop
-    /// or Monster House, isn't a hallway junction, and isn't a special tile like a Key door.
-    /// Buried items can spawn on any wall tile. Monster House items can spawn on any Monster House
-    /// tile that isn't in a Kecleon shop and isn't a hallway junction.
-    ///
-    /// Traps are similarly spawned both normally in rooms, as well as in Monster Houses. Normal
-    /// traps can spawn on any tile that has open terrain, is in a room, isn't in a Kecleon shop,
-    /// doesn't already have an item or enemy spawn, and isn't a special tile like a Key door.
-    /// Monster House traps follow the same conditions as Monster House items.
-    ///
-    /// The player can spawn on any tile that has open terrain, is in a room, isn't in a Kecleon
-    /// shop, isn't a hallway junction, doesn't already have an item, enemy, or trap spawn, and
-    /// isn't a special tile like a Key door.
     fn spawn_non_enemies(
         &mut self,
         floor_properties: &ffi::floor_properties,
@@ -96,10 +73,6 @@ pub trait DungeonEntityGeneration {
     );
 
     /// Spawn all enemies, which includes normal enemies and those in Monster Houses.
-    ///
-    /// Normal enemies can spawn on any tile that has open terrain, isn't in a Kecleon shop, doesn't already have another entity spawn, and isn't a special tile like a Key door.
-    ///
-    /// Monster House enemies can spawn on any Monster House tile that isn't in a Kecleon shop, isn't where the player spawns, and isn't a special tile like a Key door.
     fn spawn_enemies(
         &mut self,
         floor_properties: &ffi::floor_properties,
