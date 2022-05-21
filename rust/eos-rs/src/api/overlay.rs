@@ -73,7 +73,7 @@ impl<const N: u32> OverlayLoadLease<N> {
     pub fn group_id() -> u32 {
         match N {
             0 => ffi::overlay_group_id::OGROUP_OVERLAY_0,
-            1 => ffi::overlay_group_id::OGROUP_OVERlAY_1,
+            1 => ffi::overlay_group_id::OGROUP_OVERLAY_1,
             2 => ffi::overlay_group_id::OGROUP_OVERLAY_2,
             3 => ffi::overlay_group_id::OGROUP_OVERLAY_3,
             4 => ffi::overlay_group_id::OGROUP_OVERLAY_4,
