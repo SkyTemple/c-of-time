@@ -481,7 +481,8 @@ impl<'a> GlobalDungeonData<'a> {
     /// This is unsafe, since it borrows the global dungeon struct (essentially a `static mut`)
     /// mutably.
     ///
-    /// You need to make sure no other borrows over the global dungeon struct exist.
+    /// You need to make sure no other borrows over the global dungeon struct
+    /// (or any of it's values) exist.
     pub unsafe fn get(ov29: &'a OverlayLoadLease<29>) -> Self {
         let ptr = ffi::GetDungeonPtrMaster();
         assert!(!ptr.is_null(), "Global dungeon pointer is null!");
@@ -494,7 +495,8 @@ impl<'a> GlobalDungeonData<'a> {
     /// This is unsafe, since it borrows the global dungeon struct (essentially a `static mut`)
     /// mutably. It also invalidates any previously borrowed global dungeon struct.
     ///
-    /// You need to make sure no other borrows over the global dungeon struct exist.
+    /// You need to make sure no other borrows over the global dungeon struct
+    /// (or any of it's values) exist.
     pub unsafe fn alloc(ov29: &'a OverlayLoadLease<29>) -> Self {
         Self(ov29, Dungeon(&mut *ffi::DungeonAlloc()))
     }
@@ -586,12 +588,16 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Returns the tile at the given coordinates.
+    ///
+    /// If the coordinates are out-of-bounds, this seems to return some kind of default tile.
     pub fn get_tile(&self, x: i32, y: i32) -> &DungeonTile {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
         unsafe { &*ffi::GetTile(x, y) }
     }
 
     /// Returns the tile at the given coordinates.
+    ///
+    /// If the coordinates are out-of-bounds, this seems to return some kind of default tile.
     pub fn get_tile_mut(&mut self, x: i32, y: i32) -> &mut DungeonTile {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
         unsafe { &mut *ffi::GetTile(x, y) }
