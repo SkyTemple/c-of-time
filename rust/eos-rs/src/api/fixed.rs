@@ -53,6 +53,13 @@
 //! // bit will be 0, and the upper byte to 1, which means this is "1.0".
 //! let n3 = I24F8::from_bits(0x01_00);
 //! assert_eq!(n3, 1.0);
+//!
+//! let n4 = I24F8::from_bits(0x01_AB);
+//! // Using strings here to compare, due to the before mentioned accuracy issues.
+//! assert_eq!(format!("{}", n4), "1.668");
+//!
+//! let n5 = I24F8::from_bits(0x01_FF);
+//! assert_eq!(format!("{}", n5), "1.996");
 //! ```
 //!
 //! [U0]: fixed::types::extra::U0
@@ -65,6 +72,7 @@ pub use fixed::types::*;
 // Since doctests don't work, we turn the doctest into a normal unit test here.
 #[cfg(test)]
 mod test {
+    use alloc::format;
     use super::I24F8;
 
     #[test]
@@ -77,5 +85,11 @@ mod test {
 
         let n3 = I24F8::from_bits(0x01_00);
         assert_eq!(n3, 1.0);
+
+        let n4 = I24F8::from_bits(0x01_AB);
+        assert_eq!(format!("{}", n4), "1.668");
+
+        let n5 = I24F8::from_bits(0x01_FF);
+        assert_eq!(format!("{}", n5), "1.996");
     }
 }
