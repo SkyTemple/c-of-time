@@ -1,6 +1,10 @@
 //! Dealing with [fixed-point numbers](https://en.wikipedia.org/wiki/Fixed-point_arithmetic)
 //! used in the game.
 //!
+//! Note that this module currently only deals with binary fixed-point representations.
+//! The game also sometimes uses decimal representations of fixed-point numbers
+//! (eg. 0x64 -> 100 -> '01.00').
+//!
 //! This pulls in parts of the [`fixed`](https://docs.rs/fixed/latest/fixed/index.html) crate,
 //! which describes these numbers as follows:
 //!
