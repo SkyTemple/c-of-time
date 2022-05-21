@@ -143,7 +143,7 @@ pub mod overlay_group_id {
     pub const OGROUP_OVERLAY_0: Type = 1;
     pub const OGROUP_OVERLAY_10: Type = 2;
     pub const OGROUP_OVERLAY_35: Type = 3;
-    pub const OGROUP_OVERlAY_1: Type = 4;
+    pub const OGROUP_OVERLAY_1: Type = 4;
     pub const OGROUP_OVERLAY_2: Type = 5;
     pub const OGROUP_OVERLAY_3: Type = 6;
     pub const OGROUP_OVERLAY_6: Type = 7;
@@ -112744,4 +112744,29 @@ pub struct move_effect_input {
     pub move_id: crate::ctypes::c_int,
     pub item_id: crate::ctypes::c_int,
     pub out_dealt_damage: bool_,
+}
+extern "C" {
+    pub fn CustomApplyItemEffect(
+        user: *mut entity,
+        target: *mut entity,
+        item: *mut item,
+        is_thrown: bool_,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn CustomApplyMoveEffect(
+        data: *mut move_effect_input,
+        user: *mut entity,
+        target: *mut entity,
+        move_: *mut move_,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn CustomScriptSpecialProcessCall(
+        unknown: *mut undefined4,
+        special_process_id: u32,
+        arg1: crate::ctypes::c_short,
+        arg2: crate::ctypes::c_short,
+        return_val: *mut crate::ctypes::c_int,
+    ) -> bool_;
 }
