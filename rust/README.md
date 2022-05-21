@@ -2,8 +2,7 @@
 
 An environment for hooking and linking to Pokémon Mystery Dungeon: Explorers of Sky: Rust subsystem.
 
-The c-of-time Rust subsystem extends c-of-time with the ability to compile and link Rust code into
-the game.
+Rust of Darkness extends c-of-time with the ability to compile and link Rust code into the game.
 
 Everything you need to get started is in this repository.
 
