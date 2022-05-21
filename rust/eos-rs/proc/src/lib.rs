@@ -87,7 +87,7 @@ use eos_rs_patches_def::PatchesDef;
 ///
 /// ### Signature of raw patch functions registered this way:
 /// ```
-/// pub fn function(arg1: i16, arg2: i16, ov11: &eos_rs::api::overlay::OverlayLoadLease<11>) { /* ... */ }
+/// pub fn function(arg1: i16, arg2: i16, ov11: &eos_rs::api::overlay::OverlayLoadLease<11>) -> i32 { /* ... */ 0 }
 /// ```
 ///
 /// ## ASM glue code
@@ -133,6 +133,7 @@ use eos_rs_patches_def::PatchesDef;
 ///     special_process_id: eos_rs::ctypes::c_uint,
 ///     arg1: eos_rs::ctypes::c_short,
 ///     arg2: eos_rs::ctypes::c_short,
+///     return_val: *mut i32
 /// ) { /* ... */ }
 /// ```
 ///
@@ -179,7 +180,7 @@ pub fn patches(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 
     let special_processes_cases = def.special_processes.iter()
         .map(|(idx, fn_name)| quote! {
-            #idx => #fn_name(arg1, arg2, &lease),
+            #idx => *return_val = #fn_name(arg1, arg2, &lease),
         });
 
     (quote! {
@@ -226,7 +227,9 @@ pub fn patches(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
             special_process_id: eos_rs::ctypes::c_uint,
             arg1: eos_rs::ctypes::c_short,
             arg2: eos_rs::ctypes::c_short,
+            return_val: *mut i32
         ) {
+            let return_val = unsafe { &mut*return_val };
             eos_rs::log_impl::register_logger();
             let lease = eos_rs::api::overlay::OverlayLoadLease::<11>::acquire_unchecked();
             match special_process_id {

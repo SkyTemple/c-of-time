@@ -113,13 +113,12 @@ This repository contains a lot of example code. To remove it and get started wit
   (`#![no_std]`, etc.) and the `patches!` macro, where you can insert your own patch definitions.
 - Remove the `../patches/patch.cotpatch` file. This is an example C patch glue code.
 - Remove the contents of `../src/main.c`. This is an example C patch.
-- From `../src/item_effects.c`, remove the `ItemElixir` function. This is an example item effect. Also remove it
-  from the switch case in `CustomApplyItemEffect`. Leave everything else as it is.
-- From `../src/move_effects.c`, remove the `MoveBodyPress` function. This is an example move effect. Also remove it
-  from the switch case in `CustomApplyMoveEffect`. Leave everything else as it is.
-- From `../src/special_processes.c`, remove the `SpChangeBorderColor` function. This is an example special process. 
-  Also remove it from the switch case in `CustomScriptSpecialProcessCall`. Leave everything else as it is.
-
+- From `../src/item_effects.c`, remove the `ItemElixir` function 
+  and stub out `CustomApplyItemEffect` to just return false.
+- From `../src/move_effects.c`, remove the `MoveBodyPress` function
+  and stub out `CustomApplyMoveEffect` to just return false.
+- From `../src/special_processes.c`, remove the `SpChangeBorderColor` function
+  and stub out `CustomScriptSpecialProcessCall` to just return false.
 
 ## Cleaning up
 Sometimes it might be neccesary to clean build artifacts. For this you have two options:

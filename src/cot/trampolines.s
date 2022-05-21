@@ -2,7 +2,7 @@
 cotInternalTrampolineScriptSpecialProcessCall:
   // If the special process ID is >= 100, handle it as a custom special process
   cmp r1, #100
-  bge CustomScriptSpecialProcessCall
+  bge cotInternalDispatchScriptSpecialProcessCall
 
   // Otherwise, restore the instruction we've replaced in the patch
   // and run the original function
@@ -19,7 +19,7 @@ cotInternalTrampolineApplyItemEffect:
   mov r1, r7
   mov r2, r6
   mov r3, r9
-  bl CustomApplyItemEffect
+  bl cotInternalDispatchApplyItemEffect
   // Check if true was returned
   cmp r0, #1
 
@@ -52,7 +52,7 @@ cotInternalTrampolineApplyMoveEffect:
   mov r1, r9
   mov r2, r4
   mov r3, r8
-  bl CustomApplyMoveEffect
+  bl cotInternalDispatchApplyMoveEffect
 
   // Check if true was returned
   cmp r0, #1

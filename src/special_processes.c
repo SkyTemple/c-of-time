@@ -12,27 +12,23 @@ static int SpChangeBorderColor(short arg1) {
   return 0;
 }
 
-// Called for special process IDs 100 and greater
-int CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_process_id, short arg1, short arg2) {
+// Called for special process IDs 100 and greater.
+//
+// Set return_val to the return value that should be passed back to the game's script engine. Return true,
+// if the special process was handled.
+bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_process_id, short arg1, short arg2, int* return_val) {
   // TODO: arg2 doesn't seem to match the argument in the script engine?
   COT_LOGFMT(COT_LOG_CAT_SPECIAL_PROCESS, "Running special process %d (arg1=%d, arg2=%d)",
     special_process_id, arg1, arg2);
 
   switch (special_process_id) {
     case 100:
-      return SpChangeBorderColor(arg1);
+      *return_val = SpChangeBorderColor(arg1);
+      return true;
 
-    // Add your own SP's here...  
+    // Add your own SP's here...
 
-    default:
-#ifdef COT_RUST
-      // If the Rust runtime of c-of-time is used, ask it to take over from here.
-      eos_rs_call_special_process(unknown, special_process_id, arg1, arg2);
-#else
-      // Otherwise: Log a warning that the special processed went unhandled.
-      COT_WARNFMT(COT_LOG_CAT_SPECIAL_PROCESS, "Unhandled special process ID %d", special_process_id);
-#endif
   }
 
-  return 0;
+  return false;
 }

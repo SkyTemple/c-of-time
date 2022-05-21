@@ -109,12 +109,13 @@ pub extern "C" fn has_high_health(
 }
 
 /// This just prints the parameters to the log.
-pub fn print_args(arg1: i16, arg2: i16, _ov11: &OverlayLoadLease<11>) {
+pub fn print_args(arg1: i16, arg2: i16, _ov11: &OverlayLoadLease<11>) -> i32 {
     info!("Running special process 101... You put in these parameters: {}, {}", arg1, arg2);
+    0
 }
 
 /// This demonstrates panics.
-pub fn just_panic(_: i16, _: i16, _: &OverlayLoadLease<11>) {
+pub fn just_panic(_: i16, _: i16, _: &OverlayLoadLease<11>) -> i32 {
     info!("Brace yourself, about to panic...");
     panic!("Rust code panicked! oh no!");
 }
