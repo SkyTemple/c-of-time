@@ -1,11 +1,28 @@
 //! Dealing with [fixed-point numbers](https://en.wikipedia.org/wiki/Fixed-point_arithmetic)
 //! used in the game.
 //!
-//! These types can have `Frac` fractional bits, where 0 ≤ `Frac` ≤ *n*
-//! and *n* is the total number of bits. When `Frac` = 0, the fixed-point
-//! number behaves like an *n*-bit integer. When `Frac` = *n*, the value
-//! *x* lies in the range −0.5 ≤ *x* < 0.5 for signed numbers, and in the
-//! range 0 ≤ *x* < 1 for unsigned numbers.
+//! This pulls in parts of the [`fixed`](https://docs.rs/fixed/latest/fixed/index.html) crate,
+//! which describes these numbers as follows:
+//!
+//! > An <i>n</i>-bit fixed-point number has <i>f</i>&nbsp;=&nbsp;`Frac` fractional
+//! > bits where 0&nbsp;≤&nbsp;<i>f</i>&nbsp;≤&nbsp;<i>n</i>, and
+//! > <i>n</i>&nbsp;&minus;&nbsp;<i>f</i> integer bits. For example,
+//! > <code>[FixedI32]\<[U24]></code> is a 32-bit signed fixed-point number with
+//! > <i>n</i>&nbsp;=&nbsp;32 total bits, <i>f</i>&nbsp;=&nbsp;24 fractional bits, and
+//! > <i>n</i>&nbsp;&minus;&nbsp;<i>f</i>&nbsp;=&nbsp;8 integer bits.
+//! > <code>[FixedI32]\<[U0]></code> behaves like [`i32`], and
+//! > <code>[FixedU32]\<[U0]></code> behaves like [`u32`].
+//! >
+//! > The difference between any two successive representable numbers is constant
+//! > throughout the possible range for a fixed-point number:
+//! > <i>Δ</i>&nbsp;=&nbsp;1/2<sup><i>f</i></sup>. When <i>f</i>&nbsp;=&nbsp;0, like
+//! > in <code>[FixedI32]\<[U0]></code>, <i>Δ</i>&nbsp;=&nbsp;1 because representable
+//! > numbers are integers, and the difference between two successive integers is 1.
+//! > When <i>f</i>&nbsp;=&nbsp;<i>n</i>, <i>Δ</i>&nbsp;=&nbsp;1/2<sup><i>n</i></sup>
+//! > and the value lies in the range &minus;0.5&nbsp;≤&nbsp;<i>x</i>&nbsp;<&nbsp;0.5
+//! > for signed numbers like <code>[FixedI32]\<[U32]></code>, and in the range
+//! > 0&nbsp;≤&nbsp;<i>x</i>&nbsp;<&nbsp;1 for unsigned numbers like
+//! > <code>[FixedU32]\<[U32]></code>.
 //!
 //! Think of these similar to floats, but instead of having an arbitrary amount of
 //! fractional digits/bits and arbitrary precision, fixed-point numbers have a set
@@ -34,7 +51,10 @@
 //! assert_eq!(n3, 1.0);
 //! ```
 //!
-//!
+//! [U0]: fixed::types::extra::U0
+//! [U24]: fixed::types::extra::U24
+//! [U32]: fixed::types::extra::U32
+pub use fixed::{FixedU8, FixedI8, FixedU16, FixedI16, FixedU32, FixedI32};
 pub use fixed::types::*;
 
 
