@@ -21,7 +21,8 @@ use eos_rs_patches_def::PatchesDef;
 /// The arguments it receives depend on the glue code / where it is inserted in the machine code
 /// of the ROM.
 ///
-/// Raw patches must call [`eos_rs::log_impl::register_logger`] for log macros to work.
+/// Raw patches must call [`register_logger`](https://eosrs.pmdcollab.org/armv5te-none-ndseoseabi-na/doc/eos_rs/log_impl/fn.register_logger.html)
+/// for log macros to work.
 ///
 /// ### Syntax of argument
 /// `<Function Name; Rust Identifier>`
