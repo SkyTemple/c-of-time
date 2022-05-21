@@ -13,15 +13,16 @@ Everything you need to get started is in this repository.
     - If you're using Windows, follow the next steps within MSYS (refer to the installation guide for instructions on 
       how to launch it)
     - On Unix platforms, you might need to relaunch your terminal after the installation
-3. After you've followed the devkitpro installation guide, add the Nintendo DS modules with `sudo dkp-pacman -S nds-dev`.
-4. Clone this repository *recursively* with `git clone --recursive https://github.com/tech-ticks/c-of-time.git`. 
+3. Make sure the devkitpro's ARM binaries are in your PATH (eg. `/opt/devkitpro/devkitARM/bin`).
+4. After you've followed the devkitpro installation guide, add the Nintendo DS modules with `sudo dkp-pacman -S nds-dev`.
+5. Clone this repository *recursively* with `git clone --recursive https://github.com/tech-ticks/c-of-time.git`. 
    Make sure that you enter the correct directory before continuing (e.g. `cd c-of-time/rust`).
-5. Patch a Pokémon Mystery Dungeon: Explorers of Sky ROM with the
+6. Patch a Pokémon Mystery Dungeon: Explorers of Sky ROM with the
    [`ExtraSpace` patch by End45](https://github.com/End45/EoS-asm-hacks/blob/main/src/ExtraSpace.asm). You can apply the patch with [SkyTemple](https://skytemple.org):
     1. Open the ROM in SkyTemple
     2. Click *ASM Patches* and switch to the *Utility* tab
     3. Select the *ExtraSpace* patch and click *Apply*
-6. Install the `cargo-cot` Cargo extension, by running `cargo install --path ./cargo-cot`.
+7. Install the `cargo-cot` Cargo extension, by running `cargo install --path ./cargo-cot`.
 
 ## Building
 To build the project, run `cargo cot build <region>`, where `<region>` is either `na`, `eu` or `jp`, matching your 
