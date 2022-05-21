@@ -132,7 +132,7 @@ pub mod file {
         fn read(&mut self, dst: &mut [u8]) -> super::Result<usize> {
             unsafe {
                 let len = ffi::FileRead(
-                    &mut self.0.0,
+                    &mut self.0 .0,
                     dst.as_mut_ptr() as *mut c_void,
                     dst.len() as u32,
                 ) as usize;
@@ -148,12 +148,12 @@ pub mod file {
         fn seek(&mut self, pos: SeekFrom) -> super::Result<u64> {
             unsafe {
                 match pos {
-                    SeekFrom::Start(p) => ffi::FileSeek(&mut self.0.0, p as i32, 0),
-                    SeekFrom::Current(p) => ffi::FileSeek(&mut self.0.0, p as i32, 1),
-                    SeekFrom::End(p) => ffi::FileSeek(&mut self.0.0, p as i32, 2),
+                    SeekFrom::Start(p) => ffi::FileSeek(&mut self.0 .0, p as i32, 0),
+                    SeekFrom::Current(p) => ffi::FileSeek(&mut self.0 .0, p as i32, 1),
+                    SeekFrom::End(p) => ffi::FileSeek(&mut self.0 .0, p as i32, 2),
                 }
 
-                Ok((self.0.0.current_address as u64) - (self.0.0.start_address as u64))
+                Ok((self.0 .0.current_address as u64) - (self.0 .0.start_address as u64))
             }
         }
     }

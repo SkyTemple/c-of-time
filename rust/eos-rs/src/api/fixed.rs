@@ -65,15 +65,14 @@
 //! [U0]: fixed::types::extra::U0
 //! [U24]: fixed::types::extra::U24
 //! [U32]: fixed::types::extra::U32
-pub use fixed::{FixedU8, FixedI8, FixedU16, FixedI16, FixedU32, FixedI32};
 pub use fixed::types::*;
-
+pub use fixed::{FixedI16, FixedI32, FixedI8, FixedU16, FixedU32, FixedU8};
 
 // Since doctests don't work, we turn the doctest into a normal unit test here.
 #[cfg(test)]
 mod test {
-    use alloc::format;
     use super::I24F8;
+    use alloc::format;
 
     #[test]
     pub fn test_documentation() {
