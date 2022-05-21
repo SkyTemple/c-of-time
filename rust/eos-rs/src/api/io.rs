@@ -161,9 +161,13 @@ pub mod file {
     impl Drop for File {
         fn drop(&mut self) {
             unsafe {
-                ffi::DataTransferInit();
+                if COUNT_IN_FILE_TRANSFER_MODE == 0 {
+                    ffi::DataTransferInit();
+                }
                 ffi::FileClose(&mut self.0);
-                ffi::DataTransferStop();
+                if COUNT_IN_FILE_TRANSFER_MODE == 0 {
+                    ffi::DataTransferStop();
+                }
             }
         }
     }
