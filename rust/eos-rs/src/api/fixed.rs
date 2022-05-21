@@ -12,7 +12,7 @@
 //! amount of fractional digits/bits that are fully accurate.
 //!
 //! Commonly used fixed numbers:
-//! - [`Self::I24F8`]: 32-bit number that has 24 integer bits and eight fractional bits.
+//! - [`I24F8`]: 32-bit number that has 24 integer bits and eight fractional bits.
 //!
 //! You have several options to create a fixed-point number:
 //!

@@ -13,7 +13,7 @@
 
 mod grid;
 
-pub use self::grid::DungeonGridMutator;
+pub use self::grid::{DungeonGridMutator, GRID_CAPACITY_DIM};
 use crate::api::dungeon_mode::GlobalDungeonData;
 
 use crate::api::dungeon_mode::dungeon_generator::{
