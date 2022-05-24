@@ -191,16 +191,7 @@ pub trait DungeonMonsterExtRead {
     /// The values in the returned tuple are None, if they are invalid (or we don't know them yet).
     ///
     /// See [`Move::get_target_and_range`] for more information.
-    fn get_move_target_and_range(
-        &self,
-        the_move: &Move,
-        is_ai: bool,
-    ) -> (
-        Option<MoveTarget>,
-        Option<MoveRange>,
-        Option<HealingMoveType>,
-        u16,
-    );
+    fn get_move_target_and_range(&self, the_move: &Move, is_ai: bool) -> MoveTargetAndRange;
 
     /// Get the weather, as experienced by the monster.
     fn get_apparent_weather(&self) -> Option<Weather>;
@@ -512,16 +503,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         unsafe { ffi::HasConditionalGroundImmunity(force_mut_ptr!(self.1)) > 0 }
     }
 
-    fn get_move_target_and_range(
-        &self,
-        the_move: &Move,
-        is_ai: bool,
-    ) -> (
-        Option<MoveTarget>,
-        Option<MoveRange>,
-        Option<HealingMoveType>,
-        u16,
-    ) {
+    fn get_move_target_and_range(&self, the_move: &Move, is_ai: bool) -> MoveTargetAndRange {
         unsafe {
             ffi::GetEntityMoveTargetAndRange(
                 force_mut_ptr!(self.1),
@@ -791,16 +773,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         self.as_ref().has_conditional_ground_immunity()
     }
 
-    fn get_move_target_and_range(
-        &self,
-        the_move: &Move,
-        is_ai: bool,
-    ) -> (
-        Option<MoveTarget>,
-        Option<MoveRange>,
-        Option<HealingMoveType>,
-        u16,
-    ) {
+    fn get_move_target_and_range(&self, the_move: &Move, is_ai: bool) -> MoveTargetAndRange {
         self.as_ref().get_move_target_and_range(the_move, is_ai)
     }
 

@@ -3,7 +3,6 @@
 use crate::api::dungeon_mode::MoveCategory;
 use crate::api::objects::Move;
 use crate::ffi;
-use crate::ffi::move_target_and_range;
 
 #[repr(u32)]
 #[derive(PartialEq, Clone, Copy)]
@@ -50,7 +49,7 @@ pub enum MoveRange {
     Floor = ffi::move_range::RANGE_FLOOR,
     User = ffi::move_range::RANGE_USER,
     FrontWithCornerCutting = ffi::move_range::RANGE_FRONT_WITH_CORNER_CUTTING,
-    IceShard = ffi::move_range::RANGE_ICE_SHARD,
+    Front2WithCornerCutting = ffi::move_range::RANGE_FRONT_2_WITH_CORNER_CUTTING,
     Special = ffi::move_range::RANGE_SPECIAL,
 }
 
@@ -70,7 +69,9 @@ impl TryInto<MoveRange> for ffi::move_range::Type {
             ffi::move_range::RANGE_FRONT_WITH_CORNER_CUTTING => {
                 Ok(MoveRange::FrontWithCornerCutting)
             }
-            ffi::move_range::RANGE_ICE_SHARD => Ok(MoveRange::IceShard),
+            ffi::move_range::RANGE_FRONT_2_WITH_CORNER_CUTTING => {
+                Ok(MoveRange::Front2WithCornerCutting)
+            }
             ffi::move_range::RANGE_SPECIAL => Ok(MoveRange::Special),
             _ => Err(()),
         }
@@ -79,41 +80,88 @@ impl TryInto<MoveRange> for ffi::move_range::Type {
 
 #[repr(u32)]
 #[derive(PartialEq, Clone, Copy)]
-/// Seems to be used to differentiate certain healing moves.
-/// This might also be a bitfield rather than an enum?
-pub enum HealingMoveType {
-    Normal = ffi::healing_move_type::HEALING_MOVE_NORMAL,
-    /// For Softboiled, Moonlight, Milk Drink, Synthesis, Swallow, Heal Order, and Roost
-    Special = ffi::healing_move_type::HEALING_MOVE_SPECIAL,
-    /// For Healing Wish and Lunar Dance
-    Faint = ffi::healing_move_type::HEALING_MOVE_FAINT,
+/// Conditions checked by the AI to determine when a move should be used.
+/// It does not affect how the move works.
+pub enum MoveAiCondition {
+    None = ffi::move_ai_condition::AI_CONDITION_NONE,
+    /// The AI will consider a target elegible wirh a chance equal to the
+    /// move's "ai_condition_random_chance" value.
+    Random = ffi::move_ai_condition::AI_CONDITION_RANDOM,
+    /// Target has HP <= 25%
+    Hp25 = ffi::move_ai_condition::AI_CONDITION_HP_25,
+    /// Target has a negative status condition
+    Status = ffi::move_ai_condition::AI_CONDITION_STATUS,
+    /// Target is asleep, napping or in a nightmare
+    Asleep = ffi::move_ai_condition::AI_CONDITION_ASLEEP,
+    /// Target is ghost-type and not exposed
+    Ghost = ffi::move_ai_condition::AI_CONDITION_GHOST,
+    /// Target has HP <= 25% or a negative status condition
+    Hp25OrStatus = ffi::move_ai_condition::AI_CONDITION_HP_25_OR_STATUS,
 }
 
-impl TryInto<HealingMoveType> for ffi::healing_move_type::Type {
+impl TryInto<MoveAiCondition> for ffi::move_ai_condition::Type {
     type Error = ();
 
-    fn try_into(self) -> Result<HealingMoveType, Self::Error> {
+    fn try_into(self) -> Result<MoveAiCondition, Self::Error> {
         match self {
-            ffi::healing_move_type::HEALING_MOVE_NORMAL => Ok(HealingMoveType::Normal),
-            ffi::healing_move_type::HEALING_MOVE_SPECIAL => Ok(HealingMoveType::Special),
-            ffi::healing_move_type::HEALING_MOVE_FAINT => Ok(HealingMoveType::Faint),
+            ffi::move_ai_condition::AI_CONDITION_NONE => Ok(MoveAiCondition::None),
+            ffi::move_ai_condition::AI_CONDITION_RANDOM => Ok(MoveAiCondition::Random),
+            ffi::move_ai_condition::AI_CONDITION_HP_25 => Ok(MoveAiCondition::Hp25),
+            ffi::move_ai_condition::AI_CONDITION_STATUS => Ok(MoveAiCondition::Status),
+            ffi::move_ai_condition::AI_CONDITION_ASLEEP => Ok(MoveAiCondition::Asleep),
+            ffi::move_ai_condition::AI_CONDITION_GHOST => Ok(MoveAiCondition::Ghost),
+            ffi::move_ai_condition::AI_CONDITION_HP_25_OR_STATUS => {
+                Ok(MoveAiCondition::Hp25OrStatus)
+            }
             _ => Err(()),
         }
+    }
+}
+
+/// Range, target and AI data for a move.
+/// Values are None, if they are invalid / non-standard.
+pub struct MoveTargetAndRange {
+    pub target: Option<MoveTarget>,
+    pub range: Option<MoveRange>,
+    pub ai_condition: Option<MoveAiCondition>,
+    pub unused: u16,
+}
+
+impl From<ffi::move_target_and_range> for MoveTargetAndRange {
+    fn from(tr: ffi::move_target_and_range) -> Self {
+        MoveTargetAndRange {
+            target: tr.target().try_into().ok(),
+            range: tr.range().try_into().ok(),
+            ai_condition: tr.ai_condition().try_into().ok(),
+            unused: tr.unused(),
+        }
+    }
+}
+
+/// Will fail, if any values are None in MoveTargetAndRange.
+impl TryFrom<MoveTargetAndRange> for ffi::move_target_and_range {
+    type Error = ();
+
+    fn try_from(value: MoveTargetAndRange) -> Result<Self, Self::Error> {
+        if value.target.is_none() || value.range.is_none() || value.ai_condition.is_none() {
+            return Err(());
+        }
+        Ok(ffi::move_target_and_range {
+            _bitfield_align_1: [],
+            _bitfield_1: ffi::move_target_and_range::new_bitfield_1(
+                value.target.unwrap() as ffi::move_target::Type,
+                value.range.unwrap() as ffi::move_range::Type,
+                value.ai_condition.unwrap() as ffi::move_ai_condition::Type,
+                value.unused,
+            ),
+        })
     }
 }
 
 /// Game functions related to [`Move`]s.
 pub trait MoveExt {
     /// Gets the move target-and-range field. See struct move_target_and_range in the C headers.
-    fn get_target_and_range(
-        &self,
-        is_ai: bool,
-    ) -> (
-        Option<MoveTarget>,
-        Option<MoveRange>,
-        Option<HealingMoveType>,
-        u16,
-    );
+    fn get_target_and_range(&self, is_ai: bool) -> MoveTargetAndRange;
 
     /// Gets the base power of the move.
     fn get_base_power(&self) -> i32;
@@ -137,15 +185,7 @@ pub trait MoveExt {
 }
 
 impl MoveExt for Move {
-    fn get_target_and_range(
-        &self,
-        is_ai: bool,
-    ) -> (
-        Option<MoveTarget>,
-        Option<MoveRange>,
-        Option<HealingMoveType>,
-        u16,
-    ) {
+    fn get_target_and_range(&self, is_ai: bool) -> MoveTargetAndRange {
         unsafe { ffi::GetMoveTargetAndRange(force_mut_ptr!(self), is_ai as ffi::bool_) }.into()
     }
 
@@ -173,23 +213,5 @@ impl MoveExt for Move {
         unsafe { ffi::GetMoveCategory(self.id.val()) }
             .try_into()
             .ok()
-    }
-}
-
-impl From<move_target_and_range>
-    for (
-        Option<MoveTarget>,
-        Option<MoveRange>,
-        Option<HealingMoveType>,
-        u16,
-    )
-{
-    fn from(tr: move_target_and_range) -> Self {
-        (
-            tr.target().try_into().ok(),
-            tr.range().try_into().ok(),
-            tr.type_().try_into().ok(),
-            tr.unused(),
-        )
     }
 }
