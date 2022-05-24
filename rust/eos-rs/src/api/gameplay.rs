@@ -14,7 +14,7 @@ pub enum TeamSetup {
 }
 
 #[repr(i32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Move index of a monster, used by some functions.
 pub enum TargetTypeIndex {
     FirstType = 0,

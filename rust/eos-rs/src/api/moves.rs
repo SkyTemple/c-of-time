@@ -5,7 +5,7 @@ use crate::api::objects::Move;
 use crate::ffi;
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Move target (i.e., who does a move affect when used?).
 pub enum MoveTarget {
     Enemies = ffi::move_target::TARGET_ENEMIES,
@@ -37,7 +37,7 @@ impl TryInto<MoveTarget> for ffi::move_target::Type {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Move range.
 pub enum MoveRange {
     Front = ffi::move_range::RANGE_FRONT,
@@ -79,7 +79,7 @@ impl TryInto<MoveRange> for ffi::move_range::Type {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Conditions checked by the AI to determine when a move should be used.
 /// It does not affect how the move works.
 pub enum MoveAiCondition {

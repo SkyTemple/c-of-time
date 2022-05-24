@@ -2,7 +2,7 @@ use crate::ffi;
 use crate::ffi::type_matchup::Type;
 
 #[repr(i32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Move index of a monster, used by some functions.
 pub enum TargetTypeIndex {
     FirstType = 0,
@@ -10,7 +10,7 @@ pub enum TargetTypeIndex {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Describes the effectiveness of a move's type against type(s).
 pub enum DungeonTypeMatchup {
     Immune = ffi::type_matchup::MATCHUP_IMMUNE,
@@ -36,7 +36,7 @@ impl TryFrom<ffi::type_matchup::Type> for DungeonTypeMatchup {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// The type of an entity in a dungeon.
 pub enum DungeonEntityType {
     Nothing = ffi::entity_type::ENTITY_NOTHING,
@@ -62,7 +62,7 @@ impl TryFrom<ffi::entity_type::Type> for DungeonEntityType {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// The category of a move.
 pub enum MoveCategory {
     None = ffi::move_category::CATEGORY_NONE,
@@ -86,7 +86,7 @@ impl TryFrom<ffi::move_category::Type> for MoveCategory {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// The type of a floor.
 pub enum FloorType {
     /// The floor is neither a fixed floor nor does it contain a rescue point.
@@ -111,7 +111,7 @@ impl TryFrom<ffi::floor_type::Type> for FloorType {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// The type of terrain of a tile.
 pub enum TerrainType {
     Wall = ffi::terrain_type::TERRAIN_WALL,
@@ -135,7 +135,7 @@ impl TryFrom<ffi::terrain_type::Type> for TerrainType {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// The type of secondary terrain of a tile.
 pub enum SecondaryTerrainType {
     Water = ffi::secondary_terrain_type::SECONDARY_TERRAIN_WATER,
@@ -157,7 +157,7 @@ impl TryFrom<ffi::secondary_terrain_type::Type> for SecondaryTerrainType {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Types of weather.
 pub enum Weather {
     Clear = ffi::weather_id::WEATHER_CLEAR,
@@ -191,7 +191,7 @@ impl TryFrom<ffi::weather_id::Type> for Weather {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Types of weather.
 pub enum DungeonObjective {
     Story = ffi::dungeon_objective::OBJECTIVE_STORY,
@@ -213,7 +213,7 @@ impl TryFrom<ffi::dungeon_objective::Type> for DungeonObjective {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Direction on the dungeon grid
 pub enum Direction {
     Down = ffi::direction_id::DIR_DOWN,
@@ -247,7 +247,7 @@ impl TryFrom<ffi::direction_id::Type> for Direction {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Different types of warp effects
 pub enum WarpType {
     /// Warp to a random position
@@ -281,7 +281,7 @@ impl TryFrom<ffi::warp_type::Type> for WarpType {
 }
 
 #[repr(i32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// The status of a monster's Conversion 2 state.
 pub enum Conversion2Status {
     /// The monster is not under the effect of Conversion 2.
@@ -306,7 +306,7 @@ impl TryFrom<i32> for Conversion2Status {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Group of mission type on a dungeon floor.
 pub enum MissionTypeGroup {
     RescueClient = ffi::mission_type::MISSION_RESCUE_CLIENT,
@@ -353,7 +353,7 @@ impl TryFrom<ffi::mission_type::Type> for MissionTypeGroup {
     }
 }
 
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Specific mission type on a dungeon floor.
 pub enum MissionType {
     RescueClient,
@@ -421,7 +421,7 @@ impl MissionType {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Mission subtype for [`MissionType::ExploreWithClient`].
 pub enum MissionSubtypeExplore {
     Normal = ffi::mission_subtype_explore::MISSION_EXPLORE_NORMAL,
@@ -458,7 +458,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeExplore {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Mission subtype for [`MissionType::TakeItemFromOutlaw`].
 pub enum MissionSubtypeTakeItem {
     NormalOutlaw = ffi::mission_subtype_take_item::MISSION_TAKE_ITEM_NORMAL_OUTLAW,
@@ -495,7 +495,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeTakeItem {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Mission subtype for [`MissionType::ArrestOutlaw`].
 pub enum MissionSubtypeOutlaw {
     Normal0 = ffi::mission_subtype_outlaw::MISSION_OUTLAW_NORMAL_0,
@@ -550,7 +550,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeOutlaw {
 }
 
 #[repr(u32)]
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Mission subtype for [`MissionType::ChallengeRequest`].
 pub enum MissionSubtypeChallenge {
     Normal = ffi::mission_subtype_challenge::MISSION_CHALLENGE_NORMAL,
