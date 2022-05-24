@@ -24,7 +24,6 @@ static bool MoveBodyPress(struct entity* user, struct entity* target, struct mov
 bool CustomApplyMoveEffect(
   move_effect_input* data, struct entity* user, struct entity* target, struct move* move
 ) {
-  COT_LOGFMT(COT_LOG_CAT_EFFECTS, "Running move effect %d", data->move_id);
   switch (data->move_id) {
     case MOVE_SCRATCH:
       // Replace move 260 (Scratch) with custom Body Press effect
