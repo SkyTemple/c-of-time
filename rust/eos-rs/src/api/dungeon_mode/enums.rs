@@ -305,6 +305,32 @@ impl TryFrom<i32> for Conversion2Status {
     }
 }
 
+#[repr(i32)]
+#[derive(PartialEq, Eq, Clone, Copy)]
+/// Controls whether the loop that runs until the current floor ends should continue
+/// iterating or not and why
+pub enum FloorLoopStatus {
+    /// The floor loop keeps executing as normal
+    Continue = 0,
+    /// The floor loop exits because the leader fainted
+    LeaderFainted = 1,
+    /// The floor loop exits because the floor is over
+    NextFloor = 2,
+}
+
+impl TryFrom<ffi::floor_loop_status::Type> for FloorLoopStatus {
+    type Error = ();
+
+    fn try_from(value: ffi::floor_loop_status::Type) -> Result<Self, Self::Error> {
+        match value {
+            ffi::floor_loop_status::FLOOR_LOOP_CONTINUE => Ok(FloorLoopStatus::Continue),
+            ffi::floor_loop_status::FLOOR_LOOP_LEADER_FAINTED => Ok(FloorLoopStatus::LeaderFainted),
+            ffi::floor_loop_status::FLOOR_LOOP_NEXT_FLOOR => Ok(FloorLoopStatus::NextFloor),
+            _ => Err(()),
+        }
+    }
+}
+
 #[repr(u32)]
 #[derive(PartialEq, Eq, Clone, Copy)]
 /// Group of mission type on a dungeon floor.

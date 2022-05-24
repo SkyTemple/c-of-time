@@ -384,6 +384,72 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
         self.0.as_mut().gravity = gravity as ffi::bool_
     }
 
+    /// Entity that is taking it's turn at this moment.
+    pub fn get_current_active_entity(&self) -> Option<&DungeonEntity> {
+        let ptr = self.0.as_ref().current_active_entity;
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &*ptr })
+        }
+    }
+
+    /// Entity that is taking it's turn at this moment.
+    pub fn get_current_active_entity_mut(&self) -> Option<&mut DungeonEntity> {
+        let ptr = self.0.as_ref().current_active_entity;
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// Monster that will become the leader of the team after changing leaders.
+    pub fn get_new_leader(&self) -> Option<&DungeonEntity> {
+        let ptr = self.0.as_ref().new_leader;
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &*ptr })
+        }
+    }
+
+    /// Monster that will become the leader of the team after changing leaders.
+    pub fn get_new_leader_mut(&self) -> Option<&mut DungeonEntity> {
+        let ptr = self.0.as_ref().new_leader;
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// Get whether the floor will be advanced at the end of the turn (unless the leader fainted).
+    pub fn get_end_floor_flag(&self) -> bool {
+        self.0.as_ref().end_floor_flag > 0
+    }
+
+    /// Set whether the floor will be advanced at the end of the turn (unless the leader fainted).
+    pub fn set_end_floor_flag(&mut self, flag: bool) {
+        self.0.as_mut().end_floor_flag = flag as ffi::bool_
+    }
+
+    /// Get whether the floor will be advanced at the end of the turn (even if the leader fainted).
+    pub fn get_end_floor_flag_force(&self) -> bool {
+        self.0.as_ref().end_floor_no_death_check_flag > 0
+    }
+
+    /// Set whether the floor will be advanced at the end of the turn (even if the leader fainted).
+    pub fn set_end_floor_flag_force(&mut self, flag: bool) {
+        self.0.as_mut().end_floor_no_death_check_flag = flag as ffi::bool_
+    }
+
+    /// False if the leader isn't doing anything right now. True if it's currently performing
+    /// an action (such as walking or attacking)
+    pub fn get_leader_action_flag(&self) -> bool {
+        self.0.as_ref().no_action_in_progress == 0
+    }
+
     /// Gets the table of all entities.
     pub fn get_entities(&self) -> EntityTableRef {
         EntityTableRef(&self.0.as_ref().entity_table)
@@ -412,6 +478,87 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
     /// Dungeon floor properties.
     pub fn get_floor_properties_mut(&mut self) -> &mut ffi::floor_properties {
         &mut self.0.as_mut().floor_properties
+    }
+
+    /// Color table. Used to apply a tint to the colors shown on screen.
+    /// Changes depending on the current weather.
+    pub fn get_color_table(&self) -> &[ffi::rgb; 256] {
+        &self.0.as_ref().color_table
+    }
+
+    /// Color table, mutably. Used to apply a tint to the colors shown on screen.
+    /// Changes depending on the current weather.
+    pub fn get_color_table_mut(&mut self) -> &mut [ffi::rgb; 256] {
+        &mut self.0.as_mut().color_table
+    }
+
+    /// Whether the current floor should continue or end and why. Returns None for invalid values.
+    pub fn get_floor_loop_status(&self) -> Option<FloorLoopStatus> {
+        self.0.as_ref().floor_loop_status.val().try_into().ok()
+    }
+
+    /// Whether the current floor should continue or end and why.
+    pub fn set_floor_loop_status(&mut self, loop_status: FloorLoopStatus) {
+        self.0
+            .as_mut()
+            .floor_loop_status
+            .set_val(loop_status as ffi::floor_loop_status::Type);
+    }
+
+    /// If true, the message log won't be shown and the yellow beam animation won't
+    /// appear over team members after the leader faints
+    pub fn is_skip_faint_animation_flag_set(&self) -> bool {
+        self.0.as_ref().skip_faint_animation_flag > 0
+    }
+
+    /// If true, the message log won't be shown and the yellow beam animation won't
+    /// appear over team members after the leader faints
+    pub fn set_skip_faint_animation_flag(&mut self, flag: bool) {
+        self.0.as_mut().skip_faint_animation_flag = flag as ffi::bool_
+    }
+
+    /// True if the leader is running. Causes the leader's action for the next tur
+    /// to be set to [`ffi::action::ACTION_WALK`] until it hits an obstacle.
+    pub fn is_leader_running(&self) -> bool {
+        self.0.as_ref().leader_running > 0
+    }
+
+    /// True if the leader is running. Causes the leader's action for the next tur
+    /// to be set to [`ffi::action::ACTION_WALK`] until it hits an obstacle.
+    pub fn set_leader_running(&mut self, running: bool) {
+        self.0.as_mut().leader_running = running as ffi::bool_
+    }
+
+    /// List of spawn entries for this floor.
+    pub fn get_spawn_entries(&self) -> &[ffi::monster_spawn_entry; 16] {
+        &self.0.as_ref().spawn_entries
+    }
+
+    /// List of spawn entries for this floor, mutably.
+    pub fn get_spawn_entries_mut(&mut self) -> &mut [ffi::monster_spawn_entry; 16] {
+        &mut self.0.as_mut().spawn_entries
+    }
+
+    /// List of the indices in the complete monster spawn table for this floor that were
+    /// spawned in this floor.
+    pub fn get_spawn_table_entries_chosen(&self) -> &[u16; 16] {
+        &self.0.as_ref().spawn_table_entries_chosen
+    }
+
+    /// List of the indices in the complete monster spawn table for this floor that were
+    /// spawned in this floor.
+    pub fn get_spawn_table_entries_chosen_mut(&mut self) -> &mut [u16; 16] {
+        &mut self.0.as_mut().spawn_table_entries_chosen
+    }
+
+    /// Highest level among all the enemies that spawn on this floor
+    pub fn get_highest_enemy_level(&self) -> u16 {
+        self.0.as_ref().highest_enemy_level
+    }
+
+    /// Highest level among all the enemies that spawn on this floor
+    pub fn set_highest_enemy_level(&mut self, level: u16) {
+        self.0.as_mut().highest_enemy_level = level
     }
 }
 
