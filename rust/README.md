@@ -55,7 +55,7 @@ If you do this, not specifying a region with `cargo cot build` or `cargo cot bur
 the Cargo.toml.
 
 ## Documentation
-Most of the logic of the Rust subsystem is in the `eos-rs` crate. The documentation for this crate is available
+Most of the logic of Rust of Darkness is in the `eos-rs` crate. The documentation for this crate is available
 at <https://eosrs.pmdcollab.org/>.
 
 Broadly speaking, this crate provides two APIs:
@@ -156,6 +156,6 @@ To extend the space used by this patch, see the parent README.md, section "Code 
 
 
 ## License
-The Rust subsystem is licensed under the MIT license, see the `LICENSE_MIT` file in the root directory for more information.
+Rust of Darkness is licensed under the MIT license, see the `LICENSE_MIT` file in the root directory for more information.
 
 See the README.md in the root directory for more other licenses that apply to other parts of this repository.
