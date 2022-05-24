@@ -7,6 +7,8 @@
 bool cotInternalDispatchApplyItemEffect(
         struct entity* user, struct entity* target, struct item* item, bool is_thrown
 ) {
+    COT_LOGFMT(COT_LOG_CAT_EFFECTS, "Running item effect %d", item->id.val);
+
     bool handled = CustomApplyItemEffect(user, target, item, is_thrown);
 #ifdef COT_RUST
     // If the Rust runtime of c-of-time is used, ask the Rust implementation to process the effect.
@@ -20,6 +22,8 @@ bool cotInternalDispatchApplyItemEffect(
 bool cotInternalDispatchApplyMoveEffect(
         move_effect_input* data, struct entity* user, struct entity* target, struct move* move
 ) {
+    COT_LOGFMT(COT_LOG_CAT_EFFECTS, "Running move effect %d", data->move_id);
+
     bool handled = CustomApplyMoveEffect(data, user, target, move);
 #ifdef COT_RUST
     // If the Rust runtime of c-of-time is used, ask the Rust implementation to process the effect.
@@ -33,6 +37,10 @@ bool cotInternalDispatchApplyMoveEffect(
 int cotInternalDispatchScriptSpecialProcessCall(
         undefined4* unknown, uint32_t special_process_id, short arg1, short arg2
 ) {
+    // TODO: arg2 doesn't seem to match the argument in the script engine?
+    COT_LOGFMT(COT_LOG_CAT_SPECIAL_PROCESS, "Running special process %d (arg1=%d, arg2=%d)",
+               special_process_id, arg1, arg2);
+
     int return_val = 0;
     bool handled = CustomScriptSpecialProcessCall(unknown, special_process_id, arg1, arg2, &return_val);
     if (!handled) {

@@ -21,7 +21,6 @@ static void ItemElixir(struct entity* target) {
 bool CustomApplyItemEffect(
   struct entity* user, struct entity* target, struct item* item, bool is_thrown
 ) {
-  COT_LOGFMT(COT_LOG_CAT_EFFECTS, "Running item effect %d", item->id.val);
   switch (item->id.val) {
     case ITEM_MAX_ELIXIR:
       // Replace item 99 (Max Elixir) with custom Elixir effect
