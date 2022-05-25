@@ -384,7 +384,7 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
         self.0.as_mut().gravity = gravity as ffi::bool_
     }
 
-    /// Entity that is taking it's turn at this moment.
+    /// Entity that is taking its turn at this moment.
     pub fn get_current_active_entity(&self) -> Option<&DungeonEntity> {
         let ptr = self.0.as_ref().current_active_entity;
         if ptr.is_null() {
@@ -394,7 +394,7 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
         }
     }
 
-    /// Entity that is taking it's turn at this moment.
+    /// Entity that is taking its turn at this moment.
     pub fn get_current_active_entity_mut(&self) -> Option<&mut DungeonEntity> {
         let ptr = self.0.as_ref().current_active_entity;
         if ptr.is_null() {
@@ -517,13 +517,13 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
         self.0.as_mut().skip_faint_animation_flag = flag as ffi::bool_
     }
 
-    /// True if the leader is running. Causes the leader's action for the next tur
+    /// True if the leader is running. Causes the leader's action for the next turn
     /// to be set to [`ffi::action::ACTION_WALK`] until it hits an obstacle.
     pub fn is_leader_running(&self) -> bool {
         self.0.as_ref().leader_running > 0
     }
 
-    /// True if the leader is running. Causes the leader's action for the next tur
+    /// True if the leader is running. Causes the leader's action for the next turn
     /// to be set to [`ffi::action::ACTION_WALK`] until it hits an obstacle.
     pub fn set_leader_running(&mut self, running: bool) {
         self.0.as_mut().leader_running = running as ffi::bool_
