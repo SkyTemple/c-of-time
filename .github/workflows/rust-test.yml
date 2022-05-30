@@ -50,6 +50,7 @@ jobs:
   clippy:
     name: Clippy Checks
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - uses: actions/checkout@v3
 
