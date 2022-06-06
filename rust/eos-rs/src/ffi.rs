@@ -4840,33 +4840,6 @@ pub mod forced_loss_reason {
     pub const FORCED_LOSS_ESCORT_FAINTED: Type = 3;
     pub const FORCED_LOSS_CLIENT_CANT_JOIN: Type = 4;
 }
-#[repr(C, packed)]
-pub struct forced_loss_reason_8 {
-    pub _bitfield_align_1: [u8; 0],
-    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
-}
-impl forced_loss_reason_8 {
-    #[inline]
-    pub fn val(&self) -> forced_loss_reason::Type {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
-    }
-    #[inline]
-    pub fn set_val(&mut self, val: forced_loss_reason::Type) {
-        unsafe {
-            let val: u32 = ::core::mem::transmute(val);
-            self._bitfield_1.set(0usize, 8u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn new_bitfield_1(val: forced_loss_reason::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
-        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
-        __bindgen_bitfield_unit.set(0usize, 8u8, {
-            let val: u32 = unsafe { ::core::mem::transmute(val) };
-            val as u64
-        });
-        __bindgen_bitfield_unit
-    }
-}
 pub mod floor_loop_status {
     pub type Type = crate::ctypes::c_uint;
     pub const FLOOR_LOOP_CONTINUE: Type = 0;
@@ -6870,7 +6843,7 @@ impl move_ {
     }
 }
 #[repr(C)]
-pub struct attack_data {
+pub struct damage_data {
     pub damage: crate::ctypes::c_int,
     pub damage_source: damage_source::Type,
     pub type_matchup: type_matchup::Type,
@@ -8736,6 +8709,11 @@ pub struct dungeon_menu_entry {
     pub string_id: u16,
 }
 #[repr(C)]
+pub struct message_tip {
+    pub tip_id: crate::ctypes::c_int,
+    pub message_id: crate::ctypes::c_int,
+}
+#[repr(C)]
 pub struct map_marker {
     pub map_id: u16,
     pub reference_id: i16,
@@ -8766,15 +8744,12 @@ pub struct dungeon {
     pub field_0xc: undefined,
     pub field_0xd: undefined,
     pub field_0xe: undefined,
-    pub field_0xf: undefined,
+    pub should_enemy_evolve: bool_,
     pub field_0x10: undefined,
     pub no_action_in_progress: bool_,
     pub iq_disabled: bool_,
     pub field_0x13: undefined,
-    pub forced_loss_reason: forced_loss_reason_8,
-    pub field_0x15: undefined,
-    pub field_0x16: undefined,
-    pub field_0x17: undefined,
+    pub forced_loss_reason: forced_loss_reason::Type,
     pub field_0x18: undefined,
     pub field_0x19: undefined,
     pub field_0x1a: undefined,
@@ -9624,7 +9599,7 @@ pub struct dungeon {
     pub leader_running: bool_,
     pub field_0x78c: undefined,
     pub field_0x78d: undefined,
-    pub field_0x78e: undefined,
+    pub pass_turn: bool_,
     pub field_0x78f: undefined,
     pub thief_alert: bool_,
     pub thief_alert_event: bool_,
@@ -49912,7 +49887,13 @@ extern "C" {
     pub fn GetMoveTargetAndRange(move_: *mut move_, is_ai: bool_) -> move_target_and_range;
 }
 extern "C" {
+    pub fn GetMoveType(move_: *mut move_) -> type_id::Type;
+}
+extern "C" {
     pub fn GetMoveBasePower(move_: *mut move_) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetMoveAccuracyOrAiChance(move_: *mut move_, which: crate::ctypes::c_int) -> u8;
 }
 extern "C" {
     pub fn GetMaxPp(move_: *mut move_) -> crate::ctypes::c_int;
@@ -50106,6 +50087,12 @@ extern "C" {
     pub fn InitDungeonListScriptVars();
 }
 extern "C" {
+    pub fn SetDungeonTipShown(tip_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetDungeonTipShown(tip_id: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
     pub fn SetAdventureLogStructLocation();
 }
 extern "C" {
@@ -50236,6 +50223,38 @@ extern "C" {
 }
 extern "C" {
     pub fn DungeonGoesUp(dungeon_id: dungeon_id::Type) -> bool_;
+}
+extern "C" {
+    pub fn JoinedAtRangeCheck(joined_at: dungeon_id_8) -> bool_;
+}
+extern "C" {
+    pub fn ShouldCauseGameOverOnFaint(joined_at: dungeon_id_8) -> bool_;
+}
+extern "C" {
+    pub fn GetMonsterGender(monster_id: monster_id::Type) -> u8;
+}
+extern "C" {
+    pub fn GetSpriteSize(monster_id: monster_id::Type) -> u8;
+}
+extern "C" {
+    pub fn GetSpriteFileSize(monster_id: monster_id::Type) -> u8;
+}
+extern "C" {
+    pub fn GetMonsterPreEvolution(monster_id: monster_id::Type) -> monster_id::Type;
+}
+extern "C" {
+    pub fn GetEvolutions(
+        monster_id: monster_id::Type,
+        output_list: *mut monster_id::Type,
+        skip_sprite_size_check: bool_,
+        skip_shedinja_check: bool_,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetMonsterIdFromSpawnEntry(arg1: *mut monster_spawn_entry) -> monster_id::Type;
+}
+extern "C" {
+    pub fn GetMonsterGenderVeneer(monster_id: monster_id::Type) -> u8;
 }
 extern "C" {
     pub fn IsUnown(monster_id: monster_id::Type) -> bool_;
@@ -50563,6 +50582,9 @@ extern "C" {
     pub fn FixedRoomIsSubstituteRoom() -> bool_;
 }
 extern "C" {
+    pub fn ShouldGameOverOnImportantTeamMemberFaint() -> bool_;
+}
+extern "C" {
     pub fn SubstitutePlaceholderStringTags(
         string_id: crate::ctypes::c_int,
         entity: *mut entity,
@@ -50571,6 +50593,12 @@ extern "C" {
 }
 extern "C" {
     pub fn ItemIsActive(entity: *mut entity, item_id: item_id::Type) -> bool_;
+}
+extern "C" {
+    pub fn IsOnMonsterSpawnList(monster_id: monster_id::Type) -> bool_;
+}
+extern "C" {
+    pub fn GetLeader() -> *mut entity;
 }
 extern "C" {
     pub fn GenerateDungeonRngSeed() -> u32;
@@ -50619,10 +50647,26 @@ extern "C" {
     pub fn TrySwitchPlace(user: *mut entity, target: *mut entity);
 }
 extern "C" {
+    pub fn SetForcedLossReason(forced_loss_reason: forced_loss_reason::Type);
+}
+extern "C" {
+    pub fn GetForcedLossReason() -> forced_loss_reason::Type;
+}
+extern "C" {
     pub fn ResetDamageDesc(damage_desc: *mut undefined4);
 }
 extern "C" {
+    pub fn GetSpriteIndex(monster_id: monster_id::Type) -> u16;
+}
+extern "C" {
     pub fn FloorNumberIsEven() -> bool_;
+}
+extern "C" {
+    pub fn HandleFaint(
+        fainted_entity: *mut entity,
+        faint_reason: crate::ctypes::c_int,
+        killer: *mut entity,
+    );
 }
 extern "C" {
     pub fn TryActivateSlowStart();
@@ -50643,6 +50687,9 @@ extern "C" {
 }
 extern "C" {
     pub fn TryActivateTruant(entity: *mut entity);
+}
+extern "C" {
+    pub fn RestorePpAllMovesSetFlags(entity: *mut entity);
 }
 extern "C" {
     pub fn ExclusiveItemEffectIsActive(
@@ -50678,6 +50725,9 @@ extern "C" {
     pub fn IqSkillIsEnabled(entity: *mut entity, iq_id: iq_skill_id::Type) -> bool_;
 }
 extern "C" {
+    pub fn GetMoveTypeForMonster(entity: *mut entity, move_: *mut move_) -> type_id::Type;
+}
+extern "C" {
     pub fn GetMovePower(entity: *mut entity, move_: *mut move_) -> crate::ctypes::c_int;
 }
 extern "C" {
@@ -50686,6 +50736,26 @@ extern "C" {
         defender: *mut entity,
         base_exp: crate::ctypes::c_int,
     );
+}
+extern "C" {
+    pub fn EnemyEvolution(enemy: *mut entity);
+}
+extern "C" {
+    pub fn EvolveMonster(
+        monster: *mut entity,
+        param_2: *mut undefined4,
+        new_monster_id: monster_id::Type,
+    );
+}
+extern "C" {
+    pub fn ApplyDamage(
+        attacker: *mut entity,
+        defender: *mut entity,
+        damage_data: *mut damage_data,
+        param_4: undefined4,
+        param_5: *mut undefined4,
+        param_6: *mut undefined4,
+    ) -> bool_;
 }
 extern "C" {
     pub fn GetTypeMatchup(
@@ -50702,7 +50772,7 @@ extern "C" {
         attack_type: type_id::Type,
         attack_power: crate::ctypes::c_int,
         crit_chance: crate::ctypes::c_int,
-        damage_out: *mut undefined4,
+        damage_out: *mut damage_data,
         damage_mult_fp: crate::ctypes::c_int,
         move_id: move_id::Type,
         param_9: crate::ctypes::c_int,
@@ -50713,7 +50783,7 @@ extern "C" {
         attacker: *mut entity,
         fixed_damage: crate::ctypes::c_int,
         param_3: undefined4,
-        damage_out: *mut undefined4,
+        damage_out: *mut damage_data,
         move_id: move_id::Type,
         attack_type: type_id::Type,
         param_7: i16,
@@ -50728,7 +50798,7 @@ extern "C" {
         defender: *mut entity,
         fixed_damage: crate::ctypes::c_int,
         param_4: undefined4,
-        damage_out: *mut undefined4,
+        damage_out: *mut damage_data,
         attack_type: type_id::Type,
         move_category: move_category::Type,
         param_8: i16,
@@ -50743,7 +50813,7 @@ extern "C" {
         defender: *mut entity,
         fixed_damage: crate::ctypes::c_int,
         param_4: undefined4,
-        damage_out: *mut undefined4,
+        damage_out: *mut damage_data,
         attack_type: type_id::Type,
         move_category: move_category::Type,
         param_8: i16,
@@ -50758,7 +50828,7 @@ extern "C" {
         defender: *mut entity,
         fixed_damage: crate::ctypes::c_int,
         param_4: undefined4,
-        damage_out: *mut undefined4,
+        damage_out: *mut damage_data,
         attack_type: type_id::Type,
         param_7: i16,
         param_8: undefined4,
@@ -51120,6 +51190,14 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn MoveHitCheck(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        use_second_accuracy: bool_,
+    ) -> bool_;
+}
+extern "C" {
     pub fn DungeonRandOutcomeUserTargetInteraction(
         user: *mut entity,
         target: *mut entity,
@@ -51147,6 +51225,15 @@ extern "C" {
     ) -> bool_;
 }
 extern "C" {
+    pub fn ExecuteMoveEffect(
+        param_1: *mut undefined4,
+        attacker: *mut entity,
+        move_: *mut move_,
+        param_4: undefined4,
+        param_5: undefined4,
+    );
+}
+extern "C" {
     pub fn DealDamage(
         attacker: *mut entity,
         defender: *mut entity,
@@ -51166,6 +51253,15 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn CalcDamageFinal(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        param_4: undefined4,
+        param_5: *mut undefined4,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn GetApparentWeather(entity: *mut entity) -> weather_id::Type;
 }
 extern "C" {
@@ -51182,6 +51278,15 @@ extern "C" {
 }
 extern "C" {
     pub fn IsSecretRoom() -> bool_;
+}
+extern "C" {
+    pub fn GetMinimapData() -> *mut minimap_display_data;
+}
+extern "C" {
+    pub fn SetMinimapDataE447(value: u8);
+}
+extern "C" {
+    pub fn SetMinimapDataE448(value: u8);
 }
 extern "C" {
     pub fn LoadFixedRoomDataVeneer();
@@ -51466,6 +51571,9 @@ extern "C" {
     pub fn HasHeldItem(entity: *mut entity, item_id: item_id::Type) -> bool_;
 }
 extern "C" {
+    pub fn IsOutlawOrChallengeRequestFloor() -> bool_;
+}
+extern "C" {
     pub fn IsCurrentMissionType(type_: mission_type::Type) -> bool_;
 }
 extern "C" {
@@ -51575,10 +51683,46 @@ extern "C" {
     pub fn LogMessageById(user: *mut entity, message_id: crate::ctypes::c_int, show_popup: bool_);
 }
 extern "C" {
+    pub fn OpenMessageLog(param_1: undefined4, param_2: undefined4);
+}
+extern "C" {
     pub fn RunDungeonMode(param_1: *mut undefined4, param_2: undefined4) -> bool_;
 }
 extern "C" {
+    pub fn DisplayDungeonTip(message_tip: *mut message_tip, log: bool_);
+}
+extern "C" {
     pub fn SetBothScreensWindowColorToDefault();
+}
+extern "C" {
+    pub fn DisplayMessage(
+        param_1: undefined4,
+        message_id: crate::ctypes::c_int,
+        wait_for_input: bool_,
+    );
+}
+extern "C" {
+    pub fn DisplayMessage2(
+        param_1: undefined4,
+        message_id: crate::ctypes::c_int,
+        wait_for_input: bool_,
+    );
+}
+extern "C" {
+    pub fn DisplayMessageInternal(
+        message_id: crate::ctypes::c_int,
+        wait_for_input: bool_,
+        param_3: undefined4,
+        param_4: undefined4,
+        param_5: undefined4,
+        param_6: undefined4,
+    );
+}
+extern "C" {
+    pub fn EuFaintCheck(non_team_member_fainted: bool_, set_unk_byte: bool_);
+}
+extern "C" {
+    pub fn GetMinimapDataE447() -> u8;
 }
 #[repr(C)]
 pub struct move_effect_input {
