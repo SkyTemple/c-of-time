@@ -404,30 +404,6 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
         }
     }
 
-    /// Gets a reference to the entity that is currently leading the team, or None if none of
-    /// the first 4 entities is a valid monster with its is_team_leader flag set.
-    // Needs a mut reference, since:
-    // It also sets LEADER_PTR to the result before returning it.
-    pub fn get_leader(&mut self) -> Option<&DungeonEntity> {
-        let ptr = unsafe { ffi::GetLeader() };
-        if ptr.is_null() {
-            None
-        } else {
-            Some(unsafe { &*ptr })
-        }
-    }
-
-    /// Gets a mutable reference to the entity that is currently leading the team, or None if none
-    /// of the first 4 entities is a valid monster with its is_team_leader flag set.
-    pub fn get_leader_mut(&mut self) -> Option<&mut DungeonEntity> {
-        let ptr = unsafe { ffi::GetLeader() };
-        if ptr.is_null() {
-            None
-        } else {
-            Some(unsafe { &mut *ptr })
-        }
-    }
-
     /// Monster that will become the leader of the team after changing leaders.
     pub fn get_new_leader(&self) -> Option<&DungeonEntity> {
         let ptr = self.0.as_ref().new_leader;
@@ -583,18 +559,6 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
     /// Highest level among all the enemies that spawn on this floor
     pub fn set_highest_enemy_level(&mut self, level: u16) {
         self.0.as_mut().highest_enemy_level = level
-    }
-
-    /// Returns true if the player should get kicked out of the dungeon if an important team member
-    /// (like the partner or certain story allies) faints.
-    pub fn should_game_over_on_important_team_member_faint(&self) -> bool {
-        unsafe { ffi::ShouldGameOverOnImportantTeamMemberFaint() > 0 }
-    }
-
-    /// Returns true if the specified monster is included in the floor's monster spawn list
-    /// (the modified list after a maximum of 14 different species were chosen).
-    pub fn is_on_monster_spawn_list(monster_id: monster_catalog::Type) -> bool {
-        unsafe { ffi::IsOnMonsterSpawnList(monster_id) > 0 }
     }
 }
 
@@ -996,6 +960,42 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn get_mission_enemy_minion_group(&self, minion_group_index: i32) -> monster_catalog::Type {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetMissionEnemyMinionGroup(minion_group_index) }
+    }
+
+    /// Gets a reference to the entity that is currently leading the team, or None if none of
+    /// the first 4 entities is a valid monster with its is_team_leader flag set.
+    // Needs a mut reference, since:
+    // It also sets LEADER_PTR to the result before returning it.
+    pub fn get_leader(&mut self) -> Option<&DungeonEntity> {
+        let ptr = unsafe { ffi::GetLeader() };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &*ptr })
+        }
+    }
+
+    /// Gets a mutable reference to the entity that is currently leading the team, or None if none
+    /// of the first 4 entities is a valid monster with its is_team_leader flag set.
+    pub fn get_leader_mut(&mut self) -> Option<&mut DungeonEntity> {
+        let ptr = unsafe { ffi::GetLeader() };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// Returns true if the player should get kicked out of the dungeon if an important team member
+    /// (like the partner or certain story allies) faints.
+    pub fn should_game_over_on_important_team_member_faint(&self) -> bool {
+        unsafe { ffi::ShouldGameOverOnImportantTeamMemberFaint() > 0 }
+    }
+
+    /// Returns true if the specified monster is included in the floor's monster spawn list
+    /// (the modified list after a maximum of 14 different species were chosen).
+    pub fn is_on_monster_spawn_list(&self, monster_id: monster_catalog::Type) -> bool {
+        unsafe { ffi::IsOnMonsterSpawnList(monster_id) > 0 }
     }
 
     /// Loads fixed room data from BALANCE/fixed.bin into the buffer pointed to by
