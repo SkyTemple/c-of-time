@@ -12,7 +12,7 @@ pub struct MonsterSpeciesInfo(monster_catalog::Type);
 impl MonsterSpeciesInfo {
     /// Returns the info struct for the monster species with the given ID.
     ///
-    /// The caller should make sure, the ID is valid (refers to an existing monster species),
+    /// The caller should make sure the ID is valid (refers to an existing monster species),
     /// otherwise the data returned by methods of this struct will be invalid and undefined.
     pub fn get(monster_idx: monster_catalog::Type) -> Self {
         Self(monster_idx)
@@ -60,25 +60,25 @@ impl MonsterSpeciesInfo {
         ignore_sprite_size: bool,
         include_shedinja: bool,
     ) -> Vec<MonsterSpeciesInfo> {
-        unsafe {
-            const MAX_EVOLUTIONS: i32 = 32;
-            let mut output_list = [0; MAX_EVOLUTIONS as usize];
-            let count = ffi::GetEvolutions(
+        const MAX_EVOLUTIONS: i32 = 32;
+        let mut output_list = [0; MAX_EVOLUTIONS as usize];
+        let count = unsafe {
+            ffi::GetEvolutions(
                 self.0,
                 output_list.as_mut_ptr(),
                 ignore_sprite_size as ffi::bool_,
                 include_shedinja as ffi::bool_,
-            );
-            if count >= MAX_EVOLUTIONS {
-                // uh oh. Memory is corrupted now, so time to bail.
-                // THIS PANIC IS NOT UNWIND SAFE (not that it matters).
-                panic!("Monster has more than {} evolutions.", MAX_EVOLUTIONS);
-            }
-            output_list
-                .into_iter()
-                .take(count as usize)
-                .map(MonsterSpeciesInfo)
-                .collect()
+            )
+        };
+        if count >= MAX_EVOLUTIONS {
+            // uh oh. Memory is corrupted now, so time to bail.
+            // THIS PANIC IS NOT UNWIND SAFE (not that it matters).
+            panic!("Monster has more than {} evolutions.", MAX_EVOLUTIONS);
         }
+        output_list
+            .into_iter()
+            .take(count as usize)
+            .map(MonsterSpeciesInfo)
+            .collect()
     }
 }

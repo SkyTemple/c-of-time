@@ -409,26 +409,22 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
     // Needs a mut reference, since:
     // It also sets LEADER_PTR to the result before returning it.
     pub fn get_leader(&mut self) -> Option<&DungeonEntity> {
-        unsafe {
-            let ptr = ffi::GetLeader();
-            if ptr.is_null() {
-                None
-            } else {
-                Some(&*ptr)
-            }
+        let ptr = unsafe { ffi::GetLeader() };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &*ptr })
         }
     }
 
     /// Gets a mutable reference to the entity that is currently leading the team, or None if none
     /// of the first 4 entities is a valid monster with its is_team_leader flag set.
     pub fn get_leader_mut(&mut self) -> Option<&mut DungeonEntity> {
-        unsafe {
-            let ptr = ffi::GetLeader();
-            if ptr.is_null() {
-                None
-            } else {
-                Some(&mut *ptr)
-            }
+        let ptr = unsafe { ffi::GetLeader() };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
         }
     }
 
