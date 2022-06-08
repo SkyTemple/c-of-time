@@ -4,6 +4,7 @@
 
 #[cfg(not(test))]
 pub use crate::allocation::ALLOCATOR;
+#[cfg_attr(docsrs, doc(cfg(feature = "io")))]
 #[cfg(feature = "io")]
 pub use crate::api::io::prelude::*;
 #[cfg(not(test))]

@@ -404,6 +404,34 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
         }
     }
 
+    /// Gets a reference to the entity that is currently leading the team, or None if none of
+    /// the first 4 entities is a valid monster with its is_team_leader flag set.
+    // Needs a mut reference, since:
+    // It also sets LEADER_PTR to the result before returning it.
+    pub fn get_leader(&mut self) -> Option<&DungeonEntity> {
+        unsafe {
+            let ptr = ffi::GetLeader();
+            if ptr.is_null() {
+                None
+            } else {
+                Some(&*ptr)
+            }
+        }
+    }
+
+    /// Gets a mutable reference to the entity that is currently leading the team, or None if none
+    /// of the first 4 entities is a valid monster with its is_team_leader flag set.
+    pub fn get_leader_mut(&mut self) -> Option<&mut DungeonEntity> {
+        unsafe {
+            let ptr = ffi::GetLeader();
+            if ptr.is_null() {
+                None
+            } else {
+                Some(&mut *ptr)
+            }
+        }
+    }
+
     /// Monster that will become the leader of the team after changing leaders.
     pub fn get_new_leader(&self) -> Option<&DungeonEntity> {
         let ptr = self.0.as_ref().new_leader;
@@ -559,6 +587,18 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
     /// Highest level among all the enemies that spawn on this floor
     pub fn set_highest_enemy_level(&mut self, level: u16) {
         self.0.as_mut().highest_enemy_level = level
+    }
+
+    /// Returns true if the player should get kicked out of the dungeon if an important team member
+    /// (like the partner or certain story allies) faints.
+    pub fn should_game_over_on_important_team_member_faint(&self) -> bool {
+        unsafe { ffi::ShouldGameOverOnImportantTeamMemberFaint() > 0 }
+    }
+
+    /// Returns true if the specified monster is included in the floor's monster spawn list
+    /// (the modified list after a maximum of 14 different species were chosen).
+    pub fn is_on_monster_spawn_list(monster_id: monster_catalog::Type) -> bool {
+        unsafe { ffi::IsOnMonsterSpawnList(monster_id) > 0 }
     }
 }
 
@@ -800,6 +840,14 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::IsHiddenStairsFloor() > 0 }
     }
 
+    /// Checks if the current floor is an active mission destination of type
+    /// [`MissionType::TakeItemFromOutlaw`], [`MissionType::ArrestOutlaw`] or
+    /// [`MissionType::ChallengeRequest`].
+    pub fn is_outlaw_or_challenge_request_floor(&self) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::IsOutlawOrChallengeRequestFloor() > 0 }
+    }
+
     /// Checks if the current floor is an active mission destination of a given type group.
     pub fn is_current_mission_type(&self, mission_type_group: MissionTypeGroup) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
@@ -962,6 +1010,141 @@ impl<'a> GlobalDungeonData<'a> {
     /// to it's content must exist.
     pub unsafe fn load_fixed_room_data(&mut self) {
         ffi::LoadFixedRoomData()
+    }
+
+    /// Sets the forced loss reason to a given value.
+    pub fn set_forced_loss_reason(&mut self, reason: ForcedLossReason) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::SetForcedLossReason(reason as ffi::forced_loss_reason::Type) }
+    }
+
+    /// Gets the forced loss reason, returns None if it's invalid.
+    pub fn get_forced_loss_reason(&self) -> Option<ForcedLossReason> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetForcedLossReason() }.try_into().ok()
+    }
+
+    /// Gets the sprite index of the specified monster on this floor
+    pub fn get_monster_sprite_index(&self, monster_idx: monster_catalog::Type) -> u16 {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetSpriteIndex(monster_idx) }
+    }
+
+    /// Handles a fainted monster (reviving does not count as fainting).
+    ///
+    /// # Arguments
+    /// * `fainted_entity`: Fainted entity
+    /// * `faint_reason`: Faint reason (move ID or greater than the max move id for other causes)
+    /// * `killer`: Entity responsible of the fainting
+    pub fn handle_faint(
+        &mut self,
+        fainted_entity: &mut DungeonEntity,
+        faint_reason: i32,
+        killer: &mut DungeonEntity,
+    ) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::HandleFaint(fainted_entity, faint_reason, killer) }
+    }
+
+    /// Returns a reference to the minimap_display_data struct in the dungeon struct, if it
+    /// exists.
+    pub fn get_minimap_data(&self) -> Option<&ffi::minimap_display_data> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        let ptr = unsafe { ffi::GetMinimapData() };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &*ptr })
+        }
+    }
+
+    /// Returns a mutable reference to the minimap_display_data struct in the dungeon struct, if it
+    /// exists.
+    pub fn get_minimap_data_mut(&mut self) -> Option<&mut ffi::minimap_display_data> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        let ptr = unsafe { ffi::GetMinimapData() };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// Sets [`ffi::minimap_display_data::field_0xE447`] to the specified value
+    pub fn set_minimap_data_e447(&mut self, value: u8) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::SetMinimapDataE447(value) }
+    }
+
+    /// Gets the value of [`ffi::minimap_display_data::field_0xE447`].
+    pub fn get_minimap_data_e447(&mut self) -> u8 {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetMinimapDataE447() }
+    }
+
+    /// Sets [`ffi::minimap_display_data::field_0xE448`] to the specified value
+    pub fn set_minimap_data_e448(&mut self, value: u8) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::SetMinimapDataE448(value) }
+    }
+
+    /// Opens the message log window.
+    pub fn open_message_log(&mut self, param_1: ffi::undefined4, param_2: ffi::undefined4) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::OpenMessageLog(param_1, param_2) }
+    }
+
+    /// Checks if a given dungeon tip was not displayed yet and if so, displays it.
+    ///
+    /// If `log` is true, the tip will also be written to the message log.
+    pub fn display_dungeon_tip(&mut self, tip: &mut ffi::message_tip, log: bool) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::DisplayDungeonTip(tip, log as ffi::bool_) }
+    }
+
+    /// Displays a message in a dialogue box that optionally waits for player input before closing.
+    pub fn display_message(
+        &mut self,
+        param_1: ffi::undefined4,
+        message_id: i32,
+        wait_for_input: bool,
+    ) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::DisplayMessage(param_1, message_id, wait_for_input as ffi::bool_) }
+    }
+
+    /// Displays a message in a dialogue box that optionally waits for player input before closing.
+    pub fn display_message2(
+        &mut self,
+        param_1: ffi::undefined4,
+        message_id: i32,
+        wait_for_input: bool,
+    ) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::DisplayMessage2(param_1, message_id, wait_for_input as ffi::bool_) }
+    }
+
+    #[cfg_attr(docsrs, doc(cfg(feature = "eu")))]
+    #[cfg(feature = "eu")]
+    /// This function is exclusive to the EU ROM. Seems to perform a check to see if the monster
+    /// who just fainted was a team member who should cause the minimap to be updated (or something
+    /// like that, maybe related to the Map Surveyor IQ skill) and if it passes, updates the
+    /// minimap.
+    ///
+    /// The function ends by calling another 2 functions. In US ROMs, calls to this are
+    /// replaced by calls to those two functions. This seems to indicate that this function fixes
+    /// some edge case glitch that can happen when a team member faints.
+    ///
+    /// # Arguments
+    /// * `non_team_member_fainted` - False if the fainted entity was a team member.
+    /// * `set_unk_byte` - True to set an unknown byte in the RAM to 1.
+    pub fn faint_check(&mut self, non_team_member_fainted: bool, set_unk_byte: bool) {
+        unsafe {
+            ffi::EuFaintCheck(
+                non_team_member_fainted as ffi::bool_,
+                set_unk_byte as ffi::bool_,
+            )
+        }
     }
 }
 

@@ -7,6 +7,7 @@ use crate::panic;
 use core::alloc::{AllocError, Allocator, GlobalAlloc, Layout};
 use core::ptr::NonNull;
 
+#[cfg_attr(docsrs, doc(cfg(feature = "global_allocator")))]
 #[cfg(feature = "global_allocator")]
 #[cfg(not(test))]
 #[global_allocator]

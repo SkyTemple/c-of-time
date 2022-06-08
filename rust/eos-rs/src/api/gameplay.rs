@@ -546,3 +546,42 @@ pub fn item_at_table_idx(table_idx: i32) -> ffi::owned_item {
     unsafe { ffi::ItemAtTableIdx(table_idx, &mut out) }
     out
 }
+
+/// Marks a dungeon tip as already shown to the player
+pub fn set_dungeon_tip_shown(tip_id: i32) {
+    unsafe { ffi::SetDungeonTipShown(tip_id) }
+}
+
+/// Checks if a dungeon tip has already been shown before or not.
+pub fn was_dungeon_tip_shown(tip_id: i32) -> bool {
+    unsafe { ffi::GetDungeonTipShown(tip_id) > 0 }
+}
+
+/// Returns whether a certain joined_at field value is between
+/// [`dungeon_catalog::DUNGEON_JOINED_AT_BIDOOF`] and [`dungeon_catalog::DUNGEON_DUMMY_0xE3`].
+pub fn is_special_joined_at_location(joined_at: dungeon_catalog::Type) -> bool {
+    unsafe {
+        ffi::JoinedAtRangeCheck(ffi::dungeon_id_8 {
+            _bitfield_align_1: [],
+            _bitfield_1: ffi::dungeon_id_8::new_bitfield_1(joined_at),
+        }) > 0
+    }
+}
+
+/// Returns whether a game over should happen when a monster with the specified joined_at ID faints
+/// (as long as the other conditions are met). It might have a more generic meaning.
+pub fn should_cause_game_over_on_faint(joined_at: dungeon_catalog::Type) -> bool {
+    unsafe {
+        ffi::ShouldCauseGameOverOnFaint(ffi::dungeon_id_8 {
+            _bitfield_align_1: [],
+            _bitfield_1: ffi::dungeon_id_8::new_bitfield_1(joined_at),
+        }) > 0
+    }
+}
+
+/// Returns the monster ID of the specified monster spawn entry.
+pub fn get_monster_id_from_spawn_entry(
+    spawn_entry: &ffi::monster_spawn_entry,
+) -> monster_catalog::Type {
+    unsafe { ffi::GetMonsterIdFromSpawnEntry(force_mut_ptr!(spawn_entry)) }
+}

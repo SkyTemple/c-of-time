@@ -1,6 +1,8 @@
 use crate::api::dungeon_mode::*;
 use crate::api::moves::*;
 use crate::api::objects::*;
+use crate::ffi::type_id::Type;
+use crate::ffi::undefined4;
 use fixed::types::I24F8;
 
 /// Extension trait for [`DungeonMonsterRef`] (read operations).
@@ -74,7 +76,7 @@ pub trait DungeonMonsterExtRead {
         attack_type: type_catalog::Type,
         attack_power: i32,
         crit_chance: i32,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         damage_multiplier: I24F8,
         move_id: move_catalog::Type,
         param_9: i32,
@@ -93,7 +95,7 @@ pub trait DungeonMonsterExtRead {
         &self,
         fixed_damage: i32,
         param_3: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         move_id: move_catalog::Type,
         attack_type: type_catalog::Type,
         param_7: i16,
@@ -112,7 +114,7 @@ pub trait DungeonMonsterExtRead {
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
@@ -130,7 +132,7 @@ pub trait DungeonMonsterExtRead {
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         attack_type: type_catalog::Type,
         param_7: i16,
         message_type: ffi::undefined4,
@@ -146,7 +148,7 @@ pub trait DungeonMonsterExtRead {
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
@@ -223,6 +225,17 @@ pub trait DungeonMonsterExtRead {
     /// Checks if the monster is under the effect of Conversion 2 (its type was changed). Returns
     /// `None` if the value is invalid.
     fn is_conversion2_active(&self) -> Option<Conversion2Status>;
+
+    /// Check the type of a move when used by a certain monster. Accounts for special cases
+    /// such as Hidden Power, Weather Ball, the regular attack...
+    fn get_move_type_if_used_by_self(&self, the_move: &Move) -> type_catalog::Type;
+
+    /// Checks if the specified enemy should evolve because it just defeated an ally, and if so,
+    /// attempts to evolve it.
+    fn evolve_this_enemy_if_should(&mut self);
+
+    /// Makes the specified monster evolve into the specified species.
+    fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: monster_catalog::Type);
 }
 
 /// Extension trait for [`DungeonMonsterMut`] (write operations).
@@ -243,6 +256,13 @@ pub trait DungeonMonsterExtWrite {
     ///
     /// Applies to Castform and Cherrim, and checks for their unique abilities.
     fn try_weather_form_change(&mut self);
+
+    /// Restores PP for all moves, clears flags [`Move::f_consume_2_pp`],
+    /// [`Move::flags2_unk5`] and [`Move::flags2_unk7`], and sets flag
+    /// [`Move::f_consume_pp`].
+    ///
+    /// Called when a monster is revived.
+    fn restore_pp_for_all_moves_set_flags(&mut self);
 }
 
 impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
@@ -325,7 +345,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         attack_type: type_catalog::Type,
         attack_power: i32,
         crit_chance: i32,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         damage_multiplier: I24F8,
         move_id: move_catalog::Type,
         param_9: i32,
@@ -349,7 +369,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         &self,
         fixed_damage: i32,
         param_3: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         move_id: move_catalog::Type,
         attack_type: type_catalog::Type,
         param_7: i16,
@@ -378,7 +398,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
@@ -408,7 +428,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         attack_type: type_catalog::Type,
         param_7: i16,
         message_type: ffi::undefined4,
@@ -436,7 +456,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
@@ -551,6 +571,18 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
             .try_into()
             .ok()
     }
+
+    fn get_move_type_if_used_by_self(&self, the_move: &Move) -> Type {
+        unsafe { ffi::GetMoveTypeForMonster(force_mut_ptr!(self.1), force_mut_ptr!(the_move)) }
+    }
+
+    fn evolve_this_enemy_if_should(&mut self) {
+        unsafe { ffi::EnemyEvolution(force_mut_ptr!(self.1)) }
+    }
+
+    fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: monster_catalog::Type) {
+        unsafe { ffi::EvolveMonster(force_mut_ptr!(self.1), param_2, new_monster_idx) }
+    }
 }
 
 impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
@@ -622,7 +654,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         attack_type: type_catalog::Type,
         attack_power: i32,
         crit_chance: i32,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         damage_multiplier: I24F8,
         move_id: move_catalog::Type,
         param_9: i32,
@@ -643,7 +675,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         &self,
         fixed_damage: i32,
         param_3: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         move_id: move_catalog::Type,
         attack_type: type_catalog::Type,
         param_7: i16,
@@ -669,7 +701,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
@@ -696,7 +728,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         attack_type: type_catalog::Type,
         param_7: i16,
         message_type: ffi::undefined4,
@@ -721,7 +753,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
-        damage_out: &mut ffi::undefined4,
+        damage_out: &mut ffi::damage_data,
         attack_type: type_catalog::Type,
         move_category: MoveCategory,
         param_8: i16,
@@ -804,6 +836,18 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
     fn is_conversion2_active(&self) -> Option<Conversion2Status> {
         self.as_ref().is_conversion2_active()
     }
+
+    fn get_move_type_if_used_by_self(&self, the_move: &Move) -> Type {
+        self.as_ref().get_move_type_if_used_by_self(the_move)
+    }
+
+    fn evolve_this_enemy_if_should(&mut self) {
+        self.as_ref().evolve_this_enemy_if_should()
+    }
+
+    fn evolve(&mut self, param_2: &mut undefined4, new_monster_idx: monster_catalog::Type) {
+        self.as_ref().evolve(param_2, new_monster_idx)
+    }
 }
 
 impl<'a> DungeonMonsterExtWrite for DungeonMonsterMut<'a> {
@@ -817,5 +861,9 @@ impl<'a> DungeonMonsterExtWrite for DungeonMonsterMut<'a> {
 
     fn try_weather_form_change(&mut self) {
         unsafe { ffi::TryWeatherFormChange(self.1 as *mut _) }
+    }
+
+    fn restore_pp_for_all_moves_set_flags(&mut self) {
+        unsafe { ffi::RestorePpAllMovesSetFlags(self.1 as *mut _) }
     }
 }

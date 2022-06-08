@@ -623,3 +623,42 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeChallenge {
         Self::try_from(*unsafe { value.challenge.as_ref() })
     }
 }
+
+#[repr(i32)]
+#[derive(PartialEq, Eq, Clone, Copy)]
+/// List of reasons why you can get forcefully kicked out of a dungeon.
+pub enum ForcedLossReason {
+    /// You don't have to get kicked out of the dungeon.
+    None = 0,
+    /// Your partner fainted (before postgame).
+    PartnerFainted = 1,
+    /// Your client fainted.
+    ClientFainted = 2,
+    /// The client you had to escort fainted.
+    EscortFainted = 3,
+    /// "Your client \[name:0\] couldn't join you. Let's return to Treasure Town."
+    ClientCantJoin = 4,
+}
+
+impl TryFrom<ffi::forced_loss_reason::Type> for ForcedLossReason {
+    type Error = ();
+
+    fn try_from(value: ffi::forced_loss_reason::Type) -> Result<Self, Self::Error> {
+        match value {
+            ffi::forced_loss_reason::FORCED_LOSS_NONE => Ok(ForcedLossReason::None),
+            ffi::forced_loss_reason::FORCED_LOSS_PARTNER_FAINTED => {
+                Ok(ForcedLossReason::PartnerFainted)
+            }
+            ffi::forced_loss_reason::FORCED_LOSS_CLIENT_FAINTED => {
+                Ok(ForcedLossReason::ClientFainted)
+            }
+            ffi::forced_loss_reason::FORCED_LOSS_ESCORT_FAINTED => {
+                Ok(ForcedLossReason::EscortFainted)
+            }
+            ffi::forced_loss_reason::FORCED_LOSS_CLIENT_CANT_JOIN => {
+                Ok(ForcedLossReason::ClientCantJoin)
+            }
+            _ => Err(()),
+        }
+    }
+}
