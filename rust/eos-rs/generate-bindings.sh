@@ -12,6 +12,7 @@ bindgen \
   --raw-line "#![allow(non_camel_case_types)]" \
   --raw-line "#![allow(non_snake_case)]" \
   --raw-line "#![allow(clippy::missing_safety_doc)]" \
+  --raw-line "#![allow(clippy::useless_transmute)]" \
   --ctypes-prefix "crate::ctypes" \
   --use-core \
   --no-layout-tests \

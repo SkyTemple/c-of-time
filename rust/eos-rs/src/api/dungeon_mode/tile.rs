@@ -87,7 +87,7 @@ impl<'a, const W: usize, const H: usize> DungeonTileGridRead<W, H>
     for DungeonTileGridRef<'a, W, H>
 {
     fn get(&self, x: usize, y: usize) -> Option<&DungeonTile> {
-        unsafe { self.0[y][x].as_ref().map(|tile| &*tile) }
+        unsafe { self.0[y][x].as_ref() }
     }
 
     fn iter(&self) -> DungeonTileGridIter<W> {
@@ -103,7 +103,7 @@ impl<'a, const W: usize, const H: usize> DungeonTileGridRead<W, H>
     for DungeonTileGridMut<'a, W, H>
 {
     fn get(&self, x: usize, y: usize) -> Option<&DungeonTile> {
-        unsafe { self.0[y][x].as_ref().map(|tile| &*tile) }
+        unsafe { self.0[y][x].as_ref() }
     }
 
     fn iter(&self) -> DungeonTileGridIter<W> {

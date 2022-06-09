@@ -1,7 +1,7 @@
 //! Functions related to getting information about monster moves.
 
 use crate::api::dungeon_mode::MoveCategory;
-use crate::api::objects::Move;
+use crate::api::objects::{type_catalog, Move};
 use crate::ffi;
 
 #[repr(u32)]
@@ -182,6 +182,18 @@ pub trait MoveExt {
 
     /// Gets a move's category (physical, special, status). Returns None if the catgeory is invalid.
     fn get_category(&self) -> Option<MoveCategory>;
+
+    /// Gets the type of the move.
+    fn get_type(&self) -> type_catalog::Type;
+
+    /// Gets the accuracy1 value for the move.
+    fn get_accuracy1(&self) -> u8;
+
+    /// Gets the accuracy2 value for the move.
+    fn get_accuracy2(&self) -> u8;
+
+    /// Gets the `ai_condition_random_chance` value for the move.
+    fn get_ai_condition_random_chance(&self) -> u8;
 }
 
 impl MoveExt for Move {
@@ -213,5 +225,21 @@ impl MoveExt for Move {
         unsafe { ffi::GetMoveCategory(self.id.val()) }
             .try_into()
             .ok()
+    }
+
+    fn get_type(&self) -> type_catalog::Type {
+        unsafe { ffi::GetMoveType(force_mut_ptr!(self)) }
+    }
+
+    fn get_accuracy1(&self) -> u8 {
+        unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 0) }
+    }
+
+    fn get_accuracy2(&self) -> u8 {
+        unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 1) }
+    }
+
+    fn get_ai_condition_random_chance(&self) -> u8 {
+        unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 2) }
     }
 }

@@ -22,6 +22,12 @@ impl CreatableWithLease<29> for DungeonEffectsEmitter {
 }
 
 impl DungeonEffectsEmitter {
+    /// Low-level functions internal to the dungeon engine.
+    /// Consider using one of the other functions instead for most cases.
+    pub fn internals(&self) -> DungeonEffectsInternals {
+        DungeonEffectsInternals(self)
+    }
+
     /// Deals damage from a move or item used by an attacking monster on a defending monster.
     ///
     /// Returns the amount of damage dealt.
@@ -29,7 +35,7 @@ impl DungeonEffectsEmitter {
         &self,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
-        used_move: &mut Move,
+        used_move: &Move,
         damage_multiplier: I24F8,
         item_id: Option<item_catalog::Type>,
     ) -> i32 {
@@ -38,7 +44,7 @@ impl DungeonEffectsEmitter {
             ffi::DealDamage(
                 attacker as *mut _,
                 defender as *mut _,
-                used_move as *mut _,
+                force_mut_ptr!(used_move),
                 damage_multiplier.to_bits() as c_int,
                 item_id.unwrap_or(item_catalog::ITEM_NOTHING),
             )
@@ -53,7 +59,7 @@ impl DungeonEffectsEmitter {
         &self,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
-        used_move: &mut Move,
+        used_move: &Move,
         item_id: Option<item_catalog::Type>,
     ) -> bool {
         // SAFETY: We have a lease on the overlay existing.
@@ -61,7 +67,7 @@ impl DungeonEffectsEmitter {
             ffi::DealDamageWithRecoil(
                 attacker as *mut _,
                 defender as *mut _,
-                used_move as *mut _,
+                force_mut_ptr!(used_move),
                 item_id.unwrap_or(item_catalog::ITEM_NOTHING),
             ) > 0
         }
@@ -1097,5 +1103,135 @@ impl DungeonEffectsEmitter {
     pub fn try_activate_artificial_weather_abilities(&self) {
         // SAFETY: We have a lease on the overlay existing.
         unsafe { ffi::TryActivateArtificialWeatherAbilities() }
+    }
+}
+
+/// Internal functions for battle effect calculations.
+pub struct DungeonEffectsInternals<'a>(&'a DungeonEffectsEmitter);
+
+impl<'a> DungeonEffectsInternals<'a> {
+    /// Applies damage to a monster. Displays the damage animation, lowers its health and handles
+    /// reviving if applicable.
+    ///
+    /// The EU version has some additional checks related to printing fainting messages under
+    /// specific circumstances.
+    ///
+    /// Returns true if the target fainted (reviving does not count as fainting).
+    ///
+    /// # Arguments
+    /// * `attacker` - The monster that is trying to inflict this status.
+    /// * `defender` - The monster that is being inflicted with this status.
+    /// * `damage_data` - Mutable reference to the damage_data struct that contains info about the
+    ///                   damage to deal
+    /// * `param_4` - ?
+    /// * `param_5` - ?
+    /// * `param_6` - ?
+    pub fn apply_damage(
+        &self,
+        attacker: &mut DungeonEntity,
+        defender: &mut DungeonEntity,
+        damage_data: &mut ffi::damage_data,
+        param_4: ffi::undefined4,
+        param_5: &mut ffi::undefined4,
+        param_6: &mut ffi::undefined4,
+    ) -> bool {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe {
+            ffi::ApplyDamage(
+                attacker as *mut _,
+                defender as *mut _,
+                damage_data,
+                param_4,
+                param_5,
+                param_6,
+            ) > 0
+        }
+    }
+
+    /// Determines if a move used hits or misses the target.
+    ///
+    /// # Arguments
+    /// * `attacker` - The monster that is trying to inflict this status.
+    /// * `defender` - The monster that is being inflicted with this status.
+    /// * `the_move` - Reference to move data
+    /// * `use_second_accuracy` - True if the move's first accuracy (accuracy1) should be used, false
+    ///                           if its second accuracy (accuracy2) should be used instead.
+    pub fn move_hit_check(
+        &self,
+        attacker: &mut DungeonEntity,
+        defender: &mut DungeonEntity,
+        the_move: &Move,
+        use_second_accuracy: bool,
+    ) -> bool {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe {
+            ffi::MoveHitCheck(
+                attacker as *mut _,
+                defender as *mut _,
+                force_mut_ptr!(the_move),
+                use_second_accuracy as ffi::bool_,
+            ) > 0
+        }
+    }
+
+    /// Handles the effects that happen after a move is used. Includes a loop that is run for
+    /// each target, multiple ability checks and the giant switch statement that executes the
+    /// effect of the move used given its ID.
+    ///
+    /// # Arguments
+    /// * `param_1` - pointer to some struct
+    /// * `attacker` - attacker pointer
+    /// * `the_move` - pointer to move data
+    /// * `param_4` - ?
+    /// * `param_5` - ?
+    pub fn execute_move_effect(
+        &self,
+        param_1: &mut ffi::undefined4,
+        attacker: &mut DungeonEntity,
+        the_move: &Move,
+        param_4: ffi::undefined4,
+        param_5: ffi::undefined4,
+    ) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe {
+            ffi::ExecuteMoveEffect(
+                param_1,
+                attacker as *mut _,
+                force_mut_ptr!(the_move),
+                param_4,
+                param_5,
+            )
+        }
+    }
+
+    /// Last function called by [`DungeonEffectsEmitter::deal_damage`] to determine the final
+    /// damage dealt by the move.
+    ///
+    /// The result of this call is the return value of DealDamage.
+    ///
+    /// # Arguments
+    /// * `attacker` - attacker pointer
+    /// * `defender` - defender pointer
+    /// * `the_move` - pointer to move data
+    /// * `param_4` - ?
+    /// * `param_5` - ?
+    pub fn calc_damage_final(
+        &self,
+        attacker: &mut DungeonEntity,
+        defender: &mut DungeonEntity,
+        used_move: &Move,
+        param_4: ffi::undefined4,
+        param_5: &mut ffi::undefined4,
+    ) -> i32 {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe {
+            ffi::CalcDamageFinal(
+                attacker as *mut _,
+                defender as *mut _,
+                force_mut_ptr!(used_move),
+                param_4,
+                param_5,
+            )
+        }
     }
 }

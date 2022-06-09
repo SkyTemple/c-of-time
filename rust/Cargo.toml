@@ -20,8 +20,10 @@ members = ["cargo-cot", "eos-rs", "eos-rs/patches-def", "eos-rs/proc", "eos-rs/b
 #[workspace.metadata.cot]
 #region = "NA"
 
-[dependencies]
-eos-rs = { path = "./eos-rs" }
+[dependencies.eos-rs]
+path = "./eos-rs"
+# Enable the "eu" feature if you want access to additional functions only present in the EU version
+#features = ["eu"]
 
 [build-dependencies]
 eos-rs-build = { path = "./eos-rs/build" }

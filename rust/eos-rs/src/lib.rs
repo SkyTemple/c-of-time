@@ -36,6 +36,7 @@
 #![feature(core_c_str)]
 #![feature(allocator_api)]
 #![feature(nonnull_slice_from_raw_parts)]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 #![allow(clippy::too_many_arguments)]
 
 extern crate alloc;

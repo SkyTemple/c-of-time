@@ -14,6 +14,7 @@ doctest = false  # Doctests don't seem to run with this weird no-std setup; even
 default = ["global_allocator", "io"]
 global_allocator = []
 io = []
+eu = []
 
 [dependencies]
 # This fork removes float support, int support and math support from the compiler builtins.
