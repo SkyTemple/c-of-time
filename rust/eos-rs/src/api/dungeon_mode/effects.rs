@@ -601,7 +601,10 @@ impl DungeonEffectsEmitter {
     /// Lowers the specified offensive stat on the target monster.
     ///
     /// `param_5` and `param_6` are unknown.
-    pub fn lower_offensive_stat(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn lower_offensive_stat(
         &self,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
@@ -610,14 +613,16 @@ impl DungeonEffectsEmitter {
         param_5: ffi::undefined,
         param_6: ffi::undefined,
     ) {
-        // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::LowerOffensiveStat(attacker, defender, stat_idx, n_stages, param_5, param_6) }
+        ffi::LowerOffensiveStat(attacker, defender, stat_idx, n_stages, param_5, param_6)
     }
 
     /// Lowers the specified defensive stat on the target monster.
     ///
     /// `param_5` and `param_6` are unknown.
-    pub fn lower_defensive_stat(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn lower_defensive_stat(
         &self,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
@@ -626,8 +631,7 @@ impl DungeonEffectsEmitter {
         param_5: ffi::undefined,
         param_6: ffi::undefined,
     ) {
-        // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::LowerDefensiveStat(attacker, defender, stat_idx, n_stages, param_5, param_6) }
+        ffi::LowerDefensiveStat(attacker, defender, stat_idx, n_stages, param_5, param_6)
     }
 
     /// Boosts the specified offensive stat on the target monster.
@@ -660,7 +664,10 @@ impl DungeonEffectsEmitter {
     /// Charm and Memento.
     ///
     /// `param_5` is unknown.
-    pub fn apply_offensive_stat_multiplier(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn apply_offensive_stat_multiplier(
         &self,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
@@ -668,10 +675,7 @@ impl DungeonEffectsEmitter {
         multiplier: i32,
         param_5: ffi::undefined,
     ) {
-        // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::ApplyOffensiveStatMultiplier(attacker, defender, stat_idx, multiplier, param_5)
-        }
+        ffi::ApplyOffensiveStatMultiplier(attacker, defender, stat_idx, multiplier, param_5)
     }
 
     /// Applies a multiplier to the specified defensive stat on the target monster.
@@ -680,7 +684,10 @@ impl DungeonEffectsEmitter {
     /// Charm and Memento.
     ///
     /// `param_5` is unknown.
-    pub fn apply_defensive_stat_multiplier(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn apply_defensive_stat_multiplier(
         &self,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
@@ -688,10 +695,7 @@ impl DungeonEffectsEmitter {
         multiplier: i32,
         param_5: ffi::undefined,
     ) {
-        // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::ApplyDefensiveStatMultiplier(attacker, defender, stat_idx, multiplier, param_5)
-        }
+        ffi::ApplyDefensiveStatMultiplier(attacker, defender, stat_idx, multiplier, param_5)
     }
 
     /// Boosts the specified hit chance stat (accuracy or evasion) on the target monster.
@@ -885,7 +889,10 @@ impl DungeonEffectsEmitter {
     /// * `attacker` - The monster that is trying to inflict this status.
     /// * `defender` - The monster that is being inflicted with this status.
     /// * `item` - The item that was used / thrown.
-    pub fn apply_item_effect(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn apply_item_effect(
         &self,
         param_1: ffi::undefined4,
         param_2: ffi::undefined4,
@@ -894,8 +901,7 @@ impl DungeonEffectsEmitter {
         defender: &mut DungeonEntity,
         item: &mut DungeonItem,
     ) {
-        // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::ApplyItemEffect(param_1, param_2, param_3, attacker, defender, item) }
+        ffi::ApplyItemEffect(param_1, param_2, param_3, attacker, defender, item)
     }
 
     /// Applies the Violent Seed boost to an entity.
@@ -1076,17 +1082,19 @@ impl<'a> DungeonEffectsInternals<'a> {
     /// * `param_4` - ?
     /// * `param_5` - ?
     /// * `param_6` - ?
-    pub fn apply_damage(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn apply_damage(
         &self,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
         damage_data: &mut ffi::damage_data,
         param_4: ffi::undefined4,
-        param_5: &mut ffi::undefined4,
-        param_6: &mut ffi::undefined4,
+        param_5: *mut ffi::undefined4,
+        param_6: *mut ffi::undefined4,
     ) -> bool {
-        // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::ApplyDamage(attacker, defender, damage_data, param_4, param_5, param_6) > 0 }
+        ffi::ApplyDamage(attacker, defender, damage_data, param_4, param_5, param_6) > 0
     }
 
     /// Determines if a move used hits or misses the target.
@@ -1125,24 +1133,24 @@ impl<'a> DungeonEffectsInternals<'a> {
     /// * `the_move` - pointer to move data
     /// * `param_4` - ?
     /// * `param_5` - ?
-    pub fn execute_move_effect(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn execute_move_effect(
         &self,
-        param_1: &mut ffi::undefined4,
+        param_1: *mut ffi::undefined4,
         attacker: &mut DungeonEntity,
         the_move: &Move,
         param_4: ffi::undefined4,
         param_5: ffi::undefined4,
     ) {
-        // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::ExecuteMoveEffect(
-                param_1,
-                attacker,
-                force_mut_ptr!(the_move),
-                param_4,
-                param_5,
-            )
-        }
+        ffi::ExecuteMoveEffect(
+            param_1,
+            attacker,
+            force_mut_ptr!(the_move),
+            param_4,
+            param_5,
+        )
     }
 
     /// Last function called by [`DungeonEffectsEmitter::deal_damage`] to determine the final
@@ -1156,23 +1164,23 @@ impl<'a> DungeonEffectsInternals<'a> {
     /// * `the_move` - pointer to move data
     /// * `param_4` - ?
     /// * `param_5` - ?
-    pub fn calc_damage_final(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn calc_damage_final(
         &self,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
         used_move: &Move,
         param_4: ffi::undefined4,
-        param_5: &mut ffi::undefined4,
+        param_5: *mut ffi::undefined4,
     ) -> i32 {
-        // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::CalcDamageFinal(
-                attacker,
-                defender,
-                force_mut_ptr!(used_move),
-                param_4,
-                param_5,
-            )
-        }
+        ffi::CalcDamageFinal(
+            attacker,
+            defender,
+            force_mut_ptr!(used_move),
+            param_4,
+            param_5,
+        )
     }
 }

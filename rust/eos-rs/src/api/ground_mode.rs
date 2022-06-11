@@ -72,14 +72,17 @@ impl GroundModeContext {
     ///               [`script_opcode_catalog::OPCODE_PROCESS_SPECIAL`]
     /// * `arg2`    - second argument, if relevant? Probably corresponds to the third parameter of
     ///               [`script_opcode_catalog::OPCODE_PROCESS_SPECIAL`]
-    pub fn script_special_process_call(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn script_special_process_call(
         &mut self,
-        param_1: &mut ffi::undefined4,
+        param_1: *mut ffi::undefined4,
         id: special_process_catalog::Type,
         arg1: i32,
         arg2: i32,
     ) -> i32 {
-        unsafe { ffi::ScriptSpecialProcessCall(param_1, id, arg1, arg2) }
+        ffi::ScriptSpecialProcessCall(param_1, id, arg1, arg2)
     }
 
     /// Returns an entry from RECRUITMENT_TABLE_SPECIES.
@@ -102,8 +105,11 @@ impl GroundModeContext {
     /// # Arguments
     /// * `job_type` - job type? 0 is a random NPC job, 1 is a bottle mission
     /// * `param_2`  - ???
-    pub fn init_random_npc_jobs(&mut self, job_type: i32, param_2: ffi::undefined2) {
-        unsafe { ffi::InitRandomNpcJobs(job_type, param_2) }
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn init_random_npc_jobs(&mut self, job_type: i32, param_2: ffi::undefined2) {
+        ffi::InitRandomNpcJobs(job_type, param_2)
     }
 
     /// Implements SPECIAL_PROC_GET_RANDOM_NPC_JOB_TYPE.

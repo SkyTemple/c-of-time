@@ -595,20 +595,19 @@ pub fn get_monster_level_from_spawn_entry(spawn_entry: &ffi::monster_spawn_entry
 ///
 /// You should not use this in dungeon mode.
 /// Use [`crate::api::dungeon_mode::DungeonEffectsEmitter::apply_gummi_boosts`] instead.
-pub fn apply_gummi_boosts(
-    param_1: &mut ffi::undefined2,
-    param_2: &mut ffi::undefined2,
-    param_3: &mut ffi::undefined,
-    param_4: &mut ffi::undefined,
+///
+/// # Safety
+/// The caller must make sure the undefined params and buffer are valid for this function.
+pub unsafe fn apply_gummi_boosts(
+    param_1: *mut ffi::undefined2,
+    param_2: *mut ffi::undefined2,
+    param_3: *mut ffi::undefined,
+    param_4: *mut ffi::undefined,
     param_5: ffi::undefined2,
     param_6: ffi::undefined,
-    buffer: &mut crate::ctypes::c_void,
+    buffer: *mut crate::ctypes::c_void,
 ) {
-    unsafe {
-        ffi::ApplyGummiBoostsGroundMode(
-            param_1, param_2, param_3, param_4, param_5, param_6, buffer,
-        )
-    }
+    ffi::ApplyGummiBoostsGroundMode(param_1, param_2, param_3, param_4, param_5, param_6, buffer)
 }
 
 /// Returns the maximum rescue attempts allowed in the specified dungeon,

@@ -1091,9 +1091,11 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Opens the message log window.
-    pub fn open_message_log(&mut self, param_1: ffi::undefined4, param_2: ffi::undefined4) {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::OpenMessageLog(param_1, param_2) }
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn open_message_log(&mut self, param_1: ffi::undefined4, param_2: ffi::undefined4) {
+        ffi::OpenMessageLog(param_1, param_2)
     }
 
     /// Checks if a given dungeon tip was not displayed yet and if so, displays it.
@@ -1105,25 +1107,29 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Displays a message in a dialogue box that optionally waits for player input before closing.
-    pub fn display_message(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn display_message(
         &mut self,
         param_1: ffi::undefined4,
         message_id: i32,
         wait_for_input: bool,
     ) {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::DisplayMessage(param_1, message_id, wait_for_input as ffi::bool_) }
+        ffi::DisplayMessage(param_1, message_id, wait_for_input as ffi::bool_)
     }
 
     /// Displays a message in a dialogue box that optionally waits for player input before closing.
-    pub fn display_message2(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn display_message2(
         &mut self,
         param_1: ffi::undefined4,
         message_id: i32,
         wait_for_input: bool,
     ) {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::DisplayMessage2(param_1, message_id, wait_for_input as ffi::bool_) }
+        ffi::DisplayMessage2(param_1, message_id, wait_for_input as ffi::bool_)
     }
 
     /// Attempts to trigger a forced loss of the type set with [`Self::set_forced_loss_reason`].
@@ -1188,9 +1194,11 @@ impl<'a> GlobalDungeonData<'a> {
     /// (and some others) pass, the function does not return until the leader performs an action.
     ///
     /// Returns true, if the leader has performed an action.
-    pub fn run_leader_turn(&mut self, param_1: ffi::undefined) -> bool {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::RunLeaderTurn(param_1) > 0 }
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn run_leader_turn(&mut self, param_1: ffi::undefined) -> bool {
+        ffi::RunLeaderTurn(param_1) > 0
     }
 
     /// Called at the beginning of [`Self::run_fractional_turn`]. Executed only if
@@ -1230,13 +1238,15 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Loads the sprite of the specified monster to use it in a dungeon.
-    pub fn load_monster_sprite(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn load_monster_sprite(
         &mut self,
         monster_id: monster_catalog::Type,
         param_2: ffi::undefined,
     ) {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::LoadMonsterSprite(monster_id, param_2) }
+        ffi::LoadMonsterSprite(monster_id, param_2)
     }
 
     /// If the monster id parameter is 0x97 (Mew), returns false if either
@@ -1293,13 +1303,18 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Initializes the team when entering a dungeon.
-    pub fn init_team(&mut self, param_1: ffi::undefined) {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::InitTeam(param_1) }
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn init_team(&mut self, param_1: ffi::undefined) {
+        ffi::InitTeam(param_1)
     }
 
     /// Initializes a team member. Run at the start of each floor in a dungeon.
-    pub fn init_team_member(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn init_team_member(
         &mut self,
         arg1: monster_catalog::Type,
         type_1: type_catalog::Type,
@@ -1311,20 +1326,17 @@ impl<'a> GlobalDungeonData<'a> {
         param_8: ffi::undefined,
         param_9: ffi::undefined,
     ) {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe {
-            ffi::InitTeamMember(
-                arg1,
-                type_1,
-                type_2,
-                team_member_data,
-                param_5,
-                param_6,
-                param_7,
-                param_8,
-                param_9,
-            )
-        }
+        ffi::InitTeamMember(
+            arg1,
+            type_1,
+            type_2,
+            team_member_data,
+            param_5,
+            param_6,
+            param_7,
+            param_8,
+            param_9,
+        )
     }
 
     /// Spawns the given monster on a tile. Returns None, if the game returned a null-pointer after

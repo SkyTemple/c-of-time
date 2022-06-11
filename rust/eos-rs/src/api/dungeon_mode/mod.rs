@@ -36,6 +36,8 @@ use crate::ffi;
 /// # Safety
 /// This resets some global data. The caller needs to make sure pointers to this space
 /// are set up correctly and no references to the area exist.
+///
+/// The caller must make sure the undefined params are valid for this function.
 pub unsafe fn reset_damage_desc(damage_desc: *mut ffi::undefined4, _ov29: &OverlayLoadLease<29>) {
     ffi::ResetDamageDesc(damage_desc);
 }
