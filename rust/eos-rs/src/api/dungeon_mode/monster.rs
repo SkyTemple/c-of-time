@@ -283,6 +283,13 @@ pub trait DungeonMonsterExtWrite {
 
     /// Sets the monster's reflect damage countdown to 4.
     fn set_reflect_damage_countdown_to_four(&mut self);
+
+    /// Executes the set action for the specified monster.
+    ///
+    /// Used for both AI actions and player-inputted actions. If the action is not ACTION_NOTHING,
+    /// ACTION_PASS_TURN, ACTION_WALK or ACTION_UNK_4, the monster's already_acted field is set to
+    /// true.
+    fn execute_action(&mut self);
 }
 
 impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
@@ -909,5 +916,9 @@ impl<'a> DungeonMonsterExtWrite for DungeonMonsterMut<'a> {
 
     fn set_reflect_damage_countdown_to_four(&mut self) {
         unsafe { ffi::SetReflectDamageCountdownTo4(self.1) }
+    }
+
+    fn execute_action(&mut self) {
+        unsafe { ffi::ExecuteMonsterAction(self.1) }
     }
 }

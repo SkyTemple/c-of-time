@@ -6064,6 +6064,139 @@ pub struct ground_monster {
     pub name: [crate::ctypes::c_char; 10usize],
 }
 #[repr(C)]
+pub struct team_member {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+    pub is_leader: bool_,
+    pub level: u8,
+    pub field_0x3: undefined,
+    pub field_0x4: undefined,
+    pub field_0x5: undefined,
+    pub iq: u16,
+    pub field_0x8: undefined,
+    pub field_0x9: undefined,
+    pub field_0xA: undefined,
+    pub field_0xB: undefined,
+    pub field_0xC: undefined,
+    pub field_0xD: undefined,
+    pub current_hp: u16,
+    pub max_hp: u16,
+    pub atk: i8,
+    pub sp_atk: i8,
+    pub def: i8,
+    pub sp_def: i8,
+    pub field_0x16: undefined,
+    pub field_0x17: undefined,
+    pub exp: crate::ctypes::c_int,
+    pub field_0x1C: undefined,
+    pub field_0x1D: undefined,
+    pub field_0x1E: undefined,
+    pub field_0x1F: undefined,
+    pub field_0x20: undefined,
+    pub field_0x21: undefined,
+    pub field_0x22: undefined,
+    pub field_0x23: undefined,
+    pub field_0x24: undefined,
+    pub field_0x25: undefined,
+    pub field_0x26: undefined,
+    pub field_0x27: undefined,
+    pub field_0x28: undefined,
+    pub field_0x29: undefined,
+    pub field_0x2A: undefined,
+    pub field_0x2B: undefined,
+    pub field_0x2C: undefined,
+    pub field_0x2D: undefined,
+    pub field_0x2E: undefined,
+    pub field_0x2F: undefined,
+    pub field_0x30: undefined,
+    pub field_0x31: undefined,
+    pub field_0x32: undefined,
+    pub field_0x33: undefined,
+    pub field_0x34: undefined,
+    pub field_0x35: undefined,
+    pub field_0x36: undefined,
+    pub field_0x37: undefined,
+    pub field_0x38: undefined,
+    pub field_0x39: undefined,
+    pub field_0x3A: undefined,
+    pub field_0x3B: undefined,
+    pub field_0x3C: undefined,
+    pub field_0x3D: undefined,
+    pub field_0x3E: undefined,
+    pub field_0x3F: undefined,
+    pub field_0x40: undefined,
+    pub field_0x41: undefined,
+    pub field_0x42: undefined,
+    pub field_0x43: undefined,
+    pub field_0x44: undefined,
+    pub field_0x45: undefined,
+    pub field_0x46: undefined,
+    pub field_0x47: undefined,
+    pub field_0x48: undefined,
+    pub field_0x49: undefined,
+    pub field_0x4A: undefined,
+    pub field_0x4B: undefined,
+    pub field_0x4C: undefined,
+    pub field_0x4D: undefined,
+    pub field_0x4E: undefined,
+    pub field_0x4F: undefined,
+    pub field_0x50: undefined,
+    pub field_0x51: undefined,
+    pub field_0x52: undefined,
+    pub field_0x53: undefined,
+    pub field_0x54: undefined,
+    pub field_0x55: undefined,
+    pub field_0x56: undefined,
+    pub field_0x57: undefined,
+    pub field_0x58: undefined,
+    pub field_0x59: undefined,
+    pub field_0x5A: undefined,
+    pub field_0x5B: undefined,
+    pub field_0x5C: undefined,
+    pub field_0x5D: undefined,
+    pub name: [crate::ctypes::c_char; 10usize],
+}
+impl team_member {
+    #[inline]
+    pub fn f_is_valid(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_is_valid(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags_unk1(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 7u8) as u8) }
+    }
+    #[inline]
+    pub fn set_flags_unk1(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 7u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        f_is_valid: bool_,
+        flags_unk1: u8,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let f_is_valid: u8 = unsafe { ::core::mem::transmute(f_is_valid) };
+            f_is_valid as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 7u8, {
+            let flags_unk1: u8 = unsafe { ::core::mem::transmute(flags_unk1) };
+            flags_unk1 as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
 pub struct dungeon_floor_pair {
     pub dungeon_id: u8,
     pub floor_id: u8,
@@ -8094,10 +8227,7 @@ pub struct dungeon_generation_info {
     pub field_0x6: undefined,
     pub field_0x7: undefined,
     pub hidden_stairs_type: hidden_stairs_type::Type,
-    pub field_0xc: undefined,
-    pub field_0xd: undefined,
-    pub field_0xe: undefined,
-    pub field_0xf: undefined,
+    pub field_0xc: undefined4,
     pub tileset_id: u8,
     pub field_0x11: undefined,
     pub music_table_idx: u16,
@@ -9624,7 +9754,7 @@ pub struct dungeon {
     pub dungeon_objective: dungeon_objective_8,
     pub field_0x799: undefined,
     pub field_0x79a: undefined,
-    pub rescue_attempts_left: u8,
+    pub rescue_attempts_left: i8,
     pub prng_seed: u32,
     pub field_0x7a0: undefined,
     pub field_0x7a1: undefined,
@@ -49759,6 +49889,17 @@ extern "C" {
     ) -> bool_;
 }
 extern "C" {
+    pub fn ApplyGummiBoostsGroundMode(
+        param_1: *mut undefined2,
+        param_2: *mut undefined2,
+        param_3: *mut undefined,
+        param_4: *mut undefined,
+        param_5: undefined2,
+        param_6: undefined,
+        buffer: *mut crate::ctypes::c_void,
+    );
+}
+extern "C" {
     pub fn GetMoveTargetAndRange(move_: *mut move_, is_ai: bool_) -> move_target_and_range;
 }
 extern "C" {
@@ -50103,6 +50244,9 @@ extern "C" {
     pub fn DungeonGoesUp(dungeon_id: dungeon_id::Type) -> bool_;
 }
 extern "C" {
+    pub fn GetMaxRescueAttempts(dungeon_id: dungeon_id::Type) -> i8;
+}
+extern "C" {
     pub fn JoinedAtRangeCheck(joined_at: dungeon_id_8) -> bool_;
 }
 extern "C" {
@@ -50156,6 +50300,9 @@ extern "C" {
     pub fn IsMonsterOnTeam(monster_id: monster_id::Type, param_2: crate::ctypes::c_int) -> bool_;
 }
 extern "C" {
+    pub fn GetTeamMemberData(index: u8) -> *mut team_member;
+}
+extern "C" {
     pub fn SetTeamSetupHeroAndPartnerOnly();
 }
 extern "C" {
@@ -50166,6 +50313,9 @@ extern "C" {
 }
 extern "C" {
     pub fn IqSkillFlagTest(iq_skill_flags: *mut u32, iq_id: iq_skill_id::Type) -> bool_;
+}
+extern "C" {
+    pub fn GetExplorerMazeMonster(entry_number: u8) -> *mut ground_monster;
 }
 extern "C" {
     pub fn GetSosMailCount(param_1: crate::ctypes::c_int, param_2: bool_) -> crate::ctypes::c_int;
@@ -50448,8 +50598,8 @@ extern "C" {
     pub fn DungeonFree();
 }
 extern "C" {
-    pub fn InitializeDungeon(
-        dungeon_data: *mut undefined,
+    pub fn RunDungeon(
+        dungeon_init_data: *mut dungeon_init,
         dungeon: *mut dungeon,
     ) -> crate::ctypes::c_int;
 }
@@ -50467,6 +50617,9 @@ extern "C" {
 }
 extern "C" {
     pub fn ShouldGameOverOnImportantTeamMemberFaint() -> bool_;
+}
+extern "C" {
+    pub fn FadeToBlack();
 }
 extern "C" {
     pub fn GetTileAtEntity(entity: *mut entity) -> *mut tile;
@@ -50498,6 +50651,9 @@ extern "C" {
 }
 extern "C" {
     pub fn TickStatusTurnCounter(counter: *mut u8) -> u8;
+}
+extern "C" {
+    pub fn AdvanceFrame(param_1: undefined);
 }
 extern "C" {
     pub fn GenerateDungeonRngSeed() -> u32;
@@ -50552,10 +50708,16 @@ extern "C" {
     pub fn RunFractionalTurn(is_first_loop: bool_);
 }
 extern "C" {
+    pub fn RunLeaderTurn(param_1: undefined) -> bool_;
+}
+extern "C" {
     pub fn TrySpawnMonsterAndActivatePlusMinus();
 }
 extern "C" {
-    pub fn FloorIsOver() -> bool_;
+    pub fn IsFloorOver() -> bool_;
+}
+extern "C" {
+    pub fn DecrementWindCounter();
 }
 extern "C" {
     pub fn GetForcedLossReason() -> forced_loss_reason::Type;
@@ -50570,6 +50732,9 @@ extern "C" {
     pub fn FloorNumberIsEven() -> bool_;
 }
 extern "C" {
+    pub fn EuFaintCheck(non_team_member_fainted: bool_, set_unk_byte: bool_);
+}
+extern "C" {
     pub fn HandleFaint(
         fainted_entity: *mut entity,
         faint_reason: crate::ctypes::c_int,
@@ -50578,6 +50743,9 @@ extern "C" {
 }
 extern "C" {
     pub fn GetKecleonIdToSpawnByFloor() -> monster_id::Type;
+}
+extern "C" {
+    pub fn LoadMonsterSprite(monster_id: monster_id::Type, param_2: undefined);
 }
 extern "C" {
     pub fn TryActivateSlowStart();
@@ -50630,16 +50798,38 @@ extern "C" {
     pub fn IsExperienceLocked(monster: *mut monster) -> bool_;
 }
 extern "C" {
+    pub fn InitTeam(param_1: undefined);
+}
+extern "C" {
     pub fn SpawnMonster(
         monster_data: *mut spawned_monster_data,
         cannot_be_asleep: bool_,
     ) -> *mut entity;
 }
 extern "C" {
+    pub fn InitTeamMember(
+        arg1: monster_id::Type,
+        type_1: type_id::Type,
+        type_2: type_id::Type,
+        team_member_data: *mut team_member,
+        param_5: undefined,
+        param_6: undefined,
+        param_7: undefined,
+        param_8: undefined,
+        param_9: undefined,
+    );
+}
+extern "C" {
+    pub fn ExecuteMonsterAction(monster: *mut entity);
+}
+extern "C" {
     pub fn CalcSpeedStage(
         entity: *mut entity,
         counter_weight: crate::ctypes::c_int,
     ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CalcSpeedStageWrapper(entity: *mut entity) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetNumberOfAttacks(entity: *mut entity) -> crate::ctypes::c_int;
@@ -50681,6 +50871,9 @@ extern "C" {
         param_2: *mut undefined4,
         new_monster_id: monster_id::Type,
     );
+}
+extern "C" {
+    pub fn DisplayActions(param_1: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn ApplyDamage(
@@ -51126,7 +51319,7 @@ extern "C" {
     pub fn ViolentSeedBoost(attacker: *mut entity, defender: *mut entity);
 }
 extern "C" {
-    pub fn ApplyGummiBoosts(
+    pub fn ApplyGummiBoostsDungeonMode(
         user: *mut entity,
         target: *mut entity,
         gummi_type: type_id::Type,
@@ -51253,10 +51446,16 @@ extern "C" {
     pub fn SetMinimapDataE447(value: u8);
 }
 extern "C" {
+    pub fn GetMinimapDataE447() -> u8;
+}
+extern "C" {
     pub fn SetMinimapDataE448(value: u8);
 }
 extern "C" {
     pub fn IsSecretFloor() -> bool_;
+}
+extern "C" {
+    pub fn GetDungeonGenInfoUnk0C() -> undefined4;
 }
 extern "C" {
     pub fn LoadFixedRoomDataVeneer();
@@ -51687,12 +51886,6 @@ extern "C" {
         param_5: undefined4,
         param_6: undefined4,
     );
-}
-extern "C" {
-    pub fn EuFaintCheck(non_team_member_fainted: bool_, set_unk_byte: bool_);
-}
-extern "C" {
-    pub fn GetMinimapDataE447() -> u8;
 }
 #[repr(C)]
 pub struct move_effect_input {

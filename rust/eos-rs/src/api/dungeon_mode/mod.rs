@@ -12,6 +12,8 @@ mod tile;
 
 pub mod dungeon_generator;
 
+use crate::api::objects::DungeonEntity;
+use core::ptr;
 pub use dungeon_struct::*;
 pub use effects::*;
 pub use entity::*;
@@ -56,4 +58,26 @@ pub unsafe fn reset_damage_calc_scratch_space(_ov29: &OverlayLoadLease<29>) {
 ///
 pub fn set_both_screens_window_color_to_default(_ov29: &OverlayLoadLease<29>) {
     unsafe { ffi::SetBothScreensWindowColorToDefault() }
+}
+
+/// Fades the screen to black across several frames.
+pub fn fade_to_black(_ov29: &OverlayLoadLease<29>) {
+    unsafe { ffi::FadeToBlack() }
+}
+
+/// Advances one frame. Does not return until the next frame starts.
+pub fn advance_frame(_ov29: &OverlayLoadLease<29>) {
+    unsafe { ffi::AdvanceFrame(0 as ffi::undefined) }
+}
+
+/// Graphically displays any pending actions that have happened but haven't been shown on screen
+/// yet.
+///
+/// All actions are displayed at the same time. For example, this delayed display system is used
+/// to display multiple monsters moving at once even though they take turns sequentially.
+///
+/// Seems to return true if there were any pending actions to display.
+pub fn display_actions(_ov29: &OverlayLoadLease<29>, entity: Option<&DungeonEntity>) -> bool {
+    let ptr = entity.map(|e| force_mut_ptr!(e)).unwrap_or(ptr::null_mut());
+    unsafe { ffi::DisplayActions(ptr) > 0 }
 }

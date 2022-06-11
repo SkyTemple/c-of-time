@@ -923,7 +923,7 @@ impl DungeonEffectsEmitter {
         stat_boost: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::ApplyGummiBoosts(attacker, defender, gummi_type, stat_boost) }
+        unsafe { ffi::ApplyGummiBoostsDungeonMode(attacker, defender, gummi_type, stat_boost) }
     }
 
     /// Applies the IQ and possible stat boosts from eating a Gummi to the target monster.
