@@ -585,3 +585,8 @@ pub fn get_monster_id_from_spawn_entry(
 ) -> monster_catalog::Type {
     unsafe { ffi::GetMonsterIdFromSpawnEntry(force_mut_ptr!(spawn_entry)) }
 }
+
+/// Returns the level of the monster defined in the specified monster spawn entry.
+pub fn get_monster_level_from_spawn_entry(spawn_entry: &ffi::monster_spawn_entry) -> u8 {
+    unsafe { ffi::GetMonsterLevelFromSpawnEntry(force_mut_ptr!(spawn_entry)) }
+}

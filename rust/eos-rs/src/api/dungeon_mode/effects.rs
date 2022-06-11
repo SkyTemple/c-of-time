@@ -28,6 +28,33 @@ impl DungeonEffectsEmitter {
         DungeonEffectsInternals(self)
     }
 
+    /// Returns true if the target is within range of the user's move, false otherwise.
+    ///
+    /// If the user does not have Course Checker, it simply checks if the distance between user
+    /// and target is less or equal than the move range.
+    ///
+    /// Otherwise, it will iterate through all tiles in the direction specified, checking for
+    /// walls or other monsters in the way, and return false if they are found.
+    ///
+    /// `move_range` is the range in number of tiles.
+    pub fn is_target_in_range(
+        &self,
+        user: &DungeonEntity,
+        target: &DungeonEntity,
+        direction: Direction,
+        move_range: i32,
+    ) -> bool {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe {
+            ffi::IsTargetInRange(
+                force_mut_ptr!(user),
+                force_mut_ptr!(target),
+                direction as ffi::direction_id::Type,
+                move_range,
+            ) > 0
+        }
+    }
+
     /// Deals damage from a move or item used by an attacking monster on a defending monster.
     ///
     /// Returns the amount of damage dealt.
@@ -42,8 +69,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::DealDamage(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 force_mut_ptr!(used_move),
                 damage_multiplier.to_bits() as c_int,
                 item_id.unwrap_or(item_catalog::ITEM_NOTHING),
@@ -65,8 +92,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::DealDamageWithRecoil(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 force_mut_ptr!(used_move),
                 item_id.unwrap_or(item_catalog::ITEM_NOTHING),
             ) > 0
@@ -91,12 +118,7 @@ impl DungeonEffectsEmitter {
     ) {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
-            ffi::TryInflictSleepStatus(
-                attacker as *mut _,
-                defender as *mut _,
-                number_turns,
-                log_failure as ffi::bool_,
-            )
+            ffi::TryInflictSleepStatus(attacker, defender, number_turns, log_failure as ffi::bool_)
         }
     }
 
@@ -115,9 +137,7 @@ impl DungeonEffectsEmitter {
         number_turns: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::TryInflictNightmareStatus(attacker as *mut _, defender as *mut _, number_turns)
-        }
+        unsafe { ffi::TryInflictNightmareStatus(attacker, defender, number_turns) }
     }
 
     /// Inflicts the Napping status condition on a target monster if possible.
@@ -135,9 +155,7 @@ impl DungeonEffectsEmitter {
         number_turns: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::TryInflictNappingStatus(attacker as *mut _, defender as *mut _, number_turns)
-        }
+        unsafe { ffi::TryInflictNappingStatus(attacker, defender, number_turns) }
     }
 
     /// Inflicts the Yawning status condition on a target monster if possible.
@@ -155,9 +173,7 @@ impl DungeonEffectsEmitter {
         number_turns: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::TryInflictYawningStatus(attacker as *mut _, defender as *mut _, number_turns)
-        }
+        unsafe { ffi::TryInflictYawningStatus(attacker, defender, number_turns) }
     }
 
     /// Inflicts the Sleepless status condition on a target monster if possible.
@@ -173,7 +189,7 @@ impl DungeonEffectsEmitter {
         defender: &mut DungeonEntity,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::TryInflictSleeplessStatus(attacker as *mut _, defender as *mut _) }
+        unsafe { ffi::TryInflictSleeplessStatus(attacker, defender) }
     }
 
     /// Inflicts the Paused status condition on a target monster if possible.
@@ -199,8 +215,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictPausedStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 param3,
                 number_turns,
                 log_failure as ffi::bool_,
@@ -228,8 +244,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictInfatuatedStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 log_failure as ffi::bool_,
                 check_only as ffi::bool_,
             ) > 0
@@ -257,8 +273,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictBurnStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 special_effect as ffi::bool_,
                 log_failure as ffi::bool_,
                 check_only as ffi::bool_,
@@ -295,8 +311,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictPoisonedStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 log_failure as ffi::bool_,
                 check_only as ffi::bool_,
             ) > 0
@@ -322,8 +338,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictBadlyPoisonedStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 log_failure as ffi::bool_,
                 check_only as ffi::bool_,
             ) > 0
@@ -343,13 +359,7 @@ impl DungeonEffectsEmitter {
         log_failure: bool,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::TryInflictFrozenStatus(
-                attacker as *mut _,
-                defender as *mut _,
-                log_failure as ffi::bool_,
-            )
-        }
+        unsafe { ffi::TryInflictFrozenStatus(attacker, defender, log_failure as ffi::bool_) }
     }
 
     /// Inflicts the Constriction status condition on a target monster if possible.
@@ -369,8 +379,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictConstrictionStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 animation_id,
                 log_failure as ffi::bool_,
             )
@@ -390,13 +400,7 @@ impl DungeonEffectsEmitter {
         log_failure: bool,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::TryInflictShadowHoldStatus(
-                attacker as *mut _,
-                defender as *mut _,
-                log_failure as ffi::bool_,
-            )
-        }
+        unsafe { ffi::TryInflictShadowHoldStatus(attacker, defender, log_failure as ffi::bool_) }
     }
 
     /// Inflicts the Shadow Hold (AKA Immobilized) status condition on a target monster if possible.
@@ -410,7 +414,7 @@ impl DungeonEffectsEmitter {
         defender: &mut DungeonEntity,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::TryInflictIngrainStatus(attacker as *mut _, defender as *mut _) }
+        unsafe { ffi::TryInflictIngrainStatus(attacker, defender) }
     }
 
     /// Inflicts the Wrapped status condition on a target monster if possible.
@@ -426,7 +430,7 @@ impl DungeonEffectsEmitter {
         defender: &mut DungeonEntity,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::TryInflictWrappedStatus(attacker as *mut _, defender as *mut _) }
+        unsafe { ffi::TryInflictWrappedStatus(attacker, defender) }
     }
 
     /// Inflicts the Petrified status condition on a target monster if possible.
@@ -440,7 +444,7 @@ impl DungeonEffectsEmitter {
         defender: &mut DungeonEntity,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::TryInflictPetrifiedStatus(attacker as *mut _, defender as *mut _) }
+        unsafe { ffi::TryInflictPetrifiedStatus(attacker, defender) }
     }
 
     /// Inflicts the Cringe status condition on a target monster if possible.
@@ -462,8 +466,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictCringeStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 log_failure as ffi::bool_,
                 check_only as ffi::bool_,
             ) > 0
@@ -489,8 +493,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictParalysisStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 log_failure as ffi::bool_,
                 check_only as ffi::bool_,
             ) > 0
@@ -516,8 +520,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictConfusedStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 log_failure as ffi::bool_,
                 check_only as ffi::bool_,
             ) > 0
@@ -543,8 +547,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictCoweringStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 log_failure as ffi::bool_,
                 check_only as ffi::bool_,
             ) > 0
@@ -570,8 +574,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryInflictLeechSeedStatus(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 log_failure as ffi::bool_,
                 check_only as ffi::bool_,
             ) > 0
@@ -591,7 +595,7 @@ impl DungeonEffectsEmitter {
         defender: &mut DungeonEntity,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::TryInflictDestinyBond(attacker as *mut _, defender as *mut _) }
+        unsafe { ffi::TryInflictDestinyBond(attacker, defender) }
     }
 
     /// Lowers the specified offensive stat on the target monster.
@@ -607,16 +611,7 @@ impl DungeonEffectsEmitter {
         param_6: ffi::undefined,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::LowerOffensiveStat(
-                attacker as *mut _,
-                defender as *mut _,
-                stat_idx,
-                n_stages,
-                param_5,
-                param_6,
-            )
-        }
+        unsafe { ffi::LowerOffensiveStat(attacker, defender, stat_idx, n_stages, param_5, param_6) }
     }
 
     /// Lowers the specified defensive stat on the target monster.
@@ -632,16 +627,7 @@ impl DungeonEffectsEmitter {
         param_6: ffi::undefined,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::LowerDefensiveStat(
-                attacker as *mut _,
-                defender as *mut _,
-                stat_idx,
-                n_stages,
-                param_5,
-                param_6,
-            )
-        }
+        unsafe { ffi::LowerDefensiveStat(attacker, defender, stat_idx, n_stages, param_5, param_6) }
     }
 
     /// Boosts the specified offensive stat on the target monster.
@@ -653,9 +639,7 @@ impl DungeonEffectsEmitter {
         n_stages: i16,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::BoostOffensiveStat(attacker as *mut _, defender as *mut _, stat_idx, n_stages)
-        }
+        unsafe { ffi::BoostOffensiveStat(attacker, defender, stat_idx, n_stages) }
     }
 
     /// Boosts the specified defensive stat on the target monster.
@@ -667,9 +651,7 @@ impl DungeonEffectsEmitter {
         n_stages: i16,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::BoostDefensiveStat(attacker as *mut _, defender as *mut _, stat_idx, n_stages)
-        }
+        unsafe { ffi::BoostDefensiveStat(attacker, defender, stat_idx, n_stages) }
     }
 
     /// Applies a multiplier to the specified offensive stat on the target monster.
@@ -688,13 +670,7 @@ impl DungeonEffectsEmitter {
     ) {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
-            ffi::ApplyOffensiveStatMultiplier(
-                attacker as *mut _,
-                defender as *mut _,
-                stat_idx,
-                multiplier,
-                param_5,
-            )
+            ffi::ApplyOffensiveStatMultiplier(attacker, defender, stat_idx, multiplier, param_5)
         }
     }
 
@@ -714,13 +690,7 @@ impl DungeonEffectsEmitter {
     ) {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
-            ffi::ApplyDefensiveStatMultiplier(
-                attacker as *mut _,
-                defender as *mut _,
-                stat_idx,
-                multiplier,
-                param_5,
-            )
+            ffi::ApplyDefensiveStatMultiplier(attacker, defender, stat_idx, multiplier, param_5)
         }
     }
 
@@ -732,7 +702,7 @@ impl DungeonEffectsEmitter {
         stat_idx: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::BoostHitChanceStat(attacker as *mut _, defender as *mut _, stat_idx) }
+        unsafe { ffi::BoostHitChanceStat(attacker, defender, stat_idx) }
     }
 
     /// Lowers the specified hit chance stat (accuracy or evasion) on the target monster.
@@ -744,9 +714,7 @@ impl DungeonEffectsEmitter {
         param_4: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::LowerHitChanceStat(attacker as *mut _, defender as *mut _, stat_idx, param_4)
-        }
+        unsafe { ffi::LowerHitChanceStat(attacker, defender, stat_idx, param_4) }
     }
 
     /// Resets the specified hit chance stat (accuracy or evasion) back to normal on the
@@ -759,9 +727,7 @@ impl DungeonEffectsEmitter {
         param_4: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::ResetHitChanceStat(attacker as *mut _, defender as *mut _, stat_idx, param_4)
-        }
+        unsafe { ffi::ResetHitChanceStat(attacker, defender, stat_idx, param_4) }
     }
 
     /// Boosts the speed of the target monster.
@@ -786,8 +752,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::BoostSpeed(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 n_stages,
                 n_turns,
                 log_failure as ffi::bool_,
@@ -810,14 +776,7 @@ impl DungeonEffectsEmitter {
         log_failure: bool,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::LowerSpeed(
-                attacker as *mut _,
-                defender as *mut _,
-                n_stages,
-                log_failure as ffi::bool_,
-            )
-        }
+        unsafe { ffi::LowerSpeed(attacker, defender, n_stages, log_failure as ffi::bool_) }
     }
 
     /// Randomly boosts or lowers the speed of the target monster by one stage with equal
@@ -828,7 +787,7 @@ impl DungeonEffectsEmitter {
     /// * `defender` - The monster that is being inflicted with this status.
     pub fn boost_or_lower_speed(&self, attacker: &mut DungeonEntity, defender: &mut DungeonEntity) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::BoostOrLowerSpeed(attacker as *mut _, defender as *mut _) }
+        unsafe { ffi::BoostOrLowerSpeed(attacker, defender) }
     }
 
     /// Lowers the speed of the target monster.
@@ -846,13 +805,7 @@ impl DungeonEffectsEmitter {
         log_failure: bool,
     ) -> bool {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::TrySealMove(
-                attacker as *mut _,
-                defender as *mut _,
-                log_failure as ffi::bool_,
-            ) > 0
-        }
+        unsafe { ffi::TrySealMove(attacker, defender, log_failure as ffi::bool_) > 0 }
     }
 
     /// Activate the Quick Feet ability on the defender, if the monster has it and it's active.
@@ -868,7 +821,7 @@ impl DungeonEffectsEmitter {
         defender: &mut DungeonEntity,
     ) -> bool {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::TryActivateQuickFeet(attacker as *mut _, defender as *mut _) > 0 }
+        unsafe { ffi::TryActivateQuickFeet(attacker, defender) > 0 }
     }
 
     /// Restore HP and possibly boost max HP of the target monster if possible.
@@ -892,8 +845,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryIncreaseHp(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 hp_to_restore,
                 max_hp_boost,
                 log_failure as ffi::bool_,
@@ -918,8 +871,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::RestoreMovePP(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 pp_to_restore,
                 (!log_failure) as ffi::bool_,
             )
@@ -942,16 +895,7 @@ impl DungeonEffectsEmitter {
         item: &mut DungeonItem,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::ApplyItemEffect(
-                param_1,
-                param_2,
-                param_3,
-                attacker as *mut _,
-                defender as *mut _,
-                item as *mut _,
-            )
-        }
+        unsafe { ffi::ApplyItemEffect(param_1, param_2, param_3, attacker, defender, item) }
     }
 
     /// Applies the Violent Seed boost to an entity.
@@ -961,7 +905,7 @@ impl DungeonEffectsEmitter {
     /// * `defender` - The monster that is being inflicted with this status.
     pub fn violent_seed_boost(&self, attacker: &mut DungeonEntity, defender: &mut DungeonEntity) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::ViolentSeedBoost(attacker as *mut _, defender as *mut _) }
+        unsafe { ffi::ViolentSeedBoost(attacker, defender) }
     }
 
     /// Applies the IQ and possible stat boosts from eating a Gummi to the target monster.
@@ -979,14 +923,7 @@ impl DungeonEffectsEmitter {
         stat_boost: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::ApplyGummiBoosts(
-                attacker as *mut _,
-                defender as *mut _,
-                gummi_type,
-                stat_boost,
-            )
-        }
+        unsafe { ffi::ApplyGummiBoosts(attacker, defender, gummi_type, stat_boost) }
     }
 
     /// Applies the IQ and possible stat boosts from eating a Gummi to the target monster.
@@ -1002,13 +939,7 @@ impl DungeonEffectsEmitter {
         direction: Direction,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::TryPounce(
-                attacker as *mut _,
-                defender as *mut _,
-                direction as ffi::direction_id::Type,
-            )
-        }
+        unsafe { ffi::TryPounce(attacker, defender, direction as ffi::direction_id::Type) }
     }
 
     /// Blows away the target monster in a given direction if possible.
@@ -1024,13 +955,7 @@ impl DungeonEffectsEmitter {
         direction: Direction,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::TryBlowAway(
-                attacker as *mut _,
-                defender as *mut _,
-                direction as ffi::direction_id::Type,
-            )
-        }
+        unsafe { ffi::TryBlowAway(attacker, defender, direction as ffi::direction_id::Type) }
     }
 
     /// Makes the target monster warp if possible.
@@ -1050,8 +975,8 @@ impl DungeonEffectsEmitter {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::TryWarp(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 warp_type as ffi::warp_type::Type,
                 position,
             )
@@ -1078,7 +1003,7 @@ impl DungeonEffectsEmitter {
         base_exp: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::AddExpSpecial(attacker as *mut _, defender as *mut _, base_exp) }
+        unsafe { ffi::AddExpSpecial(attacker, defender, base_exp) }
     }
 
     /// The user entity attempts to switch places with the target entity (i.e. by the effect of the
@@ -1088,21 +1013,46 @@ impl DungeonEffectsEmitter {
     /// the Mold Breaker ability on the user.
     pub fn try_switch_place(&self, attacker: &mut DungeonEntity, defender: &mut DungeonEntity) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::TrySwitchPlace(attacker as *mut _, defender as *mut _) }
+        unsafe { ffi::TrySwitchPlace(attacker, defender) }
     }
 
-    /// Runs a check over all monsters on the field for the ability Slow Start, and lowers the
-    /// speed of those who have it.
-    pub fn try_activate_slow_start(&self) {
+    /// Cures the target's freeze, shadow hold, ingrain, petrified, constriction or wrap (both as
+    /// user and as target) status due to the action of the user.
+    ///
+    /// # Arguments
+    /// * `attacker` - The monster that is trying to inflict this status.
+    /// * `defender` - The monster that is being cured from this status.
+    /// * `log` - Flag to log a message to the dungeon message log.
+    pub fn end_frozen_class_status(
+        &self,
+        attacker: &mut DungeonEntity,
+        defender: &mut DungeonEntity,
+        log: bool,
+    ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::TryActivateSlowStart() }
+        unsafe { ffi::EndFrozenClassStatus(attacker, defender, log as ffi::bool_) }
     }
 
-    /// Runs a check over all monsters on the field for abilities that affect the weather and
-    /// changes the floor's weather accordingly.
-    pub fn try_activate_artificial_weather_abilities(&self) {
+    /// Cures the target's cringe, confusion, cowering, pause, taunt, encore or infatuated status
+    /// due to the action of the user, and prints the event to the log.
+    ///
+    /// # Arguments
+    /// * `attacker` - The monster that is trying to inflict this status.
+    /// * `defender` - The monster that is being cured from this status.
+    pub fn end_cringe_class_status(
+        &self,
+        attacker: &mut DungeonEntity,
+        defender: &mut DungeonEntity,
+    ) {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe { ffi::TryActivateArtificialWeatherAbilities() }
+        unsafe { ffi::EndCringeClassStatus(attacker, defender) }
+    }
+
+    /// Frees from the wrap status all monsters which are wrapped by/around the monster passed as
+    /// parameter.
+    pub fn free_other_wrapped_monsters(&self, target: &mut DungeonEntity) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::FreeOtherWrappedMonsters(target) }
     }
 }
 
@@ -1136,16 +1086,7 @@ impl<'a> DungeonEffectsInternals<'a> {
         param_6: &mut ffi::undefined4,
     ) -> bool {
         // SAFETY: We have a lease on the overlay existing.
-        unsafe {
-            ffi::ApplyDamage(
-                attacker as *mut _,
-                defender as *mut _,
-                damage_data,
-                param_4,
-                param_5,
-                param_6,
-            ) > 0
-        }
+        unsafe { ffi::ApplyDamage(attacker, defender, damage_data, param_4, param_5, param_6) > 0 }
     }
 
     /// Determines if a move used hits or misses the target.
@@ -1166,8 +1107,8 @@ impl<'a> DungeonEffectsInternals<'a> {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::MoveHitCheck(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 force_mut_ptr!(the_move),
                 use_second_accuracy as ffi::bool_,
             ) > 0
@@ -1196,7 +1137,7 @@ impl<'a> DungeonEffectsInternals<'a> {
         unsafe {
             ffi::ExecuteMoveEffect(
                 param_1,
-                attacker as *mut _,
+                attacker,
                 force_mut_ptr!(the_move),
                 param_4,
                 param_5,
@@ -1226,8 +1167,8 @@ impl<'a> DungeonEffectsInternals<'a> {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
             ffi::CalcDamageFinal(
-                attacker as *mut _,
-                defender as *mut _,
+                attacker,
+                defender,
                 force_mut_ptr!(used_move),
                 param_4,
                 param_5,

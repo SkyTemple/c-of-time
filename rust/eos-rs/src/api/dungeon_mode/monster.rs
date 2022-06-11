@@ -2,7 +2,6 @@ use crate::api::dungeon_mode::*;
 use crate::api::moves::*;
 use crate::api::objects::*;
 use crate::ffi::type_id::Type;
-use crate::ffi::undefined4;
 use fixed::types::I24F8;
 
 /// Extension trait for [`DungeonMonsterRef`] (read operations).
@@ -230,12 +229,13 @@ pub trait DungeonMonsterExtRead {
     /// such as Hidden Power, Weather Ball, the regular attack...
     fn get_move_type_if_used_by_self(&self, the_move: &Move) -> type_catalog::Type;
 
-    /// Checks if the specified enemy should evolve because it just defeated an ally, and if so,
-    /// attempts to evolve it.
-    fn evolve_this_enemy_if_should(&mut self);
+    /// Returns the animation id to be applied to a monster that has the sleep, napping,
+    /// nightmare or bide status.
+    fn get_sleep_animation_id(&self) -> u8;
 
-    /// Makes the specified monster evolve into the specified species.
-    fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: monster_catalog::Type);
+    /// Returns true if the monster has the blinded status, or if it is not the leader and is
+    /// holding Y-Ray Specs.
+    fn is_blinded(&self, check_held_item: bool) -> bool;
 }
 
 /// Extension trait for [`DungeonMonsterMut`] (write operations).
@@ -263,6 +263,26 @@ pub trait DungeonMonsterExtWrite {
     ///
     /// Called when a monster is revived.
     fn restore_pp_for_all_moves_set_flags(&mut self);
+
+    /// Checks if the specified enemy should evolve because it just defeated an ally, and if so,
+    /// attempts to evolve it.
+    fn evolve_this_enemy_if_should(&mut self);
+
+    /// Makes the specified monster evolve into the specified species.
+    fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: monster_catalog::Type);
+
+    /// Calculates the speed stage of a monster from its speed up/down counters. The second
+    /// parameter is the weight of each counter (how many stages it will add/remove), but appears
+    /// to be always 1.
+    ///
+    /// Takes modifiers into account (paralysis, snowy weather, Time Tripper). Deoxys-speed,
+    /// Shaymin-sky and enemy Kecleon during a thief alert get a flat +1 always.
+    ///
+    /// The calculated speed stage is both returned and saved in the monster's statuses struct.
+    fn calc_speed_stage(&mut self, counter_weight: i32) -> i32;
+
+    /// Sets the monster's reflect damage countdown to 4.
+    fn set_reflect_damage_countdown_to_four(&mut self);
 }
 
 impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
@@ -357,7 +377,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
                 attack_type,
                 attack_power,
                 crit_chance,
-                damage_out as *mut _,
+                damage_out,
                 damage_multiplier.to_bits() as c_int,
                 move_id,
                 param_9,
@@ -382,7 +402,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
                 force_mut_ptr!(self.1),
                 fixed_damage,
                 param_3,
-                damage_out as *mut _,
+                damage_out,
                 move_id,
                 attack_type,
                 param_7,
@@ -412,7 +432,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
                 force_mut_ptr!(defender),
                 fixed_damage,
                 param_4,
-                damage_out as *mut _,
+                damage_out,
                 attack_type,
                 move_category as move_catalog::Type,
                 param_8,
@@ -441,7 +461,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
                 force_mut_ptr!(defender),
                 fixed_damage,
                 param_4,
-                damage_out as *mut _,
+                damage_out,
                 attack_type,
                 param_7,
                 message_type,
@@ -470,7 +490,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
                 force_mut_ptr!(defender),
                 fixed_damage,
                 param_4,
-                damage_out as *mut _,
+                damage_out,
                 attack_type,
                 move_category as move_catalog::Type,
                 param_8,
@@ -576,12 +596,12 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         unsafe { ffi::GetMoveTypeForMonster(force_mut_ptr!(self.1), force_mut_ptr!(the_move)) }
     }
 
-    fn evolve_this_enemy_if_should(&mut self) {
-        unsafe { ffi::EnemyEvolution(force_mut_ptr!(self.1)) }
+    fn get_sleep_animation_id(&self) -> u8 {
+        unsafe { ffi::GetSleepAnimationId(force_mut_ptr!(self.1)) }
     }
 
-    fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: monster_catalog::Type) {
-        unsafe { ffi::EvolveMonster(force_mut_ptr!(self.1), param_2, new_monster_idx) }
+    fn is_blinded(&self, check_held_item: bool) -> bool {
+        unsafe { ffi::IsBlinded(force_mut_ptr!(self.1), check_held_item as ffi::bool_) > 0 }
     }
 }
 
@@ -841,29 +861,53 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         self.as_ref().get_move_type_if_used_by_self(the_move)
     }
 
-    fn evolve_this_enemy_if_should(&mut self) {
-        self.as_ref().evolve_this_enemy_if_should()
+    fn get_sleep_animation_id(&self) -> u8 {
+        self.as_ref().get_sleep_animation_id()
     }
 
-    fn evolve(&mut self, param_2: &mut undefined4, new_monster_idx: monster_catalog::Type) {
-        self.as_ref().evolve(param_2, new_monster_idx)
+    fn is_blinded(&self, check_held_item: bool) -> bool {
+        self.as_ref().is_blinded(check_held_item)
     }
 }
 
 impl<'a> DungeonMonsterExtWrite for DungeonMonsterMut<'a> {
     fn update_move_pp(&mut self, should_consume_pp: bool) {
-        unsafe { ffi::UpdateMovePp(self.1 as *mut _, should_consume_pp as ffi::bool_) }
+        unsafe { ffi::UpdateMovePp(self.1, should_consume_pp as ffi::bool_) }
     }
 
     fn try_activate_truant(&mut self) {
-        unsafe { ffi::TryActivateTruant(self.1 as *mut _) }
+        unsafe { ffi::TryActivateTruant(self.1) }
     }
 
     fn try_weather_form_change(&mut self) {
-        unsafe { ffi::TryWeatherFormChange(self.1 as *mut _) }
+        unsafe { ffi::TryWeatherFormChange(self.1) }
     }
 
     fn restore_pp_for_all_moves_set_flags(&mut self) {
-        unsafe { ffi::RestorePpAllMovesSetFlags(self.1 as *mut _) }
+        unsafe { ffi::RestorePpAllMovesSetFlags(self.1) }
+    }
+
+    fn evolve_this_enemy_if_should(&mut self) {
+        unsafe { ffi::EnemyEvolution(force_mut_ptr!(self.1)) }
+    }
+
+    fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: monster_catalog::Type) {
+        unsafe { ffi::EvolveMonster(force_mut_ptr!(self.1), param_2, new_monster_idx) }
+    }
+
+    /// Calculates the speed stage of a monster from its speed up/down counters. The second
+    /// parameter is the weight of each counter (how many stages it will add/remove), but appears
+    /// to be always 1.
+    ///
+    /// Takes modifiers into account (paralysis, snowy weather, Time Tripper). Deoxys-speed,
+    /// Shaymin-sky and enemy Kecleon during a thief alert get a flat +1 always.
+    ///
+    /// The calculated speed stage is both returned and saved in the monster's statuses struct.
+    fn calc_speed_stage(&mut self, counter_weight: i32) -> i32 {
+        unsafe { ffi::CalcSpeedStage(self.1, counter_weight) }
+    }
+
+    fn set_reflect_damage_countdown_to_four(&mut self) {
+        unsafe { ffi::SetReflectDamageCountdownTo4(self.1) }
     }
 }

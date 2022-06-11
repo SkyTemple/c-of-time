@@ -6882,10 +6882,7 @@ pub struct statuses {
     pub field_0x8: undefined,
     pub field_0x9: undefined,
     pub field_0xa: undefined,
-    pub field_0xb: undefined,
-    pub field_0xc: undefined,
-    pub field_0xd: undefined,
-    pub field_0xe: undefined,
+    pub wrapped_opponent: *mut entity,
     pub field_0xf: undefined,
     pub field_0x10: undefined,
     pub field_0x11: undefined,
@@ -8729,6 +8726,20 @@ pub struct prng_state {
     pub idx_secondary: crate::ctypes::c_int,
 }
 #[repr(C)]
+pub struct spawned_monster_data {
+    pub monster_id: monster_id_16,
+    pub behavior: monster_behavior_8,
+    pub field_0x3: undefined,
+    pub field_0x4: undefined,
+    pub field_0x5: undefined,
+    pub field_0x6: undefined,
+    pub field_0x7: undefined,
+    pub level: u16,
+    pub pos: position,
+    pub cannot_be_asleep: bool_,
+    pub field_0xf: undefined,
+}
+#[repr(C)]
 pub struct dungeon {
     pub field_0x0: undefined,
     pub field_0x1: undefined,
@@ -8736,7 +8747,7 @@ pub struct dungeon {
     pub field_0x3: undefined,
     pub field_0x4: undefined,
     pub stepped_on_stairs: bool_,
-    pub end_floor_flag: bool_,
+    pub end_floor_flag: u8,
     pub quicksave_flag: bool_,
     pub end_floor_no_death_check_flag: bool_,
     pub field_0x9: undefined,
@@ -8744,7 +8755,7 @@ pub struct dungeon {
     pub field_0xb: undefined,
     pub field_0xc: undefined,
     pub field_0xd: undefined,
-    pub field_0xe: undefined,
+    pub activate_artificial_weather_flag: bool_,
     pub should_enemy_evolve: bool_,
     pub field_0x10: undefined,
     pub no_action_in_progress: bool_,
@@ -8758,7 +8769,7 @@ pub struct dungeon {
     pub field_0x1c: undefined,
     pub field_0x1d: undefined,
     pub field_0x1e: undefined,
-    pub field_0x1f: undefined,
+    pub speed_boost_counter: u8,
     pub field_0x20: undefined,
     pub field_0x21: undefined,
     pub field_0x22: undefined,
@@ -10849,134 +10860,7 @@ pub struct dungeon {
     pub field_0x3971: undefined,
     pub field_0x3972: undefined,
     pub field_0x3973: undefined,
-    pub field_0x3974: undefined,
-    pub field_0x3975: undefined,
-    pub field_0x3976: undefined,
-    pub field_0x3977: undefined,
-    pub field_0x3978: undefined,
-    pub field_0x3979: undefined,
-    pub field_0x397a: undefined,
-    pub field_0x397b: undefined,
-    pub field_0x397c: undefined,
-    pub field_0x397d: undefined,
-    pub field_0x397e: undefined,
-    pub field_0x397f: undefined,
-    pub field_0x3980: undefined,
-    pub field_0x3981: undefined,
-    pub field_0x3982: undefined,
-    pub field_0x3983: undefined,
-    pub field_0x3984: undefined,
-    pub field_0x3985: undefined,
-    pub field_0x3986: undefined,
-    pub field_0x3987: undefined,
-    pub field_0x3988: undefined,
-    pub field_0x3989: undefined,
-    pub field_0x398a: undefined,
-    pub field_0x398b: undefined,
-    pub field_0x398c: undefined,
-    pub field_0x398d: undefined,
-    pub field_0x398e: undefined,
-    pub field_0x398f: undefined,
-    pub field_0x3990: undefined,
-    pub field_0x3991: undefined,
-    pub field_0x3992: undefined,
-    pub field_0x3993: undefined,
-    pub field_0x3994: undefined,
-    pub field_0x3995: undefined,
-    pub field_0x3996: undefined,
-    pub field_0x3997: undefined,
-    pub field_0x3998: undefined,
-    pub field_0x3999: undefined,
-    pub field_0x399a: undefined,
-    pub field_0x399b: undefined,
-    pub field_0x399c: undefined,
-    pub field_0x399d: undefined,
-    pub field_0x399e: undefined,
-    pub field_0x399f: undefined,
-    pub field_0x39a0: undefined,
-    pub field_0x39a1: undefined,
-    pub field_0x39a2: undefined,
-    pub field_0x39a3: undefined,
-    pub field_0x39a4: undefined,
-    pub field_0x39a5: undefined,
-    pub field_0x39a6: undefined,
-    pub field_0x39a7: undefined,
-    pub field_0x39a8: undefined,
-    pub field_0x39a9: undefined,
-    pub field_0x39aa: undefined,
-    pub field_0x39ab: undefined,
-    pub field_0x39ac: undefined,
-    pub field_0x39ad: undefined,
-    pub field_0x39ae: undefined,
-    pub field_0x39af: undefined,
-    pub field_0x39b0: undefined,
-    pub field_0x39b1: undefined,
-    pub field_0x39b2: undefined,
-    pub field_0x39b3: undefined,
-    pub field_0x39b4: undefined,
-    pub field_0x39b5: undefined,
-    pub field_0x39b6: undefined,
-    pub field_0x39b7: undefined,
-    pub field_0x39b8: undefined,
-    pub field_0x39b9: undefined,
-    pub field_0x39ba: undefined,
-    pub field_0x39bb: undefined,
-    pub field_0x39bc: undefined,
-    pub field_0x39bd: undefined,
-    pub field_0x39be: undefined,
-    pub field_0x39bf: undefined,
-    pub field_0x39c0: undefined,
-    pub field_0x39c1: undefined,
-    pub field_0x39c2: undefined,
-    pub field_0x39c3: undefined,
-    pub field_0x39c4: undefined,
-    pub field_0x39c5: undefined,
-    pub field_0x39c6: undefined,
-    pub field_0x39c7: undefined,
-    pub field_0x39c8: undefined,
-    pub field_0x39c9: undefined,
-    pub field_0x39ca: undefined,
-    pub field_0x39cb: undefined,
-    pub field_0x39cc: undefined,
-    pub field_0x39cd: undefined,
-    pub field_0x39ce: undefined,
-    pub field_0x39cf: undefined,
-    pub field_0x39d0: undefined,
-    pub field_0x39d1: undefined,
-    pub field_0x39d2: undefined,
-    pub field_0x39d3: undefined,
-    pub field_0x39d4: undefined,
-    pub field_0x39d5: undefined,
-    pub field_0x39d6: undefined,
-    pub field_0x39d7: undefined,
-    pub field_0x39d8: undefined,
-    pub field_0x39d9: undefined,
-    pub field_0x39da: undefined,
-    pub field_0x39db: undefined,
-    pub field_0x39dc: undefined,
-    pub field_0x39dd: undefined,
-    pub field_0x39de: undefined,
-    pub field_0x39df: undefined,
-    pub field_0x39e0: undefined,
-    pub field_0x39e1: undefined,
-    pub field_0x39e2: undefined,
-    pub field_0x39e3: undefined,
-    pub field_0x39e4: undefined,
-    pub field_0x39e5: undefined,
-    pub field_0x39e6: undefined,
-    pub field_0x39e7: undefined,
-    pub field_0x39e8: undefined,
-    pub field_0x39e9: undefined,
-    pub field_0x39ea: undefined,
-    pub field_0x39eb: undefined,
-    pub field_0x39ec: undefined,
-    pub field_0x39ed: undefined,
-    pub field_0x39ee: undefined,
-    pub field_0x39ef: undefined,
-    pub field_0x39f0: undefined,
-    pub field_0x39f1: undefined,
-    pub field_0x39f2: undefined,
-    pub field_0x39f3: undefined,
+    pub spawn_entries: [monster_spawn_entry; 16usize],
     pub field_0x39f4: undefined,
     pub field_0x39f5: undefined,
     pub field_0x39f6: undefined,
@@ -12045,10 +11929,7 @@ pub struct dungeon {
     pub field_0x3e1d: undefined,
     pub field_0x3e1e: undefined,
     pub field_0x3e1f: undefined,
-    pub field_0x3e20: undefined,
-    pub field_0x3e21: undefined,
-    pub field_0x3e22: undefined,
-    pub field_0x3e23: undefined,
+    pub monster_spawn_entries_length: crate::ctypes::c_int,
     pub field_0x3e24: undefined,
     pub field_0x3e25: undefined,
     pub field_0x3e26: undefined,
@@ -12070,7 +11951,7 @@ pub struct dungeon {
     pub enemy_minus_is_active: bool_,
     pub team_minus_is_active: bool_,
     pub field_0x3e38: undefined,
-    pub field_0x3e39: undefined,
+    pub mew_cannot_spawn: bool_,
     pub field_0x3e3a: undefined,
     pub field_0x3e3b: undefined,
     pub field_0x3e3c: undefined,
@@ -27735,20 +27616,13 @@ pub struct dungeon {
     pub field_0x19901: undefined,
     pub field_0x19902: undefined,
     pub field_0x19903: undefined,
-    pub field_0x19904: undefined,
-    pub field_0x19905: undefined,
-    pub field_0x19906: undefined,
-    pub field_0x19907: undefined,
-    pub field_0x19908: undefined,
-    pub field_0x19909: undefined,
-    pub field_0x1990a: undefined,
-    pub field_0x1990b: undefined,
+    pub unknown_monster: *mut entity,
+    pub illuminate_spawn_entity: *mut entity,
     pub field_0x1990c: undefined,
     pub field_0x1990d: undefined,
     pub field_0x1990e: undefined,
     pub field_0x1990f: undefined,
-    pub field_0x19910: undefined,
-    pub field_0x19911: undefined,
+    pub illuminate_spawn_genid: u16,
     pub field_0x19912: undefined,
     pub field_0x19913: undefined,
     pub sprite_indexes: [monster_id_16; 1155usize],
@@ -44801,7 +44675,7 @@ pub struct dungeon {
     pub field_0x2c961: undefined,
     pub field_0x2c962: undefined,
     pub field_0x2c963: undefined,
-    pub spawn_entries: [monster_spawn_entry; 16usize],
+    pub spawn_entries_master: [monster_spawn_entry; 16usize],
     pub field_0x2c9e4: undefined2,
     pub highest_enemy_level: u16,
     pub guaranteed_item_id: item_id_16,
@@ -50094,6 +49968,9 @@ extern "C" {
     pub fn GetDungeonTipShown(tip_id: crate::ctypes::c_int) -> bool_;
 }
 extern "C" {
+    pub fn MonsterSpawnsEnabled() -> bool_;
+}
+extern "C" {
     pub fn SetAdventureLogStructLocation();
 }
 extern "C" {
@@ -50256,6 +50133,9 @@ extern "C" {
 }
 extern "C" {
     pub fn GetMonsterGenderVeneer(monster_id: monster_id::Type) -> u8;
+}
+extern "C" {
+    pub fn GetMonsterLevelFromSpawnEntry(entry: *mut monster_spawn_entry) -> u8;
 }
 extern "C" {
     pub fn IsUnown(monster_id: monster_id::Type) -> bool_;
@@ -50580,10 +50460,16 @@ extern "C" {
     pub fn GetFloorType() -> floor_type::Type;
 }
 extern "C" {
+    pub fn TryForcedLoss(skip_floor_end_check: bool_) -> bool_;
+}
+extern "C" {
     pub fn FixedRoomIsSubstituteRoom() -> bool_;
 }
 extern "C" {
     pub fn ShouldGameOverOnImportantTeamMemberFaint() -> bool_;
+}
+extern "C" {
+    pub fn GetTileAtEntity(entity: *mut entity) -> *mut tile;
 }
 extern "C" {
     pub fn SubstitutePlaceholderStringTags(
@@ -50593,6 +50479,9 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn UpdateMapSurveyorFlag() -> bool_;
+}
+extern "C" {
     pub fn ItemIsActive(entity: *mut entity, item_id: item_id::Type) -> bool_;
 }
 extern "C" {
@@ -50600,6 +50489,15 @@ extern "C" {
 }
 extern "C" {
     pub fn GetLeader() -> *mut entity;
+}
+extern "C" {
+    pub fn GetMonsterIdToSpawn(spawn_weight: crate::ctypes::c_int) -> monster_id::Type;
+}
+extern "C" {
+    pub fn GetMonsterLevelToSpawn(monster_id: monster_id::Type) -> u8;
+}
+extern "C" {
+    pub fn TickStatusTurnCounter(counter: *mut u8) -> u8;
 }
 extern "C" {
     pub fn GenerateDungeonRngSeed() -> u32;
@@ -50651,6 +50549,15 @@ extern "C" {
     pub fn SetForcedLossReason(forced_loss_reason: forced_loss_reason::Type);
 }
 extern "C" {
+    pub fn RunFractionalTurn(is_first_loop: bool_);
+}
+extern "C" {
+    pub fn TrySpawnMonsterAndActivatePlusMinus();
+}
+extern "C" {
+    pub fn FloorIsOver() -> bool_;
+}
+extern "C" {
     pub fn GetForcedLossReason() -> forced_loss_reason::Type;
 }
 extern "C" {
@@ -50668,6 +50575,9 @@ extern "C" {
         faint_reason: crate::ctypes::c_int,
         killer: *mut entity,
     );
+}
+extern "C" {
+    pub fn GetKecleonIdToSpawnByFloor() -> monster_id::Type;
 }
 extern "C" {
     pub fn TryActivateSlowStart();
@@ -50693,10 +50603,22 @@ extern "C" {
     pub fn RestorePpAllMovesSetFlags(entity: *mut entity);
 }
 extern "C" {
+    pub fn MewSpawnCheck(monster_id: monster_id::Type, fail_if_mew: bool_) -> bool_;
+}
+extern "C" {
     pub fn ExclusiveItemEffectIsActive(
         entity: *mut entity,
         effect_id: exclusive_item_effect_id::Type,
     ) -> bool_;
+}
+extern "C" {
+    pub fn GetTeamMemberWithIqSkill(iq_skill: iq_skill_id::Type) -> *mut entity;
+}
+extern "C" {
+    pub fn TeamMemberHasEnabledIqSkill(iq_skill: iq_skill_id::Type) -> bool_;
+}
+extern "C" {
+    pub fn TeamLeaderIqSkillIsEnabled(iq_skill: iq_skill_id::Type) -> bool_;
 }
 extern "C" {
     pub fn HasLowHealth(entity: *mut entity) -> bool_;
@@ -50706,6 +50628,18 @@ extern "C" {
 }
 extern "C" {
     pub fn IsExperienceLocked(monster: *mut monster) -> bool_;
+}
+extern "C" {
+    pub fn SpawnMonster(
+        monster_data: *mut spawned_monster_data,
+        cannot_be_asleep: bool_,
+    ) -> *mut entity;
+}
+extern "C" {
+    pub fn CalcSpeedStage(
+        entity: *mut entity,
+        counter_weight: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetNumberOfAttacks(entity: *mut entity) -> crate::ctypes::c_int;
@@ -50757,6 +50691,15 @@ extern "C" {
         param_5: *mut undefined4,
         param_6: *mut undefined4,
     ) -> bool_;
+}
+extern "C" {
+    pub fn GetSleepAnimationId(entity: *mut entity) -> u8;
+}
+extern "C" {
+    pub fn EndFrozenClassStatus(user: *mut entity, target: *mut entity, log: bool_);
+}
+extern "C" {
+    pub fn EndCringeClassStatus(user: *mut entity, target: *mut entity);
 }
 extern "C" {
     pub fn GetTypeMatchup(
@@ -50839,6 +50782,9 @@ extern "C" {
 }
 extern "C" {
     pub fn ResetDamageCalcScratchSpace();
+}
+extern "C" {
+    pub fn TrySpawnMonsterAndTickSpawnCounter();
 }
 extern "C" {
     pub fn AuraBowIsActive(entity: *mut entity) -> bool_;
@@ -50961,6 +50907,9 @@ extern "C" {
 }
 extern "C" {
     pub fn TryInflictWrappedStatus(user: *mut entity, target: *mut entity);
+}
+extern "C" {
+    pub fn FreeOtherWrappedMonsters(entity: *mut entity);
 }
 extern "C" {
     pub fn TryInflictPetrifiedStatus(user: *mut entity, target: *mut entity);
@@ -51129,6 +51078,9 @@ extern "C" {
     pub fn TryInflictDestinyBond(user: *mut entity, target: *mut entity);
 }
 extern "C" {
+    pub fn IsBlinded(entity: *mut entity, check_held_item: bool_) -> bool_;
+}
+extern "C" {
     pub fn RestoreMovePP(
         user: *mut entity,
         target: *mut entity,
@@ -51137,10 +51089,21 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn SetReflectDamageCountdownTo4(entity: *mut entity);
+}
+extern "C" {
     pub fn HasConditionalGroundImmunity(entity: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn Conversion2IsActive(entity: *mut entity) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsTargetInRange(
+        user: *mut entity,
+        target: *mut entity,
+        direction: direction_id::Type,
+        n_tiles: crate::ctypes::c_int,
+    ) -> bool_;
 }
 extern "C" {
     pub fn GetEntityMoveTargetAndRange(
@@ -51272,6 +51235,9 @@ extern "C" {
     pub fn GetTile(x: crate::ctypes::c_int, y: crate::ctypes::c_int) -> *mut tile;
 }
 extern "C" {
+    pub fn GetTileSafe(x: crate::ctypes::c_int, y: crate::ctypes::c_int) -> *mut tile;
+}
+extern "C" {
     pub fn GravityIsActive() -> bool_;
 }
 extern "C" {
@@ -51288,6 +51254,9 @@ extern "C" {
 }
 extern "C" {
     pub fn SetMinimapDataE448(value: u8);
+}
+extern "C" {
+    pub fn IsSecretFloor() -> bool_;
 }
 extern "C" {
     pub fn LoadFixedRoomDataVeneer();
