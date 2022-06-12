@@ -1020,7 +1020,7 @@ impl DungeonEffectsEmitter {
     /// user and as target) status due to the action of the user.
     ///
     /// # Arguments
-    /// * `attacker` - The monster that is trying to inflict this status.
+    /// * `attacker` - The monster that is trying to cure this status.
     /// * `defender` - The monster that is being cured from this status.
     /// * `log` - Flag to log a message to the dungeon message log.
     pub fn end_frozen_class_status(
@@ -1037,7 +1037,7 @@ impl DungeonEffectsEmitter {
     /// due to the action of the user, and prints the event to the log.
     ///
     /// # Arguments
-    /// * `attacker` - The monster that is trying to inflict this status.
+    /// * `attacker` - The monster that is trying to cure this status.
     /// * `defender` - The monster that is being cured from this status.
     pub fn end_cringe_class_status(
         &self,

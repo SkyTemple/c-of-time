@@ -4,14 +4,6 @@ use crate::api::overlay::OverlayLoadLease;
 use crate::ffi;
 use alloc::vec::Vec;
 
-/// This is `u8` with the `eu` feature and `bool` without.
-#[cfg(feature = "eu")]
-pub type UpdateMapSurveyorFlagReturn = bool;
-
-/// This is `u8` with the `eu` feature and `bool` without.
-#[cfg(not(feature = "eu"))]
-pub type UpdateMapSurveyorFlagReturn = u8;
-
 /// The Rust-safe wrapped master struct that contains the state of the dungeon.
 /// Can be owned or mutably borrowed from a low-level [`ffi::dungeon`].
 ///
@@ -1150,17 +1142,9 @@ impl<'a> GlobalDungeonData<'a> {
     ///
     /// This function has two variants: in the EU ROM, it will return true if the flag was changed.
     /// The NA version will return the new value of the flag instead.
-    pub fn update_map_surveyor_flag(&mut self) -> UpdateMapSurveyorFlagReturn {
+    pub fn update_map_surveyor_flag(&mut self) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        let raw = unsafe { ffi::UpdateMapSurveyorFlag() };
-        #[cfg(feature = "eu")]
-        {
-            raw > 0
-        }
-        #[cfg(not(feature = "eu"))]
-        {
-            raw as u8
-        }
+        unsafe { ffi::UpdateMapSurveyorFlag() > 0 }
     }
 
     /// Get the id of the monster to be randomly spawned.
