@@ -19,6 +19,19 @@ bindgen \
   --no-derive-copy \
   --no-derive-debug \
   --default-enum-style moduleconsts \
+  --newtype-enum ability_id \
+  --newtype-enum dungeon_group_id \
+  --newtype-enum exclusive_item_effect_id \
+  --newtype-enum fixed_room_id \
+  --newtype-enum iq_group_id \
+  --newtype-enum iq_skill_id \
+  --newtype-enum item_id \
+  --newtype-enum monster_id \
+  --newtype-enum move_id \
+  --newtype-enum script_opcode_id \
+  --newtype-enum script_var_id \
+  --newtype-enum special_process_id \
+  --newtype-enum type_id \
   $SCRIPT_DIR/include.h \
   -- \
   -target armv5te-none-eabi \

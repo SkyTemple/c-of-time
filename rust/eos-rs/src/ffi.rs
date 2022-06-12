@@ -196,609 +196,1809 @@ pub mod texture_format {
     pub const TEXFORMAT_A5I3: Type = 6;
     pub const TEXFORMAT_DIRECT: Type = 7;
 }
-pub mod monster_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const MONSTER_NONE: Type = 0;
-    pub const MONSTER_BULBASAUR: Type = 1;
-    pub const MONSTER_IVYSAUR: Type = 2;
-    pub const MONSTER_VENUSAUR: Type = 3;
-    pub const MONSTER_CHARMANDER: Type = 4;
-    pub const MONSTER_CHARMELEON: Type = 5;
-    pub const MONSTER_CHARIZARD: Type = 6;
-    pub const MONSTER_SQUIRTLE: Type = 7;
-    pub const MONSTER_WARTORTLE: Type = 8;
-    pub const MONSTER_BLASTOISE: Type = 9;
-    pub const MONSTER_CATERPIE: Type = 10;
-    pub const MONSTER_METAPOD: Type = 11;
-    pub const MONSTER_BUTTERFREE: Type = 12;
-    pub const MONSTER_WEEDLE: Type = 13;
-    pub const MONSTER_KAKUNA: Type = 14;
-    pub const MONSTER_BEEDRILL: Type = 15;
-    pub const MONSTER_PIDGEY: Type = 16;
-    pub const MONSTER_PIDGEOTTO: Type = 17;
-    pub const MONSTER_PIDGEOT: Type = 18;
-    pub const MONSTER_RATTATA: Type = 19;
-    pub const MONSTER_RATICATE: Type = 20;
-    pub const MONSTER_SPEAROW: Type = 21;
-    pub const MONSTER_FEAROW: Type = 22;
-    pub const MONSTER_EKANS: Type = 23;
-    pub const MONSTER_ARBOK: Type = 24;
-    pub const MONSTER_PIKACHU: Type = 25;
-    pub const MONSTER_RAICHU: Type = 26;
-    pub const MONSTER_SANDSHREW: Type = 27;
-    pub const MONSTER_SANDSLASH: Type = 28;
-    pub const MONSTER_NIDORAN_F: Type = 29;
-    pub const MONSTER_NIDORINA: Type = 30;
-    pub const MONSTER_NIDOQUEEN: Type = 31;
-    pub const MONSTER_NIDORAN_M: Type = 32;
-    pub const MONSTER_NIDORINO: Type = 33;
-    pub const MONSTER_NIDOKING: Type = 34;
-    pub const MONSTER_CLEFAIRY: Type = 35;
-    pub const MONSTER_CLEFABLE: Type = 36;
-    pub const MONSTER_VULPIX: Type = 37;
-    pub const MONSTER_NINETALES: Type = 38;
-    pub const MONSTER_JIGGLYPUFF: Type = 39;
-    pub const MONSTER_WIGGLYTUFF: Type = 40;
-    pub const MONSTER_ZUBAT: Type = 41;
-    pub const MONSTER_GOLBAT: Type = 42;
-    pub const MONSTER_ODDISH: Type = 43;
-    pub const MONSTER_GLOOM: Type = 44;
-    pub const MONSTER_VILEPLUME: Type = 45;
-    pub const MONSTER_PARAS: Type = 46;
-    pub const MONSTER_PARASECT: Type = 47;
-    pub const MONSTER_VENONAT: Type = 48;
-    pub const MONSTER_VENOMOTH: Type = 49;
-    pub const MONSTER_DIGLETT: Type = 50;
-    pub const MONSTER_DUGTRIO: Type = 51;
-    pub const MONSTER_MEOWTH: Type = 52;
-    pub const MONSTER_PERSIAN: Type = 53;
-    pub const MONSTER_PSYDUCK: Type = 54;
-    pub const MONSTER_GOLDUCK: Type = 55;
-    pub const MONSTER_MANKEY: Type = 56;
-    pub const MONSTER_PRIMEAPE: Type = 57;
-    pub const MONSTER_GROWLITHE: Type = 58;
-    pub const MONSTER_ARCANINE: Type = 59;
-    pub const MONSTER_POLIWAG: Type = 60;
-    pub const MONSTER_POLIWHIRL: Type = 61;
-    pub const MONSTER_POLIWRATH: Type = 62;
-    pub const MONSTER_ABRA: Type = 63;
-    pub const MONSTER_KADABRA: Type = 64;
-    pub const MONSTER_ALAKAZAM: Type = 65;
-    pub const MONSTER_MACHOP: Type = 66;
-    pub const MONSTER_MACHOKE: Type = 67;
-    pub const MONSTER_MACHAMP: Type = 68;
-    pub const MONSTER_BELLSPROUT: Type = 69;
-    pub const MONSTER_WEEPINBELL: Type = 70;
-    pub const MONSTER_VICTREEBEL: Type = 71;
-    pub const MONSTER_TENTACOOL: Type = 72;
-    pub const MONSTER_TENTACRUEL: Type = 73;
-    pub const MONSTER_GEODUDE: Type = 74;
-    pub const MONSTER_GRAVELER: Type = 75;
-    pub const MONSTER_GOLEM: Type = 76;
-    pub const MONSTER_PONYTA: Type = 77;
-    pub const MONSTER_RAPIDASH: Type = 78;
-    pub const MONSTER_SLOWPOKE: Type = 79;
-    pub const MONSTER_SLOWBRO: Type = 80;
-    pub const MONSTER_MAGNEMITE: Type = 81;
-    pub const MONSTER_MAGNETON: Type = 82;
-    pub const MONSTER_FARFETCHD: Type = 83;
-    pub const MONSTER_DODUO: Type = 84;
-    pub const MONSTER_DODRIO: Type = 85;
-    pub const MONSTER_SEEL: Type = 86;
-    pub const MONSTER_DEWGONG: Type = 87;
-    pub const MONSTER_GRIMER: Type = 88;
-    pub const MONSTER_MUK: Type = 89;
-    pub const MONSTER_SHELLDER: Type = 90;
-    pub const MONSTER_CLOYSTER: Type = 91;
-    pub const MONSTER_GASTLY: Type = 92;
-    pub const MONSTER_HAUNTER: Type = 93;
-    pub const MONSTER_GENGAR: Type = 94;
-    pub const MONSTER_ONIX: Type = 95;
-    pub const MONSTER_DROWZEE: Type = 96;
-    pub const MONSTER_HYPNO: Type = 97;
-    pub const MONSTER_KRABBY: Type = 98;
-    pub const MONSTER_KINGLER: Type = 99;
-    pub const MONSTER_VOLTORB: Type = 100;
-    pub const MONSTER_ELECTRODE: Type = 101;
-    pub const MONSTER_EXEGGCUTE: Type = 102;
-    pub const MONSTER_EXEGGUTOR: Type = 103;
-    pub const MONSTER_CUBONE: Type = 104;
-    pub const MONSTER_MAROWAK: Type = 105;
-    pub const MONSTER_HITMONLEE: Type = 106;
-    pub const MONSTER_HITMONCHAN: Type = 107;
-    pub const MONSTER_LICKITUNG: Type = 108;
-    pub const MONSTER_KOFFING: Type = 109;
-    pub const MONSTER_WEEZING: Type = 110;
-    pub const MONSTER_RHYHORN: Type = 111;
-    pub const MONSTER_RHYDON: Type = 112;
-    pub const MONSTER_CHANSEY: Type = 113;
-    pub const MONSTER_TANGELA: Type = 114;
-    pub const MONSTER_KANGASKHAN: Type = 115;
-    pub const MONSTER_HORSEA: Type = 116;
-    pub const MONSTER_SEADRA: Type = 117;
-    pub const MONSTER_GOLDEEN: Type = 118;
-    pub const MONSTER_SEAKING: Type = 119;
-    pub const MONSTER_STARYU: Type = 120;
-    pub const MONSTER_STARMIE: Type = 121;
-    pub const MONSTER_MR_MIME: Type = 122;
-    pub const MONSTER_SCYTHER: Type = 123;
-    pub const MONSTER_JYNX: Type = 124;
-    pub const MONSTER_ELECTABUZZ: Type = 125;
-    pub const MONSTER_MAGMAR: Type = 126;
-    pub const MONSTER_PINSIR: Type = 127;
-    pub const MONSTER_TAUROS: Type = 128;
-    pub const MONSTER_MAGIKARP: Type = 129;
-    pub const MONSTER_GYARADOS: Type = 130;
-    pub const MONSTER_LAPRAS: Type = 131;
-    pub const MONSTER_DITTO: Type = 132;
-    pub const MONSTER_EEVEE: Type = 133;
-    pub const MONSTER_VAPOREON: Type = 134;
-    pub const MONSTER_JOLTEON: Type = 135;
-    pub const MONSTER_FLAREON: Type = 136;
-    pub const MONSTER_PORYGON: Type = 137;
-    pub const MONSTER_OMANYTE: Type = 138;
-    pub const MONSTER_OMASTAR: Type = 139;
-    pub const MONSTER_KABUTO: Type = 140;
-    pub const MONSTER_KABUTOPS: Type = 141;
-    pub const MONSTER_AERODACTYL: Type = 142;
-    pub const MONSTER_SNORLAX: Type = 143;
-    pub const MONSTER_ARTICUNO: Type = 144;
-    pub const MONSTER_ZAPDOS: Type = 145;
-    pub const MONSTER_MOLTRES: Type = 146;
-    pub const MONSTER_DRATINI: Type = 147;
-    pub const MONSTER_DRAGONAIR: Type = 148;
-    pub const MONSTER_DRAGONITE: Type = 149;
-    pub const MONSTER_MEWTWO: Type = 150;
-    pub const MONSTER_MEW: Type = 151;
-    pub const MONSTER_CHIKORITA: Type = 152;
-    pub const MONSTER_BAYLEEF: Type = 153;
-    pub const MONSTER_MEGANIUM: Type = 154;
-    pub const MONSTER_CYNDAQUIL: Type = 155;
-    pub const MONSTER_QUILAVA: Type = 156;
-    pub const MONSTER_TYPHLOSION: Type = 157;
-    pub const MONSTER_TOTODILE: Type = 158;
-    pub const MONSTER_CROCONAW: Type = 159;
-    pub const MONSTER_FERALIGATR: Type = 160;
-    pub const MONSTER_SENTRET: Type = 161;
-    pub const MONSTER_FURRET: Type = 162;
-    pub const MONSTER_HOOTHOOT: Type = 163;
-    pub const MONSTER_NOCTOWL: Type = 164;
-    pub const MONSTER_LEDYBA: Type = 165;
-    pub const MONSTER_LEDIAN: Type = 166;
-    pub const MONSTER_SPINARAK: Type = 167;
-    pub const MONSTER_ARIADOS: Type = 168;
-    pub const MONSTER_CROBAT: Type = 169;
-    pub const MONSTER_CHINCHOU: Type = 170;
-    pub const MONSTER_LANTURN: Type = 171;
-    pub const MONSTER_PICHU: Type = 172;
-    pub const MONSTER_CLEFFA: Type = 173;
-    pub const MONSTER_IGGLYBUFF: Type = 174;
-    pub const MONSTER_TOGEPI: Type = 175;
-    pub const MONSTER_TOGETIC: Type = 176;
-    pub const MONSTER_NATU: Type = 177;
-    pub const MONSTER_XATU: Type = 178;
-    pub const MONSTER_MAREEP: Type = 179;
-    pub const MONSTER_FLAAFFY: Type = 180;
-    pub const MONSTER_AMPHAROS: Type = 181;
-    pub const MONSTER_BELLOSSOM: Type = 182;
-    pub const MONSTER_MARILL: Type = 183;
-    pub const MONSTER_AZUMARILL: Type = 184;
-    pub const MONSTER_SUDOWOODO: Type = 185;
-    pub const MONSTER_POLITOED: Type = 186;
-    pub const MONSTER_HOPPIP: Type = 187;
-    pub const MONSTER_SKIPLOOM: Type = 188;
-    pub const MONSTER_JUMPLUFF: Type = 189;
-    pub const MONSTER_AIPOM: Type = 190;
-    pub const MONSTER_SUNKERN: Type = 191;
-    pub const MONSTER_SUNFLORA: Type = 192;
-    pub const MONSTER_YANMA: Type = 193;
-    pub const MONSTER_WOOPER: Type = 194;
-    pub const MONSTER_QUAGSIRE: Type = 195;
-    pub const MONSTER_ESPEON: Type = 196;
-    pub const MONSTER_UMBREON: Type = 197;
-    pub const MONSTER_MURKROW: Type = 198;
-    pub const MONSTER_SLOWKING: Type = 199;
-    pub const MONSTER_MISDREAVUS: Type = 200;
-    pub const MONSTER_UNOWN_A: Type = 201;
-    pub const MONSTER_UNOWN_B: Type = 202;
-    pub const MONSTER_UNOWN_C: Type = 203;
-    pub const MONSTER_UNOWN_D: Type = 204;
-    pub const MONSTER_UNOWN_E: Type = 205;
-    pub const MONSTER_UNOWN_F: Type = 206;
-    pub const MONSTER_UNOWN_G: Type = 207;
-    pub const MONSTER_UNOWN_H: Type = 208;
-    pub const MONSTER_UNOWN_I: Type = 209;
-    pub const MONSTER_UNOWN_J: Type = 210;
-    pub const MONSTER_UNOWN_K: Type = 211;
-    pub const MONSTER_UNOWN_L: Type = 212;
-    pub const MONSTER_UNOWN_M: Type = 213;
-    pub const MONSTER_UNOWN_N: Type = 214;
-    pub const MONSTER_UNOWN_O: Type = 215;
-    pub const MONSTER_UNOWN_P: Type = 216;
-    pub const MONSTER_UNOWN_Q: Type = 217;
-    pub const MONSTER_UNOWN_R: Type = 218;
-    pub const MONSTER_UNOWN_S: Type = 219;
-    pub const MONSTER_UNOWN_T: Type = 220;
-    pub const MONSTER_UNOWN_U: Type = 221;
-    pub const MONSTER_UNOWN_V: Type = 222;
-    pub const MONSTER_UNOWN_W: Type = 223;
-    pub const MONSTER_UNOWN_X: Type = 224;
-    pub const MONSTER_UNOWN_Y: Type = 225;
-    pub const MONSTER_UNOWN_Z: Type = 226;
-    pub const MONSTER_UNOWN_EXCLAMATION: Type = 227;
-    pub const MONSTER_UNOWN_QUESTION: Type = 228;
-    pub const MONSTER_WOBBUFFET: Type = 229;
-    pub const MONSTER_GIRAFARIG: Type = 230;
-    pub const MONSTER_PINECO: Type = 231;
-    pub const MONSTER_FORRETRESS: Type = 232;
-    pub const MONSTER_DUNSPARCE: Type = 233;
-    pub const MONSTER_GLIGAR: Type = 234;
-    pub const MONSTER_STEELIX: Type = 235;
-    pub const MONSTER_SNUBBULL: Type = 236;
-    pub const MONSTER_GRANBULL: Type = 237;
-    pub const MONSTER_QWILFISH: Type = 238;
-    pub const MONSTER_SCIZOR: Type = 239;
-    pub const MONSTER_SHUCKLE: Type = 240;
-    pub const MONSTER_HERACROSS: Type = 241;
-    pub const MONSTER_SNEASEL: Type = 242;
-    pub const MONSTER_TEDDIURSA: Type = 243;
-    pub const MONSTER_URSARING: Type = 244;
-    pub const MONSTER_SLUGMA: Type = 245;
-    pub const MONSTER_MAGCARGO: Type = 246;
-    pub const MONSTER_SWINUB: Type = 247;
-    pub const MONSTER_PILOSWINE: Type = 248;
-    pub const MONSTER_CORSOLA: Type = 249;
-    pub const MONSTER_REMORAID: Type = 250;
-    pub const MONSTER_OCTILLERY: Type = 251;
-    pub const MONSTER_DELIBIRD: Type = 252;
-    pub const MONSTER_MANTINE: Type = 253;
-    pub const MONSTER_SKARMORY: Type = 254;
-    pub const MONSTER_HOUNDOUR: Type = 255;
-    pub const MONSTER_HOUNDOOM: Type = 256;
-    pub const MONSTER_KINGDRA: Type = 257;
-    pub const MONSTER_PHANPY: Type = 258;
-    pub const MONSTER_DONPHAN: Type = 259;
-    pub const MONSTER_PORYGON2: Type = 260;
-    pub const MONSTER_STANTLER: Type = 261;
-    pub const MONSTER_SMEARGLE: Type = 262;
-    pub const MONSTER_TYROGUE: Type = 263;
-    pub const MONSTER_HITMONTOP: Type = 264;
-    pub const MONSTER_SMOOCHUM: Type = 265;
-    pub const MONSTER_ELEKID: Type = 266;
-    pub const MONSTER_MAGBY: Type = 267;
-    pub const MONSTER_MILTANK: Type = 268;
-    pub const MONSTER_BLISSEY: Type = 269;
-    pub const MONSTER_RAIKOU: Type = 270;
-    pub const MONSTER_ENTEI: Type = 271;
-    pub const MONSTER_SUICUNE: Type = 272;
-    pub const MONSTER_LARVITAR: Type = 273;
-    pub const MONSTER_PUPITAR: Type = 274;
-    pub const MONSTER_TYRANITAR: Type = 275;
-    pub const MONSTER_LUGIA: Type = 276;
-    pub const MONSTER_HO_OH: Type = 277;
-    pub const MONSTER_CELEBI: Type = 278;
-    pub const MONSTER_SHINY_CELEBI: Type = 279;
-    pub const MONSTER_TREECKO: Type = 280;
-    pub const MONSTER_GROVYLE: Type = 281;
-    pub const MONSTER_SCEPTILE: Type = 282;
-    pub const MONSTER_TORCHIC: Type = 283;
-    pub const MONSTER_COMBUSKEN: Type = 284;
-    pub const MONSTER_BLAZIKEN: Type = 285;
-    pub const MONSTER_MUDKIP: Type = 286;
-    pub const MONSTER_MARSHTOMP: Type = 287;
-    pub const MONSTER_SWAMPERT: Type = 288;
-    pub const MONSTER_POOCHYENA: Type = 289;
-    pub const MONSTER_MIGHTYENA: Type = 290;
-    pub const MONSTER_ZIGZAGOON: Type = 291;
-    pub const MONSTER_LINOONE: Type = 292;
-    pub const MONSTER_WURMPLE: Type = 293;
-    pub const MONSTER_SILCOON: Type = 294;
-    pub const MONSTER_BEAUTIFLY: Type = 295;
-    pub const MONSTER_CASCOON: Type = 296;
-    pub const MONSTER_DUSTOX: Type = 297;
-    pub const MONSTER_LOTAD: Type = 298;
-    pub const MONSTER_LOMBRE: Type = 299;
-    pub const MONSTER_LUDICOLO: Type = 300;
-    pub const MONSTER_SEEDOT: Type = 301;
-    pub const MONSTER_NUZLEAF: Type = 302;
-    pub const MONSTER_SHIFTRY: Type = 303;
-    pub const MONSTER_TAILLOW: Type = 304;
-    pub const MONSTER_SWELLOW: Type = 305;
-    pub const MONSTER_WINGULL: Type = 306;
-    pub const MONSTER_PELIPPER: Type = 307;
-    pub const MONSTER_RALTS: Type = 308;
-    pub const MONSTER_KIRLIA: Type = 309;
-    pub const MONSTER_GARDEVOIR: Type = 310;
-    pub const MONSTER_SURSKIT: Type = 311;
-    pub const MONSTER_MASQUERAIN: Type = 312;
-    pub const MONSTER_SHROOMISH: Type = 313;
-    pub const MONSTER_BRELOOM: Type = 314;
-    pub const MONSTER_SLAKOTH: Type = 315;
-    pub const MONSTER_VIGOROTH: Type = 316;
-    pub const MONSTER_SLAKING: Type = 317;
-    pub const MONSTER_NINCADA: Type = 318;
-    pub const MONSTER_NINJASK: Type = 319;
-    pub const MONSTER_SHEDINJA: Type = 320;
-    pub const MONSTER_WHISMUR: Type = 321;
-    pub const MONSTER_LOUDRED: Type = 322;
-    pub const MONSTER_EXPLOUD: Type = 323;
-    pub const MONSTER_MAKUHITA: Type = 324;
-    pub const MONSTER_HARIYAMA: Type = 325;
-    pub const MONSTER_AZURILL: Type = 326;
-    pub const MONSTER_NOSEPASS: Type = 327;
-    pub const MONSTER_SKITTY: Type = 328;
-    pub const MONSTER_DELCATTY: Type = 329;
-    pub const MONSTER_SABLEYE: Type = 330;
-    pub const MONSTER_MAWILE: Type = 331;
-    pub const MONSTER_ARON: Type = 332;
-    pub const MONSTER_LAIRON: Type = 333;
-    pub const MONSTER_AGGRON: Type = 334;
-    pub const MONSTER_MEDITITE: Type = 335;
-    pub const MONSTER_MEDICHAM: Type = 336;
-    pub const MONSTER_ELECTRIKE: Type = 337;
-    pub const MONSTER_MANECTRIC: Type = 338;
-    pub const MONSTER_PLUSLE: Type = 339;
-    pub const MONSTER_MINUN: Type = 340;
-    pub const MONSTER_VOLBEAT: Type = 341;
-    pub const MONSTER_ILLUMISE: Type = 342;
-    pub const MONSTER_ROSELIA: Type = 343;
-    pub const MONSTER_GULPIN: Type = 344;
-    pub const MONSTER_SWALOT: Type = 345;
-    pub const MONSTER_CARVANHA: Type = 346;
-    pub const MONSTER_SHARPEDO: Type = 347;
-    pub const MONSTER_WAILMER: Type = 348;
-    pub const MONSTER_WAILORD: Type = 349;
-    pub const MONSTER_NUMEL: Type = 350;
-    pub const MONSTER_CAMERUPT: Type = 351;
-    pub const MONSTER_TORKOAL: Type = 352;
-    pub const MONSTER_SPOINK: Type = 353;
-    pub const MONSTER_GRUMPIG: Type = 354;
-    pub const MONSTER_SPINDA: Type = 355;
-    pub const MONSTER_TRAPINCH: Type = 356;
-    pub const MONSTER_VIBRAVA: Type = 357;
-    pub const MONSTER_FLYGON: Type = 358;
-    pub const MONSTER_CACNEA: Type = 359;
-    pub const MONSTER_CACTURNE: Type = 360;
-    pub const MONSTER_SWABLU: Type = 361;
-    pub const MONSTER_ALTARIA: Type = 362;
-    pub const MONSTER_ZANGOOSE: Type = 363;
-    pub const MONSTER_SEVIPER: Type = 364;
-    pub const MONSTER_LUNATONE: Type = 365;
-    pub const MONSTER_SOLROCK: Type = 366;
-    pub const MONSTER_BARBOACH: Type = 367;
-    pub const MONSTER_WHISCASH: Type = 368;
-    pub const MONSTER_CORPHISH: Type = 369;
-    pub const MONSTER_CRAWDAUNT: Type = 370;
-    pub const MONSTER_BALTOY: Type = 371;
-    pub const MONSTER_CLAYDOL: Type = 372;
-    pub const MONSTER_LILEEP: Type = 373;
-    pub const MONSTER_CRADILY: Type = 374;
-    pub const MONSTER_ANORITH: Type = 375;
-    pub const MONSTER_ARMALDO: Type = 376;
-    pub const MONSTER_FEEBAS: Type = 377;
-    pub const MONSTER_MILOTIC: Type = 378;
-    pub const MONSTER_CASTFORM_NORMAL: Type = 379;
-    pub const MONSTER_CASTFORM_SNOWY: Type = 380;
-    pub const MONSTER_CASTFORM_SUNNY: Type = 381;
-    pub const MONSTER_CASTFORM_RAINY: Type = 382;
-    pub const MONSTER_KECLEON: Type = 383;
-    pub const MONSTER_PURPLE_KECLEON: Type = 384;
-    pub const MONSTER_SHUPPET: Type = 385;
-    pub const MONSTER_BANETTE: Type = 386;
-    pub const MONSTER_DUSKULL: Type = 387;
-    pub const MONSTER_DUSCLOPS: Type = 388;
-    pub const MONSTER_TROPIUS: Type = 389;
-    pub const MONSTER_CHIMECHO: Type = 390;
-    pub const MONSTER_ABSOL: Type = 391;
-    pub const MONSTER_WYNAUT: Type = 392;
-    pub const MONSTER_SNORUNT: Type = 393;
-    pub const MONSTER_GLALIE: Type = 394;
-    pub const MONSTER_SPHEAL: Type = 395;
-    pub const MONSTER_SEALEO: Type = 396;
-    pub const MONSTER_WALREIN: Type = 397;
-    pub const MONSTER_CLAMPERL: Type = 398;
-    pub const MONSTER_HUNTAIL: Type = 399;
-    pub const MONSTER_GOREBYSS: Type = 400;
-    pub const MONSTER_RELICANTH: Type = 401;
-    pub const MONSTER_LUVDISC: Type = 402;
-    pub const MONSTER_BAGON: Type = 403;
-    pub const MONSTER_SHELGON: Type = 404;
-    pub const MONSTER_SALAMENCE: Type = 405;
-    pub const MONSTER_BELDUM: Type = 406;
-    pub const MONSTER_METANG: Type = 407;
-    pub const MONSTER_METAGROSS: Type = 408;
-    pub const MONSTER_REGIROCK: Type = 409;
-    pub const MONSTER_REGICE: Type = 410;
-    pub const MONSTER_REGISTEEL: Type = 411;
-    pub const MONSTER_LATIAS: Type = 412;
-    pub const MONSTER_LATIOS: Type = 413;
-    pub const MONSTER_KYOGRE: Type = 414;
-    pub const MONSTER_GROUDON: Type = 415;
-    pub const MONSTER_RAYQUAZA: Type = 416;
-    pub const MONSTER_JIRACHI: Type = 417;
-    pub const MONSTER_DEOXYS_NORMAL: Type = 418;
-    pub const MONSTER_DEOXYS_ATTACH: Type = 419;
-    pub const MONSTER_DEOXYS_DEFENSE: Type = 420;
-    pub const MONSTER_DEOXYS_SPEED: Type = 421;
-    pub const MONSTER_TURTWIG: Type = 422;
-    pub const MONSTER_GROTLE: Type = 423;
-    pub const MONSTER_TORTERRA: Type = 424;
-    pub const MONSTER_CHIMCHAR: Type = 425;
-    pub const MONSTER_MONFERNO: Type = 426;
-    pub const MONSTER_INFERNAPE: Type = 427;
-    pub const MONSTER_PIPLUP: Type = 428;
-    pub const MONSTER_PRINPLUP: Type = 429;
-    pub const MONSTER_EMPOLEON: Type = 430;
-    pub const MONSTER_STARLY: Type = 431;
-    pub const MONSTER_STARAVIA: Type = 432;
-    pub const MONSTER_STARAPTOR: Type = 433;
-    pub const MONSTER_BIDOOF: Type = 434;
-    pub const MONSTER_BIBAREL: Type = 435;
-    pub const MONSTER_KRICKETOT: Type = 436;
-    pub const MONSTER_KRICKETUNE: Type = 437;
-    pub const MONSTER_SHINX: Type = 438;
-    pub const MONSTER_LUXIO: Type = 439;
-    pub const MONSTER_LUXRAY: Type = 440;
-    pub const MONSTER_BUDEW: Type = 441;
-    pub const MONSTER_ROSERADE: Type = 442;
-    pub const MONSTER_CRANIDOS: Type = 443;
-    pub const MONSTER_RAMPARDOS: Type = 444;
-    pub const MONSTER_SHIELDON: Type = 445;
-    pub const MONSTER_BASTIODON: Type = 446;
-    pub const MONSTER_BURMY_SANDY: Type = 447;
-    pub const MONSTER_BURMY_PLANT: Type = 448;
-    pub const MONSTER_BURMY_TRASH: Type = 449;
-    pub const MONSTER_WORMADAM_SANDY: Type = 450;
-    pub const MONSTER_WORMADAM_PLANT: Type = 451;
-    pub const MONSTER_WORMADAM_TRASH: Type = 452;
-    pub const MONSTER_MOTHIM: Type = 453;
-    pub const MONSTER_COMBEE: Type = 454;
-    pub const MONSTER_VESPIQUEN: Type = 455;
-    pub const MONSTER_PACHIRISU: Type = 456;
-    pub const MONSTER_BUIZEL: Type = 457;
-    pub const MONSTER_FLOATZEL: Type = 458;
-    pub const MONSTER_CHERUBI: Type = 459;
-    pub const MONSTER_CHERRIM_OVERCAST: Type = 460;
-    pub const MONSTER_CHERRIM_SUNSHINE: Type = 461;
-    pub const MONSTER_SHELLOS_EAST: Type = 462;
-    pub const MONSTER_SHELLOS_WEST: Type = 463;
-    pub const MONSTER_GASTRODON_EAST: Type = 464;
-    pub const MONSTER_GASTRODON_WEST: Type = 465;
-    pub const MONSTER_AMBIPOM: Type = 466;
-    pub const MONSTER_DRIFLOON: Type = 467;
-    pub const MONSTER_DRIFBLIM: Type = 468;
-    pub const MONSTER_BUNEARY: Type = 469;
-    pub const MONSTER_LOPUNNY: Type = 470;
-    pub const MONSTER_MISMAGIUS: Type = 471;
-    pub const MONSTER_HONCHKROW: Type = 472;
-    pub const MONSTER_GLAMEOW: Type = 473;
-    pub const MONSTER_PURUGLY: Type = 474;
-    pub const MONSTER_CHINGLING: Type = 475;
-    pub const MONSTER_STUNKY: Type = 476;
-    pub const MONSTER_SKUNTANK: Type = 477;
-    pub const MONSTER_BRONZOR: Type = 478;
-    pub const MONSTER_BRONZONG: Type = 479;
-    pub const MONSTER_BONSLY: Type = 480;
-    pub const MONSTER_MIME_JR: Type = 481;
-    pub const MONSTER_HAPPINY: Type = 482;
-    pub const MONSTER_CHATOT: Type = 483;
-    pub const MONSTER_SPIRITOMB: Type = 484;
-    pub const MONSTER_GIBLE: Type = 485;
-    pub const MONSTER_GABITE: Type = 486;
-    pub const MONSTER_GARCHOMP: Type = 487;
-    pub const MONSTER_MUNCHLAX: Type = 488;
-    pub const MONSTER_RIOLU: Type = 489;
-    pub const MONSTER_LUCARIO: Type = 490;
-    pub const MONSTER_HIPPOPOTAS: Type = 491;
-    pub const MONSTER_HIPPOWDON: Type = 492;
-    pub const MONSTER_SKORUPI: Type = 493;
-    pub const MONSTER_DRAPION: Type = 494;
-    pub const MONSTER_CROAGUNK: Type = 495;
-    pub const MONSTER_TOXICROAK: Type = 496;
-    pub const MONSTER_CARNIVINE: Type = 497;
-    pub const MONSTER_FINNEON: Type = 498;
-    pub const MONSTER_LUMINEON: Type = 499;
-    pub const MONSTER_MANTYKE: Type = 500;
-    pub const MONSTER_SNOVER: Type = 501;
-    pub const MONSTER_ABOMASNOW: Type = 502;
-    pub const MONSTER_WEAVILE: Type = 503;
-    pub const MONSTER_MAGNEZONE: Type = 504;
-    pub const MONSTER_LICKILICKY: Type = 505;
-    pub const MONSTER_RHYPERIOR: Type = 506;
-    pub const MONSTER_TANGROWTH: Type = 507;
-    pub const MONSTER_ELECTIVIRE: Type = 508;
-    pub const MONSTER_MAGMORTAR: Type = 509;
-    pub const MONSTER_TOGEKISS: Type = 510;
-    pub const MONSTER_YANMEGA: Type = 511;
-    pub const MONSTER_LEAFEON: Type = 512;
-    pub const MONSTER_GLACEON: Type = 513;
-    pub const MONSTER_GLISCOR: Type = 514;
-    pub const MONSTER_MAMOSWINE: Type = 515;
-    pub const MONSTER_PORYGON_Z: Type = 516;
-    pub const MONSTER_GALLADE: Type = 517;
-    pub const MONSTER_PROBOPASS: Type = 518;
-    pub const MONSTER_DUSKNOIR: Type = 519;
-    pub const MONSTER_FROSLASS: Type = 520;
-    pub const MONSTER_ROTOM: Type = 521;
-    pub const MONSTER_UXIE: Type = 522;
-    pub const MONSTER_MESPRIT: Type = 523;
-    pub const MONSTER_AZELF: Type = 524;
-    pub const MONSTER_DIALGA: Type = 525;
-    pub const MONSTER_PALKIA: Type = 526;
-    pub const MONSTER_HEATRAN: Type = 527;
-    pub const MONSTER_REGIGIGAS: Type = 528;
-    pub const MONSTER_GIRATINA_ALTERED: Type = 529;
-    pub const MONSTER_CRESSELIA: Type = 530;
-    pub const MONSTER_PHIONE: Type = 531;
-    pub const MONSTER_MANAPHY: Type = 532;
-    pub const MONSTER_DARKRAI: Type = 533;
-    pub const MONSTER_SHAYMIN_LAND: Type = 534;
-    pub const MONSTER_SHAYMIN_SKY: Type = 535;
-    pub const MONSTER_GIRATINA_ORIGIN: Type = 536;
-    pub const MONSTER_UNNAMED_0x219: Type = 537;
-    pub const MONSTER_UNNAMED_0x21A: Type = 538;
-    pub const MONSTER_UNNAMED_0x21B: Type = 539;
-    pub const MONSTER_UNNAMED_0x21C: Type = 540;
-    pub const MONSTER_UNNAMED_0x21D: Type = 541;
-    pub const MONSTER_UNNAMED_0x21E: Type = 542;
-    pub const MONSTER_UNNAMED_0x21F: Type = 543;
-    pub const MONSTER_UNNAMED_0x220: Type = 544;
-    pub const MONSTER_UNNAMED_0x221: Type = 545;
-    pub const MONSTER_UNNAMED_0x222: Type = 546;
-    pub const MONSTER_UNNAMED_0x223: Type = 547;
-    pub const MONSTER_UNNAMED_0x224: Type = 548;
-    pub const MONSTER_UNNAMED_0x225: Type = 549;
-    pub const MONSTER_UNNAMED_0x226: Type = 550;
-    pub const MONSTER_UNNAMED_0x227: Type = 551;
-    pub const MONSTER_PRIMAL_DIALGA: Type = 552;
-    pub const MONSTER_DECOY: Type = 553;
-    pub const MONSTER_STATUE: Type = 554;
-    pub const MONSTER_WIGGLYTUFF_STORY: Type = 555;
-    pub const MONSTER_REGIGIGAS_STORY: Type = 556;
-    pub const MONSTER_BRONZONG_STORY: Type = 557;
-    pub const MONSTER_HITMONLEE_STORY: Type = 558;
-    pub const MONSTER_CHIMECHO_STORY: Type = 559;
-    pub const MONSTER_WIGGLYTUFF_STORY_2: Type = 560;
-    pub const MONSTER_UXIE_STORY: Type = 561;
-    pub const MONSTER_AZELF_STORY: Type = 562;
-    pub const MONSTER_MESPRIT_STORY: Type = 563;
-    pub const MONSTER_SUNFLORA_STORY: Type = 564;
-    pub const MONSTER_DIGLETT_STORY: Type = 565;
-    pub const MONSTER_DUGTRIO_STORY: Type = 566;
-    pub const MONSTER_CORPHISH_STORY: Type = 567;
-    pub const MONSTER_LOUDRED_STORY: Type = 568;
-    pub const MONSTER_BIDOOF_STORY: Type = 569;
-    pub const MONSTER_CHATOT_STORY: Type = 570;
-    pub const MONSTER_GROVYLE_STORY: Type = 571;
-    pub const MONSTER_DUSKNOIR_STORY: Type = 572;
-    pub const MONSTER_SABLEYE_STORY: Type = 573;
-    pub const MONSTER_DARKRAI_STORY: Type = 574;
-    pub const MONSTER_MAMA: Type = 575;
-    pub const MONSTER_GROVYLE_STORY_2: Type = 576;
-    pub const MONSTER_DUSKNOIR_STORY_2: Type = 577;
-    pub const MONSTER_DUSKNOIR_STORY_3: Type = 578;
-    pub const MONSTER_SENTRET_DITTO: Type = 579;
-    pub const MONSTER_BELLOSSOM_DITTO: Type = 580;
-    pub const MONSTER_RESERVE_27: Type = 581;
-    pub const MONSTER_RESERVE_28: Type = 582;
-    pub const MONSTER_RESERVE_29: Type = 583;
-    pub const MONSTER_RESERVE_30: Type = 584;
-    pub const MONSTER_RESERVE_31: Type = 585;
-    pub const MONSTER_RESERVE_32: Type = 586;
-    pub const MONSTER_RESERVE_33: Type = 587;
-    pub const MONSTER_RESERVE_34: Type = 588;
-    pub const MONSTER_RESERVE_35: Type = 589;
-    pub const MONSTER_RESERVE_36: Type = 590;
-    pub const MONSTER_RESERVE_37: Type = 591;
-    pub const MONSTER_RESERVE_38: Type = 592;
-    pub const MONSTER_RESERVE_39: Type = 593;
-    pub const MONSTER_RESERVE_40: Type = 594;
-    pub const MONSTER_RESERVE_41: Type = 595;
-    pub const MONSTER_RESERVE_42: Type = 596;
-    pub const MONSTER_RESERVE_43: Type = 597;
-    pub const MONSTER_RESERVE_44: Type = 598;
-    pub const MONSTER_RESERVE_45: Type = 599;
+impl monster_id {
+    pub const MONSTER_NONE: monster_id = monster_id(0);
 }
+impl monster_id {
+    pub const MONSTER_BULBASAUR: monster_id = monster_id(1);
+}
+impl monster_id {
+    pub const MONSTER_IVYSAUR: monster_id = monster_id(2);
+}
+impl monster_id {
+    pub const MONSTER_VENUSAUR: monster_id = monster_id(3);
+}
+impl monster_id {
+    pub const MONSTER_CHARMANDER: monster_id = monster_id(4);
+}
+impl monster_id {
+    pub const MONSTER_CHARMELEON: monster_id = monster_id(5);
+}
+impl monster_id {
+    pub const MONSTER_CHARIZARD: monster_id = monster_id(6);
+}
+impl monster_id {
+    pub const MONSTER_SQUIRTLE: monster_id = monster_id(7);
+}
+impl monster_id {
+    pub const MONSTER_WARTORTLE: monster_id = monster_id(8);
+}
+impl monster_id {
+    pub const MONSTER_BLASTOISE: monster_id = monster_id(9);
+}
+impl monster_id {
+    pub const MONSTER_CATERPIE: monster_id = monster_id(10);
+}
+impl monster_id {
+    pub const MONSTER_METAPOD: monster_id = monster_id(11);
+}
+impl monster_id {
+    pub const MONSTER_BUTTERFREE: monster_id = monster_id(12);
+}
+impl monster_id {
+    pub const MONSTER_WEEDLE: monster_id = monster_id(13);
+}
+impl monster_id {
+    pub const MONSTER_KAKUNA: monster_id = monster_id(14);
+}
+impl monster_id {
+    pub const MONSTER_BEEDRILL: monster_id = monster_id(15);
+}
+impl monster_id {
+    pub const MONSTER_PIDGEY: monster_id = monster_id(16);
+}
+impl monster_id {
+    pub const MONSTER_PIDGEOTTO: monster_id = monster_id(17);
+}
+impl monster_id {
+    pub const MONSTER_PIDGEOT: monster_id = monster_id(18);
+}
+impl monster_id {
+    pub const MONSTER_RATTATA: monster_id = monster_id(19);
+}
+impl monster_id {
+    pub const MONSTER_RATICATE: monster_id = monster_id(20);
+}
+impl monster_id {
+    pub const MONSTER_SPEAROW: monster_id = monster_id(21);
+}
+impl monster_id {
+    pub const MONSTER_FEAROW: monster_id = monster_id(22);
+}
+impl monster_id {
+    pub const MONSTER_EKANS: monster_id = monster_id(23);
+}
+impl monster_id {
+    pub const MONSTER_ARBOK: monster_id = monster_id(24);
+}
+impl monster_id {
+    pub const MONSTER_PIKACHU: monster_id = monster_id(25);
+}
+impl monster_id {
+    pub const MONSTER_RAICHU: monster_id = monster_id(26);
+}
+impl monster_id {
+    pub const MONSTER_SANDSHREW: monster_id = monster_id(27);
+}
+impl monster_id {
+    pub const MONSTER_SANDSLASH: monster_id = monster_id(28);
+}
+impl monster_id {
+    pub const MONSTER_NIDORAN_F: monster_id = monster_id(29);
+}
+impl monster_id {
+    pub const MONSTER_NIDORINA: monster_id = monster_id(30);
+}
+impl monster_id {
+    pub const MONSTER_NIDOQUEEN: monster_id = monster_id(31);
+}
+impl monster_id {
+    pub const MONSTER_NIDORAN_M: monster_id = monster_id(32);
+}
+impl monster_id {
+    pub const MONSTER_NIDORINO: monster_id = monster_id(33);
+}
+impl monster_id {
+    pub const MONSTER_NIDOKING: monster_id = monster_id(34);
+}
+impl monster_id {
+    pub const MONSTER_CLEFAIRY: monster_id = monster_id(35);
+}
+impl monster_id {
+    pub const MONSTER_CLEFABLE: monster_id = monster_id(36);
+}
+impl monster_id {
+    pub const MONSTER_VULPIX: monster_id = monster_id(37);
+}
+impl monster_id {
+    pub const MONSTER_NINETALES: monster_id = monster_id(38);
+}
+impl monster_id {
+    pub const MONSTER_JIGGLYPUFF: monster_id = monster_id(39);
+}
+impl monster_id {
+    pub const MONSTER_WIGGLYTUFF: monster_id = monster_id(40);
+}
+impl monster_id {
+    pub const MONSTER_ZUBAT: monster_id = monster_id(41);
+}
+impl monster_id {
+    pub const MONSTER_GOLBAT: monster_id = monster_id(42);
+}
+impl monster_id {
+    pub const MONSTER_ODDISH: monster_id = monster_id(43);
+}
+impl monster_id {
+    pub const MONSTER_GLOOM: monster_id = monster_id(44);
+}
+impl monster_id {
+    pub const MONSTER_VILEPLUME: monster_id = monster_id(45);
+}
+impl monster_id {
+    pub const MONSTER_PARAS: monster_id = monster_id(46);
+}
+impl monster_id {
+    pub const MONSTER_PARASECT: monster_id = monster_id(47);
+}
+impl monster_id {
+    pub const MONSTER_VENONAT: monster_id = monster_id(48);
+}
+impl monster_id {
+    pub const MONSTER_VENOMOTH: monster_id = monster_id(49);
+}
+impl monster_id {
+    pub const MONSTER_DIGLETT: monster_id = monster_id(50);
+}
+impl monster_id {
+    pub const MONSTER_DUGTRIO: monster_id = monster_id(51);
+}
+impl monster_id {
+    pub const MONSTER_MEOWTH: monster_id = monster_id(52);
+}
+impl monster_id {
+    pub const MONSTER_PERSIAN: monster_id = monster_id(53);
+}
+impl monster_id {
+    pub const MONSTER_PSYDUCK: monster_id = monster_id(54);
+}
+impl monster_id {
+    pub const MONSTER_GOLDUCK: monster_id = monster_id(55);
+}
+impl monster_id {
+    pub const MONSTER_MANKEY: monster_id = monster_id(56);
+}
+impl monster_id {
+    pub const MONSTER_PRIMEAPE: monster_id = monster_id(57);
+}
+impl monster_id {
+    pub const MONSTER_GROWLITHE: monster_id = monster_id(58);
+}
+impl monster_id {
+    pub const MONSTER_ARCANINE: monster_id = monster_id(59);
+}
+impl monster_id {
+    pub const MONSTER_POLIWAG: monster_id = monster_id(60);
+}
+impl monster_id {
+    pub const MONSTER_POLIWHIRL: monster_id = monster_id(61);
+}
+impl monster_id {
+    pub const MONSTER_POLIWRATH: monster_id = monster_id(62);
+}
+impl monster_id {
+    pub const MONSTER_ABRA: monster_id = monster_id(63);
+}
+impl monster_id {
+    pub const MONSTER_KADABRA: monster_id = monster_id(64);
+}
+impl monster_id {
+    pub const MONSTER_ALAKAZAM: monster_id = monster_id(65);
+}
+impl monster_id {
+    pub const MONSTER_MACHOP: monster_id = monster_id(66);
+}
+impl monster_id {
+    pub const MONSTER_MACHOKE: monster_id = monster_id(67);
+}
+impl monster_id {
+    pub const MONSTER_MACHAMP: monster_id = monster_id(68);
+}
+impl monster_id {
+    pub const MONSTER_BELLSPROUT: monster_id = monster_id(69);
+}
+impl monster_id {
+    pub const MONSTER_WEEPINBELL: monster_id = monster_id(70);
+}
+impl monster_id {
+    pub const MONSTER_VICTREEBEL: monster_id = monster_id(71);
+}
+impl monster_id {
+    pub const MONSTER_TENTACOOL: monster_id = monster_id(72);
+}
+impl monster_id {
+    pub const MONSTER_TENTACRUEL: monster_id = monster_id(73);
+}
+impl monster_id {
+    pub const MONSTER_GEODUDE: monster_id = monster_id(74);
+}
+impl monster_id {
+    pub const MONSTER_GRAVELER: monster_id = monster_id(75);
+}
+impl monster_id {
+    pub const MONSTER_GOLEM: monster_id = monster_id(76);
+}
+impl monster_id {
+    pub const MONSTER_PONYTA: monster_id = monster_id(77);
+}
+impl monster_id {
+    pub const MONSTER_RAPIDASH: monster_id = monster_id(78);
+}
+impl monster_id {
+    pub const MONSTER_SLOWPOKE: monster_id = monster_id(79);
+}
+impl monster_id {
+    pub const MONSTER_SLOWBRO: monster_id = monster_id(80);
+}
+impl monster_id {
+    pub const MONSTER_MAGNEMITE: monster_id = monster_id(81);
+}
+impl monster_id {
+    pub const MONSTER_MAGNETON: monster_id = monster_id(82);
+}
+impl monster_id {
+    pub const MONSTER_FARFETCHD: monster_id = monster_id(83);
+}
+impl monster_id {
+    pub const MONSTER_DODUO: monster_id = monster_id(84);
+}
+impl monster_id {
+    pub const MONSTER_DODRIO: monster_id = monster_id(85);
+}
+impl monster_id {
+    pub const MONSTER_SEEL: monster_id = monster_id(86);
+}
+impl monster_id {
+    pub const MONSTER_DEWGONG: monster_id = monster_id(87);
+}
+impl monster_id {
+    pub const MONSTER_GRIMER: monster_id = monster_id(88);
+}
+impl monster_id {
+    pub const MONSTER_MUK: monster_id = monster_id(89);
+}
+impl monster_id {
+    pub const MONSTER_SHELLDER: monster_id = monster_id(90);
+}
+impl monster_id {
+    pub const MONSTER_CLOYSTER: monster_id = monster_id(91);
+}
+impl monster_id {
+    pub const MONSTER_GASTLY: monster_id = monster_id(92);
+}
+impl monster_id {
+    pub const MONSTER_HAUNTER: monster_id = monster_id(93);
+}
+impl monster_id {
+    pub const MONSTER_GENGAR: monster_id = monster_id(94);
+}
+impl monster_id {
+    pub const MONSTER_ONIX: monster_id = monster_id(95);
+}
+impl monster_id {
+    pub const MONSTER_DROWZEE: monster_id = monster_id(96);
+}
+impl monster_id {
+    pub const MONSTER_HYPNO: monster_id = monster_id(97);
+}
+impl monster_id {
+    pub const MONSTER_KRABBY: monster_id = monster_id(98);
+}
+impl monster_id {
+    pub const MONSTER_KINGLER: monster_id = monster_id(99);
+}
+impl monster_id {
+    pub const MONSTER_VOLTORB: monster_id = monster_id(100);
+}
+impl monster_id {
+    pub const MONSTER_ELECTRODE: monster_id = monster_id(101);
+}
+impl monster_id {
+    pub const MONSTER_EXEGGCUTE: monster_id = monster_id(102);
+}
+impl monster_id {
+    pub const MONSTER_EXEGGUTOR: monster_id = monster_id(103);
+}
+impl monster_id {
+    pub const MONSTER_CUBONE: monster_id = monster_id(104);
+}
+impl monster_id {
+    pub const MONSTER_MAROWAK: monster_id = monster_id(105);
+}
+impl monster_id {
+    pub const MONSTER_HITMONLEE: monster_id = monster_id(106);
+}
+impl monster_id {
+    pub const MONSTER_HITMONCHAN: monster_id = monster_id(107);
+}
+impl monster_id {
+    pub const MONSTER_LICKITUNG: monster_id = monster_id(108);
+}
+impl monster_id {
+    pub const MONSTER_KOFFING: monster_id = monster_id(109);
+}
+impl monster_id {
+    pub const MONSTER_WEEZING: monster_id = monster_id(110);
+}
+impl monster_id {
+    pub const MONSTER_RHYHORN: monster_id = monster_id(111);
+}
+impl monster_id {
+    pub const MONSTER_RHYDON: monster_id = monster_id(112);
+}
+impl monster_id {
+    pub const MONSTER_CHANSEY: monster_id = monster_id(113);
+}
+impl monster_id {
+    pub const MONSTER_TANGELA: monster_id = monster_id(114);
+}
+impl monster_id {
+    pub const MONSTER_KANGASKHAN: monster_id = monster_id(115);
+}
+impl monster_id {
+    pub const MONSTER_HORSEA: monster_id = monster_id(116);
+}
+impl monster_id {
+    pub const MONSTER_SEADRA: monster_id = monster_id(117);
+}
+impl monster_id {
+    pub const MONSTER_GOLDEEN: monster_id = monster_id(118);
+}
+impl monster_id {
+    pub const MONSTER_SEAKING: monster_id = monster_id(119);
+}
+impl monster_id {
+    pub const MONSTER_STARYU: monster_id = monster_id(120);
+}
+impl monster_id {
+    pub const MONSTER_STARMIE: monster_id = monster_id(121);
+}
+impl monster_id {
+    pub const MONSTER_MR_MIME: monster_id = monster_id(122);
+}
+impl monster_id {
+    pub const MONSTER_SCYTHER: monster_id = monster_id(123);
+}
+impl monster_id {
+    pub const MONSTER_JYNX: monster_id = monster_id(124);
+}
+impl monster_id {
+    pub const MONSTER_ELECTABUZZ: monster_id = monster_id(125);
+}
+impl monster_id {
+    pub const MONSTER_MAGMAR: monster_id = monster_id(126);
+}
+impl monster_id {
+    pub const MONSTER_PINSIR: monster_id = monster_id(127);
+}
+impl monster_id {
+    pub const MONSTER_TAUROS: monster_id = monster_id(128);
+}
+impl monster_id {
+    pub const MONSTER_MAGIKARP: monster_id = monster_id(129);
+}
+impl monster_id {
+    pub const MONSTER_GYARADOS: monster_id = monster_id(130);
+}
+impl monster_id {
+    pub const MONSTER_LAPRAS: monster_id = monster_id(131);
+}
+impl monster_id {
+    pub const MONSTER_DITTO: monster_id = monster_id(132);
+}
+impl monster_id {
+    pub const MONSTER_EEVEE: monster_id = monster_id(133);
+}
+impl monster_id {
+    pub const MONSTER_VAPOREON: monster_id = monster_id(134);
+}
+impl monster_id {
+    pub const MONSTER_JOLTEON: monster_id = monster_id(135);
+}
+impl monster_id {
+    pub const MONSTER_FLAREON: monster_id = monster_id(136);
+}
+impl monster_id {
+    pub const MONSTER_PORYGON: monster_id = monster_id(137);
+}
+impl monster_id {
+    pub const MONSTER_OMANYTE: monster_id = monster_id(138);
+}
+impl monster_id {
+    pub const MONSTER_OMASTAR: monster_id = monster_id(139);
+}
+impl monster_id {
+    pub const MONSTER_KABUTO: monster_id = monster_id(140);
+}
+impl monster_id {
+    pub const MONSTER_KABUTOPS: monster_id = monster_id(141);
+}
+impl monster_id {
+    pub const MONSTER_AERODACTYL: monster_id = monster_id(142);
+}
+impl monster_id {
+    pub const MONSTER_SNORLAX: monster_id = monster_id(143);
+}
+impl monster_id {
+    pub const MONSTER_ARTICUNO: monster_id = monster_id(144);
+}
+impl monster_id {
+    pub const MONSTER_ZAPDOS: monster_id = monster_id(145);
+}
+impl monster_id {
+    pub const MONSTER_MOLTRES: monster_id = monster_id(146);
+}
+impl monster_id {
+    pub const MONSTER_DRATINI: monster_id = monster_id(147);
+}
+impl monster_id {
+    pub const MONSTER_DRAGONAIR: monster_id = monster_id(148);
+}
+impl monster_id {
+    pub const MONSTER_DRAGONITE: monster_id = monster_id(149);
+}
+impl monster_id {
+    pub const MONSTER_MEWTWO: monster_id = monster_id(150);
+}
+impl monster_id {
+    pub const MONSTER_MEW: monster_id = monster_id(151);
+}
+impl monster_id {
+    pub const MONSTER_CHIKORITA: monster_id = monster_id(152);
+}
+impl monster_id {
+    pub const MONSTER_BAYLEEF: monster_id = monster_id(153);
+}
+impl monster_id {
+    pub const MONSTER_MEGANIUM: monster_id = monster_id(154);
+}
+impl monster_id {
+    pub const MONSTER_CYNDAQUIL: monster_id = monster_id(155);
+}
+impl monster_id {
+    pub const MONSTER_QUILAVA: monster_id = monster_id(156);
+}
+impl monster_id {
+    pub const MONSTER_TYPHLOSION: monster_id = monster_id(157);
+}
+impl monster_id {
+    pub const MONSTER_TOTODILE: monster_id = monster_id(158);
+}
+impl monster_id {
+    pub const MONSTER_CROCONAW: monster_id = monster_id(159);
+}
+impl monster_id {
+    pub const MONSTER_FERALIGATR: monster_id = monster_id(160);
+}
+impl monster_id {
+    pub const MONSTER_SENTRET: monster_id = monster_id(161);
+}
+impl monster_id {
+    pub const MONSTER_FURRET: monster_id = monster_id(162);
+}
+impl monster_id {
+    pub const MONSTER_HOOTHOOT: monster_id = monster_id(163);
+}
+impl monster_id {
+    pub const MONSTER_NOCTOWL: monster_id = monster_id(164);
+}
+impl monster_id {
+    pub const MONSTER_LEDYBA: monster_id = monster_id(165);
+}
+impl monster_id {
+    pub const MONSTER_LEDIAN: monster_id = monster_id(166);
+}
+impl monster_id {
+    pub const MONSTER_SPINARAK: monster_id = monster_id(167);
+}
+impl monster_id {
+    pub const MONSTER_ARIADOS: monster_id = monster_id(168);
+}
+impl monster_id {
+    pub const MONSTER_CROBAT: monster_id = monster_id(169);
+}
+impl monster_id {
+    pub const MONSTER_CHINCHOU: monster_id = monster_id(170);
+}
+impl monster_id {
+    pub const MONSTER_LANTURN: monster_id = monster_id(171);
+}
+impl monster_id {
+    pub const MONSTER_PICHU: monster_id = monster_id(172);
+}
+impl monster_id {
+    pub const MONSTER_CLEFFA: monster_id = monster_id(173);
+}
+impl monster_id {
+    pub const MONSTER_IGGLYBUFF: monster_id = monster_id(174);
+}
+impl monster_id {
+    pub const MONSTER_TOGEPI: monster_id = monster_id(175);
+}
+impl monster_id {
+    pub const MONSTER_TOGETIC: monster_id = monster_id(176);
+}
+impl monster_id {
+    pub const MONSTER_NATU: monster_id = monster_id(177);
+}
+impl monster_id {
+    pub const MONSTER_XATU: monster_id = monster_id(178);
+}
+impl monster_id {
+    pub const MONSTER_MAREEP: monster_id = monster_id(179);
+}
+impl monster_id {
+    pub const MONSTER_FLAAFFY: monster_id = monster_id(180);
+}
+impl monster_id {
+    pub const MONSTER_AMPHAROS: monster_id = monster_id(181);
+}
+impl monster_id {
+    pub const MONSTER_BELLOSSOM: monster_id = monster_id(182);
+}
+impl monster_id {
+    pub const MONSTER_MARILL: monster_id = monster_id(183);
+}
+impl monster_id {
+    pub const MONSTER_AZUMARILL: monster_id = monster_id(184);
+}
+impl monster_id {
+    pub const MONSTER_SUDOWOODO: monster_id = monster_id(185);
+}
+impl monster_id {
+    pub const MONSTER_POLITOED: monster_id = monster_id(186);
+}
+impl monster_id {
+    pub const MONSTER_HOPPIP: monster_id = monster_id(187);
+}
+impl monster_id {
+    pub const MONSTER_SKIPLOOM: monster_id = monster_id(188);
+}
+impl monster_id {
+    pub const MONSTER_JUMPLUFF: monster_id = monster_id(189);
+}
+impl monster_id {
+    pub const MONSTER_AIPOM: monster_id = monster_id(190);
+}
+impl monster_id {
+    pub const MONSTER_SUNKERN: monster_id = monster_id(191);
+}
+impl monster_id {
+    pub const MONSTER_SUNFLORA: monster_id = monster_id(192);
+}
+impl monster_id {
+    pub const MONSTER_YANMA: monster_id = monster_id(193);
+}
+impl monster_id {
+    pub const MONSTER_WOOPER: monster_id = monster_id(194);
+}
+impl monster_id {
+    pub const MONSTER_QUAGSIRE: monster_id = monster_id(195);
+}
+impl monster_id {
+    pub const MONSTER_ESPEON: monster_id = monster_id(196);
+}
+impl monster_id {
+    pub const MONSTER_UMBREON: monster_id = monster_id(197);
+}
+impl monster_id {
+    pub const MONSTER_MURKROW: monster_id = monster_id(198);
+}
+impl monster_id {
+    pub const MONSTER_SLOWKING: monster_id = monster_id(199);
+}
+impl monster_id {
+    pub const MONSTER_MISDREAVUS: monster_id = monster_id(200);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_A: monster_id = monster_id(201);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_B: monster_id = monster_id(202);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_C: monster_id = monster_id(203);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_D: monster_id = monster_id(204);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_E: monster_id = monster_id(205);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_F: monster_id = monster_id(206);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_G: monster_id = monster_id(207);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_H: monster_id = monster_id(208);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_I: monster_id = monster_id(209);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_J: monster_id = monster_id(210);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_K: monster_id = monster_id(211);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_L: monster_id = monster_id(212);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_M: monster_id = monster_id(213);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_N: monster_id = monster_id(214);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_O: monster_id = monster_id(215);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_P: monster_id = monster_id(216);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_Q: monster_id = monster_id(217);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_R: monster_id = monster_id(218);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_S: monster_id = monster_id(219);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_T: monster_id = monster_id(220);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_U: monster_id = monster_id(221);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_V: monster_id = monster_id(222);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_W: monster_id = monster_id(223);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_X: monster_id = monster_id(224);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_Y: monster_id = monster_id(225);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_Z: monster_id = monster_id(226);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_EXCLAMATION: monster_id = monster_id(227);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_QUESTION: monster_id = monster_id(228);
+}
+impl monster_id {
+    pub const MONSTER_WOBBUFFET: monster_id = monster_id(229);
+}
+impl monster_id {
+    pub const MONSTER_GIRAFARIG: monster_id = monster_id(230);
+}
+impl monster_id {
+    pub const MONSTER_PINECO: monster_id = monster_id(231);
+}
+impl monster_id {
+    pub const MONSTER_FORRETRESS: monster_id = monster_id(232);
+}
+impl monster_id {
+    pub const MONSTER_DUNSPARCE: monster_id = monster_id(233);
+}
+impl monster_id {
+    pub const MONSTER_GLIGAR: monster_id = monster_id(234);
+}
+impl monster_id {
+    pub const MONSTER_STEELIX: monster_id = monster_id(235);
+}
+impl monster_id {
+    pub const MONSTER_SNUBBULL: monster_id = monster_id(236);
+}
+impl monster_id {
+    pub const MONSTER_GRANBULL: monster_id = monster_id(237);
+}
+impl monster_id {
+    pub const MONSTER_QWILFISH: monster_id = monster_id(238);
+}
+impl monster_id {
+    pub const MONSTER_SCIZOR: monster_id = monster_id(239);
+}
+impl monster_id {
+    pub const MONSTER_SHUCKLE: monster_id = monster_id(240);
+}
+impl monster_id {
+    pub const MONSTER_HERACROSS: monster_id = monster_id(241);
+}
+impl monster_id {
+    pub const MONSTER_SNEASEL: monster_id = monster_id(242);
+}
+impl monster_id {
+    pub const MONSTER_TEDDIURSA: monster_id = monster_id(243);
+}
+impl monster_id {
+    pub const MONSTER_URSARING: monster_id = monster_id(244);
+}
+impl monster_id {
+    pub const MONSTER_SLUGMA: monster_id = monster_id(245);
+}
+impl monster_id {
+    pub const MONSTER_MAGCARGO: monster_id = monster_id(246);
+}
+impl monster_id {
+    pub const MONSTER_SWINUB: monster_id = monster_id(247);
+}
+impl monster_id {
+    pub const MONSTER_PILOSWINE: monster_id = monster_id(248);
+}
+impl monster_id {
+    pub const MONSTER_CORSOLA: monster_id = monster_id(249);
+}
+impl monster_id {
+    pub const MONSTER_REMORAID: monster_id = monster_id(250);
+}
+impl monster_id {
+    pub const MONSTER_OCTILLERY: monster_id = monster_id(251);
+}
+impl monster_id {
+    pub const MONSTER_DELIBIRD: monster_id = monster_id(252);
+}
+impl monster_id {
+    pub const MONSTER_MANTINE: monster_id = monster_id(253);
+}
+impl monster_id {
+    pub const MONSTER_SKARMORY: monster_id = monster_id(254);
+}
+impl monster_id {
+    pub const MONSTER_HOUNDOUR: monster_id = monster_id(255);
+}
+impl monster_id {
+    pub const MONSTER_HOUNDOOM: monster_id = monster_id(256);
+}
+impl monster_id {
+    pub const MONSTER_KINGDRA: monster_id = monster_id(257);
+}
+impl monster_id {
+    pub const MONSTER_PHANPY: monster_id = monster_id(258);
+}
+impl monster_id {
+    pub const MONSTER_DONPHAN: monster_id = monster_id(259);
+}
+impl monster_id {
+    pub const MONSTER_PORYGON2: monster_id = monster_id(260);
+}
+impl monster_id {
+    pub const MONSTER_STANTLER: monster_id = monster_id(261);
+}
+impl monster_id {
+    pub const MONSTER_SMEARGLE: monster_id = monster_id(262);
+}
+impl monster_id {
+    pub const MONSTER_TYROGUE: monster_id = monster_id(263);
+}
+impl monster_id {
+    pub const MONSTER_HITMONTOP: monster_id = monster_id(264);
+}
+impl monster_id {
+    pub const MONSTER_SMOOCHUM: monster_id = monster_id(265);
+}
+impl monster_id {
+    pub const MONSTER_ELEKID: monster_id = monster_id(266);
+}
+impl monster_id {
+    pub const MONSTER_MAGBY: monster_id = monster_id(267);
+}
+impl monster_id {
+    pub const MONSTER_MILTANK: monster_id = monster_id(268);
+}
+impl monster_id {
+    pub const MONSTER_BLISSEY: monster_id = monster_id(269);
+}
+impl monster_id {
+    pub const MONSTER_RAIKOU: monster_id = monster_id(270);
+}
+impl monster_id {
+    pub const MONSTER_ENTEI: monster_id = monster_id(271);
+}
+impl monster_id {
+    pub const MONSTER_SUICUNE: monster_id = monster_id(272);
+}
+impl monster_id {
+    pub const MONSTER_LARVITAR: monster_id = monster_id(273);
+}
+impl monster_id {
+    pub const MONSTER_PUPITAR: monster_id = monster_id(274);
+}
+impl monster_id {
+    pub const MONSTER_TYRANITAR: monster_id = monster_id(275);
+}
+impl monster_id {
+    pub const MONSTER_LUGIA: monster_id = monster_id(276);
+}
+impl monster_id {
+    pub const MONSTER_HO_OH: monster_id = monster_id(277);
+}
+impl monster_id {
+    pub const MONSTER_CELEBI: monster_id = monster_id(278);
+}
+impl monster_id {
+    pub const MONSTER_SHINY_CELEBI: monster_id = monster_id(279);
+}
+impl monster_id {
+    pub const MONSTER_TREECKO: monster_id = monster_id(280);
+}
+impl monster_id {
+    pub const MONSTER_GROVYLE: monster_id = monster_id(281);
+}
+impl monster_id {
+    pub const MONSTER_SCEPTILE: monster_id = monster_id(282);
+}
+impl monster_id {
+    pub const MONSTER_TORCHIC: monster_id = monster_id(283);
+}
+impl monster_id {
+    pub const MONSTER_COMBUSKEN: monster_id = monster_id(284);
+}
+impl monster_id {
+    pub const MONSTER_BLAZIKEN: monster_id = monster_id(285);
+}
+impl monster_id {
+    pub const MONSTER_MUDKIP: monster_id = monster_id(286);
+}
+impl monster_id {
+    pub const MONSTER_MARSHTOMP: monster_id = monster_id(287);
+}
+impl monster_id {
+    pub const MONSTER_SWAMPERT: monster_id = monster_id(288);
+}
+impl monster_id {
+    pub const MONSTER_POOCHYENA: monster_id = monster_id(289);
+}
+impl monster_id {
+    pub const MONSTER_MIGHTYENA: monster_id = monster_id(290);
+}
+impl monster_id {
+    pub const MONSTER_ZIGZAGOON: monster_id = monster_id(291);
+}
+impl monster_id {
+    pub const MONSTER_LINOONE: monster_id = monster_id(292);
+}
+impl monster_id {
+    pub const MONSTER_WURMPLE: monster_id = monster_id(293);
+}
+impl monster_id {
+    pub const MONSTER_SILCOON: monster_id = monster_id(294);
+}
+impl monster_id {
+    pub const MONSTER_BEAUTIFLY: monster_id = monster_id(295);
+}
+impl monster_id {
+    pub const MONSTER_CASCOON: monster_id = monster_id(296);
+}
+impl monster_id {
+    pub const MONSTER_DUSTOX: monster_id = monster_id(297);
+}
+impl monster_id {
+    pub const MONSTER_LOTAD: monster_id = monster_id(298);
+}
+impl monster_id {
+    pub const MONSTER_LOMBRE: monster_id = monster_id(299);
+}
+impl monster_id {
+    pub const MONSTER_LUDICOLO: monster_id = monster_id(300);
+}
+impl monster_id {
+    pub const MONSTER_SEEDOT: monster_id = monster_id(301);
+}
+impl monster_id {
+    pub const MONSTER_NUZLEAF: monster_id = monster_id(302);
+}
+impl monster_id {
+    pub const MONSTER_SHIFTRY: monster_id = monster_id(303);
+}
+impl monster_id {
+    pub const MONSTER_TAILLOW: monster_id = monster_id(304);
+}
+impl monster_id {
+    pub const MONSTER_SWELLOW: monster_id = monster_id(305);
+}
+impl monster_id {
+    pub const MONSTER_WINGULL: monster_id = monster_id(306);
+}
+impl monster_id {
+    pub const MONSTER_PELIPPER: monster_id = monster_id(307);
+}
+impl monster_id {
+    pub const MONSTER_RALTS: monster_id = monster_id(308);
+}
+impl monster_id {
+    pub const MONSTER_KIRLIA: monster_id = monster_id(309);
+}
+impl monster_id {
+    pub const MONSTER_GARDEVOIR: monster_id = monster_id(310);
+}
+impl monster_id {
+    pub const MONSTER_SURSKIT: monster_id = monster_id(311);
+}
+impl monster_id {
+    pub const MONSTER_MASQUERAIN: monster_id = monster_id(312);
+}
+impl monster_id {
+    pub const MONSTER_SHROOMISH: monster_id = monster_id(313);
+}
+impl monster_id {
+    pub const MONSTER_BRELOOM: monster_id = monster_id(314);
+}
+impl monster_id {
+    pub const MONSTER_SLAKOTH: monster_id = monster_id(315);
+}
+impl monster_id {
+    pub const MONSTER_VIGOROTH: monster_id = monster_id(316);
+}
+impl monster_id {
+    pub const MONSTER_SLAKING: monster_id = monster_id(317);
+}
+impl monster_id {
+    pub const MONSTER_NINCADA: monster_id = monster_id(318);
+}
+impl monster_id {
+    pub const MONSTER_NINJASK: monster_id = monster_id(319);
+}
+impl monster_id {
+    pub const MONSTER_SHEDINJA: monster_id = monster_id(320);
+}
+impl monster_id {
+    pub const MONSTER_WHISMUR: monster_id = monster_id(321);
+}
+impl monster_id {
+    pub const MONSTER_LOUDRED: monster_id = monster_id(322);
+}
+impl monster_id {
+    pub const MONSTER_EXPLOUD: monster_id = monster_id(323);
+}
+impl monster_id {
+    pub const MONSTER_MAKUHITA: monster_id = monster_id(324);
+}
+impl monster_id {
+    pub const MONSTER_HARIYAMA: monster_id = monster_id(325);
+}
+impl monster_id {
+    pub const MONSTER_AZURILL: monster_id = monster_id(326);
+}
+impl monster_id {
+    pub const MONSTER_NOSEPASS: monster_id = monster_id(327);
+}
+impl monster_id {
+    pub const MONSTER_SKITTY: monster_id = monster_id(328);
+}
+impl monster_id {
+    pub const MONSTER_DELCATTY: monster_id = monster_id(329);
+}
+impl monster_id {
+    pub const MONSTER_SABLEYE: monster_id = monster_id(330);
+}
+impl monster_id {
+    pub const MONSTER_MAWILE: monster_id = monster_id(331);
+}
+impl monster_id {
+    pub const MONSTER_ARON: monster_id = monster_id(332);
+}
+impl monster_id {
+    pub const MONSTER_LAIRON: monster_id = monster_id(333);
+}
+impl monster_id {
+    pub const MONSTER_AGGRON: monster_id = monster_id(334);
+}
+impl monster_id {
+    pub const MONSTER_MEDITITE: monster_id = monster_id(335);
+}
+impl monster_id {
+    pub const MONSTER_MEDICHAM: monster_id = monster_id(336);
+}
+impl monster_id {
+    pub const MONSTER_ELECTRIKE: monster_id = monster_id(337);
+}
+impl monster_id {
+    pub const MONSTER_MANECTRIC: monster_id = monster_id(338);
+}
+impl monster_id {
+    pub const MONSTER_PLUSLE: monster_id = monster_id(339);
+}
+impl monster_id {
+    pub const MONSTER_MINUN: monster_id = monster_id(340);
+}
+impl monster_id {
+    pub const MONSTER_VOLBEAT: monster_id = monster_id(341);
+}
+impl monster_id {
+    pub const MONSTER_ILLUMISE: monster_id = monster_id(342);
+}
+impl monster_id {
+    pub const MONSTER_ROSELIA: monster_id = monster_id(343);
+}
+impl monster_id {
+    pub const MONSTER_GULPIN: monster_id = monster_id(344);
+}
+impl monster_id {
+    pub const MONSTER_SWALOT: monster_id = monster_id(345);
+}
+impl monster_id {
+    pub const MONSTER_CARVANHA: monster_id = monster_id(346);
+}
+impl monster_id {
+    pub const MONSTER_SHARPEDO: monster_id = monster_id(347);
+}
+impl monster_id {
+    pub const MONSTER_WAILMER: monster_id = monster_id(348);
+}
+impl monster_id {
+    pub const MONSTER_WAILORD: monster_id = monster_id(349);
+}
+impl monster_id {
+    pub const MONSTER_NUMEL: monster_id = monster_id(350);
+}
+impl monster_id {
+    pub const MONSTER_CAMERUPT: monster_id = monster_id(351);
+}
+impl monster_id {
+    pub const MONSTER_TORKOAL: monster_id = monster_id(352);
+}
+impl monster_id {
+    pub const MONSTER_SPOINK: monster_id = monster_id(353);
+}
+impl monster_id {
+    pub const MONSTER_GRUMPIG: monster_id = monster_id(354);
+}
+impl monster_id {
+    pub const MONSTER_SPINDA: monster_id = monster_id(355);
+}
+impl monster_id {
+    pub const MONSTER_TRAPINCH: monster_id = monster_id(356);
+}
+impl monster_id {
+    pub const MONSTER_VIBRAVA: monster_id = monster_id(357);
+}
+impl monster_id {
+    pub const MONSTER_FLYGON: monster_id = monster_id(358);
+}
+impl monster_id {
+    pub const MONSTER_CACNEA: monster_id = monster_id(359);
+}
+impl monster_id {
+    pub const MONSTER_CACTURNE: monster_id = monster_id(360);
+}
+impl monster_id {
+    pub const MONSTER_SWABLU: monster_id = monster_id(361);
+}
+impl monster_id {
+    pub const MONSTER_ALTARIA: monster_id = monster_id(362);
+}
+impl monster_id {
+    pub const MONSTER_ZANGOOSE: monster_id = monster_id(363);
+}
+impl monster_id {
+    pub const MONSTER_SEVIPER: monster_id = monster_id(364);
+}
+impl monster_id {
+    pub const MONSTER_LUNATONE: monster_id = monster_id(365);
+}
+impl monster_id {
+    pub const MONSTER_SOLROCK: monster_id = monster_id(366);
+}
+impl monster_id {
+    pub const MONSTER_BARBOACH: monster_id = monster_id(367);
+}
+impl monster_id {
+    pub const MONSTER_WHISCASH: monster_id = monster_id(368);
+}
+impl monster_id {
+    pub const MONSTER_CORPHISH: monster_id = monster_id(369);
+}
+impl monster_id {
+    pub const MONSTER_CRAWDAUNT: monster_id = monster_id(370);
+}
+impl monster_id {
+    pub const MONSTER_BALTOY: monster_id = monster_id(371);
+}
+impl monster_id {
+    pub const MONSTER_CLAYDOL: monster_id = monster_id(372);
+}
+impl monster_id {
+    pub const MONSTER_LILEEP: monster_id = monster_id(373);
+}
+impl monster_id {
+    pub const MONSTER_CRADILY: monster_id = monster_id(374);
+}
+impl monster_id {
+    pub const MONSTER_ANORITH: monster_id = monster_id(375);
+}
+impl monster_id {
+    pub const MONSTER_ARMALDO: monster_id = monster_id(376);
+}
+impl monster_id {
+    pub const MONSTER_FEEBAS: monster_id = monster_id(377);
+}
+impl monster_id {
+    pub const MONSTER_MILOTIC: monster_id = monster_id(378);
+}
+impl monster_id {
+    pub const MONSTER_CASTFORM_NORMAL: monster_id = monster_id(379);
+}
+impl monster_id {
+    pub const MONSTER_CASTFORM_SNOWY: monster_id = monster_id(380);
+}
+impl monster_id {
+    pub const MONSTER_CASTFORM_SUNNY: monster_id = monster_id(381);
+}
+impl monster_id {
+    pub const MONSTER_CASTFORM_RAINY: monster_id = monster_id(382);
+}
+impl monster_id {
+    pub const MONSTER_KECLEON: monster_id = monster_id(383);
+}
+impl monster_id {
+    pub const MONSTER_PURPLE_KECLEON: monster_id = monster_id(384);
+}
+impl monster_id {
+    pub const MONSTER_SHUPPET: monster_id = monster_id(385);
+}
+impl monster_id {
+    pub const MONSTER_BANETTE: monster_id = monster_id(386);
+}
+impl monster_id {
+    pub const MONSTER_DUSKULL: monster_id = monster_id(387);
+}
+impl monster_id {
+    pub const MONSTER_DUSCLOPS: monster_id = monster_id(388);
+}
+impl monster_id {
+    pub const MONSTER_TROPIUS: monster_id = monster_id(389);
+}
+impl monster_id {
+    pub const MONSTER_CHIMECHO: monster_id = monster_id(390);
+}
+impl monster_id {
+    pub const MONSTER_ABSOL: monster_id = monster_id(391);
+}
+impl monster_id {
+    pub const MONSTER_WYNAUT: monster_id = monster_id(392);
+}
+impl monster_id {
+    pub const MONSTER_SNORUNT: monster_id = monster_id(393);
+}
+impl monster_id {
+    pub const MONSTER_GLALIE: monster_id = monster_id(394);
+}
+impl monster_id {
+    pub const MONSTER_SPHEAL: monster_id = monster_id(395);
+}
+impl monster_id {
+    pub const MONSTER_SEALEO: monster_id = monster_id(396);
+}
+impl monster_id {
+    pub const MONSTER_WALREIN: monster_id = monster_id(397);
+}
+impl monster_id {
+    pub const MONSTER_CLAMPERL: monster_id = monster_id(398);
+}
+impl monster_id {
+    pub const MONSTER_HUNTAIL: monster_id = monster_id(399);
+}
+impl monster_id {
+    pub const MONSTER_GOREBYSS: monster_id = monster_id(400);
+}
+impl monster_id {
+    pub const MONSTER_RELICANTH: monster_id = monster_id(401);
+}
+impl monster_id {
+    pub const MONSTER_LUVDISC: monster_id = monster_id(402);
+}
+impl monster_id {
+    pub const MONSTER_BAGON: monster_id = monster_id(403);
+}
+impl monster_id {
+    pub const MONSTER_SHELGON: monster_id = monster_id(404);
+}
+impl monster_id {
+    pub const MONSTER_SALAMENCE: monster_id = monster_id(405);
+}
+impl monster_id {
+    pub const MONSTER_BELDUM: monster_id = monster_id(406);
+}
+impl monster_id {
+    pub const MONSTER_METANG: monster_id = monster_id(407);
+}
+impl monster_id {
+    pub const MONSTER_METAGROSS: monster_id = monster_id(408);
+}
+impl monster_id {
+    pub const MONSTER_REGIROCK: monster_id = monster_id(409);
+}
+impl monster_id {
+    pub const MONSTER_REGICE: monster_id = monster_id(410);
+}
+impl monster_id {
+    pub const MONSTER_REGISTEEL: monster_id = monster_id(411);
+}
+impl monster_id {
+    pub const MONSTER_LATIAS: monster_id = monster_id(412);
+}
+impl monster_id {
+    pub const MONSTER_LATIOS: monster_id = monster_id(413);
+}
+impl monster_id {
+    pub const MONSTER_KYOGRE: monster_id = monster_id(414);
+}
+impl monster_id {
+    pub const MONSTER_GROUDON: monster_id = monster_id(415);
+}
+impl monster_id {
+    pub const MONSTER_RAYQUAZA: monster_id = monster_id(416);
+}
+impl monster_id {
+    pub const MONSTER_JIRACHI: monster_id = monster_id(417);
+}
+impl monster_id {
+    pub const MONSTER_DEOXYS_NORMAL: monster_id = monster_id(418);
+}
+impl monster_id {
+    pub const MONSTER_DEOXYS_ATTACH: monster_id = monster_id(419);
+}
+impl monster_id {
+    pub const MONSTER_DEOXYS_DEFENSE: monster_id = monster_id(420);
+}
+impl monster_id {
+    pub const MONSTER_DEOXYS_SPEED: monster_id = monster_id(421);
+}
+impl monster_id {
+    pub const MONSTER_TURTWIG: monster_id = monster_id(422);
+}
+impl monster_id {
+    pub const MONSTER_GROTLE: monster_id = monster_id(423);
+}
+impl monster_id {
+    pub const MONSTER_TORTERRA: monster_id = monster_id(424);
+}
+impl monster_id {
+    pub const MONSTER_CHIMCHAR: monster_id = monster_id(425);
+}
+impl monster_id {
+    pub const MONSTER_MONFERNO: monster_id = monster_id(426);
+}
+impl monster_id {
+    pub const MONSTER_INFERNAPE: monster_id = monster_id(427);
+}
+impl monster_id {
+    pub const MONSTER_PIPLUP: monster_id = monster_id(428);
+}
+impl monster_id {
+    pub const MONSTER_PRINPLUP: monster_id = monster_id(429);
+}
+impl monster_id {
+    pub const MONSTER_EMPOLEON: monster_id = monster_id(430);
+}
+impl monster_id {
+    pub const MONSTER_STARLY: monster_id = monster_id(431);
+}
+impl monster_id {
+    pub const MONSTER_STARAVIA: monster_id = monster_id(432);
+}
+impl monster_id {
+    pub const MONSTER_STARAPTOR: monster_id = monster_id(433);
+}
+impl monster_id {
+    pub const MONSTER_BIDOOF: monster_id = monster_id(434);
+}
+impl monster_id {
+    pub const MONSTER_BIBAREL: monster_id = monster_id(435);
+}
+impl monster_id {
+    pub const MONSTER_KRICKETOT: monster_id = monster_id(436);
+}
+impl monster_id {
+    pub const MONSTER_KRICKETUNE: monster_id = monster_id(437);
+}
+impl monster_id {
+    pub const MONSTER_SHINX: monster_id = monster_id(438);
+}
+impl monster_id {
+    pub const MONSTER_LUXIO: monster_id = monster_id(439);
+}
+impl monster_id {
+    pub const MONSTER_LUXRAY: monster_id = monster_id(440);
+}
+impl monster_id {
+    pub const MONSTER_BUDEW: monster_id = monster_id(441);
+}
+impl monster_id {
+    pub const MONSTER_ROSERADE: monster_id = monster_id(442);
+}
+impl monster_id {
+    pub const MONSTER_CRANIDOS: monster_id = monster_id(443);
+}
+impl monster_id {
+    pub const MONSTER_RAMPARDOS: monster_id = monster_id(444);
+}
+impl monster_id {
+    pub const MONSTER_SHIELDON: monster_id = monster_id(445);
+}
+impl monster_id {
+    pub const MONSTER_BASTIODON: monster_id = monster_id(446);
+}
+impl monster_id {
+    pub const MONSTER_BURMY_SANDY: monster_id = monster_id(447);
+}
+impl monster_id {
+    pub const MONSTER_BURMY_PLANT: monster_id = monster_id(448);
+}
+impl monster_id {
+    pub const MONSTER_BURMY_TRASH: monster_id = monster_id(449);
+}
+impl monster_id {
+    pub const MONSTER_WORMADAM_SANDY: monster_id = monster_id(450);
+}
+impl monster_id {
+    pub const MONSTER_WORMADAM_PLANT: monster_id = monster_id(451);
+}
+impl monster_id {
+    pub const MONSTER_WORMADAM_TRASH: monster_id = monster_id(452);
+}
+impl monster_id {
+    pub const MONSTER_MOTHIM: monster_id = monster_id(453);
+}
+impl monster_id {
+    pub const MONSTER_COMBEE: monster_id = monster_id(454);
+}
+impl monster_id {
+    pub const MONSTER_VESPIQUEN: monster_id = monster_id(455);
+}
+impl monster_id {
+    pub const MONSTER_PACHIRISU: monster_id = monster_id(456);
+}
+impl monster_id {
+    pub const MONSTER_BUIZEL: monster_id = monster_id(457);
+}
+impl monster_id {
+    pub const MONSTER_FLOATZEL: monster_id = monster_id(458);
+}
+impl monster_id {
+    pub const MONSTER_CHERUBI: monster_id = monster_id(459);
+}
+impl monster_id {
+    pub const MONSTER_CHERRIM_OVERCAST: monster_id = monster_id(460);
+}
+impl monster_id {
+    pub const MONSTER_CHERRIM_SUNSHINE: monster_id = monster_id(461);
+}
+impl monster_id {
+    pub const MONSTER_SHELLOS_EAST: monster_id = monster_id(462);
+}
+impl monster_id {
+    pub const MONSTER_SHELLOS_WEST: monster_id = monster_id(463);
+}
+impl monster_id {
+    pub const MONSTER_GASTRODON_EAST: monster_id = monster_id(464);
+}
+impl monster_id {
+    pub const MONSTER_GASTRODON_WEST: monster_id = monster_id(465);
+}
+impl monster_id {
+    pub const MONSTER_AMBIPOM: monster_id = monster_id(466);
+}
+impl monster_id {
+    pub const MONSTER_DRIFLOON: monster_id = monster_id(467);
+}
+impl monster_id {
+    pub const MONSTER_DRIFBLIM: monster_id = monster_id(468);
+}
+impl monster_id {
+    pub const MONSTER_BUNEARY: monster_id = monster_id(469);
+}
+impl monster_id {
+    pub const MONSTER_LOPUNNY: monster_id = monster_id(470);
+}
+impl monster_id {
+    pub const MONSTER_MISMAGIUS: monster_id = monster_id(471);
+}
+impl monster_id {
+    pub const MONSTER_HONCHKROW: monster_id = monster_id(472);
+}
+impl monster_id {
+    pub const MONSTER_GLAMEOW: monster_id = monster_id(473);
+}
+impl monster_id {
+    pub const MONSTER_PURUGLY: monster_id = monster_id(474);
+}
+impl monster_id {
+    pub const MONSTER_CHINGLING: monster_id = monster_id(475);
+}
+impl monster_id {
+    pub const MONSTER_STUNKY: monster_id = monster_id(476);
+}
+impl monster_id {
+    pub const MONSTER_SKUNTANK: monster_id = monster_id(477);
+}
+impl monster_id {
+    pub const MONSTER_BRONZOR: monster_id = monster_id(478);
+}
+impl monster_id {
+    pub const MONSTER_BRONZONG: monster_id = monster_id(479);
+}
+impl monster_id {
+    pub const MONSTER_BONSLY: monster_id = monster_id(480);
+}
+impl monster_id {
+    pub const MONSTER_MIME_JR: monster_id = monster_id(481);
+}
+impl monster_id {
+    pub const MONSTER_HAPPINY: monster_id = monster_id(482);
+}
+impl monster_id {
+    pub const MONSTER_CHATOT: monster_id = monster_id(483);
+}
+impl monster_id {
+    pub const MONSTER_SPIRITOMB: monster_id = monster_id(484);
+}
+impl monster_id {
+    pub const MONSTER_GIBLE: monster_id = monster_id(485);
+}
+impl monster_id {
+    pub const MONSTER_GABITE: monster_id = monster_id(486);
+}
+impl monster_id {
+    pub const MONSTER_GARCHOMP: monster_id = monster_id(487);
+}
+impl monster_id {
+    pub const MONSTER_MUNCHLAX: monster_id = monster_id(488);
+}
+impl monster_id {
+    pub const MONSTER_RIOLU: monster_id = monster_id(489);
+}
+impl monster_id {
+    pub const MONSTER_LUCARIO: monster_id = monster_id(490);
+}
+impl monster_id {
+    pub const MONSTER_HIPPOPOTAS: monster_id = monster_id(491);
+}
+impl monster_id {
+    pub const MONSTER_HIPPOWDON: monster_id = monster_id(492);
+}
+impl monster_id {
+    pub const MONSTER_SKORUPI: monster_id = monster_id(493);
+}
+impl monster_id {
+    pub const MONSTER_DRAPION: monster_id = monster_id(494);
+}
+impl monster_id {
+    pub const MONSTER_CROAGUNK: monster_id = monster_id(495);
+}
+impl monster_id {
+    pub const MONSTER_TOXICROAK: monster_id = monster_id(496);
+}
+impl monster_id {
+    pub const MONSTER_CARNIVINE: monster_id = monster_id(497);
+}
+impl monster_id {
+    pub const MONSTER_FINNEON: monster_id = monster_id(498);
+}
+impl monster_id {
+    pub const MONSTER_LUMINEON: monster_id = monster_id(499);
+}
+impl monster_id {
+    pub const MONSTER_MANTYKE: monster_id = monster_id(500);
+}
+impl monster_id {
+    pub const MONSTER_SNOVER: monster_id = monster_id(501);
+}
+impl monster_id {
+    pub const MONSTER_ABOMASNOW: monster_id = monster_id(502);
+}
+impl monster_id {
+    pub const MONSTER_WEAVILE: monster_id = monster_id(503);
+}
+impl monster_id {
+    pub const MONSTER_MAGNEZONE: monster_id = monster_id(504);
+}
+impl monster_id {
+    pub const MONSTER_LICKILICKY: monster_id = monster_id(505);
+}
+impl monster_id {
+    pub const MONSTER_RHYPERIOR: monster_id = monster_id(506);
+}
+impl monster_id {
+    pub const MONSTER_TANGROWTH: monster_id = monster_id(507);
+}
+impl monster_id {
+    pub const MONSTER_ELECTIVIRE: monster_id = monster_id(508);
+}
+impl monster_id {
+    pub const MONSTER_MAGMORTAR: monster_id = monster_id(509);
+}
+impl monster_id {
+    pub const MONSTER_TOGEKISS: monster_id = monster_id(510);
+}
+impl monster_id {
+    pub const MONSTER_YANMEGA: monster_id = monster_id(511);
+}
+impl monster_id {
+    pub const MONSTER_LEAFEON: monster_id = monster_id(512);
+}
+impl monster_id {
+    pub const MONSTER_GLACEON: monster_id = monster_id(513);
+}
+impl monster_id {
+    pub const MONSTER_GLISCOR: monster_id = monster_id(514);
+}
+impl monster_id {
+    pub const MONSTER_MAMOSWINE: monster_id = monster_id(515);
+}
+impl monster_id {
+    pub const MONSTER_PORYGON_Z: monster_id = monster_id(516);
+}
+impl monster_id {
+    pub const MONSTER_GALLADE: monster_id = monster_id(517);
+}
+impl monster_id {
+    pub const MONSTER_PROBOPASS: monster_id = monster_id(518);
+}
+impl monster_id {
+    pub const MONSTER_DUSKNOIR: monster_id = monster_id(519);
+}
+impl monster_id {
+    pub const MONSTER_FROSLASS: monster_id = monster_id(520);
+}
+impl monster_id {
+    pub const MONSTER_ROTOM: monster_id = monster_id(521);
+}
+impl monster_id {
+    pub const MONSTER_UXIE: monster_id = monster_id(522);
+}
+impl monster_id {
+    pub const MONSTER_MESPRIT: monster_id = monster_id(523);
+}
+impl monster_id {
+    pub const MONSTER_AZELF: monster_id = monster_id(524);
+}
+impl monster_id {
+    pub const MONSTER_DIALGA: monster_id = monster_id(525);
+}
+impl monster_id {
+    pub const MONSTER_PALKIA: monster_id = monster_id(526);
+}
+impl monster_id {
+    pub const MONSTER_HEATRAN: monster_id = monster_id(527);
+}
+impl monster_id {
+    pub const MONSTER_REGIGIGAS: monster_id = monster_id(528);
+}
+impl monster_id {
+    pub const MONSTER_GIRATINA_ALTERED: monster_id = monster_id(529);
+}
+impl monster_id {
+    pub const MONSTER_CRESSELIA: monster_id = monster_id(530);
+}
+impl monster_id {
+    pub const MONSTER_PHIONE: monster_id = monster_id(531);
+}
+impl monster_id {
+    pub const MONSTER_MANAPHY: monster_id = monster_id(532);
+}
+impl monster_id {
+    pub const MONSTER_DARKRAI: monster_id = monster_id(533);
+}
+impl monster_id {
+    pub const MONSTER_SHAYMIN_LAND: monster_id = monster_id(534);
+}
+impl monster_id {
+    pub const MONSTER_SHAYMIN_SKY: monster_id = monster_id(535);
+}
+impl monster_id {
+    pub const MONSTER_GIRATINA_ORIGIN: monster_id = monster_id(536);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x219: monster_id = monster_id(537);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21A: monster_id = monster_id(538);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21B: monster_id = monster_id(539);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21C: monster_id = monster_id(540);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21D: monster_id = monster_id(541);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21E: monster_id = monster_id(542);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21F: monster_id = monster_id(543);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x220: monster_id = monster_id(544);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x221: monster_id = monster_id(545);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x222: monster_id = monster_id(546);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x223: monster_id = monster_id(547);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x224: monster_id = monster_id(548);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x225: monster_id = monster_id(549);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x226: monster_id = monster_id(550);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x227: monster_id = monster_id(551);
+}
+impl monster_id {
+    pub const MONSTER_PRIMAL_DIALGA: monster_id = monster_id(552);
+}
+impl monster_id {
+    pub const MONSTER_DECOY: monster_id = monster_id(553);
+}
+impl monster_id {
+    pub const MONSTER_STATUE: monster_id = monster_id(554);
+}
+impl monster_id {
+    pub const MONSTER_WIGGLYTUFF_STORY: monster_id = monster_id(555);
+}
+impl monster_id {
+    pub const MONSTER_REGIGIGAS_STORY: monster_id = monster_id(556);
+}
+impl monster_id {
+    pub const MONSTER_BRONZONG_STORY: monster_id = monster_id(557);
+}
+impl monster_id {
+    pub const MONSTER_HITMONLEE_STORY: monster_id = monster_id(558);
+}
+impl monster_id {
+    pub const MONSTER_CHIMECHO_STORY: monster_id = monster_id(559);
+}
+impl monster_id {
+    pub const MONSTER_WIGGLYTUFF_STORY_2: monster_id = monster_id(560);
+}
+impl monster_id {
+    pub const MONSTER_UXIE_STORY: monster_id = monster_id(561);
+}
+impl monster_id {
+    pub const MONSTER_AZELF_STORY: monster_id = monster_id(562);
+}
+impl monster_id {
+    pub const MONSTER_MESPRIT_STORY: monster_id = monster_id(563);
+}
+impl monster_id {
+    pub const MONSTER_SUNFLORA_STORY: monster_id = monster_id(564);
+}
+impl monster_id {
+    pub const MONSTER_DIGLETT_STORY: monster_id = monster_id(565);
+}
+impl monster_id {
+    pub const MONSTER_DUGTRIO_STORY: monster_id = monster_id(566);
+}
+impl monster_id {
+    pub const MONSTER_CORPHISH_STORY: monster_id = monster_id(567);
+}
+impl monster_id {
+    pub const MONSTER_LOUDRED_STORY: monster_id = monster_id(568);
+}
+impl monster_id {
+    pub const MONSTER_BIDOOF_STORY: monster_id = monster_id(569);
+}
+impl monster_id {
+    pub const MONSTER_CHATOT_STORY: monster_id = monster_id(570);
+}
+impl monster_id {
+    pub const MONSTER_GROVYLE_STORY: monster_id = monster_id(571);
+}
+impl monster_id {
+    pub const MONSTER_DUSKNOIR_STORY: monster_id = monster_id(572);
+}
+impl monster_id {
+    pub const MONSTER_SABLEYE_STORY: monster_id = monster_id(573);
+}
+impl monster_id {
+    pub const MONSTER_DARKRAI_STORY: monster_id = monster_id(574);
+}
+impl monster_id {
+    pub const MONSTER_MAMA: monster_id = monster_id(575);
+}
+impl monster_id {
+    pub const MONSTER_GROVYLE_STORY_2: monster_id = monster_id(576);
+}
+impl monster_id {
+    pub const MONSTER_DUSKNOIR_STORY_2: monster_id = monster_id(577);
+}
+impl monster_id {
+    pub const MONSTER_DUSKNOIR_STORY_3: monster_id = monster_id(578);
+}
+impl monster_id {
+    pub const MONSTER_SENTRET_DITTO: monster_id = monster_id(579);
+}
+impl monster_id {
+    pub const MONSTER_BELLOSSOM_DITTO: monster_id = monster_id(580);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_27: monster_id = monster_id(581);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_28: monster_id = monster_id(582);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_29: monster_id = monster_id(583);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_30: monster_id = monster_id(584);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_31: monster_id = monster_id(585);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_32: monster_id = monster_id(586);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_33: monster_id = monster_id(587);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_34: monster_id = monster_id(588);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_35: monster_id = monster_id(589);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_36: monster_id = monster_id(590);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_37: monster_id = monster_id(591);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_38: monster_id = monster_id(592);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_39: monster_id = monster_id(593);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_40: monster_id = monster_id(594);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_41: monster_id = monster_id(595);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_42: monster_id = monster_id(596);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_43: monster_id = monster_id(597);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_44: monster_id = monster_id(598);
+}
+impl monster_id {
+    pub const MONSTER_RESERVE_45: monster_id = monster_id(599);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct monster_id(pub crate::ctypes::c_uint);
 #[repr(C)]
 #[repr(align(2))]
 pub struct monster_id_16 {
@@ -807,18 +2007,18 @@ pub struct monster_id_16 {
 }
 impl monster_id_16 {
     #[inline]
-    pub fn val(&self) -> monster_id::Type {
+    pub fn val(&self) -> monster_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 16u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: monster_id::Type) {
+    pub fn set_val(&mut self, val: monster_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 16u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: monster_id::Type) -> __BindgenBitfieldUnit<[u8; 2usize]> {
+    pub fn new_bitfield_1(val: monster_id) -> __BindgenBitfieldUnit<[u8; 2usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 16u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -827,1409 +2027,4209 @@ impl monster_id_16 {
         __bindgen_bitfield_unit
     }
 }
-pub mod item_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const ITEM_NOTHING: Type = 0;
-    pub const ITEM_STICK: Type = 1;
-    pub const ITEM_IRON_THORN: Type = 2;
-    pub const ITEM_SILVER_SPIKE: Type = 3;
-    pub const ITEM_GOLD_FANG: Type = 4;
-    pub const ITEM_CACNEA_SPIKE: Type = 5;
-    pub const ITEM_CORSOLA_TWIG: Type = 6;
-    pub const ITEM_GRAVELEROCK: Type = 7;
-    pub const ITEM_GEO_PEBBLE: Type = 8;
-    pub const ITEM_GOLD_THORN: Type = 9;
-    pub const ITEM_RARE_FOSSIL: Type = 10;
-    pub const ITEM_UNNAMED_0xB: Type = 11;
-    pub const ITEM_UNNAMED_0xC: Type = 12;
-    pub const ITEM_NO_SLIP_CAP: Type = 13;
-    pub const ITEM_Y_RAY_SPECS: Type = 14;
-    pub const ITEM_GAGGLE_SPECS: Type = 15;
-    pub const ITEM_MOBILE_SCARF: Type = 16;
-    pub const ITEM_HEAL_RIBBON: Type = 17;
-    pub const ITEM_TWIST_BAND: Type = 18;
-    pub const ITEM_SCOPE_LENS: Type = 19;
-    pub const ITEM_PATSY_BAND: Type = 20;
-    pub const ITEM_NO_STICK_CAP: Type = 21;
-    pub const ITEM_PIERCE_BAND: Type = 22;
-    pub const ITEM_JOY_RIBBON: Type = 23;
-    pub const ITEM_X_RAY_SPECS: Type = 24;
-    pub const ITEM_PERSIM_BAND: Type = 25;
-    pub const ITEM_POWER_BAND: Type = 26;
-    pub const ITEM_PECHA_SCARF: Type = 27;
-    pub const ITEM_INSOMNISCOPE: Type = 28;
-    pub const ITEM_WARP_SCARF: Type = 29;
-    pub const ITEM_TIGHT_BELT: Type = 30;
-    pub const ITEM_SNEAK_SCARF: Type = 31;
-    pub const ITEM_GOLD_RIBBON: Type = 32;
-    pub const ITEM_GOGGLE_SPECS: Type = 33;
-    pub const ITEM_DIET_RIBBON: Type = 34;
-    pub const ITEM_TRAP_SCARF: Type = 35;
-    pub const ITEM_RACKET_BAND: Type = 36;
-    pub const ITEM_DEF_SCARF: Type = 37;
-    pub const ITEM_STAMINA_BAND: Type = 38;
-    pub const ITEM_PLAIN_RIBBON: Type = 39;
-    pub const ITEM_SPECIAL_BAND: Type = 40;
-    pub const ITEM_ZINC_BAND: Type = 41;
-    pub const ITEM_DETECT_BAND: Type = 42;
-    pub const ITEM_SPACE_GLOBE: Type = 43;
-    pub const ITEM_DODGE_SCARF: Type = 44;
-    pub const ITEM_BOUNCE_BAND: Type = 45;
-    pub const ITEM_CURVE_BAND: Type = 46;
-    pub const ITEM_WHIFF_SPECS: Type = 47;
-    pub const ITEM_NO_AIM_SCOPE: Type = 48;
-    pub const ITEM_LOCKON_SPECS: Type = 49;
-    pub const ITEM_MUNCH_BELT: Type = 50;
-    pub const ITEM_PASS_SCARF: Type = 51;
-    pub const ITEM_WEATHER_BAND: Type = 52;
-    pub const ITEM_FRIEND_BOW: Type = 53;
-    pub const ITEM_BEAUTY_SCARF: Type = 54;
-    pub const ITEM_SUN_RIBBON: Type = 55;
-    pub const ITEM_LUNAR_RIBBON: Type = 56;
-    pub const ITEM_GOLDEN_MASK: Type = 57;
-    pub const ITEM_AMBER_TEAR: Type = 58;
-    pub const ITEM_ICY_FLUTE: Type = 59;
-    pub const ITEM_FIERY_DRUM: Type = 60;
-    pub const ITEM_TERRA_CYMBAL: Type = 61;
-    pub const ITEM_AQUA_MONICA: Type = 62;
-    pub const ITEM_ROCK_HORN: Type = 63;
-    pub const ITEM_GRASS_CORNET: Type = 64;
-    pub const ITEM_SKY_MELODICA: Type = 65;
-    pub const ITEM_MIRACLE_CHEST: Type = 66;
-    pub const ITEM_WONDER_CHEST: Type = 67;
-    pub const ITEM_IQ_BOOSTER: Type = 68;
-    pub const ITEM_HEAL_SEED: Type = 69;
-    pub const ITEM_ORAN_BERRY: Type = 70;
-    pub const ITEM_SITRUS_BERRY: Type = 71;
-    pub const ITEM_EYEDROP_SEED: Type = 72;
-    pub const ITEM_REVIVER_SEED: Type = 73;
-    pub const ITEM_BLINKER_SEED: Type = 74;
-    pub const ITEM_DOOM_SEED: Type = 75;
-    pub const ITEM_X_EYE_SEED: Type = 76;
-    pub const ITEM_LIFE_SEED: Type = 77;
-    pub const ITEM_RAWST_BERRY: Type = 78;
-    pub const ITEM_HUNGER_SEED: Type = 79;
-    pub const ITEM_QUICK_SEED: Type = 80;
-    pub const ITEM_PECHA_BERRY: Type = 81;
-    pub const ITEM_CHERI_BERRY: Type = 82;
-    pub const ITEM_TOTTER_SEED: Type = 83;
-    pub const ITEM_SLEEP_SEED: Type = 84;
-    pub const ITEM_PLAIN_SEED: Type = 85;
-    pub const ITEM_WARP_SEED: Type = 86;
-    pub const ITEM_BLAST_SEED: Type = 87;
-    pub const ITEM_GINSENG: Type = 88;
-    pub const ITEM_JOY_SEED: Type = 89;
-    pub const ITEM_CHESTO_BERRY: Type = 90;
-    pub const ITEM_STUN_SEED: Type = 91;
-    pub const ITEM_GABITE_SCALE: Type = 92;
-    pub const ITEM_GOLDEN_SEED: Type = 93;
-    pub const ITEM_VILE_SEED: Type = 94;
-    pub const ITEM_PURE_SEED: Type = 95;
-    pub const ITEM_VIOLENT_SEED: Type = 96;
-    pub const ITEM_VANISH_SEED: Type = 97;
-    pub const ITEM_UNNAMED_0x62: Type = 98;
-    pub const ITEM_MAX_ELIXIR: Type = 99;
-    pub const ITEM_PROTEIN: Type = 100;
-    pub const ITEM_CALCIUM: Type = 101;
-    pub const ITEM_IRON: Type = 102;
-    pub const ITEM_NECTAR: Type = 103;
-    pub const ITEM_DROPEYE_SEED: Type = 104;
-    pub const ITEM_REVISER_SEED: Type = 105;
-    pub const ITEM_SLIP_SEED: Type = 106;
-    pub const ITEM_VIA_SEED: Type = 107;
-    pub const ITEM_ZINC: Type = 108;
-    pub const ITEM_APPLE: Type = 109;
-    pub const ITEM_BIG_APPLE: Type = 110;
-    pub const ITEM_GRIMY_FOOD: Type = 111;
-    pub const ITEM_HUGE_APPLE: Type = 112;
-    pub const ITEM_UNNAMED_0x71: Type = 113;
-    pub const ITEM_UNNAMED_0x72: Type = 114;
-    pub const ITEM_GOLDEN_APPLE: Type = 115;
-    pub const ITEM_MIX_ELIXIR: Type = 116;
-    pub const ITEM_OREN_BERRY: Type = 117;
-    pub const ITEM_DOUGH_SEED: Type = 118;
-    pub const ITEM_WHITE_GUMMI: Type = 119;
-    pub const ITEM_RED_GUMMI: Type = 120;
-    pub const ITEM_BLUE_GUMMI: Type = 121;
-    pub const ITEM_GRASS_GUMMI: Type = 122;
-    pub const ITEM_YELLOW_GUMMI: Type = 123;
-    pub const ITEM_CLEAR_GUMMI: Type = 124;
-    pub const ITEM_ORANGE_GUMMI: Type = 125;
-    pub const ITEM_PINK_GUMMI: Type = 126;
-    pub const ITEM_BROWN_GUMMI: Type = 127;
-    pub const ITEM_SKY_GUMMI: Type = 128;
-    pub const ITEM_GOLD_GUMMI: Type = 129;
-    pub const ITEM_GREEN_GUMMI: Type = 130;
-    pub const ITEM_GRAY_GUMMI: Type = 131;
-    pub const ITEM_PURPLE_GUMMI: Type = 132;
-    pub const ITEM_ROYAL_GUMMI: Type = 133;
-    pub const ITEM_BLACK_GUMMI: Type = 134;
-    pub const ITEM_SILVER_GUMMI: Type = 135;
-    pub const ITEM_WONDER_GUMMI: Type = 136;
-    pub const ITEM_GRAVELYROCK: Type = 137;
-    pub const ITEM_UNNAMED_0x8A: Type = 138;
-    pub const ITEM_UPGRADE: Type = 139;
-    pub const ITEM_KINGS_ROCK: Type = 140;
-    pub const ITEM_THUNDERSTONE: Type = 141;
-    pub const ITEM_DEEPSEASCALE: Type = 142;
-    pub const ITEM_DEEPSEATOOTH: Type = 143;
-    pub const ITEM_SUN_STONE: Type = 144;
-    pub const ITEM_MOON_STONE: Type = 145;
-    pub const ITEM_FIRE_STONE: Type = 146;
-    pub const ITEM_WATER_STONE: Type = 147;
-    pub const ITEM_METAL_COAT: Type = 148;
-    pub const ITEM_LEAF_STONE: Type = 149;
-    pub const ITEM_DRAGON_SCALE: Type = 150;
-    pub const ITEM_LINK_CABLE: Type = 151;
-    pub const ITEM_DUBIOUS_DISC: Type = 152;
-    pub const ITEM_PROTECTOR: Type = 153;
-    pub const ITEM_REAPER_CLOTH: Type = 154;
-    pub const ITEM_RAZOR_FANG: Type = 155;
-    pub const ITEM_RAZOR_CLAW: Type = 156;
-    pub const ITEM_ELECTIRIZER: Type = 157;
-    pub const ITEM_MAGMARIZER: Type = 158;
-    pub const ITEM_OVAL_STONE: Type = 159;
-    pub const ITEM_DAWN_STONE: Type = 160;
-    pub const ITEM_SHINY_STONE: Type = 161;
-    pub const ITEM_DUSK_STONE: Type = 162;
-    pub const ITEM_CORONET_ROCK: Type = 163;
-    pub const ITEM_MOSSY_ROCK: Type = 164;
-    pub const ITEM_FROZEN_ROCK: Type = 165;
-    pub const ITEM_UNNAMED_0xA6: Type = 166;
-    pub const ITEM_GONE_PEBBLE: Type = 167;
-    pub const ITEM_WANDER_GUMMI: Type = 168;
-    pub const ITEM_PRIZE_TICKET: Type = 169;
-    pub const ITEM_SILVER_TICKET: Type = 170;
-    pub const ITEM_GOLD_TICKET: Type = 171;
-    pub const ITEM_PRISM_TICKET: Type = 172;
-    pub const ITEM_MYSTERY_PART: Type = 173;
-    pub const ITEM_SECRET_SLAB: Type = 174;
-    pub const ITEM_UNNAMED_0xAF: Type = 175;
-    pub const ITEM_UNNAMED_0xB0: Type = 176;
-    pub const ITEM_UNNAMED_0xB1: Type = 177;
-    pub const ITEM_WONDER_EGG: Type = 178;
-    pub const ITEM_GRACIDEA: Type = 179;
-    pub const ITEM_SKY_GIFT: Type = 180;
-    pub const ITEM_UNNAMED_0xB5: Type = 181;
-    pub const ITEM_KEY: Type = 182;
-    pub const ITEM_POKE: Type = 183;
-    pub const ITEM_UNNAMED_0xB8: Type = 184;
-    pub const ITEM_UNNAMED_0xB9: Type = 185;
-    pub const ITEM_LOST_LOOT: Type = 186;
-    pub const ITEM_TM_USED_TM: Type = 187;
-    pub const ITEM_TM_FOCUS_PUNCH: Type = 188;
-    pub const ITEM_TM_DRAGON_CLAW: Type = 189;
-    pub const ITEM_TM_WATER_PULSE: Type = 190;
-    pub const ITEM_TM_CALM_MIND: Type = 191;
-    pub const ITEM_TM_ROAR: Type = 192;
-    pub const ITEM_TM_TOXIC: Type = 193;
-    pub const ITEM_TM_HAIL: Type = 194;
-    pub const ITEM_TM_BULK_UP: Type = 195;
-    pub const ITEM_TM_BULLET_SEED: Type = 196;
-    pub const ITEM_TM_HIDDEN_POWER: Type = 197;
-    pub const ITEM_UNNAMED_0xC6: Type = 198;
-    pub const ITEM_TM_TAUNT: Type = 199;
-    pub const ITEM_TM_ICE_BEAM: Type = 200;
-    pub const ITEM_TM_BLIZZARD: Type = 201;
-    pub const ITEM_TM_HYPER_BEAM: Type = 202;
-    pub const ITEM_TM_LIGHT_SCREEN: Type = 203;
-    pub const ITEM_TM_PROTECT: Type = 204;
-    pub const ITEM_UNNAMED_0xCD: Type = 205;
-    pub const ITEM_TM_GIGA_DRAIN: Type = 206;
-    pub const ITEM_TM_SAFEGUARD: Type = 207;
-    pub const ITEM_TM_FRUSTRATION: Type = 208;
-    pub const ITEM_TM_SOLARBEAM: Type = 209;
-    pub const ITEM_TM_IRON_TAIL: Type = 210;
-    pub const ITEM_TM_THUNDERBOLT: Type = 211;
-    pub const ITEM_TM_THUNDER: Type = 212;
-    pub const ITEM_TM_EARTHQUAKE: Type = 213;
-    pub const ITEM_TM_RETURN: Type = 214;
-    pub const ITEM_TM_DIG: Type = 215;
-    pub const ITEM_TM_PSYCHIC: Type = 216;
-    pub const ITEM_TM_SHADOW_BALL: Type = 217;
-    pub const ITEM_TM_BRICK_BREAK: Type = 218;
-    pub const ITEM_UNNAMED_0xDB: Type = 219;
-    pub const ITEM_TM_REFLECT: Type = 220;
-    pub const ITEM_TM_SHOCK_WAVE: Type = 221;
-    pub const ITEM_TM_FLAMETHROWER: Type = 222;
-    pub const ITEM_TM_SLUDGE_BOMB: Type = 223;
-    pub const ITEM_UNNAMED_0xE0: Type = 224;
-    pub const ITEM_TM_FIRE_BLAST: Type = 225;
-    pub const ITEM_UNNAMED_0xE2: Type = 226;
-    pub const ITEM_TM_AERIAL_ACE: Type = 227;
-    pub const ITEM_TM_TORMENT: Type = 228;
-    pub const ITEM_TM_FACADE: Type = 229;
-    pub const ITEM_TM_SECRET_POWER: Type = 230;
-    pub const ITEM_TM_REST: Type = 231;
-    pub const ITEM_TM_ATTRACT: Type = 232;
-    pub const ITEM_TM_THIEF: Type = 233;
-    pub const ITEM_TM_STEEL_WING: Type = 234;
-    pub const ITEM_TM_SKILL_SWAP: Type = 235;
-    pub const ITEM_UNNAMED_0xEC: Type = 236;
-    pub const ITEM_TM_OVERHEAT: Type = 237;
-    pub const ITEM_TM_ROOST: Type = 238;
-    pub const ITEM_TM_FOCUS_BLAST: Type = 239;
-    pub const ITEM_TM_ENERGY_BALL: Type = 240;
-    pub const ITEM_TM_FALSE_SWIPE: Type = 241;
-    pub const ITEM_TM_BRINE: Type = 242;
-    pub const ITEM_TM_FLING: Type = 243;
-    pub const ITEM_TM_CHARGE_BEAM: Type = 244;
-    pub const ITEM_TM_ENDURE: Type = 245;
-    pub const ITEM_TM_DRAGON_PULSE: Type = 246;
-    pub const ITEM_TM_DRAIN_PUNCH: Type = 247;
-    pub const ITEM_TM_WILL_O_WISP: Type = 248;
-    pub const ITEM_TM_SILVER_WIND: Type = 249;
-    pub const ITEM_TM_EMBARGO: Type = 250;
-    pub const ITEM_TM_EXPLOSION: Type = 251;
-    pub const ITEM_TM_SHADOW_CLAW: Type = 252;
-    pub const ITEM_TM_PAYBACK: Type = 253;
-    pub const ITEM_TM_RECYCLE: Type = 254;
-    pub const ITEM_TM_GIGA_IMPACT: Type = 255;
-    pub const ITEM_TM_ROCK_POLISH: Type = 256;
-    pub const ITEM_TM_WIDE_SLASH: Type = 257;
-    pub const ITEM_UNNAMED_0x102: Type = 258;
-    pub const ITEM_UNNAMED_0x103: Type = 259;
-    pub const ITEM_TM_VACUUM_CUT: Type = 260;
-    pub const ITEM_TM_DIVE: Type = 261;
-    pub const ITEM_TM_FLASH: Type = 262;
-    pub const ITEM_TM_STONE_EDGE: Type = 263;
-    pub const ITEM_TM_AVALANCHE: Type = 264;
-    pub const ITEM_TM_THUNDER_WAVE: Type = 265;
-    pub const ITEM_TM_GYRO_BALL: Type = 266;
-    pub const ITEM_TM_SWORDS_DANCE: Type = 267;
-    pub const ITEM_TM_STEALTH_ROCK: Type = 268;
-    pub const ITEM_TM_PSYCH_UP: Type = 269;
-    pub const ITEM_TM_CAPTIVATE: Type = 270;
-    pub const ITEM_TM_DARK_PULSE: Type = 271;
-    pub const ITEM_TM_ROCK_SLIDE: Type = 272;
-    pub const ITEM_TM_X_SCISSOR: Type = 273;
-    pub const ITEM_TM_SLEEP_TALK: Type = 274;
-    pub const ITEM_TM_NATURAL_GIFT: Type = 275;
-    pub const ITEM_TM_POISON_JAB: Type = 276;
-    pub const ITEM_TM_DREAM_EATER: Type = 277;
-    pub const ITEM_TM_GRASS_KNOT: Type = 278;
-    pub const ITEM_TM_SWAGGER: Type = 279;
-    pub const ITEM_TM_PLUCK: Type = 280;
-    pub const ITEM_TM_U_TURN: Type = 281;
-    pub const ITEM_TM_SUBSTITUTE: Type = 282;
-    pub const ITEM_TM_FLASH_CANNON: Type = 283;
-    pub const ITEM_TM_TRICK_ROOM: Type = 284;
-    pub const ITEM_TM_CUT: Type = 285;
-    pub const ITEM_TM_FLY: Type = 286;
-    pub const ITEM_TM_SURF: Type = 287;
-    pub const ITEM_TM_STRENGTH: Type = 288;
-    pub const ITEM_TM_DEFOG: Type = 289;
-    pub const ITEM_TM_ROCK_SMASH: Type = 290;
-    pub const ITEM_TM_WATERFALL: Type = 291;
-    pub const ITEM_TM_ROCK_CLIMB: Type = 292;
-    pub const ITEM_UNNAMED_0x125: Type = 293;
-    pub const ITEM_UNNAMED_0x126: Type = 294;
-    pub const ITEM_UNNAMED_0x127: Type = 295;
-    pub const ITEM_UNNAMED_0x128: Type = 296;
-    pub const ITEM_UNNAMED_0x129: Type = 297;
-    pub const ITEM_UNNAMED_0x12A: Type = 298;
-    pub const ITEM_UNNAMED_0x12B: Type = 299;
-    pub const ITEM_UNNAMED_0x12C: Type = 300;
-    pub const ITEM_HAIL_ORB: Type = 301;
-    pub const ITEM_SUNNY_ORB: Type = 302;
-    pub const ITEM_RAINY_ORB: Type = 303;
-    pub const ITEM_EVASION_ORB: Type = 304;
-    pub const ITEM_SANDY_ORB: Type = 305;
-    pub const ITEM_ROCKY_ORB: Type = 306;
-    pub const ITEM_SNATCH_ORB: Type = 307;
-    pub const ITEM_SEE_TRAP_ORB: Type = 308;
-    pub const ITEM_MUG_ORB: Type = 309;
-    pub const ITEM_REBOUND_ORB: Type = 310;
-    pub const ITEM_LOB_ORB: Type = 311;
-    pub const ITEM_SWITCHER_ORB: Type = 312;
-    pub const ITEM_BLOWBACK_ORB: Type = 313;
-    pub const ITEM_WARP_ORB: Type = 314;
-    pub const ITEM_TRANSFER_ORB: Type = 315;
-    pub const ITEM_SLOW_ORB: Type = 316;
-    pub const ITEM_QUICK_ORB: Type = 317;
-    pub const ITEM_LUMINOUS_ORB: Type = 318;
-    pub const ITEM_PETRIFY_ORB: Type = 319;
-    pub const ITEM_STAYAWAY_ORB: Type = 320;
-    pub const ITEM_POUNCE_ORB: Type = 321;
-    pub const ITEM_TRAWL_ORB: Type = 322;
-    pub const ITEM_CLEANSE_ORB: Type = 323;
-    pub const ITEM_UNNAMED_0x144: Type = 324;
-    pub const ITEM_DECOY_ORB: Type = 325;
-    pub const ITEM_SLUMBER_ORB: Type = 326;
-    pub const ITEM_TOTTER_ORB: Type = 327;
-    pub const ITEM_TWO_EDGE_ORB: Type = 328;
-    pub const ITEM_SILENCE_ORB: Type = 329;
-    pub const ITEM_ESCAPE_ORB: Type = 330;
-    pub const ITEM_SCANNER_ORB: Type = 331;
-    pub const ITEM_RADAR_ORB: Type = 332;
-    pub const ITEM_DROUGHT_ORB: Type = 333;
-    pub const ITEM_TRAPBUST_ORB: Type = 334;
-    pub const ITEM_ROLLCALL_ORB: Type = 335;
-    pub const ITEM_INVISIFY_ORB: Type = 336;
-    pub const ITEM_ONE_SHOT_ORB: Type = 337;
-    pub const ITEM_IDENTIFY_ORB: Type = 338;
-    pub const ITEM_UNNAMED_0x153: Type = 339;
-    pub const ITEM_SHOCKER_ORB: Type = 340;
-    pub const ITEM_SIZEBUST_ORB: Type = 341;
-    pub const ITEM_ONE_ROOM_ORB: Type = 342;
-    pub const ITEM_FILL_IN_ORB: Type = 343;
-    pub const ITEM_TRAPPER_ORB: Type = 344;
-    pub const ITEM_UNNAMED_0x159: Type = 345;
-    pub const ITEM_ITEMIZER_ORB: Type = 346;
-    pub const ITEM_HURL_ORB: Type = 347;
-    pub const ITEM_MOBILE_ORB: Type = 348;
-    pub const ITEM_UNNAMED_0x15D: Type = 349;
-    pub const ITEM_STAIRS_ORB: Type = 350;
-    pub const ITEM_LONGTOSS_ORB: Type = 351;
-    pub const ITEM_PIERCE_ORB: Type = 352;
-    pub const ITEM_UNNAMED_0x161: Type = 353;
-    pub const ITEM_SPURN_ORB: Type = 354;
-    pub const ITEM_FOE_HOLD_ORB: Type = 355;
-    pub const ITEM_ALL_MACH_ORB: Type = 356;
-    pub const ITEM_FOE_FEAR_ORB: Type = 357;
-    pub const ITEM_ALL_HIT_ORB: Type = 358;
-    pub const ITEM_FOE_SEAL_ORB: Type = 359;
-    pub const ITEM_UNNAMED_0x168: Type = 360;
-    pub const ITEM_UNNAMED_0x169: Type = 361;
-    pub const ITEM_LINK_BOX: Type = 362;
-    pub const ITEM_UNNAMED_0x16B: Type = 363;
-    pub const ITEM_GORGEOUS_BOX_1: Type = 364;
-    pub const ITEM_GORGEOUS_BOX_2: Type = 365;
-    pub const ITEM_GORGEOUS_BOX_3: Type = 366;
-    pub const ITEM_HEAVY_BOX_1: Type = 367;
-    pub const ITEM_HEAVY_BOX_2: Type = 368;
-    pub const ITEM_HEAVY_BOX_3: Type = 369;
-    pub const ITEM_SHINY_BOX_1: Type = 370;
-    pub const ITEM_SHINY_BOX_2: Type = 371;
-    pub const ITEM_SHINY_BOX_3: Type = 372;
-    pub const ITEM_NIFTY_BOX_1: Type = 373;
-    pub const ITEM_NIFTY_BOX_2: Type = 374;
-    pub const ITEM_NIFTY_BOX_3: Type = 375;
-    pub const ITEM_DAINTY_BOX_1: Type = 376;
-    pub const ITEM_DAINTY_BOX_2: Type = 377;
-    pub const ITEM_DAINTY_BOX_3: Type = 378;
-    pub const ITEM_GLITTERY_BOX_1: Type = 379;
-    pub const ITEM_GLITTERY_BOX_2: Type = 380;
-    pub const ITEM_GLITTERY_BOX_3: Type = 381;
-    pub const ITEM_PRETTY_BOX_1: Type = 382;
-    pub const ITEM_PRETTY_BOX_2: Type = 383;
-    pub const ITEM_PRETTY_BOX_3: Type = 384;
-    pub const ITEM_DELUXE_BOX_1: Type = 385;
-    pub const ITEM_DELUXE_BOX_2: Type = 386;
-    pub const ITEM_DELUXE_BOX_3: Type = 387;
-    pub const ITEM_LIGHT_BOX_1: Type = 388;
-    pub const ITEM_LIGHT_BOX_2: Type = 389;
-    pub const ITEM_LIGHT_BOX_3: Type = 390;
-    pub const ITEM_CUTE_BOX_1: Type = 391;
-    pub const ITEM_CUTE_BOX_2: Type = 392;
-    pub const ITEM_CUTE_BOX_3: Type = 393;
-    pub const ITEM_HARD_BOX_1: Type = 394;
-    pub const ITEM_HARD_BOX_2: Type = 395;
-    pub const ITEM_HARD_BOX_3: Type = 396;
-    pub const ITEM_SINISTER_BOX_1: Type = 397;
-    pub const ITEM_SINISTER_BOX_2: Type = 398;
-    pub const ITEM_SINISTER_BOX_3: Type = 399;
-    pub const ITEM_A_STONE: Type = 400;
-    pub const ITEM_B_STONE: Type = 401;
-    pub const ITEM_C_STONE: Type = 402;
-    pub const ITEM_D_STONE: Type = 403;
-    pub const ITEM_E_STONE: Type = 404;
-    pub const ITEM_F_STONE: Type = 405;
-    pub const ITEM_G_STONE: Type = 406;
-    pub const ITEM_H_STONE: Type = 407;
-    pub const ITEM_I_STONE: Type = 408;
-    pub const ITEM_J_STONE: Type = 409;
-    pub const ITEM_K_STONE: Type = 410;
-    pub const ITEM_L_STONE: Type = 411;
-    pub const ITEM_M_STONE: Type = 412;
-    pub const ITEM_N_STONE: Type = 413;
-    pub const ITEM_O_STONE: Type = 414;
-    pub const ITEM_P_STONE: Type = 415;
-    pub const ITEM_Q_STONE: Type = 416;
-    pub const ITEM_R_STONE: Type = 417;
-    pub const ITEM_S_STONE: Type = 418;
-    pub const ITEM_T_STONE: Type = 419;
-    pub const ITEM_U_STONE: Type = 420;
-    pub const ITEM_V_STONE: Type = 421;
-    pub const ITEM_W_STONE: Type = 422;
-    pub const ITEM_X_STONE: Type = 423;
-    pub const ITEM_Y_STONE: Type = 424;
-    pub const ITEM_Z_STONE: Type = 425;
-    pub const ITEM_EXCLAMATION_STONE: Type = 426;
-    pub const ITEM_QUESTION_STONE: Type = 427;
-    pub const ITEM_SILVER_BOW: Type = 428;
-    pub const ITEM_BROWN_BOW: Type = 429;
-    pub const ITEM_RED_BOW: Type = 430;
-    pub const ITEM_PINK_BOW: Type = 431;
-    pub const ITEM_ORANGE_BOW: Type = 432;
-    pub const ITEM_YELLOW_BOW: Type = 433;
-    pub const ITEM_LIME_BOW: Type = 434;
-    pub const ITEM_GREEN_BOW: Type = 435;
-    pub const ITEM_VIRIDIAN_BOW: Type = 436;
-    pub const ITEM_MINTY_BOW: Type = 437;
-    pub const ITEM_SKY_BLUE_BOW: Type = 438;
-    pub const ITEM_BLUE_BOW: Type = 439;
-    pub const ITEM_COBALT_BOW: Type = 440;
-    pub const ITEM_PURPLE_BOW: Type = 441;
-    pub const ITEM_VIOLET_BOW: Type = 442;
-    pub const ITEM_FUCHSIA_BOW: Type = 443;
-    pub const ITEM_PRISM_RUFF: Type = 444;
-    pub const ITEM_AQUA_COLLAR: Type = 445;
-    pub const ITEM_VOLT_COLLAR: Type = 446;
-    pub const ITEM_FIRE_COLLAR: Type = 447;
-    pub const ITEM_LIGHT_COLLAR: Type = 448;
-    pub const ITEM_DUSK_COLLAR: Type = 449;
-    pub const ITEM_VIRID_COLLAR: Type = 450;
-    pub const ITEM_ICY_COLLAR: Type = 451;
-    pub const ITEM_PEP_SASH: Type = 452;
-    pub const ITEM_COUNTER_RUFF: Type = 453;
-    pub const ITEM_VICTORY_BELT: Type = 454;
-    pub const ITEM_POWER_BANGLE: Type = 455;
-    pub const ITEM_THUNDERSHARD: Type = 456;
-    pub const ITEM_FALLEN_STAR: Type = 457;
-    pub const ITEM_FLUFF_DUST: Type = 458;
-    pub const ITEM_EGG_SHARD: Type = 459;
-    pub const ITEM_HEROIC_MEDAL: Type = 460;
-    pub const ITEM_CHIC_SHARD: Type = 461;
-    pub const ITEM_YELLOW_JEWEL: Type = 462;
-    pub const ITEM_RED_JEWEL: Type = 463;
-    pub const ITEM_BLUE_JEWEL: Type = 464;
-    pub const ITEM_LAUGH_DUST: Type = 465;
-    pub const ITEM_GUARD_SAND: Type = 466;
-    pub const ITEM_PURPLE_JEWEL: Type = 467;
-    pub const ITEM_WHITE_JEWEL: Type = 468;
-    pub const ITEM_BRAVE_DUST: Type = 469;
-    pub const ITEM_HEAL_DEW: Type = 470;
-    pub const ITEM_MARINE_CACHE: Type = 471;
-    pub const ITEM_FREEZE_VEIL: Type = 472;
-    pub const ITEM_THUNDER_VEIL: Type = 473;
-    pub const ITEM_FIRE_VEIL: Type = 474;
-    pub const ITEM_HAVOC_ROBE: Type = 475;
-    pub const ITEM_LIFE_RING: Type = 476;
-    pub const ITEM_BOLT_FANG: Type = 477;
-    pub const ITEM_FLARE_FANG: Type = 478;
-    pub const ITEM_AQUA_MANTLE: Type = 479;
-    pub const ITEM_SILVER_VEIL: Type = 480;
-    pub const ITEM_RAINBOW_VEIL: Type = 481;
-    pub const ITEM_CHRONO_VEIL: Type = 482;
-    pub const ITEM_ROCK_SASH: Type = 483;
-    pub const ITEM_ICE_SASH: Type = 484;
-    pub const ITEM_STEEL_SASH: Type = 485;
-    pub const ITEM_HEART_BROOCH: Type = 486;
-    pub const ITEM_EON_VEIL: Type = 487;
-    pub const ITEM_SEABED_VEIL: Type = 488;
-    pub const ITEM_TERRA_RING: Type = 489;
-    pub const ITEM_SKYHIGH_VEIL: Type = 490;
-    pub const ITEM_WISH_MANTLE: Type = 491;
-    pub const ITEM_REVIVE_ROBE: Type = 492;
-    pub const ITEM_SHADOW_VEIL: Type = 493;
-    pub const ITEM_PLASMA_VEIL: Type = 494;
-    pub const ITEM_EDIFY_ROBE: Type = 495;
-    pub const ITEM_CHARITY_ROBE: Type = 496;
-    pub const ITEM_HOPE_ROBE: Type = 497;
-    pub const ITEM_TIME_SHIELD: Type = 498;
-    pub const ITEM_AIR_BLADE: Type = 499;
-    pub const ITEM_SEARING_RING: Type = 500;
-    pub const ITEM_ANCIENT_RING: Type = 501;
-    pub const ITEM_NETHER_VEIL: Type = 502;
-    pub const ITEM_LUNAR_VEIL: Type = 503;
-    pub const ITEM_TIDAL_CAPE: Type = 504;
-    pub const ITEM_ECLIPSE_ROBE: Type = 505;
-    pub const ITEM_WHITE_SILK: Type = 506;
-    pub const ITEM_NORMAL_DUST: Type = 507;
-    pub const ITEM_WHITE_GEM: Type = 508;
-    pub const ITEM_JOY_GLOBE: Type = 509;
-    pub const ITEM_RED_SILK: Type = 510;
-    pub const ITEM_FIRE_DUST: Type = 511;
-    pub const ITEM_FIERY_GEM: Type = 512;
-    pub const ITEM_FIERY_GLOBE: Type = 513;
-    pub const ITEM_BLUE_SILK: Type = 514;
-    pub const ITEM_WATER_DUST: Type = 515;
-    pub const ITEM_AQUA_GEM: Type = 516;
-    pub const ITEM_AQUA_GLOBE: Type = 517;
-    pub const ITEM_GRASS_SILK: Type = 518;
-    pub const ITEM_GRASS_DUST: Type = 519;
-    pub const ITEM_GRASS_GEM: Type = 520;
-    pub const ITEM_SOOTHE_GLOBE: Type = 521;
-    pub const ITEM_YELLOW_SILK: Type = 522;
-    pub const ITEM_THUNDER_DUST: Type = 523;
-    pub const ITEM_THUNDER_GEM: Type = 524;
-    pub const ITEM_VOLT_GLOBE: Type = 525;
-    pub const ITEM_CLEAR_SILK: Type = 526;
-    pub const ITEM_ICY_DUST: Type = 527;
-    pub const ITEM_ICY_GEM: Type = 528;
-    pub const ITEM_ICY_GLOBE: Type = 529;
-    pub const ITEM_ORANGE_SILK: Type = 530;
-    pub const ITEM_COURAGE_DUST: Type = 531;
-    pub const ITEM_FIGHT_GEM: Type = 532;
-    pub const ITEM_POWER_GLOBE: Type = 533;
-    pub const ITEM_PINK_SILK: Type = 534;
-    pub const ITEM_POISON_DUST: Type = 535;
-    pub const ITEM_POISON_GEM: Type = 536;
-    pub const ITEM_POISON_GLOBE: Type = 537;
-    pub const ITEM_BROWN_SILK: Type = 538;
-    pub const ITEM_GROUND_DUST: Type = 539;
-    pub const ITEM_EARTH_GEM: Type = 540;
-    pub const ITEM_TERRA_GLOBE: Type = 541;
-    pub const ITEM_SKY_SILK: Type = 542;
-    pub const ITEM_SKY_DUST: Type = 543;
-    pub const ITEM_SKY_GEM: Type = 544;
-    pub const ITEM_SKY_GLOBE: Type = 545;
-    pub const ITEM_GOLD_SILK: Type = 546;
-    pub const ITEM_PSYCHE_DUST: Type = 547;
-    pub const ITEM_PSYCHE_GEM: Type = 548;
-    pub const ITEM_PSYCHE_GLOBE: Type = 549;
-    pub const ITEM_GREEN_SILK: Type = 550;
-    pub const ITEM_WONDER_DUST: Type = 551;
-    pub const ITEM_GUARD_GEM: Type = 552;
-    pub const ITEM_DEFEND_GLOBE: Type = 553;
-    pub const ITEM_GRAY_SILK: Type = 554;
-    pub const ITEM_ROCK_DUST: Type = 555;
-    pub const ITEM_STONE_GEM: Type = 556;
-    pub const ITEM_ROCK_GLOBE: Type = 557;
-    pub const ITEM_PURPLE_SILK: Type = 558;
-    pub const ITEM_SHADY_DUST: Type = 559;
-    pub const ITEM_SHADOW_GEM: Type = 560;
-    pub const ITEM_NETHER_GLOBE: Type = 561;
-    pub const ITEM_ROYAL_SILK: Type = 562;
-    pub const ITEM_DRAGON_DUST: Type = 563;
-    pub const ITEM_DRAGON_GEM: Type = 564;
-    pub const ITEM_DRAGON_GLOBE: Type = 565;
-    pub const ITEM_BLACK_SILK: Type = 566;
-    pub const ITEM_DARK_DUST: Type = 567;
-    pub const ITEM_DARK_GEM: Type = 568;
-    pub const ITEM_DUSK_GLOBE: Type = 569;
-    pub const ITEM_IRON_SILK: Type = 570;
-    pub const ITEM_STEEL_DUST: Type = 571;
-    pub const ITEM_METAL_GEM: Type = 572;
-    pub const ITEM_STEEL_GLOBE: Type = 573;
-    pub const ITEM_BULBA_CLAW: Type = 574;
-    pub const ITEM_BULBA_FANG: Type = 575;
-    pub const ITEM_GRASS_GUARD: Type = 576;
-    pub const ITEM_LEAFY_TIE: Type = 577;
-    pub const ITEM_IVY_CLAW: Type = 578;
-    pub const ITEM_IVY_FANG: Type = 579;
-    pub const ITEM_IVY_CREST: Type = 580;
-    pub const ITEM_PLANT_TORC: Type = 581;
-    pub const ITEM_VENUS_CLAW: Type = 582;
-    pub const ITEM_VENUS_FANG: Type = 583;
-    pub const ITEM_VENUS_SEAL: Type = 584;
-    pub const ITEM_SOLAR_SASH: Type = 585;
-    pub const ITEM_CHAR_CLAW: Type = 586;
-    pub const ITEM_CHAR_FANG: Type = 587;
-    pub const ITEM_FIERY_HEART: Type = 588;
-    pub const ITEM_HEAT_ARMLET: Type = 589;
-    pub const ITEM_CHARME_CLAW: Type = 590;
-    pub const ITEM_CHARME_FANG: Type = 591;
-    pub const ITEM_CHARME_CREST: Type = 592;
-    pub const ITEM_KINDLE_SCARF: Type = 593;
-    pub const ITEM_CHARIZ_CLAW: Type = 594;
-    pub const ITEM_CHARIZ_FANG: Type = 595;
-    pub const ITEM_CHARIZ_SEAL: Type = 596;
-    pub const ITEM_FLAME_BANGLE: Type = 597;
-    pub const ITEM_SQUIRT_FOAM: Type = 598;
-    pub const ITEM_SQUIRT_CARD: Type = 599;
-    pub const ITEM_WATER_GUARD: Type = 600;
-    pub const ITEM_AQUA_TIE: Type = 601;
-    pub const ITEM_WARTOR_CLAW: Type = 602;
-    pub const ITEM_WARTOR_FANG: Type = 603;
-    pub const ITEM_WARTOR_CREST: Type = 604;
-    pub const ITEM_BUBBLEBANGLE: Type = 605;
-    pub const ITEM_BLASTO_CLAW: Type = 606;
-    pub const ITEM_BLASTO_CARD: Type = 607;
-    pub const ITEM_BLASTO_SEAL: Type = 608;
-    pub const ITEM_HYDRO_BAND: Type = 609;
-    pub const ITEM_PICHU_HAIR: Type = 610;
-    pub const ITEM_PICHU_CARD: Type = 611;
-    pub const ITEM_EXPRESS_TAG: Type = 612;
-    pub const ITEM_SHOCKER_CAPE: Type = 613;
-    pub const ITEM_PIKACHU_HAIR: Type = 614;
-    pub const ITEM_PIKACHU_CARD: Type = 615;
-    pub const ITEM_VOLT_CHARM: Type = 616;
-    pub const ITEM_VOLT_TORC: Type = 617;
-    pub const ITEM_RAICHU_HAIR: Type = 618;
-    pub const ITEM_RAICHU_CARD: Type = 619;
-    pub const ITEM_RAICHU_CREST: Type = 620;
-    pub const ITEM_ZAPPER_SCARF: Type = 621;
-    pub const ITEM_MEOWTH_CLAW: Type = 622;
-    pub const ITEM_MEOWTH_FANG: Type = 623;
-    pub const ITEM_COIN_CHARM: Type = 624;
-    pub const ITEM_BLING_RUFF: Type = 625;
-    pub const ITEM_PERSIAN_CLAW: Type = 626;
-    pub const ITEM_PERSIAN_FANG: Type = 627;
-    pub const ITEM_INSIGHT_ROCK: Type = 628;
-    pub const ITEM_NOBLE_SCARF: Type = 629;
-    pub const ITEM_CHIKO_CLAW: Type = 630;
-    pub const ITEM_CHIKO_CARD: Type = 631;
-    pub const ITEM_DAWN_JEWEL: Type = 632;
-    pub const ITEM_FRESH_BOW: Type = 633;
-    pub const ITEM_BAYLEEF_CLAW: Type = 634;
-    pub const ITEM_BAYLEEF_CARD: Type = 635;
-    pub const ITEM_BAYLEEF_SEAL: Type = 636;
-    pub const ITEM_SPICE_BOW: Type = 637;
-    pub const ITEM_MEGANI_CLAW: Type = 638;
-    pub const ITEM_MEGANI_CARD: Type = 639;
-    pub const ITEM_SHINY_CHARM: Type = 640;
-    pub const ITEM_BRIGHT_VEIL: Type = 641;
-    pub const ITEM_CYNDA_HAIR: Type = 642;
-    pub const ITEM_CYNDA_CLAW: Type = 643;
-    pub const ITEM_BLAZING_ROCK: Type = 644;
-    pub const ITEM_STORM_SASH: Type = 645;
-    pub const ITEM_QUILA_HAIR: Type = 646;
-    pub const ITEM_QUILA_CARD: Type = 647;
-    pub const ITEM_QUILA_CREST: Type = 648;
-    pub const ITEM_VOLCANO_TORC: Type = 649;
-    pub const ITEM_TYPHLO_GASP: Type = 650;
-    pub const ITEM_TYPHLO_FANG: Type = 651;
-    pub const ITEM_TYPHLO_SEAL: Type = 652;
-    pub const ITEM_BLAST_BANGLE: Type = 653;
-    pub const ITEM_TOTODI_DEW: Type = 654;
-    pub const ITEM_TOTODI_FANG: Type = 655;
-    pub const ITEM_WATER_HEART: Type = 656;
-    pub const ITEM_WASH_BOW: Type = 657;
-    pub const ITEM_CROCO_FANG: Type = 658;
-    pub const ITEM_CROCO_CARD: Type = 659;
-    pub const ITEM_SWIRL_ROCK: Type = 660;
-    pub const ITEM_ANGER_SCARF: Type = 661;
-    pub const ITEM_FERAL_CLAW: Type = 662;
-    pub const ITEM_FERAL_FANG: Type = 663;
-    pub const ITEM_FERAL_CREST: Type = 664;
-    pub const ITEM_HYDRO_JAW: Type = 665;
-    pub const ITEM_TREECK_THORN: Type = 666;
-    pub const ITEM_TREECK_CARD: Type = 667;
-    pub const ITEM_FOREST_ORE: Type = 668;
-    pub const ITEM_GUARD_RING: Type = 669;
-    pub const ITEM_GROVY_SHOOT: Type = 670;
-    pub const ITEM_GROVY_CARD: Type = 671;
-    pub const ITEM_JUNGLE_TAG: Type = 672;
-    pub const ITEM_GRASS_BLADE: Type = 673;
-    pub const ITEM_SCEPT_CLAW: Type = 674;
-    pub const ITEM_SCEPT_CARD: Type = 675;
-    pub const ITEM_SCEPT_SEAL: Type = 676;
-    pub const ITEM_DRAIN_BANGLE: Type = 677;
-    pub const ITEM_TORCHIC_HAIR: Type = 678;
-    pub const ITEM_TORCHIC_CARD: Type = 679;
-    pub const ITEM_HOT_PEBBLE: Type = 680;
-    pub const ITEM_FIRE_CAPE: Type = 681;
-    pub const ITEM_COMBUS_SWEAT: Type = 682;
-    pub const ITEM_COMBUS_CLAW: Type = 683;
-    pub const ITEM_CHARGE_TAG: Type = 684;
-    pub const ITEM_GUTSY_BAND: Type = 685;
-    pub const ITEM_BLAZI_CLAW: Type = 686;
-    pub const ITEM_BLAZI_CARD: Type = 687;
-    pub const ITEM_BLAZI_SEAL: Type = 688;
-    pub const ITEM_BLAZE_TORC: Type = 689;
-    pub const ITEM_MUDKIP_MUD: Type = 690;
-    pub const ITEM_MUDKIP_CARD: Type = 691;
-    pub const ITEM_MUD_JEWEL: Type = 692;
-    pub const ITEM_SPEED_SCARF: Type = 693;
-    pub const ITEM_MARSH_MUD: Type = 694;
-    pub const ITEM_MARSH_CARD: Type = 695;
-    pub const ITEM_MARSH_CREST: Type = 696;
-    pub const ITEM_MARSH_TORC: Type = 697;
-    pub const ITEM_SWAMP_MUD: Type = 698;
-    pub const ITEM_SWAMP_CARD: Type = 699;
-    pub const ITEM_SWAMP_SEAL: Type = 700;
-    pub const ITEM_SWAMP_BANGLE: Type = 701;
-    pub const ITEM_SKITTY_FANG: Type = 702;
-    pub const ITEM_SKITTY_CARD: Type = 703;
-    pub const ITEM_SMILE_PEBBLE: Type = 704;
-    pub const ITEM_HEAL_PENDANT: Type = 705;
-    pub const ITEM_DELCAT_HAIR: Type = 706;
-    pub const ITEM_DELCAT_FANG: Type = 707;
-    pub const ITEM_PRIM_PEBBLE: Type = 708;
-    pub const ITEM_GUARD_COLLAR: Type = 709;
-    pub const ITEM_LUCKY_LEAF: Type = 710;
-    pub const ITEM_TURTWIG_CARD: Type = 711;
-    pub const ITEM_SPROUT_ROCK: Type = 712;
-    pub const ITEM_LEAFY_HAT: Type = 713;
-    pub const ITEM_GROTLE_TWIG: Type = 714;
-    pub const ITEM_GROTLE_CLAW: Type = 715;
-    pub const ITEM_GROTLE_CREST: Type = 716;
-    pub const ITEM_WOODY_SCARF: Type = 717;
-    pub const ITEM_TORT_CLAW: Type = 718;
-    pub const ITEM_TORT_HORN: Type = 719;
-    pub const ITEM_TORT_SEAL: Type = 720;
-    pub const ITEM_FOREST_TORC: Type = 721;
-    pub const ITEM_CHIM_HAIR: Type = 722;
-    pub const ITEM_CHIM_FANG: Type = 723;
-    pub const ITEM_NIMBLE_CHARM: Type = 724;
-    pub const ITEM_EMBER_CAP: Type = 725;
-    pub const ITEM_MONFER_HAIR: Type = 726;
-    pub const ITEM_MONFER_FANG: Type = 727;
-    pub const ITEM_MONFER_CREST: Type = 728;
-    pub const ITEM_BURST_SASH: Type = 729;
-    pub const ITEM_INFERN_HAIR: Type = 730;
-    pub const ITEM_INFERN_FANG: Type = 731;
-    pub const ITEM_INFERN_SEAL: Type = 732;
-    pub const ITEM_BLAZING_RUFF: Type = 733;
-    pub const ITEM_PIPLUP_FOAM: Type = 734;
-    pub const ITEM_PIPLUP_CARD: Type = 735;
-    pub const ITEM_SEA_ORE: Type = 736;
-    pub const ITEM_WATER_CAPE: Type = 737;
-    pub const ITEM_PRIN_FOAM: Type = 738;
-    pub const ITEM_PRIN_CARD: Type = 739;
-    pub const ITEM_PRIN_CREST: Type = 740;
-    pub const ITEM_AQUA_BLADE: Type = 741;
-    pub const ITEM_EMPOL_CLAW: Type = 742;
-    pub const ITEM_EMPOL_HORN: Type = 743;
-    pub const ITEM_EMPOL_SEAL: Type = 744;
-    pub const ITEM_MARINE_CROWN: Type = 745;
-    pub const ITEM_MUNCH_DROOL: Type = 746;
-    pub const ITEM_MUNCH_CLAW: Type = 747;
-    pub const ITEM_TUMMY_CHARM: Type = 748;
-    pub const ITEM_GLUTTON_CAPE: Type = 749;
-    pub const ITEM_SNORLAX_GASP: Type = 750;
-    pub const ITEM_SNORLAX_FANG: Type = 751;
-    pub const ITEM_VALOR_CHARM: Type = 752;
-    pub const ITEM_GLEE_SCARF: Type = 753;
-    pub const ITEM_SCYTHER_FANG: Type = 754;
-    pub const ITEM_SCYTHER_CARD: Type = 755;
-    pub const ITEM_AMBUSH_ROCK: Type = 756;
-    pub const ITEM_STRIKE_RUFF: Type = 757;
-    pub const ITEM_SCIZOR_WING: Type = 758;
-    pub const ITEM_SCIZOR_CARD: Type = 759;
-    pub const ITEM_STEEL_CHARM: Type = 760;
-    pub const ITEM_RED_ARMLET: Type = 761;
-    pub const ITEM_LAPRAS_SONG: Type = 762;
-    pub const ITEM_LAPRAS_CARD: Type = 763;
-    pub const ITEM_WAVY_CHARM: Type = 764;
-    pub const ITEM_MYSTIC_SCARF: Type = 765;
-    pub const ITEM_EEVEE_TAIL: Type = 766;
-    pub const ITEM_EEVEE_CARD: Type = 767;
-    pub const ITEM_EVOLVE_CHARM: Type = 768;
-    pub const ITEM_EEVEE: Type = 769;
-    pub const ITEM_CLEFFA_DEW: Type = 770;
-    pub const ITEM_CLEFFA_CARD: Type = 771;
-    pub const ITEM_STARRY_ORE: Type = 772;
-    pub const ITEM_COMET_RING: Type = 773;
-    pub const ITEM_CLEF_CLAW: Type = 774;
-    pub const ITEM_CLEF_FANG: Type = 775;
-    pub const ITEM_MOON_JEWEL: Type = 776;
-    pub const ITEM_MOON_SCARF: Type = 777;
-    pub const ITEM_CLEFA_CLAW: Type = 778;
-    pub const ITEM_CLEFA_CARD: Type = 779;
-    pub const ITEM_MOON_ROCK: Type = 780;
-    pub const ITEM_FAIRY_BOW: Type = 781;
-    pub const ITEM_IGGLY_DEW: Type = 782;
-    pub const ITEM_IGGLY_CARD: Type = 783;
-    pub const ITEM_BOUNCY_CHARM: Type = 784;
-    pub const ITEM_PRETTY_BOW: Type = 785;
-    pub const ITEM_JIGGLY_SONG: Type = 786;
-    pub const ITEM_JIGGLY_CARD: Type = 787;
-    pub const ITEM_SLUMBER_ROCK: Type = 788;
-    pub const ITEM_SNOOZE_RING: Type = 789;
-    pub const ITEM_WIGGLY_HAIR: Type = 790;
-    pub const ITEM_WIGGLY_CARD: Type = 791;
-    pub const ITEM_BUDDY_ROCK: Type = 792;
-    pub const ITEM_FRIEND_TORC: Type = 793;
-    pub const ITEM_TOGEPI_DEW: Type = 794;
-    pub const ITEM_TOGEPI_CARD: Type = 795;
-    pub const ITEM_PURE_HEART: Type = 796;
-    pub const ITEM_ANGEL_SCARF: Type = 797;
-    pub const ITEM_TOGETIC_WING: Type = 798;
-    pub const ITEM_TOGETIC_CARD: Type = 799;
-    pub const ITEM_HAPPY_ROCK: Type = 800;
-    pub const ITEM_LUCK_BROOCH: Type = 801;
-    pub const ITEM_TOGEK_WING: Type = 802;
-    pub const ITEM_TOGEK_CARD: Type = 803;
-    pub const ITEM_OVATION_ROCK: Type = 804;
-    pub const ITEM_GLITTER_ROBE: Type = 805;
-    pub const ITEM_SNEASEL_CLAW: Type = 806;
-    pub const ITEM_SNEASEL_CARD: Type = 807;
-    pub const ITEM_DUSK_JEWEL: Type = 808;
-    pub const ITEM_CRUEL_RING: Type = 809;
-    pub const ITEM_WEAVILE_CLAW: Type = 810;
-    pub const ITEM_WEAVILE_FANG: Type = 811;
-    pub const ITEM_VILE_TAG: Type = 812;
-    pub const ITEM_RUIN_ARMLET: Type = 813;
-    pub const ITEM_TEDDI_CLAW: Type = 814;
-    pub const ITEM_TEDDI_CARD: Type = 815;
-    pub const ITEM_HONEY_ROCK: Type = 816;
-    pub const ITEM_HEAL_SCARF: Type = 817;
-    pub const ITEM_URSA_CLAW: Type = 818;
-    pub const ITEM_URSA_FANG: Type = 819;
-    pub const ITEM_CALMING_ROCK: Type = 820;
-    pub const ITEM_HIBER_SCARF: Type = 821;
-    pub const ITEM_TYRO_SWEAT: Type = 822;
-    pub const ITEM_TYRO_CARD: Type = 823;
-    pub const ITEM_MUSCLE_CHARM: Type = 824;
-    pub const ITEM_TYROGUE: Type = 825;
-    pub const ITEM_SMOOCH_SONG: Type = 826;
-    pub const ITEM_SMOOCH_CARD: Type = 827;
-    pub const ITEM_KISS_CHARM: Type = 828;
-    pub const ITEM_HEART_TIARA: Type = 829;
-    pub const ITEM_JYNX_SONG: Type = 830;
-    pub const ITEM_JYNX_CARD: Type = 831;
-    pub const ITEM_FROZEN_ORE: Type = 832;
-    pub const ITEM_RUIN_SCARF: Type = 833;
-    pub const ITEM_ELEKID_CLAW: Type = 834;
-    pub const ITEM_ELEKID_CARD: Type = 835;
-    pub const ITEM_JOLT_CHARM: Type = 836;
-    pub const ITEM_CURRENT_RING: Type = 837;
-    pub const ITEM_ELECTA_CLAW: Type = 838;
-    pub const ITEM_ELECTA_FANG: Type = 839;
-    pub const ITEM_CHARGE_SEAL: Type = 840;
-    pub const ITEM_VOLT_BANGLE: Type = 841;
-    pub const ITEM_ELECTI_CLAW: Type = 842;
-    pub const ITEM_ELECTI_CARD: Type = 843;
-    pub const ITEM_VOLTAIC_ROCK: Type = 844;
-    pub const ITEM_VOLTAIC_BAND: Type = 845;
-    pub const ITEM_MAGBY_CLAW: Type = 846;
-    pub const ITEM_MAGBY_CARD: Type = 847;
-    pub const ITEM_EMBER_JEWEL: Type = 848;
-    pub const ITEM_COAL_RING: Type = 849;
-    pub const ITEM_MAGMAR_CLAW: Type = 850;
-    pub const ITEM_MAGMAR_CARD: Type = 851;
-    pub const ITEM_ERUPT_ORE: Type = 852;
-    pub const ITEM_MAGMA_SCARF: Type = 853;
-    pub const ITEM_MAGMOR_CLAW: Type = 854;
-    pub const ITEM_MAGMOR_CARD: Type = 855;
-    pub const ITEM_VULCAN_ROCK: Type = 856;
-    pub const ITEM_BURNING_TORC: Type = 857;
-    pub const ITEM_AZURI_DEW: Type = 858;
-    pub const ITEM_AZURI_CARD: Type = 859;
-    pub const ITEM_FOUNT_CHARM: Type = 860;
-    pub const ITEM_WATER_FLOAT: Type = 861;
-    pub const ITEM_MARILL_DEW: Type = 862;
-    pub const ITEM_MARILL_CARD: Type = 863;
-    pub const ITEM_SURFER_ROCK: Type = 864;
-    pub const ITEM_BRINE_SCARF: Type = 865;
-    pub const ITEM_AZUMA_DEW: Type = 866;
-    pub const ITEM_AZUMA_CARD: Type = 867;
-    pub const ITEM_STREAM_CHARM: Type = 868;
-    pub const ITEM_DOTTED_SCARF: Type = 869;
-    pub const ITEM_PLUSLE_TAIL: Type = 870;
-    pub const ITEM_PLUSLE_CARD: Type = 871;
-    pub const ITEM_CHEER_ROCK: Type = 872;
-    pub const ITEM_PULSE_BOW: Type = 873;
-    pub const ITEM_MINUN_TAIL: Type = 874;
-    pub const ITEM_MINUN_CARD: Type = 875;
-    pub const ITEM_VOLT_HEART: Type = 876;
-    pub const ITEM_SPARK_TIE: Type = 877;
-    pub const ITEM_CAST_DEW: Type = 878;
-    pub const ITEM_CAST_CARD: Type = 879;
-    pub const ITEM_CLOUD_ROCK: Type = 880;
-    pub const ITEM_WEATHER_CAPE: Type = 881;
-    pub const ITEM_WYNAUT_TAIL: Type = 882;
-    pub const ITEM_WYNAUT_CARD: Type = 883;
-    pub const ITEM_GRIN_CHARM: Type = 884;
-    pub const ITEM_CHEERY_SCARF: Type = 885;
-    pub const ITEM_WOBBU_SWEAT: Type = 886;
-    pub const ITEM_WOBBU_CARD: Type = 887;
-    pub const ITEM_ENDURE_ROCK: Type = 888;
-    pub const ITEM_SUFFER_SCARF: Type = 889;
-    pub const ITEM_BIDOOF_TOOTH: Type = 890;
-    pub const ITEM_BIDOOF_CARD: Type = 891;
-    pub const ITEM_FALL_CHARM: Type = 892;
-    pub const ITEM_STOLID_SCARF: Type = 893;
-    pub const ITEM_BIBA_TOOTH: Type = 894;
-    pub const ITEM_BIBA_CARD: Type = 895;
-    pub const ITEM_RIVER_CHARM: Type = 896;
-    pub const ITEM_DAM_SCARF: Type = 897;
-    pub const ITEM_SHINX_CLAW: Type = 898;
-    pub const ITEM_SHINX_FANG: Type = 899;
-    pub const ITEM_FLASH_TAG: Type = 900;
-    pub const ITEM_ENERGY_SCARF: Type = 901;
-    pub const ITEM_LUXIO_CLAW: Type = 902;
-    pub const ITEM_LUXIO_FANG: Type = 903;
-    pub const ITEM_SPARK_TAG: Type = 904;
-    pub const ITEM_SPARK_SCARF: Type = 905;
-    pub const ITEM_LUXRAY_CLAW: Type = 906;
-    pub const ITEM_LUXRAY_FANG: Type = 907;
-    pub const ITEM_GLARE_TAG: Type = 908;
-    pub const ITEM_GLARE_SASH: Type = 909;
-    pub const ITEM_PACHI_TOOTH: Type = 910;
-    pub const ITEM_PACHI_CARD: Type = 911;
-    pub const ITEM_ROUSE_CHARM: Type = 912;
-    pub const ITEM_MIRACLE_BOW: Type = 913;
-    pub const ITEM_BUIZEL_FANG: Type = 914;
-    pub const ITEM_BUIZEL_CARD: Type = 915;
-    pub const ITEM_SWIMMER_ROCK: Type = 916;
-    pub const ITEM_SCREW_TORC: Type = 917;
-    pub const ITEM_FLOAT_FANG: Type = 918;
-    pub const ITEM_FLOAT_CARD: Type = 919;
-    pub const ITEM_RESCUE_ROCK: Type = 920;
-    pub const ITEM_FLOAT_AID: Type = 921;
-    pub const ITEM_DRIFLOO_GASP: Type = 922;
-    pub const ITEM_DRIFLOO_CARD: Type = 923;
-    pub const ITEM_WIND_HEART: Type = 924;
-    pub const ITEM_DRAFT_RING: Type = 925;
-    pub const ITEM_DRIFBLI_GASP: Type = 926;
-    pub const ITEM_DRIFBLI_CARD: Type = 927;
-    pub const ITEM_EASY_CHARM: Type = 928;
-    pub const ITEM_BREEZE_SCARF: Type = 929;
-    pub const ITEM_CHERUBI_SEED: Type = 930;
-    pub const ITEM_CHERUBI_CARD: Type = 931;
-    pub const ITEM_CUTE_ORE: Type = 932;
-    pub const ITEM_CHARM_BOW: Type = 933;
-    pub const ITEM_CHERRIM_DEW: Type = 934;
-    pub const ITEM_CHERRIM_CARD: Type = 935;
-    pub const ITEM_SWEET_AROMA: Type = 936;
-    pub const ITEM_PETAL_DRESS: Type = 937;
-    pub const ITEM_BONSLY_DEW: Type = 938;
-    pub const ITEM_BONSLY_CARD: Type = 939;
-    pub const ITEM_ARID_TAG: Type = 940;
-    pub const ITEM_TEARY_CAPE: Type = 941;
-    pub const ITEM_SUDO_SWEAT: Type = 942;
-    pub const ITEM_SUDO_CARD: Type = 943;
-    pub const ITEM_DRAIN_ROCK: Type = 944;
-    pub const ITEM_FAKE_TORC: Type = 945;
-    pub const ITEM_JUNIOR_BEAM: Type = 946;
-    pub const ITEM_JUNIOR_CARD: Type = 947;
-    pub const ITEM_MIMIC_PEBBLE: Type = 948;
-    pub const ITEM_COPY_MASK: Type = 949;
-    pub const ITEM_MIME_KEY: Type = 950;
-    pub const ITEM_MIME_CARD: Type = 951;
-    pub const ITEM_BULWARK_ROCK: Type = 952;
-    pub const ITEM_BARRIER_BOW: Type = 953;
-    pub const ITEM_HAPPINY_DEW: Type = 954;
-    pub const ITEM_HAPPINY_CARD: Type = 955;
-    pub const ITEM_PLAY_TAG: Type = 956;
-    pub const ITEM_NURTURE_CAPE: Type = 957;
-    pub const ITEM_CHANSEY_SONG: Type = 958;
-    pub const ITEM_CHANSEY_CARD: Type = 959;
-    pub const ITEM_LUCKY_CHARM: Type = 960;
-    pub const ITEM_LUCKY_SCARF: Type = 961;
-    pub const ITEM_BLISSEY_SONG: Type = 962;
-    pub const ITEM_BLISSEY_CARD: Type = 963;
-    pub const ITEM_AMITY_ROCK: Type = 964;
-    pub const ITEM_FAITH_RING: Type = 965;
-    pub const ITEM_GIBLE_FANG: Type = 966;
-    pub const ITEM_GIBLE_CARD: Type = 967;
-    pub const ITEM_DRAGON_JEWEL: Type = 968;
-    pub const ITEM_DRAGON_TIE: Type = 969;
-    pub const ITEM_GABITE_CLAW: Type = 970;
-    pub const ITEM_GABITE_FANG: Type = 971;
-    pub const ITEM_STAR_ROCK: Type = 972;
-    pub const ITEM_METEOR_TORC: Type = 973;
-    pub const ITEM_GAR_CLAW: Type = 974;
-    pub const ITEM_GAR_FANG: Type = 975;
-    pub const ITEM_SPEED_TAG: Type = 976;
-    pub const ITEM_MACH_SCARF: Type = 977;
-    pub const ITEM_RIOLU_TAIL: Type = 978;
-    pub const ITEM_RIOLU_CARD: Type = 979;
-    pub const ITEM_VALIANT_ROCK: Type = 980;
-    pub const ITEM_EMIT_RING: Type = 981;
-    pub const ITEM_LUCARIO_FANG: Type = 982;
-    pub const ITEM_LUCARIO_CARD: Type = 983;
-    pub const ITEM_PLEDGE_ROCK: Type = 984;
-    pub const ITEM_RAVAGE_RING: Type = 985;
-    pub const ITEM_MANTYKE_BEAM: Type = 986;
-    pub const ITEM_MANTYKE_CARD: Type = 987;
-    pub const ITEM_WAFT_ROCK: Type = 988;
-    pub const ITEM_OCEAN_BOW: Type = 989;
-    pub const ITEM_MANTINE_FOAM: Type = 990;
-    pub const ITEM_MANTINE_CARD: Type = 991;
-    pub const ITEM_SUNSET_ROCK: Type = 992;
-    pub const ITEM_HORIZON_BOW: Type = 993;
-    pub const ITEM_PHIONE_SONG: Type = 994;
-    pub const ITEM_PHIONE_CARD: Type = 995;
-    pub const ITEM_WAVE_JEWEL: Type = 996;
-    pub const ITEM_RIPPLE_CAPE: Type = 997;
-    pub const ITEM_VULPIX_TAIL: Type = 998;
-    pub const ITEM_VULPIX_CARD: Type = 999;
-    pub const ITEM_VULPIX_TAG: Type = 1000;
-    pub const ITEM_GLOWING_BOW: Type = 1001;
-    pub const ITEM_NINE_HAIR: Type = 1002;
-    pub const ITEM_NINE_CARD: Type = 1003;
-    pub const ITEM_NINE_SEAL: Type = 1004;
-    pub const ITEM_AFIRE_COLLAR: Type = 1005;
-    pub const ITEM_PHANPY_CLAW: Type = 1006;
-    pub const ITEM_PHANPY_CARD: Type = 1007;
-    pub const ITEM_PHANPY_TAG: Type = 1008;
-    pub const ITEM_VALUE_RUFF: Type = 1009;
-    pub const ITEM_DONPHAN_FANG: Type = 1010;
-    pub const ITEM_DONPHAN_CARD: Type = 1011;
-    pub const ITEM_DON_CREST: Type = 1012;
-    pub const ITEM_ARMOR_SCARF: Type = 1013;
-    pub const ITEM_CATER_BELT: Type = 1014;
-    pub const ITEM_DEFENSE_BOW: Type = 1015;
-    pub const ITEM_GLITTERY_BOW: Type = 1016;
-    pub const ITEM_WEEDLE_BOW: Type = 1017;
-    pub const ITEM_KAKUNA_SCARF: Type = 1018;
-    pub const ITEM_CHARGE_SCARF: Type = 1019;
-    pub const ITEM_PIDGEY_BOW: Type = 1020;
-    pub const ITEM_PIDGEO_SCARF: Type = 1021;
-    pub const ITEM_PIDGEOT_TORC: Type = 1022;
-    pub const ITEM_RATTA_SCARF: Type = 1023;
-    pub const ITEM_OVERCOME_BOW: Type = 1024;
-    pub const ITEM_QUIRKY_BOW: Type = 1025;
-    pub const ITEM_WING_SCARF: Type = 1026;
-    pub const ITEM_LEASH_BOW: Type = 1027;
-    pub const ITEM_SHOCK_RUFF: Type = 1028;
-    pub const ITEM_SAND_SCARF: Type = 1029;
-    pub const ITEM_SANDY_TORC: Type = 1030;
-    pub const ITEM_POINTY_SCARF: Type = 1031;
-    pub const ITEM_RETURN_SCARF: Type = 1032;
-    pub const ITEM_IMPACT_TORC: Type = 1033;
-    pub const ITEM_HALVE_SCARF: Type = 1034;
-    pub const ITEM_THORNY_SCARF: Type = 1035;
-    pub const ITEM_KING_SASH: Type = 1036;
-    pub const ITEM_DODGE_BOW: Type = 1037;
-    pub const ITEM_ABSORB_SCARF: Type = 1038;
-    pub const ITEM_ODD_BOW: Type = 1039;
-    pub const ITEM_GUARD_HAT: Type = 1040;
-    pub const ITEM_AROMA_SCARF: Type = 1041;
-    pub const ITEM_MOVING_SCARF: Type = 1042;
-    pub const ITEM_FIRM_HAT: Type = 1043;
-    pub const ITEM_GAZE_GOGGLES: Type = 1044;
-    pub const ITEM_VENOMOTH_BOW: Type = 1045;
-    pub const ITEM_DIGLETT_HAT: Type = 1046;
-    pub const ITEM_DUGTRIO_BOW: Type = 1047;
-    pub const ITEM_PSYDUCK_HAT: Type = 1048;
-    pub const ITEM_PADDLE_SCARF: Type = 1049;
-    pub const ITEM_MANKEY_TORC: Type = 1050;
-    pub const ITEM_NULLIFY_BELT: Type = 1051;
-    pub const ITEM_GROWL_SCARF: Type = 1052;
-    pub const ITEM_LEGEND_BOW: Type = 1053;
-    pub const ITEM_DAMP_BOW: Type = 1054;
-    pub const ITEM_POLI_BOW: Type = 1055;
-    pub const ITEM_BOLD_BELT: Type = 1056;
-    pub const ITEM_PREDICT_TORC: Type = 1057;
-    pub const ITEM_PSYCHIC_TORC: Type = 1058;
-    pub const ITEM_SPARKLE_RUFF: Type = 1059;
-    pub const ITEM_IMPISH_BAND: Type = 1060;
-    pub const ITEM_STRONG_BELT: Type = 1061;
-    pub const ITEM_MACHAMP_BELT: Type = 1062;
-    pub const ITEM_BELL_BOW: Type = 1063;
-    pub const ITEM_DIGEST_SCARF: Type = 1064;
-    pub const ITEM_VICTREE_TORC: Type = 1065;
-    pub const ITEM_TANGLE_BOW: Type = 1066;
-    pub const ITEM_TENTA_CAPE: Type = 1067;
-    pub const ITEM_GEODUDE_TORC: Type = 1068;
-    pub const ITEM_ROCKY_TORC: Type = 1069;
-    pub const ITEM_RUGGED_SASH: Type = 1070;
-    pub const ITEM_HEATED_BOW: Type = 1071;
-    pub const ITEM_SUNLIGHT_BOW: Type = 1072;
-    pub const ITEM_SLOWPOKE_HAT: Type = 1073;
-    pub const ITEM_SLOW_SCARF: Type = 1074;
-    pub const ITEM_MAGNE_TORC: Type = 1075;
-    pub const ITEM_MAGNETON_BOW: Type = 1076;
-    pub const ITEM_BULLSEYE_BOW: Type = 1077;
-    pub const ITEM_BUDDY_TORC: Type = 1078;
-    pub const ITEM_FIGHT_TORC: Type = 1079;
-    pub const ITEM_GENTLE_BOW: Type = 1080;
-    pub const ITEM_NORTH_TORC: Type = 1081;
-    pub const ITEM_GRIMY_SCARF: Type = 1082;
-    pub const ITEM_SLIMY_BOW: Type = 1083;
-    pub const ITEM_SHELL_TORC: Type = 1084;
-    pub const ITEM_COVER_ARMOR: Type = 1085;
-    pub const ITEM_GASTLY_VEIL: Type = 1086;
-    pub const ITEM_SLIP_SCARF: Type = 1087;
-    pub const ITEM_SUNGLASSES: Type = 1088;
-    pub const ITEM_TRUST_BROOCH: Type = 1089;
-    pub const ITEM_DROWZEE_TIE: Type = 1090;
-    pub const ITEM_DREAM_COIN: Type = 1091;
-    pub const ITEM_KRABBY_BOW: Type = 1092;
-    pub const ITEM_SUPER_SASH: Type = 1093;
-    pub const ITEM_BALL_SCARF: Type = 1094;
-    pub const ITEM_ELECTRO_BOW: Type = 1095;
-    pub const ITEM_REPEL_SCARF: Type = 1096;
-    pub const ITEM_EXEGGU_SASH: Type = 1097;
-    pub const ITEM_CUBONE_SCARF: Type = 1098;
-    pub const ITEM_MAROWAK_TORC: Type = 1099;
-    pub const ITEM_LICKY_SCARF: Type = 1100;
-    pub const ITEM_KOFFING_BOW: Type = 1101;
-    pub const ITEM_WEEZ_SCARF: Type = 1102;
-    pub const ITEM_SOLID_SHIELD: Type = 1103;
-    pub const ITEM_PIERCE_DRILL: Type = 1104;
-    pub const ITEM_STICKY_BOW: Type = 1105;
-    pub const ITEM_KANG_APRON: Type = 1106;
-    pub const ITEM_HORSEA_BOW: Type = 1107;
-    pub const ITEM_SWIRL_SCARF: Type = 1108;
-    pub const ITEM_GOLDEEN_BOW: Type = 1109;
-    pub const ITEM_SEAKING_BOW: Type = 1110;
-    pub const ITEM_RECOVER_TORC: Type = 1111;
-    pub const ITEM_STARMIE_BELT: Type = 1112;
-    pub const ITEM_PINSIR_SASH: Type = 1113;
-    pub const ITEM_RUSHING_BOW: Type = 1114;
-    pub const ITEM_MAGIKARP_BOW: Type = 1115;
-    pub const ITEM_TEMPEST_SASH: Type = 1116;
-    pub const ITEM_DITTO_TORC: Type = 1117;
-    pub const ITEM_AI_BROOCH: Type = 1118;
-    pub const ITEM_SPIKE_BROOCH: Type = 1119;
-    pub const ITEM_AGED_SCARF: Type = 1120;
-    pub const ITEM_KABUTO_HAT: Type = 1121;
-    pub const ITEM_KABU_TORC: Type = 1122;
-    pub const ITEM_OLD_BROOCH: Type = 1123;
-    pub const ITEM_DRAGON_SASH: Type = 1124;
-    pub const ITEM_ALOFT_MANTLE: Type = 1125;
-    pub const ITEM_MIRAGE_CAPE: Type = 1126;
-    pub const ITEM_SENTRET_RUFF: Type = 1127;
-    pub const ITEM_BODY_COLLAR: Type = 1128;
-    pub const ITEM_EXPOSE_SPECS: Type = 1129;
-    pub const ITEM_NOCTOWL_TORC: Type = 1130;
-    pub const ITEM_MORNING_BOW: Type = 1131;
-    pub const ITEM_LEDIAN_BOW: Type = 1132;
-    pub const ITEM_SPINA_SCARF: Type = 1133;
-    pub const ITEM_ARIADOS_BOW: Type = 1134;
-    pub const ITEM_SLASH_BOW: Type = 1135;
-    pub const ITEM_SHINE_TORC: Type = 1136;
-    pub const ITEM_LANTURN_BOW: Type = 1137;
-    pub const ITEM_LIVELY_SCARF: Type = 1138;
-    pub const ITEM_XATU_BOW: Type = 1139;
-    pub const ITEM_WOOL_BOW: Type = 1140;
-    pub const ITEM_FLUFFY_SCARF: Type = 1141;
-    pub const ITEM_SACRED_SCARF: Type = 1142;
-    pub const ITEM_BRIGHT_TIARA: Type = 1143;
-    pub const ITEM_RAIN_CROWN: Type = 1144;
-    pub const ITEM_ZEPHYR_BOW: Type = 1145;
-    pub const ITEM_SKIP_SCARF: Type = 1146;
-    pub const ITEM_COTTON_TORC: Type = 1147;
-    pub const ITEM_REVENGE_RUFF: Type = 1148;
-    pub const ITEM_HASTY_BOW: Type = 1149;
-    pub const ITEM_SUN_SCARF: Type = 1150;
-    pub const ITEM_CHITIN_BOW: Type = 1151;
-    pub const ITEM_WOOPER_BOW: Type = 1152;
-    pub const ITEM_QUAG_TORC: Type = 1153;
-    pub const ITEM_MURKROW_HAT: Type = 1154;
-    pub const ITEM_KING_CAP: Type = 1155;
-    pub const ITEM_MISDREA_CAPE: Type = 1156;
-    pub const ITEM_CRYPTIC_SASH: Type = 1157;
-    pub const ITEM_REVERSE_BOW: Type = 1158;
-    pub const ITEM_ROBUST_BOW: Type = 1159;
-    pub const ITEM_DENSE_PONCHO: Type = 1160;
-    pub const ITEM_ESCAPE_SCARF: Type = 1161;
-    pub const ITEM_TAKEOFF_RUFF: Type = 1162;
-    pub const ITEM_QUARTZ_TORC: Type = 1163;
-    pub const ITEM_SNUB_CAPE: Type = 1164;
-    pub const ITEM_STERN_SASH: Type = 1165;
-    pub const ITEM_QWILFISH_BOW: Type = 1166;
-    pub const ITEM_SHUCKLE_BOW: Type = 1167;
-    pub const ITEM_HORN_TORC: Type = 1168;
-    pub const ITEM_LAVA_BOW: Type = 1169;
-    pub const ITEM_TORRID_SCARF: Type = 1170;
-    pub const ITEM_FRIGID_BOW: Type = 1171;
-    pub const ITEM_FROST_TORC: Type = 1172;
-    pub const ITEM_EAGER_BROOCH: Type = 1173;
-    pub const ITEM_REACH_BOW: Type = 1174;
-    pub const ITEM_PSY_BOW: Type = 1175;
-    pub const ITEM_SNOW_BROOCH: Type = 1176;
-    pub const ITEM_SKAR_CAPE: Type = 1177;
-    pub const ITEM_DARK_CHOKER: Type = 1178;
-    pub const ITEM_PIT_FANG: Type = 1179;
-    pub const ITEM_TORNADO_BOW: Type = 1180;
-    pub const ITEM_VIRTUAL_BOW: Type = 1181;
-    pub const ITEM_DELUSION_BOW: Type = 1182;
-    pub const ITEM_PAINT_SCARF: Type = 1183;
-    pub const ITEM_MILKY_SCARF: Type = 1184;
-    pub const ITEM_LARVITAR_BOW: Type = 1185;
-    pub const ITEM_PUPITA_SCARF: Type = 1186;
-    pub const ITEM_CRASH_CLAW: Type = 1187;
-    pub const ITEM_POOCH_COLLAR: Type = 1188;
-    pub const ITEM_DARK_FANG: Type = 1189;
-    pub const ITEM_MERRY_SCARF: Type = 1190;
-    pub const ITEM_LINOONE_RUFF: Type = 1191;
-    pub const ITEM_WURMPLE_BOW: Type = 1192;
-    pub const ITEM_TOUGH_SCARF: Type = 1193;
-    pub const ITEM_VIVID_SILK: Type = 1194;
-    pub const ITEM_GUARD_BOW: Type = 1195;
-    pub const ITEM_DUSTOX_BOW: Type = 1196;
-    pub const ITEM_KELP_HAT: Type = 1197;
-    pub const ITEM_JOLLY_SCARF: Type = 1198;
-    pub const ITEM_LUDICOLO_HAT: Type = 1199;
-    pub const ITEM_SEEDOT_HAT: Type = 1200;
-    pub const ITEM_NUZLEAF_BOW: Type = 1201;
-    pub const ITEM_SHIFTRY_BELT: Type = 1202;
-    pub const ITEM_TAILLOW_BOW: Type = 1203;
-    pub const ITEM_MIDAIR_SCARF: Type = 1204;
-    pub const ITEM_WINGULL_BOW: Type = 1205;
-    pub const ITEM_STOCK_SCARF: Type = 1206;
-    pub const ITEM_SENSING_HAT: Type = 1207;
-    pub const ITEM_MAGICAL_BOW: Type = 1208;
-    pub const ITEM_CARING_SCARF: Type = 1209;
-    pub const ITEM_BLISS_SCARF: Type = 1210;
-    pub const ITEM_BLOCKING_BOW: Type = 1211;
-    pub const ITEM_MOBILE_BOW: Type = 1212;
-    pub const ITEM_THWART_BOW: Type = 1213;
-    pub const ITEM_SLAK_SCARF: Type = 1214;
-    pub const ITEM_VIGOR_SASH: Type = 1215;
-    pub const ITEM_LAZY_RUFF: Type = 1216;
-    pub const ITEM_NOVICE_SCARF: Type = 1217;
-    pub const ITEM_NINJA_RUFF: Type = 1218;
-    pub const ITEM_AWE_MANTLE: Type = 1219;
-    pub const ITEM_GOOD_EARRING: Type = 1220;
-    pub const ITEM_NICE_BANGLE: Type = 1221;
-    pub const ITEM_GREAT_TORC: Type = 1222;
-    pub const ITEM_MAKUHIT_BELT: Type = 1223;
-    pub const ITEM_THRUST_BELT: Type = 1224;
-    pub const ITEM_NOSE_TORC: Type = 1225;
-    pub const ITEM_SABLE_SCOPE: Type = 1226;
-    pub const ITEM_DECEIT_MASK: Type = 1227;
-    pub const ITEM_IRON_TORC: Type = 1228;
-    pub const ITEM_METAL_BANGLE: Type = 1229;
-    pub const ITEM_IRON_HELMET: Type = 1230;
-    pub const ITEM_INTUIT_BOW: Type = 1231;
-    pub const ITEM_PONDER_SASH: Type = 1232;
-    pub const ITEM_PUNISH_TORC: Type = 1233;
-    pub const ITEM_PROTECT_MASK: Type = 1234;
-    pub const ITEM_NEON_SCARF: Type = 1235;
-    pub const ITEM_EVENING_BOW: Type = 1236;
-    pub const ITEM_THORNED_TORC: Type = 1237;
-    pub const ITEM_GULPIN_BOW: Type = 1238;
-    pub const ITEM_SWALOT_BELT: Type = 1239;
-    pub const ITEM_CARVA_SASH: Type = 1240;
-    pub const ITEM_VICIOUS_BOW: Type = 1241;
-    pub const ITEM_SPOUT_SCARF: Type = 1242;
-    pub const ITEM_HUGE_BOW: Type = 1243;
-    pub const ITEM_NUMEL_BOW: Type = 1244;
-    pub const ITEM_ERUPT_SCARF: Type = 1245;
-    pub const ITEM_SOOTY_SASH: Type = 1246;
-    pub const ITEM_SPRING_BOW: Type = 1247;
-    pub const ITEM_SCHEME_SCARF: Type = 1248;
-    pub const ITEM_HULA_BOW: Type = 1249;
-    pub const ITEM_DESERT_BOW: Type = 1250;
-    pub const ITEM_VIBRA_SCARF: Type = 1251;
-    pub const ITEM_RED_GLASSES: Type = 1252;
-    pub const ITEM_DESERT_SASH: Type = 1253;
-    pub const ITEM_CACTURNE_HAT: Type = 1254;
-    pub const ITEM_TUFT_BOW: Type = 1255;
-    pub const ITEM_CLOUD_RUFF: Type = 1256;
-    pub const ITEM_STRONG_SASH: Type = 1257;
-    pub const ITEM_SEVIPER_BOW: Type = 1258;
-    pub const ITEM_LUNATON_TORC: Type = 1259;
-    pub const ITEM_SOLROCK_BOW: Type = 1260;
-    pub const ITEM_SOAK_SCARF: Type = 1261;
-    pub const ITEM_WHISCASH_BOW: Type = 1262;
-    pub const ITEM_BOSSY_SCARF: Type = 1263;
-    pub const ITEM_COWER_SASH: Type = 1264;
-    pub const ITEM_BAL_BROOCH: Type = 1265;
-    pub const ITEM_CLAYDOL_TORC: Type = 1266;
-    pub const ITEM_BIND_SCARF: Type = 1267;
-    pub const ITEM_CRADILY_BOW: Type = 1268;
-    pub const ITEM_GUARD_CLAW: Type = 1269;
-    pub const ITEM_RIGID_CAPE: Type = 1270;
-    pub const ITEM_ADMIRE_SCARF: Type = 1271;
-    pub const ITEM_GRACE_SCARF: Type = 1272;
-    pub const ITEM_KECLEON_TORC: Type = 1273;
-    pub const ITEM_SHUPPET_CAPE: Type = 1274;
-    pub const ITEM_OMINOUS_TORC: Type = 1275;
-    pub const ITEM_DUSKULL_RUFF: Type = 1276;
-    pub const ITEM_ILLUSION_BOW: Type = 1277;
-    pub const ITEM_TROPIUS_BOW: Type = 1278;
-    pub const ITEM_CHIME_SCARF: Type = 1279;
-    pub const ITEM_PERISH_TORC: Type = 1280;
-    pub const ITEM_CHILLY_HAT: Type = 1281;
-    pub const ITEM_HAIL_SCARF: Type = 1282;
-    pub const ITEM_SLEET_BOW: Type = 1283;
-    pub const ITEM_SAFE_SCARF: Type = 1284;
-    pub const ITEM_WALREIN_TORC: Type = 1285;
-    pub const ITEM_CLAM_BROOCH: Type = 1286;
-    pub const ITEM_DEEP_TORC: Type = 1287;
-    pub const ITEM_GORE_SCARF: Type = 1288;
-    pub const ITEM_RELI_TORC: Type = 1289;
-    pub const ITEM_LUVDISC_TORC: Type = 1290;
-    pub const ITEM_CRAG_HELMET: Type = 1291;
-    pub const ITEM_OUTLAST_BOW: Type = 1292;
-    pub const ITEM_SALA_CAPE: Type = 1293;
-    pub const ITEM_BELDUM_TORC: Type = 1294;
-    pub const ITEM_METANG_SCARF: Type = 1295;
-    pub const ITEM_META_TORC: Type = 1296;
-    pub const ITEM_STARLY_BOW: Type = 1297;
-    pub const ITEM_REGRET_TORC: Type = 1298;
-    pub const ITEM_GUTS_SASH: Type = 1299;
-    pub const ITEM_STILL_BOW: Type = 1300;
-    pub const ITEM_KRICKE_TORC: Type = 1301;
-    pub const ITEM_BUDEW_SCARF: Type = 1302;
-    pub const ITEM_BOUQUET_CAPE: Type = 1303;
-    pub const ITEM_HARD_HELMET: Type = 1304;
-    pub const ITEM_SKULL_HELMET: Type = 1305;
-    pub const ITEM_REBOUND_BOW: Type = 1306;
-    pub const ITEM_BLOCK_BROOCH: Type = 1307;
-    pub const ITEM_STRAW_CAPE: Type = 1308;
-    pub const ITEM_WORMA_BOW: Type = 1309;
-    pub const ITEM_MOTHIM_BOW: Type = 1310;
-    pub const ITEM_NECTAR_BOW: Type = 1311;
-    pub const ITEM_VESPI_TORC: Type = 1312;
-    pub const ITEM_AWAKE_BOW: Type = 1313;
-    pub const ITEM_GASTRO_TORC: Type = 1314;
-    pub const ITEM_AMBIPOM_BOW: Type = 1315;
-    pub const ITEM_DEFROST_RUFF: Type = 1316;
-    pub const ITEM_ALLURE_COAT: Type = 1317;
-    pub const ITEM_MAGIC_HAT: Type = 1318;
-    pub const ITEM_HONCH_CAPE: Type = 1319;
-    pub const ITEM_GLAMEOW_BOW: Type = 1320;
-    pub const ITEM_SCARY_BELT: Type = 1321;
-    pub const ITEM_CHING_TORC: Type = 1322;
-    pub const ITEM_STINKY_SCARF: Type = 1323;
-    pub const ITEM_STENCH_SASH: Type = 1324;
-    pub const ITEM_IMAGE_BROOCH: Type = 1325;
-    pub const ITEM_MIRROR_TORC: Type = 1326;
-    pub const ITEM_CHATOT_SCARF: Type = 1327;
-    pub const ITEM_THICK_SCARF: Type = 1328;
-    pub const ITEM_GRIT_VEIL: Type = 1329;
-    pub const ITEM_SKORUPI_BOW: Type = 1330;
-    pub const ITEM_DUST_SCARF: Type = 1331;
-    pub const ITEM_CROA_TORC: Type = 1332;
-    pub const ITEM_TOXI_BELT: Type = 1333;
-    pub const ITEM_CARNI_BOW: Type = 1334;
-    pub const ITEM_SWIM_BOW: Type = 1335;
-    pub const ITEM_LUMI_TORC: Type = 1336;
-    pub const ITEM_SNOWY_TORC: Type = 1337;
-    pub const ITEM_FROZEN_CAPE: Type = 1338;
-    pub const ITEM_BUILDER_SASH: Type = 1339;
-    pub const ITEM_FLABBY_BELT: Type = 1340;
-    pub const ITEM_RHYPERI_TORC: Type = 1341;
-    pub const ITEM_CLINGING_BOW: Type = 1342;
-    pub const ITEM_YANMEGA_BOW: Type = 1343;
-    pub const ITEM_GLISCOR_CAPE: Type = 1344;
-    pub const ITEM_GLACIER_CAPE: Type = 1345;
-    pub const ITEM_BEST_SCARF: Type = 1346;
-    pub const ITEM_GALLANT_TORC: Type = 1347;
-    pub const ITEM_PROBO_HAT: Type = 1348;
-    pub const ITEM_UNLUCKY_SASH: Type = 1349;
-    pub const ITEM_FROSLASS_BOW: Type = 1350;
-    pub const ITEM_PURIFY_VEIL: Type = 1351;
-    pub const ITEM_UNNAMED_0x548: Type = 1352;
-    pub const ITEM_UNNAMED_0x549: Type = 1353;
-    pub const ITEM_UNNAMED_0x54A: Type = 1354;
-    pub const ITEM_UNNAMED_0x54B: Type = 1355;
-    pub const ITEM_UNNAMED_0x54C: Type = 1356;
-    pub const ITEM_UNNAMED_0x54D: Type = 1357;
-    pub const ITEM_UNNAMED_0x54E: Type = 1358;
-    pub const ITEM_UNNAMED_0x54F: Type = 1359;
-    pub const ITEM_UNNAMED_0x550: Type = 1360;
-    pub const ITEM_UNNAMED_0x551: Type = 1361;
-    pub const ITEM_UNNAMED_0x552: Type = 1362;
-    pub const ITEM_UNNAMED_0x553: Type = 1363;
-    pub const ITEM_UNNAMED_0x554: Type = 1364;
-    pub const ITEM_UNNAMED_0x555: Type = 1365;
-    pub const ITEM_UNNAMED_0x556: Type = 1366;
-    pub const ITEM_UNNAMED_0x557: Type = 1367;
-    pub const ITEM_UNNAMED_0x558: Type = 1368;
-    pub const ITEM_UNNAMED_0x559: Type = 1369;
-    pub const ITEM_UNNAMED_0x55A: Type = 1370;
-    pub const ITEM_UNNAMED_0x55B: Type = 1371;
-    pub const ITEM_UNNAMED_0x55C: Type = 1372;
-    pub const ITEM_UNNAMED_0x55D: Type = 1373;
-    pub const ITEM_UNNAMED_0x55E: Type = 1374;
-    pub const ITEM_UNNAMED_0x55F: Type = 1375;
-    pub const ITEM_UNNAMED_0x560: Type = 1376;
-    pub const ITEM_UNNAMED_0x561: Type = 1377;
-    pub const ITEM_UNNAMED_0x562: Type = 1378;
-    pub const ITEM_UNNAMED_0x563: Type = 1379;
-    pub const ITEM_UNNAMED_0x564: Type = 1380;
-    pub const ITEM_UNNAMED_0x565: Type = 1381;
-    pub const ITEM_UNNAMED_0x566: Type = 1382;
-    pub const ITEM_UNNAMED_0x567: Type = 1383;
-    pub const ITEM_UNNAMED_0x568: Type = 1384;
-    pub const ITEM_UNNAMED_0x569: Type = 1385;
-    pub const ITEM_UNNAMED_0x56A: Type = 1386;
-    pub const ITEM_UNNAMED_0x56B: Type = 1387;
-    pub const ITEM_UNNAMED_0x56C: Type = 1388;
-    pub const ITEM_UNNAMED_0x56D: Type = 1389;
-    pub const ITEM_UNNAMED_0x56E: Type = 1390;
-    pub const ITEM_UNNAMED_0x56F: Type = 1391;
-    pub const ITEM_UNNAMED_0x570: Type = 1392;
-    pub const ITEM_UNNAMED_0x571: Type = 1393;
-    pub const ITEM_UNNAMED_0x572: Type = 1394;
-    pub const ITEM_UNNAMED_0x573: Type = 1395;
-    pub const ITEM_UNNAMED_0x574: Type = 1396;
-    pub const ITEM_UNNAMED_0x575: Type = 1397;
-    pub const ITEM_UNNAMED_0x576: Type = 1398;
-    pub const ITEM_UNNAMED_0x577: Type = 1399;
+impl item_id {
+    pub const ITEM_NOTHING: item_id = item_id(0);
 }
+impl item_id {
+    pub const ITEM_STICK: item_id = item_id(1);
+}
+impl item_id {
+    pub const ITEM_IRON_THORN: item_id = item_id(2);
+}
+impl item_id {
+    pub const ITEM_SILVER_SPIKE: item_id = item_id(3);
+}
+impl item_id {
+    pub const ITEM_GOLD_FANG: item_id = item_id(4);
+}
+impl item_id {
+    pub const ITEM_CACNEA_SPIKE: item_id = item_id(5);
+}
+impl item_id {
+    pub const ITEM_CORSOLA_TWIG: item_id = item_id(6);
+}
+impl item_id {
+    pub const ITEM_GRAVELEROCK: item_id = item_id(7);
+}
+impl item_id {
+    pub const ITEM_GEO_PEBBLE: item_id = item_id(8);
+}
+impl item_id {
+    pub const ITEM_GOLD_THORN: item_id = item_id(9);
+}
+impl item_id {
+    pub const ITEM_RARE_FOSSIL: item_id = item_id(10);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xB: item_id = item_id(11);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xC: item_id = item_id(12);
+}
+impl item_id {
+    pub const ITEM_NO_SLIP_CAP: item_id = item_id(13);
+}
+impl item_id {
+    pub const ITEM_Y_RAY_SPECS: item_id = item_id(14);
+}
+impl item_id {
+    pub const ITEM_GAGGLE_SPECS: item_id = item_id(15);
+}
+impl item_id {
+    pub const ITEM_MOBILE_SCARF: item_id = item_id(16);
+}
+impl item_id {
+    pub const ITEM_HEAL_RIBBON: item_id = item_id(17);
+}
+impl item_id {
+    pub const ITEM_TWIST_BAND: item_id = item_id(18);
+}
+impl item_id {
+    pub const ITEM_SCOPE_LENS: item_id = item_id(19);
+}
+impl item_id {
+    pub const ITEM_PATSY_BAND: item_id = item_id(20);
+}
+impl item_id {
+    pub const ITEM_NO_STICK_CAP: item_id = item_id(21);
+}
+impl item_id {
+    pub const ITEM_PIERCE_BAND: item_id = item_id(22);
+}
+impl item_id {
+    pub const ITEM_JOY_RIBBON: item_id = item_id(23);
+}
+impl item_id {
+    pub const ITEM_X_RAY_SPECS: item_id = item_id(24);
+}
+impl item_id {
+    pub const ITEM_PERSIM_BAND: item_id = item_id(25);
+}
+impl item_id {
+    pub const ITEM_POWER_BAND: item_id = item_id(26);
+}
+impl item_id {
+    pub const ITEM_PECHA_SCARF: item_id = item_id(27);
+}
+impl item_id {
+    pub const ITEM_INSOMNISCOPE: item_id = item_id(28);
+}
+impl item_id {
+    pub const ITEM_WARP_SCARF: item_id = item_id(29);
+}
+impl item_id {
+    pub const ITEM_TIGHT_BELT: item_id = item_id(30);
+}
+impl item_id {
+    pub const ITEM_SNEAK_SCARF: item_id = item_id(31);
+}
+impl item_id {
+    pub const ITEM_GOLD_RIBBON: item_id = item_id(32);
+}
+impl item_id {
+    pub const ITEM_GOGGLE_SPECS: item_id = item_id(33);
+}
+impl item_id {
+    pub const ITEM_DIET_RIBBON: item_id = item_id(34);
+}
+impl item_id {
+    pub const ITEM_TRAP_SCARF: item_id = item_id(35);
+}
+impl item_id {
+    pub const ITEM_RACKET_BAND: item_id = item_id(36);
+}
+impl item_id {
+    pub const ITEM_DEF_SCARF: item_id = item_id(37);
+}
+impl item_id {
+    pub const ITEM_STAMINA_BAND: item_id = item_id(38);
+}
+impl item_id {
+    pub const ITEM_PLAIN_RIBBON: item_id = item_id(39);
+}
+impl item_id {
+    pub const ITEM_SPECIAL_BAND: item_id = item_id(40);
+}
+impl item_id {
+    pub const ITEM_ZINC_BAND: item_id = item_id(41);
+}
+impl item_id {
+    pub const ITEM_DETECT_BAND: item_id = item_id(42);
+}
+impl item_id {
+    pub const ITEM_SPACE_GLOBE: item_id = item_id(43);
+}
+impl item_id {
+    pub const ITEM_DODGE_SCARF: item_id = item_id(44);
+}
+impl item_id {
+    pub const ITEM_BOUNCE_BAND: item_id = item_id(45);
+}
+impl item_id {
+    pub const ITEM_CURVE_BAND: item_id = item_id(46);
+}
+impl item_id {
+    pub const ITEM_WHIFF_SPECS: item_id = item_id(47);
+}
+impl item_id {
+    pub const ITEM_NO_AIM_SCOPE: item_id = item_id(48);
+}
+impl item_id {
+    pub const ITEM_LOCKON_SPECS: item_id = item_id(49);
+}
+impl item_id {
+    pub const ITEM_MUNCH_BELT: item_id = item_id(50);
+}
+impl item_id {
+    pub const ITEM_PASS_SCARF: item_id = item_id(51);
+}
+impl item_id {
+    pub const ITEM_WEATHER_BAND: item_id = item_id(52);
+}
+impl item_id {
+    pub const ITEM_FRIEND_BOW: item_id = item_id(53);
+}
+impl item_id {
+    pub const ITEM_BEAUTY_SCARF: item_id = item_id(54);
+}
+impl item_id {
+    pub const ITEM_SUN_RIBBON: item_id = item_id(55);
+}
+impl item_id {
+    pub const ITEM_LUNAR_RIBBON: item_id = item_id(56);
+}
+impl item_id {
+    pub const ITEM_GOLDEN_MASK: item_id = item_id(57);
+}
+impl item_id {
+    pub const ITEM_AMBER_TEAR: item_id = item_id(58);
+}
+impl item_id {
+    pub const ITEM_ICY_FLUTE: item_id = item_id(59);
+}
+impl item_id {
+    pub const ITEM_FIERY_DRUM: item_id = item_id(60);
+}
+impl item_id {
+    pub const ITEM_TERRA_CYMBAL: item_id = item_id(61);
+}
+impl item_id {
+    pub const ITEM_AQUA_MONICA: item_id = item_id(62);
+}
+impl item_id {
+    pub const ITEM_ROCK_HORN: item_id = item_id(63);
+}
+impl item_id {
+    pub const ITEM_GRASS_CORNET: item_id = item_id(64);
+}
+impl item_id {
+    pub const ITEM_SKY_MELODICA: item_id = item_id(65);
+}
+impl item_id {
+    pub const ITEM_MIRACLE_CHEST: item_id = item_id(66);
+}
+impl item_id {
+    pub const ITEM_WONDER_CHEST: item_id = item_id(67);
+}
+impl item_id {
+    pub const ITEM_IQ_BOOSTER: item_id = item_id(68);
+}
+impl item_id {
+    pub const ITEM_HEAL_SEED: item_id = item_id(69);
+}
+impl item_id {
+    pub const ITEM_ORAN_BERRY: item_id = item_id(70);
+}
+impl item_id {
+    pub const ITEM_SITRUS_BERRY: item_id = item_id(71);
+}
+impl item_id {
+    pub const ITEM_EYEDROP_SEED: item_id = item_id(72);
+}
+impl item_id {
+    pub const ITEM_REVIVER_SEED: item_id = item_id(73);
+}
+impl item_id {
+    pub const ITEM_BLINKER_SEED: item_id = item_id(74);
+}
+impl item_id {
+    pub const ITEM_DOOM_SEED: item_id = item_id(75);
+}
+impl item_id {
+    pub const ITEM_X_EYE_SEED: item_id = item_id(76);
+}
+impl item_id {
+    pub const ITEM_LIFE_SEED: item_id = item_id(77);
+}
+impl item_id {
+    pub const ITEM_RAWST_BERRY: item_id = item_id(78);
+}
+impl item_id {
+    pub const ITEM_HUNGER_SEED: item_id = item_id(79);
+}
+impl item_id {
+    pub const ITEM_QUICK_SEED: item_id = item_id(80);
+}
+impl item_id {
+    pub const ITEM_PECHA_BERRY: item_id = item_id(81);
+}
+impl item_id {
+    pub const ITEM_CHERI_BERRY: item_id = item_id(82);
+}
+impl item_id {
+    pub const ITEM_TOTTER_SEED: item_id = item_id(83);
+}
+impl item_id {
+    pub const ITEM_SLEEP_SEED: item_id = item_id(84);
+}
+impl item_id {
+    pub const ITEM_PLAIN_SEED: item_id = item_id(85);
+}
+impl item_id {
+    pub const ITEM_WARP_SEED: item_id = item_id(86);
+}
+impl item_id {
+    pub const ITEM_BLAST_SEED: item_id = item_id(87);
+}
+impl item_id {
+    pub const ITEM_GINSENG: item_id = item_id(88);
+}
+impl item_id {
+    pub const ITEM_JOY_SEED: item_id = item_id(89);
+}
+impl item_id {
+    pub const ITEM_CHESTO_BERRY: item_id = item_id(90);
+}
+impl item_id {
+    pub const ITEM_STUN_SEED: item_id = item_id(91);
+}
+impl item_id {
+    pub const ITEM_GABITE_SCALE: item_id = item_id(92);
+}
+impl item_id {
+    pub const ITEM_GOLDEN_SEED: item_id = item_id(93);
+}
+impl item_id {
+    pub const ITEM_VILE_SEED: item_id = item_id(94);
+}
+impl item_id {
+    pub const ITEM_PURE_SEED: item_id = item_id(95);
+}
+impl item_id {
+    pub const ITEM_VIOLENT_SEED: item_id = item_id(96);
+}
+impl item_id {
+    pub const ITEM_VANISH_SEED: item_id = item_id(97);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x62: item_id = item_id(98);
+}
+impl item_id {
+    pub const ITEM_MAX_ELIXIR: item_id = item_id(99);
+}
+impl item_id {
+    pub const ITEM_PROTEIN: item_id = item_id(100);
+}
+impl item_id {
+    pub const ITEM_CALCIUM: item_id = item_id(101);
+}
+impl item_id {
+    pub const ITEM_IRON: item_id = item_id(102);
+}
+impl item_id {
+    pub const ITEM_NECTAR: item_id = item_id(103);
+}
+impl item_id {
+    pub const ITEM_DROPEYE_SEED: item_id = item_id(104);
+}
+impl item_id {
+    pub const ITEM_REVISER_SEED: item_id = item_id(105);
+}
+impl item_id {
+    pub const ITEM_SLIP_SEED: item_id = item_id(106);
+}
+impl item_id {
+    pub const ITEM_VIA_SEED: item_id = item_id(107);
+}
+impl item_id {
+    pub const ITEM_ZINC: item_id = item_id(108);
+}
+impl item_id {
+    pub const ITEM_APPLE: item_id = item_id(109);
+}
+impl item_id {
+    pub const ITEM_BIG_APPLE: item_id = item_id(110);
+}
+impl item_id {
+    pub const ITEM_GRIMY_FOOD: item_id = item_id(111);
+}
+impl item_id {
+    pub const ITEM_HUGE_APPLE: item_id = item_id(112);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x71: item_id = item_id(113);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x72: item_id = item_id(114);
+}
+impl item_id {
+    pub const ITEM_GOLDEN_APPLE: item_id = item_id(115);
+}
+impl item_id {
+    pub const ITEM_MIX_ELIXIR: item_id = item_id(116);
+}
+impl item_id {
+    pub const ITEM_OREN_BERRY: item_id = item_id(117);
+}
+impl item_id {
+    pub const ITEM_DOUGH_SEED: item_id = item_id(118);
+}
+impl item_id {
+    pub const ITEM_WHITE_GUMMI: item_id = item_id(119);
+}
+impl item_id {
+    pub const ITEM_RED_GUMMI: item_id = item_id(120);
+}
+impl item_id {
+    pub const ITEM_BLUE_GUMMI: item_id = item_id(121);
+}
+impl item_id {
+    pub const ITEM_GRASS_GUMMI: item_id = item_id(122);
+}
+impl item_id {
+    pub const ITEM_YELLOW_GUMMI: item_id = item_id(123);
+}
+impl item_id {
+    pub const ITEM_CLEAR_GUMMI: item_id = item_id(124);
+}
+impl item_id {
+    pub const ITEM_ORANGE_GUMMI: item_id = item_id(125);
+}
+impl item_id {
+    pub const ITEM_PINK_GUMMI: item_id = item_id(126);
+}
+impl item_id {
+    pub const ITEM_BROWN_GUMMI: item_id = item_id(127);
+}
+impl item_id {
+    pub const ITEM_SKY_GUMMI: item_id = item_id(128);
+}
+impl item_id {
+    pub const ITEM_GOLD_GUMMI: item_id = item_id(129);
+}
+impl item_id {
+    pub const ITEM_GREEN_GUMMI: item_id = item_id(130);
+}
+impl item_id {
+    pub const ITEM_GRAY_GUMMI: item_id = item_id(131);
+}
+impl item_id {
+    pub const ITEM_PURPLE_GUMMI: item_id = item_id(132);
+}
+impl item_id {
+    pub const ITEM_ROYAL_GUMMI: item_id = item_id(133);
+}
+impl item_id {
+    pub const ITEM_BLACK_GUMMI: item_id = item_id(134);
+}
+impl item_id {
+    pub const ITEM_SILVER_GUMMI: item_id = item_id(135);
+}
+impl item_id {
+    pub const ITEM_WONDER_GUMMI: item_id = item_id(136);
+}
+impl item_id {
+    pub const ITEM_GRAVELYROCK: item_id = item_id(137);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x8A: item_id = item_id(138);
+}
+impl item_id {
+    pub const ITEM_UPGRADE: item_id = item_id(139);
+}
+impl item_id {
+    pub const ITEM_KINGS_ROCK: item_id = item_id(140);
+}
+impl item_id {
+    pub const ITEM_THUNDERSTONE: item_id = item_id(141);
+}
+impl item_id {
+    pub const ITEM_DEEPSEASCALE: item_id = item_id(142);
+}
+impl item_id {
+    pub const ITEM_DEEPSEATOOTH: item_id = item_id(143);
+}
+impl item_id {
+    pub const ITEM_SUN_STONE: item_id = item_id(144);
+}
+impl item_id {
+    pub const ITEM_MOON_STONE: item_id = item_id(145);
+}
+impl item_id {
+    pub const ITEM_FIRE_STONE: item_id = item_id(146);
+}
+impl item_id {
+    pub const ITEM_WATER_STONE: item_id = item_id(147);
+}
+impl item_id {
+    pub const ITEM_METAL_COAT: item_id = item_id(148);
+}
+impl item_id {
+    pub const ITEM_LEAF_STONE: item_id = item_id(149);
+}
+impl item_id {
+    pub const ITEM_DRAGON_SCALE: item_id = item_id(150);
+}
+impl item_id {
+    pub const ITEM_LINK_CABLE: item_id = item_id(151);
+}
+impl item_id {
+    pub const ITEM_DUBIOUS_DISC: item_id = item_id(152);
+}
+impl item_id {
+    pub const ITEM_PROTECTOR: item_id = item_id(153);
+}
+impl item_id {
+    pub const ITEM_REAPER_CLOTH: item_id = item_id(154);
+}
+impl item_id {
+    pub const ITEM_RAZOR_FANG: item_id = item_id(155);
+}
+impl item_id {
+    pub const ITEM_RAZOR_CLAW: item_id = item_id(156);
+}
+impl item_id {
+    pub const ITEM_ELECTIRIZER: item_id = item_id(157);
+}
+impl item_id {
+    pub const ITEM_MAGMARIZER: item_id = item_id(158);
+}
+impl item_id {
+    pub const ITEM_OVAL_STONE: item_id = item_id(159);
+}
+impl item_id {
+    pub const ITEM_DAWN_STONE: item_id = item_id(160);
+}
+impl item_id {
+    pub const ITEM_SHINY_STONE: item_id = item_id(161);
+}
+impl item_id {
+    pub const ITEM_DUSK_STONE: item_id = item_id(162);
+}
+impl item_id {
+    pub const ITEM_CORONET_ROCK: item_id = item_id(163);
+}
+impl item_id {
+    pub const ITEM_MOSSY_ROCK: item_id = item_id(164);
+}
+impl item_id {
+    pub const ITEM_FROZEN_ROCK: item_id = item_id(165);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xA6: item_id = item_id(166);
+}
+impl item_id {
+    pub const ITEM_GONE_PEBBLE: item_id = item_id(167);
+}
+impl item_id {
+    pub const ITEM_WANDER_GUMMI: item_id = item_id(168);
+}
+impl item_id {
+    pub const ITEM_PRIZE_TICKET: item_id = item_id(169);
+}
+impl item_id {
+    pub const ITEM_SILVER_TICKET: item_id = item_id(170);
+}
+impl item_id {
+    pub const ITEM_GOLD_TICKET: item_id = item_id(171);
+}
+impl item_id {
+    pub const ITEM_PRISM_TICKET: item_id = item_id(172);
+}
+impl item_id {
+    pub const ITEM_MYSTERY_PART: item_id = item_id(173);
+}
+impl item_id {
+    pub const ITEM_SECRET_SLAB: item_id = item_id(174);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xAF: item_id = item_id(175);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xB0: item_id = item_id(176);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xB1: item_id = item_id(177);
+}
+impl item_id {
+    pub const ITEM_WONDER_EGG: item_id = item_id(178);
+}
+impl item_id {
+    pub const ITEM_GRACIDEA: item_id = item_id(179);
+}
+impl item_id {
+    pub const ITEM_SKY_GIFT: item_id = item_id(180);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xB5: item_id = item_id(181);
+}
+impl item_id {
+    pub const ITEM_KEY: item_id = item_id(182);
+}
+impl item_id {
+    pub const ITEM_POKE: item_id = item_id(183);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xB8: item_id = item_id(184);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xB9: item_id = item_id(185);
+}
+impl item_id {
+    pub const ITEM_LOST_LOOT: item_id = item_id(186);
+}
+impl item_id {
+    pub const ITEM_TM_USED_TM: item_id = item_id(187);
+}
+impl item_id {
+    pub const ITEM_TM_FOCUS_PUNCH: item_id = item_id(188);
+}
+impl item_id {
+    pub const ITEM_TM_DRAGON_CLAW: item_id = item_id(189);
+}
+impl item_id {
+    pub const ITEM_TM_WATER_PULSE: item_id = item_id(190);
+}
+impl item_id {
+    pub const ITEM_TM_CALM_MIND: item_id = item_id(191);
+}
+impl item_id {
+    pub const ITEM_TM_ROAR: item_id = item_id(192);
+}
+impl item_id {
+    pub const ITEM_TM_TOXIC: item_id = item_id(193);
+}
+impl item_id {
+    pub const ITEM_TM_HAIL: item_id = item_id(194);
+}
+impl item_id {
+    pub const ITEM_TM_BULK_UP: item_id = item_id(195);
+}
+impl item_id {
+    pub const ITEM_TM_BULLET_SEED: item_id = item_id(196);
+}
+impl item_id {
+    pub const ITEM_TM_HIDDEN_POWER: item_id = item_id(197);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xC6: item_id = item_id(198);
+}
+impl item_id {
+    pub const ITEM_TM_TAUNT: item_id = item_id(199);
+}
+impl item_id {
+    pub const ITEM_TM_ICE_BEAM: item_id = item_id(200);
+}
+impl item_id {
+    pub const ITEM_TM_BLIZZARD: item_id = item_id(201);
+}
+impl item_id {
+    pub const ITEM_TM_HYPER_BEAM: item_id = item_id(202);
+}
+impl item_id {
+    pub const ITEM_TM_LIGHT_SCREEN: item_id = item_id(203);
+}
+impl item_id {
+    pub const ITEM_TM_PROTECT: item_id = item_id(204);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xCD: item_id = item_id(205);
+}
+impl item_id {
+    pub const ITEM_TM_GIGA_DRAIN: item_id = item_id(206);
+}
+impl item_id {
+    pub const ITEM_TM_SAFEGUARD: item_id = item_id(207);
+}
+impl item_id {
+    pub const ITEM_TM_FRUSTRATION: item_id = item_id(208);
+}
+impl item_id {
+    pub const ITEM_TM_SOLARBEAM: item_id = item_id(209);
+}
+impl item_id {
+    pub const ITEM_TM_IRON_TAIL: item_id = item_id(210);
+}
+impl item_id {
+    pub const ITEM_TM_THUNDERBOLT: item_id = item_id(211);
+}
+impl item_id {
+    pub const ITEM_TM_THUNDER: item_id = item_id(212);
+}
+impl item_id {
+    pub const ITEM_TM_EARTHQUAKE: item_id = item_id(213);
+}
+impl item_id {
+    pub const ITEM_TM_RETURN: item_id = item_id(214);
+}
+impl item_id {
+    pub const ITEM_TM_DIG: item_id = item_id(215);
+}
+impl item_id {
+    pub const ITEM_TM_PSYCHIC: item_id = item_id(216);
+}
+impl item_id {
+    pub const ITEM_TM_SHADOW_BALL: item_id = item_id(217);
+}
+impl item_id {
+    pub const ITEM_TM_BRICK_BREAK: item_id = item_id(218);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xDB: item_id = item_id(219);
+}
+impl item_id {
+    pub const ITEM_TM_REFLECT: item_id = item_id(220);
+}
+impl item_id {
+    pub const ITEM_TM_SHOCK_WAVE: item_id = item_id(221);
+}
+impl item_id {
+    pub const ITEM_TM_FLAMETHROWER: item_id = item_id(222);
+}
+impl item_id {
+    pub const ITEM_TM_SLUDGE_BOMB: item_id = item_id(223);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xE0: item_id = item_id(224);
+}
+impl item_id {
+    pub const ITEM_TM_FIRE_BLAST: item_id = item_id(225);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xE2: item_id = item_id(226);
+}
+impl item_id {
+    pub const ITEM_TM_AERIAL_ACE: item_id = item_id(227);
+}
+impl item_id {
+    pub const ITEM_TM_TORMENT: item_id = item_id(228);
+}
+impl item_id {
+    pub const ITEM_TM_FACADE: item_id = item_id(229);
+}
+impl item_id {
+    pub const ITEM_TM_SECRET_POWER: item_id = item_id(230);
+}
+impl item_id {
+    pub const ITEM_TM_REST: item_id = item_id(231);
+}
+impl item_id {
+    pub const ITEM_TM_ATTRACT: item_id = item_id(232);
+}
+impl item_id {
+    pub const ITEM_TM_THIEF: item_id = item_id(233);
+}
+impl item_id {
+    pub const ITEM_TM_STEEL_WING: item_id = item_id(234);
+}
+impl item_id {
+    pub const ITEM_TM_SKILL_SWAP: item_id = item_id(235);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0xEC: item_id = item_id(236);
+}
+impl item_id {
+    pub const ITEM_TM_OVERHEAT: item_id = item_id(237);
+}
+impl item_id {
+    pub const ITEM_TM_ROOST: item_id = item_id(238);
+}
+impl item_id {
+    pub const ITEM_TM_FOCUS_BLAST: item_id = item_id(239);
+}
+impl item_id {
+    pub const ITEM_TM_ENERGY_BALL: item_id = item_id(240);
+}
+impl item_id {
+    pub const ITEM_TM_FALSE_SWIPE: item_id = item_id(241);
+}
+impl item_id {
+    pub const ITEM_TM_BRINE: item_id = item_id(242);
+}
+impl item_id {
+    pub const ITEM_TM_FLING: item_id = item_id(243);
+}
+impl item_id {
+    pub const ITEM_TM_CHARGE_BEAM: item_id = item_id(244);
+}
+impl item_id {
+    pub const ITEM_TM_ENDURE: item_id = item_id(245);
+}
+impl item_id {
+    pub const ITEM_TM_DRAGON_PULSE: item_id = item_id(246);
+}
+impl item_id {
+    pub const ITEM_TM_DRAIN_PUNCH: item_id = item_id(247);
+}
+impl item_id {
+    pub const ITEM_TM_WILL_O_WISP: item_id = item_id(248);
+}
+impl item_id {
+    pub const ITEM_TM_SILVER_WIND: item_id = item_id(249);
+}
+impl item_id {
+    pub const ITEM_TM_EMBARGO: item_id = item_id(250);
+}
+impl item_id {
+    pub const ITEM_TM_EXPLOSION: item_id = item_id(251);
+}
+impl item_id {
+    pub const ITEM_TM_SHADOW_CLAW: item_id = item_id(252);
+}
+impl item_id {
+    pub const ITEM_TM_PAYBACK: item_id = item_id(253);
+}
+impl item_id {
+    pub const ITEM_TM_RECYCLE: item_id = item_id(254);
+}
+impl item_id {
+    pub const ITEM_TM_GIGA_IMPACT: item_id = item_id(255);
+}
+impl item_id {
+    pub const ITEM_TM_ROCK_POLISH: item_id = item_id(256);
+}
+impl item_id {
+    pub const ITEM_TM_WIDE_SLASH: item_id = item_id(257);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x102: item_id = item_id(258);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x103: item_id = item_id(259);
+}
+impl item_id {
+    pub const ITEM_TM_VACUUM_CUT: item_id = item_id(260);
+}
+impl item_id {
+    pub const ITEM_TM_DIVE: item_id = item_id(261);
+}
+impl item_id {
+    pub const ITEM_TM_FLASH: item_id = item_id(262);
+}
+impl item_id {
+    pub const ITEM_TM_STONE_EDGE: item_id = item_id(263);
+}
+impl item_id {
+    pub const ITEM_TM_AVALANCHE: item_id = item_id(264);
+}
+impl item_id {
+    pub const ITEM_TM_THUNDER_WAVE: item_id = item_id(265);
+}
+impl item_id {
+    pub const ITEM_TM_GYRO_BALL: item_id = item_id(266);
+}
+impl item_id {
+    pub const ITEM_TM_SWORDS_DANCE: item_id = item_id(267);
+}
+impl item_id {
+    pub const ITEM_TM_STEALTH_ROCK: item_id = item_id(268);
+}
+impl item_id {
+    pub const ITEM_TM_PSYCH_UP: item_id = item_id(269);
+}
+impl item_id {
+    pub const ITEM_TM_CAPTIVATE: item_id = item_id(270);
+}
+impl item_id {
+    pub const ITEM_TM_DARK_PULSE: item_id = item_id(271);
+}
+impl item_id {
+    pub const ITEM_TM_ROCK_SLIDE: item_id = item_id(272);
+}
+impl item_id {
+    pub const ITEM_TM_X_SCISSOR: item_id = item_id(273);
+}
+impl item_id {
+    pub const ITEM_TM_SLEEP_TALK: item_id = item_id(274);
+}
+impl item_id {
+    pub const ITEM_TM_NATURAL_GIFT: item_id = item_id(275);
+}
+impl item_id {
+    pub const ITEM_TM_POISON_JAB: item_id = item_id(276);
+}
+impl item_id {
+    pub const ITEM_TM_DREAM_EATER: item_id = item_id(277);
+}
+impl item_id {
+    pub const ITEM_TM_GRASS_KNOT: item_id = item_id(278);
+}
+impl item_id {
+    pub const ITEM_TM_SWAGGER: item_id = item_id(279);
+}
+impl item_id {
+    pub const ITEM_TM_PLUCK: item_id = item_id(280);
+}
+impl item_id {
+    pub const ITEM_TM_U_TURN: item_id = item_id(281);
+}
+impl item_id {
+    pub const ITEM_TM_SUBSTITUTE: item_id = item_id(282);
+}
+impl item_id {
+    pub const ITEM_TM_FLASH_CANNON: item_id = item_id(283);
+}
+impl item_id {
+    pub const ITEM_TM_TRICK_ROOM: item_id = item_id(284);
+}
+impl item_id {
+    pub const ITEM_TM_CUT: item_id = item_id(285);
+}
+impl item_id {
+    pub const ITEM_TM_FLY: item_id = item_id(286);
+}
+impl item_id {
+    pub const ITEM_TM_SURF: item_id = item_id(287);
+}
+impl item_id {
+    pub const ITEM_TM_STRENGTH: item_id = item_id(288);
+}
+impl item_id {
+    pub const ITEM_TM_DEFOG: item_id = item_id(289);
+}
+impl item_id {
+    pub const ITEM_TM_ROCK_SMASH: item_id = item_id(290);
+}
+impl item_id {
+    pub const ITEM_TM_WATERFALL: item_id = item_id(291);
+}
+impl item_id {
+    pub const ITEM_TM_ROCK_CLIMB: item_id = item_id(292);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x125: item_id = item_id(293);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x126: item_id = item_id(294);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x127: item_id = item_id(295);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x128: item_id = item_id(296);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x129: item_id = item_id(297);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x12A: item_id = item_id(298);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x12B: item_id = item_id(299);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x12C: item_id = item_id(300);
+}
+impl item_id {
+    pub const ITEM_HAIL_ORB: item_id = item_id(301);
+}
+impl item_id {
+    pub const ITEM_SUNNY_ORB: item_id = item_id(302);
+}
+impl item_id {
+    pub const ITEM_RAINY_ORB: item_id = item_id(303);
+}
+impl item_id {
+    pub const ITEM_EVASION_ORB: item_id = item_id(304);
+}
+impl item_id {
+    pub const ITEM_SANDY_ORB: item_id = item_id(305);
+}
+impl item_id {
+    pub const ITEM_ROCKY_ORB: item_id = item_id(306);
+}
+impl item_id {
+    pub const ITEM_SNATCH_ORB: item_id = item_id(307);
+}
+impl item_id {
+    pub const ITEM_SEE_TRAP_ORB: item_id = item_id(308);
+}
+impl item_id {
+    pub const ITEM_MUG_ORB: item_id = item_id(309);
+}
+impl item_id {
+    pub const ITEM_REBOUND_ORB: item_id = item_id(310);
+}
+impl item_id {
+    pub const ITEM_LOB_ORB: item_id = item_id(311);
+}
+impl item_id {
+    pub const ITEM_SWITCHER_ORB: item_id = item_id(312);
+}
+impl item_id {
+    pub const ITEM_BLOWBACK_ORB: item_id = item_id(313);
+}
+impl item_id {
+    pub const ITEM_WARP_ORB: item_id = item_id(314);
+}
+impl item_id {
+    pub const ITEM_TRANSFER_ORB: item_id = item_id(315);
+}
+impl item_id {
+    pub const ITEM_SLOW_ORB: item_id = item_id(316);
+}
+impl item_id {
+    pub const ITEM_QUICK_ORB: item_id = item_id(317);
+}
+impl item_id {
+    pub const ITEM_LUMINOUS_ORB: item_id = item_id(318);
+}
+impl item_id {
+    pub const ITEM_PETRIFY_ORB: item_id = item_id(319);
+}
+impl item_id {
+    pub const ITEM_STAYAWAY_ORB: item_id = item_id(320);
+}
+impl item_id {
+    pub const ITEM_POUNCE_ORB: item_id = item_id(321);
+}
+impl item_id {
+    pub const ITEM_TRAWL_ORB: item_id = item_id(322);
+}
+impl item_id {
+    pub const ITEM_CLEANSE_ORB: item_id = item_id(323);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x144: item_id = item_id(324);
+}
+impl item_id {
+    pub const ITEM_DECOY_ORB: item_id = item_id(325);
+}
+impl item_id {
+    pub const ITEM_SLUMBER_ORB: item_id = item_id(326);
+}
+impl item_id {
+    pub const ITEM_TOTTER_ORB: item_id = item_id(327);
+}
+impl item_id {
+    pub const ITEM_TWO_EDGE_ORB: item_id = item_id(328);
+}
+impl item_id {
+    pub const ITEM_SILENCE_ORB: item_id = item_id(329);
+}
+impl item_id {
+    pub const ITEM_ESCAPE_ORB: item_id = item_id(330);
+}
+impl item_id {
+    pub const ITEM_SCANNER_ORB: item_id = item_id(331);
+}
+impl item_id {
+    pub const ITEM_RADAR_ORB: item_id = item_id(332);
+}
+impl item_id {
+    pub const ITEM_DROUGHT_ORB: item_id = item_id(333);
+}
+impl item_id {
+    pub const ITEM_TRAPBUST_ORB: item_id = item_id(334);
+}
+impl item_id {
+    pub const ITEM_ROLLCALL_ORB: item_id = item_id(335);
+}
+impl item_id {
+    pub const ITEM_INVISIFY_ORB: item_id = item_id(336);
+}
+impl item_id {
+    pub const ITEM_ONE_SHOT_ORB: item_id = item_id(337);
+}
+impl item_id {
+    pub const ITEM_IDENTIFY_ORB: item_id = item_id(338);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x153: item_id = item_id(339);
+}
+impl item_id {
+    pub const ITEM_SHOCKER_ORB: item_id = item_id(340);
+}
+impl item_id {
+    pub const ITEM_SIZEBUST_ORB: item_id = item_id(341);
+}
+impl item_id {
+    pub const ITEM_ONE_ROOM_ORB: item_id = item_id(342);
+}
+impl item_id {
+    pub const ITEM_FILL_IN_ORB: item_id = item_id(343);
+}
+impl item_id {
+    pub const ITEM_TRAPPER_ORB: item_id = item_id(344);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x159: item_id = item_id(345);
+}
+impl item_id {
+    pub const ITEM_ITEMIZER_ORB: item_id = item_id(346);
+}
+impl item_id {
+    pub const ITEM_HURL_ORB: item_id = item_id(347);
+}
+impl item_id {
+    pub const ITEM_MOBILE_ORB: item_id = item_id(348);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x15D: item_id = item_id(349);
+}
+impl item_id {
+    pub const ITEM_STAIRS_ORB: item_id = item_id(350);
+}
+impl item_id {
+    pub const ITEM_LONGTOSS_ORB: item_id = item_id(351);
+}
+impl item_id {
+    pub const ITEM_PIERCE_ORB: item_id = item_id(352);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x161: item_id = item_id(353);
+}
+impl item_id {
+    pub const ITEM_SPURN_ORB: item_id = item_id(354);
+}
+impl item_id {
+    pub const ITEM_FOE_HOLD_ORB: item_id = item_id(355);
+}
+impl item_id {
+    pub const ITEM_ALL_MACH_ORB: item_id = item_id(356);
+}
+impl item_id {
+    pub const ITEM_FOE_FEAR_ORB: item_id = item_id(357);
+}
+impl item_id {
+    pub const ITEM_ALL_HIT_ORB: item_id = item_id(358);
+}
+impl item_id {
+    pub const ITEM_FOE_SEAL_ORB: item_id = item_id(359);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x168: item_id = item_id(360);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x169: item_id = item_id(361);
+}
+impl item_id {
+    pub const ITEM_LINK_BOX: item_id = item_id(362);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x16B: item_id = item_id(363);
+}
+impl item_id {
+    pub const ITEM_GORGEOUS_BOX_1: item_id = item_id(364);
+}
+impl item_id {
+    pub const ITEM_GORGEOUS_BOX_2: item_id = item_id(365);
+}
+impl item_id {
+    pub const ITEM_GORGEOUS_BOX_3: item_id = item_id(366);
+}
+impl item_id {
+    pub const ITEM_HEAVY_BOX_1: item_id = item_id(367);
+}
+impl item_id {
+    pub const ITEM_HEAVY_BOX_2: item_id = item_id(368);
+}
+impl item_id {
+    pub const ITEM_HEAVY_BOX_3: item_id = item_id(369);
+}
+impl item_id {
+    pub const ITEM_SHINY_BOX_1: item_id = item_id(370);
+}
+impl item_id {
+    pub const ITEM_SHINY_BOX_2: item_id = item_id(371);
+}
+impl item_id {
+    pub const ITEM_SHINY_BOX_3: item_id = item_id(372);
+}
+impl item_id {
+    pub const ITEM_NIFTY_BOX_1: item_id = item_id(373);
+}
+impl item_id {
+    pub const ITEM_NIFTY_BOX_2: item_id = item_id(374);
+}
+impl item_id {
+    pub const ITEM_NIFTY_BOX_3: item_id = item_id(375);
+}
+impl item_id {
+    pub const ITEM_DAINTY_BOX_1: item_id = item_id(376);
+}
+impl item_id {
+    pub const ITEM_DAINTY_BOX_2: item_id = item_id(377);
+}
+impl item_id {
+    pub const ITEM_DAINTY_BOX_3: item_id = item_id(378);
+}
+impl item_id {
+    pub const ITEM_GLITTERY_BOX_1: item_id = item_id(379);
+}
+impl item_id {
+    pub const ITEM_GLITTERY_BOX_2: item_id = item_id(380);
+}
+impl item_id {
+    pub const ITEM_GLITTERY_BOX_3: item_id = item_id(381);
+}
+impl item_id {
+    pub const ITEM_PRETTY_BOX_1: item_id = item_id(382);
+}
+impl item_id {
+    pub const ITEM_PRETTY_BOX_2: item_id = item_id(383);
+}
+impl item_id {
+    pub const ITEM_PRETTY_BOX_3: item_id = item_id(384);
+}
+impl item_id {
+    pub const ITEM_DELUXE_BOX_1: item_id = item_id(385);
+}
+impl item_id {
+    pub const ITEM_DELUXE_BOX_2: item_id = item_id(386);
+}
+impl item_id {
+    pub const ITEM_DELUXE_BOX_3: item_id = item_id(387);
+}
+impl item_id {
+    pub const ITEM_LIGHT_BOX_1: item_id = item_id(388);
+}
+impl item_id {
+    pub const ITEM_LIGHT_BOX_2: item_id = item_id(389);
+}
+impl item_id {
+    pub const ITEM_LIGHT_BOX_3: item_id = item_id(390);
+}
+impl item_id {
+    pub const ITEM_CUTE_BOX_1: item_id = item_id(391);
+}
+impl item_id {
+    pub const ITEM_CUTE_BOX_2: item_id = item_id(392);
+}
+impl item_id {
+    pub const ITEM_CUTE_BOX_3: item_id = item_id(393);
+}
+impl item_id {
+    pub const ITEM_HARD_BOX_1: item_id = item_id(394);
+}
+impl item_id {
+    pub const ITEM_HARD_BOX_2: item_id = item_id(395);
+}
+impl item_id {
+    pub const ITEM_HARD_BOX_3: item_id = item_id(396);
+}
+impl item_id {
+    pub const ITEM_SINISTER_BOX_1: item_id = item_id(397);
+}
+impl item_id {
+    pub const ITEM_SINISTER_BOX_2: item_id = item_id(398);
+}
+impl item_id {
+    pub const ITEM_SINISTER_BOX_3: item_id = item_id(399);
+}
+impl item_id {
+    pub const ITEM_A_STONE: item_id = item_id(400);
+}
+impl item_id {
+    pub const ITEM_B_STONE: item_id = item_id(401);
+}
+impl item_id {
+    pub const ITEM_C_STONE: item_id = item_id(402);
+}
+impl item_id {
+    pub const ITEM_D_STONE: item_id = item_id(403);
+}
+impl item_id {
+    pub const ITEM_E_STONE: item_id = item_id(404);
+}
+impl item_id {
+    pub const ITEM_F_STONE: item_id = item_id(405);
+}
+impl item_id {
+    pub const ITEM_G_STONE: item_id = item_id(406);
+}
+impl item_id {
+    pub const ITEM_H_STONE: item_id = item_id(407);
+}
+impl item_id {
+    pub const ITEM_I_STONE: item_id = item_id(408);
+}
+impl item_id {
+    pub const ITEM_J_STONE: item_id = item_id(409);
+}
+impl item_id {
+    pub const ITEM_K_STONE: item_id = item_id(410);
+}
+impl item_id {
+    pub const ITEM_L_STONE: item_id = item_id(411);
+}
+impl item_id {
+    pub const ITEM_M_STONE: item_id = item_id(412);
+}
+impl item_id {
+    pub const ITEM_N_STONE: item_id = item_id(413);
+}
+impl item_id {
+    pub const ITEM_O_STONE: item_id = item_id(414);
+}
+impl item_id {
+    pub const ITEM_P_STONE: item_id = item_id(415);
+}
+impl item_id {
+    pub const ITEM_Q_STONE: item_id = item_id(416);
+}
+impl item_id {
+    pub const ITEM_R_STONE: item_id = item_id(417);
+}
+impl item_id {
+    pub const ITEM_S_STONE: item_id = item_id(418);
+}
+impl item_id {
+    pub const ITEM_T_STONE: item_id = item_id(419);
+}
+impl item_id {
+    pub const ITEM_U_STONE: item_id = item_id(420);
+}
+impl item_id {
+    pub const ITEM_V_STONE: item_id = item_id(421);
+}
+impl item_id {
+    pub const ITEM_W_STONE: item_id = item_id(422);
+}
+impl item_id {
+    pub const ITEM_X_STONE: item_id = item_id(423);
+}
+impl item_id {
+    pub const ITEM_Y_STONE: item_id = item_id(424);
+}
+impl item_id {
+    pub const ITEM_Z_STONE: item_id = item_id(425);
+}
+impl item_id {
+    pub const ITEM_EXCLAMATION_STONE: item_id = item_id(426);
+}
+impl item_id {
+    pub const ITEM_QUESTION_STONE: item_id = item_id(427);
+}
+impl item_id {
+    pub const ITEM_SILVER_BOW: item_id = item_id(428);
+}
+impl item_id {
+    pub const ITEM_BROWN_BOW: item_id = item_id(429);
+}
+impl item_id {
+    pub const ITEM_RED_BOW: item_id = item_id(430);
+}
+impl item_id {
+    pub const ITEM_PINK_BOW: item_id = item_id(431);
+}
+impl item_id {
+    pub const ITEM_ORANGE_BOW: item_id = item_id(432);
+}
+impl item_id {
+    pub const ITEM_YELLOW_BOW: item_id = item_id(433);
+}
+impl item_id {
+    pub const ITEM_LIME_BOW: item_id = item_id(434);
+}
+impl item_id {
+    pub const ITEM_GREEN_BOW: item_id = item_id(435);
+}
+impl item_id {
+    pub const ITEM_VIRIDIAN_BOW: item_id = item_id(436);
+}
+impl item_id {
+    pub const ITEM_MINTY_BOW: item_id = item_id(437);
+}
+impl item_id {
+    pub const ITEM_SKY_BLUE_BOW: item_id = item_id(438);
+}
+impl item_id {
+    pub const ITEM_BLUE_BOW: item_id = item_id(439);
+}
+impl item_id {
+    pub const ITEM_COBALT_BOW: item_id = item_id(440);
+}
+impl item_id {
+    pub const ITEM_PURPLE_BOW: item_id = item_id(441);
+}
+impl item_id {
+    pub const ITEM_VIOLET_BOW: item_id = item_id(442);
+}
+impl item_id {
+    pub const ITEM_FUCHSIA_BOW: item_id = item_id(443);
+}
+impl item_id {
+    pub const ITEM_PRISM_RUFF: item_id = item_id(444);
+}
+impl item_id {
+    pub const ITEM_AQUA_COLLAR: item_id = item_id(445);
+}
+impl item_id {
+    pub const ITEM_VOLT_COLLAR: item_id = item_id(446);
+}
+impl item_id {
+    pub const ITEM_FIRE_COLLAR: item_id = item_id(447);
+}
+impl item_id {
+    pub const ITEM_LIGHT_COLLAR: item_id = item_id(448);
+}
+impl item_id {
+    pub const ITEM_DUSK_COLLAR: item_id = item_id(449);
+}
+impl item_id {
+    pub const ITEM_VIRID_COLLAR: item_id = item_id(450);
+}
+impl item_id {
+    pub const ITEM_ICY_COLLAR: item_id = item_id(451);
+}
+impl item_id {
+    pub const ITEM_PEP_SASH: item_id = item_id(452);
+}
+impl item_id {
+    pub const ITEM_COUNTER_RUFF: item_id = item_id(453);
+}
+impl item_id {
+    pub const ITEM_VICTORY_BELT: item_id = item_id(454);
+}
+impl item_id {
+    pub const ITEM_POWER_BANGLE: item_id = item_id(455);
+}
+impl item_id {
+    pub const ITEM_THUNDERSHARD: item_id = item_id(456);
+}
+impl item_id {
+    pub const ITEM_FALLEN_STAR: item_id = item_id(457);
+}
+impl item_id {
+    pub const ITEM_FLUFF_DUST: item_id = item_id(458);
+}
+impl item_id {
+    pub const ITEM_EGG_SHARD: item_id = item_id(459);
+}
+impl item_id {
+    pub const ITEM_HEROIC_MEDAL: item_id = item_id(460);
+}
+impl item_id {
+    pub const ITEM_CHIC_SHARD: item_id = item_id(461);
+}
+impl item_id {
+    pub const ITEM_YELLOW_JEWEL: item_id = item_id(462);
+}
+impl item_id {
+    pub const ITEM_RED_JEWEL: item_id = item_id(463);
+}
+impl item_id {
+    pub const ITEM_BLUE_JEWEL: item_id = item_id(464);
+}
+impl item_id {
+    pub const ITEM_LAUGH_DUST: item_id = item_id(465);
+}
+impl item_id {
+    pub const ITEM_GUARD_SAND: item_id = item_id(466);
+}
+impl item_id {
+    pub const ITEM_PURPLE_JEWEL: item_id = item_id(467);
+}
+impl item_id {
+    pub const ITEM_WHITE_JEWEL: item_id = item_id(468);
+}
+impl item_id {
+    pub const ITEM_BRAVE_DUST: item_id = item_id(469);
+}
+impl item_id {
+    pub const ITEM_HEAL_DEW: item_id = item_id(470);
+}
+impl item_id {
+    pub const ITEM_MARINE_CACHE: item_id = item_id(471);
+}
+impl item_id {
+    pub const ITEM_FREEZE_VEIL: item_id = item_id(472);
+}
+impl item_id {
+    pub const ITEM_THUNDER_VEIL: item_id = item_id(473);
+}
+impl item_id {
+    pub const ITEM_FIRE_VEIL: item_id = item_id(474);
+}
+impl item_id {
+    pub const ITEM_HAVOC_ROBE: item_id = item_id(475);
+}
+impl item_id {
+    pub const ITEM_LIFE_RING: item_id = item_id(476);
+}
+impl item_id {
+    pub const ITEM_BOLT_FANG: item_id = item_id(477);
+}
+impl item_id {
+    pub const ITEM_FLARE_FANG: item_id = item_id(478);
+}
+impl item_id {
+    pub const ITEM_AQUA_MANTLE: item_id = item_id(479);
+}
+impl item_id {
+    pub const ITEM_SILVER_VEIL: item_id = item_id(480);
+}
+impl item_id {
+    pub const ITEM_RAINBOW_VEIL: item_id = item_id(481);
+}
+impl item_id {
+    pub const ITEM_CHRONO_VEIL: item_id = item_id(482);
+}
+impl item_id {
+    pub const ITEM_ROCK_SASH: item_id = item_id(483);
+}
+impl item_id {
+    pub const ITEM_ICE_SASH: item_id = item_id(484);
+}
+impl item_id {
+    pub const ITEM_STEEL_SASH: item_id = item_id(485);
+}
+impl item_id {
+    pub const ITEM_HEART_BROOCH: item_id = item_id(486);
+}
+impl item_id {
+    pub const ITEM_EON_VEIL: item_id = item_id(487);
+}
+impl item_id {
+    pub const ITEM_SEABED_VEIL: item_id = item_id(488);
+}
+impl item_id {
+    pub const ITEM_TERRA_RING: item_id = item_id(489);
+}
+impl item_id {
+    pub const ITEM_SKYHIGH_VEIL: item_id = item_id(490);
+}
+impl item_id {
+    pub const ITEM_WISH_MANTLE: item_id = item_id(491);
+}
+impl item_id {
+    pub const ITEM_REVIVE_ROBE: item_id = item_id(492);
+}
+impl item_id {
+    pub const ITEM_SHADOW_VEIL: item_id = item_id(493);
+}
+impl item_id {
+    pub const ITEM_PLASMA_VEIL: item_id = item_id(494);
+}
+impl item_id {
+    pub const ITEM_EDIFY_ROBE: item_id = item_id(495);
+}
+impl item_id {
+    pub const ITEM_CHARITY_ROBE: item_id = item_id(496);
+}
+impl item_id {
+    pub const ITEM_HOPE_ROBE: item_id = item_id(497);
+}
+impl item_id {
+    pub const ITEM_TIME_SHIELD: item_id = item_id(498);
+}
+impl item_id {
+    pub const ITEM_AIR_BLADE: item_id = item_id(499);
+}
+impl item_id {
+    pub const ITEM_SEARING_RING: item_id = item_id(500);
+}
+impl item_id {
+    pub const ITEM_ANCIENT_RING: item_id = item_id(501);
+}
+impl item_id {
+    pub const ITEM_NETHER_VEIL: item_id = item_id(502);
+}
+impl item_id {
+    pub const ITEM_LUNAR_VEIL: item_id = item_id(503);
+}
+impl item_id {
+    pub const ITEM_TIDAL_CAPE: item_id = item_id(504);
+}
+impl item_id {
+    pub const ITEM_ECLIPSE_ROBE: item_id = item_id(505);
+}
+impl item_id {
+    pub const ITEM_WHITE_SILK: item_id = item_id(506);
+}
+impl item_id {
+    pub const ITEM_NORMAL_DUST: item_id = item_id(507);
+}
+impl item_id {
+    pub const ITEM_WHITE_GEM: item_id = item_id(508);
+}
+impl item_id {
+    pub const ITEM_JOY_GLOBE: item_id = item_id(509);
+}
+impl item_id {
+    pub const ITEM_RED_SILK: item_id = item_id(510);
+}
+impl item_id {
+    pub const ITEM_FIRE_DUST: item_id = item_id(511);
+}
+impl item_id {
+    pub const ITEM_FIERY_GEM: item_id = item_id(512);
+}
+impl item_id {
+    pub const ITEM_FIERY_GLOBE: item_id = item_id(513);
+}
+impl item_id {
+    pub const ITEM_BLUE_SILK: item_id = item_id(514);
+}
+impl item_id {
+    pub const ITEM_WATER_DUST: item_id = item_id(515);
+}
+impl item_id {
+    pub const ITEM_AQUA_GEM: item_id = item_id(516);
+}
+impl item_id {
+    pub const ITEM_AQUA_GLOBE: item_id = item_id(517);
+}
+impl item_id {
+    pub const ITEM_GRASS_SILK: item_id = item_id(518);
+}
+impl item_id {
+    pub const ITEM_GRASS_DUST: item_id = item_id(519);
+}
+impl item_id {
+    pub const ITEM_GRASS_GEM: item_id = item_id(520);
+}
+impl item_id {
+    pub const ITEM_SOOTHE_GLOBE: item_id = item_id(521);
+}
+impl item_id {
+    pub const ITEM_YELLOW_SILK: item_id = item_id(522);
+}
+impl item_id {
+    pub const ITEM_THUNDER_DUST: item_id = item_id(523);
+}
+impl item_id {
+    pub const ITEM_THUNDER_GEM: item_id = item_id(524);
+}
+impl item_id {
+    pub const ITEM_VOLT_GLOBE: item_id = item_id(525);
+}
+impl item_id {
+    pub const ITEM_CLEAR_SILK: item_id = item_id(526);
+}
+impl item_id {
+    pub const ITEM_ICY_DUST: item_id = item_id(527);
+}
+impl item_id {
+    pub const ITEM_ICY_GEM: item_id = item_id(528);
+}
+impl item_id {
+    pub const ITEM_ICY_GLOBE: item_id = item_id(529);
+}
+impl item_id {
+    pub const ITEM_ORANGE_SILK: item_id = item_id(530);
+}
+impl item_id {
+    pub const ITEM_COURAGE_DUST: item_id = item_id(531);
+}
+impl item_id {
+    pub const ITEM_FIGHT_GEM: item_id = item_id(532);
+}
+impl item_id {
+    pub const ITEM_POWER_GLOBE: item_id = item_id(533);
+}
+impl item_id {
+    pub const ITEM_PINK_SILK: item_id = item_id(534);
+}
+impl item_id {
+    pub const ITEM_POISON_DUST: item_id = item_id(535);
+}
+impl item_id {
+    pub const ITEM_POISON_GEM: item_id = item_id(536);
+}
+impl item_id {
+    pub const ITEM_POISON_GLOBE: item_id = item_id(537);
+}
+impl item_id {
+    pub const ITEM_BROWN_SILK: item_id = item_id(538);
+}
+impl item_id {
+    pub const ITEM_GROUND_DUST: item_id = item_id(539);
+}
+impl item_id {
+    pub const ITEM_EARTH_GEM: item_id = item_id(540);
+}
+impl item_id {
+    pub const ITEM_TERRA_GLOBE: item_id = item_id(541);
+}
+impl item_id {
+    pub const ITEM_SKY_SILK: item_id = item_id(542);
+}
+impl item_id {
+    pub const ITEM_SKY_DUST: item_id = item_id(543);
+}
+impl item_id {
+    pub const ITEM_SKY_GEM: item_id = item_id(544);
+}
+impl item_id {
+    pub const ITEM_SKY_GLOBE: item_id = item_id(545);
+}
+impl item_id {
+    pub const ITEM_GOLD_SILK: item_id = item_id(546);
+}
+impl item_id {
+    pub const ITEM_PSYCHE_DUST: item_id = item_id(547);
+}
+impl item_id {
+    pub const ITEM_PSYCHE_GEM: item_id = item_id(548);
+}
+impl item_id {
+    pub const ITEM_PSYCHE_GLOBE: item_id = item_id(549);
+}
+impl item_id {
+    pub const ITEM_GREEN_SILK: item_id = item_id(550);
+}
+impl item_id {
+    pub const ITEM_WONDER_DUST: item_id = item_id(551);
+}
+impl item_id {
+    pub const ITEM_GUARD_GEM: item_id = item_id(552);
+}
+impl item_id {
+    pub const ITEM_DEFEND_GLOBE: item_id = item_id(553);
+}
+impl item_id {
+    pub const ITEM_GRAY_SILK: item_id = item_id(554);
+}
+impl item_id {
+    pub const ITEM_ROCK_DUST: item_id = item_id(555);
+}
+impl item_id {
+    pub const ITEM_STONE_GEM: item_id = item_id(556);
+}
+impl item_id {
+    pub const ITEM_ROCK_GLOBE: item_id = item_id(557);
+}
+impl item_id {
+    pub const ITEM_PURPLE_SILK: item_id = item_id(558);
+}
+impl item_id {
+    pub const ITEM_SHADY_DUST: item_id = item_id(559);
+}
+impl item_id {
+    pub const ITEM_SHADOW_GEM: item_id = item_id(560);
+}
+impl item_id {
+    pub const ITEM_NETHER_GLOBE: item_id = item_id(561);
+}
+impl item_id {
+    pub const ITEM_ROYAL_SILK: item_id = item_id(562);
+}
+impl item_id {
+    pub const ITEM_DRAGON_DUST: item_id = item_id(563);
+}
+impl item_id {
+    pub const ITEM_DRAGON_GEM: item_id = item_id(564);
+}
+impl item_id {
+    pub const ITEM_DRAGON_GLOBE: item_id = item_id(565);
+}
+impl item_id {
+    pub const ITEM_BLACK_SILK: item_id = item_id(566);
+}
+impl item_id {
+    pub const ITEM_DARK_DUST: item_id = item_id(567);
+}
+impl item_id {
+    pub const ITEM_DARK_GEM: item_id = item_id(568);
+}
+impl item_id {
+    pub const ITEM_DUSK_GLOBE: item_id = item_id(569);
+}
+impl item_id {
+    pub const ITEM_IRON_SILK: item_id = item_id(570);
+}
+impl item_id {
+    pub const ITEM_STEEL_DUST: item_id = item_id(571);
+}
+impl item_id {
+    pub const ITEM_METAL_GEM: item_id = item_id(572);
+}
+impl item_id {
+    pub const ITEM_STEEL_GLOBE: item_id = item_id(573);
+}
+impl item_id {
+    pub const ITEM_BULBA_CLAW: item_id = item_id(574);
+}
+impl item_id {
+    pub const ITEM_BULBA_FANG: item_id = item_id(575);
+}
+impl item_id {
+    pub const ITEM_GRASS_GUARD: item_id = item_id(576);
+}
+impl item_id {
+    pub const ITEM_LEAFY_TIE: item_id = item_id(577);
+}
+impl item_id {
+    pub const ITEM_IVY_CLAW: item_id = item_id(578);
+}
+impl item_id {
+    pub const ITEM_IVY_FANG: item_id = item_id(579);
+}
+impl item_id {
+    pub const ITEM_IVY_CREST: item_id = item_id(580);
+}
+impl item_id {
+    pub const ITEM_PLANT_TORC: item_id = item_id(581);
+}
+impl item_id {
+    pub const ITEM_VENUS_CLAW: item_id = item_id(582);
+}
+impl item_id {
+    pub const ITEM_VENUS_FANG: item_id = item_id(583);
+}
+impl item_id {
+    pub const ITEM_VENUS_SEAL: item_id = item_id(584);
+}
+impl item_id {
+    pub const ITEM_SOLAR_SASH: item_id = item_id(585);
+}
+impl item_id {
+    pub const ITEM_CHAR_CLAW: item_id = item_id(586);
+}
+impl item_id {
+    pub const ITEM_CHAR_FANG: item_id = item_id(587);
+}
+impl item_id {
+    pub const ITEM_FIERY_HEART: item_id = item_id(588);
+}
+impl item_id {
+    pub const ITEM_HEAT_ARMLET: item_id = item_id(589);
+}
+impl item_id {
+    pub const ITEM_CHARME_CLAW: item_id = item_id(590);
+}
+impl item_id {
+    pub const ITEM_CHARME_FANG: item_id = item_id(591);
+}
+impl item_id {
+    pub const ITEM_CHARME_CREST: item_id = item_id(592);
+}
+impl item_id {
+    pub const ITEM_KINDLE_SCARF: item_id = item_id(593);
+}
+impl item_id {
+    pub const ITEM_CHARIZ_CLAW: item_id = item_id(594);
+}
+impl item_id {
+    pub const ITEM_CHARIZ_FANG: item_id = item_id(595);
+}
+impl item_id {
+    pub const ITEM_CHARIZ_SEAL: item_id = item_id(596);
+}
+impl item_id {
+    pub const ITEM_FLAME_BANGLE: item_id = item_id(597);
+}
+impl item_id {
+    pub const ITEM_SQUIRT_FOAM: item_id = item_id(598);
+}
+impl item_id {
+    pub const ITEM_SQUIRT_CARD: item_id = item_id(599);
+}
+impl item_id {
+    pub const ITEM_WATER_GUARD: item_id = item_id(600);
+}
+impl item_id {
+    pub const ITEM_AQUA_TIE: item_id = item_id(601);
+}
+impl item_id {
+    pub const ITEM_WARTOR_CLAW: item_id = item_id(602);
+}
+impl item_id {
+    pub const ITEM_WARTOR_FANG: item_id = item_id(603);
+}
+impl item_id {
+    pub const ITEM_WARTOR_CREST: item_id = item_id(604);
+}
+impl item_id {
+    pub const ITEM_BUBBLEBANGLE: item_id = item_id(605);
+}
+impl item_id {
+    pub const ITEM_BLASTO_CLAW: item_id = item_id(606);
+}
+impl item_id {
+    pub const ITEM_BLASTO_CARD: item_id = item_id(607);
+}
+impl item_id {
+    pub const ITEM_BLASTO_SEAL: item_id = item_id(608);
+}
+impl item_id {
+    pub const ITEM_HYDRO_BAND: item_id = item_id(609);
+}
+impl item_id {
+    pub const ITEM_PICHU_HAIR: item_id = item_id(610);
+}
+impl item_id {
+    pub const ITEM_PICHU_CARD: item_id = item_id(611);
+}
+impl item_id {
+    pub const ITEM_EXPRESS_TAG: item_id = item_id(612);
+}
+impl item_id {
+    pub const ITEM_SHOCKER_CAPE: item_id = item_id(613);
+}
+impl item_id {
+    pub const ITEM_PIKACHU_HAIR: item_id = item_id(614);
+}
+impl item_id {
+    pub const ITEM_PIKACHU_CARD: item_id = item_id(615);
+}
+impl item_id {
+    pub const ITEM_VOLT_CHARM: item_id = item_id(616);
+}
+impl item_id {
+    pub const ITEM_VOLT_TORC: item_id = item_id(617);
+}
+impl item_id {
+    pub const ITEM_RAICHU_HAIR: item_id = item_id(618);
+}
+impl item_id {
+    pub const ITEM_RAICHU_CARD: item_id = item_id(619);
+}
+impl item_id {
+    pub const ITEM_RAICHU_CREST: item_id = item_id(620);
+}
+impl item_id {
+    pub const ITEM_ZAPPER_SCARF: item_id = item_id(621);
+}
+impl item_id {
+    pub const ITEM_MEOWTH_CLAW: item_id = item_id(622);
+}
+impl item_id {
+    pub const ITEM_MEOWTH_FANG: item_id = item_id(623);
+}
+impl item_id {
+    pub const ITEM_COIN_CHARM: item_id = item_id(624);
+}
+impl item_id {
+    pub const ITEM_BLING_RUFF: item_id = item_id(625);
+}
+impl item_id {
+    pub const ITEM_PERSIAN_CLAW: item_id = item_id(626);
+}
+impl item_id {
+    pub const ITEM_PERSIAN_FANG: item_id = item_id(627);
+}
+impl item_id {
+    pub const ITEM_INSIGHT_ROCK: item_id = item_id(628);
+}
+impl item_id {
+    pub const ITEM_NOBLE_SCARF: item_id = item_id(629);
+}
+impl item_id {
+    pub const ITEM_CHIKO_CLAW: item_id = item_id(630);
+}
+impl item_id {
+    pub const ITEM_CHIKO_CARD: item_id = item_id(631);
+}
+impl item_id {
+    pub const ITEM_DAWN_JEWEL: item_id = item_id(632);
+}
+impl item_id {
+    pub const ITEM_FRESH_BOW: item_id = item_id(633);
+}
+impl item_id {
+    pub const ITEM_BAYLEEF_CLAW: item_id = item_id(634);
+}
+impl item_id {
+    pub const ITEM_BAYLEEF_CARD: item_id = item_id(635);
+}
+impl item_id {
+    pub const ITEM_BAYLEEF_SEAL: item_id = item_id(636);
+}
+impl item_id {
+    pub const ITEM_SPICE_BOW: item_id = item_id(637);
+}
+impl item_id {
+    pub const ITEM_MEGANI_CLAW: item_id = item_id(638);
+}
+impl item_id {
+    pub const ITEM_MEGANI_CARD: item_id = item_id(639);
+}
+impl item_id {
+    pub const ITEM_SHINY_CHARM: item_id = item_id(640);
+}
+impl item_id {
+    pub const ITEM_BRIGHT_VEIL: item_id = item_id(641);
+}
+impl item_id {
+    pub const ITEM_CYNDA_HAIR: item_id = item_id(642);
+}
+impl item_id {
+    pub const ITEM_CYNDA_CLAW: item_id = item_id(643);
+}
+impl item_id {
+    pub const ITEM_BLAZING_ROCK: item_id = item_id(644);
+}
+impl item_id {
+    pub const ITEM_STORM_SASH: item_id = item_id(645);
+}
+impl item_id {
+    pub const ITEM_QUILA_HAIR: item_id = item_id(646);
+}
+impl item_id {
+    pub const ITEM_QUILA_CARD: item_id = item_id(647);
+}
+impl item_id {
+    pub const ITEM_QUILA_CREST: item_id = item_id(648);
+}
+impl item_id {
+    pub const ITEM_VOLCANO_TORC: item_id = item_id(649);
+}
+impl item_id {
+    pub const ITEM_TYPHLO_GASP: item_id = item_id(650);
+}
+impl item_id {
+    pub const ITEM_TYPHLO_FANG: item_id = item_id(651);
+}
+impl item_id {
+    pub const ITEM_TYPHLO_SEAL: item_id = item_id(652);
+}
+impl item_id {
+    pub const ITEM_BLAST_BANGLE: item_id = item_id(653);
+}
+impl item_id {
+    pub const ITEM_TOTODI_DEW: item_id = item_id(654);
+}
+impl item_id {
+    pub const ITEM_TOTODI_FANG: item_id = item_id(655);
+}
+impl item_id {
+    pub const ITEM_WATER_HEART: item_id = item_id(656);
+}
+impl item_id {
+    pub const ITEM_WASH_BOW: item_id = item_id(657);
+}
+impl item_id {
+    pub const ITEM_CROCO_FANG: item_id = item_id(658);
+}
+impl item_id {
+    pub const ITEM_CROCO_CARD: item_id = item_id(659);
+}
+impl item_id {
+    pub const ITEM_SWIRL_ROCK: item_id = item_id(660);
+}
+impl item_id {
+    pub const ITEM_ANGER_SCARF: item_id = item_id(661);
+}
+impl item_id {
+    pub const ITEM_FERAL_CLAW: item_id = item_id(662);
+}
+impl item_id {
+    pub const ITEM_FERAL_FANG: item_id = item_id(663);
+}
+impl item_id {
+    pub const ITEM_FERAL_CREST: item_id = item_id(664);
+}
+impl item_id {
+    pub const ITEM_HYDRO_JAW: item_id = item_id(665);
+}
+impl item_id {
+    pub const ITEM_TREECK_THORN: item_id = item_id(666);
+}
+impl item_id {
+    pub const ITEM_TREECK_CARD: item_id = item_id(667);
+}
+impl item_id {
+    pub const ITEM_FOREST_ORE: item_id = item_id(668);
+}
+impl item_id {
+    pub const ITEM_GUARD_RING: item_id = item_id(669);
+}
+impl item_id {
+    pub const ITEM_GROVY_SHOOT: item_id = item_id(670);
+}
+impl item_id {
+    pub const ITEM_GROVY_CARD: item_id = item_id(671);
+}
+impl item_id {
+    pub const ITEM_JUNGLE_TAG: item_id = item_id(672);
+}
+impl item_id {
+    pub const ITEM_GRASS_BLADE: item_id = item_id(673);
+}
+impl item_id {
+    pub const ITEM_SCEPT_CLAW: item_id = item_id(674);
+}
+impl item_id {
+    pub const ITEM_SCEPT_CARD: item_id = item_id(675);
+}
+impl item_id {
+    pub const ITEM_SCEPT_SEAL: item_id = item_id(676);
+}
+impl item_id {
+    pub const ITEM_DRAIN_BANGLE: item_id = item_id(677);
+}
+impl item_id {
+    pub const ITEM_TORCHIC_HAIR: item_id = item_id(678);
+}
+impl item_id {
+    pub const ITEM_TORCHIC_CARD: item_id = item_id(679);
+}
+impl item_id {
+    pub const ITEM_HOT_PEBBLE: item_id = item_id(680);
+}
+impl item_id {
+    pub const ITEM_FIRE_CAPE: item_id = item_id(681);
+}
+impl item_id {
+    pub const ITEM_COMBUS_SWEAT: item_id = item_id(682);
+}
+impl item_id {
+    pub const ITEM_COMBUS_CLAW: item_id = item_id(683);
+}
+impl item_id {
+    pub const ITEM_CHARGE_TAG: item_id = item_id(684);
+}
+impl item_id {
+    pub const ITEM_GUTSY_BAND: item_id = item_id(685);
+}
+impl item_id {
+    pub const ITEM_BLAZI_CLAW: item_id = item_id(686);
+}
+impl item_id {
+    pub const ITEM_BLAZI_CARD: item_id = item_id(687);
+}
+impl item_id {
+    pub const ITEM_BLAZI_SEAL: item_id = item_id(688);
+}
+impl item_id {
+    pub const ITEM_BLAZE_TORC: item_id = item_id(689);
+}
+impl item_id {
+    pub const ITEM_MUDKIP_MUD: item_id = item_id(690);
+}
+impl item_id {
+    pub const ITEM_MUDKIP_CARD: item_id = item_id(691);
+}
+impl item_id {
+    pub const ITEM_MUD_JEWEL: item_id = item_id(692);
+}
+impl item_id {
+    pub const ITEM_SPEED_SCARF: item_id = item_id(693);
+}
+impl item_id {
+    pub const ITEM_MARSH_MUD: item_id = item_id(694);
+}
+impl item_id {
+    pub const ITEM_MARSH_CARD: item_id = item_id(695);
+}
+impl item_id {
+    pub const ITEM_MARSH_CREST: item_id = item_id(696);
+}
+impl item_id {
+    pub const ITEM_MARSH_TORC: item_id = item_id(697);
+}
+impl item_id {
+    pub const ITEM_SWAMP_MUD: item_id = item_id(698);
+}
+impl item_id {
+    pub const ITEM_SWAMP_CARD: item_id = item_id(699);
+}
+impl item_id {
+    pub const ITEM_SWAMP_SEAL: item_id = item_id(700);
+}
+impl item_id {
+    pub const ITEM_SWAMP_BANGLE: item_id = item_id(701);
+}
+impl item_id {
+    pub const ITEM_SKITTY_FANG: item_id = item_id(702);
+}
+impl item_id {
+    pub const ITEM_SKITTY_CARD: item_id = item_id(703);
+}
+impl item_id {
+    pub const ITEM_SMILE_PEBBLE: item_id = item_id(704);
+}
+impl item_id {
+    pub const ITEM_HEAL_PENDANT: item_id = item_id(705);
+}
+impl item_id {
+    pub const ITEM_DELCAT_HAIR: item_id = item_id(706);
+}
+impl item_id {
+    pub const ITEM_DELCAT_FANG: item_id = item_id(707);
+}
+impl item_id {
+    pub const ITEM_PRIM_PEBBLE: item_id = item_id(708);
+}
+impl item_id {
+    pub const ITEM_GUARD_COLLAR: item_id = item_id(709);
+}
+impl item_id {
+    pub const ITEM_LUCKY_LEAF: item_id = item_id(710);
+}
+impl item_id {
+    pub const ITEM_TURTWIG_CARD: item_id = item_id(711);
+}
+impl item_id {
+    pub const ITEM_SPROUT_ROCK: item_id = item_id(712);
+}
+impl item_id {
+    pub const ITEM_LEAFY_HAT: item_id = item_id(713);
+}
+impl item_id {
+    pub const ITEM_GROTLE_TWIG: item_id = item_id(714);
+}
+impl item_id {
+    pub const ITEM_GROTLE_CLAW: item_id = item_id(715);
+}
+impl item_id {
+    pub const ITEM_GROTLE_CREST: item_id = item_id(716);
+}
+impl item_id {
+    pub const ITEM_WOODY_SCARF: item_id = item_id(717);
+}
+impl item_id {
+    pub const ITEM_TORT_CLAW: item_id = item_id(718);
+}
+impl item_id {
+    pub const ITEM_TORT_HORN: item_id = item_id(719);
+}
+impl item_id {
+    pub const ITEM_TORT_SEAL: item_id = item_id(720);
+}
+impl item_id {
+    pub const ITEM_FOREST_TORC: item_id = item_id(721);
+}
+impl item_id {
+    pub const ITEM_CHIM_HAIR: item_id = item_id(722);
+}
+impl item_id {
+    pub const ITEM_CHIM_FANG: item_id = item_id(723);
+}
+impl item_id {
+    pub const ITEM_NIMBLE_CHARM: item_id = item_id(724);
+}
+impl item_id {
+    pub const ITEM_EMBER_CAP: item_id = item_id(725);
+}
+impl item_id {
+    pub const ITEM_MONFER_HAIR: item_id = item_id(726);
+}
+impl item_id {
+    pub const ITEM_MONFER_FANG: item_id = item_id(727);
+}
+impl item_id {
+    pub const ITEM_MONFER_CREST: item_id = item_id(728);
+}
+impl item_id {
+    pub const ITEM_BURST_SASH: item_id = item_id(729);
+}
+impl item_id {
+    pub const ITEM_INFERN_HAIR: item_id = item_id(730);
+}
+impl item_id {
+    pub const ITEM_INFERN_FANG: item_id = item_id(731);
+}
+impl item_id {
+    pub const ITEM_INFERN_SEAL: item_id = item_id(732);
+}
+impl item_id {
+    pub const ITEM_BLAZING_RUFF: item_id = item_id(733);
+}
+impl item_id {
+    pub const ITEM_PIPLUP_FOAM: item_id = item_id(734);
+}
+impl item_id {
+    pub const ITEM_PIPLUP_CARD: item_id = item_id(735);
+}
+impl item_id {
+    pub const ITEM_SEA_ORE: item_id = item_id(736);
+}
+impl item_id {
+    pub const ITEM_WATER_CAPE: item_id = item_id(737);
+}
+impl item_id {
+    pub const ITEM_PRIN_FOAM: item_id = item_id(738);
+}
+impl item_id {
+    pub const ITEM_PRIN_CARD: item_id = item_id(739);
+}
+impl item_id {
+    pub const ITEM_PRIN_CREST: item_id = item_id(740);
+}
+impl item_id {
+    pub const ITEM_AQUA_BLADE: item_id = item_id(741);
+}
+impl item_id {
+    pub const ITEM_EMPOL_CLAW: item_id = item_id(742);
+}
+impl item_id {
+    pub const ITEM_EMPOL_HORN: item_id = item_id(743);
+}
+impl item_id {
+    pub const ITEM_EMPOL_SEAL: item_id = item_id(744);
+}
+impl item_id {
+    pub const ITEM_MARINE_CROWN: item_id = item_id(745);
+}
+impl item_id {
+    pub const ITEM_MUNCH_DROOL: item_id = item_id(746);
+}
+impl item_id {
+    pub const ITEM_MUNCH_CLAW: item_id = item_id(747);
+}
+impl item_id {
+    pub const ITEM_TUMMY_CHARM: item_id = item_id(748);
+}
+impl item_id {
+    pub const ITEM_GLUTTON_CAPE: item_id = item_id(749);
+}
+impl item_id {
+    pub const ITEM_SNORLAX_GASP: item_id = item_id(750);
+}
+impl item_id {
+    pub const ITEM_SNORLAX_FANG: item_id = item_id(751);
+}
+impl item_id {
+    pub const ITEM_VALOR_CHARM: item_id = item_id(752);
+}
+impl item_id {
+    pub const ITEM_GLEE_SCARF: item_id = item_id(753);
+}
+impl item_id {
+    pub const ITEM_SCYTHER_FANG: item_id = item_id(754);
+}
+impl item_id {
+    pub const ITEM_SCYTHER_CARD: item_id = item_id(755);
+}
+impl item_id {
+    pub const ITEM_AMBUSH_ROCK: item_id = item_id(756);
+}
+impl item_id {
+    pub const ITEM_STRIKE_RUFF: item_id = item_id(757);
+}
+impl item_id {
+    pub const ITEM_SCIZOR_WING: item_id = item_id(758);
+}
+impl item_id {
+    pub const ITEM_SCIZOR_CARD: item_id = item_id(759);
+}
+impl item_id {
+    pub const ITEM_STEEL_CHARM: item_id = item_id(760);
+}
+impl item_id {
+    pub const ITEM_RED_ARMLET: item_id = item_id(761);
+}
+impl item_id {
+    pub const ITEM_LAPRAS_SONG: item_id = item_id(762);
+}
+impl item_id {
+    pub const ITEM_LAPRAS_CARD: item_id = item_id(763);
+}
+impl item_id {
+    pub const ITEM_WAVY_CHARM: item_id = item_id(764);
+}
+impl item_id {
+    pub const ITEM_MYSTIC_SCARF: item_id = item_id(765);
+}
+impl item_id {
+    pub const ITEM_EEVEE_TAIL: item_id = item_id(766);
+}
+impl item_id {
+    pub const ITEM_EEVEE_CARD: item_id = item_id(767);
+}
+impl item_id {
+    pub const ITEM_EVOLVE_CHARM: item_id = item_id(768);
+}
+impl item_id {
+    pub const ITEM_EEVEE: item_id = item_id(769);
+}
+impl item_id {
+    pub const ITEM_CLEFFA_DEW: item_id = item_id(770);
+}
+impl item_id {
+    pub const ITEM_CLEFFA_CARD: item_id = item_id(771);
+}
+impl item_id {
+    pub const ITEM_STARRY_ORE: item_id = item_id(772);
+}
+impl item_id {
+    pub const ITEM_COMET_RING: item_id = item_id(773);
+}
+impl item_id {
+    pub const ITEM_CLEF_CLAW: item_id = item_id(774);
+}
+impl item_id {
+    pub const ITEM_CLEF_FANG: item_id = item_id(775);
+}
+impl item_id {
+    pub const ITEM_MOON_JEWEL: item_id = item_id(776);
+}
+impl item_id {
+    pub const ITEM_MOON_SCARF: item_id = item_id(777);
+}
+impl item_id {
+    pub const ITEM_CLEFA_CLAW: item_id = item_id(778);
+}
+impl item_id {
+    pub const ITEM_CLEFA_CARD: item_id = item_id(779);
+}
+impl item_id {
+    pub const ITEM_MOON_ROCK: item_id = item_id(780);
+}
+impl item_id {
+    pub const ITEM_FAIRY_BOW: item_id = item_id(781);
+}
+impl item_id {
+    pub const ITEM_IGGLY_DEW: item_id = item_id(782);
+}
+impl item_id {
+    pub const ITEM_IGGLY_CARD: item_id = item_id(783);
+}
+impl item_id {
+    pub const ITEM_BOUNCY_CHARM: item_id = item_id(784);
+}
+impl item_id {
+    pub const ITEM_PRETTY_BOW: item_id = item_id(785);
+}
+impl item_id {
+    pub const ITEM_JIGGLY_SONG: item_id = item_id(786);
+}
+impl item_id {
+    pub const ITEM_JIGGLY_CARD: item_id = item_id(787);
+}
+impl item_id {
+    pub const ITEM_SLUMBER_ROCK: item_id = item_id(788);
+}
+impl item_id {
+    pub const ITEM_SNOOZE_RING: item_id = item_id(789);
+}
+impl item_id {
+    pub const ITEM_WIGGLY_HAIR: item_id = item_id(790);
+}
+impl item_id {
+    pub const ITEM_WIGGLY_CARD: item_id = item_id(791);
+}
+impl item_id {
+    pub const ITEM_BUDDY_ROCK: item_id = item_id(792);
+}
+impl item_id {
+    pub const ITEM_FRIEND_TORC: item_id = item_id(793);
+}
+impl item_id {
+    pub const ITEM_TOGEPI_DEW: item_id = item_id(794);
+}
+impl item_id {
+    pub const ITEM_TOGEPI_CARD: item_id = item_id(795);
+}
+impl item_id {
+    pub const ITEM_PURE_HEART: item_id = item_id(796);
+}
+impl item_id {
+    pub const ITEM_ANGEL_SCARF: item_id = item_id(797);
+}
+impl item_id {
+    pub const ITEM_TOGETIC_WING: item_id = item_id(798);
+}
+impl item_id {
+    pub const ITEM_TOGETIC_CARD: item_id = item_id(799);
+}
+impl item_id {
+    pub const ITEM_HAPPY_ROCK: item_id = item_id(800);
+}
+impl item_id {
+    pub const ITEM_LUCK_BROOCH: item_id = item_id(801);
+}
+impl item_id {
+    pub const ITEM_TOGEK_WING: item_id = item_id(802);
+}
+impl item_id {
+    pub const ITEM_TOGEK_CARD: item_id = item_id(803);
+}
+impl item_id {
+    pub const ITEM_OVATION_ROCK: item_id = item_id(804);
+}
+impl item_id {
+    pub const ITEM_GLITTER_ROBE: item_id = item_id(805);
+}
+impl item_id {
+    pub const ITEM_SNEASEL_CLAW: item_id = item_id(806);
+}
+impl item_id {
+    pub const ITEM_SNEASEL_CARD: item_id = item_id(807);
+}
+impl item_id {
+    pub const ITEM_DUSK_JEWEL: item_id = item_id(808);
+}
+impl item_id {
+    pub const ITEM_CRUEL_RING: item_id = item_id(809);
+}
+impl item_id {
+    pub const ITEM_WEAVILE_CLAW: item_id = item_id(810);
+}
+impl item_id {
+    pub const ITEM_WEAVILE_FANG: item_id = item_id(811);
+}
+impl item_id {
+    pub const ITEM_VILE_TAG: item_id = item_id(812);
+}
+impl item_id {
+    pub const ITEM_RUIN_ARMLET: item_id = item_id(813);
+}
+impl item_id {
+    pub const ITEM_TEDDI_CLAW: item_id = item_id(814);
+}
+impl item_id {
+    pub const ITEM_TEDDI_CARD: item_id = item_id(815);
+}
+impl item_id {
+    pub const ITEM_HONEY_ROCK: item_id = item_id(816);
+}
+impl item_id {
+    pub const ITEM_HEAL_SCARF: item_id = item_id(817);
+}
+impl item_id {
+    pub const ITEM_URSA_CLAW: item_id = item_id(818);
+}
+impl item_id {
+    pub const ITEM_URSA_FANG: item_id = item_id(819);
+}
+impl item_id {
+    pub const ITEM_CALMING_ROCK: item_id = item_id(820);
+}
+impl item_id {
+    pub const ITEM_HIBER_SCARF: item_id = item_id(821);
+}
+impl item_id {
+    pub const ITEM_TYRO_SWEAT: item_id = item_id(822);
+}
+impl item_id {
+    pub const ITEM_TYRO_CARD: item_id = item_id(823);
+}
+impl item_id {
+    pub const ITEM_MUSCLE_CHARM: item_id = item_id(824);
+}
+impl item_id {
+    pub const ITEM_TYROGUE: item_id = item_id(825);
+}
+impl item_id {
+    pub const ITEM_SMOOCH_SONG: item_id = item_id(826);
+}
+impl item_id {
+    pub const ITEM_SMOOCH_CARD: item_id = item_id(827);
+}
+impl item_id {
+    pub const ITEM_KISS_CHARM: item_id = item_id(828);
+}
+impl item_id {
+    pub const ITEM_HEART_TIARA: item_id = item_id(829);
+}
+impl item_id {
+    pub const ITEM_JYNX_SONG: item_id = item_id(830);
+}
+impl item_id {
+    pub const ITEM_JYNX_CARD: item_id = item_id(831);
+}
+impl item_id {
+    pub const ITEM_FROZEN_ORE: item_id = item_id(832);
+}
+impl item_id {
+    pub const ITEM_RUIN_SCARF: item_id = item_id(833);
+}
+impl item_id {
+    pub const ITEM_ELEKID_CLAW: item_id = item_id(834);
+}
+impl item_id {
+    pub const ITEM_ELEKID_CARD: item_id = item_id(835);
+}
+impl item_id {
+    pub const ITEM_JOLT_CHARM: item_id = item_id(836);
+}
+impl item_id {
+    pub const ITEM_CURRENT_RING: item_id = item_id(837);
+}
+impl item_id {
+    pub const ITEM_ELECTA_CLAW: item_id = item_id(838);
+}
+impl item_id {
+    pub const ITEM_ELECTA_FANG: item_id = item_id(839);
+}
+impl item_id {
+    pub const ITEM_CHARGE_SEAL: item_id = item_id(840);
+}
+impl item_id {
+    pub const ITEM_VOLT_BANGLE: item_id = item_id(841);
+}
+impl item_id {
+    pub const ITEM_ELECTI_CLAW: item_id = item_id(842);
+}
+impl item_id {
+    pub const ITEM_ELECTI_CARD: item_id = item_id(843);
+}
+impl item_id {
+    pub const ITEM_VOLTAIC_ROCK: item_id = item_id(844);
+}
+impl item_id {
+    pub const ITEM_VOLTAIC_BAND: item_id = item_id(845);
+}
+impl item_id {
+    pub const ITEM_MAGBY_CLAW: item_id = item_id(846);
+}
+impl item_id {
+    pub const ITEM_MAGBY_CARD: item_id = item_id(847);
+}
+impl item_id {
+    pub const ITEM_EMBER_JEWEL: item_id = item_id(848);
+}
+impl item_id {
+    pub const ITEM_COAL_RING: item_id = item_id(849);
+}
+impl item_id {
+    pub const ITEM_MAGMAR_CLAW: item_id = item_id(850);
+}
+impl item_id {
+    pub const ITEM_MAGMAR_CARD: item_id = item_id(851);
+}
+impl item_id {
+    pub const ITEM_ERUPT_ORE: item_id = item_id(852);
+}
+impl item_id {
+    pub const ITEM_MAGMA_SCARF: item_id = item_id(853);
+}
+impl item_id {
+    pub const ITEM_MAGMOR_CLAW: item_id = item_id(854);
+}
+impl item_id {
+    pub const ITEM_MAGMOR_CARD: item_id = item_id(855);
+}
+impl item_id {
+    pub const ITEM_VULCAN_ROCK: item_id = item_id(856);
+}
+impl item_id {
+    pub const ITEM_BURNING_TORC: item_id = item_id(857);
+}
+impl item_id {
+    pub const ITEM_AZURI_DEW: item_id = item_id(858);
+}
+impl item_id {
+    pub const ITEM_AZURI_CARD: item_id = item_id(859);
+}
+impl item_id {
+    pub const ITEM_FOUNT_CHARM: item_id = item_id(860);
+}
+impl item_id {
+    pub const ITEM_WATER_FLOAT: item_id = item_id(861);
+}
+impl item_id {
+    pub const ITEM_MARILL_DEW: item_id = item_id(862);
+}
+impl item_id {
+    pub const ITEM_MARILL_CARD: item_id = item_id(863);
+}
+impl item_id {
+    pub const ITEM_SURFER_ROCK: item_id = item_id(864);
+}
+impl item_id {
+    pub const ITEM_BRINE_SCARF: item_id = item_id(865);
+}
+impl item_id {
+    pub const ITEM_AZUMA_DEW: item_id = item_id(866);
+}
+impl item_id {
+    pub const ITEM_AZUMA_CARD: item_id = item_id(867);
+}
+impl item_id {
+    pub const ITEM_STREAM_CHARM: item_id = item_id(868);
+}
+impl item_id {
+    pub const ITEM_DOTTED_SCARF: item_id = item_id(869);
+}
+impl item_id {
+    pub const ITEM_PLUSLE_TAIL: item_id = item_id(870);
+}
+impl item_id {
+    pub const ITEM_PLUSLE_CARD: item_id = item_id(871);
+}
+impl item_id {
+    pub const ITEM_CHEER_ROCK: item_id = item_id(872);
+}
+impl item_id {
+    pub const ITEM_PULSE_BOW: item_id = item_id(873);
+}
+impl item_id {
+    pub const ITEM_MINUN_TAIL: item_id = item_id(874);
+}
+impl item_id {
+    pub const ITEM_MINUN_CARD: item_id = item_id(875);
+}
+impl item_id {
+    pub const ITEM_VOLT_HEART: item_id = item_id(876);
+}
+impl item_id {
+    pub const ITEM_SPARK_TIE: item_id = item_id(877);
+}
+impl item_id {
+    pub const ITEM_CAST_DEW: item_id = item_id(878);
+}
+impl item_id {
+    pub const ITEM_CAST_CARD: item_id = item_id(879);
+}
+impl item_id {
+    pub const ITEM_CLOUD_ROCK: item_id = item_id(880);
+}
+impl item_id {
+    pub const ITEM_WEATHER_CAPE: item_id = item_id(881);
+}
+impl item_id {
+    pub const ITEM_WYNAUT_TAIL: item_id = item_id(882);
+}
+impl item_id {
+    pub const ITEM_WYNAUT_CARD: item_id = item_id(883);
+}
+impl item_id {
+    pub const ITEM_GRIN_CHARM: item_id = item_id(884);
+}
+impl item_id {
+    pub const ITEM_CHEERY_SCARF: item_id = item_id(885);
+}
+impl item_id {
+    pub const ITEM_WOBBU_SWEAT: item_id = item_id(886);
+}
+impl item_id {
+    pub const ITEM_WOBBU_CARD: item_id = item_id(887);
+}
+impl item_id {
+    pub const ITEM_ENDURE_ROCK: item_id = item_id(888);
+}
+impl item_id {
+    pub const ITEM_SUFFER_SCARF: item_id = item_id(889);
+}
+impl item_id {
+    pub const ITEM_BIDOOF_TOOTH: item_id = item_id(890);
+}
+impl item_id {
+    pub const ITEM_BIDOOF_CARD: item_id = item_id(891);
+}
+impl item_id {
+    pub const ITEM_FALL_CHARM: item_id = item_id(892);
+}
+impl item_id {
+    pub const ITEM_STOLID_SCARF: item_id = item_id(893);
+}
+impl item_id {
+    pub const ITEM_BIBA_TOOTH: item_id = item_id(894);
+}
+impl item_id {
+    pub const ITEM_BIBA_CARD: item_id = item_id(895);
+}
+impl item_id {
+    pub const ITEM_RIVER_CHARM: item_id = item_id(896);
+}
+impl item_id {
+    pub const ITEM_DAM_SCARF: item_id = item_id(897);
+}
+impl item_id {
+    pub const ITEM_SHINX_CLAW: item_id = item_id(898);
+}
+impl item_id {
+    pub const ITEM_SHINX_FANG: item_id = item_id(899);
+}
+impl item_id {
+    pub const ITEM_FLASH_TAG: item_id = item_id(900);
+}
+impl item_id {
+    pub const ITEM_ENERGY_SCARF: item_id = item_id(901);
+}
+impl item_id {
+    pub const ITEM_LUXIO_CLAW: item_id = item_id(902);
+}
+impl item_id {
+    pub const ITEM_LUXIO_FANG: item_id = item_id(903);
+}
+impl item_id {
+    pub const ITEM_SPARK_TAG: item_id = item_id(904);
+}
+impl item_id {
+    pub const ITEM_SPARK_SCARF: item_id = item_id(905);
+}
+impl item_id {
+    pub const ITEM_LUXRAY_CLAW: item_id = item_id(906);
+}
+impl item_id {
+    pub const ITEM_LUXRAY_FANG: item_id = item_id(907);
+}
+impl item_id {
+    pub const ITEM_GLARE_TAG: item_id = item_id(908);
+}
+impl item_id {
+    pub const ITEM_GLARE_SASH: item_id = item_id(909);
+}
+impl item_id {
+    pub const ITEM_PACHI_TOOTH: item_id = item_id(910);
+}
+impl item_id {
+    pub const ITEM_PACHI_CARD: item_id = item_id(911);
+}
+impl item_id {
+    pub const ITEM_ROUSE_CHARM: item_id = item_id(912);
+}
+impl item_id {
+    pub const ITEM_MIRACLE_BOW: item_id = item_id(913);
+}
+impl item_id {
+    pub const ITEM_BUIZEL_FANG: item_id = item_id(914);
+}
+impl item_id {
+    pub const ITEM_BUIZEL_CARD: item_id = item_id(915);
+}
+impl item_id {
+    pub const ITEM_SWIMMER_ROCK: item_id = item_id(916);
+}
+impl item_id {
+    pub const ITEM_SCREW_TORC: item_id = item_id(917);
+}
+impl item_id {
+    pub const ITEM_FLOAT_FANG: item_id = item_id(918);
+}
+impl item_id {
+    pub const ITEM_FLOAT_CARD: item_id = item_id(919);
+}
+impl item_id {
+    pub const ITEM_RESCUE_ROCK: item_id = item_id(920);
+}
+impl item_id {
+    pub const ITEM_FLOAT_AID: item_id = item_id(921);
+}
+impl item_id {
+    pub const ITEM_DRIFLOO_GASP: item_id = item_id(922);
+}
+impl item_id {
+    pub const ITEM_DRIFLOO_CARD: item_id = item_id(923);
+}
+impl item_id {
+    pub const ITEM_WIND_HEART: item_id = item_id(924);
+}
+impl item_id {
+    pub const ITEM_DRAFT_RING: item_id = item_id(925);
+}
+impl item_id {
+    pub const ITEM_DRIFBLI_GASP: item_id = item_id(926);
+}
+impl item_id {
+    pub const ITEM_DRIFBLI_CARD: item_id = item_id(927);
+}
+impl item_id {
+    pub const ITEM_EASY_CHARM: item_id = item_id(928);
+}
+impl item_id {
+    pub const ITEM_BREEZE_SCARF: item_id = item_id(929);
+}
+impl item_id {
+    pub const ITEM_CHERUBI_SEED: item_id = item_id(930);
+}
+impl item_id {
+    pub const ITEM_CHERUBI_CARD: item_id = item_id(931);
+}
+impl item_id {
+    pub const ITEM_CUTE_ORE: item_id = item_id(932);
+}
+impl item_id {
+    pub const ITEM_CHARM_BOW: item_id = item_id(933);
+}
+impl item_id {
+    pub const ITEM_CHERRIM_DEW: item_id = item_id(934);
+}
+impl item_id {
+    pub const ITEM_CHERRIM_CARD: item_id = item_id(935);
+}
+impl item_id {
+    pub const ITEM_SWEET_AROMA: item_id = item_id(936);
+}
+impl item_id {
+    pub const ITEM_PETAL_DRESS: item_id = item_id(937);
+}
+impl item_id {
+    pub const ITEM_BONSLY_DEW: item_id = item_id(938);
+}
+impl item_id {
+    pub const ITEM_BONSLY_CARD: item_id = item_id(939);
+}
+impl item_id {
+    pub const ITEM_ARID_TAG: item_id = item_id(940);
+}
+impl item_id {
+    pub const ITEM_TEARY_CAPE: item_id = item_id(941);
+}
+impl item_id {
+    pub const ITEM_SUDO_SWEAT: item_id = item_id(942);
+}
+impl item_id {
+    pub const ITEM_SUDO_CARD: item_id = item_id(943);
+}
+impl item_id {
+    pub const ITEM_DRAIN_ROCK: item_id = item_id(944);
+}
+impl item_id {
+    pub const ITEM_FAKE_TORC: item_id = item_id(945);
+}
+impl item_id {
+    pub const ITEM_JUNIOR_BEAM: item_id = item_id(946);
+}
+impl item_id {
+    pub const ITEM_JUNIOR_CARD: item_id = item_id(947);
+}
+impl item_id {
+    pub const ITEM_MIMIC_PEBBLE: item_id = item_id(948);
+}
+impl item_id {
+    pub const ITEM_COPY_MASK: item_id = item_id(949);
+}
+impl item_id {
+    pub const ITEM_MIME_KEY: item_id = item_id(950);
+}
+impl item_id {
+    pub const ITEM_MIME_CARD: item_id = item_id(951);
+}
+impl item_id {
+    pub const ITEM_BULWARK_ROCK: item_id = item_id(952);
+}
+impl item_id {
+    pub const ITEM_BARRIER_BOW: item_id = item_id(953);
+}
+impl item_id {
+    pub const ITEM_HAPPINY_DEW: item_id = item_id(954);
+}
+impl item_id {
+    pub const ITEM_HAPPINY_CARD: item_id = item_id(955);
+}
+impl item_id {
+    pub const ITEM_PLAY_TAG: item_id = item_id(956);
+}
+impl item_id {
+    pub const ITEM_NURTURE_CAPE: item_id = item_id(957);
+}
+impl item_id {
+    pub const ITEM_CHANSEY_SONG: item_id = item_id(958);
+}
+impl item_id {
+    pub const ITEM_CHANSEY_CARD: item_id = item_id(959);
+}
+impl item_id {
+    pub const ITEM_LUCKY_CHARM: item_id = item_id(960);
+}
+impl item_id {
+    pub const ITEM_LUCKY_SCARF: item_id = item_id(961);
+}
+impl item_id {
+    pub const ITEM_BLISSEY_SONG: item_id = item_id(962);
+}
+impl item_id {
+    pub const ITEM_BLISSEY_CARD: item_id = item_id(963);
+}
+impl item_id {
+    pub const ITEM_AMITY_ROCK: item_id = item_id(964);
+}
+impl item_id {
+    pub const ITEM_FAITH_RING: item_id = item_id(965);
+}
+impl item_id {
+    pub const ITEM_GIBLE_FANG: item_id = item_id(966);
+}
+impl item_id {
+    pub const ITEM_GIBLE_CARD: item_id = item_id(967);
+}
+impl item_id {
+    pub const ITEM_DRAGON_JEWEL: item_id = item_id(968);
+}
+impl item_id {
+    pub const ITEM_DRAGON_TIE: item_id = item_id(969);
+}
+impl item_id {
+    pub const ITEM_GABITE_CLAW: item_id = item_id(970);
+}
+impl item_id {
+    pub const ITEM_GABITE_FANG: item_id = item_id(971);
+}
+impl item_id {
+    pub const ITEM_STAR_ROCK: item_id = item_id(972);
+}
+impl item_id {
+    pub const ITEM_METEOR_TORC: item_id = item_id(973);
+}
+impl item_id {
+    pub const ITEM_GAR_CLAW: item_id = item_id(974);
+}
+impl item_id {
+    pub const ITEM_GAR_FANG: item_id = item_id(975);
+}
+impl item_id {
+    pub const ITEM_SPEED_TAG: item_id = item_id(976);
+}
+impl item_id {
+    pub const ITEM_MACH_SCARF: item_id = item_id(977);
+}
+impl item_id {
+    pub const ITEM_RIOLU_TAIL: item_id = item_id(978);
+}
+impl item_id {
+    pub const ITEM_RIOLU_CARD: item_id = item_id(979);
+}
+impl item_id {
+    pub const ITEM_VALIANT_ROCK: item_id = item_id(980);
+}
+impl item_id {
+    pub const ITEM_EMIT_RING: item_id = item_id(981);
+}
+impl item_id {
+    pub const ITEM_LUCARIO_FANG: item_id = item_id(982);
+}
+impl item_id {
+    pub const ITEM_LUCARIO_CARD: item_id = item_id(983);
+}
+impl item_id {
+    pub const ITEM_PLEDGE_ROCK: item_id = item_id(984);
+}
+impl item_id {
+    pub const ITEM_RAVAGE_RING: item_id = item_id(985);
+}
+impl item_id {
+    pub const ITEM_MANTYKE_BEAM: item_id = item_id(986);
+}
+impl item_id {
+    pub const ITEM_MANTYKE_CARD: item_id = item_id(987);
+}
+impl item_id {
+    pub const ITEM_WAFT_ROCK: item_id = item_id(988);
+}
+impl item_id {
+    pub const ITEM_OCEAN_BOW: item_id = item_id(989);
+}
+impl item_id {
+    pub const ITEM_MANTINE_FOAM: item_id = item_id(990);
+}
+impl item_id {
+    pub const ITEM_MANTINE_CARD: item_id = item_id(991);
+}
+impl item_id {
+    pub const ITEM_SUNSET_ROCK: item_id = item_id(992);
+}
+impl item_id {
+    pub const ITEM_HORIZON_BOW: item_id = item_id(993);
+}
+impl item_id {
+    pub const ITEM_PHIONE_SONG: item_id = item_id(994);
+}
+impl item_id {
+    pub const ITEM_PHIONE_CARD: item_id = item_id(995);
+}
+impl item_id {
+    pub const ITEM_WAVE_JEWEL: item_id = item_id(996);
+}
+impl item_id {
+    pub const ITEM_RIPPLE_CAPE: item_id = item_id(997);
+}
+impl item_id {
+    pub const ITEM_VULPIX_TAIL: item_id = item_id(998);
+}
+impl item_id {
+    pub const ITEM_VULPIX_CARD: item_id = item_id(999);
+}
+impl item_id {
+    pub const ITEM_VULPIX_TAG: item_id = item_id(1000);
+}
+impl item_id {
+    pub const ITEM_GLOWING_BOW: item_id = item_id(1001);
+}
+impl item_id {
+    pub const ITEM_NINE_HAIR: item_id = item_id(1002);
+}
+impl item_id {
+    pub const ITEM_NINE_CARD: item_id = item_id(1003);
+}
+impl item_id {
+    pub const ITEM_NINE_SEAL: item_id = item_id(1004);
+}
+impl item_id {
+    pub const ITEM_AFIRE_COLLAR: item_id = item_id(1005);
+}
+impl item_id {
+    pub const ITEM_PHANPY_CLAW: item_id = item_id(1006);
+}
+impl item_id {
+    pub const ITEM_PHANPY_CARD: item_id = item_id(1007);
+}
+impl item_id {
+    pub const ITEM_PHANPY_TAG: item_id = item_id(1008);
+}
+impl item_id {
+    pub const ITEM_VALUE_RUFF: item_id = item_id(1009);
+}
+impl item_id {
+    pub const ITEM_DONPHAN_FANG: item_id = item_id(1010);
+}
+impl item_id {
+    pub const ITEM_DONPHAN_CARD: item_id = item_id(1011);
+}
+impl item_id {
+    pub const ITEM_DON_CREST: item_id = item_id(1012);
+}
+impl item_id {
+    pub const ITEM_ARMOR_SCARF: item_id = item_id(1013);
+}
+impl item_id {
+    pub const ITEM_CATER_BELT: item_id = item_id(1014);
+}
+impl item_id {
+    pub const ITEM_DEFENSE_BOW: item_id = item_id(1015);
+}
+impl item_id {
+    pub const ITEM_GLITTERY_BOW: item_id = item_id(1016);
+}
+impl item_id {
+    pub const ITEM_WEEDLE_BOW: item_id = item_id(1017);
+}
+impl item_id {
+    pub const ITEM_KAKUNA_SCARF: item_id = item_id(1018);
+}
+impl item_id {
+    pub const ITEM_CHARGE_SCARF: item_id = item_id(1019);
+}
+impl item_id {
+    pub const ITEM_PIDGEY_BOW: item_id = item_id(1020);
+}
+impl item_id {
+    pub const ITEM_PIDGEO_SCARF: item_id = item_id(1021);
+}
+impl item_id {
+    pub const ITEM_PIDGEOT_TORC: item_id = item_id(1022);
+}
+impl item_id {
+    pub const ITEM_RATTA_SCARF: item_id = item_id(1023);
+}
+impl item_id {
+    pub const ITEM_OVERCOME_BOW: item_id = item_id(1024);
+}
+impl item_id {
+    pub const ITEM_QUIRKY_BOW: item_id = item_id(1025);
+}
+impl item_id {
+    pub const ITEM_WING_SCARF: item_id = item_id(1026);
+}
+impl item_id {
+    pub const ITEM_LEASH_BOW: item_id = item_id(1027);
+}
+impl item_id {
+    pub const ITEM_SHOCK_RUFF: item_id = item_id(1028);
+}
+impl item_id {
+    pub const ITEM_SAND_SCARF: item_id = item_id(1029);
+}
+impl item_id {
+    pub const ITEM_SANDY_TORC: item_id = item_id(1030);
+}
+impl item_id {
+    pub const ITEM_POINTY_SCARF: item_id = item_id(1031);
+}
+impl item_id {
+    pub const ITEM_RETURN_SCARF: item_id = item_id(1032);
+}
+impl item_id {
+    pub const ITEM_IMPACT_TORC: item_id = item_id(1033);
+}
+impl item_id {
+    pub const ITEM_HALVE_SCARF: item_id = item_id(1034);
+}
+impl item_id {
+    pub const ITEM_THORNY_SCARF: item_id = item_id(1035);
+}
+impl item_id {
+    pub const ITEM_KING_SASH: item_id = item_id(1036);
+}
+impl item_id {
+    pub const ITEM_DODGE_BOW: item_id = item_id(1037);
+}
+impl item_id {
+    pub const ITEM_ABSORB_SCARF: item_id = item_id(1038);
+}
+impl item_id {
+    pub const ITEM_ODD_BOW: item_id = item_id(1039);
+}
+impl item_id {
+    pub const ITEM_GUARD_HAT: item_id = item_id(1040);
+}
+impl item_id {
+    pub const ITEM_AROMA_SCARF: item_id = item_id(1041);
+}
+impl item_id {
+    pub const ITEM_MOVING_SCARF: item_id = item_id(1042);
+}
+impl item_id {
+    pub const ITEM_FIRM_HAT: item_id = item_id(1043);
+}
+impl item_id {
+    pub const ITEM_GAZE_GOGGLES: item_id = item_id(1044);
+}
+impl item_id {
+    pub const ITEM_VENOMOTH_BOW: item_id = item_id(1045);
+}
+impl item_id {
+    pub const ITEM_DIGLETT_HAT: item_id = item_id(1046);
+}
+impl item_id {
+    pub const ITEM_DUGTRIO_BOW: item_id = item_id(1047);
+}
+impl item_id {
+    pub const ITEM_PSYDUCK_HAT: item_id = item_id(1048);
+}
+impl item_id {
+    pub const ITEM_PADDLE_SCARF: item_id = item_id(1049);
+}
+impl item_id {
+    pub const ITEM_MANKEY_TORC: item_id = item_id(1050);
+}
+impl item_id {
+    pub const ITEM_NULLIFY_BELT: item_id = item_id(1051);
+}
+impl item_id {
+    pub const ITEM_GROWL_SCARF: item_id = item_id(1052);
+}
+impl item_id {
+    pub const ITEM_LEGEND_BOW: item_id = item_id(1053);
+}
+impl item_id {
+    pub const ITEM_DAMP_BOW: item_id = item_id(1054);
+}
+impl item_id {
+    pub const ITEM_POLI_BOW: item_id = item_id(1055);
+}
+impl item_id {
+    pub const ITEM_BOLD_BELT: item_id = item_id(1056);
+}
+impl item_id {
+    pub const ITEM_PREDICT_TORC: item_id = item_id(1057);
+}
+impl item_id {
+    pub const ITEM_PSYCHIC_TORC: item_id = item_id(1058);
+}
+impl item_id {
+    pub const ITEM_SPARKLE_RUFF: item_id = item_id(1059);
+}
+impl item_id {
+    pub const ITEM_IMPISH_BAND: item_id = item_id(1060);
+}
+impl item_id {
+    pub const ITEM_STRONG_BELT: item_id = item_id(1061);
+}
+impl item_id {
+    pub const ITEM_MACHAMP_BELT: item_id = item_id(1062);
+}
+impl item_id {
+    pub const ITEM_BELL_BOW: item_id = item_id(1063);
+}
+impl item_id {
+    pub const ITEM_DIGEST_SCARF: item_id = item_id(1064);
+}
+impl item_id {
+    pub const ITEM_VICTREE_TORC: item_id = item_id(1065);
+}
+impl item_id {
+    pub const ITEM_TANGLE_BOW: item_id = item_id(1066);
+}
+impl item_id {
+    pub const ITEM_TENTA_CAPE: item_id = item_id(1067);
+}
+impl item_id {
+    pub const ITEM_GEODUDE_TORC: item_id = item_id(1068);
+}
+impl item_id {
+    pub const ITEM_ROCKY_TORC: item_id = item_id(1069);
+}
+impl item_id {
+    pub const ITEM_RUGGED_SASH: item_id = item_id(1070);
+}
+impl item_id {
+    pub const ITEM_HEATED_BOW: item_id = item_id(1071);
+}
+impl item_id {
+    pub const ITEM_SUNLIGHT_BOW: item_id = item_id(1072);
+}
+impl item_id {
+    pub const ITEM_SLOWPOKE_HAT: item_id = item_id(1073);
+}
+impl item_id {
+    pub const ITEM_SLOW_SCARF: item_id = item_id(1074);
+}
+impl item_id {
+    pub const ITEM_MAGNE_TORC: item_id = item_id(1075);
+}
+impl item_id {
+    pub const ITEM_MAGNETON_BOW: item_id = item_id(1076);
+}
+impl item_id {
+    pub const ITEM_BULLSEYE_BOW: item_id = item_id(1077);
+}
+impl item_id {
+    pub const ITEM_BUDDY_TORC: item_id = item_id(1078);
+}
+impl item_id {
+    pub const ITEM_FIGHT_TORC: item_id = item_id(1079);
+}
+impl item_id {
+    pub const ITEM_GENTLE_BOW: item_id = item_id(1080);
+}
+impl item_id {
+    pub const ITEM_NORTH_TORC: item_id = item_id(1081);
+}
+impl item_id {
+    pub const ITEM_GRIMY_SCARF: item_id = item_id(1082);
+}
+impl item_id {
+    pub const ITEM_SLIMY_BOW: item_id = item_id(1083);
+}
+impl item_id {
+    pub const ITEM_SHELL_TORC: item_id = item_id(1084);
+}
+impl item_id {
+    pub const ITEM_COVER_ARMOR: item_id = item_id(1085);
+}
+impl item_id {
+    pub const ITEM_GASTLY_VEIL: item_id = item_id(1086);
+}
+impl item_id {
+    pub const ITEM_SLIP_SCARF: item_id = item_id(1087);
+}
+impl item_id {
+    pub const ITEM_SUNGLASSES: item_id = item_id(1088);
+}
+impl item_id {
+    pub const ITEM_TRUST_BROOCH: item_id = item_id(1089);
+}
+impl item_id {
+    pub const ITEM_DROWZEE_TIE: item_id = item_id(1090);
+}
+impl item_id {
+    pub const ITEM_DREAM_COIN: item_id = item_id(1091);
+}
+impl item_id {
+    pub const ITEM_KRABBY_BOW: item_id = item_id(1092);
+}
+impl item_id {
+    pub const ITEM_SUPER_SASH: item_id = item_id(1093);
+}
+impl item_id {
+    pub const ITEM_BALL_SCARF: item_id = item_id(1094);
+}
+impl item_id {
+    pub const ITEM_ELECTRO_BOW: item_id = item_id(1095);
+}
+impl item_id {
+    pub const ITEM_REPEL_SCARF: item_id = item_id(1096);
+}
+impl item_id {
+    pub const ITEM_EXEGGU_SASH: item_id = item_id(1097);
+}
+impl item_id {
+    pub const ITEM_CUBONE_SCARF: item_id = item_id(1098);
+}
+impl item_id {
+    pub const ITEM_MAROWAK_TORC: item_id = item_id(1099);
+}
+impl item_id {
+    pub const ITEM_LICKY_SCARF: item_id = item_id(1100);
+}
+impl item_id {
+    pub const ITEM_KOFFING_BOW: item_id = item_id(1101);
+}
+impl item_id {
+    pub const ITEM_WEEZ_SCARF: item_id = item_id(1102);
+}
+impl item_id {
+    pub const ITEM_SOLID_SHIELD: item_id = item_id(1103);
+}
+impl item_id {
+    pub const ITEM_PIERCE_DRILL: item_id = item_id(1104);
+}
+impl item_id {
+    pub const ITEM_STICKY_BOW: item_id = item_id(1105);
+}
+impl item_id {
+    pub const ITEM_KANG_APRON: item_id = item_id(1106);
+}
+impl item_id {
+    pub const ITEM_HORSEA_BOW: item_id = item_id(1107);
+}
+impl item_id {
+    pub const ITEM_SWIRL_SCARF: item_id = item_id(1108);
+}
+impl item_id {
+    pub const ITEM_GOLDEEN_BOW: item_id = item_id(1109);
+}
+impl item_id {
+    pub const ITEM_SEAKING_BOW: item_id = item_id(1110);
+}
+impl item_id {
+    pub const ITEM_RECOVER_TORC: item_id = item_id(1111);
+}
+impl item_id {
+    pub const ITEM_STARMIE_BELT: item_id = item_id(1112);
+}
+impl item_id {
+    pub const ITEM_PINSIR_SASH: item_id = item_id(1113);
+}
+impl item_id {
+    pub const ITEM_RUSHING_BOW: item_id = item_id(1114);
+}
+impl item_id {
+    pub const ITEM_MAGIKARP_BOW: item_id = item_id(1115);
+}
+impl item_id {
+    pub const ITEM_TEMPEST_SASH: item_id = item_id(1116);
+}
+impl item_id {
+    pub const ITEM_DITTO_TORC: item_id = item_id(1117);
+}
+impl item_id {
+    pub const ITEM_AI_BROOCH: item_id = item_id(1118);
+}
+impl item_id {
+    pub const ITEM_SPIKE_BROOCH: item_id = item_id(1119);
+}
+impl item_id {
+    pub const ITEM_AGED_SCARF: item_id = item_id(1120);
+}
+impl item_id {
+    pub const ITEM_KABUTO_HAT: item_id = item_id(1121);
+}
+impl item_id {
+    pub const ITEM_KABU_TORC: item_id = item_id(1122);
+}
+impl item_id {
+    pub const ITEM_OLD_BROOCH: item_id = item_id(1123);
+}
+impl item_id {
+    pub const ITEM_DRAGON_SASH: item_id = item_id(1124);
+}
+impl item_id {
+    pub const ITEM_ALOFT_MANTLE: item_id = item_id(1125);
+}
+impl item_id {
+    pub const ITEM_MIRAGE_CAPE: item_id = item_id(1126);
+}
+impl item_id {
+    pub const ITEM_SENTRET_RUFF: item_id = item_id(1127);
+}
+impl item_id {
+    pub const ITEM_BODY_COLLAR: item_id = item_id(1128);
+}
+impl item_id {
+    pub const ITEM_EXPOSE_SPECS: item_id = item_id(1129);
+}
+impl item_id {
+    pub const ITEM_NOCTOWL_TORC: item_id = item_id(1130);
+}
+impl item_id {
+    pub const ITEM_MORNING_BOW: item_id = item_id(1131);
+}
+impl item_id {
+    pub const ITEM_LEDIAN_BOW: item_id = item_id(1132);
+}
+impl item_id {
+    pub const ITEM_SPINA_SCARF: item_id = item_id(1133);
+}
+impl item_id {
+    pub const ITEM_ARIADOS_BOW: item_id = item_id(1134);
+}
+impl item_id {
+    pub const ITEM_SLASH_BOW: item_id = item_id(1135);
+}
+impl item_id {
+    pub const ITEM_SHINE_TORC: item_id = item_id(1136);
+}
+impl item_id {
+    pub const ITEM_LANTURN_BOW: item_id = item_id(1137);
+}
+impl item_id {
+    pub const ITEM_LIVELY_SCARF: item_id = item_id(1138);
+}
+impl item_id {
+    pub const ITEM_XATU_BOW: item_id = item_id(1139);
+}
+impl item_id {
+    pub const ITEM_WOOL_BOW: item_id = item_id(1140);
+}
+impl item_id {
+    pub const ITEM_FLUFFY_SCARF: item_id = item_id(1141);
+}
+impl item_id {
+    pub const ITEM_SACRED_SCARF: item_id = item_id(1142);
+}
+impl item_id {
+    pub const ITEM_BRIGHT_TIARA: item_id = item_id(1143);
+}
+impl item_id {
+    pub const ITEM_RAIN_CROWN: item_id = item_id(1144);
+}
+impl item_id {
+    pub const ITEM_ZEPHYR_BOW: item_id = item_id(1145);
+}
+impl item_id {
+    pub const ITEM_SKIP_SCARF: item_id = item_id(1146);
+}
+impl item_id {
+    pub const ITEM_COTTON_TORC: item_id = item_id(1147);
+}
+impl item_id {
+    pub const ITEM_REVENGE_RUFF: item_id = item_id(1148);
+}
+impl item_id {
+    pub const ITEM_HASTY_BOW: item_id = item_id(1149);
+}
+impl item_id {
+    pub const ITEM_SUN_SCARF: item_id = item_id(1150);
+}
+impl item_id {
+    pub const ITEM_CHITIN_BOW: item_id = item_id(1151);
+}
+impl item_id {
+    pub const ITEM_WOOPER_BOW: item_id = item_id(1152);
+}
+impl item_id {
+    pub const ITEM_QUAG_TORC: item_id = item_id(1153);
+}
+impl item_id {
+    pub const ITEM_MURKROW_HAT: item_id = item_id(1154);
+}
+impl item_id {
+    pub const ITEM_KING_CAP: item_id = item_id(1155);
+}
+impl item_id {
+    pub const ITEM_MISDREA_CAPE: item_id = item_id(1156);
+}
+impl item_id {
+    pub const ITEM_CRYPTIC_SASH: item_id = item_id(1157);
+}
+impl item_id {
+    pub const ITEM_REVERSE_BOW: item_id = item_id(1158);
+}
+impl item_id {
+    pub const ITEM_ROBUST_BOW: item_id = item_id(1159);
+}
+impl item_id {
+    pub const ITEM_DENSE_PONCHO: item_id = item_id(1160);
+}
+impl item_id {
+    pub const ITEM_ESCAPE_SCARF: item_id = item_id(1161);
+}
+impl item_id {
+    pub const ITEM_TAKEOFF_RUFF: item_id = item_id(1162);
+}
+impl item_id {
+    pub const ITEM_QUARTZ_TORC: item_id = item_id(1163);
+}
+impl item_id {
+    pub const ITEM_SNUB_CAPE: item_id = item_id(1164);
+}
+impl item_id {
+    pub const ITEM_STERN_SASH: item_id = item_id(1165);
+}
+impl item_id {
+    pub const ITEM_QWILFISH_BOW: item_id = item_id(1166);
+}
+impl item_id {
+    pub const ITEM_SHUCKLE_BOW: item_id = item_id(1167);
+}
+impl item_id {
+    pub const ITEM_HORN_TORC: item_id = item_id(1168);
+}
+impl item_id {
+    pub const ITEM_LAVA_BOW: item_id = item_id(1169);
+}
+impl item_id {
+    pub const ITEM_TORRID_SCARF: item_id = item_id(1170);
+}
+impl item_id {
+    pub const ITEM_FRIGID_BOW: item_id = item_id(1171);
+}
+impl item_id {
+    pub const ITEM_FROST_TORC: item_id = item_id(1172);
+}
+impl item_id {
+    pub const ITEM_EAGER_BROOCH: item_id = item_id(1173);
+}
+impl item_id {
+    pub const ITEM_REACH_BOW: item_id = item_id(1174);
+}
+impl item_id {
+    pub const ITEM_PSY_BOW: item_id = item_id(1175);
+}
+impl item_id {
+    pub const ITEM_SNOW_BROOCH: item_id = item_id(1176);
+}
+impl item_id {
+    pub const ITEM_SKAR_CAPE: item_id = item_id(1177);
+}
+impl item_id {
+    pub const ITEM_DARK_CHOKER: item_id = item_id(1178);
+}
+impl item_id {
+    pub const ITEM_PIT_FANG: item_id = item_id(1179);
+}
+impl item_id {
+    pub const ITEM_TORNADO_BOW: item_id = item_id(1180);
+}
+impl item_id {
+    pub const ITEM_VIRTUAL_BOW: item_id = item_id(1181);
+}
+impl item_id {
+    pub const ITEM_DELUSION_BOW: item_id = item_id(1182);
+}
+impl item_id {
+    pub const ITEM_PAINT_SCARF: item_id = item_id(1183);
+}
+impl item_id {
+    pub const ITEM_MILKY_SCARF: item_id = item_id(1184);
+}
+impl item_id {
+    pub const ITEM_LARVITAR_BOW: item_id = item_id(1185);
+}
+impl item_id {
+    pub const ITEM_PUPITA_SCARF: item_id = item_id(1186);
+}
+impl item_id {
+    pub const ITEM_CRASH_CLAW: item_id = item_id(1187);
+}
+impl item_id {
+    pub const ITEM_POOCH_COLLAR: item_id = item_id(1188);
+}
+impl item_id {
+    pub const ITEM_DARK_FANG: item_id = item_id(1189);
+}
+impl item_id {
+    pub const ITEM_MERRY_SCARF: item_id = item_id(1190);
+}
+impl item_id {
+    pub const ITEM_LINOONE_RUFF: item_id = item_id(1191);
+}
+impl item_id {
+    pub const ITEM_WURMPLE_BOW: item_id = item_id(1192);
+}
+impl item_id {
+    pub const ITEM_TOUGH_SCARF: item_id = item_id(1193);
+}
+impl item_id {
+    pub const ITEM_VIVID_SILK: item_id = item_id(1194);
+}
+impl item_id {
+    pub const ITEM_GUARD_BOW: item_id = item_id(1195);
+}
+impl item_id {
+    pub const ITEM_DUSTOX_BOW: item_id = item_id(1196);
+}
+impl item_id {
+    pub const ITEM_KELP_HAT: item_id = item_id(1197);
+}
+impl item_id {
+    pub const ITEM_JOLLY_SCARF: item_id = item_id(1198);
+}
+impl item_id {
+    pub const ITEM_LUDICOLO_HAT: item_id = item_id(1199);
+}
+impl item_id {
+    pub const ITEM_SEEDOT_HAT: item_id = item_id(1200);
+}
+impl item_id {
+    pub const ITEM_NUZLEAF_BOW: item_id = item_id(1201);
+}
+impl item_id {
+    pub const ITEM_SHIFTRY_BELT: item_id = item_id(1202);
+}
+impl item_id {
+    pub const ITEM_TAILLOW_BOW: item_id = item_id(1203);
+}
+impl item_id {
+    pub const ITEM_MIDAIR_SCARF: item_id = item_id(1204);
+}
+impl item_id {
+    pub const ITEM_WINGULL_BOW: item_id = item_id(1205);
+}
+impl item_id {
+    pub const ITEM_STOCK_SCARF: item_id = item_id(1206);
+}
+impl item_id {
+    pub const ITEM_SENSING_HAT: item_id = item_id(1207);
+}
+impl item_id {
+    pub const ITEM_MAGICAL_BOW: item_id = item_id(1208);
+}
+impl item_id {
+    pub const ITEM_CARING_SCARF: item_id = item_id(1209);
+}
+impl item_id {
+    pub const ITEM_BLISS_SCARF: item_id = item_id(1210);
+}
+impl item_id {
+    pub const ITEM_BLOCKING_BOW: item_id = item_id(1211);
+}
+impl item_id {
+    pub const ITEM_MOBILE_BOW: item_id = item_id(1212);
+}
+impl item_id {
+    pub const ITEM_THWART_BOW: item_id = item_id(1213);
+}
+impl item_id {
+    pub const ITEM_SLAK_SCARF: item_id = item_id(1214);
+}
+impl item_id {
+    pub const ITEM_VIGOR_SASH: item_id = item_id(1215);
+}
+impl item_id {
+    pub const ITEM_LAZY_RUFF: item_id = item_id(1216);
+}
+impl item_id {
+    pub const ITEM_NOVICE_SCARF: item_id = item_id(1217);
+}
+impl item_id {
+    pub const ITEM_NINJA_RUFF: item_id = item_id(1218);
+}
+impl item_id {
+    pub const ITEM_AWE_MANTLE: item_id = item_id(1219);
+}
+impl item_id {
+    pub const ITEM_GOOD_EARRING: item_id = item_id(1220);
+}
+impl item_id {
+    pub const ITEM_NICE_BANGLE: item_id = item_id(1221);
+}
+impl item_id {
+    pub const ITEM_GREAT_TORC: item_id = item_id(1222);
+}
+impl item_id {
+    pub const ITEM_MAKUHIT_BELT: item_id = item_id(1223);
+}
+impl item_id {
+    pub const ITEM_THRUST_BELT: item_id = item_id(1224);
+}
+impl item_id {
+    pub const ITEM_NOSE_TORC: item_id = item_id(1225);
+}
+impl item_id {
+    pub const ITEM_SABLE_SCOPE: item_id = item_id(1226);
+}
+impl item_id {
+    pub const ITEM_DECEIT_MASK: item_id = item_id(1227);
+}
+impl item_id {
+    pub const ITEM_IRON_TORC: item_id = item_id(1228);
+}
+impl item_id {
+    pub const ITEM_METAL_BANGLE: item_id = item_id(1229);
+}
+impl item_id {
+    pub const ITEM_IRON_HELMET: item_id = item_id(1230);
+}
+impl item_id {
+    pub const ITEM_INTUIT_BOW: item_id = item_id(1231);
+}
+impl item_id {
+    pub const ITEM_PONDER_SASH: item_id = item_id(1232);
+}
+impl item_id {
+    pub const ITEM_PUNISH_TORC: item_id = item_id(1233);
+}
+impl item_id {
+    pub const ITEM_PROTECT_MASK: item_id = item_id(1234);
+}
+impl item_id {
+    pub const ITEM_NEON_SCARF: item_id = item_id(1235);
+}
+impl item_id {
+    pub const ITEM_EVENING_BOW: item_id = item_id(1236);
+}
+impl item_id {
+    pub const ITEM_THORNED_TORC: item_id = item_id(1237);
+}
+impl item_id {
+    pub const ITEM_GULPIN_BOW: item_id = item_id(1238);
+}
+impl item_id {
+    pub const ITEM_SWALOT_BELT: item_id = item_id(1239);
+}
+impl item_id {
+    pub const ITEM_CARVA_SASH: item_id = item_id(1240);
+}
+impl item_id {
+    pub const ITEM_VICIOUS_BOW: item_id = item_id(1241);
+}
+impl item_id {
+    pub const ITEM_SPOUT_SCARF: item_id = item_id(1242);
+}
+impl item_id {
+    pub const ITEM_HUGE_BOW: item_id = item_id(1243);
+}
+impl item_id {
+    pub const ITEM_NUMEL_BOW: item_id = item_id(1244);
+}
+impl item_id {
+    pub const ITEM_ERUPT_SCARF: item_id = item_id(1245);
+}
+impl item_id {
+    pub const ITEM_SOOTY_SASH: item_id = item_id(1246);
+}
+impl item_id {
+    pub const ITEM_SPRING_BOW: item_id = item_id(1247);
+}
+impl item_id {
+    pub const ITEM_SCHEME_SCARF: item_id = item_id(1248);
+}
+impl item_id {
+    pub const ITEM_HULA_BOW: item_id = item_id(1249);
+}
+impl item_id {
+    pub const ITEM_DESERT_BOW: item_id = item_id(1250);
+}
+impl item_id {
+    pub const ITEM_VIBRA_SCARF: item_id = item_id(1251);
+}
+impl item_id {
+    pub const ITEM_RED_GLASSES: item_id = item_id(1252);
+}
+impl item_id {
+    pub const ITEM_DESERT_SASH: item_id = item_id(1253);
+}
+impl item_id {
+    pub const ITEM_CACTURNE_HAT: item_id = item_id(1254);
+}
+impl item_id {
+    pub const ITEM_TUFT_BOW: item_id = item_id(1255);
+}
+impl item_id {
+    pub const ITEM_CLOUD_RUFF: item_id = item_id(1256);
+}
+impl item_id {
+    pub const ITEM_STRONG_SASH: item_id = item_id(1257);
+}
+impl item_id {
+    pub const ITEM_SEVIPER_BOW: item_id = item_id(1258);
+}
+impl item_id {
+    pub const ITEM_LUNATON_TORC: item_id = item_id(1259);
+}
+impl item_id {
+    pub const ITEM_SOLROCK_BOW: item_id = item_id(1260);
+}
+impl item_id {
+    pub const ITEM_SOAK_SCARF: item_id = item_id(1261);
+}
+impl item_id {
+    pub const ITEM_WHISCASH_BOW: item_id = item_id(1262);
+}
+impl item_id {
+    pub const ITEM_BOSSY_SCARF: item_id = item_id(1263);
+}
+impl item_id {
+    pub const ITEM_COWER_SASH: item_id = item_id(1264);
+}
+impl item_id {
+    pub const ITEM_BAL_BROOCH: item_id = item_id(1265);
+}
+impl item_id {
+    pub const ITEM_CLAYDOL_TORC: item_id = item_id(1266);
+}
+impl item_id {
+    pub const ITEM_BIND_SCARF: item_id = item_id(1267);
+}
+impl item_id {
+    pub const ITEM_CRADILY_BOW: item_id = item_id(1268);
+}
+impl item_id {
+    pub const ITEM_GUARD_CLAW: item_id = item_id(1269);
+}
+impl item_id {
+    pub const ITEM_RIGID_CAPE: item_id = item_id(1270);
+}
+impl item_id {
+    pub const ITEM_ADMIRE_SCARF: item_id = item_id(1271);
+}
+impl item_id {
+    pub const ITEM_GRACE_SCARF: item_id = item_id(1272);
+}
+impl item_id {
+    pub const ITEM_KECLEON_TORC: item_id = item_id(1273);
+}
+impl item_id {
+    pub const ITEM_SHUPPET_CAPE: item_id = item_id(1274);
+}
+impl item_id {
+    pub const ITEM_OMINOUS_TORC: item_id = item_id(1275);
+}
+impl item_id {
+    pub const ITEM_DUSKULL_RUFF: item_id = item_id(1276);
+}
+impl item_id {
+    pub const ITEM_ILLUSION_BOW: item_id = item_id(1277);
+}
+impl item_id {
+    pub const ITEM_TROPIUS_BOW: item_id = item_id(1278);
+}
+impl item_id {
+    pub const ITEM_CHIME_SCARF: item_id = item_id(1279);
+}
+impl item_id {
+    pub const ITEM_PERISH_TORC: item_id = item_id(1280);
+}
+impl item_id {
+    pub const ITEM_CHILLY_HAT: item_id = item_id(1281);
+}
+impl item_id {
+    pub const ITEM_HAIL_SCARF: item_id = item_id(1282);
+}
+impl item_id {
+    pub const ITEM_SLEET_BOW: item_id = item_id(1283);
+}
+impl item_id {
+    pub const ITEM_SAFE_SCARF: item_id = item_id(1284);
+}
+impl item_id {
+    pub const ITEM_WALREIN_TORC: item_id = item_id(1285);
+}
+impl item_id {
+    pub const ITEM_CLAM_BROOCH: item_id = item_id(1286);
+}
+impl item_id {
+    pub const ITEM_DEEP_TORC: item_id = item_id(1287);
+}
+impl item_id {
+    pub const ITEM_GORE_SCARF: item_id = item_id(1288);
+}
+impl item_id {
+    pub const ITEM_RELI_TORC: item_id = item_id(1289);
+}
+impl item_id {
+    pub const ITEM_LUVDISC_TORC: item_id = item_id(1290);
+}
+impl item_id {
+    pub const ITEM_CRAG_HELMET: item_id = item_id(1291);
+}
+impl item_id {
+    pub const ITEM_OUTLAST_BOW: item_id = item_id(1292);
+}
+impl item_id {
+    pub const ITEM_SALA_CAPE: item_id = item_id(1293);
+}
+impl item_id {
+    pub const ITEM_BELDUM_TORC: item_id = item_id(1294);
+}
+impl item_id {
+    pub const ITEM_METANG_SCARF: item_id = item_id(1295);
+}
+impl item_id {
+    pub const ITEM_META_TORC: item_id = item_id(1296);
+}
+impl item_id {
+    pub const ITEM_STARLY_BOW: item_id = item_id(1297);
+}
+impl item_id {
+    pub const ITEM_REGRET_TORC: item_id = item_id(1298);
+}
+impl item_id {
+    pub const ITEM_GUTS_SASH: item_id = item_id(1299);
+}
+impl item_id {
+    pub const ITEM_STILL_BOW: item_id = item_id(1300);
+}
+impl item_id {
+    pub const ITEM_KRICKE_TORC: item_id = item_id(1301);
+}
+impl item_id {
+    pub const ITEM_BUDEW_SCARF: item_id = item_id(1302);
+}
+impl item_id {
+    pub const ITEM_BOUQUET_CAPE: item_id = item_id(1303);
+}
+impl item_id {
+    pub const ITEM_HARD_HELMET: item_id = item_id(1304);
+}
+impl item_id {
+    pub const ITEM_SKULL_HELMET: item_id = item_id(1305);
+}
+impl item_id {
+    pub const ITEM_REBOUND_BOW: item_id = item_id(1306);
+}
+impl item_id {
+    pub const ITEM_BLOCK_BROOCH: item_id = item_id(1307);
+}
+impl item_id {
+    pub const ITEM_STRAW_CAPE: item_id = item_id(1308);
+}
+impl item_id {
+    pub const ITEM_WORMA_BOW: item_id = item_id(1309);
+}
+impl item_id {
+    pub const ITEM_MOTHIM_BOW: item_id = item_id(1310);
+}
+impl item_id {
+    pub const ITEM_NECTAR_BOW: item_id = item_id(1311);
+}
+impl item_id {
+    pub const ITEM_VESPI_TORC: item_id = item_id(1312);
+}
+impl item_id {
+    pub const ITEM_AWAKE_BOW: item_id = item_id(1313);
+}
+impl item_id {
+    pub const ITEM_GASTRO_TORC: item_id = item_id(1314);
+}
+impl item_id {
+    pub const ITEM_AMBIPOM_BOW: item_id = item_id(1315);
+}
+impl item_id {
+    pub const ITEM_DEFROST_RUFF: item_id = item_id(1316);
+}
+impl item_id {
+    pub const ITEM_ALLURE_COAT: item_id = item_id(1317);
+}
+impl item_id {
+    pub const ITEM_MAGIC_HAT: item_id = item_id(1318);
+}
+impl item_id {
+    pub const ITEM_HONCH_CAPE: item_id = item_id(1319);
+}
+impl item_id {
+    pub const ITEM_GLAMEOW_BOW: item_id = item_id(1320);
+}
+impl item_id {
+    pub const ITEM_SCARY_BELT: item_id = item_id(1321);
+}
+impl item_id {
+    pub const ITEM_CHING_TORC: item_id = item_id(1322);
+}
+impl item_id {
+    pub const ITEM_STINKY_SCARF: item_id = item_id(1323);
+}
+impl item_id {
+    pub const ITEM_STENCH_SASH: item_id = item_id(1324);
+}
+impl item_id {
+    pub const ITEM_IMAGE_BROOCH: item_id = item_id(1325);
+}
+impl item_id {
+    pub const ITEM_MIRROR_TORC: item_id = item_id(1326);
+}
+impl item_id {
+    pub const ITEM_CHATOT_SCARF: item_id = item_id(1327);
+}
+impl item_id {
+    pub const ITEM_THICK_SCARF: item_id = item_id(1328);
+}
+impl item_id {
+    pub const ITEM_GRIT_VEIL: item_id = item_id(1329);
+}
+impl item_id {
+    pub const ITEM_SKORUPI_BOW: item_id = item_id(1330);
+}
+impl item_id {
+    pub const ITEM_DUST_SCARF: item_id = item_id(1331);
+}
+impl item_id {
+    pub const ITEM_CROA_TORC: item_id = item_id(1332);
+}
+impl item_id {
+    pub const ITEM_TOXI_BELT: item_id = item_id(1333);
+}
+impl item_id {
+    pub const ITEM_CARNI_BOW: item_id = item_id(1334);
+}
+impl item_id {
+    pub const ITEM_SWIM_BOW: item_id = item_id(1335);
+}
+impl item_id {
+    pub const ITEM_LUMI_TORC: item_id = item_id(1336);
+}
+impl item_id {
+    pub const ITEM_SNOWY_TORC: item_id = item_id(1337);
+}
+impl item_id {
+    pub const ITEM_FROZEN_CAPE: item_id = item_id(1338);
+}
+impl item_id {
+    pub const ITEM_BUILDER_SASH: item_id = item_id(1339);
+}
+impl item_id {
+    pub const ITEM_FLABBY_BELT: item_id = item_id(1340);
+}
+impl item_id {
+    pub const ITEM_RHYPERI_TORC: item_id = item_id(1341);
+}
+impl item_id {
+    pub const ITEM_CLINGING_BOW: item_id = item_id(1342);
+}
+impl item_id {
+    pub const ITEM_YANMEGA_BOW: item_id = item_id(1343);
+}
+impl item_id {
+    pub const ITEM_GLISCOR_CAPE: item_id = item_id(1344);
+}
+impl item_id {
+    pub const ITEM_GLACIER_CAPE: item_id = item_id(1345);
+}
+impl item_id {
+    pub const ITEM_BEST_SCARF: item_id = item_id(1346);
+}
+impl item_id {
+    pub const ITEM_GALLANT_TORC: item_id = item_id(1347);
+}
+impl item_id {
+    pub const ITEM_PROBO_HAT: item_id = item_id(1348);
+}
+impl item_id {
+    pub const ITEM_UNLUCKY_SASH: item_id = item_id(1349);
+}
+impl item_id {
+    pub const ITEM_FROSLASS_BOW: item_id = item_id(1350);
+}
+impl item_id {
+    pub const ITEM_PURIFY_VEIL: item_id = item_id(1351);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x548: item_id = item_id(1352);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x549: item_id = item_id(1353);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x54A: item_id = item_id(1354);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x54B: item_id = item_id(1355);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x54C: item_id = item_id(1356);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x54D: item_id = item_id(1357);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x54E: item_id = item_id(1358);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x54F: item_id = item_id(1359);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x550: item_id = item_id(1360);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x551: item_id = item_id(1361);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x552: item_id = item_id(1362);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x553: item_id = item_id(1363);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x554: item_id = item_id(1364);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x555: item_id = item_id(1365);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x556: item_id = item_id(1366);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x557: item_id = item_id(1367);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x558: item_id = item_id(1368);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x559: item_id = item_id(1369);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x55A: item_id = item_id(1370);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x55B: item_id = item_id(1371);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x55C: item_id = item_id(1372);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x55D: item_id = item_id(1373);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x55E: item_id = item_id(1374);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x55F: item_id = item_id(1375);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x560: item_id = item_id(1376);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x561: item_id = item_id(1377);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x562: item_id = item_id(1378);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x563: item_id = item_id(1379);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x564: item_id = item_id(1380);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x565: item_id = item_id(1381);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x566: item_id = item_id(1382);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x567: item_id = item_id(1383);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x568: item_id = item_id(1384);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x569: item_id = item_id(1385);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x56A: item_id = item_id(1386);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x56B: item_id = item_id(1387);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x56C: item_id = item_id(1388);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x56D: item_id = item_id(1389);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x56E: item_id = item_id(1390);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x56F: item_id = item_id(1391);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x570: item_id = item_id(1392);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x571: item_id = item_id(1393);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x572: item_id = item_id(1394);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x573: item_id = item_id(1395);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x574: item_id = item_id(1396);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x575: item_id = item_id(1397);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x576: item_id = item_id(1398);
+}
+impl item_id {
+    pub const ITEM_UNNAMED_0x577: item_id = item_id(1399);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct item_id(pub crate::ctypes::c_uint);
 #[repr(C)]
 #[repr(align(2))]
 pub struct item_id_16 {
@@ -2238,18 +6238,18 @@ pub struct item_id_16 {
 }
 impl item_id_16 {
     #[inline]
-    pub fn val(&self) -> item_id::Type {
+    pub fn val(&self) -> item_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 16u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: item_id::Type) {
+    pub fn set_val(&mut self, val: item_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 16u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: item_id::Type) -> __BindgenBitfieldUnit<[u8; 2usize]> {
+    pub fn new_bitfield_1(val: item_id) -> __BindgenBitfieldUnit<[u8; 2usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 16u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -2258,28 +6258,66 @@ impl item_id_16 {
         __bindgen_bitfield_unit
     }
 }
-pub mod type_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const TYPE_NONE: Type = 0;
-    pub const TYPE_NORMAL: Type = 1;
-    pub const TYPE_FIRE: Type = 2;
-    pub const TYPE_WATER: Type = 3;
-    pub const TYPE_GRASS: Type = 4;
-    pub const TYPE_ELECTRIC: Type = 5;
-    pub const TYPE_ICE: Type = 6;
-    pub const TYPE_FIGHTING: Type = 7;
-    pub const TYPE_POISON: Type = 8;
-    pub const TYPE_GROUND: Type = 9;
-    pub const TYPE_FLYING: Type = 10;
-    pub const TYPE_PSYCHIC: Type = 11;
-    pub const TYPE_BUG: Type = 12;
-    pub const TYPE_ROCK: Type = 13;
-    pub const TYPE_GHOST: Type = 14;
-    pub const TYPE_DRAGON: Type = 15;
-    pub const TYPE_DARK: Type = 16;
-    pub const TYPE_STEEL: Type = 17;
-    pub const TYPE_NEUTRAL: Type = 18;
+impl type_id {
+    pub const TYPE_NONE: type_id = type_id(0);
 }
+impl type_id {
+    pub const TYPE_NORMAL: type_id = type_id(1);
+}
+impl type_id {
+    pub const TYPE_FIRE: type_id = type_id(2);
+}
+impl type_id {
+    pub const TYPE_WATER: type_id = type_id(3);
+}
+impl type_id {
+    pub const TYPE_GRASS: type_id = type_id(4);
+}
+impl type_id {
+    pub const TYPE_ELECTRIC: type_id = type_id(5);
+}
+impl type_id {
+    pub const TYPE_ICE: type_id = type_id(6);
+}
+impl type_id {
+    pub const TYPE_FIGHTING: type_id = type_id(7);
+}
+impl type_id {
+    pub const TYPE_POISON: type_id = type_id(8);
+}
+impl type_id {
+    pub const TYPE_GROUND: type_id = type_id(9);
+}
+impl type_id {
+    pub const TYPE_FLYING: type_id = type_id(10);
+}
+impl type_id {
+    pub const TYPE_PSYCHIC: type_id = type_id(11);
+}
+impl type_id {
+    pub const TYPE_BUG: type_id = type_id(12);
+}
+impl type_id {
+    pub const TYPE_ROCK: type_id = type_id(13);
+}
+impl type_id {
+    pub const TYPE_GHOST: type_id = type_id(14);
+}
+impl type_id {
+    pub const TYPE_DRAGON: type_id = type_id(15);
+}
+impl type_id {
+    pub const TYPE_DARK: type_id = type_id(16);
+}
+impl type_id {
+    pub const TYPE_STEEL: type_id = type_id(17);
+}
+impl type_id {
+    pub const TYPE_NEUTRAL: type_id = type_id(18);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct type_id(pub crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct type_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -2287,18 +6325,18 @@ pub struct type_id_8 {
 }
 impl type_id_8 {
     #[inline]
-    pub fn val(&self) -> type_id::Type {
+    pub fn val(&self) -> type_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: type_id::Type) {
+    pub fn set_val(&mut self, val: type_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 8u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: type_id::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+    pub fn new_bitfield_1(val: type_id) -> __BindgenBitfieldUnit<[u8; 1usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 8u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -2342,568 +6380,1686 @@ impl type_matchup_16 {
         __bindgen_bitfield_unit
     }
 }
-pub mod move_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const MOVE_NOTHING: Type = 0;
-    pub const MOVE_IRON_TAIL: Type = 1;
-    pub const MOVE_ICE_BALL: Type = 2;
-    pub const MOVE_YAWN: Type = 3;
-    pub const MOVE_LOVELY_KISS: Type = 4;
-    pub const MOVE_NIGHTMARE: Type = 5;
-    pub const MOVE_MORNING_SUN: Type = 6;
-    pub const MOVE_VITAL_THROW: Type = 7;
-    pub const MOVE_DIG: Type = 8;
-    pub const MOVE_THRASH: Type = 9;
-    pub const MOVE_SWEET_SCENT: Type = 10;
-    pub const MOVE_CHARM: Type = 11;
-    pub const MOVE_RAIN_DANCE: Type = 12;
-    pub const MOVE_CONFUSE_RAY: Type = 13;
-    pub const MOVE_HAIL: Type = 14;
-    pub const MOVE_AROMATHERAPY: Type = 15;
-    pub const MOVE_BUBBLE: Type = 16;
-    pub const MOVE_ENCORE: Type = 17;
-    pub const MOVE_CUT: Type = 18;
-    pub const MOVE_RAGE: Type = 19;
-    pub const MOVE_SUPER_FANG: Type = 20;
-    pub const MOVE_PAIN_SPLIT: Type = 21;
-    pub const MOVE_TORMENT: Type = 22;
-    pub const MOVE_STRING_SHOT: Type = 23;
-    pub const MOVE_SWAGGER: Type = 24;
-    pub const MOVE_SNORE: Type = 25;
-    pub const MOVE_HEAL_BELL: Type = 26;
-    pub const MOVE_SCREECH: Type = 27;
-    pub const MOVE_ROCK_THROW: Type = 28;
-    pub const MOVE_ROCK_SMASH: Type = 29;
-    pub const MOVE_ROCK_SLIDE: Type = 30;
-    pub const MOVE_WEATHER_BALL: Type = 31;
-    pub const MOVE_WHIRLPOOL: Type = 32;
-    pub const MOVE_FAKE_TEARS: Type = 33;
-    pub const MOVE_SING: Type = 34;
-    pub const MOVE_SPITE: Type = 35;
-    pub const MOVE_AIR_CUTTER: Type = 36;
-    pub const MOVE_SMOKESCREEN: Type = 37;
-    pub const MOVE_PURSUIT: Type = 38;
-    pub const MOVE_DOUBLESLAP: Type = 39;
-    pub const MOVE_MIRROR_MOVE: Type = 40;
-    pub const MOVE_OVERHEAT: Type = 41;
-    pub const MOVE_AURORA_BEAM: Type = 42;
-    pub const MOVE_MEMENTO: Type = 43;
-    pub const MOVE_OCTAZOOKA: Type = 44;
-    pub const MOVE_FLATTER: Type = 45;
-    pub const MOVE_ASTONISH: Type = 46;
-    pub const MOVE_WILL_O_WISP: Type = 47;
-    pub const MOVE_RETURN: Type = 48;
-    pub const MOVE_GRUDGE: Type = 49;
-    pub const MOVE_STRENGTH: Type = 50;
-    pub const MOVE_COUNTER: Type = 51;
-    pub const MOVE_FLAME_WHEEL: Type = 52;
-    pub const MOVE_FLAMETHROWER: Type = 53;
-    pub const MOVE_ODOR_SLEUTH: Type = 54;
-    pub const MOVE_SHARPEN: Type = 55;
-    pub const MOVE_DOUBLE_TEAM: Type = 56;
-    pub const MOVE_GUST: Type = 57;
-    pub const MOVE_HARDEN: Type = 58;
-    pub const MOVE_DISABLE: Type = 59;
-    pub const MOVE_RAZOR_WIND: Type = 60;
-    pub const MOVE_BIDE: Type = 61;
-    pub const MOVE_CRUNCH: Type = 62;
-    pub const MOVE_BITE: Type = 63;
-    pub const MOVE_THUNDER: Type = 64;
-    pub const MOVE_THUNDERPUNCH: Type = 65;
-    pub const MOVE_ENDEAVOR: Type = 66;
-    pub const MOVE_FACADE: Type = 67;
-    pub const MOVE_KARATE_CHOP: Type = 68;
-    pub const MOVE_CLAMP: Type = 69;
-    pub const MOVE_WITHDRAW: Type = 70;
-    pub const MOVE_CONSTRICT: Type = 71;
-    pub const MOVE_BRICK_BREAK: Type = 72;
-    pub const MOVE_ROCK_TOMB: Type = 73;
-    pub const MOVE_FOCUS_ENERGY: Type = 74;
-    pub const MOVE_FOCUS_PUNCH: Type = 75;
-    pub const MOVE_GIGA_DRAIN: Type = 76;
-    pub const MOVE_REVERSAL: Type = 77;
-    pub const MOVE_SMELLINGSALT: Type = 78;
-    pub const MOVE_SPORE: Type = 79;
-    pub const MOVE_LEECH_LIFE: Type = 80;
-    pub const MOVE_SLASH: Type = 81;
-    pub const MOVE_SILVER_WIND: Type = 82;
-    pub const MOVE_METAL_SOUND: Type = 83;
-    pub const MOVE_GRASSWHISTLE: Type = 84;
-    pub const MOVE_TICKLE: Type = 85;
-    pub const MOVE_SPIDER_WEB: Type = 86;
-    pub const MOVE_CRABHAMMER: Type = 87;
-    pub const MOVE_HAZE: Type = 88;
-    pub const MOVE_MEAN_LOOK: Type = 89;
-    pub const MOVE_CROSS_CHOP: Type = 90;
-    pub const MOVE_OUTRAGE: Type = 91;
-    pub const MOVE_LOW_KICK: Type = 92;
-    pub const MOVE_ANCIENTPOWER: Type = 93;
-    pub const MOVE_SYNTHESIS: Type = 94;
-    pub const MOVE_AGILITY: Type = 95;
-    pub const MOVE_RAPID_SPIN: Type = 96;
-    pub const MOVE_ICY_WIND: Type = 97;
-    pub const MOVE_MIND_READER: Type = 98;
-    pub const MOVE_COSMIC_POWER: Type = 99;
-    pub const MOVE_SKY_ATTACK: Type = 100;
-    pub const MOVE_POWDER_SNOW: Type = 101;
-    pub const MOVE_FOLLOW_ME: Type = 102;
-    pub const MOVE_METEOR_MASH: Type = 103;
-    pub const MOVE_ENDURE: Type = 104;
-    pub const MOVE_ROLLOUT: Type = 105;
-    pub const MOVE_SCARY_FACE: Type = 106;
-    pub const MOVE_PSYBEAM: Type = 107;
-    pub const MOVE_PSYWAVE: Type = 108;
-    pub const MOVE_PSYCHIC: Type = 109;
-    pub const MOVE_PSYCHO_BOOST: Type = 110;
-    pub const MOVE_HYPNOSIS: Type = 111;
-    pub const MOVE_UPROAR: Type = 112;
-    pub const MOVE_WATER_SPOUT: Type = 113;
-    pub const MOVE_SIGNAL_BEAM: Type = 114;
-    pub const MOVE_PSYCH_UP: Type = 115;
-    pub const MOVE_SUBMISSION: Type = 116;
-    pub const MOVE_RECOVER: Type = 117;
-    pub const MOVE_EARTHQUAKE: Type = 118;
-    pub const MOVE_NATURE_POWER: Type = 119;
-    pub const MOVE_LICK: Type = 120;
-    pub const MOVE_FLAIL: Type = 121;
-    pub const MOVE_TAIL_WHIP: Type = 122;
-    pub const MOVE_SELFDESTRUCT: Type = 123;
-    pub const MOVE_STUN_SPORE: Type = 124;
-    pub const MOVE_BIND: Type = 125;
-    pub const MOVE_SHADOW_PUNCH: Type = 126;
-    pub const MOVE_SHADOW_BALL: Type = 127;
-    pub const MOVE_CHARGE: Type = 128;
-    pub const MOVE_THUNDERBOLT: Type = 129;
-    pub const MOVE_MIST: Type = 130;
-    pub const MOVE_FISSURE: Type = 131;
-    pub const MOVE_EXTREMESPEED: Type = 132;
-    pub const MOVE_EXTRASENSORY: Type = 133;
-    pub const MOVE_SAFEGUARD: Type = 134;
-    pub const MOVE_ABSORB: Type = 135;
-    pub const MOVE_SKY_UPPERCUT: Type = 136;
-    pub const MOVE_SKILL_SWAP: Type = 137;
-    pub const MOVE_SKETCH: Type = 138;
-    pub const MOVE_HEADBUTT: Type = 139;
-    pub const MOVE_DOUBLE_EDGE: Type = 140;
-    pub const MOVE_SANDSTORM: Type = 141;
-    pub const MOVE_SAND_ATTACK: Type = 142;
-    pub const MOVE_SAND_TOMB: Type = 143;
-    pub const MOVE_SPARK: Type = 144;
-    pub const MOVE_SWIFT: Type = 145;
-    pub const MOVE_KINESIS: Type = 146;
-    pub const MOVE_SMOG: Type = 147;
-    pub const MOVE_GROWTH: Type = 148;
-    pub const MOVE_SACRED_FIRE: Type = 149;
-    pub const MOVE_SHEER_COLD: Type = 150;
-    pub const MOVE_SOLARBEAM: Type = 151;
-    pub const MOVE_SONICBOOM: Type = 152;
-    pub const MOVE_FLY: Type = 153;
-    pub const MOVE_TACKLE: Type = 154;
-    pub const MOVE_EXPLOSION: Type = 155;
-    pub const MOVE_DIVE: Type = 156;
-    pub const MOVE_FIRE_BLAST: Type = 157;
-    pub const MOVE_WATERFALL: Type = 158;
-    pub const MOVE_MUDDY_WATER: Type = 159;
-    pub const MOVE_STOCKPILE: Type = 160;
-    pub const MOVE_SLAM: Type = 161;
-    pub const MOVE_TWISTER: Type = 162;
-    pub const MOVE_BULLET_SEED: Type = 163;
-    pub const MOVE_TWINEEDLE: Type = 164;
-    pub const MOVE_SOFTBOILED: Type = 165;
-    pub const MOVE_EGG_BOMB: Type = 166;
-    pub const MOVE_FAINT_ATTACK: Type = 167;
-    pub const MOVE_BARRAGE: Type = 168;
-    pub const MOVE_MINIMIZE: Type = 169;
-    pub const MOVE_SEISMIC_TOSS: Type = 170;
-    pub const MOVE_SUPERSONIC: Type = 171;
-    pub const MOVE_TAUNT: Type = 172;
-    pub const MOVE_MOONLIGHT: Type = 173;
-    pub const MOVE_PECK: Type = 174;
-    pub const MOVE_ARM_THRUST: Type = 175;
-    pub const MOVE_HORN_ATTACK: Type = 176;
-    pub const MOVE_HORN_DRILL: Type = 177;
-    pub const MOVE_WING_ATTACK: Type = 178;
-    pub const MOVE_AERIAL_ACE: Type = 179;
-    pub const MOVE_ICICLE_SPEAR: Type = 180;
-    pub const MOVE_SWORDS_DANCE: Type = 181;
-    pub const MOVE_VINE_WHIP: Type = 182;
-    pub const MOVE_CONVERSION: Type = 183;
-    pub const MOVE_CONVERSION_2: Type = 184;
-    pub const MOVE_HELPING_HAND: Type = 185;
-    pub const MOVE_IRON_DEFENSE: Type = 186;
-    pub const MOVE_TELEPORT: Type = 187;
-    pub const MOVE_THUNDERSHOCK: Type = 188;
-    pub const MOVE_SHOCK_WAVE: Type = 189;
-    pub const MOVE_QUICK_ATTACK: Type = 190;
-    pub const MOVE_SWEET_KISS: Type = 191;
-    pub const MOVE_THUNDER_WAVE: Type = 192;
-    pub const MOVE_ZAP_CANNON: Type = 193;
-    pub const MOVE_BLOCK: Type = 194;
-    pub const MOVE_HOWL: Type = 195;
-    pub const MOVE_POISON_GAS: Type = 196;
-    pub const MOVE_TOXIC: Type = 197;
-    pub const MOVE_POISON_FANG: Type = 198;
-    pub const MOVE_POISONPOWDER: Type = 199;
-    pub const MOVE_POISON_STING: Type = 200;
-    pub const MOVE_SPIKE_CANNON: Type = 201;
-    pub const MOVE_ACID_ARMOR: Type = 202;
-    pub const MOVE_TAKE_DOWN: Type = 203;
-    pub const MOVE_JUMP_KICK: Type = 204;
-    pub const MOVE_BOUNCE: Type = 205;
-    pub const MOVE_HI_JUMP_KICK: Type = 206;
-    pub const MOVE_TRI_ATTACK: Type = 207;
-    pub const MOVE_DRAGON_CLAW: Type = 208;
-    pub const MOVE_TRICK: Type = 209;
-    pub const MOVE_TRIPLE_KICK: Type = 210;
-    pub const MOVE_DRILL_PECK: Type = 211;
-    pub const MOVE_MUD_SPORT: Type = 212;
-    pub const MOVE_MUD_SLAP: Type = 213;
-    pub const MOVE_THIEF: Type = 214;
-    pub const MOVE_AMNESIA: Type = 215;
-    pub const MOVE_NIGHT_SHADE: Type = 216;
-    pub const MOVE_GROWL: Type = 217;
-    pub const MOVE_SLACK_OFF: Type = 218;
-    pub const MOVE_SURF: Type = 219;
-    pub const MOVE_ROLE_PLAY: Type = 220;
-    pub const MOVE_NEEDLE_ARM: Type = 221;
-    pub const MOVE_DOUBLE_KICK: Type = 222;
-    pub const MOVE_SUNNY_DAY: Type = 223;
-    pub const MOVE_LEER: Type = 224;
-    pub const MOVE_WISH: Type = 225;
-    pub const MOVE_FAKE_OUT: Type = 226;
-    pub const MOVE_SLEEP_TALK: Type = 227;
-    pub const MOVE_PAY_DAY: Type = 228;
-    pub const MOVE_ASSIST: Type = 229;
-    pub const MOVE_HEAT_WAVE: Type = 230;
-    pub const MOVE_SLEEP_POWDER: Type = 231;
-    pub const MOVE_REST: Type = 232;
-    pub const MOVE_INGRAIN: Type = 233;
-    pub const MOVE_CONFUSION: Type = 234;
-    pub const MOVE_BODY_SLAM: Type = 235;
-    pub const MOVE_SWALLOW: Type = 236;
-    pub const MOVE_CURSE: Type = 237;
-    pub const MOVE_FRENZY_PLANT: Type = 238;
-    pub const MOVE_HYDRO_CANNON: Type = 239;
-    pub const MOVE_HYDRO_PUMP: Type = 240;
-    pub const MOVE_HYPER_VOICE: Type = 241;
-    pub const MOVE_HYPER_BEAM: Type = 242;
-    pub const MOVE_SUPERPOWER: Type = 243;
-    pub const MOVE_STEEL_WING: Type = 244;
-    pub const MOVE_SPIT_UP: Type = 245;
-    pub const MOVE_DYNAMICPUNCH: Type = 246;
-    pub const MOVE_GUILLOTINE: Type = 247;
-    pub const MOVE_VICEGRIP: Type = 248;
-    pub const MOVE_KNOCK_OFF: Type = 249;
-    pub const MOVE_POUND: Type = 250;
-    pub const MOVE_RAZOR_LEAF: Type = 251;
-    pub const MOVE_BATON_PASS: Type = 252;
-    pub const MOVE_PETAL_DANCE: Type = 253;
-    pub const MOVE_SPLASH: Type = 254;
-    pub const MOVE_BUBBLEBEAM: Type = 255;
-    pub const MOVE_DOOM_DESIRE: Type = 256;
-    pub const MOVE_BELLY_DRUM: Type = 257;
-    pub const MOVE_BARRIER: Type = 258;
-    pub const MOVE_LIGHT_SCREEN: Type = 259;
-    pub const MOVE_SCRATCH: Type = 260;
-    pub const MOVE_HYPER_FANG: Type = 261;
-    pub const MOVE_EMBER: Type = 262;
-    pub const MOVE_SECRET_POWER: Type = 263;
-    pub const MOVE_DIZZY_PUNCH: Type = 264;
-    pub const MOVE_BULK_UP: Type = 265;
-    pub const MOVE_IMPRISON: Type = 266;
-    pub const MOVE_FEATHERDANCE: Type = 267;
-    pub const MOVE_WHIRLWIND: Type = 268;
-    pub const MOVE_BEAT_UP: Type = 269;
-    pub const MOVE_BLIZZARD: Type = 270;
-    pub const MOVE_STOMP: Type = 271;
-    pub const MOVE_BLAST_BURN: Type = 272;
-    pub const MOVE_FLASH: Type = 273;
-    pub const MOVE_TEETER_DANCE: Type = 274;
-    pub const MOVE_CRUSH_CLAW: Type = 275;
-    pub const MOVE_BLAZE_KICK: Type = 276;
-    pub const MOVE_PRESENT: Type = 277;
-    pub const MOVE_ERUPTION: Type = 278;
-    pub const MOVE_SLUDGE: Type = 279;
-    pub const MOVE_SLUDGE_BOMB: Type = 280;
-    pub const MOVE_GLARE: Type = 281;
-    pub const MOVE_TRANSFORM: Type = 282;
-    pub const MOVE_POISON_TAIL: Type = 283;
-    pub const MOVE_ROAR: Type = 284;
-    pub const MOVE_BONE_RUSH: Type = 285;
-    pub const MOVE_CAMOUFLAGE: Type = 286;
-    pub const MOVE_COVET: Type = 287;
-    pub const MOVE_TAIL_GLOW: Type = 288;
-    pub const MOVE_BONE_CLUB: Type = 289;
-    pub const MOVE_BONEMERANG: Type = 290;
-    pub const MOVE_FIRE_SPIN: Type = 291;
-    pub const MOVE_FIRE_PUNCH: Type = 292;
-    pub const MOVE_PERISH_SONG: Type = 293;
-    pub const MOVE_WRAP: Type = 294;
-    pub const MOVE_SPIKES: Type = 295;
-    pub const MOVE_MAGNITUDE: Type = 296;
-    pub const MOVE_MAGICAL_LEAF: Type = 297;
-    pub const MOVE_MAGIC_COAT: Type = 298;
-    pub const MOVE_MUD_SHOT: Type = 299;
-    pub const MOVE_MACH_PUNCH: Type = 300;
-    pub const MOVE_PROTECT: Type = 301;
-    pub const MOVE_DEFENSE_CURL: Type = 302;
-    pub const MOVE_ROLLING_KICK: Type = 303;
-    pub const MOVE_SUBSTITUTE: Type = 304;
-    pub const MOVE_DETECT: Type = 305;
-    pub const MOVE_PIN_MISSILE: Type = 306;
-    pub const MOVE_WATER_SPORT: Type = 307;
-    pub const MOVE_WATER_GUN: Type = 308;
-    pub const MOVE_MIST_BALL: Type = 309;
-    pub const MOVE_WATER_PULSE: Type = 310;
-    pub const MOVE_FURY_ATTACK: Type = 311;
-    pub const MOVE_FURY_SWIPES: Type = 312;
-    pub const MOVE_DESTINY_BOND: Type = 313;
-    pub const MOVE_FALSE_SWIPE: Type = 314;
-    pub const MOVE_FORESIGHT: Type = 315;
-    pub const MOVE_MIRROR_COAT: Type = 316;
-    pub const MOVE_FUTURE_SIGHT: Type = 317;
-    pub const MOVE_MILK_DRINK: Type = 318;
-    pub const MOVE_CALM_MIND: Type = 319;
-    pub const MOVE_MEGA_DRAIN: Type = 320;
-    pub const MOVE_MEGA_KICK: Type = 321;
-    pub const MOVE_MEGA_PUNCH: Type = 322;
-    pub const MOVE_MEGAHORN: Type = 323;
-    pub const MOVE_HIDDEN_POWER: Type = 324;
-    pub const MOVE_METAL_CLAW: Type = 325;
-    pub const MOVE_ATTRACT: Type = 326;
-    pub const MOVE_MIMIC: Type = 327;
-    pub const MOVE_FRUSTRATION: Type = 328;
-    pub const MOVE_LEECH_SEED: Type = 329;
-    pub const MOVE_METRONOME: Type = 330;
-    pub const MOVE_DREAM_EATER: Type = 331;
-    pub const MOVE_ACID: Type = 332;
-    pub const MOVE_MEDITATE: Type = 333;
-    pub const MOVE_SNATCH: Type = 334;
-    pub const MOVE_LUSTER_PURGE: Type = 335;
-    pub const MOVE_LEAF_BLADE: Type = 336;
-    pub const MOVE_RECYCLE: Type = 337;
-    pub const MOVE_REFLECT: Type = 338;
-    pub const MOVE_REFRESH: Type = 339;
-    pub const MOVE_REVENGE: Type = 340;
-    pub const MOVE_DRAGON_RAGE: Type = 341;
-    pub const MOVE_DRAGONBREATH: Type = 342;
-    pub const MOVE_DRAGON_DANCE: Type = 343;
-    pub const MOVE_ICE_PUNCH: Type = 344;
-    pub const MOVE_ICE_BEAM: Type = 345;
-    pub const MOVE_FURY_CUTTER: Type = 346;
-    pub const MOVE_COMET_PUNCH: Type = 347;
-    pub const MOVE_SKULL_BASH: Type = 348;
-    pub const MOVE_LOCK_ON: Type = 349;
-    pub const MOVE_ROCK_BLAST: Type = 350;
-    pub const MOVE_COTTON_SPORE: Type = 351;
-    pub const MOVE_STRUGGLE: Type = 352;
-    pub const MOVE_AEROBLAST: Type = 353;
-    pub const MOVE_VOLT_TACKLE: Type = 354;
-    pub const MOVE_REGULAR_ATTACK: Type = 355;
-    pub const MOVE_IS_WATCHING: Type = 356;
-    pub const MOVE_BIDE_UNLEASH: Type = 357;
-    pub const MOVE_REVENGE_UNLEASH: Type = 358;
-    pub const MOVE_AVALANCHE_UNLEASH: Type = 359;
-    pub const MOVE_WIDE_SLASH: Type = 360;
-    pub const MOVE_UNNAMED_0x169: Type = 361;
-    pub const MOVE_UNNAMED_0x16A: Type = 362;
-    pub const MOVE_SEE_TRAP: Type = 363;
-    pub const MOVE_TAKEAWAY: Type = 364;
-    pub const MOVE_REBOUND: Type = 365;
-    pub const MOVE_BLOOP_SLASH: Type = 366;
-    pub const MOVE_SWITCHER: Type = 367;
-    pub const MOVE_BLOWBACK: Type = 368;
-    pub const MOVE_WARP: Type = 369;
-    pub const MOVE_TRANSFER: Type = 370;
-    pub const MOVE_SLOW_DOWN: Type = 371;
-    pub const MOVE_SPEED_BOOST: Type = 372;
-    pub const MOVE_SEARCHLIGHT: Type = 373;
-    pub const MOVE_PETRIFY: Type = 374;
-    pub const MOVE_STAY_AWAY: Type = 375;
-    pub const MOVE_POUNCE: Type = 376;
-    pub const MOVE_TRAWL: Type = 377;
-    pub const MOVE_CLEANSE: Type = 378;
-    pub const MOVE_OBSERVER: Type = 379;
-    pub const MOVE_DECOY_MAKER: Type = 380;
-    pub const MOVE_SIESTA: Type = 381;
-    pub const MOVE_TOTTER: Type = 382;
-    pub const MOVE_TWO_EDGE: Type = 383;
-    pub const MOVE_NO_MOVE: Type = 384;
-    pub const MOVE_ESCAPE: Type = 385;
-    pub const MOVE_SCAN: Type = 386;
-    pub const MOVE_POWER_EARS: Type = 387;
-    pub const MOVE_DROUGHT: Type = 388;
-    pub const MOVE_TRAP_BUSTER: Type = 389;
-    pub const MOVE_WILD_CALL: Type = 390;
-    pub const MOVE_INVISIFY: Type = 391;
-    pub const MOVE_ONE_SHOT: Type = 392;
-    pub const MOVE_HP_GAUGE: Type = 393;
-    pub const MOVE_VACUUM_CUT: Type = 394;
-    pub const MOVE_REVIVER: Type = 395;
-    pub const MOVE_SHOCKER: Type = 396;
-    pub const MOVE_ECHO: Type = 397;
-    pub const MOVE_FAMISH: Type = 398;
-    pub const MOVE_ONE_ROOM: Type = 399;
-    pub const MOVE_FILL_IN: Type = 400;
-    pub const MOVE_TRAPPER: Type = 401;
-    pub const MOVE_POSSESS: Type = 402;
-    pub const MOVE_ITEMIZE: Type = 403;
-    pub const MOVE_TAG_0x194: Type = 404;
-    pub const MOVE_PROJECTILE: Type = 405;
-    pub const MOVE_HURL: Type = 406;
-    pub const MOVE_MOBILE: Type = 407;
-    pub const MOVE_ITEM_TOSS: Type = 408;
-    pub const MOVE_SEE_STAIRS: Type = 409;
-    pub const MOVE_LONG_TOSS: Type = 410;
-    pub const MOVE_TAG_0x19B: Type = 411;
-    pub const MOVE_PIERCE: Type = 412;
-    pub const MOVE_TAG_0x19D: Type = 413;
-    pub const MOVE_TAG_0x19E: Type = 414;
-    pub const MOVE_TAG_0x19F: Type = 415;
-    pub const MOVE_TAG_0x1A0: Type = 416;
-    pub const MOVE_TAG_0x1A1: Type = 417;
-    pub const MOVE_TAG_0x1A2: Type = 418;
-    pub const MOVE_TAG_0x1A3: Type = 419;
-    pub const MOVE_TAG_0x1A4: Type = 420;
-    pub const MOVE_TAG_0x1A5: Type = 421;
-    pub const MOVE_TAG_0x1A6: Type = 422;
-    pub const MOVE_TAG_0x1A7: Type = 423;
-    pub const MOVE_TAG_0x1A8: Type = 424;
-    pub const MOVE_TAG_0x1A9: Type = 425;
-    pub const MOVE_TAG_0x1AA: Type = 426;
-    pub const MOVE_TAG_0x1AB: Type = 427;
-    pub const MOVE_TAG_0x1AC: Type = 428;
-    pub const MOVE_TAG_0x1AD: Type = 429;
-    pub const MOVE_HAMMER_ARM: Type = 430;
-    pub const MOVE_IRON_HEAD: Type = 431;
-    pub const MOVE_AQUA_JET: Type = 432;
-    pub const MOVE_AQUA_TAIL: Type = 433;
-    pub const MOVE_AQUA_RING: Type = 434;
-    pub const MOVE_SPACIAL_REND: Type = 435;
-    pub const MOVE_DARK_PULSE: Type = 436;
-    pub const MOVE_OMINOUS_WIND: Type = 437;
-    pub const MOVE_GASTRO_ACID: Type = 438;
-    pub const MOVE_HEALING_WISH: Type = 439;
-    pub const MOVE_CLOSE_COMBAT: Type = 440;
-    pub const MOVE_WOOD_HAMMER: Type = 441;
-    pub const MOVE_AIR_SLASH: Type = 442;
-    pub const MOVE_ENERGY_BALL: Type = 443;
-    pub const MOVE_TAILWIND: Type = 444;
-    pub const MOVE_PUNISHMENT: Type = 445;
-    pub const MOVE_CHATTER: Type = 446;
-    pub const MOVE_LUCKY_CHANT: Type = 447;
-    pub const MOVE_GUARD_SWAP: Type = 448;
-    pub const MOVE_HEAL_ORDER: Type = 449;
-    pub const MOVE_HEAL_BLOCK: Type = 450;
-    pub const MOVE_SHADOW_SNEAK: Type = 451;
-    pub const MOVE_THUNDER_FANG: Type = 452;
-    pub const MOVE_ROCK_WRECKER: Type = 453;
-    pub const MOVE_FOCUS_BLAST: Type = 454;
-    pub const MOVE_GIGA_IMPACT: Type = 455;
-    pub const MOVE_DEFOG: Type = 456;
-    pub const MOVE_TRUMP_CARD: Type = 457;
-    pub const MOVE_GRASS_KNOT: Type = 458;
-    pub const MOVE_CROSS_POISON: Type = 459;
-    pub const MOVE_ATTACK_ORDER: Type = 460;
-    pub const MOVE_ICE_FANG: Type = 461;
-    pub const MOVE_ICE_SHARD: Type = 462;
-    pub const MOVE_PSYCHO_CUT: Type = 463;
-    pub const MOVE_PSYCHO_SHIFT: Type = 464;
-    pub const MOVE_ME_FIRST: Type = 465;
-    pub const MOVE_EMBARGO: Type = 466;
-    pub const MOVE_JUDGMENT: Type = 467;
-    pub const MOVE_SEED_FLARE: Type = 468;
-    pub const MOVE_BRINE: Type = 469;
-    pub const MOVE_X_SCISSOR: Type = 470;
-    pub const MOVE_NATURAL_GIFT: Type = 471;
-    pub const MOVE_PAYBACK: Type = 472;
-    pub const MOVE_ZEN_HEADBUTT: Type = 473;
-    pub const MOVE_WRING_OUT: Type = 474;
-    pub const MOVE_GYRO_BALL: Type = 475;
-    pub const MOVE_SHADOW_CLAW: Type = 476;
-    pub const MOVE_SHADOW_FORCE: Type = 477;
-    pub const MOVE_GRAVITY: Type = 478;
-    pub const MOVE_VACUUM_WAVE: Type = 479;
-    pub const MOVE_STEALTH_ROCK: Type = 480;
-    pub const MOVE_STONE_EDGE: Type = 481;
-    pub const MOVE_SWITCHEROO: Type = 482;
-    pub const MOVE_DARK_VOID: Type = 483;
-    pub const MOVE_EARTH_POWER: Type = 484;
-    pub const MOVE_GUNK_SHOT: Type = 485;
-    pub const MOVE_SEED_BOMB: Type = 486;
-    pub const MOVE_DOUBLE_HIT: Type = 487;
-    pub const MOVE_ASSURANCE: Type = 488;
-    pub const MOVE_CHARGE_BEAM: Type = 489;
-    pub const MOVE_PLUCK: Type = 490;
-    pub const MOVE_NIGHT_SLASH: Type = 491;
-    pub const MOVE_ACUPRESSURE: Type = 492;
-    pub const MOVE_MAGNET_RISE: Type = 493;
-    pub const MOVE_ROAR_OF_TIME: Type = 494;
-    pub const MOVE_POISON_JAB: Type = 495;
-    pub const MOVE_TOXIC_SPIKES: Type = 496;
-    pub const MOVE_LAST_RESORT: Type = 497;
-    pub const MOVE_DRAGON_RUSH: Type = 498;
-    pub const MOVE_TRICK_ROOM: Type = 499;
-    pub const MOVE_DRAIN_PUNCH: Type = 500;
-    pub const MOVE_MUD_BOMB: Type = 501;
-    pub const MOVE_U_TURN: Type = 502;
-    pub const MOVE_FLING: Type = 503;
-    pub const MOVE_WORRY_SEED: Type = 504;
-    pub const MOVE_CRUSH_GRIP: Type = 505;
-    pub const MOVE_HEART_SWAP: Type = 506;
-    pub const MOVE_FORCE_PALM: Type = 507;
-    pub const MOVE_AURA_SPHERE: Type = 508;
-    pub const MOVE_ROOST: Type = 509;
-    pub const MOVE_BULLET_PUNCH: Type = 510;
-    pub const MOVE_POWER_WHIP: Type = 511;
-    pub const MOVE_POWER_GEM: Type = 512;
-    pub const MOVE_POWER_SWAP: Type = 513;
-    pub const MOVE_POWER_TRICK: Type = 514;
-    pub const MOVE_SUCKER_PUNCH: Type = 515;
-    pub const MOVE_FEINT: Type = 516;
-    pub const MOVE_FLARE_BLITZ: Type = 517;
-    pub const MOVE_BRAVE_BIRD: Type = 518;
-    pub const MOVE_LAVA_PLUME: Type = 519;
-    pub const MOVE_DEFEND_ORDER: Type = 520;
-    pub const MOVE_DISCHARGE: Type = 521;
-    pub const MOVE_FIRE_FANG: Type = 522;
-    pub const MOVE_MAGNET_BOMB: Type = 523;
-    pub const MOVE_MAGMA_STORM: Type = 524;
-    pub const MOVE_COPYCAT: Type = 525;
-    pub const MOVE_LUNAR_DANCE: Type = 526;
-    pub const MOVE_MIRROR_SHOT: Type = 527;
-    pub const MOVE_MIRACLE_EYE: Type = 528;
-    pub const MOVE_BUG_BITE: Type = 529;
-    pub const MOVE_BUG_BUZZ: Type = 530;
-    pub const MOVE_WAKE_UP_SLAP: Type = 531;
-    pub const MOVE_METAL_BURST: Type = 532;
-    pub const MOVE_HEAD_SMASH: Type = 533;
-    pub const MOVE_CAPTIVATE: Type = 534;
-    pub const MOVE_AVALANCHE: Type = 535;
-    pub const MOVE_FLASH_CANNON: Type = 536;
-    pub const MOVE_LEAF_STORM: Type = 537;
-    pub const MOVE_DRACO_METEOR: Type = 538;
-    pub const MOVE_DRAGON_PULSE: Type = 539;
-    pub const MOVE_ROCK_POLISH: Type = 540;
-    pub const MOVE_ROCK_CLIMB: Type = 541;
-    pub const MOVE_NASTY_PLOT: Type = 542;
-    pub const MOVE_TAG_0x21F: Type = 543;
-    pub const MOVE_TAG_0x220: Type = 544;
-    pub const MOVE_TAG_0x221: Type = 545;
-    pub const MOVE_TAG_0x222: Type = 546;
-    pub const MOVE_TAG_0x223: Type = 547;
-    pub const MOVE_TAG_0x224: Type = 548;
-    pub const MOVE_TAG_0x225: Type = 549;
-    pub const MOVE_TAG_0x226: Type = 550;
-    pub const MOVE_TAG_0x227: Type = 551;
-    pub const MOVE_TAG_0x228: Type = 552;
-    pub const MOVE_TAG_0x229: Type = 553;
-    pub const MOVE_TAG_0x22A: Type = 554;
-    pub const MOVE_TAG_0x22B: Type = 555;
-    pub const MOVE_TAG_0x22C: Type = 556;
-    pub const MOVE_TAG_0x22D: Type = 557;
-    pub const MOVE_TAG_0x22E: Type = 558;
+impl move_id {
+    pub const MOVE_NOTHING: move_id = move_id(0);
 }
+impl move_id {
+    pub const MOVE_IRON_TAIL: move_id = move_id(1);
+}
+impl move_id {
+    pub const MOVE_ICE_BALL: move_id = move_id(2);
+}
+impl move_id {
+    pub const MOVE_YAWN: move_id = move_id(3);
+}
+impl move_id {
+    pub const MOVE_LOVELY_KISS: move_id = move_id(4);
+}
+impl move_id {
+    pub const MOVE_NIGHTMARE: move_id = move_id(5);
+}
+impl move_id {
+    pub const MOVE_MORNING_SUN: move_id = move_id(6);
+}
+impl move_id {
+    pub const MOVE_VITAL_THROW: move_id = move_id(7);
+}
+impl move_id {
+    pub const MOVE_DIG: move_id = move_id(8);
+}
+impl move_id {
+    pub const MOVE_THRASH: move_id = move_id(9);
+}
+impl move_id {
+    pub const MOVE_SWEET_SCENT: move_id = move_id(10);
+}
+impl move_id {
+    pub const MOVE_CHARM: move_id = move_id(11);
+}
+impl move_id {
+    pub const MOVE_RAIN_DANCE: move_id = move_id(12);
+}
+impl move_id {
+    pub const MOVE_CONFUSE_RAY: move_id = move_id(13);
+}
+impl move_id {
+    pub const MOVE_HAIL: move_id = move_id(14);
+}
+impl move_id {
+    pub const MOVE_AROMATHERAPY: move_id = move_id(15);
+}
+impl move_id {
+    pub const MOVE_BUBBLE: move_id = move_id(16);
+}
+impl move_id {
+    pub const MOVE_ENCORE: move_id = move_id(17);
+}
+impl move_id {
+    pub const MOVE_CUT: move_id = move_id(18);
+}
+impl move_id {
+    pub const MOVE_RAGE: move_id = move_id(19);
+}
+impl move_id {
+    pub const MOVE_SUPER_FANG: move_id = move_id(20);
+}
+impl move_id {
+    pub const MOVE_PAIN_SPLIT: move_id = move_id(21);
+}
+impl move_id {
+    pub const MOVE_TORMENT: move_id = move_id(22);
+}
+impl move_id {
+    pub const MOVE_STRING_SHOT: move_id = move_id(23);
+}
+impl move_id {
+    pub const MOVE_SWAGGER: move_id = move_id(24);
+}
+impl move_id {
+    pub const MOVE_SNORE: move_id = move_id(25);
+}
+impl move_id {
+    pub const MOVE_HEAL_BELL: move_id = move_id(26);
+}
+impl move_id {
+    pub const MOVE_SCREECH: move_id = move_id(27);
+}
+impl move_id {
+    pub const MOVE_ROCK_THROW: move_id = move_id(28);
+}
+impl move_id {
+    pub const MOVE_ROCK_SMASH: move_id = move_id(29);
+}
+impl move_id {
+    pub const MOVE_ROCK_SLIDE: move_id = move_id(30);
+}
+impl move_id {
+    pub const MOVE_WEATHER_BALL: move_id = move_id(31);
+}
+impl move_id {
+    pub const MOVE_WHIRLPOOL: move_id = move_id(32);
+}
+impl move_id {
+    pub const MOVE_FAKE_TEARS: move_id = move_id(33);
+}
+impl move_id {
+    pub const MOVE_SING: move_id = move_id(34);
+}
+impl move_id {
+    pub const MOVE_SPITE: move_id = move_id(35);
+}
+impl move_id {
+    pub const MOVE_AIR_CUTTER: move_id = move_id(36);
+}
+impl move_id {
+    pub const MOVE_SMOKESCREEN: move_id = move_id(37);
+}
+impl move_id {
+    pub const MOVE_PURSUIT: move_id = move_id(38);
+}
+impl move_id {
+    pub const MOVE_DOUBLESLAP: move_id = move_id(39);
+}
+impl move_id {
+    pub const MOVE_MIRROR_MOVE: move_id = move_id(40);
+}
+impl move_id {
+    pub const MOVE_OVERHEAT: move_id = move_id(41);
+}
+impl move_id {
+    pub const MOVE_AURORA_BEAM: move_id = move_id(42);
+}
+impl move_id {
+    pub const MOVE_MEMENTO: move_id = move_id(43);
+}
+impl move_id {
+    pub const MOVE_OCTAZOOKA: move_id = move_id(44);
+}
+impl move_id {
+    pub const MOVE_FLATTER: move_id = move_id(45);
+}
+impl move_id {
+    pub const MOVE_ASTONISH: move_id = move_id(46);
+}
+impl move_id {
+    pub const MOVE_WILL_O_WISP: move_id = move_id(47);
+}
+impl move_id {
+    pub const MOVE_RETURN: move_id = move_id(48);
+}
+impl move_id {
+    pub const MOVE_GRUDGE: move_id = move_id(49);
+}
+impl move_id {
+    pub const MOVE_STRENGTH: move_id = move_id(50);
+}
+impl move_id {
+    pub const MOVE_COUNTER: move_id = move_id(51);
+}
+impl move_id {
+    pub const MOVE_FLAME_WHEEL: move_id = move_id(52);
+}
+impl move_id {
+    pub const MOVE_FLAMETHROWER: move_id = move_id(53);
+}
+impl move_id {
+    pub const MOVE_ODOR_SLEUTH: move_id = move_id(54);
+}
+impl move_id {
+    pub const MOVE_SHARPEN: move_id = move_id(55);
+}
+impl move_id {
+    pub const MOVE_DOUBLE_TEAM: move_id = move_id(56);
+}
+impl move_id {
+    pub const MOVE_GUST: move_id = move_id(57);
+}
+impl move_id {
+    pub const MOVE_HARDEN: move_id = move_id(58);
+}
+impl move_id {
+    pub const MOVE_DISABLE: move_id = move_id(59);
+}
+impl move_id {
+    pub const MOVE_RAZOR_WIND: move_id = move_id(60);
+}
+impl move_id {
+    pub const MOVE_BIDE: move_id = move_id(61);
+}
+impl move_id {
+    pub const MOVE_CRUNCH: move_id = move_id(62);
+}
+impl move_id {
+    pub const MOVE_BITE: move_id = move_id(63);
+}
+impl move_id {
+    pub const MOVE_THUNDER: move_id = move_id(64);
+}
+impl move_id {
+    pub const MOVE_THUNDERPUNCH: move_id = move_id(65);
+}
+impl move_id {
+    pub const MOVE_ENDEAVOR: move_id = move_id(66);
+}
+impl move_id {
+    pub const MOVE_FACADE: move_id = move_id(67);
+}
+impl move_id {
+    pub const MOVE_KARATE_CHOP: move_id = move_id(68);
+}
+impl move_id {
+    pub const MOVE_CLAMP: move_id = move_id(69);
+}
+impl move_id {
+    pub const MOVE_WITHDRAW: move_id = move_id(70);
+}
+impl move_id {
+    pub const MOVE_CONSTRICT: move_id = move_id(71);
+}
+impl move_id {
+    pub const MOVE_BRICK_BREAK: move_id = move_id(72);
+}
+impl move_id {
+    pub const MOVE_ROCK_TOMB: move_id = move_id(73);
+}
+impl move_id {
+    pub const MOVE_FOCUS_ENERGY: move_id = move_id(74);
+}
+impl move_id {
+    pub const MOVE_FOCUS_PUNCH: move_id = move_id(75);
+}
+impl move_id {
+    pub const MOVE_GIGA_DRAIN: move_id = move_id(76);
+}
+impl move_id {
+    pub const MOVE_REVERSAL: move_id = move_id(77);
+}
+impl move_id {
+    pub const MOVE_SMELLINGSALT: move_id = move_id(78);
+}
+impl move_id {
+    pub const MOVE_SPORE: move_id = move_id(79);
+}
+impl move_id {
+    pub const MOVE_LEECH_LIFE: move_id = move_id(80);
+}
+impl move_id {
+    pub const MOVE_SLASH: move_id = move_id(81);
+}
+impl move_id {
+    pub const MOVE_SILVER_WIND: move_id = move_id(82);
+}
+impl move_id {
+    pub const MOVE_METAL_SOUND: move_id = move_id(83);
+}
+impl move_id {
+    pub const MOVE_GRASSWHISTLE: move_id = move_id(84);
+}
+impl move_id {
+    pub const MOVE_TICKLE: move_id = move_id(85);
+}
+impl move_id {
+    pub const MOVE_SPIDER_WEB: move_id = move_id(86);
+}
+impl move_id {
+    pub const MOVE_CRABHAMMER: move_id = move_id(87);
+}
+impl move_id {
+    pub const MOVE_HAZE: move_id = move_id(88);
+}
+impl move_id {
+    pub const MOVE_MEAN_LOOK: move_id = move_id(89);
+}
+impl move_id {
+    pub const MOVE_CROSS_CHOP: move_id = move_id(90);
+}
+impl move_id {
+    pub const MOVE_OUTRAGE: move_id = move_id(91);
+}
+impl move_id {
+    pub const MOVE_LOW_KICK: move_id = move_id(92);
+}
+impl move_id {
+    pub const MOVE_ANCIENTPOWER: move_id = move_id(93);
+}
+impl move_id {
+    pub const MOVE_SYNTHESIS: move_id = move_id(94);
+}
+impl move_id {
+    pub const MOVE_AGILITY: move_id = move_id(95);
+}
+impl move_id {
+    pub const MOVE_RAPID_SPIN: move_id = move_id(96);
+}
+impl move_id {
+    pub const MOVE_ICY_WIND: move_id = move_id(97);
+}
+impl move_id {
+    pub const MOVE_MIND_READER: move_id = move_id(98);
+}
+impl move_id {
+    pub const MOVE_COSMIC_POWER: move_id = move_id(99);
+}
+impl move_id {
+    pub const MOVE_SKY_ATTACK: move_id = move_id(100);
+}
+impl move_id {
+    pub const MOVE_POWDER_SNOW: move_id = move_id(101);
+}
+impl move_id {
+    pub const MOVE_FOLLOW_ME: move_id = move_id(102);
+}
+impl move_id {
+    pub const MOVE_METEOR_MASH: move_id = move_id(103);
+}
+impl move_id {
+    pub const MOVE_ENDURE: move_id = move_id(104);
+}
+impl move_id {
+    pub const MOVE_ROLLOUT: move_id = move_id(105);
+}
+impl move_id {
+    pub const MOVE_SCARY_FACE: move_id = move_id(106);
+}
+impl move_id {
+    pub const MOVE_PSYBEAM: move_id = move_id(107);
+}
+impl move_id {
+    pub const MOVE_PSYWAVE: move_id = move_id(108);
+}
+impl move_id {
+    pub const MOVE_PSYCHIC: move_id = move_id(109);
+}
+impl move_id {
+    pub const MOVE_PSYCHO_BOOST: move_id = move_id(110);
+}
+impl move_id {
+    pub const MOVE_HYPNOSIS: move_id = move_id(111);
+}
+impl move_id {
+    pub const MOVE_UPROAR: move_id = move_id(112);
+}
+impl move_id {
+    pub const MOVE_WATER_SPOUT: move_id = move_id(113);
+}
+impl move_id {
+    pub const MOVE_SIGNAL_BEAM: move_id = move_id(114);
+}
+impl move_id {
+    pub const MOVE_PSYCH_UP: move_id = move_id(115);
+}
+impl move_id {
+    pub const MOVE_SUBMISSION: move_id = move_id(116);
+}
+impl move_id {
+    pub const MOVE_RECOVER: move_id = move_id(117);
+}
+impl move_id {
+    pub const MOVE_EARTHQUAKE: move_id = move_id(118);
+}
+impl move_id {
+    pub const MOVE_NATURE_POWER: move_id = move_id(119);
+}
+impl move_id {
+    pub const MOVE_LICK: move_id = move_id(120);
+}
+impl move_id {
+    pub const MOVE_FLAIL: move_id = move_id(121);
+}
+impl move_id {
+    pub const MOVE_TAIL_WHIP: move_id = move_id(122);
+}
+impl move_id {
+    pub const MOVE_SELFDESTRUCT: move_id = move_id(123);
+}
+impl move_id {
+    pub const MOVE_STUN_SPORE: move_id = move_id(124);
+}
+impl move_id {
+    pub const MOVE_BIND: move_id = move_id(125);
+}
+impl move_id {
+    pub const MOVE_SHADOW_PUNCH: move_id = move_id(126);
+}
+impl move_id {
+    pub const MOVE_SHADOW_BALL: move_id = move_id(127);
+}
+impl move_id {
+    pub const MOVE_CHARGE: move_id = move_id(128);
+}
+impl move_id {
+    pub const MOVE_THUNDERBOLT: move_id = move_id(129);
+}
+impl move_id {
+    pub const MOVE_MIST: move_id = move_id(130);
+}
+impl move_id {
+    pub const MOVE_FISSURE: move_id = move_id(131);
+}
+impl move_id {
+    pub const MOVE_EXTREMESPEED: move_id = move_id(132);
+}
+impl move_id {
+    pub const MOVE_EXTRASENSORY: move_id = move_id(133);
+}
+impl move_id {
+    pub const MOVE_SAFEGUARD: move_id = move_id(134);
+}
+impl move_id {
+    pub const MOVE_ABSORB: move_id = move_id(135);
+}
+impl move_id {
+    pub const MOVE_SKY_UPPERCUT: move_id = move_id(136);
+}
+impl move_id {
+    pub const MOVE_SKILL_SWAP: move_id = move_id(137);
+}
+impl move_id {
+    pub const MOVE_SKETCH: move_id = move_id(138);
+}
+impl move_id {
+    pub const MOVE_HEADBUTT: move_id = move_id(139);
+}
+impl move_id {
+    pub const MOVE_DOUBLE_EDGE: move_id = move_id(140);
+}
+impl move_id {
+    pub const MOVE_SANDSTORM: move_id = move_id(141);
+}
+impl move_id {
+    pub const MOVE_SAND_ATTACK: move_id = move_id(142);
+}
+impl move_id {
+    pub const MOVE_SAND_TOMB: move_id = move_id(143);
+}
+impl move_id {
+    pub const MOVE_SPARK: move_id = move_id(144);
+}
+impl move_id {
+    pub const MOVE_SWIFT: move_id = move_id(145);
+}
+impl move_id {
+    pub const MOVE_KINESIS: move_id = move_id(146);
+}
+impl move_id {
+    pub const MOVE_SMOG: move_id = move_id(147);
+}
+impl move_id {
+    pub const MOVE_GROWTH: move_id = move_id(148);
+}
+impl move_id {
+    pub const MOVE_SACRED_FIRE: move_id = move_id(149);
+}
+impl move_id {
+    pub const MOVE_SHEER_COLD: move_id = move_id(150);
+}
+impl move_id {
+    pub const MOVE_SOLARBEAM: move_id = move_id(151);
+}
+impl move_id {
+    pub const MOVE_SONICBOOM: move_id = move_id(152);
+}
+impl move_id {
+    pub const MOVE_FLY: move_id = move_id(153);
+}
+impl move_id {
+    pub const MOVE_TACKLE: move_id = move_id(154);
+}
+impl move_id {
+    pub const MOVE_EXPLOSION: move_id = move_id(155);
+}
+impl move_id {
+    pub const MOVE_DIVE: move_id = move_id(156);
+}
+impl move_id {
+    pub const MOVE_FIRE_BLAST: move_id = move_id(157);
+}
+impl move_id {
+    pub const MOVE_WATERFALL: move_id = move_id(158);
+}
+impl move_id {
+    pub const MOVE_MUDDY_WATER: move_id = move_id(159);
+}
+impl move_id {
+    pub const MOVE_STOCKPILE: move_id = move_id(160);
+}
+impl move_id {
+    pub const MOVE_SLAM: move_id = move_id(161);
+}
+impl move_id {
+    pub const MOVE_TWISTER: move_id = move_id(162);
+}
+impl move_id {
+    pub const MOVE_BULLET_SEED: move_id = move_id(163);
+}
+impl move_id {
+    pub const MOVE_TWINEEDLE: move_id = move_id(164);
+}
+impl move_id {
+    pub const MOVE_SOFTBOILED: move_id = move_id(165);
+}
+impl move_id {
+    pub const MOVE_EGG_BOMB: move_id = move_id(166);
+}
+impl move_id {
+    pub const MOVE_FAINT_ATTACK: move_id = move_id(167);
+}
+impl move_id {
+    pub const MOVE_BARRAGE: move_id = move_id(168);
+}
+impl move_id {
+    pub const MOVE_MINIMIZE: move_id = move_id(169);
+}
+impl move_id {
+    pub const MOVE_SEISMIC_TOSS: move_id = move_id(170);
+}
+impl move_id {
+    pub const MOVE_SUPERSONIC: move_id = move_id(171);
+}
+impl move_id {
+    pub const MOVE_TAUNT: move_id = move_id(172);
+}
+impl move_id {
+    pub const MOVE_MOONLIGHT: move_id = move_id(173);
+}
+impl move_id {
+    pub const MOVE_PECK: move_id = move_id(174);
+}
+impl move_id {
+    pub const MOVE_ARM_THRUST: move_id = move_id(175);
+}
+impl move_id {
+    pub const MOVE_HORN_ATTACK: move_id = move_id(176);
+}
+impl move_id {
+    pub const MOVE_HORN_DRILL: move_id = move_id(177);
+}
+impl move_id {
+    pub const MOVE_WING_ATTACK: move_id = move_id(178);
+}
+impl move_id {
+    pub const MOVE_AERIAL_ACE: move_id = move_id(179);
+}
+impl move_id {
+    pub const MOVE_ICICLE_SPEAR: move_id = move_id(180);
+}
+impl move_id {
+    pub const MOVE_SWORDS_DANCE: move_id = move_id(181);
+}
+impl move_id {
+    pub const MOVE_VINE_WHIP: move_id = move_id(182);
+}
+impl move_id {
+    pub const MOVE_CONVERSION: move_id = move_id(183);
+}
+impl move_id {
+    pub const MOVE_CONVERSION_2: move_id = move_id(184);
+}
+impl move_id {
+    pub const MOVE_HELPING_HAND: move_id = move_id(185);
+}
+impl move_id {
+    pub const MOVE_IRON_DEFENSE: move_id = move_id(186);
+}
+impl move_id {
+    pub const MOVE_TELEPORT: move_id = move_id(187);
+}
+impl move_id {
+    pub const MOVE_THUNDERSHOCK: move_id = move_id(188);
+}
+impl move_id {
+    pub const MOVE_SHOCK_WAVE: move_id = move_id(189);
+}
+impl move_id {
+    pub const MOVE_QUICK_ATTACK: move_id = move_id(190);
+}
+impl move_id {
+    pub const MOVE_SWEET_KISS: move_id = move_id(191);
+}
+impl move_id {
+    pub const MOVE_THUNDER_WAVE: move_id = move_id(192);
+}
+impl move_id {
+    pub const MOVE_ZAP_CANNON: move_id = move_id(193);
+}
+impl move_id {
+    pub const MOVE_BLOCK: move_id = move_id(194);
+}
+impl move_id {
+    pub const MOVE_HOWL: move_id = move_id(195);
+}
+impl move_id {
+    pub const MOVE_POISON_GAS: move_id = move_id(196);
+}
+impl move_id {
+    pub const MOVE_TOXIC: move_id = move_id(197);
+}
+impl move_id {
+    pub const MOVE_POISON_FANG: move_id = move_id(198);
+}
+impl move_id {
+    pub const MOVE_POISONPOWDER: move_id = move_id(199);
+}
+impl move_id {
+    pub const MOVE_POISON_STING: move_id = move_id(200);
+}
+impl move_id {
+    pub const MOVE_SPIKE_CANNON: move_id = move_id(201);
+}
+impl move_id {
+    pub const MOVE_ACID_ARMOR: move_id = move_id(202);
+}
+impl move_id {
+    pub const MOVE_TAKE_DOWN: move_id = move_id(203);
+}
+impl move_id {
+    pub const MOVE_JUMP_KICK: move_id = move_id(204);
+}
+impl move_id {
+    pub const MOVE_BOUNCE: move_id = move_id(205);
+}
+impl move_id {
+    pub const MOVE_HI_JUMP_KICK: move_id = move_id(206);
+}
+impl move_id {
+    pub const MOVE_TRI_ATTACK: move_id = move_id(207);
+}
+impl move_id {
+    pub const MOVE_DRAGON_CLAW: move_id = move_id(208);
+}
+impl move_id {
+    pub const MOVE_TRICK: move_id = move_id(209);
+}
+impl move_id {
+    pub const MOVE_TRIPLE_KICK: move_id = move_id(210);
+}
+impl move_id {
+    pub const MOVE_DRILL_PECK: move_id = move_id(211);
+}
+impl move_id {
+    pub const MOVE_MUD_SPORT: move_id = move_id(212);
+}
+impl move_id {
+    pub const MOVE_MUD_SLAP: move_id = move_id(213);
+}
+impl move_id {
+    pub const MOVE_THIEF: move_id = move_id(214);
+}
+impl move_id {
+    pub const MOVE_AMNESIA: move_id = move_id(215);
+}
+impl move_id {
+    pub const MOVE_NIGHT_SHADE: move_id = move_id(216);
+}
+impl move_id {
+    pub const MOVE_GROWL: move_id = move_id(217);
+}
+impl move_id {
+    pub const MOVE_SLACK_OFF: move_id = move_id(218);
+}
+impl move_id {
+    pub const MOVE_SURF: move_id = move_id(219);
+}
+impl move_id {
+    pub const MOVE_ROLE_PLAY: move_id = move_id(220);
+}
+impl move_id {
+    pub const MOVE_NEEDLE_ARM: move_id = move_id(221);
+}
+impl move_id {
+    pub const MOVE_DOUBLE_KICK: move_id = move_id(222);
+}
+impl move_id {
+    pub const MOVE_SUNNY_DAY: move_id = move_id(223);
+}
+impl move_id {
+    pub const MOVE_LEER: move_id = move_id(224);
+}
+impl move_id {
+    pub const MOVE_WISH: move_id = move_id(225);
+}
+impl move_id {
+    pub const MOVE_FAKE_OUT: move_id = move_id(226);
+}
+impl move_id {
+    pub const MOVE_SLEEP_TALK: move_id = move_id(227);
+}
+impl move_id {
+    pub const MOVE_PAY_DAY: move_id = move_id(228);
+}
+impl move_id {
+    pub const MOVE_ASSIST: move_id = move_id(229);
+}
+impl move_id {
+    pub const MOVE_HEAT_WAVE: move_id = move_id(230);
+}
+impl move_id {
+    pub const MOVE_SLEEP_POWDER: move_id = move_id(231);
+}
+impl move_id {
+    pub const MOVE_REST: move_id = move_id(232);
+}
+impl move_id {
+    pub const MOVE_INGRAIN: move_id = move_id(233);
+}
+impl move_id {
+    pub const MOVE_CONFUSION: move_id = move_id(234);
+}
+impl move_id {
+    pub const MOVE_BODY_SLAM: move_id = move_id(235);
+}
+impl move_id {
+    pub const MOVE_SWALLOW: move_id = move_id(236);
+}
+impl move_id {
+    pub const MOVE_CURSE: move_id = move_id(237);
+}
+impl move_id {
+    pub const MOVE_FRENZY_PLANT: move_id = move_id(238);
+}
+impl move_id {
+    pub const MOVE_HYDRO_CANNON: move_id = move_id(239);
+}
+impl move_id {
+    pub const MOVE_HYDRO_PUMP: move_id = move_id(240);
+}
+impl move_id {
+    pub const MOVE_HYPER_VOICE: move_id = move_id(241);
+}
+impl move_id {
+    pub const MOVE_HYPER_BEAM: move_id = move_id(242);
+}
+impl move_id {
+    pub const MOVE_SUPERPOWER: move_id = move_id(243);
+}
+impl move_id {
+    pub const MOVE_STEEL_WING: move_id = move_id(244);
+}
+impl move_id {
+    pub const MOVE_SPIT_UP: move_id = move_id(245);
+}
+impl move_id {
+    pub const MOVE_DYNAMICPUNCH: move_id = move_id(246);
+}
+impl move_id {
+    pub const MOVE_GUILLOTINE: move_id = move_id(247);
+}
+impl move_id {
+    pub const MOVE_VICEGRIP: move_id = move_id(248);
+}
+impl move_id {
+    pub const MOVE_KNOCK_OFF: move_id = move_id(249);
+}
+impl move_id {
+    pub const MOVE_POUND: move_id = move_id(250);
+}
+impl move_id {
+    pub const MOVE_RAZOR_LEAF: move_id = move_id(251);
+}
+impl move_id {
+    pub const MOVE_BATON_PASS: move_id = move_id(252);
+}
+impl move_id {
+    pub const MOVE_PETAL_DANCE: move_id = move_id(253);
+}
+impl move_id {
+    pub const MOVE_SPLASH: move_id = move_id(254);
+}
+impl move_id {
+    pub const MOVE_BUBBLEBEAM: move_id = move_id(255);
+}
+impl move_id {
+    pub const MOVE_DOOM_DESIRE: move_id = move_id(256);
+}
+impl move_id {
+    pub const MOVE_BELLY_DRUM: move_id = move_id(257);
+}
+impl move_id {
+    pub const MOVE_BARRIER: move_id = move_id(258);
+}
+impl move_id {
+    pub const MOVE_LIGHT_SCREEN: move_id = move_id(259);
+}
+impl move_id {
+    pub const MOVE_SCRATCH: move_id = move_id(260);
+}
+impl move_id {
+    pub const MOVE_HYPER_FANG: move_id = move_id(261);
+}
+impl move_id {
+    pub const MOVE_EMBER: move_id = move_id(262);
+}
+impl move_id {
+    pub const MOVE_SECRET_POWER: move_id = move_id(263);
+}
+impl move_id {
+    pub const MOVE_DIZZY_PUNCH: move_id = move_id(264);
+}
+impl move_id {
+    pub const MOVE_BULK_UP: move_id = move_id(265);
+}
+impl move_id {
+    pub const MOVE_IMPRISON: move_id = move_id(266);
+}
+impl move_id {
+    pub const MOVE_FEATHERDANCE: move_id = move_id(267);
+}
+impl move_id {
+    pub const MOVE_WHIRLWIND: move_id = move_id(268);
+}
+impl move_id {
+    pub const MOVE_BEAT_UP: move_id = move_id(269);
+}
+impl move_id {
+    pub const MOVE_BLIZZARD: move_id = move_id(270);
+}
+impl move_id {
+    pub const MOVE_STOMP: move_id = move_id(271);
+}
+impl move_id {
+    pub const MOVE_BLAST_BURN: move_id = move_id(272);
+}
+impl move_id {
+    pub const MOVE_FLASH: move_id = move_id(273);
+}
+impl move_id {
+    pub const MOVE_TEETER_DANCE: move_id = move_id(274);
+}
+impl move_id {
+    pub const MOVE_CRUSH_CLAW: move_id = move_id(275);
+}
+impl move_id {
+    pub const MOVE_BLAZE_KICK: move_id = move_id(276);
+}
+impl move_id {
+    pub const MOVE_PRESENT: move_id = move_id(277);
+}
+impl move_id {
+    pub const MOVE_ERUPTION: move_id = move_id(278);
+}
+impl move_id {
+    pub const MOVE_SLUDGE: move_id = move_id(279);
+}
+impl move_id {
+    pub const MOVE_SLUDGE_BOMB: move_id = move_id(280);
+}
+impl move_id {
+    pub const MOVE_GLARE: move_id = move_id(281);
+}
+impl move_id {
+    pub const MOVE_TRANSFORM: move_id = move_id(282);
+}
+impl move_id {
+    pub const MOVE_POISON_TAIL: move_id = move_id(283);
+}
+impl move_id {
+    pub const MOVE_ROAR: move_id = move_id(284);
+}
+impl move_id {
+    pub const MOVE_BONE_RUSH: move_id = move_id(285);
+}
+impl move_id {
+    pub const MOVE_CAMOUFLAGE: move_id = move_id(286);
+}
+impl move_id {
+    pub const MOVE_COVET: move_id = move_id(287);
+}
+impl move_id {
+    pub const MOVE_TAIL_GLOW: move_id = move_id(288);
+}
+impl move_id {
+    pub const MOVE_BONE_CLUB: move_id = move_id(289);
+}
+impl move_id {
+    pub const MOVE_BONEMERANG: move_id = move_id(290);
+}
+impl move_id {
+    pub const MOVE_FIRE_SPIN: move_id = move_id(291);
+}
+impl move_id {
+    pub const MOVE_FIRE_PUNCH: move_id = move_id(292);
+}
+impl move_id {
+    pub const MOVE_PERISH_SONG: move_id = move_id(293);
+}
+impl move_id {
+    pub const MOVE_WRAP: move_id = move_id(294);
+}
+impl move_id {
+    pub const MOVE_SPIKES: move_id = move_id(295);
+}
+impl move_id {
+    pub const MOVE_MAGNITUDE: move_id = move_id(296);
+}
+impl move_id {
+    pub const MOVE_MAGICAL_LEAF: move_id = move_id(297);
+}
+impl move_id {
+    pub const MOVE_MAGIC_COAT: move_id = move_id(298);
+}
+impl move_id {
+    pub const MOVE_MUD_SHOT: move_id = move_id(299);
+}
+impl move_id {
+    pub const MOVE_MACH_PUNCH: move_id = move_id(300);
+}
+impl move_id {
+    pub const MOVE_PROTECT: move_id = move_id(301);
+}
+impl move_id {
+    pub const MOVE_DEFENSE_CURL: move_id = move_id(302);
+}
+impl move_id {
+    pub const MOVE_ROLLING_KICK: move_id = move_id(303);
+}
+impl move_id {
+    pub const MOVE_SUBSTITUTE: move_id = move_id(304);
+}
+impl move_id {
+    pub const MOVE_DETECT: move_id = move_id(305);
+}
+impl move_id {
+    pub const MOVE_PIN_MISSILE: move_id = move_id(306);
+}
+impl move_id {
+    pub const MOVE_WATER_SPORT: move_id = move_id(307);
+}
+impl move_id {
+    pub const MOVE_WATER_GUN: move_id = move_id(308);
+}
+impl move_id {
+    pub const MOVE_MIST_BALL: move_id = move_id(309);
+}
+impl move_id {
+    pub const MOVE_WATER_PULSE: move_id = move_id(310);
+}
+impl move_id {
+    pub const MOVE_FURY_ATTACK: move_id = move_id(311);
+}
+impl move_id {
+    pub const MOVE_FURY_SWIPES: move_id = move_id(312);
+}
+impl move_id {
+    pub const MOVE_DESTINY_BOND: move_id = move_id(313);
+}
+impl move_id {
+    pub const MOVE_FALSE_SWIPE: move_id = move_id(314);
+}
+impl move_id {
+    pub const MOVE_FORESIGHT: move_id = move_id(315);
+}
+impl move_id {
+    pub const MOVE_MIRROR_COAT: move_id = move_id(316);
+}
+impl move_id {
+    pub const MOVE_FUTURE_SIGHT: move_id = move_id(317);
+}
+impl move_id {
+    pub const MOVE_MILK_DRINK: move_id = move_id(318);
+}
+impl move_id {
+    pub const MOVE_CALM_MIND: move_id = move_id(319);
+}
+impl move_id {
+    pub const MOVE_MEGA_DRAIN: move_id = move_id(320);
+}
+impl move_id {
+    pub const MOVE_MEGA_KICK: move_id = move_id(321);
+}
+impl move_id {
+    pub const MOVE_MEGA_PUNCH: move_id = move_id(322);
+}
+impl move_id {
+    pub const MOVE_MEGAHORN: move_id = move_id(323);
+}
+impl move_id {
+    pub const MOVE_HIDDEN_POWER: move_id = move_id(324);
+}
+impl move_id {
+    pub const MOVE_METAL_CLAW: move_id = move_id(325);
+}
+impl move_id {
+    pub const MOVE_ATTRACT: move_id = move_id(326);
+}
+impl move_id {
+    pub const MOVE_MIMIC: move_id = move_id(327);
+}
+impl move_id {
+    pub const MOVE_FRUSTRATION: move_id = move_id(328);
+}
+impl move_id {
+    pub const MOVE_LEECH_SEED: move_id = move_id(329);
+}
+impl move_id {
+    pub const MOVE_METRONOME: move_id = move_id(330);
+}
+impl move_id {
+    pub const MOVE_DREAM_EATER: move_id = move_id(331);
+}
+impl move_id {
+    pub const MOVE_ACID: move_id = move_id(332);
+}
+impl move_id {
+    pub const MOVE_MEDITATE: move_id = move_id(333);
+}
+impl move_id {
+    pub const MOVE_SNATCH: move_id = move_id(334);
+}
+impl move_id {
+    pub const MOVE_LUSTER_PURGE: move_id = move_id(335);
+}
+impl move_id {
+    pub const MOVE_LEAF_BLADE: move_id = move_id(336);
+}
+impl move_id {
+    pub const MOVE_RECYCLE: move_id = move_id(337);
+}
+impl move_id {
+    pub const MOVE_REFLECT: move_id = move_id(338);
+}
+impl move_id {
+    pub const MOVE_REFRESH: move_id = move_id(339);
+}
+impl move_id {
+    pub const MOVE_REVENGE: move_id = move_id(340);
+}
+impl move_id {
+    pub const MOVE_DRAGON_RAGE: move_id = move_id(341);
+}
+impl move_id {
+    pub const MOVE_DRAGONBREATH: move_id = move_id(342);
+}
+impl move_id {
+    pub const MOVE_DRAGON_DANCE: move_id = move_id(343);
+}
+impl move_id {
+    pub const MOVE_ICE_PUNCH: move_id = move_id(344);
+}
+impl move_id {
+    pub const MOVE_ICE_BEAM: move_id = move_id(345);
+}
+impl move_id {
+    pub const MOVE_FURY_CUTTER: move_id = move_id(346);
+}
+impl move_id {
+    pub const MOVE_COMET_PUNCH: move_id = move_id(347);
+}
+impl move_id {
+    pub const MOVE_SKULL_BASH: move_id = move_id(348);
+}
+impl move_id {
+    pub const MOVE_LOCK_ON: move_id = move_id(349);
+}
+impl move_id {
+    pub const MOVE_ROCK_BLAST: move_id = move_id(350);
+}
+impl move_id {
+    pub const MOVE_COTTON_SPORE: move_id = move_id(351);
+}
+impl move_id {
+    pub const MOVE_STRUGGLE: move_id = move_id(352);
+}
+impl move_id {
+    pub const MOVE_AEROBLAST: move_id = move_id(353);
+}
+impl move_id {
+    pub const MOVE_VOLT_TACKLE: move_id = move_id(354);
+}
+impl move_id {
+    pub const MOVE_REGULAR_ATTACK: move_id = move_id(355);
+}
+impl move_id {
+    pub const MOVE_IS_WATCHING: move_id = move_id(356);
+}
+impl move_id {
+    pub const MOVE_BIDE_UNLEASH: move_id = move_id(357);
+}
+impl move_id {
+    pub const MOVE_REVENGE_UNLEASH: move_id = move_id(358);
+}
+impl move_id {
+    pub const MOVE_AVALANCHE_UNLEASH: move_id = move_id(359);
+}
+impl move_id {
+    pub const MOVE_WIDE_SLASH: move_id = move_id(360);
+}
+impl move_id {
+    pub const MOVE_UNNAMED_0x169: move_id = move_id(361);
+}
+impl move_id {
+    pub const MOVE_UNNAMED_0x16A: move_id = move_id(362);
+}
+impl move_id {
+    pub const MOVE_SEE_TRAP: move_id = move_id(363);
+}
+impl move_id {
+    pub const MOVE_TAKEAWAY: move_id = move_id(364);
+}
+impl move_id {
+    pub const MOVE_REBOUND: move_id = move_id(365);
+}
+impl move_id {
+    pub const MOVE_BLOOP_SLASH: move_id = move_id(366);
+}
+impl move_id {
+    pub const MOVE_SWITCHER: move_id = move_id(367);
+}
+impl move_id {
+    pub const MOVE_BLOWBACK: move_id = move_id(368);
+}
+impl move_id {
+    pub const MOVE_WARP: move_id = move_id(369);
+}
+impl move_id {
+    pub const MOVE_TRANSFER: move_id = move_id(370);
+}
+impl move_id {
+    pub const MOVE_SLOW_DOWN: move_id = move_id(371);
+}
+impl move_id {
+    pub const MOVE_SPEED_BOOST: move_id = move_id(372);
+}
+impl move_id {
+    pub const MOVE_SEARCHLIGHT: move_id = move_id(373);
+}
+impl move_id {
+    pub const MOVE_PETRIFY: move_id = move_id(374);
+}
+impl move_id {
+    pub const MOVE_STAY_AWAY: move_id = move_id(375);
+}
+impl move_id {
+    pub const MOVE_POUNCE: move_id = move_id(376);
+}
+impl move_id {
+    pub const MOVE_TRAWL: move_id = move_id(377);
+}
+impl move_id {
+    pub const MOVE_CLEANSE: move_id = move_id(378);
+}
+impl move_id {
+    pub const MOVE_OBSERVER: move_id = move_id(379);
+}
+impl move_id {
+    pub const MOVE_DECOY_MAKER: move_id = move_id(380);
+}
+impl move_id {
+    pub const MOVE_SIESTA: move_id = move_id(381);
+}
+impl move_id {
+    pub const MOVE_TOTTER: move_id = move_id(382);
+}
+impl move_id {
+    pub const MOVE_TWO_EDGE: move_id = move_id(383);
+}
+impl move_id {
+    pub const MOVE_NO_MOVE: move_id = move_id(384);
+}
+impl move_id {
+    pub const MOVE_ESCAPE: move_id = move_id(385);
+}
+impl move_id {
+    pub const MOVE_SCAN: move_id = move_id(386);
+}
+impl move_id {
+    pub const MOVE_POWER_EARS: move_id = move_id(387);
+}
+impl move_id {
+    pub const MOVE_DROUGHT: move_id = move_id(388);
+}
+impl move_id {
+    pub const MOVE_TRAP_BUSTER: move_id = move_id(389);
+}
+impl move_id {
+    pub const MOVE_WILD_CALL: move_id = move_id(390);
+}
+impl move_id {
+    pub const MOVE_INVISIFY: move_id = move_id(391);
+}
+impl move_id {
+    pub const MOVE_ONE_SHOT: move_id = move_id(392);
+}
+impl move_id {
+    pub const MOVE_HP_GAUGE: move_id = move_id(393);
+}
+impl move_id {
+    pub const MOVE_VACUUM_CUT: move_id = move_id(394);
+}
+impl move_id {
+    pub const MOVE_REVIVER: move_id = move_id(395);
+}
+impl move_id {
+    pub const MOVE_SHOCKER: move_id = move_id(396);
+}
+impl move_id {
+    pub const MOVE_ECHO: move_id = move_id(397);
+}
+impl move_id {
+    pub const MOVE_FAMISH: move_id = move_id(398);
+}
+impl move_id {
+    pub const MOVE_ONE_ROOM: move_id = move_id(399);
+}
+impl move_id {
+    pub const MOVE_FILL_IN: move_id = move_id(400);
+}
+impl move_id {
+    pub const MOVE_TRAPPER: move_id = move_id(401);
+}
+impl move_id {
+    pub const MOVE_POSSESS: move_id = move_id(402);
+}
+impl move_id {
+    pub const MOVE_ITEMIZE: move_id = move_id(403);
+}
+impl move_id {
+    pub const MOVE_TAG_0x194: move_id = move_id(404);
+}
+impl move_id {
+    pub const MOVE_PROJECTILE: move_id = move_id(405);
+}
+impl move_id {
+    pub const MOVE_HURL: move_id = move_id(406);
+}
+impl move_id {
+    pub const MOVE_MOBILE: move_id = move_id(407);
+}
+impl move_id {
+    pub const MOVE_ITEM_TOSS: move_id = move_id(408);
+}
+impl move_id {
+    pub const MOVE_SEE_STAIRS: move_id = move_id(409);
+}
+impl move_id {
+    pub const MOVE_LONG_TOSS: move_id = move_id(410);
+}
+impl move_id {
+    pub const MOVE_TAG_0x19B: move_id = move_id(411);
+}
+impl move_id {
+    pub const MOVE_PIERCE: move_id = move_id(412);
+}
+impl move_id {
+    pub const MOVE_TAG_0x19D: move_id = move_id(413);
+}
+impl move_id {
+    pub const MOVE_TAG_0x19E: move_id = move_id(414);
+}
+impl move_id {
+    pub const MOVE_TAG_0x19F: move_id = move_id(415);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A0: move_id = move_id(416);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A1: move_id = move_id(417);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A2: move_id = move_id(418);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A3: move_id = move_id(419);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A4: move_id = move_id(420);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A5: move_id = move_id(421);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A6: move_id = move_id(422);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A7: move_id = move_id(423);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A8: move_id = move_id(424);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1A9: move_id = move_id(425);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1AA: move_id = move_id(426);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1AB: move_id = move_id(427);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1AC: move_id = move_id(428);
+}
+impl move_id {
+    pub const MOVE_TAG_0x1AD: move_id = move_id(429);
+}
+impl move_id {
+    pub const MOVE_HAMMER_ARM: move_id = move_id(430);
+}
+impl move_id {
+    pub const MOVE_IRON_HEAD: move_id = move_id(431);
+}
+impl move_id {
+    pub const MOVE_AQUA_JET: move_id = move_id(432);
+}
+impl move_id {
+    pub const MOVE_AQUA_TAIL: move_id = move_id(433);
+}
+impl move_id {
+    pub const MOVE_AQUA_RING: move_id = move_id(434);
+}
+impl move_id {
+    pub const MOVE_SPACIAL_REND: move_id = move_id(435);
+}
+impl move_id {
+    pub const MOVE_DARK_PULSE: move_id = move_id(436);
+}
+impl move_id {
+    pub const MOVE_OMINOUS_WIND: move_id = move_id(437);
+}
+impl move_id {
+    pub const MOVE_GASTRO_ACID: move_id = move_id(438);
+}
+impl move_id {
+    pub const MOVE_HEALING_WISH: move_id = move_id(439);
+}
+impl move_id {
+    pub const MOVE_CLOSE_COMBAT: move_id = move_id(440);
+}
+impl move_id {
+    pub const MOVE_WOOD_HAMMER: move_id = move_id(441);
+}
+impl move_id {
+    pub const MOVE_AIR_SLASH: move_id = move_id(442);
+}
+impl move_id {
+    pub const MOVE_ENERGY_BALL: move_id = move_id(443);
+}
+impl move_id {
+    pub const MOVE_TAILWIND: move_id = move_id(444);
+}
+impl move_id {
+    pub const MOVE_PUNISHMENT: move_id = move_id(445);
+}
+impl move_id {
+    pub const MOVE_CHATTER: move_id = move_id(446);
+}
+impl move_id {
+    pub const MOVE_LUCKY_CHANT: move_id = move_id(447);
+}
+impl move_id {
+    pub const MOVE_GUARD_SWAP: move_id = move_id(448);
+}
+impl move_id {
+    pub const MOVE_HEAL_ORDER: move_id = move_id(449);
+}
+impl move_id {
+    pub const MOVE_HEAL_BLOCK: move_id = move_id(450);
+}
+impl move_id {
+    pub const MOVE_SHADOW_SNEAK: move_id = move_id(451);
+}
+impl move_id {
+    pub const MOVE_THUNDER_FANG: move_id = move_id(452);
+}
+impl move_id {
+    pub const MOVE_ROCK_WRECKER: move_id = move_id(453);
+}
+impl move_id {
+    pub const MOVE_FOCUS_BLAST: move_id = move_id(454);
+}
+impl move_id {
+    pub const MOVE_GIGA_IMPACT: move_id = move_id(455);
+}
+impl move_id {
+    pub const MOVE_DEFOG: move_id = move_id(456);
+}
+impl move_id {
+    pub const MOVE_TRUMP_CARD: move_id = move_id(457);
+}
+impl move_id {
+    pub const MOVE_GRASS_KNOT: move_id = move_id(458);
+}
+impl move_id {
+    pub const MOVE_CROSS_POISON: move_id = move_id(459);
+}
+impl move_id {
+    pub const MOVE_ATTACK_ORDER: move_id = move_id(460);
+}
+impl move_id {
+    pub const MOVE_ICE_FANG: move_id = move_id(461);
+}
+impl move_id {
+    pub const MOVE_ICE_SHARD: move_id = move_id(462);
+}
+impl move_id {
+    pub const MOVE_PSYCHO_CUT: move_id = move_id(463);
+}
+impl move_id {
+    pub const MOVE_PSYCHO_SHIFT: move_id = move_id(464);
+}
+impl move_id {
+    pub const MOVE_ME_FIRST: move_id = move_id(465);
+}
+impl move_id {
+    pub const MOVE_EMBARGO: move_id = move_id(466);
+}
+impl move_id {
+    pub const MOVE_JUDGMENT: move_id = move_id(467);
+}
+impl move_id {
+    pub const MOVE_SEED_FLARE: move_id = move_id(468);
+}
+impl move_id {
+    pub const MOVE_BRINE: move_id = move_id(469);
+}
+impl move_id {
+    pub const MOVE_X_SCISSOR: move_id = move_id(470);
+}
+impl move_id {
+    pub const MOVE_NATURAL_GIFT: move_id = move_id(471);
+}
+impl move_id {
+    pub const MOVE_PAYBACK: move_id = move_id(472);
+}
+impl move_id {
+    pub const MOVE_ZEN_HEADBUTT: move_id = move_id(473);
+}
+impl move_id {
+    pub const MOVE_WRING_OUT: move_id = move_id(474);
+}
+impl move_id {
+    pub const MOVE_GYRO_BALL: move_id = move_id(475);
+}
+impl move_id {
+    pub const MOVE_SHADOW_CLAW: move_id = move_id(476);
+}
+impl move_id {
+    pub const MOVE_SHADOW_FORCE: move_id = move_id(477);
+}
+impl move_id {
+    pub const MOVE_GRAVITY: move_id = move_id(478);
+}
+impl move_id {
+    pub const MOVE_VACUUM_WAVE: move_id = move_id(479);
+}
+impl move_id {
+    pub const MOVE_STEALTH_ROCK: move_id = move_id(480);
+}
+impl move_id {
+    pub const MOVE_STONE_EDGE: move_id = move_id(481);
+}
+impl move_id {
+    pub const MOVE_SWITCHEROO: move_id = move_id(482);
+}
+impl move_id {
+    pub const MOVE_DARK_VOID: move_id = move_id(483);
+}
+impl move_id {
+    pub const MOVE_EARTH_POWER: move_id = move_id(484);
+}
+impl move_id {
+    pub const MOVE_GUNK_SHOT: move_id = move_id(485);
+}
+impl move_id {
+    pub const MOVE_SEED_BOMB: move_id = move_id(486);
+}
+impl move_id {
+    pub const MOVE_DOUBLE_HIT: move_id = move_id(487);
+}
+impl move_id {
+    pub const MOVE_ASSURANCE: move_id = move_id(488);
+}
+impl move_id {
+    pub const MOVE_CHARGE_BEAM: move_id = move_id(489);
+}
+impl move_id {
+    pub const MOVE_PLUCK: move_id = move_id(490);
+}
+impl move_id {
+    pub const MOVE_NIGHT_SLASH: move_id = move_id(491);
+}
+impl move_id {
+    pub const MOVE_ACUPRESSURE: move_id = move_id(492);
+}
+impl move_id {
+    pub const MOVE_MAGNET_RISE: move_id = move_id(493);
+}
+impl move_id {
+    pub const MOVE_ROAR_OF_TIME: move_id = move_id(494);
+}
+impl move_id {
+    pub const MOVE_POISON_JAB: move_id = move_id(495);
+}
+impl move_id {
+    pub const MOVE_TOXIC_SPIKES: move_id = move_id(496);
+}
+impl move_id {
+    pub const MOVE_LAST_RESORT: move_id = move_id(497);
+}
+impl move_id {
+    pub const MOVE_DRAGON_RUSH: move_id = move_id(498);
+}
+impl move_id {
+    pub const MOVE_TRICK_ROOM: move_id = move_id(499);
+}
+impl move_id {
+    pub const MOVE_DRAIN_PUNCH: move_id = move_id(500);
+}
+impl move_id {
+    pub const MOVE_MUD_BOMB: move_id = move_id(501);
+}
+impl move_id {
+    pub const MOVE_U_TURN: move_id = move_id(502);
+}
+impl move_id {
+    pub const MOVE_FLING: move_id = move_id(503);
+}
+impl move_id {
+    pub const MOVE_WORRY_SEED: move_id = move_id(504);
+}
+impl move_id {
+    pub const MOVE_CRUSH_GRIP: move_id = move_id(505);
+}
+impl move_id {
+    pub const MOVE_HEART_SWAP: move_id = move_id(506);
+}
+impl move_id {
+    pub const MOVE_FORCE_PALM: move_id = move_id(507);
+}
+impl move_id {
+    pub const MOVE_AURA_SPHERE: move_id = move_id(508);
+}
+impl move_id {
+    pub const MOVE_ROOST: move_id = move_id(509);
+}
+impl move_id {
+    pub const MOVE_BULLET_PUNCH: move_id = move_id(510);
+}
+impl move_id {
+    pub const MOVE_POWER_WHIP: move_id = move_id(511);
+}
+impl move_id {
+    pub const MOVE_POWER_GEM: move_id = move_id(512);
+}
+impl move_id {
+    pub const MOVE_POWER_SWAP: move_id = move_id(513);
+}
+impl move_id {
+    pub const MOVE_POWER_TRICK: move_id = move_id(514);
+}
+impl move_id {
+    pub const MOVE_SUCKER_PUNCH: move_id = move_id(515);
+}
+impl move_id {
+    pub const MOVE_FEINT: move_id = move_id(516);
+}
+impl move_id {
+    pub const MOVE_FLARE_BLITZ: move_id = move_id(517);
+}
+impl move_id {
+    pub const MOVE_BRAVE_BIRD: move_id = move_id(518);
+}
+impl move_id {
+    pub const MOVE_LAVA_PLUME: move_id = move_id(519);
+}
+impl move_id {
+    pub const MOVE_DEFEND_ORDER: move_id = move_id(520);
+}
+impl move_id {
+    pub const MOVE_DISCHARGE: move_id = move_id(521);
+}
+impl move_id {
+    pub const MOVE_FIRE_FANG: move_id = move_id(522);
+}
+impl move_id {
+    pub const MOVE_MAGNET_BOMB: move_id = move_id(523);
+}
+impl move_id {
+    pub const MOVE_MAGMA_STORM: move_id = move_id(524);
+}
+impl move_id {
+    pub const MOVE_COPYCAT: move_id = move_id(525);
+}
+impl move_id {
+    pub const MOVE_LUNAR_DANCE: move_id = move_id(526);
+}
+impl move_id {
+    pub const MOVE_MIRROR_SHOT: move_id = move_id(527);
+}
+impl move_id {
+    pub const MOVE_MIRACLE_EYE: move_id = move_id(528);
+}
+impl move_id {
+    pub const MOVE_BUG_BITE: move_id = move_id(529);
+}
+impl move_id {
+    pub const MOVE_BUG_BUZZ: move_id = move_id(530);
+}
+impl move_id {
+    pub const MOVE_WAKE_UP_SLAP: move_id = move_id(531);
+}
+impl move_id {
+    pub const MOVE_METAL_BURST: move_id = move_id(532);
+}
+impl move_id {
+    pub const MOVE_HEAD_SMASH: move_id = move_id(533);
+}
+impl move_id {
+    pub const MOVE_CAPTIVATE: move_id = move_id(534);
+}
+impl move_id {
+    pub const MOVE_AVALANCHE: move_id = move_id(535);
+}
+impl move_id {
+    pub const MOVE_FLASH_CANNON: move_id = move_id(536);
+}
+impl move_id {
+    pub const MOVE_LEAF_STORM: move_id = move_id(537);
+}
+impl move_id {
+    pub const MOVE_DRACO_METEOR: move_id = move_id(538);
+}
+impl move_id {
+    pub const MOVE_DRAGON_PULSE: move_id = move_id(539);
+}
+impl move_id {
+    pub const MOVE_ROCK_POLISH: move_id = move_id(540);
+}
+impl move_id {
+    pub const MOVE_ROCK_CLIMB: move_id = move_id(541);
+}
+impl move_id {
+    pub const MOVE_NASTY_PLOT: move_id = move_id(542);
+}
+impl move_id {
+    pub const MOVE_TAG_0x21F: move_id = move_id(543);
+}
+impl move_id {
+    pub const MOVE_TAG_0x220: move_id = move_id(544);
+}
+impl move_id {
+    pub const MOVE_TAG_0x221: move_id = move_id(545);
+}
+impl move_id {
+    pub const MOVE_TAG_0x222: move_id = move_id(546);
+}
+impl move_id {
+    pub const MOVE_TAG_0x223: move_id = move_id(547);
+}
+impl move_id {
+    pub const MOVE_TAG_0x224: move_id = move_id(548);
+}
+impl move_id {
+    pub const MOVE_TAG_0x225: move_id = move_id(549);
+}
+impl move_id {
+    pub const MOVE_TAG_0x226: move_id = move_id(550);
+}
+impl move_id {
+    pub const MOVE_TAG_0x227: move_id = move_id(551);
+}
+impl move_id {
+    pub const MOVE_TAG_0x228: move_id = move_id(552);
+}
+impl move_id {
+    pub const MOVE_TAG_0x229: move_id = move_id(553);
+}
+impl move_id {
+    pub const MOVE_TAG_0x22A: move_id = move_id(554);
+}
+impl move_id {
+    pub const MOVE_TAG_0x22B: move_id = move_id(555);
+}
+impl move_id {
+    pub const MOVE_TAG_0x22C: move_id = move_id(556);
+}
+impl move_id {
+    pub const MOVE_TAG_0x22D: move_id = move_id(557);
+}
+impl move_id {
+    pub const MOVE_TAG_0x22E: move_id = move_id(558);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct move_id(pub crate::ctypes::c_uint);
 #[repr(C)]
 #[repr(align(2))]
 pub struct move_id_16 {
@@ -2912,18 +8068,18 @@ pub struct move_id_16 {
 }
 impl move_id_16 {
     #[inline]
-    pub fn val(&self) -> move_id::Type {
+    pub fn val(&self) -> move_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 16u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: move_id::Type) {
+    pub fn set_val(&mut self, val: move_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 16u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: move_id::Type) -> __BindgenBitfieldUnit<[u8; 2usize]> {
+    pub fn new_bitfield_1(val: move_id) -> __BindgenBitfieldUnit<[u8; 2usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 16u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -3001,133 +8157,381 @@ pub mod move_ai_condition {
     pub const AI_CONDITION_GHOST: Type = 5;
     pub const AI_CONDITION_HP_25_OR_STATUS: Type = 6;
 }
-pub mod ability_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const ABILITY_UNKNOWN: Type = 0;
-    pub const ABILITY_STENCH: Type = 1;
-    pub const ABILITY_THICK_FAT: Type = 2;
-    pub const ABILITY_RAIN_DISH: Type = 3;
-    pub const ABILITY_DRIZZLE: Type = 4;
-    pub const ABILITY_ARENA_TRAP: Type = 5;
-    pub const ABILITY_INTIMIDATE: Type = 6;
-    pub const ABILITY_ROCK_HEAD: Type = 7;
-    pub const ABILITY_AIR_LOCK: Type = 8;
-    pub const ABILITY_HYPER_CUTTER: Type = 9;
-    pub const ABILITY_SHADOW_TAG: Type = 10;
-    pub const ABILITY_SPEED_BOOST: Type = 11;
-    pub const ABILITY_BATTLE_ARMOR: Type = 12;
-    pub const ABILITY_STURDY: Type = 13;
-    pub const ABILITY_SUCTION_CUPS: Type = 14;
-    pub const ABILITY_CLEAR_BODY: Type = 15;
-    pub const ABILITY_TORRENT: Type = 16;
-    pub const ABILITY_GUTS: Type = 17;
-    pub const ABILITY_ROUGH_SKIN: Type = 18;
-    pub const ABILITY_SHELL_ARMOR: Type = 19;
-    pub const ABILITY_NATURAL_CURE: Type = 20;
-    pub const ABILITY_DAMP: Type = 21;
-    pub const ABILITY_LIMBER: Type = 22;
-    pub const ABILITY_MAGNET_PULL: Type = 23;
-    pub const ABILITY_WHITE_SMOKE: Type = 24;
-    pub const ABILITY_SYNCHRONIZE: Type = 25;
-    pub const ABILITY_OVERGROW: Type = 26;
-    pub const ABILITY_SWIFT_SWIM: Type = 27;
-    pub const ABILITY_SAND_STREAM: Type = 28;
-    pub const ABILITY_SAND_VEIL: Type = 29;
-    pub const ABILITY_KEEN_EYE: Type = 30;
-    pub const ABILITY_INNER_FOCUS: Type = 31;
-    pub const ABILITY_STATIC: Type = 32;
-    pub const ABILITY_SHED_SKIN: Type = 33;
-    pub const ABILITY_HUGE_POWER: Type = 34;
-    pub const ABILITY_VOLT_ABSORB: Type = 35;
-    pub const ABILITY_WATER_ABSORB: Type = 36;
-    pub const ABILITY_FORECAST: Type = 37;
-    pub const ABILITY_SERENE_GRACE: Type = 38;
-    pub const ABILITY_POISON_POINT: Type = 39;
-    pub const ABILITY_TRACE: Type = 40;
-    pub const ABILITY_OBLIVIOUS: Type = 41;
-    pub const ABILITY_TRUANT: Type = 42;
-    pub const ABILITY_RUN_AWAY: Type = 43;
-    pub const ABILITY_STICKY_HOLD: Type = 44;
-    pub const ABILITY_CLOUD_NINE: Type = 45;
-    pub const ABILITY_ILLUMINATE: Type = 46;
-    pub const ABILITY_EARLY_BIRD: Type = 47;
-    pub const ABILITY_HUSTLE: Type = 48;
-    pub const ABILITY_DROUGHT: Type = 49;
-    pub const ABILITY_LIGHTNINGROD: Type = 50;
-    pub const ABILITY_COMPOUNDEYES: Type = 51;
-    pub const ABILITY_MARVEL_SCALE: Type = 52;
-    pub const ABILITY_WONDER_GUARD: Type = 53;
-    pub const ABILITY_INSOMNIA: Type = 54;
-    pub const ABILITY_LEVITATE: Type = 55;
-    pub const ABILITY_PLUS: Type = 56;
-    pub const ABILITY_PRESSURE: Type = 57;
-    pub const ABILITY_LIQUID_OOZE: Type = 58;
-    pub const ABILITY_COLOR_CHANGE: Type = 59;
-    pub const ABILITY_SOUNDPROOF: Type = 60;
-    pub const ABILITY_EFFECT_SPORE: Type = 61;
-    pub const ABILITY_FLAME_BODY: Type = 62;
-    pub const ABILITY_MINUS: Type = 63;
-    pub const ABILITY_OWN_TEMPO: Type = 64;
-    pub const ABILITY_MAGMA_ARMOR: Type = 65;
-    pub const ABILITY_WATER_VEIL: Type = 66;
-    pub const ABILITY_SWARM: Type = 67;
-    pub const ABILITY_CUTE_CHARM: Type = 68;
-    pub const ABILITY_IMMUNITY: Type = 69;
-    pub const ABILITY_BLAZE: Type = 70;
-    pub const ABILITY_PICKUP: Type = 71;
-    pub const ABILITY_FLASH_FIRE: Type = 72;
-    pub const ABILITY_VITAL_SPIRIT: Type = 73;
-    pub const ABILITY_CHLOROPHYLL: Type = 74;
-    pub const ABILITY_PURE_POWER: Type = 75;
-    pub const ABILITY_SHIELD_DUST: Type = 76;
-    pub const ABILITY_ICE_BODY: Type = 77;
-    pub const ABILITY_STALL: Type = 78;
-    pub const ABILITY_ANGER_POINT: Type = 79;
-    pub const ABILITY_TINTED_LENS: Type = 80;
-    pub const ABILITY_HYDRATION: Type = 81;
-    pub const ABILITY_FRISK: Type = 82;
-    pub const ABILITY_MOLD_BREAKER: Type = 83;
-    pub const ABILITY_UNBURDEN: Type = 84;
-    pub const ABILITY_DRY_SKIN: Type = 85;
-    pub const ABILITY_ANTICIPATION: Type = 86;
-    pub const ABILITY_SCRAPPY: Type = 87;
-    pub const ABILITY_SUPER_LUCK: Type = 88;
-    pub const ABILITY_GLUTTONY: Type = 89;
-    pub const ABILITY_SOLAR_POWER: Type = 90;
-    pub const ABILITY_SKILL_LINK: Type = 91;
-    pub const ABILITY_RECKLESS: Type = 92;
-    pub const ABILITY_SNIPER: Type = 93;
-    pub const ABILITY_SLOW_START: Type = 94;
-    pub const ABILITY_HEATPROOF: Type = 95;
-    pub const ABILITY_DOWNLOAD: Type = 96;
-    pub const ABILITY_SIMPLE: Type = 97;
-    pub const ABILITY_TANGLED_FEET: Type = 98;
-    pub const ABILITY_ADAPTABILITY: Type = 99;
-    pub const ABILITY_TECHNICIAN: Type = 100;
-    pub const ABILITY_IRON_FIST: Type = 101;
-    pub const ABILITY_MOTOR_DRIVE: Type = 102;
-    pub const ABILITY_UNAWARE: Type = 103;
-    pub const ABILITY_RIVALRY: Type = 104;
-    pub const ABILITY_BAD_DREAMS: Type = 105;
-    pub const ABILITY_NO_GUARD: Type = 106;
-    pub const ABILITY_NORMALIZE: Type = 107;
-    pub const ABILITY_SOLID_ROCK: Type = 108;
-    pub const ABILITY_QUICK_FEET: Type = 109;
-    pub const ABILITY_FILTER: Type = 110;
-    pub const ABILITY_KLUTZ: Type = 111;
-    pub const ABILITY_STEADFAST: Type = 112;
-    pub const ABILITY_FLOWER_GIFT: Type = 113;
-    pub const ABILITY_POISON_HEAL: Type = 114;
-    pub const ABILITY_MAGIC_GUARD: Type = 115;
-    pub const ABILITY_UNNAMED_0x74: Type = 116;
-    pub const ABILITY_HONEY_GATHER: Type = 117;
-    pub const ABILITY_AFTERMATH: Type = 118;
-    pub const ABILITY_SNOW_CLOAK: Type = 119;
-    pub const ABILITY_SNOW_WARNING: Type = 120;
-    pub const ABILITY_FOREWARN: Type = 121;
-    pub const ABILITY_STORM_DRAIN: Type = 122;
-    pub const ABILITY_LEAF_GUARD: Type = 123;
+impl ability_id {
+    pub const ABILITY_UNKNOWN: ability_id = ability_id(0);
 }
+impl ability_id {
+    pub const ABILITY_STENCH: ability_id = ability_id(1);
+}
+impl ability_id {
+    pub const ABILITY_THICK_FAT: ability_id = ability_id(2);
+}
+impl ability_id {
+    pub const ABILITY_RAIN_DISH: ability_id = ability_id(3);
+}
+impl ability_id {
+    pub const ABILITY_DRIZZLE: ability_id = ability_id(4);
+}
+impl ability_id {
+    pub const ABILITY_ARENA_TRAP: ability_id = ability_id(5);
+}
+impl ability_id {
+    pub const ABILITY_INTIMIDATE: ability_id = ability_id(6);
+}
+impl ability_id {
+    pub const ABILITY_ROCK_HEAD: ability_id = ability_id(7);
+}
+impl ability_id {
+    pub const ABILITY_AIR_LOCK: ability_id = ability_id(8);
+}
+impl ability_id {
+    pub const ABILITY_HYPER_CUTTER: ability_id = ability_id(9);
+}
+impl ability_id {
+    pub const ABILITY_SHADOW_TAG: ability_id = ability_id(10);
+}
+impl ability_id {
+    pub const ABILITY_SPEED_BOOST: ability_id = ability_id(11);
+}
+impl ability_id {
+    pub const ABILITY_BATTLE_ARMOR: ability_id = ability_id(12);
+}
+impl ability_id {
+    pub const ABILITY_STURDY: ability_id = ability_id(13);
+}
+impl ability_id {
+    pub const ABILITY_SUCTION_CUPS: ability_id = ability_id(14);
+}
+impl ability_id {
+    pub const ABILITY_CLEAR_BODY: ability_id = ability_id(15);
+}
+impl ability_id {
+    pub const ABILITY_TORRENT: ability_id = ability_id(16);
+}
+impl ability_id {
+    pub const ABILITY_GUTS: ability_id = ability_id(17);
+}
+impl ability_id {
+    pub const ABILITY_ROUGH_SKIN: ability_id = ability_id(18);
+}
+impl ability_id {
+    pub const ABILITY_SHELL_ARMOR: ability_id = ability_id(19);
+}
+impl ability_id {
+    pub const ABILITY_NATURAL_CURE: ability_id = ability_id(20);
+}
+impl ability_id {
+    pub const ABILITY_DAMP: ability_id = ability_id(21);
+}
+impl ability_id {
+    pub const ABILITY_LIMBER: ability_id = ability_id(22);
+}
+impl ability_id {
+    pub const ABILITY_MAGNET_PULL: ability_id = ability_id(23);
+}
+impl ability_id {
+    pub const ABILITY_WHITE_SMOKE: ability_id = ability_id(24);
+}
+impl ability_id {
+    pub const ABILITY_SYNCHRONIZE: ability_id = ability_id(25);
+}
+impl ability_id {
+    pub const ABILITY_OVERGROW: ability_id = ability_id(26);
+}
+impl ability_id {
+    pub const ABILITY_SWIFT_SWIM: ability_id = ability_id(27);
+}
+impl ability_id {
+    pub const ABILITY_SAND_STREAM: ability_id = ability_id(28);
+}
+impl ability_id {
+    pub const ABILITY_SAND_VEIL: ability_id = ability_id(29);
+}
+impl ability_id {
+    pub const ABILITY_KEEN_EYE: ability_id = ability_id(30);
+}
+impl ability_id {
+    pub const ABILITY_INNER_FOCUS: ability_id = ability_id(31);
+}
+impl ability_id {
+    pub const ABILITY_STATIC: ability_id = ability_id(32);
+}
+impl ability_id {
+    pub const ABILITY_SHED_SKIN: ability_id = ability_id(33);
+}
+impl ability_id {
+    pub const ABILITY_HUGE_POWER: ability_id = ability_id(34);
+}
+impl ability_id {
+    pub const ABILITY_VOLT_ABSORB: ability_id = ability_id(35);
+}
+impl ability_id {
+    pub const ABILITY_WATER_ABSORB: ability_id = ability_id(36);
+}
+impl ability_id {
+    pub const ABILITY_FORECAST: ability_id = ability_id(37);
+}
+impl ability_id {
+    pub const ABILITY_SERENE_GRACE: ability_id = ability_id(38);
+}
+impl ability_id {
+    pub const ABILITY_POISON_POINT: ability_id = ability_id(39);
+}
+impl ability_id {
+    pub const ABILITY_TRACE: ability_id = ability_id(40);
+}
+impl ability_id {
+    pub const ABILITY_OBLIVIOUS: ability_id = ability_id(41);
+}
+impl ability_id {
+    pub const ABILITY_TRUANT: ability_id = ability_id(42);
+}
+impl ability_id {
+    pub const ABILITY_RUN_AWAY: ability_id = ability_id(43);
+}
+impl ability_id {
+    pub const ABILITY_STICKY_HOLD: ability_id = ability_id(44);
+}
+impl ability_id {
+    pub const ABILITY_CLOUD_NINE: ability_id = ability_id(45);
+}
+impl ability_id {
+    pub const ABILITY_ILLUMINATE: ability_id = ability_id(46);
+}
+impl ability_id {
+    pub const ABILITY_EARLY_BIRD: ability_id = ability_id(47);
+}
+impl ability_id {
+    pub const ABILITY_HUSTLE: ability_id = ability_id(48);
+}
+impl ability_id {
+    pub const ABILITY_DROUGHT: ability_id = ability_id(49);
+}
+impl ability_id {
+    pub const ABILITY_LIGHTNINGROD: ability_id = ability_id(50);
+}
+impl ability_id {
+    pub const ABILITY_COMPOUNDEYES: ability_id = ability_id(51);
+}
+impl ability_id {
+    pub const ABILITY_MARVEL_SCALE: ability_id = ability_id(52);
+}
+impl ability_id {
+    pub const ABILITY_WONDER_GUARD: ability_id = ability_id(53);
+}
+impl ability_id {
+    pub const ABILITY_INSOMNIA: ability_id = ability_id(54);
+}
+impl ability_id {
+    pub const ABILITY_LEVITATE: ability_id = ability_id(55);
+}
+impl ability_id {
+    pub const ABILITY_PLUS: ability_id = ability_id(56);
+}
+impl ability_id {
+    pub const ABILITY_PRESSURE: ability_id = ability_id(57);
+}
+impl ability_id {
+    pub const ABILITY_LIQUID_OOZE: ability_id = ability_id(58);
+}
+impl ability_id {
+    pub const ABILITY_COLOR_CHANGE: ability_id = ability_id(59);
+}
+impl ability_id {
+    pub const ABILITY_SOUNDPROOF: ability_id = ability_id(60);
+}
+impl ability_id {
+    pub const ABILITY_EFFECT_SPORE: ability_id = ability_id(61);
+}
+impl ability_id {
+    pub const ABILITY_FLAME_BODY: ability_id = ability_id(62);
+}
+impl ability_id {
+    pub const ABILITY_MINUS: ability_id = ability_id(63);
+}
+impl ability_id {
+    pub const ABILITY_OWN_TEMPO: ability_id = ability_id(64);
+}
+impl ability_id {
+    pub const ABILITY_MAGMA_ARMOR: ability_id = ability_id(65);
+}
+impl ability_id {
+    pub const ABILITY_WATER_VEIL: ability_id = ability_id(66);
+}
+impl ability_id {
+    pub const ABILITY_SWARM: ability_id = ability_id(67);
+}
+impl ability_id {
+    pub const ABILITY_CUTE_CHARM: ability_id = ability_id(68);
+}
+impl ability_id {
+    pub const ABILITY_IMMUNITY: ability_id = ability_id(69);
+}
+impl ability_id {
+    pub const ABILITY_BLAZE: ability_id = ability_id(70);
+}
+impl ability_id {
+    pub const ABILITY_PICKUP: ability_id = ability_id(71);
+}
+impl ability_id {
+    pub const ABILITY_FLASH_FIRE: ability_id = ability_id(72);
+}
+impl ability_id {
+    pub const ABILITY_VITAL_SPIRIT: ability_id = ability_id(73);
+}
+impl ability_id {
+    pub const ABILITY_CHLOROPHYLL: ability_id = ability_id(74);
+}
+impl ability_id {
+    pub const ABILITY_PURE_POWER: ability_id = ability_id(75);
+}
+impl ability_id {
+    pub const ABILITY_SHIELD_DUST: ability_id = ability_id(76);
+}
+impl ability_id {
+    pub const ABILITY_ICE_BODY: ability_id = ability_id(77);
+}
+impl ability_id {
+    pub const ABILITY_STALL: ability_id = ability_id(78);
+}
+impl ability_id {
+    pub const ABILITY_ANGER_POINT: ability_id = ability_id(79);
+}
+impl ability_id {
+    pub const ABILITY_TINTED_LENS: ability_id = ability_id(80);
+}
+impl ability_id {
+    pub const ABILITY_HYDRATION: ability_id = ability_id(81);
+}
+impl ability_id {
+    pub const ABILITY_FRISK: ability_id = ability_id(82);
+}
+impl ability_id {
+    pub const ABILITY_MOLD_BREAKER: ability_id = ability_id(83);
+}
+impl ability_id {
+    pub const ABILITY_UNBURDEN: ability_id = ability_id(84);
+}
+impl ability_id {
+    pub const ABILITY_DRY_SKIN: ability_id = ability_id(85);
+}
+impl ability_id {
+    pub const ABILITY_ANTICIPATION: ability_id = ability_id(86);
+}
+impl ability_id {
+    pub const ABILITY_SCRAPPY: ability_id = ability_id(87);
+}
+impl ability_id {
+    pub const ABILITY_SUPER_LUCK: ability_id = ability_id(88);
+}
+impl ability_id {
+    pub const ABILITY_GLUTTONY: ability_id = ability_id(89);
+}
+impl ability_id {
+    pub const ABILITY_SOLAR_POWER: ability_id = ability_id(90);
+}
+impl ability_id {
+    pub const ABILITY_SKILL_LINK: ability_id = ability_id(91);
+}
+impl ability_id {
+    pub const ABILITY_RECKLESS: ability_id = ability_id(92);
+}
+impl ability_id {
+    pub const ABILITY_SNIPER: ability_id = ability_id(93);
+}
+impl ability_id {
+    pub const ABILITY_SLOW_START: ability_id = ability_id(94);
+}
+impl ability_id {
+    pub const ABILITY_HEATPROOF: ability_id = ability_id(95);
+}
+impl ability_id {
+    pub const ABILITY_DOWNLOAD: ability_id = ability_id(96);
+}
+impl ability_id {
+    pub const ABILITY_SIMPLE: ability_id = ability_id(97);
+}
+impl ability_id {
+    pub const ABILITY_TANGLED_FEET: ability_id = ability_id(98);
+}
+impl ability_id {
+    pub const ABILITY_ADAPTABILITY: ability_id = ability_id(99);
+}
+impl ability_id {
+    pub const ABILITY_TECHNICIAN: ability_id = ability_id(100);
+}
+impl ability_id {
+    pub const ABILITY_IRON_FIST: ability_id = ability_id(101);
+}
+impl ability_id {
+    pub const ABILITY_MOTOR_DRIVE: ability_id = ability_id(102);
+}
+impl ability_id {
+    pub const ABILITY_UNAWARE: ability_id = ability_id(103);
+}
+impl ability_id {
+    pub const ABILITY_RIVALRY: ability_id = ability_id(104);
+}
+impl ability_id {
+    pub const ABILITY_BAD_DREAMS: ability_id = ability_id(105);
+}
+impl ability_id {
+    pub const ABILITY_NO_GUARD: ability_id = ability_id(106);
+}
+impl ability_id {
+    pub const ABILITY_NORMALIZE: ability_id = ability_id(107);
+}
+impl ability_id {
+    pub const ABILITY_SOLID_ROCK: ability_id = ability_id(108);
+}
+impl ability_id {
+    pub const ABILITY_QUICK_FEET: ability_id = ability_id(109);
+}
+impl ability_id {
+    pub const ABILITY_FILTER: ability_id = ability_id(110);
+}
+impl ability_id {
+    pub const ABILITY_KLUTZ: ability_id = ability_id(111);
+}
+impl ability_id {
+    pub const ABILITY_STEADFAST: ability_id = ability_id(112);
+}
+impl ability_id {
+    pub const ABILITY_FLOWER_GIFT: ability_id = ability_id(113);
+}
+impl ability_id {
+    pub const ABILITY_POISON_HEAL: ability_id = ability_id(114);
+}
+impl ability_id {
+    pub const ABILITY_MAGIC_GUARD: ability_id = ability_id(115);
+}
+impl ability_id {
+    pub const ABILITY_UNNAMED_0x74: ability_id = ability_id(116);
+}
+impl ability_id {
+    pub const ABILITY_HONEY_GATHER: ability_id = ability_id(117);
+}
+impl ability_id {
+    pub const ABILITY_AFTERMATH: ability_id = ability_id(118);
+}
+impl ability_id {
+    pub const ABILITY_SNOW_CLOAK: ability_id = ability_id(119);
+}
+impl ability_id {
+    pub const ABILITY_SNOW_WARNING: ability_id = ability_id(120);
+}
+impl ability_id {
+    pub const ABILITY_FOREWARN: ability_id = ability_id(121);
+}
+impl ability_id {
+    pub const ABILITY_STORM_DRAIN: ability_id = ability_id(122);
+}
+impl ability_id {
+    pub const ABILITY_LEAF_GUARD: ability_id = ability_id(123);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct ability_id(pub crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct ability_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -3135,18 +8539,18 @@ pub struct ability_id_8 {
 }
 impl ability_id_8 {
     #[inline]
-    pub fn val(&self) -> ability_id::Type {
+    pub fn val(&self) -> ability_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: ability_id::Type) {
+    pub fn set_val(&mut self, val: ability_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 8u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: ability_id::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+    pub fn new_bitfield_1(val: ability_id) -> __BindgenBitfieldUnit<[u8; 1usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 8u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -3469,109 +8873,309 @@ impl dungeon_id_16 {
         __bindgen_bitfield_unit
     }
 }
-pub mod dungeon_group_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const DGROUP_TEST_DUNGEON: Type = 0;
-    pub const DGROUP_BEACH_CAVE: Type = 1;
-    pub const DGROUP_DRENCHED_BLUFF: Type = 2;
-    pub const DGROUP_MT_BRISTLE: Type = 3;
-    pub const DGROUP_WATERFALL_CAVE: Type = 4;
-    pub const DGROUP_APPLE_WOODS: Type = 5;
-    pub const DGROUP_CRAGGY_COAST: Type = 6;
-    pub const DGROUP_SIDE_PATH: Type = 7;
-    pub const DGROUP_MT_HORN: Type = 8;
-    pub const DGROUP_ROCK_PATH: Type = 9;
-    pub const DGROUP_FOGGY_FOREST: Type = 10;
-    pub const DGROUP_FOREST_PATH: Type = 11;
-    pub const DGROUP_STEAM_CAVE: Type = 12;
-    pub const DGROUP_AMP_PLAINS: Type = 13;
-    pub const DGROUP_NORTHERN_DESERT: Type = 14;
-    pub const DGROUP_QUICKSAND_CAVE: Type = 15;
-    pub const DGROUP_CRYSTAL_CAVE: Type = 16;
-    pub const DGROUP_CRYSTAL_CROSSING: Type = 17;
-    pub const DGROUP_CHASM_CAVE: Type = 18;
-    pub const DGROUP_DARK_HILL: Type = 19;
-    pub const DGROUP_SEALED_RUIN: Type = 20;
-    pub const DGROUP_DUSK_FOREST: Type = 21;
-    pub const DGROUP_DEEP_DUSK_FOREST: Type = 22;
-    pub const DGROUP_TREESHROUD_FOREST: Type = 23;
-    pub const DGROUP_BRINE_CAVE: Type = 24;
-    pub const DGROUP_HIDDEN_LAND: Type = 25;
-    pub const DGROUP_TEMPORAL_TOWER: Type = 26;
-    pub const DGROUP_MYSTIFYING_FOREST: Type = 27;
-    pub const DGROUP_MIDNIGHT_FOREST: Type = 28;
-    pub const DGROUP_LAKE_AFAR: Type = 29;
-    pub const DGROUP_MT_MISTRAL: Type = 30;
-    pub const DGROUP_SHIMMER_HILL: Type = 31;
-    pub const DGROUP_BOTTOMLESS_SEA: Type = 32;
-    pub const DGROUP_SURROUNDED_SEA: Type = 33;
-    pub const DGROUP_MIRACLE_SEA: Type = 34;
-    pub const DGROUP_CONCEALED_RUINS: Type = 35;
-    pub const DGROUP_LOST_WILDERNESS: Type = 36;
-    pub const DGROUP_MYSTERY_JUNGLE: Type = 37;
-    pub const DGROUP_HAPPY_OUTLOOK: Type = 38;
-    pub const DGROUP_SERENITY_RIVER: Type = 39;
-    pub const DGROUP_LANDSLIDE_CAVE: Type = 40;
-    pub const DGROUP_BLIZZARD_ISLAND: Type = 41;
-    pub const DGROUP_SHIMMER_DESERT: Type = 42;
-    pub const DGROUP_CREVICE_CAVE: Type = 43;
-    pub const DGROUP_MT_AVALANCHE: Type = 44;
-    pub const DGROUP_GIANT_VOLCANO: Type = 45;
-    pub const DGROUP_WORLD_ABYSS: Type = 46;
-    pub const DGROUP_LUSH_PRAIRIE: Type = 47;
-    pub const DGROUP_TINY_MEADOW: Type = 48;
-    pub const DGROUP_LABYRINTH_CAVE: Type = 49;
-    pub const DGROUP_ORAN_FOREST: Type = 50;
-    pub const DGROUP_SKY_STAIRWAY: Type = 51;
-    pub const DGROUP_AEGIS_CAVE: Type = 52;
-    pub const DGROUP_MAROWAK_DOJO: Type = 53;
-    pub const DGROUP_DARK_CRATER: Type = 54;
-    pub const DGROUP_MARINE_RESORT: Type = 55;
-    pub const DGROUP_MT_TRAVAIL: Type = 56;
-    pub const DGROUP_THE_NIGHTMARE: Type = 57;
-    pub const DGROUP_SPACIAL_RIFT: Type = 58;
-    pub const DGROUP_ZERO_ISLE_NORTH: Type = 59;
-    pub const DGROUP_ZERO_ISLE_WEST: Type = 60;
-    pub const DGROUP_ZERO_ISLE_EAST: Type = 61;
-    pub const DGROUP_ZERO_ISLE_SOUTH: Type = 62;
-    pub const DGROUP_RESCUE: Type = 63;
-    pub const DGROUP_ZERO_ISLE_CENTER: Type = 64;
-    pub const DGROUP_DESTINY_TOWER: Type = 65;
-    pub const DGROUP_DUMMY_0x42: Type = 66;
-    pub const DGROUP_DUMMY_0x43: Type = 67;
-    pub const DGROUP_OBLIVION_FOREST: Type = 68;
-    pub const DGROUP_TREACHEROUS_WATERS: Type = 69;
-    pub const DGROUP_SOUTHEASTERN_ISLANDS: Type = 70;
-    pub const DGROUP_INFERNO_CAVE: Type = 71;
-    pub const DGROUP_SKY_PEAK: Type = 72;
-    pub const DGROUP_STAR_CAVE_SE1: Type = 73;
-    pub const DGROUP_MURKY_FOREST: Type = 74;
-    pub const DGROUP_EASTERN_CAVE: Type = 75;
-    pub const DGROUP_FORTUNE_RAVINE: Type = 76;
-    pub const DGROUP_BARREN_VALLEY: Type = 77;
-    pub const DGROUP_DARK_WASTELAND: Type = 78;
-    pub const DGROUP_TEMPORAL_TOWER_SE5: Type = 79;
-    pub const DGROUP_DUSK_FOREST_SE5: Type = 80;
-    pub const DGROUP_SPACIAL_CLIFFS: Type = 81;
-    pub const DGROUP_DARK_ICE_MOUNTAIN: Type = 82;
-    pub const DGROUP_ICICLE_FOREST: Type = 83;
-    pub const DGROUP_VAST_ICE_MOUNTAIN: Type = 84;
-    pub const DGROUP_SOUTHERN_JUNGLE: Type = 85;
-    pub const DGROUP_BOULDER_QUARRY: Type = 86;
-    pub const DGROUP_RIGHT_CAVE_PATH: Type = 87;
-    pub const DGROUP_LEFT_CAVE_PATH: Type = 88;
-    pub const DGROUP_LIMESTONE_CAVERN: Type = 89;
-    pub const DGROUP_SPRING_CAVE: Type = 90;
-    pub const DGROUP_STAR_CAVE: Type = 91;
-    pub const DGROUP_LITTLE_PLAINS: Type = 92;
-    pub const DGROUP_MT_CLEAR: Type = 93;
-    pub const DGROUP_CHALLENGE_RIVER: Type = 94;
-    pub const DGROUP_TRIAL_FOREST: Type = 95;
-    pub const DGROUP_GUIDING_SEA: Type = 96;
-    pub const DGROUP_HIDDEN_SHOPKEEPER_VILLAGE: Type = 97;
-    pub const DGROUP_DUMMY_0x62: Type = 98;
-    pub const DGROUP_DUMMY_0x63: Type = 99;
+impl dungeon_group_id {
+    pub const DGROUP_TEST_DUNGEON: dungeon_group_id = dungeon_group_id(0);
 }
+impl dungeon_group_id {
+    pub const DGROUP_BEACH_CAVE: dungeon_group_id = dungeon_group_id(1);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DRENCHED_BLUFF: dungeon_group_id = dungeon_group_id(2);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MT_BRISTLE: dungeon_group_id = dungeon_group_id(3);
+}
+impl dungeon_group_id {
+    pub const DGROUP_WATERFALL_CAVE: dungeon_group_id = dungeon_group_id(4);
+}
+impl dungeon_group_id {
+    pub const DGROUP_APPLE_WOODS: dungeon_group_id = dungeon_group_id(5);
+}
+impl dungeon_group_id {
+    pub const DGROUP_CRAGGY_COAST: dungeon_group_id = dungeon_group_id(6);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SIDE_PATH: dungeon_group_id = dungeon_group_id(7);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MT_HORN: dungeon_group_id = dungeon_group_id(8);
+}
+impl dungeon_group_id {
+    pub const DGROUP_ROCK_PATH: dungeon_group_id = dungeon_group_id(9);
+}
+impl dungeon_group_id {
+    pub const DGROUP_FOGGY_FOREST: dungeon_group_id = dungeon_group_id(10);
+}
+impl dungeon_group_id {
+    pub const DGROUP_FOREST_PATH: dungeon_group_id = dungeon_group_id(11);
+}
+impl dungeon_group_id {
+    pub const DGROUP_STEAM_CAVE: dungeon_group_id = dungeon_group_id(12);
+}
+impl dungeon_group_id {
+    pub const DGROUP_AMP_PLAINS: dungeon_group_id = dungeon_group_id(13);
+}
+impl dungeon_group_id {
+    pub const DGROUP_NORTHERN_DESERT: dungeon_group_id = dungeon_group_id(14);
+}
+impl dungeon_group_id {
+    pub const DGROUP_QUICKSAND_CAVE: dungeon_group_id = dungeon_group_id(15);
+}
+impl dungeon_group_id {
+    pub const DGROUP_CRYSTAL_CAVE: dungeon_group_id = dungeon_group_id(16);
+}
+impl dungeon_group_id {
+    pub const DGROUP_CRYSTAL_CROSSING: dungeon_group_id = dungeon_group_id(17);
+}
+impl dungeon_group_id {
+    pub const DGROUP_CHASM_CAVE: dungeon_group_id = dungeon_group_id(18);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DARK_HILL: dungeon_group_id = dungeon_group_id(19);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SEALED_RUIN: dungeon_group_id = dungeon_group_id(20);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DUSK_FOREST: dungeon_group_id = dungeon_group_id(21);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DEEP_DUSK_FOREST: dungeon_group_id = dungeon_group_id(22);
+}
+impl dungeon_group_id {
+    pub const DGROUP_TREESHROUD_FOREST: dungeon_group_id = dungeon_group_id(23);
+}
+impl dungeon_group_id {
+    pub const DGROUP_BRINE_CAVE: dungeon_group_id = dungeon_group_id(24);
+}
+impl dungeon_group_id {
+    pub const DGROUP_HIDDEN_LAND: dungeon_group_id = dungeon_group_id(25);
+}
+impl dungeon_group_id {
+    pub const DGROUP_TEMPORAL_TOWER: dungeon_group_id = dungeon_group_id(26);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MYSTIFYING_FOREST: dungeon_group_id = dungeon_group_id(27);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MIDNIGHT_FOREST: dungeon_group_id = dungeon_group_id(28);
+}
+impl dungeon_group_id {
+    pub const DGROUP_LAKE_AFAR: dungeon_group_id = dungeon_group_id(29);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MT_MISTRAL: dungeon_group_id = dungeon_group_id(30);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SHIMMER_HILL: dungeon_group_id = dungeon_group_id(31);
+}
+impl dungeon_group_id {
+    pub const DGROUP_BOTTOMLESS_SEA: dungeon_group_id = dungeon_group_id(32);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SURROUNDED_SEA: dungeon_group_id = dungeon_group_id(33);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MIRACLE_SEA: dungeon_group_id = dungeon_group_id(34);
+}
+impl dungeon_group_id {
+    pub const DGROUP_CONCEALED_RUINS: dungeon_group_id = dungeon_group_id(35);
+}
+impl dungeon_group_id {
+    pub const DGROUP_LOST_WILDERNESS: dungeon_group_id = dungeon_group_id(36);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MYSTERY_JUNGLE: dungeon_group_id = dungeon_group_id(37);
+}
+impl dungeon_group_id {
+    pub const DGROUP_HAPPY_OUTLOOK: dungeon_group_id = dungeon_group_id(38);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SERENITY_RIVER: dungeon_group_id = dungeon_group_id(39);
+}
+impl dungeon_group_id {
+    pub const DGROUP_LANDSLIDE_CAVE: dungeon_group_id = dungeon_group_id(40);
+}
+impl dungeon_group_id {
+    pub const DGROUP_BLIZZARD_ISLAND: dungeon_group_id = dungeon_group_id(41);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SHIMMER_DESERT: dungeon_group_id = dungeon_group_id(42);
+}
+impl dungeon_group_id {
+    pub const DGROUP_CREVICE_CAVE: dungeon_group_id = dungeon_group_id(43);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MT_AVALANCHE: dungeon_group_id = dungeon_group_id(44);
+}
+impl dungeon_group_id {
+    pub const DGROUP_GIANT_VOLCANO: dungeon_group_id = dungeon_group_id(45);
+}
+impl dungeon_group_id {
+    pub const DGROUP_WORLD_ABYSS: dungeon_group_id = dungeon_group_id(46);
+}
+impl dungeon_group_id {
+    pub const DGROUP_LUSH_PRAIRIE: dungeon_group_id = dungeon_group_id(47);
+}
+impl dungeon_group_id {
+    pub const DGROUP_TINY_MEADOW: dungeon_group_id = dungeon_group_id(48);
+}
+impl dungeon_group_id {
+    pub const DGROUP_LABYRINTH_CAVE: dungeon_group_id = dungeon_group_id(49);
+}
+impl dungeon_group_id {
+    pub const DGROUP_ORAN_FOREST: dungeon_group_id = dungeon_group_id(50);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SKY_STAIRWAY: dungeon_group_id = dungeon_group_id(51);
+}
+impl dungeon_group_id {
+    pub const DGROUP_AEGIS_CAVE: dungeon_group_id = dungeon_group_id(52);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MAROWAK_DOJO: dungeon_group_id = dungeon_group_id(53);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DARK_CRATER: dungeon_group_id = dungeon_group_id(54);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MARINE_RESORT: dungeon_group_id = dungeon_group_id(55);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MT_TRAVAIL: dungeon_group_id = dungeon_group_id(56);
+}
+impl dungeon_group_id {
+    pub const DGROUP_THE_NIGHTMARE: dungeon_group_id = dungeon_group_id(57);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SPACIAL_RIFT: dungeon_group_id = dungeon_group_id(58);
+}
+impl dungeon_group_id {
+    pub const DGROUP_ZERO_ISLE_NORTH: dungeon_group_id = dungeon_group_id(59);
+}
+impl dungeon_group_id {
+    pub const DGROUP_ZERO_ISLE_WEST: dungeon_group_id = dungeon_group_id(60);
+}
+impl dungeon_group_id {
+    pub const DGROUP_ZERO_ISLE_EAST: dungeon_group_id = dungeon_group_id(61);
+}
+impl dungeon_group_id {
+    pub const DGROUP_ZERO_ISLE_SOUTH: dungeon_group_id = dungeon_group_id(62);
+}
+impl dungeon_group_id {
+    pub const DGROUP_RESCUE: dungeon_group_id = dungeon_group_id(63);
+}
+impl dungeon_group_id {
+    pub const DGROUP_ZERO_ISLE_CENTER: dungeon_group_id = dungeon_group_id(64);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DESTINY_TOWER: dungeon_group_id = dungeon_group_id(65);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DUMMY_0x42: dungeon_group_id = dungeon_group_id(66);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DUMMY_0x43: dungeon_group_id = dungeon_group_id(67);
+}
+impl dungeon_group_id {
+    pub const DGROUP_OBLIVION_FOREST: dungeon_group_id = dungeon_group_id(68);
+}
+impl dungeon_group_id {
+    pub const DGROUP_TREACHEROUS_WATERS: dungeon_group_id = dungeon_group_id(69);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SOUTHEASTERN_ISLANDS: dungeon_group_id = dungeon_group_id(70);
+}
+impl dungeon_group_id {
+    pub const DGROUP_INFERNO_CAVE: dungeon_group_id = dungeon_group_id(71);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SKY_PEAK: dungeon_group_id = dungeon_group_id(72);
+}
+impl dungeon_group_id {
+    pub const DGROUP_STAR_CAVE_SE1: dungeon_group_id = dungeon_group_id(73);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MURKY_FOREST: dungeon_group_id = dungeon_group_id(74);
+}
+impl dungeon_group_id {
+    pub const DGROUP_EASTERN_CAVE: dungeon_group_id = dungeon_group_id(75);
+}
+impl dungeon_group_id {
+    pub const DGROUP_FORTUNE_RAVINE: dungeon_group_id = dungeon_group_id(76);
+}
+impl dungeon_group_id {
+    pub const DGROUP_BARREN_VALLEY: dungeon_group_id = dungeon_group_id(77);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DARK_WASTELAND: dungeon_group_id = dungeon_group_id(78);
+}
+impl dungeon_group_id {
+    pub const DGROUP_TEMPORAL_TOWER_SE5: dungeon_group_id = dungeon_group_id(79);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DUSK_FOREST_SE5: dungeon_group_id = dungeon_group_id(80);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SPACIAL_CLIFFS: dungeon_group_id = dungeon_group_id(81);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DARK_ICE_MOUNTAIN: dungeon_group_id = dungeon_group_id(82);
+}
+impl dungeon_group_id {
+    pub const DGROUP_ICICLE_FOREST: dungeon_group_id = dungeon_group_id(83);
+}
+impl dungeon_group_id {
+    pub const DGROUP_VAST_ICE_MOUNTAIN: dungeon_group_id = dungeon_group_id(84);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SOUTHERN_JUNGLE: dungeon_group_id = dungeon_group_id(85);
+}
+impl dungeon_group_id {
+    pub const DGROUP_BOULDER_QUARRY: dungeon_group_id = dungeon_group_id(86);
+}
+impl dungeon_group_id {
+    pub const DGROUP_RIGHT_CAVE_PATH: dungeon_group_id = dungeon_group_id(87);
+}
+impl dungeon_group_id {
+    pub const DGROUP_LEFT_CAVE_PATH: dungeon_group_id = dungeon_group_id(88);
+}
+impl dungeon_group_id {
+    pub const DGROUP_LIMESTONE_CAVERN: dungeon_group_id = dungeon_group_id(89);
+}
+impl dungeon_group_id {
+    pub const DGROUP_SPRING_CAVE: dungeon_group_id = dungeon_group_id(90);
+}
+impl dungeon_group_id {
+    pub const DGROUP_STAR_CAVE: dungeon_group_id = dungeon_group_id(91);
+}
+impl dungeon_group_id {
+    pub const DGROUP_LITTLE_PLAINS: dungeon_group_id = dungeon_group_id(92);
+}
+impl dungeon_group_id {
+    pub const DGROUP_MT_CLEAR: dungeon_group_id = dungeon_group_id(93);
+}
+impl dungeon_group_id {
+    pub const DGROUP_CHALLENGE_RIVER: dungeon_group_id = dungeon_group_id(94);
+}
+impl dungeon_group_id {
+    pub const DGROUP_TRIAL_FOREST: dungeon_group_id = dungeon_group_id(95);
+}
+impl dungeon_group_id {
+    pub const DGROUP_GUIDING_SEA: dungeon_group_id = dungeon_group_id(96);
+}
+impl dungeon_group_id {
+    pub const DGROUP_HIDDEN_SHOPKEEPER_VILLAGE: dungeon_group_id = dungeon_group_id(97);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DUMMY_0x62: dungeon_group_id = dungeon_group_id(98);
+}
+impl dungeon_group_id {
+    pub const DGROUP_DUMMY_0x63: dungeon_group_id = dungeon_group_id(99);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct dungeon_group_id(pub crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct dungeon_group_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -3579,18 +9183,18 @@ pub struct dungeon_group_id_8 {
 }
 impl dungeon_group_id_8 {
     #[inline]
-    pub fn val(&self) -> dungeon_group_id::Type {
+    pub fn val(&self) -> dungeon_group_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: dungeon_group_id::Type) {
+    pub fn set_val(&mut self, val: dungeon_group_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 8u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: dungeon_group_id::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+    pub fn new_bitfield_1(val: dungeon_group_id) -> __BindgenBitfieldUnit<[u8; 1usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 8u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -3834,97 +9438,267 @@ impl music_id_16 {
         __bindgen_bitfield_unit
     }
 }
-pub mod iq_skill_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const IQ_NONE: Type = 0;
-    pub const IQ_TYPE_ADVANTAGE_MASTER: Type = 1;
-    pub const IQ_ITEM_CATCHER: Type = 2;
-    pub const IQ_COURSE_CHECKER: Type = 3;
-    pub const IQ_SURE_HIT_ATTACKER: Type = 4;
-    pub const IQ_QUICK_DODGER: Type = 5;
-    pub const IQ_PP_CHECKER: Type = 6;
-    pub const IQ_NONTRAITOR: Type = 7;
-    pub const IQ_STATUS_CHECKER: Type = 8;
-    pub const IQ_EXP_GO_GETTER: Type = 9;
-    pub const IQ_EFFICIENCY_EXPERT: Type = 10;
-    pub const IQ_WEAK_TYPE_PICKER: Type = 11;
-    pub const IQ_ALL_TERRAIN_HIKER: Type = 12;
-    pub const IQ_ABSOLUTE_MOVER: Type = 13;
-    pub const IQ_TRAP_AVOIDER: Type = 14;
-    pub const IQ_HOUSE_AVOIDER: Type = 15;
-    pub const IQ_ENERGY_SAVER: Type = 16;
-    pub const IQ_NONSLEEPER: Type = 17;
-    pub const IQ_SELF_CURER: Type = 18;
-    pub const IQ_TRAP_SEER: Type = 19;
-    pub const IQ_LAVA_EVADER: Type = 20;
-    pub const IQ_DEDICATED_TRAVELER: Type = 21;
-    pub const IQ_ITEM_MASTER: Type = 22;
-    pub const IQ_EXCLUSIVE_MOVE_USER: Type = 23;
-    pub const IQ_ESCAPIST: Type = 24;
-    pub const IQ_LOCK_PICKER: Type = 25;
-    pub const IQ_STAIR_SENSOR: Type = 26;
-    pub const IQ_COIN_WATCHER: Type = 27;
-    pub const IQ_EXP_ELITE: Type = 28;
-    pub const IQ_SHARPSHOOTER: Type = 29;
-    pub const IQ_FAST_FRIEND: Type = 30;
-    pub const IQ_PP_SAVER: Type = 31;
-    pub const IQ_BODYGUARD: Type = 32;
-    pub const IQ_CAUTIOUS_CREEPER: Type = 33;
-    pub const IQ_AGGRESSOR: Type = 34;
-    pub const IQ_DEFENDER: Type = 35;
-    pub const IQ_INTIMIDATOR: Type = 36;
-    pub const IQ_SURVIVALIST: Type = 37;
-    pub const IQ_TRAP_BUSTER: Type = 38;
-    pub const IQ_COUNTER_HITTER: Type = 39;
-    pub const IQ_EXTRA_STRIKER: Type = 40;
-    pub const IQ_HIT_AND_RUNNER: Type = 41;
-    pub const IQ_PARRY_EXPERT: Type = 42;
-    pub const IQ_QUICK_STRIKER: Type = 43;
-    pub const IQ_NO_CHARGER: Type = 44;
-    pub const IQ_WARY_FIGHTER: Type = 45;
-    pub const IQ_GAP_PROBER: Type = 46;
-    pub const IQ_POWER_PITCHER: Type = 47;
-    pub const IQ_CONCENTRATOR: Type = 48;
-    pub const IQ_COUNTER_BASHER: Type = 49;
-    pub const IQ_CHEERLEADER: Type = 50;
-    pub const IQ_NATURE_GIFTER: Type = 51;
-    pub const IQ_WISE_HEALER: Type = 52;
-    pub const IQ_QUICK_HEALER: Type = 53;
-    pub const IQ_ACUTE_SNIFFER: Type = 54;
-    pub const IQ_DEEP_BREATHER: Type = 55;
-    pub const IQ_BRICK_TOUGH: Type = 56;
-    pub const IQ_MULTITALENT: Type = 57;
-    pub const IQ_TIME_TRIPPER: Type = 58;
-    pub const IQ_ERRATIC_PLAYER: Type = 59;
-    pub const IQ_PRACTICE_SWINGER: Type = 60;
-    pub const IQ_NO_DEFEATIST: Type = 61;
-    pub const IQ_HAGGLER: Type = 62;
-    pub const IQ_CLUTCH_PERFORMER: Type = 63;
-    pub const IQ_CRITICAL_DODGER: Type = 64;
-    pub const IQ_MAP_SURVEYOR: Type = 65;
-    pub const IQ_PIERCE_HURLER: Type = 66;
-    pub const IQ_COLLECTOR: Type = 67;
-    pub const IQ_TRUE_POWERIST: Type = 68;
+impl iq_skill_id {
+    pub const IQ_NONE: iq_skill_id = iq_skill_id(0);
 }
-pub mod iq_group_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const IQ_GROUP_A: Type = 0;
-    pub const IQ_GROUP_B: Type = 1;
-    pub const IQ_GROUP_C: Type = 2;
-    pub const IQ_GROUP_D: Type = 3;
-    pub const IQ_GROUP_E: Type = 4;
-    pub const IQ_GROUP_F: Type = 5;
-    pub const IQ_GROUP_G: Type = 6;
-    pub const IQ_GROUP_H: Type = 7;
-    pub const IQ_GROUP_UNUSED_0x8: Type = 8;
-    pub const IQ_GROUP_UNUSED_0x9: Type = 9;
-    pub const IQ_GROUP_I: Type = 10;
-    pub const IQ_GROUP_J: Type = 11;
-    pub const IQ_GROUP_UNUSED_0xC: Type = 12;
-    pub const IQ_GROUP_UNUSED_0xD: Type = 13;
-    pub const IQ_GROUP_UNUSED_0xE: Type = 14;
-    pub const IQ_GROUP_NONE: Type = 15;
+impl iq_skill_id {
+    pub const IQ_TYPE_ADVANTAGE_MASTER: iq_skill_id = iq_skill_id(1);
 }
+impl iq_skill_id {
+    pub const IQ_ITEM_CATCHER: iq_skill_id = iq_skill_id(2);
+}
+impl iq_skill_id {
+    pub const IQ_COURSE_CHECKER: iq_skill_id = iq_skill_id(3);
+}
+impl iq_skill_id {
+    pub const IQ_SURE_HIT_ATTACKER: iq_skill_id = iq_skill_id(4);
+}
+impl iq_skill_id {
+    pub const IQ_QUICK_DODGER: iq_skill_id = iq_skill_id(5);
+}
+impl iq_skill_id {
+    pub const IQ_PP_CHECKER: iq_skill_id = iq_skill_id(6);
+}
+impl iq_skill_id {
+    pub const IQ_NONTRAITOR: iq_skill_id = iq_skill_id(7);
+}
+impl iq_skill_id {
+    pub const IQ_STATUS_CHECKER: iq_skill_id = iq_skill_id(8);
+}
+impl iq_skill_id {
+    pub const IQ_EXP_GO_GETTER: iq_skill_id = iq_skill_id(9);
+}
+impl iq_skill_id {
+    pub const IQ_EFFICIENCY_EXPERT: iq_skill_id = iq_skill_id(10);
+}
+impl iq_skill_id {
+    pub const IQ_WEAK_TYPE_PICKER: iq_skill_id = iq_skill_id(11);
+}
+impl iq_skill_id {
+    pub const IQ_ALL_TERRAIN_HIKER: iq_skill_id = iq_skill_id(12);
+}
+impl iq_skill_id {
+    pub const IQ_ABSOLUTE_MOVER: iq_skill_id = iq_skill_id(13);
+}
+impl iq_skill_id {
+    pub const IQ_TRAP_AVOIDER: iq_skill_id = iq_skill_id(14);
+}
+impl iq_skill_id {
+    pub const IQ_HOUSE_AVOIDER: iq_skill_id = iq_skill_id(15);
+}
+impl iq_skill_id {
+    pub const IQ_ENERGY_SAVER: iq_skill_id = iq_skill_id(16);
+}
+impl iq_skill_id {
+    pub const IQ_NONSLEEPER: iq_skill_id = iq_skill_id(17);
+}
+impl iq_skill_id {
+    pub const IQ_SELF_CURER: iq_skill_id = iq_skill_id(18);
+}
+impl iq_skill_id {
+    pub const IQ_TRAP_SEER: iq_skill_id = iq_skill_id(19);
+}
+impl iq_skill_id {
+    pub const IQ_LAVA_EVADER: iq_skill_id = iq_skill_id(20);
+}
+impl iq_skill_id {
+    pub const IQ_DEDICATED_TRAVELER: iq_skill_id = iq_skill_id(21);
+}
+impl iq_skill_id {
+    pub const IQ_ITEM_MASTER: iq_skill_id = iq_skill_id(22);
+}
+impl iq_skill_id {
+    pub const IQ_EXCLUSIVE_MOVE_USER: iq_skill_id = iq_skill_id(23);
+}
+impl iq_skill_id {
+    pub const IQ_ESCAPIST: iq_skill_id = iq_skill_id(24);
+}
+impl iq_skill_id {
+    pub const IQ_LOCK_PICKER: iq_skill_id = iq_skill_id(25);
+}
+impl iq_skill_id {
+    pub const IQ_STAIR_SENSOR: iq_skill_id = iq_skill_id(26);
+}
+impl iq_skill_id {
+    pub const IQ_COIN_WATCHER: iq_skill_id = iq_skill_id(27);
+}
+impl iq_skill_id {
+    pub const IQ_EXP_ELITE: iq_skill_id = iq_skill_id(28);
+}
+impl iq_skill_id {
+    pub const IQ_SHARPSHOOTER: iq_skill_id = iq_skill_id(29);
+}
+impl iq_skill_id {
+    pub const IQ_FAST_FRIEND: iq_skill_id = iq_skill_id(30);
+}
+impl iq_skill_id {
+    pub const IQ_PP_SAVER: iq_skill_id = iq_skill_id(31);
+}
+impl iq_skill_id {
+    pub const IQ_BODYGUARD: iq_skill_id = iq_skill_id(32);
+}
+impl iq_skill_id {
+    pub const IQ_CAUTIOUS_CREEPER: iq_skill_id = iq_skill_id(33);
+}
+impl iq_skill_id {
+    pub const IQ_AGGRESSOR: iq_skill_id = iq_skill_id(34);
+}
+impl iq_skill_id {
+    pub const IQ_DEFENDER: iq_skill_id = iq_skill_id(35);
+}
+impl iq_skill_id {
+    pub const IQ_INTIMIDATOR: iq_skill_id = iq_skill_id(36);
+}
+impl iq_skill_id {
+    pub const IQ_SURVIVALIST: iq_skill_id = iq_skill_id(37);
+}
+impl iq_skill_id {
+    pub const IQ_TRAP_BUSTER: iq_skill_id = iq_skill_id(38);
+}
+impl iq_skill_id {
+    pub const IQ_COUNTER_HITTER: iq_skill_id = iq_skill_id(39);
+}
+impl iq_skill_id {
+    pub const IQ_EXTRA_STRIKER: iq_skill_id = iq_skill_id(40);
+}
+impl iq_skill_id {
+    pub const IQ_HIT_AND_RUNNER: iq_skill_id = iq_skill_id(41);
+}
+impl iq_skill_id {
+    pub const IQ_PARRY_EXPERT: iq_skill_id = iq_skill_id(42);
+}
+impl iq_skill_id {
+    pub const IQ_QUICK_STRIKER: iq_skill_id = iq_skill_id(43);
+}
+impl iq_skill_id {
+    pub const IQ_NO_CHARGER: iq_skill_id = iq_skill_id(44);
+}
+impl iq_skill_id {
+    pub const IQ_WARY_FIGHTER: iq_skill_id = iq_skill_id(45);
+}
+impl iq_skill_id {
+    pub const IQ_GAP_PROBER: iq_skill_id = iq_skill_id(46);
+}
+impl iq_skill_id {
+    pub const IQ_POWER_PITCHER: iq_skill_id = iq_skill_id(47);
+}
+impl iq_skill_id {
+    pub const IQ_CONCENTRATOR: iq_skill_id = iq_skill_id(48);
+}
+impl iq_skill_id {
+    pub const IQ_COUNTER_BASHER: iq_skill_id = iq_skill_id(49);
+}
+impl iq_skill_id {
+    pub const IQ_CHEERLEADER: iq_skill_id = iq_skill_id(50);
+}
+impl iq_skill_id {
+    pub const IQ_NATURE_GIFTER: iq_skill_id = iq_skill_id(51);
+}
+impl iq_skill_id {
+    pub const IQ_WISE_HEALER: iq_skill_id = iq_skill_id(52);
+}
+impl iq_skill_id {
+    pub const IQ_QUICK_HEALER: iq_skill_id = iq_skill_id(53);
+}
+impl iq_skill_id {
+    pub const IQ_ACUTE_SNIFFER: iq_skill_id = iq_skill_id(54);
+}
+impl iq_skill_id {
+    pub const IQ_DEEP_BREATHER: iq_skill_id = iq_skill_id(55);
+}
+impl iq_skill_id {
+    pub const IQ_BRICK_TOUGH: iq_skill_id = iq_skill_id(56);
+}
+impl iq_skill_id {
+    pub const IQ_MULTITALENT: iq_skill_id = iq_skill_id(57);
+}
+impl iq_skill_id {
+    pub const IQ_TIME_TRIPPER: iq_skill_id = iq_skill_id(58);
+}
+impl iq_skill_id {
+    pub const IQ_ERRATIC_PLAYER: iq_skill_id = iq_skill_id(59);
+}
+impl iq_skill_id {
+    pub const IQ_PRACTICE_SWINGER: iq_skill_id = iq_skill_id(60);
+}
+impl iq_skill_id {
+    pub const IQ_NO_DEFEATIST: iq_skill_id = iq_skill_id(61);
+}
+impl iq_skill_id {
+    pub const IQ_HAGGLER: iq_skill_id = iq_skill_id(62);
+}
+impl iq_skill_id {
+    pub const IQ_CLUTCH_PERFORMER: iq_skill_id = iq_skill_id(63);
+}
+impl iq_skill_id {
+    pub const IQ_CRITICAL_DODGER: iq_skill_id = iq_skill_id(64);
+}
+impl iq_skill_id {
+    pub const IQ_MAP_SURVEYOR: iq_skill_id = iq_skill_id(65);
+}
+impl iq_skill_id {
+    pub const IQ_PIERCE_HURLER: iq_skill_id = iq_skill_id(66);
+}
+impl iq_skill_id {
+    pub const IQ_COLLECTOR: iq_skill_id = iq_skill_id(67);
+}
+impl iq_skill_id {
+    pub const IQ_TRUE_POWERIST: iq_skill_id = iq_skill_id(68);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct iq_skill_id(pub crate::ctypes::c_uint);
+impl iq_group_id {
+    pub const IQ_GROUP_A: iq_group_id = iq_group_id(0);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_B: iq_group_id = iq_group_id(1);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_C: iq_group_id = iq_group_id(2);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_D: iq_group_id = iq_group_id(3);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_E: iq_group_id = iq_group_id(4);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_F: iq_group_id = iq_group_id(5);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_G: iq_group_id = iq_group_id(6);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_H: iq_group_id = iq_group_id(7);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_UNUSED_0x8: iq_group_id = iq_group_id(8);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_UNUSED_0x9: iq_group_id = iq_group_id(9);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_I: iq_group_id = iq_group_id(10);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_J: iq_group_id = iq_group_id(11);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_UNUSED_0xC: iq_group_id = iq_group_id(12);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_UNUSED_0xD: iq_group_id = iq_group_id(13);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_UNUSED_0xE: iq_group_id = iq_group_id(14);
+}
+impl iq_group_id {
+    pub const IQ_GROUP_NONE: iq_group_id = iq_group_id(15);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct iq_group_id(pub crate::ctypes::c_uint);
 pub mod direction_id {
     pub type Type = crate::ctypes::c_uint;
     pub const DIR_DOWN: Type = 0;
@@ -4492,138 +10266,502 @@ pub mod damage_source {
     pub const DAMAGE_SOURCE_SOLAR_POWER: Type = 24;
     pub const DAMAGE_SOURCE_DRY_SKIN: Type = 25;
 }
-pub mod exclusive_item_effect_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const EXCLUSIVE_EFF_STAT_BOOST: Type = 0;
-    pub const EXCLUSIVE_EFF_NO_PARALYSIS: Type = 1;
-    pub const EXCLUSIVE_EFF_NO_CONFUSION: Type = 2;
-    pub const EXCLUSIVE_EFF_NO_INFATUATION: Type = 3;
-    pub const EXCLUSIVE_EFF_NO_FREEZE: Type = 4;
-    pub const EXCLUSIVE_EFF_NO_CRITICAL_HITS: Type = 5;
-    pub const EXCLUSIVE_EFF_HALVED_EXPLOSION_DAMAGE: Type = 6;
-    pub const EXCLUSIVE_EFF_NO_EXPLOSION_DAMAGE: Type = 7;
-    pub const EXCLUSIVE_EFF_NO_MOVE_DISABLING: Type = 8;
-    pub const EXCLUSIVE_EFF_NO_WEATHER_DAMAGE: Type = 9;
-    pub const EXCLUSIVE_EFF_NO_SLEEP: Type = 10;
-    pub const EXCLUSIVE_EFF_MAY_POISON_PARALYZE_SLEEP_ATTACKERS: Type = 11;
-    pub const EXCLUSIVE_EFF_UNUSED_0xC: Type = 12;
-    pub const EXCLUSIVE_EFF_MAY_SLEEP_ATTACKERS: Type = 13;
-    pub const EXCLUSIVE_EFF_MAY_NIGHTMARE_ATTACKERS: Type = 14;
-    pub const EXCLUSIVE_EFF_MAY_BURN_ATTACKERS: Type = 15;
-    pub const EXCLUSIVE_EFF_MAY_PARALYZE_ATTACKERS: Type = 16;
-    pub const EXCLUSIVE_EFF_MAY_CONFUSE_ATTACKERS: Type = 17;
-    pub const EXCLUSIVE_EFF_MAY_INFATUATE_ATTACKERS: Type = 18;
-    pub const EXCLUSIVE_EFF_MAY_FREEZE_ATTACKERS: Type = 19;
-    pub const EXCLUSIVE_EFF_MAY_SHADOW_HOLD_ATTACKERS: Type = 20;
-    pub const EXCLUSIVE_EFF_MAY_CONSTRICT_ATTACKERS: Type = 21;
-    pub const EXCLUSIVE_EFF_MAY_CRINGE_ATTACKERS: Type = 22;
-    pub const EXCLUSIVE_EFF_MAY_BLINKER_ATTACKERS: Type = 23;
-    pub const EXCLUSIVE_EFF_MAY_SEAL_ATTACKER_MOVES: Type = 24;
-    pub const EXCLUSIVE_EFF_MAY_GO_INVISIBLE_WHEN_ATTACKED: Type = 25;
-    pub const EXCLUSIVE_EFF_MAY_BOOST_MOVEMENT_SPEED_WHEN_ATTACKED: Type = 26;
-    pub const EXCLUSIVE_EFF_MAY_WARP_WHEN_ATTACKED: Type = 27;
-    pub const EXCLUSIVE_EFF_MAY_PERISH_SONG_ATTACKERS: Type = 28;
-    pub const EXCLUSIVE_EFF_MAY_SLOW_ATTACKERS: Type = 29;
-    pub const EXCLUSIVE_EFF_HALVED_PHYSICAL_DAMAGE: Type = 30;
-    pub const EXCLUSIVE_EFF_HALVED_SPECIAL_DAMAGE: Type = 31;
-    pub const EXCLUSIVE_EFF_COUNTER_PHYSICAL_DAMAGE: Type = 32;
-    pub const EXCLUSIVE_EFF_MAY_BOUNCE_STATUS_MOVES: Type = 33;
-    pub const EXCLUSIVE_EFF_MAY_ENDURE: Type = 34;
-    pub const EXCLUSIVE_EFF_COUNTER_25_PCT_PHYSICAL_DAMAGE: Type = 35;
-    pub const EXCLUSIVE_EFF_LONG_TOSS: Type = 36;
-    pub const EXCLUSIVE_EFF_MAY_BOUNCE_MOVES: Type = 37;
-    pub const EXCLUSIVE_EFF_NO_STAT_DROPS: Type = 38;
-    pub const EXCLUSIVE_EFF_CONVERSION_2_WHEN_HIT: Type = 39;
-    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_CLEAR: Type = 40;
-    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_SUNNY: Type = 41;
-    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_SANDSTORM: Type = 42;
-    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_CLOUDY: Type = 43;
-    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_RAINY: Type = 44;
-    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_HAIL: Type = 45;
-    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_FOGGY: Type = 46;
-    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_CLEAR: Type = 47;
-    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_SUNNY: Type = 48;
-    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_SANDSTORM: Type = 49;
-    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_CLOUDY: Type = 50;
-    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_RAINY: Type = 51;
-    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_HAIL: Type = 52;
-    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_FOGGY: Type = 53;
-    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_CLEAR: Type = 54;
-    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_SUNNY: Type = 55;
-    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_SANDSTORM: Type = 56;
-    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_CLOUDY: Type = 57;
-    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_RAINY: Type = 58;
-    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_HAIL: Type = 59;
-    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_FOGGY: Type = 60;
-    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_CLEAR: Type = 61;
-    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_SUNNY: Type = 62;
-    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_SANDSTORM: Type = 63;
-    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_CLOUDY: Type = 64;
-    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_RAINY: Type = 65;
-    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_HAIL: Type = 66;
-    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_FOGGY: Type = 67;
-    pub const EXCLUSIVE_EFF_BYPASS_REFLECT_LIGHT_SCREEN: Type = 68;
-    pub const EXCLUSIVE_EFF_SCRAPPY: Type = 69;
-    pub const EXCLUSIVE_EFF_MIRACLE_EYE: Type = 70;
-    pub const EXCLUSIVE_EFF_RESTORE_PP_ON_NEW_FLOORS: Type = 71;
-    pub const EXCLUSIVE_EFF_RESTORE_HP_ON_NEW_FLOORS: Type = 72;
-    pub const EXCLUSIVE_EFF_INCREASED_HP_RECOVERY: Type = 73;
-    pub const EXCLUSIVE_EFF_MAX_PP_BOOST: Type = 74;
-    pub const EXCLUSIVE_EFF_UNUSED_0x4B: Type = 75;
-    pub const EXCLUSIVE_EFF_MAX_HP_BOOST: Type = 76;
-    pub const EXCLUSIVE_EFF_UNUSED_0x4D: Type = 77;
-    pub const EXCLUSIVE_EFF_UNUSED_0x4E: Type = 78;
-    pub const EXCLUSIVE_EFF_EXP_BOOST: Type = 79;
-    pub const EXCLUSIVE_EFF_EXP_FROM_DAMAGE: Type = 80;
-    pub const EXCLUSIVE_EFF_MAY_RESTORE_PP_FROM_DAMAGE: Type = 81;
-    pub const EXCLUSIVE_EFF_MAY_NOT_CONSUME_PP: Type = 82;
-    pub const EXCLUSIVE_EFF_THROWN_ITEM_PROTECTION: Type = 83;
-    pub const EXCLUSIVE_EFF_BOUNCE_THROWN_ITEMS: Type = 84;
-    pub const EXCLUSIVE_EFF_EXTEND_SELF_EFFECTS_TO_TEAM: Type = 85;
-    pub const EXCLUSIVE_EFF_MORE_TREASURE_DROPS: Type = 86;
-    pub const EXCLUSIVE_EFF_HP_DRAIN_RECOVERY_BOOST: Type = 87;
-    pub const EXCLUSIVE_EFF_PRESSURE_BOOST: Type = 88;
-    pub const EXCLUSIVE_EFF_NO_STATUS: Type = 89;
-    pub const EXCLUSIVE_EFF_HALVED_DAMAGE: Type = 90;
-    pub const EXCLUSIVE_EFF_DAMAGE_BOOST_50_PCT: Type = 91;
-    pub const EXCLUSIVE_EFF_ABSORB_TEAMMATE_POISON: Type = 92;
-    pub const EXCLUSIVE_EFF_RECOVER_HP_FROM_APPLES_AND_BERRIES: Type = 93;
-    pub const EXCLUSIVE_EFF_MORE_KECLEON_SHOPS: Type = 94;
-    pub const EXCLUSIVE_EFF_MORE_HIDDEN_STAIRS: Type = 95;
-    pub const EXCLUSIVE_EFF_NO_FRIENDLY_FIRE: Type = 96;
-    pub const EXCLUSIVE_EFF_PICKUP_BOOST: Type = 97;
-    pub const EXCLUSIVE_EFF_MORE_MONEY_DROPS: Type = 98;
-    pub const EXCLUSIVE_EFF_UNUSED_0x63: Type = 99;
-    pub const EXCLUSIVE_EFF_RECOVER_HP_FROM_WATERY_TERRAIN: Type = 100;
-    pub const EXCLUSIVE_EFF_HEAL_STATUS_FROM_WATERY_TERRAIN: Type = 101;
-    pub const EXCLUSIVE_EFF_NO_FIRE_DAMAGE: Type = 102;
-    pub const EXCLUSIVE_EFF_NO_WATER_DAMAGE: Type = 103;
-    pub const EXCLUSIVE_EFF_NO_GRASS_DAMAGE: Type = 104;
-    pub const EXCLUSIVE_EFF_NO_ELECTRIC_DAMAGE: Type = 105;
-    pub const EXCLUSIVE_EFF_NO_FIGHTING_DAMAGE: Type = 106;
-    pub const EXCLUSIVE_EFF_NO_GROUND_DAMAGE: Type = 107;
-    pub const EXCLUSIVE_EFF_NO_FLYING_DAMAGE: Type = 108;
-    pub const EXCLUSIVE_EFF_NO_PSYCHIC_DAMAGE: Type = 109;
-    pub const EXCLUSIVE_EFF_NO_GHOST_DAMAGE: Type = 110;
-    pub const EXCLUSIVE_EFF_NO_DRAGON_DAMAGE: Type = 111;
-    pub const EXCLUSIVE_EFF_NO_DARK_DAMAGE: Type = 112;
-    pub const EXCLUSIVE_EFF_NO_STEEL_DAMAGE: Type = 113;
-    pub const EXCLUSIVE_EFF_ABSORB_FIRE_DAMAGE: Type = 114;
-    pub const EXCLUSIVE_EFF_ABSORB_WATER_DAMAGE: Type = 115;
-    pub const EXCLUSIVE_EFF_ABSORB_GRASS_DAMAGE: Type = 116;
-    pub const EXCLUSIVE_EFF_ABSORB_ELECTRIC_DAMAGE: Type = 117;
-    pub const EXCLUSIVE_EFF_ABSORB_ICE_DAMAGE: Type = 118;
-    pub const EXCLUSIVE_EFF_ABSORB_FIGHTING_DAMAGE: Type = 119;
-    pub const EXCLUSIVE_EFF_ABSORB_GROUND_DAMAGE: Type = 120;
-    pub const EXCLUSIVE_EFF_ABSORB_FLYING_DAMAGE: Type = 121;
-    pub const EXCLUSIVE_EFF_ABSORB_PSYCHIC_DAMAGE: Type = 122;
-    pub const EXCLUSIVE_EFF_ABSORB_BUG_DAMAGE: Type = 123;
-    pub const EXCLUSIVE_EFF_ABSORB_ROCK_DAMAGE: Type = 124;
-    pub const EXCLUSIVE_EFF_ABSORB_GHOST_DAMAGE: Type = 125;
-    pub const EXCLUSIVE_EFF_ABSORB_DRAGON_DAMAGE: Type = 126;
-    pub const EXCLUSIVE_EFF_ABSORB_DARK_DAMAGE: Type = 127;
-    pub const EXCLUSIVE_EFF_ABSORB_STEEL_DAMAGE: Type = 128;
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_STAT_BOOST: exclusive_item_effect_id = exclusive_item_effect_id(0);
 }
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_PARALYSIS: exclusive_item_effect_id = exclusive_item_effect_id(1);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_CONFUSION: exclusive_item_effect_id = exclusive_item_effect_id(2);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_INFATUATION: exclusive_item_effect_id = exclusive_item_effect_id(3);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_FREEZE: exclusive_item_effect_id = exclusive_item_effect_id(4);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_CRITICAL_HITS: exclusive_item_effect_id =
+        exclusive_item_effect_id(5);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_HALVED_EXPLOSION_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(6);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_EXPLOSION_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(7);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_MOVE_DISABLING: exclusive_item_effect_id =
+        exclusive_item_effect_id(8);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_WEATHER_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(9);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_SLEEP: exclusive_item_effect_id = exclusive_item_effect_id(10);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_POISON_PARALYZE_SLEEP_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(11);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_UNUSED_0xC: exclusive_item_effect_id = exclusive_item_effect_id(12);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_SLEEP_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(13);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_NIGHTMARE_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(14);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_BURN_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(15);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_PARALYZE_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(16);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_CONFUSE_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(17);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_INFATUATE_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(18);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_FREEZE_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(19);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_SHADOW_HOLD_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(20);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_CONSTRICT_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(21);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_CRINGE_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(22);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_BLINKER_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(23);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_SEAL_ATTACKER_MOVES: exclusive_item_effect_id =
+        exclusive_item_effect_id(24);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_GO_INVISIBLE_WHEN_ATTACKED: exclusive_item_effect_id =
+        exclusive_item_effect_id(25);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_BOOST_MOVEMENT_SPEED_WHEN_ATTACKED: exclusive_item_effect_id =
+        exclusive_item_effect_id(26);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_WARP_WHEN_ATTACKED: exclusive_item_effect_id =
+        exclusive_item_effect_id(27);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_PERISH_SONG_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(28);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_SLOW_ATTACKERS: exclusive_item_effect_id =
+        exclusive_item_effect_id(29);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_HALVED_PHYSICAL_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(30);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_HALVED_SPECIAL_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(31);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_COUNTER_PHYSICAL_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(32);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_BOUNCE_STATUS_MOVES: exclusive_item_effect_id =
+        exclusive_item_effect_id(33);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_ENDURE: exclusive_item_effect_id = exclusive_item_effect_id(34);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_COUNTER_25_PCT_PHYSICAL_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(35);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_LONG_TOSS: exclusive_item_effect_id = exclusive_item_effect_id(36);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_BOUNCE_MOVES: exclusive_item_effect_id =
+        exclusive_item_effect_id(37);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STAT_DROPS: exclusive_item_effect_id = exclusive_item_effect_id(38);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_CONVERSION_2_WHEN_HIT: exclusive_item_effect_id =
+        exclusive_item_effect_id(39);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_CLEAR: exclusive_item_effect_id =
+        exclusive_item_effect_id(40);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_SUNNY: exclusive_item_effect_id =
+        exclusive_item_effect_id(41);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_SANDSTORM: exclusive_item_effect_id =
+        exclusive_item_effect_id(42);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_CLOUDY: exclusive_item_effect_id =
+        exclusive_item_effect_id(43);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_RAINY: exclusive_item_effect_id =
+        exclusive_item_effect_id(44);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_HAIL: exclusive_item_effect_id =
+        exclusive_item_effect_id(45);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STATUS_WHEN_FOGGY: exclusive_item_effect_id =
+        exclusive_item_effect_id(46);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_CLEAR: exclusive_item_effect_id =
+        exclusive_item_effect_id(47);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_SUNNY: exclusive_item_effect_id =
+        exclusive_item_effect_id(48);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_SANDSTORM: exclusive_item_effect_id =
+        exclusive_item_effect_id(49);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_CLOUDY: exclusive_item_effect_id =
+        exclusive_item_effect_id(50);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_RAINY: exclusive_item_effect_id =
+        exclusive_item_effect_id(51);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_HAIL: exclusive_item_effect_id =
+        exclusive_item_effect_id(52);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MOVEMENT_SPEED_BOOST_WHEN_FOGGY: exclusive_item_effect_id =
+        exclusive_item_effect_id(53);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_CLEAR: exclusive_item_effect_id =
+        exclusive_item_effect_id(54);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_SUNNY: exclusive_item_effect_id =
+        exclusive_item_effect_id(55);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_SANDSTORM: exclusive_item_effect_id =
+        exclusive_item_effect_id(56);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_CLOUDY: exclusive_item_effect_id =
+        exclusive_item_effect_id(57);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_RAINY: exclusive_item_effect_id =
+        exclusive_item_effect_id(58);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_HAIL: exclusive_item_effect_id =
+        exclusive_item_effect_id(59);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ATTACK_SPEED_BOOST_WHEN_FOGGY: exclusive_item_effect_id =
+        exclusive_item_effect_id(60);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_CLEAR: exclusive_item_effect_id =
+        exclusive_item_effect_id(61);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_SUNNY: exclusive_item_effect_id =
+        exclusive_item_effect_id(62);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_SANDSTORM: exclusive_item_effect_id =
+        exclusive_item_effect_id(63);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_CLOUDY: exclusive_item_effect_id =
+        exclusive_item_effect_id(64);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_RAINY: exclusive_item_effect_id =
+        exclusive_item_effect_id(65);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_HAIL: exclusive_item_effect_id =
+        exclusive_item_effect_id(66);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EVASION_BOOST_WHEN_FOGGY: exclusive_item_effect_id =
+        exclusive_item_effect_id(67);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_BYPASS_REFLECT_LIGHT_SCREEN: exclusive_item_effect_id =
+        exclusive_item_effect_id(68);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_SCRAPPY: exclusive_item_effect_id = exclusive_item_effect_id(69);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MIRACLE_EYE: exclusive_item_effect_id = exclusive_item_effect_id(70);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_RESTORE_PP_ON_NEW_FLOORS: exclusive_item_effect_id =
+        exclusive_item_effect_id(71);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_RESTORE_HP_ON_NEW_FLOORS: exclusive_item_effect_id =
+        exclusive_item_effect_id(72);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_INCREASED_HP_RECOVERY: exclusive_item_effect_id =
+        exclusive_item_effect_id(73);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAX_PP_BOOST: exclusive_item_effect_id = exclusive_item_effect_id(74);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_UNUSED_0x4B: exclusive_item_effect_id = exclusive_item_effect_id(75);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAX_HP_BOOST: exclusive_item_effect_id = exclusive_item_effect_id(76);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_UNUSED_0x4D: exclusive_item_effect_id = exclusive_item_effect_id(77);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_UNUSED_0x4E: exclusive_item_effect_id = exclusive_item_effect_id(78);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EXP_BOOST: exclusive_item_effect_id = exclusive_item_effect_id(79);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EXP_FROM_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(80);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_RESTORE_PP_FROM_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(81);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MAY_NOT_CONSUME_PP: exclusive_item_effect_id =
+        exclusive_item_effect_id(82);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_THROWN_ITEM_PROTECTION: exclusive_item_effect_id =
+        exclusive_item_effect_id(83);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_BOUNCE_THROWN_ITEMS: exclusive_item_effect_id =
+        exclusive_item_effect_id(84);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_EXTEND_SELF_EFFECTS_TO_TEAM: exclusive_item_effect_id =
+        exclusive_item_effect_id(85);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MORE_TREASURE_DROPS: exclusive_item_effect_id =
+        exclusive_item_effect_id(86);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_HP_DRAIN_RECOVERY_BOOST: exclusive_item_effect_id =
+        exclusive_item_effect_id(87);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_PRESSURE_BOOST: exclusive_item_effect_id = exclusive_item_effect_id(88);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STATUS: exclusive_item_effect_id = exclusive_item_effect_id(89);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_HALVED_DAMAGE: exclusive_item_effect_id = exclusive_item_effect_id(90);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_DAMAGE_BOOST_50_PCT: exclusive_item_effect_id =
+        exclusive_item_effect_id(91);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_TEAMMATE_POISON: exclusive_item_effect_id =
+        exclusive_item_effect_id(92);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_RECOVER_HP_FROM_APPLES_AND_BERRIES: exclusive_item_effect_id =
+        exclusive_item_effect_id(93);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MORE_KECLEON_SHOPS: exclusive_item_effect_id =
+        exclusive_item_effect_id(94);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MORE_HIDDEN_STAIRS: exclusive_item_effect_id =
+        exclusive_item_effect_id(95);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_FRIENDLY_FIRE: exclusive_item_effect_id =
+        exclusive_item_effect_id(96);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_PICKUP_BOOST: exclusive_item_effect_id = exclusive_item_effect_id(97);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_MORE_MONEY_DROPS: exclusive_item_effect_id =
+        exclusive_item_effect_id(98);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_UNUSED_0x63: exclusive_item_effect_id = exclusive_item_effect_id(99);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_RECOVER_HP_FROM_WATERY_TERRAIN: exclusive_item_effect_id =
+        exclusive_item_effect_id(100);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_HEAL_STATUS_FROM_WATERY_TERRAIN: exclusive_item_effect_id =
+        exclusive_item_effect_id(101);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_FIRE_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(102);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_WATER_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(103);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_GRASS_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(104);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_ELECTRIC_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(105);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_FIGHTING_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(106);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_GROUND_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(107);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_FLYING_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(108);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_PSYCHIC_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(109);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_GHOST_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(110);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_DRAGON_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(111);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_DARK_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(112);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_NO_STEEL_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(113);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_FIRE_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(114);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_WATER_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(115);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_GRASS_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(116);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_ELECTRIC_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(117);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_ICE_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(118);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_FIGHTING_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(119);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_GROUND_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(120);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_FLYING_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(121);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_PSYCHIC_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(122);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_BUG_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(123);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_ROCK_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(124);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_GHOST_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(125);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_DRAGON_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(126);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_DARK_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(127);
+}
+impl exclusive_item_effect_id {
+    pub const EXCLUSIVE_EFF_ABSORB_STEEL_DAMAGE: exclusive_item_effect_id =
+        exclusive_item_effect_id(128);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct exclusive_item_effect_id(pub crate::ctypes::c_uint);
 pub mod shop_item_positions {
     pub type Type = crate::ctypes::c_uint;
     pub const SHOP_POSITION_0: Type = 0;
@@ -4874,265 +11012,777 @@ impl floor_loop_status_8 {
         __bindgen_bitfield_unit
     }
 }
-pub mod fixed_room_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const FIXED_NONE: Type = 0;
-    pub const FIXED_BEACH_CAVE_PIT: Type = 1;
-    pub const FIXED_MT_BRISTLE_PEAK: Type = 2;
-    pub const FIXED_STEAM_CAVE_PEAK: Type = 3;
-    pub const FIXED_AMP_CLEARING: Type = 4;
-    pub const FIXED_UNDERGROUND_LAKE: Type = 5;
-    pub const FIXED_CRYSTAL_LAKE: Type = 6;
-    pub const FIXED_SEALED_RUIN_PIT: Type = 7;
-    pub const FIXED_BRINE_CAVE_PIT: Type = 8;
-    pub const FIXED_OLD_RUINS: Type = 9;
-    pub const FIXED_TEMPORAL_PINNACLE: Type = 10;
-    pub const FIXED_MYSTIFYING_FOREST_CLEARING: Type = 11;
-    pub const FIXED_CREVICE_CAVE_PIT: Type = 12;
-    pub const FIXED_MIRACLE_SEABED: Type = 13;
-    pub const FIXED_REGICE_CHAMBER: Type = 14;
-    pub const FIXED_REGIROCK_CHAMBER: Type = 15;
-    pub const FIXED_REGISTEEL_CHAMBER: Type = 16;
-    pub const FIXED_REGIGIGAS_CHAMBER: Type = 17;
-    pub const FIXED_SPACIAL_RIFT_BOTTOM: Type = 18;
-    pub const FIXED_DARK_CRATER_PIT: Type = 19;
-    pub const FIXED_GIANT_VOLCANO_PEAK: Type = 20;
-    pub const FIXED_SHIMMER_DESERT_PIT: Type = 21;
-    pub const FIXED_MT_AVALANCHE_PEAK: Type = 22;
-    pub const FIXED_BOTTOMLESS_SEA_DEPTHS: Type = 23;
-    pub const FIXED_WORLD_ABYSS_PIT: Type = 24;
-    pub const FIXED_DEEP_MYSTERY_JUNGLE: Type = 25;
-    pub const FIXED_SKY_STAIRWAY_APEX: Type = 26;
-    pub const FIXED_EMPTY_OCTAGON: Type = 27;
-    pub const FIXED_SKY_PEAK_5TH_STATION_CLEARING: Type = 28;
-    pub const FIXED_SKY_PEAK_SUMMIT: Type = 29;
-    pub const FIXED_DEEP_STAR_CAVE_SE1: Type = 30;
-    pub const FIXED_STAR_CAVE_PIT_SE1: Type = 31;
-    pub const FIXED_FORTUNE_RAVINE_PIT: Type = 32;
-    pub const FIXED_BARREN_VALLEY_CLEARING: Type = 33;
-    pub const FIXED_BLACK_SWAMP: Type = 34;
-    pub const FIXED_DARK_ICE_MOUNTAIN_PINNACLE: Type = 35;
-    pub const FIXED_VAST_ICE_MOUNTAIN_PINNACLE: Type = 36;
-    pub const FIXED_BOULDER_QUARRY_CLEARING: Type = 37;
-    pub const FIXED_LIMESTONE_CAVERN_DEPTHS: Type = 38;
-    pub const FIXED_UPPER_SPRING_CAVE: Type = 39;
-    pub const FIXED_MIDDLE_SPRING_CAVE: Type = 40;
-    pub const FIXED_SPRING_CAVE_PIT: Type = 41;
-    pub const FIXED_DEEP_STAR_CAVE: Type = 42;
-    pub const FIXED_BARREN_VALLEY_CLEARING_REVISIT: Type = 43;
-    pub const FIXED_UNUSED_0x2C: Type = 44;
-    pub const FIXED_UNUSED_0x2D: Type = 45;
-    pub const FIXED_UNUSED_0x2E: Type = 46;
-    pub const FIXED_UNUSED_0x2F: Type = 47;
-    pub const FIXED_UNUSED_0x30: Type = 48;
-    pub const FIXED_UNUSED_0x31: Type = 49;
-    pub const FIXED_UNUSED_0x32: Type = 50;
-    pub const FIXED_UNUSED_0x33: Type = 51;
-    pub const FIXED_UNUSED_0x34: Type = 52;
-    pub const FIXED_UNUSED_0x35: Type = 53;
-    pub const FIXED_UNUSED_0x36: Type = 54;
-    pub const FIXED_UNUSED_0x37: Type = 55;
-    pub const FIXED_UNUSED_0x38: Type = 56;
-    pub const FIXED_UNUSED_0x39: Type = 57;
-    pub const FIXED_UNUSED_0x3A: Type = 58;
-    pub const FIXED_UNUSED_0x3B: Type = 59;
-    pub const FIXED_UNUSED_0x3C: Type = 60;
-    pub const FIXED_UNUSED_0x3D: Type = 61;
-    pub const FIXED_UNUSED_0x3E: Type = 62;
-    pub const FIXED_TEST: Type = 63;
-    pub const FIXED_EMPTY_RECTANGLE: Type = 64;
-    pub const FIXED_BEACH_CAVE_PIT_REVISIT: Type = 65;
-    pub const FIXED_MT_BRISTLE_PEAK_REVISIT: Type = 66;
-    pub const FIXED_STEAM_CAVE_PEAK_REVISIT: Type = 67;
-    pub const FIXED_AMP_CLEARING_REVISIT: Type = 68;
-    pub const FIXED_UNDERGROUND_LAKE_REVISIT: Type = 69;
-    pub const FIXED_CRYSTAL_LAKE_REVISIT: Type = 70;
-    pub const FIXED_SEALED_RUIN_PIT_REVISIT: Type = 71;
-    pub const FIXED_BRINE_CAVE_PIT_REVISIT: Type = 72;
-    pub const FIXED_OLD_RUINS_REVISIT: Type = 73;
-    pub const FIXED_TEMPORAL_PINNACLE_REVISIT: Type = 74;
-    pub const FIXED_REGIGIGAS_CHAMBER_REVISIT: Type = 75;
-    pub const FIXED_SPACIAL_RIFT_BOTTOM_REVISIT: Type = 76;
-    pub const FIXED_DARK_CRATER_PIT_REVISIT: Type = 77;
-    pub const FIXED_UNUSED_0x4E: Type = 78;
-    pub const FIXED_UNUSED_0x4F: Type = 79;
-    pub const FIXED_LABYRINTH_CAVE: Type = 80;
-    pub const FIXED_ZERO_ISLE_NORTH: Type = 81;
-    pub const FIXED_ZERO_ISLE_EAST: Type = 82;
-    pub const FIXED_ZERO_ISLE_WEST: Type = 83;
-    pub const FIXED_ZERO_ISLE_SOUTH: Type = 84;
-    pub const FIXED_ORAN_FOREST: Type = 85;
-    pub const FIXED_MARINE_RESORT: Type = 86;
-    pub const FIXED_SERENITY_RIVER: Type = 87;
-    pub const FIXED_LANDSLIDE_CAVE: Type = 88;
-    pub const FIXED_LUSH_PRAIRIE: Type = 89;
-    pub const FIXED_TINY_MEADOW: Type = 90;
-    pub const FIXED_SURROUNDED_SEA: Type = 91;
-    pub const FIXED_CONCEALED_RUINS: Type = 92;
-    pub const FIXED_LAKE_AFAR: Type = 93;
-    pub const FIXED_HAPPY_OUTLOOK: Type = 94;
-    pub const FIXED_MT_MISTRAL: Type = 95;
-    pub const FIXED_SHIMMER_HILL: Type = 96;
-    pub const FIXED_LOST_WILDERNESS: Type = 97;
-    pub const FIXED_MIDNIGHT_FOREST: Type = 98;
-    pub const FIXED_ZERO_ISLE_CENTER: Type = 99;
-    pub const FIXED_OBLIVION_FOREST: Type = 100;
-    pub const FIXED_TREACHEROUS_WATERS: Type = 101;
-    pub const FIXED_SOUTHEASTERN_ISLANDS: Type = 102;
-    pub const FIXED_INFERNO_CAVE: Type = 103;
-    pub const FIXED_MIDNIGHT_FOREST_COPY: Type = 104;
-    pub const FIXED_UNUSED_0x69: Type = 105;
-    pub const FIXED_UNUSED_0x6A: Type = 106;
-    pub const FIXED_UNUSED_0x6B: Type = 107;
-    pub const FIXED_UNUSED_0x6C: Type = 108;
-    pub const FIXED_UNUSED_0x6D: Type = 109;
-    pub const FIXED_SUBSTITUTE_ROOM: Type = 110;
-    pub const FIXED_GOLDEN_CHAMBER: Type = 111;
-    pub const FIXED_SECRET_BAZAAR: Type = 112;
-    pub const FIXED_SECRET_ROOM: Type = 113;
-    pub const FIXED_TREASURE_MEMO_0: Type = 114;
-    pub const FIXED_TREASURE_MEMO_1: Type = 115;
-    pub const FIXED_TREASURE_MEMO_2: Type = 116;
-    pub const FIXED_TREASURE_MEMO_3: Type = 117;
-    pub const FIXED_TREASURE_MEMO_4: Type = 118;
-    pub const FIXED_TREASURE_MEMO_5: Type = 119;
-    pub const FIXED_TREASURE_MEMO_6: Type = 120;
-    pub const FIXED_TREASURE_MEMO_7: Type = 121;
-    pub const FIXED_TREASURE_MEMO_8: Type = 122;
-    pub const FIXED_TREASURE_MEMO_9: Type = 123;
-    pub const FIXED_TREASURE_MEMO_10: Type = 124;
-    pub const FIXED_TREASURE_MEMO_11: Type = 125;
-    pub const FIXED_TREASURE_MEMO_12: Type = 126;
-    pub const FIXED_TREASURE_MEMO_13: Type = 127;
-    pub const FIXED_TREASURE_MEMO_14: Type = 128;
-    pub const FIXED_TREASURE_MEMO_15: Type = 129;
-    pub const FIXED_TREASURE_MEMO_16: Type = 130;
-    pub const FIXED_TREASURE_MEMO_17: Type = 131;
-    pub const FIXED_TREASURE_MEMO_18: Type = 132;
-    pub const FIXED_TREASURE_MEMO_19: Type = 133;
-    pub const FIXED_TREASURE_MEMO_20: Type = 134;
-    pub const FIXED_TREASURE_MEMO_21: Type = 135;
-    pub const FIXED_TREASURE_MEMO_22: Type = 136;
-    pub const FIXED_TREASURE_MEMO_23: Type = 137;
-    pub const FIXED_TREASURE_MEMO_24: Type = 138;
-    pub const FIXED_TREASURE_MEMO_25: Type = 139;
-    pub const FIXED_TREASURE_MEMO_26: Type = 140;
-    pub const FIXED_TREASURE_MEMO_27: Type = 141;
-    pub const FIXED_TREASURE_MEMO_28: Type = 142;
-    pub const FIXED_TREASURE_MEMO_29: Type = 143;
-    pub const FIXED_TREASURE_MEMO_30: Type = 144;
-    pub const FIXED_MEWTWO_CHALLENGE_FLOOR: Type = 145;
-    pub const FIXED_ENTEI_CHALLENGE_FLOOR: Type = 146;
-    pub const FIXED_RAIKOU_CHALLENGE_FLOOR: Type = 147;
-    pub const FIXED_SUICUNE_CHALLENGE_FLOOR: Type = 148;
-    pub const FIXED_STAR_CAVE_PIT: Type = 149;
-    pub const FIXED_CHALLENGE_LETTER_FLOOR_1: Type = 150;
-    pub const FIXED_CHALLENGE_LETTER_FLOOR_2: Type = 151;
-    pub const FIXED_CHALLENGE_LETTER_FLOOR_3: Type = 152;
-    pub const FIXED_CHALLENGE_LETTER_FLOOR_4: Type = 153;
-    pub const FIXED_CHALLENGE_LETTER_FLOOR_5: Type = 154;
-    pub const FIXED_UNUSED_0x9B: Type = 155;
-    pub const FIXED_UNUSED_0x9C: Type = 156;
-    pub const FIXED_UNUSED_0x9D: Type = 157;
-    pub const FIXED_UNUSED_0x9E: Type = 158;
-    pub const FIXED_UNUSED_0x9F: Type = 159;
-    pub const FIXED_OUTLAW_TEAM_FLOOR_1: Type = 160;
-    pub const FIXED_OUTLAW_TEAM_FLOOR_2: Type = 161;
-    pub const FIXED_OUTLAW_TEAM_FLOOR_3: Type = 162;
-    pub const FIXED_OUTLAW_TEAM_FLOOR_4: Type = 163;
-    pub const FIXED_OUTLAW_TEAM_FLOOR_5: Type = 164;
-    pub const FIXED_SEALED_CHAMBER: Type = 165;
-    pub const FIXED_UNUSED_0xA6: Type = 166;
-    pub const FIXED_UNUSED_0xA7: Type = 167;
-    pub const FIXED_UNUSED_0xA8: Type = 168;
-    pub const FIXED_UNUSED_0xA9: Type = 169;
-    pub const FIXED_CLEAR_SILK_CHAMBER: Type = 170;
-    pub const FIXED_ORANGE_SILK_CHAMBER: Type = 171;
-    pub const FIXED_GREEN_SILK_CHAMBER: Type = 172;
-    pub const FIXED_IRON_SILK_CHAMBER: Type = 173;
-    pub const FIXED_JOY_SEED_CHAMBER_6X: Type = 174;
-    pub const FIXED_FRIEND_BOW_CHAMBER: Type = 175;
-    pub const FIXED_PINK_SILK_CHAMBER: Type = 176;
-    pub const FIXED_GRAY_SILK_CHAMBER: Type = 177;
-    pub const FIXED_PURPLE_SILK_CHAMBER: Type = 178;
-    pub const FIXED_JOY_SEED_CHAMBER_1X: Type = 179;
-    pub const FIXED_ROYAL_SILK_CHAMBER: Type = 180;
-    pub const FIXED_MIRACLE_CHEST_CHAMBER: Type = 181;
-    pub const FIXED_BROWN_SILK_CHAMBER: Type = 182;
-    pub const FIXED_SKY_SILK_CHAMBER: Type = 183;
-    pub const FIXED_GOLD_SILK_CHAMBER: Type = 184;
-    pub const FIXED_BLACK_SILK_CHAMBER: Type = 185;
-    pub const FIXED_JOY_SEED_CHAMBER_2X: Type = 186;
-    pub const FIXED_WONDER_GUMMI_CHAMBER: Type = 187;
-    pub const FIXED_ITEM_CHAMBER_1: Type = 188;
-    pub const FIXED_ITEM_CHAMBER_2: Type = 189;
-    pub const FIXED_WONDER_CHEST_CHAMBER: Type = 190;
-    pub const FIXED_RED_SILK_CHAMBER: Type = 191;
-    pub const FIXED_BLUE_SILK_CHAMBER: Type = 192;
-    pub const FIXED_GRASS_SILK_CHAMBER: Type = 193;
-    pub const FIXED_YELLOW_SILK_CHAMBER: Type = 194;
-    pub const FIXED_REVIVER_SEED_CHAMBER_1: Type = 195;
-    pub const FIXED_REVIVER_SEED_CHAMBER_2: Type = 196;
-    pub const FIXED_EMPTY_SEALED_CHAMBER: Type = 197;
-    pub const FIXED_UNUSED_0xC6: Type = 198;
-    pub const FIXED_UNUSED_0xC7: Type = 199;
-    pub const FIXED_UNUSED_0xC8: Type = 200;
-    pub const FIXED_UNUSED_0xC9: Type = 201;
-    pub const FIXED_UNUSED_0xCA: Type = 202;
-    pub const FIXED_UNUSED_0xCB: Type = 203;
-    pub const FIXED_UNUSED_0xCC: Type = 204;
-    pub const FIXED_UNUSED_0xCD: Type = 205;
-    pub const FIXED_UNUSED_0xCE: Type = 206;
-    pub const FIXED_UNUSED_0xCF: Type = 207;
-    pub const FIXED_UNUSED_0xD0: Type = 208;
-    pub const FIXED_UNUSED_0xD1: Type = 209;
-    pub const FIXED_UNUSED_0xD2: Type = 210;
-    pub const FIXED_UNUSED_0xD3: Type = 211;
-    pub const FIXED_UNUSED_0xD4: Type = 212;
-    pub const FIXED_UNUSED_0xD5: Type = 213;
-    pub const FIXED_UNUSED_0xD6: Type = 214;
-    pub const FIXED_UNUSED_0xD7: Type = 215;
-    pub const FIXED_UNUSED_0xD8: Type = 216;
-    pub const FIXED_UNUSED_0xD9: Type = 217;
-    pub const FIXED_UNUSED_0xDA: Type = 218;
-    pub const FIXED_UNUSED_0xDB: Type = 219;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_1: Type = 220;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_2: Type = 221;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_3: Type = 222;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_4: Type = 223;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_5: Type = 224;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_6: Type = 225;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_7: Type = 226;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_8: Type = 227;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_9: Type = 228;
-    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_10: Type = 229;
-    pub const FIXED_UNUSED_0xE6: Type = 230;
-    pub const FIXED_UNUSED_0xE7: Type = 231;
-    pub const FIXED_UNUSED_0xE8: Type = 232;
-    pub const FIXED_UNUSED_0xE9: Type = 233;
-    pub const FIXED_UNUSED_0xEA: Type = 234;
-    pub const FIXED_UNUSED_0xEB: Type = 235;
-    pub const FIXED_UNUSED_0xEC: Type = 236;
-    pub const FIXED_UNUSED_0xED: Type = 237;
-    pub const FIXED_UNUSED_0xEE: Type = 238;
-    pub const FIXED_UNUSED_0xEF: Type = 239;
-    pub const FIXED_UNUSED_0xF0: Type = 240;
-    pub const FIXED_UNUSED_0xF1: Type = 241;
-    pub const FIXED_UNUSED_0xF2: Type = 242;
-    pub const FIXED_UNUSED_0xF3: Type = 243;
-    pub const FIXED_UNUSED_0xF4: Type = 244;
-    pub const FIXED_UNUSED_0xF5: Type = 245;
-    pub const FIXED_UNUSED_0xF6: Type = 246;
-    pub const FIXED_UNUSED_0xF7: Type = 247;
-    pub const FIXED_UNUSED_0xF8: Type = 248;
-    pub const FIXED_UNUSED_0xF9: Type = 249;
-    pub const FIXED_UNUSED_0xFA: Type = 250;
-    pub const FIXED_UNUSED_0xFB: Type = 251;
-    pub const FIXED_UNUSED_0xFC: Type = 252;
-    pub const FIXED_UNUSED_0xFD: Type = 253;
-    pub const FIXED_UNUSED_0xFE: Type = 254;
-    pub const FIXED_UNUSED_0xFF: Type = 255;
+impl fixed_room_id {
+    pub const FIXED_NONE: fixed_room_id = fixed_room_id(0);
 }
+impl fixed_room_id {
+    pub const FIXED_BEACH_CAVE_PIT: fixed_room_id = fixed_room_id(1);
+}
+impl fixed_room_id {
+    pub const FIXED_MT_BRISTLE_PEAK: fixed_room_id = fixed_room_id(2);
+}
+impl fixed_room_id {
+    pub const FIXED_STEAM_CAVE_PEAK: fixed_room_id = fixed_room_id(3);
+}
+impl fixed_room_id {
+    pub const FIXED_AMP_CLEARING: fixed_room_id = fixed_room_id(4);
+}
+impl fixed_room_id {
+    pub const FIXED_UNDERGROUND_LAKE: fixed_room_id = fixed_room_id(5);
+}
+impl fixed_room_id {
+    pub const FIXED_CRYSTAL_LAKE: fixed_room_id = fixed_room_id(6);
+}
+impl fixed_room_id {
+    pub const FIXED_SEALED_RUIN_PIT: fixed_room_id = fixed_room_id(7);
+}
+impl fixed_room_id {
+    pub const FIXED_BRINE_CAVE_PIT: fixed_room_id = fixed_room_id(8);
+}
+impl fixed_room_id {
+    pub const FIXED_OLD_RUINS: fixed_room_id = fixed_room_id(9);
+}
+impl fixed_room_id {
+    pub const FIXED_TEMPORAL_PINNACLE: fixed_room_id = fixed_room_id(10);
+}
+impl fixed_room_id {
+    pub const FIXED_MYSTIFYING_FOREST_CLEARING: fixed_room_id = fixed_room_id(11);
+}
+impl fixed_room_id {
+    pub const FIXED_CREVICE_CAVE_PIT: fixed_room_id = fixed_room_id(12);
+}
+impl fixed_room_id {
+    pub const FIXED_MIRACLE_SEABED: fixed_room_id = fixed_room_id(13);
+}
+impl fixed_room_id {
+    pub const FIXED_REGICE_CHAMBER: fixed_room_id = fixed_room_id(14);
+}
+impl fixed_room_id {
+    pub const FIXED_REGIROCK_CHAMBER: fixed_room_id = fixed_room_id(15);
+}
+impl fixed_room_id {
+    pub const FIXED_REGISTEEL_CHAMBER: fixed_room_id = fixed_room_id(16);
+}
+impl fixed_room_id {
+    pub const FIXED_REGIGIGAS_CHAMBER: fixed_room_id = fixed_room_id(17);
+}
+impl fixed_room_id {
+    pub const FIXED_SPACIAL_RIFT_BOTTOM: fixed_room_id = fixed_room_id(18);
+}
+impl fixed_room_id {
+    pub const FIXED_DARK_CRATER_PIT: fixed_room_id = fixed_room_id(19);
+}
+impl fixed_room_id {
+    pub const FIXED_GIANT_VOLCANO_PEAK: fixed_room_id = fixed_room_id(20);
+}
+impl fixed_room_id {
+    pub const FIXED_SHIMMER_DESERT_PIT: fixed_room_id = fixed_room_id(21);
+}
+impl fixed_room_id {
+    pub const FIXED_MT_AVALANCHE_PEAK: fixed_room_id = fixed_room_id(22);
+}
+impl fixed_room_id {
+    pub const FIXED_BOTTOMLESS_SEA_DEPTHS: fixed_room_id = fixed_room_id(23);
+}
+impl fixed_room_id {
+    pub const FIXED_WORLD_ABYSS_PIT: fixed_room_id = fixed_room_id(24);
+}
+impl fixed_room_id {
+    pub const FIXED_DEEP_MYSTERY_JUNGLE: fixed_room_id = fixed_room_id(25);
+}
+impl fixed_room_id {
+    pub const FIXED_SKY_STAIRWAY_APEX: fixed_room_id = fixed_room_id(26);
+}
+impl fixed_room_id {
+    pub const FIXED_EMPTY_OCTAGON: fixed_room_id = fixed_room_id(27);
+}
+impl fixed_room_id {
+    pub const FIXED_SKY_PEAK_5TH_STATION_CLEARING: fixed_room_id = fixed_room_id(28);
+}
+impl fixed_room_id {
+    pub const FIXED_SKY_PEAK_SUMMIT: fixed_room_id = fixed_room_id(29);
+}
+impl fixed_room_id {
+    pub const FIXED_DEEP_STAR_CAVE_SE1: fixed_room_id = fixed_room_id(30);
+}
+impl fixed_room_id {
+    pub const FIXED_STAR_CAVE_PIT_SE1: fixed_room_id = fixed_room_id(31);
+}
+impl fixed_room_id {
+    pub const FIXED_FORTUNE_RAVINE_PIT: fixed_room_id = fixed_room_id(32);
+}
+impl fixed_room_id {
+    pub const FIXED_BARREN_VALLEY_CLEARING: fixed_room_id = fixed_room_id(33);
+}
+impl fixed_room_id {
+    pub const FIXED_BLACK_SWAMP: fixed_room_id = fixed_room_id(34);
+}
+impl fixed_room_id {
+    pub const FIXED_DARK_ICE_MOUNTAIN_PINNACLE: fixed_room_id = fixed_room_id(35);
+}
+impl fixed_room_id {
+    pub const FIXED_VAST_ICE_MOUNTAIN_PINNACLE: fixed_room_id = fixed_room_id(36);
+}
+impl fixed_room_id {
+    pub const FIXED_BOULDER_QUARRY_CLEARING: fixed_room_id = fixed_room_id(37);
+}
+impl fixed_room_id {
+    pub const FIXED_LIMESTONE_CAVERN_DEPTHS: fixed_room_id = fixed_room_id(38);
+}
+impl fixed_room_id {
+    pub const FIXED_UPPER_SPRING_CAVE: fixed_room_id = fixed_room_id(39);
+}
+impl fixed_room_id {
+    pub const FIXED_MIDDLE_SPRING_CAVE: fixed_room_id = fixed_room_id(40);
+}
+impl fixed_room_id {
+    pub const FIXED_SPRING_CAVE_PIT: fixed_room_id = fixed_room_id(41);
+}
+impl fixed_room_id {
+    pub const FIXED_DEEP_STAR_CAVE: fixed_room_id = fixed_room_id(42);
+}
+impl fixed_room_id {
+    pub const FIXED_BARREN_VALLEY_CLEARING_REVISIT: fixed_room_id = fixed_room_id(43);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x2C: fixed_room_id = fixed_room_id(44);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x2D: fixed_room_id = fixed_room_id(45);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x2E: fixed_room_id = fixed_room_id(46);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x2F: fixed_room_id = fixed_room_id(47);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x30: fixed_room_id = fixed_room_id(48);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x31: fixed_room_id = fixed_room_id(49);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x32: fixed_room_id = fixed_room_id(50);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x33: fixed_room_id = fixed_room_id(51);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x34: fixed_room_id = fixed_room_id(52);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x35: fixed_room_id = fixed_room_id(53);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x36: fixed_room_id = fixed_room_id(54);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x37: fixed_room_id = fixed_room_id(55);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x38: fixed_room_id = fixed_room_id(56);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x39: fixed_room_id = fixed_room_id(57);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x3A: fixed_room_id = fixed_room_id(58);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x3B: fixed_room_id = fixed_room_id(59);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x3C: fixed_room_id = fixed_room_id(60);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x3D: fixed_room_id = fixed_room_id(61);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x3E: fixed_room_id = fixed_room_id(62);
+}
+impl fixed_room_id {
+    pub const FIXED_TEST: fixed_room_id = fixed_room_id(63);
+}
+impl fixed_room_id {
+    pub const FIXED_EMPTY_RECTANGLE: fixed_room_id = fixed_room_id(64);
+}
+impl fixed_room_id {
+    pub const FIXED_BEACH_CAVE_PIT_REVISIT: fixed_room_id = fixed_room_id(65);
+}
+impl fixed_room_id {
+    pub const FIXED_MT_BRISTLE_PEAK_REVISIT: fixed_room_id = fixed_room_id(66);
+}
+impl fixed_room_id {
+    pub const FIXED_STEAM_CAVE_PEAK_REVISIT: fixed_room_id = fixed_room_id(67);
+}
+impl fixed_room_id {
+    pub const FIXED_AMP_CLEARING_REVISIT: fixed_room_id = fixed_room_id(68);
+}
+impl fixed_room_id {
+    pub const FIXED_UNDERGROUND_LAKE_REVISIT: fixed_room_id = fixed_room_id(69);
+}
+impl fixed_room_id {
+    pub const FIXED_CRYSTAL_LAKE_REVISIT: fixed_room_id = fixed_room_id(70);
+}
+impl fixed_room_id {
+    pub const FIXED_SEALED_RUIN_PIT_REVISIT: fixed_room_id = fixed_room_id(71);
+}
+impl fixed_room_id {
+    pub const FIXED_BRINE_CAVE_PIT_REVISIT: fixed_room_id = fixed_room_id(72);
+}
+impl fixed_room_id {
+    pub const FIXED_OLD_RUINS_REVISIT: fixed_room_id = fixed_room_id(73);
+}
+impl fixed_room_id {
+    pub const FIXED_TEMPORAL_PINNACLE_REVISIT: fixed_room_id = fixed_room_id(74);
+}
+impl fixed_room_id {
+    pub const FIXED_REGIGIGAS_CHAMBER_REVISIT: fixed_room_id = fixed_room_id(75);
+}
+impl fixed_room_id {
+    pub const FIXED_SPACIAL_RIFT_BOTTOM_REVISIT: fixed_room_id = fixed_room_id(76);
+}
+impl fixed_room_id {
+    pub const FIXED_DARK_CRATER_PIT_REVISIT: fixed_room_id = fixed_room_id(77);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x4E: fixed_room_id = fixed_room_id(78);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x4F: fixed_room_id = fixed_room_id(79);
+}
+impl fixed_room_id {
+    pub const FIXED_LABYRINTH_CAVE: fixed_room_id = fixed_room_id(80);
+}
+impl fixed_room_id {
+    pub const FIXED_ZERO_ISLE_NORTH: fixed_room_id = fixed_room_id(81);
+}
+impl fixed_room_id {
+    pub const FIXED_ZERO_ISLE_EAST: fixed_room_id = fixed_room_id(82);
+}
+impl fixed_room_id {
+    pub const FIXED_ZERO_ISLE_WEST: fixed_room_id = fixed_room_id(83);
+}
+impl fixed_room_id {
+    pub const FIXED_ZERO_ISLE_SOUTH: fixed_room_id = fixed_room_id(84);
+}
+impl fixed_room_id {
+    pub const FIXED_ORAN_FOREST: fixed_room_id = fixed_room_id(85);
+}
+impl fixed_room_id {
+    pub const FIXED_MARINE_RESORT: fixed_room_id = fixed_room_id(86);
+}
+impl fixed_room_id {
+    pub const FIXED_SERENITY_RIVER: fixed_room_id = fixed_room_id(87);
+}
+impl fixed_room_id {
+    pub const FIXED_LANDSLIDE_CAVE: fixed_room_id = fixed_room_id(88);
+}
+impl fixed_room_id {
+    pub const FIXED_LUSH_PRAIRIE: fixed_room_id = fixed_room_id(89);
+}
+impl fixed_room_id {
+    pub const FIXED_TINY_MEADOW: fixed_room_id = fixed_room_id(90);
+}
+impl fixed_room_id {
+    pub const FIXED_SURROUNDED_SEA: fixed_room_id = fixed_room_id(91);
+}
+impl fixed_room_id {
+    pub const FIXED_CONCEALED_RUINS: fixed_room_id = fixed_room_id(92);
+}
+impl fixed_room_id {
+    pub const FIXED_LAKE_AFAR: fixed_room_id = fixed_room_id(93);
+}
+impl fixed_room_id {
+    pub const FIXED_HAPPY_OUTLOOK: fixed_room_id = fixed_room_id(94);
+}
+impl fixed_room_id {
+    pub const FIXED_MT_MISTRAL: fixed_room_id = fixed_room_id(95);
+}
+impl fixed_room_id {
+    pub const FIXED_SHIMMER_HILL: fixed_room_id = fixed_room_id(96);
+}
+impl fixed_room_id {
+    pub const FIXED_LOST_WILDERNESS: fixed_room_id = fixed_room_id(97);
+}
+impl fixed_room_id {
+    pub const FIXED_MIDNIGHT_FOREST: fixed_room_id = fixed_room_id(98);
+}
+impl fixed_room_id {
+    pub const FIXED_ZERO_ISLE_CENTER: fixed_room_id = fixed_room_id(99);
+}
+impl fixed_room_id {
+    pub const FIXED_OBLIVION_FOREST: fixed_room_id = fixed_room_id(100);
+}
+impl fixed_room_id {
+    pub const FIXED_TREACHEROUS_WATERS: fixed_room_id = fixed_room_id(101);
+}
+impl fixed_room_id {
+    pub const FIXED_SOUTHEASTERN_ISLANDS: fixed_room_id = fixed_room_id(102);
+}
+impl fixed_room_id {
+    pub const FIXED_INFERNO_CAVE: fixed_room_id = fixed_room_id(103);
+}
+impl fixed_room_id {
+    pub const FIXED_MIDNIGHT_FOREST_COPY: fixed_room_id = fixed_room_id(104);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x69: fixed_room_id = fixed_room_id(105);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x6A: fixed_room_id = fixed_room_id(106);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x6B: fixed_room_id = fixed_room_id(107);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x6C: fixed_room_id = fixed_room_id(108);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x6D: fixed_room_id = fixed_room_id(109);
+}
+impl fixed_room_id {
+    pub const FIXED_SUBSTITUTE_ROOM: fixed_room_id = fixed_room_id(110);
+}
+impl fixed_room_id {
+    pub const FIXED_GOLDEN_CHAMBER: fixed_room_id = fixed_room_id(111);
+}
+impl fixed_room_id {
+    pub const FIXED_SECRET_BAZAAR: fixed_room_id = fixed_room_id(112);
+}
+impl fixed_room_id {
+    pub const FIXED_SECRET_ROOM: fixed_room_id = fixed_room_id(113);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_0: fixed_room_id = fixed_room_id(114);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_1: fixed_room_id = fixed_room_id(115);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_2: fixed_room_id = fixed_room_id(116);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_3: fixed_room_id = fixed_room_id(117);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_4: fixed_room_id = fixed_room_id(118);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_5: fixed_room_id = fixed_room_id(119);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_6: fixed_room_id = fixed_room_id(120);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_7: fixed_room_id = fixed_room_id(121);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_8: fixed_room_id = fixed_room_id(122);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_9: fixed_room_id = fixed_room_id(123);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_10: fixed_room_id = fixed_room_id(124);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_11: fixed_room_id = fixed_room_id(125);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_12: fixed_room_id = fixed_room_id(126);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_13: fixed_room_id = fixed_room_id(127);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_14: fixed_room_id = fixed_room_id(128);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_15: fixed_room_id = fixed_room_id(129);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_16: fixed_room_id = fixed_room_id(130);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_17: fixed_room_id = fixed_room_id(131);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_18: fixed_room_id = fixed_room_id(132);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_19: fixed_room_id = fixed_room_id(133);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_20: fixed_room_id = fixed_room_id(134);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_21: fixed_room_id = fixed_room_id(135);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_22: fixed_room_id = fixed_room_id(136);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_23: fixed_room_id = fixed_room_id(137);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_24: fixed_room_id = fixed_room_id(138);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_25: fixed_room_id = fixed_room_id(139);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_26: fixed_room_id = fixed_room_id(140);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_27: fixed_room_id = fixed_room_id(141);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_28: fixed_room_id = fixed_room_id(142);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_29: fixed_room_id = fixed_room_id(143);
+}
+impl fixed_room_id {
+    pub const FIXED_TREASURE_MEMO_30: fixed_room_id = fixed_room_id(144);
+}
+impl fixed_room_id {
+    pub const FIXED_MEWTWO_CHALLENGE_FLOOR: fixed_room_id = fixed_room_id(145);
+}
+impl fixed_room_id {
+    pub const FIXED_ENTEI_CHALLENGE_FLOOR: fixed_room_id = fixed_room_id(146);
+}
+impl fixed_room_id {
+    pub const FIXED_RAIKOU_CHALLENGE_FLOOR: fixed_room_id = fixed_room_id(147);
+}
+impl fixed_room_id {
+    pub const FIXED_SUICUNE_CHALLENGE_FLOOR: fixed_room_id = fixed_room_id(148);
+}
+impl fixed_room_id {
+    pub const FIXED_STAR_CAVE_PIT: fixed_room_id = fixed_room_id(149);
+}
+impl fixed_room_id {
+    pub const FIXED_CHALLENGE_LETTER_FLOOR_1: fixed_room_id = fixed_room_id(150);
+}
+impl fixed_room_id {
+    pub const FIXED_CHALLENGE_LETTER_FLOOR_2: fixed_room_id = fixed_room_id(151);
+}
+impl fixed_room_id {
+    pub const FIXED_CHALLENGE_LETTER_FLOOR_3: fixed_room_id = fixed_room_id(152);
+}
+impl fixed_room_id {
+    pub const FIXED_CHALLENGE_LETTER_FLOOR_4: fixed_room_id = fixed_room_id(153);
+}
+impl fixed_room_id {
+    pub const FIXED_CHALLENGE_LETTER_FLOOR_5: fixed_room_id = fixed_room_id(154);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x9B: fixed_room_id = fixed_room_id(155);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x9C: fixed_room_id = fixed_room_id(156);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x9D: fixed_room_id = fixed_room_id(157);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x9E: fixed_room_id = fixed_room_id(158);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0x9F: fixed_room_id = fixed_room_id(159);
+}
+impl fixed_room_id {
+    pub const FIXED_OUTLAW_TEAM_FLOOR_1: fixed_room_id = fixed_room_id(160);
+}
+impl fixed_room_id {
+    pub const FIXED_OUTLAW_TEAM_FLOOR_2: fixed_room_id = fixed_room_id(161);
+}
+impl fixed_room_id {
+    pub const FIXED_OUTLAW_TEAM_FLOOR_3: fixed_room_id = fixed_room_id(162);
+}
+impl fixed_room_id {
+    pub const FIXED_OUTLAW_TEAM_FLOOR_4: fixed_room_id = fixed_room_id(163);
+}
+impl fixed_room_id {
+    pub const FIXED_OUTLAW_TEAM_FLOOR_5: fixed_room_id = fixed_room_id(164);
+}
+impl fixed_room_id {
+    pub const FIXED_SEALED_CHAMBER: fixed_room_id = fixed_room_id(165);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xA6: fixed_room_id = fixed_room_id(166);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xA7: fixed_room_id = fixed_room_id(167);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xA8: fixed_room_id = fixed_room_id(168);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xA9: fixed_room_id = fixed_room_id(169);
+}
+impl fixed_room_id {
+    pub const FIXED_CLEAR_SILK_CHAMBER: fixed_room_id = fixed_room_id(170);
+}
+impl fixed_room_id {
+    pub const FIXED_ORANGE_SILK_CHAMBER: fixed_room_id = fixed_room_id(171);
+}
+impl fixed_room_id {
+    pub const FIXED_GREEN_SILK_CHAMBER: fixed_room_id = fixed_room_id(172);
+}
+impl fixed_room_id {
+    pub const FIXED_IRON_SILK_CHAMBER: fixed_room_id = fixed_room_id(173);
+}
+impl fixed_room_id {
+    pub const FIXED_JOY_SEED_CHAMBER_6X: fixed_room_id = fixed_room_id(174);
+}
+impl fixed_room_id {
+    pub const FIXED_FRIEND_BOW_CHAMBER: fixed_room_id = fixed_room_id(175);
+}
+impl fixed_room_id {
+    pub const FIXED_PINK_SILK_CHAMBER: fixed_room_id = fixed_room_id(176);
+}
+impl fixed_room_id {
+    pub const FIXED_GRAY_SILK_CHAMBER: fixed_room_id = fixed_room_id(177);
+}
+impl fixed_room_id {
+    pub const FIXED_PURPLE_SILK_CHAMBER: fixed_room_id = fixed_room_id(178);
+}
+impl fixed_room_id {
+    pub const FIXED_JOY_SEED_CHAMBER_1X: fixed_room_id = fixed_room_id(179);
+}
+impl fixed_room_id {
+    pub const FIXED_ROYAL_SILK_CHAMBER: fixed_room_id = fixed_room_id(180);
+}
+impl fixed_room_id {
+    pub const FIXED_MIRACLE_CHEST_CHAMBER: fixed_room_id = fixed_room_id(181);
+}
+impl fixed_room_id {
+    pub const FIXED_BROWN_SILK_CHAMBER: fixed_room_id = fixed_room_id(182);
+}
+impl fixed_room_id {
+    pub const FIXED_SKY_SILK_CHAMBER: fixed_room_id = fixed_room_id(183);
+}
+impl fixed_room_id {
+    pub const FIXED_GOLD_SILK_CHAMBER: fixed_room_id = fixed_room_id(184);
+}
+impl fixed_room_id {
+    pub const FIXED_BLACK_SILK_CHAMBER: fixed_room_id = fixed_room_id(185);
+}
+impl fixed_room_id {
+    pub const FIXED_JOY_SEED_CHAMBER_2X: fixed_room_id = fixed_room_id(186);
+}
+impl fixed_room_id {
+    pub const FIXED_WONDER_GUMMI_CHAMBER: fixed_room_id = fixed_room_id(187);
+}
+impl fixed_room_id {
+    pub const FIXED_ITEM_CHAMBER_1: fixed_room_id = fixed_room_id(188);
+}
+impl fixed_room_id {
+    pub const FIXED_ITEM_CHAMBER_2: fixed_room_id = fixed_room_id(189);
+}
+impl fixed_room_id {
+    pub const FIXED_WONDER_CHEST_CHAMBER: fixed_room_id = fixed_room_id(190);
+}
+impl fixed_room_id {
+    pub const FIXED_RED_SILK_CHAMBER: fixed_room_id = fixed_room_id(191);
+}
+impl fixed_room_id {
+    pub const FIXED_BLUE_SILK_CHAMBER: fixed_room_id = fixed_room_id(192);
+}
+impl fixed_room_id {
+    pub const FIXED_GRASS_SILK_CHAMBER: fixed_room_id = fixed_room_id(193);
+}
+impl fixed_room_id {
+    pub const FIXED_YELLOW_SILK_CHAMBER: fixed_room_id = fixed_room_id(194);
+}
+impl fixed_room_id {
+    pub const FIXED_REVIVER_SEED_CHAMBER_1: fixed_room_id = fixed_room_id(195);
+}
+impl fixed_room_id {
+    pub const FIXED_REVIVER_SEED_CHAMBER_2: fixed_room_id = fixed_room_id(196);
+}
+impl fixed_room_id {
+    pub const FIXED_EMPTY_SEALED_CHAMBER: fixed_room_id = fixed_room_id(197);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xC6: fixed_room_id = fixed_room_id(198);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xC7: fixed_room_id = fixed_room_id(199);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xC8: fixed_room_id = fixed_room_id(200);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xC9: fixed_room_id = fixed_room_id(201);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xCA: fixed_room_id = fixed_room_id(202);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xCB: fixed_room_id = fixed_room_id(203);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xCC: fixed_room_id = fixed_room_id(204);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xCD: fixed_room_id = fixed_room_id(205);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xCE: fixed_room_id = fixed_room_id(206);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xCF: fixed_room_id = fixed_room_id(207);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD0: fixed_room_id = fixed_room_id(208);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD1: fixed_room_id = fixed_room_id(209);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD2: fixed_room_id = fixed_room_id(210);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD3: fixed_room_id = fixed_room_id(211);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD4: fixed_room_id = fixed_room_id(212);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD5: fixed_room_id = fixed_room_id(213);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD6: fixed_room_id = fixed_room_id(214);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD7: fixed_room_id = fixed_room_id(215);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD8: fixed_room_id = fixed_room_id(216);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xD9: fixed_room_id = fixed_room_id(217);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xDA: fixed_room_id = fixed_room_id(218);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xDB: fixed_room_id = fixed_room_id(219);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_1: fixed_room_id = fixed_room_id(220);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_2: fixed_room_id = fixed_room_id(221);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_3: fixed_room_id = fixed_room_id(222);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_4: fixed_room_id = fixed_room_id(223);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_5: fixed_room_id = fixed_room_id(224);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_6: fixed_room_id = fixed_room_id(225);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_7: fixed_room_id = fixed_room_id(226);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_8: fixed_room_id = fixed_room_id(227);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_9: fixed_room_id = fixed_room_id(228);
+}
+impl fixed_room_id {
+    pub const FIXED_LEGENDARY_EXCLUSIVE_CHAMBER_10: fixed_room_id = fixed_room_id(229);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xE6: fixed_room_id = fixed_room_id(230);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xE7: fixed_room_id = fixed_room_id(231);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xE8: fixed_room_id = fixed_room_id(232);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xE9: fixed_room_id = fixed_room_id(233);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xEA: fixed_room_id = fixed_room_id(234);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xEB: fixed_room_id = fixed_room_id(235);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xEC: fixed_room_id = fixed_room_id(236);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xED: fixed_room_id = fixed_room_id(237);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xEE: fixed_room_id = fixed_room_id(238);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xEF: fixed_room_id = fixed_room_id(239);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF0: fixed_room_id = fixed_room_id(240);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF1: fixed_room_id = fixed_room_id(241);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF2: fixed_room_id = fixed_room_id(242);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF3: fixed_room_id = fixed_room_id(243);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF4: fixed_room_id = fixed_room_id(244);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF5: fixed_room_id = fixed_room_id(245);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF6: fixed_room_id = fixed_room_id(246);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF7: fixed_room_id = fixed_room_id(247);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF8: fixed_room_id = fixed_room_id(248);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xF9: fixed_room_id = fixed_room_id(249);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xFA: fixed_room_id = fixed_room_id(250);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xFB: fixed_room_id = fixed_room_id(251);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xFC: fixed_room_id = fixed_room_id(252);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xFD: fixed_room_id = fixed_room_id(253);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xFE: fixed_room_id = fixed_room_id(254);
+}
+impl fixed_room_id {
+    pub const FIXED_UNUSED_0xFF: fixed_room_id = fixed_room_id(255);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct fixed_room_id(pub crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct fixed_room_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -5140,18 +11790,18 @@ pub struct fixed_room_id_8 {
 }
 impl fixed_room_id_8 {
     #[inline]
-    pub fn val(&self) -> fixed_room_id::Type {
+    pub fn val(&self) -> fixed_room_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: fixed_room_id::Type) {
+    pub fn set_val(&mut self, val: fixed_room_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 8u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: fixed_room_id::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+    pub fn new_bitfield_1(val: fixed_room_id) -> __BindgenBitfieldUnit<[u8; 1usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 8u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -45077,128 +51727,366 @@ pub struct dungeon {
     pub field_0x2cb12: undefined,
     pub field_0x2cb13: undefined,
 }
-pub mod script_var_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const VAR_VERSION: Type = 0;
-    pub const VAR_CONDITION: Type = 1;
-    pub const VAR_SCENARIO_SELECT: Type = 2;
-    pub const VAR_SCENARIO_MAIN: Type = 3;
-    pub const VAR_SCENARIO_SIDE: Type = 4;
-    pub const VAR_SCENARIO_SUB1: Type = 5;
-    pub const VAR_SCENARIO_SUB2: Type = 6;
-    pub const VAR_SCENARIO_SUB3: Type = 7;
-    pub const VAR_SCENARIO_SUB4: Type = 8;
-    pub const VAR_SCENARIO_SUB5: Type = 9;
-    pub const VAR_SCENARIO_SUB6: Type = 10;
-    pub const VAR_SCENARIO_SUB7: Type = 11;
-    pub const VAR_SCENARIO_SUB8: Type = 12;
-    pub const VAR_SIDE02_TALK: Type = 13;
-    pub const VAR_SIDE06_ROOM: Type = 14;
-    pub const VAR_SIDE08_BOSS2ND: Type = 15;
-    pub const VAR_SIDE01_BOSS2ND: Type = 16;
-    pub const VAR_SCENARIO_MAIN_BIT_FLAG: Type = 17;
-    pub const VAR_SCENARIO_TALK_BIT_FLAG: Type = 18;
-    pub const VAR_SCENARIO_BALANCE_FLAG: Type = 19;
-    pub const VAR_SCENARIO_BALANCE_DEBUG: Type = 20;
-    pub const VAR_CRYSTAL_COLOR_01: Type = 21;
-    pub const VAR_CRYSTAL_COLOR_02: Type = 22;
-    pub const VAR_CRYSTAL_COLOR_03: Type = 23;
-    pub const VAR_COMPULSORY_SAVE_POINT: Type = 24;
-    pub const VAR_COMPULSORY_SAVE_POINT_SIDE: Type = 25;
-    pub const VAR_SCENARIO_SELECT_BACKUP: Type = 26;
-    pub const VAR_SCENARIO_MAIN_BIT_FLAG_BACKUP: Type = 27;
-    pub const VAR_GROUND_ENTER: Type = 28;
-    pub const VAR_GROUND_ENTER_LINK: Type = 29;
-    pub const VAR_GROUND_GETOUT: Type = 30;
-    pub const VAR_GROUND_MAP: Type = 31;
-    pub const VAR_GROUND_PLACE: Type = 32;
-    pub const VAR_GROUND_ENTER_BACKUP: Type = 33;
-    pub const VAR_GROUND_ENTER_LINK_BACKUP: Type = 34;
-    pub const VAR_GROUND_GETOUT_BACKUP: Type = 35;
-    pub const VAR_GROUND_MAP_BACKUP: Type = 36;
-    pub const VAR_GROUND_PLACE_BACKUP: Type = 37;
-    pub const VAR_DUNGEON_SELECT: Type = 38;
-    pub const VAR_DUNGEON_ENTER: Type = 39;
-    pub const VAR_DUNGEON_ENTER_MODE: Type = 40;
-    pub const VAR_DUNGEON_ENTER_INDEX: Type = 41;
-    pub const VAR_DUNGEON_ENTER_FREQUENCY: Type = 42;
-    pub const VAR_DUNGEON_RESULT: Type = 43;
-    pub const VAR_GROUND_START_MODE: Type = 44;
-    pub const VAR_DUNGEON_ENTER_BACKUP: Type = 45;
-    pub const VAR_DUNGEON_ENTER_MODE_BACKUP: Type = 46;
-    pub const VAR_DUNGEON_ENTER_INDEX_BACKUP: Type = 47;
-    pub const VAR_DUNGEON_ENTER_FREQUENCY_BACKUP: Type = 48;
-    pub const VAR_DUNGEON_RESULT_BACKUP: Type = 49;
-    pub const VAR_GROUND_START_MODE_BACKUP: Type = 50;
-    pub const VAR_REQUEST_CLEAR_COUNT: Type = 51;
-    pub const VAR_PLAYER_KIND: Type = 52;
-    pub const VAR_ATTENDANT1_KIND: Type = 53;
-    pub const VAR_ATTENDANT2_KIND: Type = 54;
-    pub const VAR_PLAYER_KIND_BACKUP: Type = 55;
-    pub const VAR_ATTENDANT1_KIND_BACKUP: Type = 56;
-    pub const VAR_ATTENDANT2_KIND_BACKUP: Type = 57;
-    pub const VAR_FRIEND_SUM: Type = 58;
-    pub const VAR_UNIT_SUM: Type = 59;
-    pub const VAR_CARRY_GOLD: Type = 60;
-    pub const VAR_BANK_GOLD: Type = 61;
-    pub const VAR_HERO_FIRST_KIND: Type = 62;
-    pub const VAR_HERO_FIRST_NAME: Type = 63;
-    pub const VAR_PARTNER_FIRST_KIND: Type = 64;
-    pub const VAR_PARTNER_FIRST_NAME: Type = 65;
-    pub const VAR_HERO_TALK_KIND: Type = 66;
-    pub const VAR_PARTNER_TALK_KIND: Type = 67;
-    pub const VAR_RANDOM_REQUEST_NPC03_KIND: Type = 68;
-    pub const VAR_CONFIG_COLOR_KIND: Type = 69;
-    pub const VAR_ROM_VARIATION: Type = 70;
-    pub const VAR_LANGUAGE_TYPE: Type = 71;
-    pub const VAR_GAME_MODE: Type = 72;
-    pub const VAR_EXECUTE_SPECIAL_EPISODE_TYPE: Type = 73;
-    pub const VAR_SPECIAL_EPISODE_TYPE: Type = 74;
-    pub const VAR_SPECIAL_EPISODE_OPEN: Type = 75;
-    pub const VAR_SPECIAL_EPISODE_OPEN_OLD: Type = 76;
-    pub const VAR_SPECIAL_EPISODE_CONQUEST: Type = 77;
-    pub const VAR_PERFORMANCE_PROGRESS_LIST: Type = 78;
-    pub const VAR_DUNGEON_OPEN_LIST: Type = 79;
-    pub const VAR_DUNGEON_ENTER_LIST: Type = 80;
-    pub const VAR_DUNGEON_ARRIVE_LIST: Type = 81;
-    pub const VAR_DUNGEON_CONQUEST_LIST: Type = 82;
-    pub const VAR_DUNGEON_PRESENT_LIST: Type = 83;
-    pub const VAR_DUNGEON_REQUEST_LIST: Type = 84;
-    pub const VAR_WORLD_MAP_MARK_LIST_NORMAL: Type = 85;
-    pub const VAR_WORLD_MAP_MARK_LIST_SPECIAL: Type = 86;
-    pub const VAR_WORLD_MAP_LEVEL: Type = 87;
-    pub const VAR_POSITION_X: Type = 88;
-    pub const VAR_POSITION_Y: Type = 89;
-    pub const VAR_POSITION_HEIGHT: Type = 90;
-    pub const VAR_POSITION_DIRECTION: Type = 91;
-    pub const VAR_EVENT_LOCAL: Type = 92;
-    pub const VAR_DUNGEON_EVENT_LOCAL: Type = 93;
-    pub const VAR_STATION_ITEM_STATIC: Type = 94;
-    pub const VAR_STATION_ITEM_TEMP: Type = 95;
-    pub const VAR_DELIVER_ITEM_STATIC: Type = 96;
-    pub const VAR_DELIVER_ITEM_TEMP: Type = 97;
-    pub const VAR_BIT_FUWARANTE_LOCAL: Type = 98;
-    pub const VAR_LOTTERY_RESULT: Type = 99;
-    pub const VAR_ITEM_BACKUP: Type = 100;
-    pub const VAR_ITEM_BACKUP_KUREKURE: Type = 101;
-    pub const VAR_ITEM_BACKUP_TAKE: Type = 102;
-    pub const VAR_ITEM_BACKUP_GET: Type = 103;
-    pub const VAR_REQUEST_THANKS_RESULT_KIND: Type = 104;
-    pub const VAR_REQUEST_THANKS_RESULT_VARIATION: Type = 105;
-    pub const VAR_SUB30_TREASURE_DISCOVER: Type = 106;
-    pub const VAR_SUB30_SPOT_DISCOVER: Type = 107;
-    pub const VAR_RECYCLE_COUNT: Type = 108;
-    pub const VAR_SUB30_SPOT_LEVEL: Type = 109;
-    pub const VAR_TEAM_RANK_EVENT_LEVEL: Type = 110;
-    pub const VAR_PLAY_OLD_GAME: Type = 111;
-    pub const VAR_NOTE_MODIFY_FLAG: Type = 112;
-    pub const VAR_SUB30_PROJECTP: Type = 113;
-    pub const VAR_SUM: Type = 114;
-    pub const VAR_LOCAL0: Type = 1024;
-    pub const VAR_LOCAL1: Type = 1025;
-    pub const VAR_LOCAL2: Type = 1026;
-    pub const VAR_LOCAL3: Type = 1027;
+impl script_var_id {
+    pub const VAR_VERSION: script_var_id = script_var_id(0);
 }
+impl script_var_id {
+    pub const VAR_CONDITION: script_var_id = script_var_id(1);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SELECT: script_var_id = script_var_id(2);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_MAIN: script_var_id = script_var_id(3);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SIDE: script_var_id = script_var_id(4);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SUB1: script_var_id = script_var_id(5);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SUB2: script_var_id = script_var_id(6);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SUB3: script_var_id = script_var_id(7);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SUB4: script_var_id = script_var_id(8);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SUB5: script_var_id = script_var_id(9);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SUB6: script_var_id = script_var_id(10);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SUB7: script_var_id = script_var_id(11);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SUB8: script_var_id = script_var_id(12);
+}
+impl script_var_id {
+    pub const VAR_SIDE02_TALK: script_var_id = script_var_id(13);
+}
+impl script_var_id {
+    pub const VAR_SIDE06_ROOM: script_var_id = script_var_id(14);
+}
+impl script_var_id {
+    pub const VAR_SIDE08_BOSS2ND: script_var_id = script_var_id(15);
+}
+impl script_var_id {
+    pub const VAR_SIDE01_BOSS2ND: script_var_id = script_var_id(16);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_MAIN_BIT_FLAG: script_var_id = script_var_id(17);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_TALK_BIT_FLAG: script_var_id = script_var_id(18);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_BALANCE_FLAG: script_var_id = script_var_id(19);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_BALANCE_DEBUG: script_var_id = script_var_id(20);
+}
+impl script_var_id {
+    pub const VAR_CRYSTAL_COLOR_01: script_var_id = script_var_id(21);
+}
+impl script_var_id {
+    pub const VAR_CRYSTAL_COLOR_02: script_var_id = script_var_id(22);
+}
+impl script_var_id {
+    pub const VAR_CRYSTAL_COLOR_03: script_var_id = script_var_id(23);
+}
+impl script_var_id {
+    pub const VAR_COMPULSORY_SAVE_POINT: script_var_id = script_var_id(24);
+}
+impl script_var_id {
+    pub const VAR_COMPULSORY_SAVE_POINT_SIDE: script_var_id = script_var_id(25);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_SELECT_BACKUP: script_var_id = script_var_id(26);
+}
+impl script_var_id {
+    pub const VAR_SCENARIO_MAIN_BIT_FLAG_BACKUP: script_var_id = script_var_id(27);
+}
+impl script_var_id {
+    pub const VAR_GROUND_ENTER: script_var_id = script_var_id(28);
+}
+impl script_var_id {
+    pub const VAR_GROUND_ENTER_LINK: script_var_id = script_var_id(29);
+}
+impl script_var_id {
+    pub const VAR_GROUND_GETOUT: script_var_id = script_var_id(30);
+}
+impl script_var_id {
+    pub const VAR_GROUND_MAP: script_var_id = script_var_id(31);
+}
+impl script_var_id {
+    pub const VAR_GROUND_PLACE: script_var_id = script_var_id(32);
+}
+impl script_var_id {
+    pub const VAR_GROUND_ENTER_BACKUP: script_var_id = script_var_id(33);
+}
+impl script_var_id {
+    pub const VAR_GROUND_ENTER_LINK_BACKUP: script_var_id = script_var_id(34);
+}
+impl script_var_id {
+    pub const VAR_GROUND_GETOUT_BACKUP: script_var_id = script_var_id(35);
+}
+impl script_var_id {
+    pub const VAR_GROUND_MAP_BACKUP: script_var_id = script_var_id(36);
+}
+impl script_var_id {
+    pub const VAR_GROUND_PLACE_BACKUP: script_var_id = script_var_id(37);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_SELECT: script_var_id = script_var_id(38);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ENTER: script_var_id = script_var_id(39);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ENTER_MODE: script_var_id = script_var_id(40);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ENTER_INDEX: script_var_id = script_var_id(41);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ENTER_FREQUENCY: script_var_id = script_var_id(42);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_RESULT: script_var_id = script_var_id(43);
+}
+impl script_var_id {
+    pub const VAR_GROUND_START_MODE: script_var_id = script_var_id(44);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ENTER_BACKUP: script_var_id = script_var_id(45);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ENTER_MODE_BACKUP: script_var_id = script_var_id(46);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ENTER_INDEX_BACKUP: script_var_id = script_var_id(47);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ENTER_FREQUENCY_BACKUP: script_var_id = script_var_id(48);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_RESULT_BACKUP: script_var_id = script_var_id(49);
+}
+impl script_var_id {
+    pub const VAR_GROUND_START_MODE_BACKUP: script_var_id = script_var_id(50);
+}
+impl script_var_id {
+    pub const VAR_REQUEST_CLEAR_COUNT: script_var_id = script_var_id(51);
+}
+impl script_var_id {
+    pub const VAR_PLAYER_KIND: script_var_id = script_var_id(52);
+}
+impl script_var_id {
+    pub const VAR_ATTENDANT1_KIND: script_var_id = script_var_id(53);
+}
+impl script_var_id {
+    pub const VAR_ATTENDANT2_KIND: script_var_id = script_var_id(54);
+}
+impl script_var_id {
+    pub const VAR_PLAYER_KIND_BACKUP: script_var_id = script_var_id(55);
+}
+impl script_var_id {
+    pub const VAR_ATTENDANT1_KIND_BACKUP: script_var_id = script_var_id(56);
+}
+impl script_var_id {
+    pub const VAR_ATTENDANT2_KIND_BACKUP: script_var_id = script_var_id(57);
+}
+impl script_var_id {
+    pub const VAR_FRIEND_SUM: script_var_id = script_var_id(58);
+}
+impl script_var_id {
+    pub const VAR_UNIT_SUM: script_var_id = script_var_id(59);
+}
+impl script_var_id {
+    pub const VAR_CARRY_GOLD: script_var_id = script_var_id(60);
+}
+impl script_var_id {
+    pub const VAR_BANK_GOLD: script_var_id = script_var_id(61);
+}
+impl script_var_id {
+    pub const VAR_HERO_FIRST_KIND: script_var_id = script_var_id(62);
+}
+impl script_var_id {
+    pub const VAR_HERO_FIRST_NAME: script_var_id = script_var_id(63);
+}
+impl script_var_id {
+    pub const VAR_PARTNER_FIRST_KIND: script_var_id = script_var_id(64);
+}
+impl script_var_id {
+    pub const VAR_PARTNER_FIRST_NAME: script_var_id = script_var_id(65);
+}
+impl script_var_id {
+    pub const VAR_HERO_TALK_KIND: script_var_id = script_var_id(66);
+}
+impl script_var_id {
+    pub const VAR_PARTNER_TALK_KIND: script_var_id = script_var_id(67);
+}
+impl script_var_id {
+    pub const VAR_RANDOM_REQUEST_NPC03_KIND: script_var_id = script_var_id(68);
+}
+impl script_var_id {
+    pub const VAR_CONFIG_COLOR_KIND: script_var_id = script_var_id(69);
+}
+impl script_var_id {
+    pub const VAR_ROM_VARIATION: script_var_id = script_var_id(70);
+}
+impl script_var_id {
+    pub const VAR_LANGUAGE_TYPE: script_var_id = script_var_id(71);
+}
+impl script_var_id {
+    pub const VAR_GAME_MODE: script_var_id = script_var_id(72);
+}
+impl script_var_id {
+    pub const VAR_EXECUTE_SPECIAL_EPISODE_TYPE: script_var_id = script_var_id(73);
+}
+impl script_var_id {
+    pub const VAR_SPECIAL_EPISODE_TYPE: script_var_id = script_var_id(74);
+}
+impl script_var_id {
+    pub const VAR_SPECIAL_EPISODE_OPEN: script_var_id = script_var_id(75);
+}
+impl script_var_id {
+    pub const VAR_SPECIAL_EPISODE_OPEN_OLD: script_var_id = script_var_id(76);
+}
+impl script_var_id {
+    pub const VAR_SPECIAL_EPISODE_CONQUEST: script_var_id = script_var_id(77);
+}
+impl script_var_id {
+    pub const VAR_PERFORMANCE_PROGRESS_LIST: script_var_id = script_var_id(78);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_OPEN_LIST: script_var_id = script_var_id(79);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ENTER_LIST: script_var_id = script_var_id(80);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_ARRIVE_LIST: script_var_id = script_var_id(81);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_CONQUEST_LIST: script_var_id = script_var_id(82);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_PRESENT_LIST: script_var_id = script_var_id(83);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_REQUEST_LIST: script_var_id = script_var_id(84);
+}
+impl script_var_id {
+    pub const VAR_WORLD_MAP_MARK_LIST_NORMAL: script_var_id = script_var_id(85);
+}
+impl script_var_id {
+    pub const VAR_WORLD_MAP_MARK_LIST_SPECIAL: script_var_id = script_var_id(86);
+}
+impl script_var_id {
+    pub const VAR_WORLD_MAP_LEVEL: script_var_id = script_var_id(87);
+}
+impl script_var_id {
+    pub const VAR_POSITION_X: script_var_id = script_var_id(88);
+}
+impl script_var_id {
+    pub const VAR_POSITION_Y: script_var_id = script_var_id(89);
+}
+impl script_var_id {
+    pub const VAR_POSITION_HEIGHT: script_var_id = script_var_id(90);
+}
+impl script_var_id {
+    pub const VAR_POSITION_DIRECTION: script_var_id = script_var_id(91);
+}
+impl script_var_id {
+    pub const VAR_EVENT_LOCAL: script_var_id = script_var_id(92);
+}
+impl script_var_id {
+    pub const VAR_DUNGEON_EVENT_LOCAL: script_var_id = script_var_id(93);
+}
+impl script_var_id {
+    pub const VAR_STATION_ITEM_STATIC: script_var_id = script_var_id(94);
+}
+impl script_var_id {
+    pub const VAR_STATION_ITEM_TEMP: script_var_id = script_var_id(95);
+}
+impl script_var_id {
+    pub const VAR_DELIVER_ITEM_STATIC: script_var_id = script_var_id(96);
+}
+impl script_var_id {
+    pub const VAR_DELIVER_ITEM_TEMP: script_var_id = script_var_id(97);
+}
+impl script_var_id {
+    pub const VAR_BIT_FUWARANTE_LOCAL: script_var_id = script_var_id(98);
+}
+impl script_var_id {
+    pub const VAR_LOTTERY_RESULT: script_var_id = script_var_id(99);
+}
+impl script_var_id {
+    pub const VAR_ITEM_BACKUP: script_var_id = script_var_id(100);
+}
+impl script_var_id {
+    pub const VAR_ITEM_BACKUP_KUREKURE: script_var_id = script_var_id(101);
+}
+impl script_var_id {
+    pub const VAR_ITEM_BACKUP_TAKE: script_var_id = script_var_id(102);
+}
+impl script_var_id {
+    pub const VAR_ITEM_BACKUP_GET: script_var_id = script_var_id(103);
+}
+impl script_var_id {
+    pub const VAR_REQUEST_THANKS_RESULT_KIND: script_var_id = script_var_id(104);
+}
+impl script_var_id {
+    pub const VAR_REQUEST_THANKS_RESULT_VARIATION: script_var_id = script_var_id(105);
+}
+impl script_var_id {
+    pub const VAR_SUB30_TREASURE_DISCOVER: script_var_id = script_var_id(106);
+}
+impl script_var_id {
+    pub const VAR_SUB30_SPOT_DISCOVER: script_var_id = script_var_id(107);
+}
+impl script_var_id {
+    pub const VAR_RECYCLE_COUNT: script_var_id = script_var_id(108);
+}
+impl script_var_id {
+    pub const VAR_SUB30_SPOT_LEVEL: script_var_id = script_var_id(109);
+}
+impl script_var_id {
+    pub const VAR_TEAM_RANK_EVENT_LEVEL: script_var_id = script_var_id(110);
+}
+impl script_var_id {
+    pub const VAR_PLAY_OLD_GAME: script_var_id = script_var_id(111);
+}
+impl script_var_id {
+    pub const VAR_NOTE_MODIFY_FLAG: script_var_id = script_var_id(112);
+}
+impl script_var_id {
+    pub const VAR_SUB30_PROJECTP: script_var_id = script_var_id(113);
+}
+impl script_var_id {
+    pub const VAR_SUM: script_var_id = script_var_id(114);
+}
+impl script_var_id {
+    pub const VAR_LOCAL0: script_var_id = script_var_id(1024);
+}
+impl script_var_id {
+    pub const VAR_LOCAL1: script_var_id = script_var_id(1025);
+}
+impl script_var_id {
+    pub const VAR_LOCAL2: script_var_id = script_var_id(1026);
+}
+impl script_var_id {
+    pub const VAR_LOCAL3: script_var_id = script_var_id(1027);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct script_var_id(pub crate::ctypes::c_uint);
 pub mod script_var_type {
     pub type Type = crate::ctypes::c_uint;
     pub const VARTYPE_NONE: Type = 0;
@@ -45240,458 +52128,1363 @@ impl script_var_type_16 {
         __bindgen_bitfield_unit
     }
 }
-pub mod script_opcode_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const OPCODE_NULL: Type = 0;
-    pub const OPCODE_BACK_CHANGE_GROUND: Type = 1;
-    pub const OPCODE_BACK_SET_BACK_EFFECT: Type = 2;
-    pub const OPCODE_BACK_SET_BACK_SCROLL_OFFSET: Type = 3;
-    pub const OPCODE_BACK_SET_BACK_SCROLL_SPEED: Type = 4;
-    pub const OPCODE_BACK_SET_BANNER: Type = 5;
-    pub const OPCODE_BACK_SET_BANNER2: Type = 6;
-    pub const OPCODE_BACK_SET_EFFECT: Type = 7;
-    pub const OPCODE_BACK_SET_DUNGEON_BANNER: Type = 8;
-    pub const OPCODE_BACK_SET_GROUND: Type = 9;
-    pub const OPCODE_BACK_SET_SPECIAL_EPISODE_BANNER: Type = 10;
-    pub const OPCODE_BACK_SET_SPECIAL_EPISODE_BANNER2: Type = 11;
-    pub const OPCODE_BACK_SET_SPECIAL_EPISODE_BANNER3: Type = 12;
-    pub const OPCODE_BACK_SET_TITLE_BANNER: Type = 13;
-    pub const OPCODE_BACK_SET_WEATHER: Type = 14;
-    pub const OPCODE_BACK_SET_WEATHER_EFFECT: Type = 15;
-    pub const OPCODE_BACK_SET_WEATHER_SCROLL_OFFSET: Type = 16;
-    pub const OPCODE_BACK_SET_WEATHER_SCROLL_SPEED: Type = 17;
-    pub const OPCODE_BACK2_SET_BACK_EFFECT: Type = 18;
-    pub const OPCODE_BACK2_SET_BACK_SCROLL_OFFSET: Type = 19;
-    pub const OPCODE_BACK2_SET_BACK_SCROLL_SPEED: Type = 20;
-    pub const OPCODE_BACK2_SET_DATA: Type = 21;
-    pub const OPCODE_BACK2_SET_EFFECT: Type = 22;
-    pub const OPCODE_BACK2_SET_GROUND: Type = 23;
-    pub const OPCODE_BACK2_SET_MODE: Type = 24;
-    pub const OPCODE_BACK2_SET_SPECIAL_ACTING: Type = 25;
-    pub const OPCODE_BACK2_SET_WEATHER: Type = 26;
-    pub const OPCODE_BACK2_SET_WEATHER_EFFECT: Type = 27;
-    pub const OPCODE_BACK2_SET_WEATHER_SCROLL_OFFSET: Type = 28;
-    pub const OPCODE_BACK2_SET_WEATHER_SCROLL_SPEED: Type = 29;
-    pub const OPCODE_BGM_FADE_OUT: Type = 30;
-    pub const OPCODE_BGM_PLAY: Type = 31;
-    pub const OPCODE_BGM_PLAY_FADE_IN: Type = 32;
-    pub const OPCODE_BGM_STOP: Type = 33;
-    pub const OPCODE_BGM_CHANGE_VOLUME: Type = 34;
-    pub const OPCODE_BGM2_FADE_OUT: Type = 35;
-    pub const OPCODE_BGM2_PLAY: Type = 36;
-    pub const OPCODE_BGM2_PLAY_FADE_IN: Type = 37;
-    pub const OPCODE_BGM2_STOP: Type = 38;
-    pub const OPCODE_BGM2_CHANGE_VOLUME: Type = 39;
-    pub const OPCODE_BRANCH: Type = 40;
-    pub const OPCODE_BRANCH_BIT: Type = 41;
-    pub const OPCODE_BRANCH_DEBUG: Type = 42;
-    pub const OPCODE_BRANCH_EDIT: Type = 43;
-    pub const OPCODE_BRANCH_EXECUTE_SUB: Type = 44;
-    pub const OPCODE_BRANCH_PERFORMANCE: Type = 45;
-    pub const OPCODE_BRANCH_SCENARIO_NOW: Type = 46;
-    pub const OPCODE_BRANCH_SCENARIO_NOW_AFTER: Type = 47;
-    pub const OPCODE_BRANCH_SCENARIO_NOW_BEFORE: Type = 48;
-    pub const OPCODE_BRANCH_SCENARIO_AFTER: Type = 49;
-    pub const OPCODE_BRANCH_SCENARIO_BEFORE: Type = 50;
-    pub const OPCODE_BRANCH_SUM: Type = 51;
-    pub const OPCODE_BRANCH_VALUE: Type = 52;
-    pub const OPCODE_BRANCH_VARIABLE: Type = 53;
-    pub const OPCODE_BRANCH_VARIATION: Type = 54;
-    pub const OPCODE_CALL: Type = 55;
-    pub const OPCODE_CALL_COMMON: Type = 56;
-    pub const OPCODE_CAMERA_MOVE2_DEFAULT: Type = 57;
-    pub const OPCODE_CAMERA_MOVE2_MY_POSITION: Type = 58;
-    pub const OPCODE_CAMERA_MOVE2_MYSELF: Type = 59;
-    pub const OPCODE_CAMERA_MOVE2_POSITION_MARK_VARIADIC: Type = 60;
-    pub const OPCODE_CAMERA_MOVE2_POSITION_MARK: Type = 61;
-    pub const OPCODE_CAMERA_MOVE3_DEFAULT: Type = 62;
-    pub const OPCODE_CAMERA_MOVE3_MY_POSITION: Type = 63;
-    pub const OPCODE_CAMERA_MOVE3_MYSELF: Type = 64;
-    pub const OPCODE_CAMERA_MOVE3_POSITION_MARK_VARIADIC: Type = 65;
-    pub const OPCODE_CAMERA_MOVE3_POSITION_MARK: Type = 66;
-    pub const OPCODE_CAMERA_MOVE_DEFAULT: Type = 67;
-    pub const OPCODE_CAMERA_MOVE_MY_POSITION: Type = 68;
-    pub const OPCODE_CAMERA_MOVE_MYSELF: Type = 69;
-    pub const OPCODE_CAMERA_MOVE_POSITION_MARK_VARIADIC: Type = 70;
-    pub const OPCODE_CAMERA_MOVE_POSITION_MARK: Type = 71;
-    pub const OPCODE_CAMERA_SET_DEFAULT: Type = 72;
-    pub const OPCODE_CAMERA_SET_EFFECT: Type = 73;
-    pub const OPCODE_CAMERA_SET_MY_POSITION: Type = 74;
-    pub const OPCODE_CAMERA_SET_MYSELF: Type = 75;
-    pub const OPCODE_CAMERA_SET_POSITION_MARK: Type = 76;
-    pub const OPCODE_CAMERA2_MOVE2_DEFAULT: Type = 77;
-    pub const OPCODE_CAMERA2_MOVE2_MY_POSITION: Type = 78;
-    pub const OPCODE_CAMERA2_MOVE2_MYSELF: Type = 79;
-    pub const OPCODE_CAMERA2_MOVE2_POSITION_MARK_VARIADIC: Type = 80;
-    pub const OPCODE_CAMERA2_MOVE2_POSITION_MARK: Type = 81;
-    pub const OPCODE_CAMERA2_MOVE3_DEFAULT: Type = 82;
-    pub const OPCODE_CAMERA2_MOVE3_MY_POSITION: Type = 83;
-    pub const OPCODE_CAMERA2_MOVE3_MYSELF: Type = 84;
-    pub const OPCODE_CAMERA2_MOVE3_POSITION_MARK_VARIADIC: Type = 85;
-    pub const OPCODE_CAMERA2_MOVE3_POSITION_MARK: Type = 86;
-    pub const OPCODE_CAMERA2_MOVE_DEFAULT: Type = 87;
-    pub const OPCODE_CAMERA2_MOVE_MY_POSITION: Type = 88;
-    pub const OPCODE_CAMERA2_MOVE_MYSELF: Type = 89;
-    pub const OPCODE_CAMERA2_MOVE_POSITION_MARK_VARIADIC: Type = 90;
-    pub const OPCODE_CAMERA2_MOVE_POSITION_MARK: Type = 91;
-    pub const OPCODE_CAMERA2_SET_DEFAULT: Type = 92;
-    pub const OPCODE_CAMERA2_SET_EFFECT: Type = 93;
-    pub const OPCODE_CAMERA2_SET_MY_POSITION: Type = 94;
-    pub const OPCODE_CAMERA2_SET_MYSELF: Type = 95;
-    pub const OPCODE_CAMERA2_SET_POSITION_MARK: Type = 96;
-    pub const OPCODE_CANCEL_CUT: Type = 97;
-    pub const OPCODE_CANCEL_RECOVER_COMMON: Type = 98;
-    pub const OPCODE_CASE: Type = 99;
-    pub const OPCODE_CASE_MENU: Type = 100;
-    pub const OPCODE_CASE_MENU2: Type = 101;
-    pub const OPCODE_CASE_SCENARIO: Type = 102;
-    pub const OPCODE_CASE_TEXT: Type = 103;
-    pub const OPCODE_CASE_VALUE: Type = 104;
-    pub const OPCODE_CASE_VARIABLE: Type = 105;
-    pub const OPCODE_DEBUG_ASSERT: Type = 106;
-    pub const OPCODE_DEBUG_PRINT: Type = 107;
-    pub const OPCODE_DEBUG_PRINT_FLAG: Type = 108;
-    pub const OPCODE_DEBUG_PRINT_SCENARIO: Type = 109;
-    pub const OPCODE_DEFAULT_TEXT: Type = 110;
-    pub const OPCODE_DESTROY: Type = 111;
-    pub const OPCODE_END: Type = 112;
-    pub const OPCODE_END_ANIMATION: Type = 113;
-    pub const OPCODE_EXECUTE_ACTING: Type = 114;
-    pub const OPCODE_EXECUTE_COMMON: Type = 115;
-    pub const OPCODE_FLAG_CALC_BIT: Type = 116;
-    pub const OPCODE_FLAG_CALC_VALUE: Type = 117;
-    pub const OPCODE_FLAG_CALC_VARIABLE: Type = 118;
-    pub const OPCODE_FLAG_CLEAR: Type = 119;
-    pub const OPCODE_FLAG_INITIAL: Type = 120;
-    pub const OPCODE_FLAG_SET: Type = 121;
-    pub const OPCODE_FLAG_RESET_DUNGEON_RESULT: Type = 122;
-    pub const OPCODE_FLAG_RESET_SCENARIO: Type = 123;
-    pub const OPCODE_FLAG_SET_ADVENTURE_LOG: Type = 124;
-    pub const OPCODE_FLAG_SET_DUNGEON_MODE: Type = 125;
-    pub const OPCODE_FLAG_SET_DUNGEON_RESULT: Type = 126;
-    pub const OPCODE_FLAG_SET_PERFORMANCE: Type = 127;
-    pub const OPCODE_FLAG_SET_SCENARIO: Type = 128;
-    pub const OPCODE_FLASH: Type = 129;
-    pub const OPCODE_HOLD: Type = 130;
-    pub const OPCODE_ITEM_GET_VARIABLE: Type = 131;
-    pub const OPCODE_ITEM_SET: Type = 132;
-    pub const OPCODE_ITEM_SET_TABLE_DATA: Type = 133;
-    pub const OPCODE_ITEM_SET_VARIABLE: Type = 134;
-    pub const OPCODE_JUMP: Type = 135;
-    pub const OPCODE_JUMP_COMMON: Type = 136;
-    pub const OPCODE_LIVES: Type = 137;
-    pub const OPCODE_LOAD_POSITION: Type = 138;
-    pub const OPCODE_LOCK: Type = 139;
-    pub const OPCODE_MAIN_ENTER_ADVENTURE: Type = 140;
-    pub const OPCODE_MAIN_ENTER_DUNGEON: Type = 141;
-    pub const OPCODE_MAIN_ENTER_GROUND: Type = 142;
-    pub const OPCODE_MAIN_ENTER_GROUND_MULTI: Type = 143;
-    pub const OPCODE_MAIN_ENTER_RESCUE_USER: Type = 144;
-    pub const OPCODE_MAIN_ENTER_TRAINING: Type = 145;
-    pub const OPCODE_MAIN_ENTER_TRAINING2: Type = 146;
-    pub const OPCODE_MAIN_SET_GROUND: Type = 147;
-    pub const OPCODE_ME_PLAY: Type = 148;
-    pub const OPCODE_ME_STOP: Type = 149;
-    pub const OPCODE_MESSAGE_CLOSE: Type = 150;
-    pub const OPCODE_MESSAGE_CLOSE_ENFORCE: Type = 151;
-    pub const OPCODE_MESSAGE_EXPLANATION: Type = 152;
-    pub const OPCODE_MESSAGE_FACE_POSITION_OFFSET: Type = 153;
-    pub const OPCODE_MESSAGE_IMITATION_SOUND: Type = 154;
-    pub const OPCODE_MESSAGE_KEY_WAIT: Type = 155;
-    pub const OPCODE_MESSAGE_MAIL: Type = 156;
-    pub const OPCODE_MESSAGE_MENU: Type = 157;
-    pub const OPCODE_MESSAGE_MONOLOGUE: Type = 158;
-    pub const OPCODE_MESSAGE_NARRATION: Type = 159;
-    pub const OPCODE_MESSAGE_NOTICE: Type = 160;
-    pub const OPCODE_MESSAGE_EMPTY_ACTOR: Type = 161;
-    pub const OPCODE_MESSAGE_RESET_ACTOR: Type = 162;
-    pub const OPCODE_MESSAGE_SET_ACTOR: Type = 163;
-    pub const OPCODE_MESSAGE_SET_FACE: Type = 164;
-    pub const OPCODE_MESSAGE_SET_FACE_EMPTY: Type = 165;
-    pub const OPCODE_MESSAGE_SET_FACE_ONLY: Type = 166;
-    pub const OPCODE_MESSAGE_SET_FACE_POSITION: Type = 167;
-    pub const OPCODE_MESSAGE_SET_WAIT_MODE: Type = 168;
-    pub const OPCODE_MESSAGE_SPECIAL_TALK: Type = 169;
-    pub const OPCODE_MESSAGE_SWITCH_MENU: Type = 170;
-    pub const OPCODE_MESSAGE_SWITCH_MENU2: Type = 171;
-    pub const OPCODE_MESSAGE_SWITCH_MONOLOGUE: Type = 172;
-    pub const OPCODE_MESSAGE_SWITCH_TALK: Type = 173;
-    pub const OPCODE_MESSAGE_TALK: Type = 174;
-    pub const OPCODE_MOVE2_POSITION: Type = 175;
-    pub const OPCODE_MOVE2_POSITION_LIVES: Type = 176;
-    pub const OPCODE_MOVE2_POSITION_MARK_VARIADIC: Type = 177;
-    pub const OPCODE_MOVE2_POSITION_MARK: Type = 178;
-    pub const OPCODE_MOVE2_POSITION_OFFSET_VARIADIC: Type = 179;
-    pub const OPCODE_MOVE2_POSITION_OFFSET: Type = 180;
-    pub const OPCODE_MOVE2_POSITION_OFFSET_RANDOM: Type = 181;
-    pub const OPCODE_MOVE3_POSITION: Type = 182;
-    pub const OPCODE_MOVE3_POSITION_LIVES: Type = 183;
-    pub const OPCODE_MOVE3_POSITION_MARK_VARIADIC: Type = 184;
-    pub const OPCODE_MOVE3_POSITION_MARK: Type = 185;
-    pub const OPCODE_MOVE3_POSITION_OFFSET_VARIADIC: Type = 186;
-    pub const OPCODE_MOVE3_POSITION_OFFSET: Type = 187;
-    pub const OPCODE_MOVE3_POSITION_OFFSET_RANDOM: Type = 188;
-    pub const OPCODE_MOVE_DIRECTION: Type = 189;
-    pub const OPCODE_MOVE_HEIGHT: Type = 190;
-    pub const OPCODE_MOVE_POSITION: Type = 191;
-    pub const OPCODE_MOVE_POSITION_LIVES: Type = 192;
-    pub const OPCODE_MOVE_POSITION_LIVES_TIME: Type = 193;
-    pub const OPCODE_MOVE_POSITION_MARK_VARIADIC: Type = 194;
-    pub const OPCODE_MOVE_POSITION_MARK: Type = 195;
-    pub const OPCODE_MOVE_POSITION_MARK_TIME: Type = 196;
-    pub const OPCODE_MOVE_POSITION_OFFSET_VARIADIC: Type = 197;
-    pub const OPCODE_MOVE_POSITION_OFFSET: Type = 198;
-    pub const OPCODE_MOVE_SPECIAL: Type = 199;
-    pub const OPCODE_MOVE_TURN: Type = 200;
-    pub const OPCODE_OBJECT: Type = 201;
-    pub const OPCODE_PAUSE_EFFECT: Type = 202;
-    pub const OPCODE_PERFORMER: Type = 203;
-    pub const OPCODE_PROCESS_SPECIAL: Type = 204;
-    pub const OPCODE_PURSUE_TURN_LIVES: Type = 205;
-    pub const OPCODE_PURSUE_TURN_LIVES2: Type = 206;
-    pub const OPCODE_RESET_ATTRIBUTE: Type = 207;
-    pub const OPCODE_RESET_FUNCTION_ATTRIBUTE: Type = 208;
-    pub const OPCODE_RESET_HIT_ATTRIBUTE: Type = 209;
-    pub const OPCODE_RESET_OUTPUT_ATTRIBUTE: Type = 210;
-    pub const OPCODE_RESET_REPLY_ATTRIBUTE: Type = 211;
-    pub const OPCODE_RESUME_EFFECT: Type = 212;
-    pub const OPCODE_RETURN: Type = 213;
-    pub const OPCODE_SAVE_POSITION: Type = 214;
-    pub const OPCODE_SCREEN_FADE_CHANGE: Type = 215;
-    pub const OPCODE_SCREEN_FADE_CHANGE_ALL: Type = 216;
-    pub const OPCODE_SCREEN_FADE_IN: Type = 217;
-    pub const OPCODE_SCREEN_FADE_IN_ALL: Type = 218;
-    pub const OPCODE_SCREEN_FADE_OUT: Type = 219;
-    pub const OPCODE_SCREEN_FADE_OUT_ALL: Type = 220;
-    pub const OPCODE_SCREEN_FLUSH_CHANGE: Type = 221;
-    pub const OPCODE_SCREEN_FLUSH_IN: Type = 222;
-    pub const OPCODE_SCREEN_FLUSH_OUT: Type = 223;
-    pub const OPCODE_SCREEN_WHITE_CHANGE: Type = 224;
-    pub const OPCODE_SCREEN_WHITE_CHANGE_ALL: Type = 225;
-    pub const OPCODE_SCREEN_WHITE_IN: Type = 226;
-    pub const OPCODE_SCREEN_WHITE_IN_ALL: Type = 227;
-    pub const OPCODE_SCREEN_WHITE_OUT: Type = 228;
-    pub const OPCODE_SCREEN_WHITE_OUT_ALL: Type = 229;
-    pub const OPCODE_SCREEN2_FADE_CHANGE: Type = 230;
-    pub const OPCODE_SCREEN2_FADE_CHANGE_ALL: Type = 231;
-    pub const OPCODE_SCREEN2_FADE_IN: Type = 232;
-    pub const OPCODE_SCREEN2_FADE_IN_ALL: Type = 233;
-    pub const OPCODE_SCREEN2_FADE_OUT: Type = 234;
-    pub const OPCODE_SCREEN2_FADE_OUT_ALL: Type = 235;
-    pub const OPCODE_SCREEN2_FLUSH_CHANGE: Type = 236;
-    pub const OPCODE_SCREEN2_FLUSH_IN: Type = 237;
-    pub const OPCODE_SCREEN2_FLUSH_OUT: Type = 238;
-    pub const OPCODE_SCREEN2_WHITE_CHANGE: Type = 239;
-    pub const OPCODE_SCREEN2_WHITE_CHANGE_ALL: Type = 240;
-    pub const OPCODE_SCREEN2_WHITE_IN: Type = 241;
-    pub const OPCODE_SCREEN2_WHITE_IN_ALL: Type = 242;
-    pub const OPCODE_SCREEN2_WHITE_OUT: Type = 243;
-    pub const OPCODE_SCREEN2_WHITE_OUT_ALL: Type = 244;
-    pub const OPCODE_SE_CHANGE_PAN: Type = 245;
-    pub const OPCODE_SE_CHANGE_VOLUME: Type = 246;
-    pub const OPCODE_SE_FADE_OUT: Type = 247;
-    pub const OPCODE_SE_PLAY: Type = 248;
-    pub const OPCODE_SE_PLAY_FULL: Type = 249;
-    pub const OPCODE_SE_PLAY_PAN: Type = 250;
-    pub const OPCODE_SE_PLAY_VOLUME: Type = 251;
-    pub const OPCODE_SE_STOP: Type = 252;
-    pub const OPCODE_SET_ANIMATION: Type = 253;
-    pub const OPCODE_SET_ATTRIBUTE: Type = 254;
-    pub const OPCODE_SET_BLINK: Type = 255;
-    pub const OPCODE_SET_DIRECTION: Type = 256;
-    pub const OPCODE_SET_DIRECTION_LIVES: Type = 257;
-    pub const OPCODE_SET_EFFECT: Type = 258;
-    pub const OPCODE_SET_FUNCTION_ATTRIBUTE: Type = 259;
-    pub const OPCODE_SET_HEIGHT: Type = 260;
-    pub const OPCODE_SET_HIT_ATTRIBUTE: Type = 261;
-    pub const OPCODE_SET_MOVE_RANGE: Type = 262;
-    pub const OPCODE_SET_OUTPUT_ATTRIBUTE: Type = 263;
-    pub const OPCODE_SET_POSITION: Type = 264;
-    pub const OPCODE_SET_POSITION_INITIAL: Type = 265;
-    pub const OPCODE_SET_POSITION_LIVES: Type = 266;
-    pub const OPCODE_SET_POSITION_MARK: Type = 267;
-    pub const OPCODE_SET_POSITION_OFFSET: Type = 268;
-    pub const OPCODE_SET_POSITION_OFFSET_RANDOM: Type = 269;
-    pub const OPCODE_SET_REPLY_ATTRIBUTE: Type = 270;
-    pub const OPCODE_SETUP_OUTPUT_ATTRIBUTE_AND_ANIMATION: Type = 271;
-    pub const OPCODE_SLIDE2_POSITION: Type = 272;
-    pub const OPCODE_SLIDE2_POSITION_LIVES: Type = 273;
-    pub const OPCODE_SLIDE2_POSITION_MARK_VARIADIC: Type = 274;
-    pub const OPCODE_SLIDE2_POSITION_MARK: Type = 275;
-    pub const OPCODE_SLIDE2_POSITION_OFFSET_VARIADIC: Type = 276;
-    pub const OPCODE_SLIDE2_POSITION_OFFSET: Type = 277;
-    pub const OPCODE_SLIDE2_POSITION_OFFSET_RANDOM: Type = 278;
-    pub const OPCODE_SLIDE3_POSITION: Type = 279;
-    pub const OPCODE_SLIDE3_POSITION_LIVES: Type = 280;
-    pub const OPCODE_SLIDE3_POSITION_MARK_VARIADIC: Type = 281;
-    pub const OPCODE_SLIDE3_POSITION_MARK: Type = 282;
-    pub const OPCODE_SLIDE3_POSITION_OFFSET_VARIADIC: Type = 283;
-    pub const OPCODE_SLIDE3_POSITION_OFFSET: Type = 284;
-    pub const OPCODE_SLIDE3_POSITION_OFFSET_RANDOM: Type = 285;
-    pub const OPCODE_SLIDE_HEIGHT: Type = 286;
-    pub const OPCODE_SLIDE_POSITION: Type = 287;
-    pub const OPCODE_SLIDE_POSITION_LIVES: Type = 288;
-    pub const OPCODE_SLIDE_POSITION_LIVES_TIME: Type = 289;
-    pub const OPCODE_SLIDE_POSITION_MARK_VARIADIC: Type = 290;
-    pub const OPCODE_SLIDE_POSITION_MARK: Type = 291;
-    pub const OPCODE_SLIDE_POSITION_MARK_TIME: Type = 292;
-    pub const OPCODE_SLIDE_POSITION_OFFSET_VARIADIC: Type = 293;
-    pub const OPCODE_SLIDE_POSITION_OFFSET: Type = 294;
-    pub const OPCODE_SOUND_FADE_OUT: Type = 295;
-    pub const OPCODE_SOUND_STOP: Type = 296;
-    pub const OPCODE_STOP_ANIMATION: Type = 297;
-    pub const OPCODE_SUPERVISION_ACTING: Type = 298;
-    pub const OPCODE_SUPERVISION_ACTING_INVISIBLE: Type = 299;
-    pub const OPCODE_SUPERVISION_EXECUTE_ACTING: Type = 300;
-    pub const OPCODE_SUPERVISION_EXECUTE_ACTING_SUB: Type = 301;
-    pub const OPCODE_SUPERVISION_EXECUTE_COMMON: Type = 302;
-    pub const OPCODE_SUPERVISION_EXECUTE_ENTER: Type = 303;
-    pub const OPCODE_SUPERVISION_EXECUTE_STATION: Type = 304;
-    pub const OPCODE_SUPERVISION_EXECUTE_STATION_COMMON: Type = 305;
-    pub const OPCODE_SUPERVISION_EXECUTE_STATION_COMMON_SUB: Type = 306;
-    pub const OPCODE_SUPERVISION_EXECUTE_STATION_SUB: Type = 307;
-    pub const OPCODE_SUPERVISION_EXECUTE_EXPORT: Type = 308;
-    pub const OPCODE_SUPERVISION_EXECUTE_EXPORT_SUB: Type = 309;
-    pub const OPCODE_SUPERVISION_LOAD_STATION: Type = 310;
-    pub const OPCODE_SUPERVISION_REMOVE: Type = 311;
-    pub const OPCODE_SUPERVISION_REMOVE_ACTING: Type = 312;
-    pub const OPCODE_SUPERVISION_REMOVE_COMMON: Type = 313;
-    pub const OPCODE_SUPERVISION_SPECIAL_ACTING: Type = 314;
-    pub const OPCODE_SUPERVISION_STATION: Type = 315;
-    pub const OPCODE_SUPERVISION_STATION_COMMON: Type = 316;
-    pub const OPCODE_SUPERVISION_SUSPEND: Type = 317;
-    pub const OPCODE_SUPERVISION2_SPECIAL_ACTING: Type = 318;
-    pub const OPCODE_SWITCH: Type = 319;
-    pub const OPCODE_SWITCH_DIRECTION: Type = 320;
-    pub const OPCODE_SWITCH_DIRECTION_LIVES: Type = 321;
-    pub const OPCODE_SWITCH_DIRECTION_LIVES2: Type = 322;
-    pub const OPCODE_SWITCH_DIRECTION_MARK: Type = 323;
-    pub const OPCODE_SWITCH_DUNGEON_MODE: Type = 324;
-    pub const OPCODE_SWITCH_LIVES: Type = 325;
-    pub const OPCODE_SWITCH_RANDOM: Type = 326;
-    pub const OPCODE_SWITCH_SCENARIO: Type = 327;
-    pub const OPCODE_SWITCH_SCENARIO_LEVEL: Type = 328;
-    pub const OPCODE_SWITCH_SECTOR: Type = 329;
-    pub const OPCODE_SWITCH_VALUE: Type = 330;
-    pub const OPCODE_SWITCH_VARIABLE: Type = 331;
-    pub const OPCODE_TURN2_DIRECTION: Type = 332;
-    pub const OPCODE_TURN2_DIRECTION_LIVES: Type = 333;
-    pub const OPCODE_TURN2_DIRECTION_LIVES2: Type = 334;
-    pub const OPCODE_TURN2_DIRECTION_MARK: Type = 335;
-    pub const OPCODE_TURN2_DIRECTION_TURN: Type = 336;
-    pub const OPCODE_TURN3: Type = 337;
-    pub const OPCODE_TURN_DIRECTION: Type = 338;
-    pub const OPCODE_TURN_DIRECTION_LIVES: Type = 339;
-    pub const OPCODE_TURN_DIRECTION_LIVES2: Type = 340;
-    pub const OPCODE_TURN_DIRECTION_MARK: Type = 341;
-    pub const OPCODE_UNLOCK: Type = 342;
-    pub const OPCODE_WAIT: Type = 343;
-    pub const OPCODE_WAIT_ANIMATION: Type = 344;
-    pub const OPCODE_WAIT_BACK_EFFECT: Type = 345;
-    pub const OPCODE_WAIT_BACK2_EFFECT: Type = 346;
-    pub const OPCODE_WAIT_BGM: Type = 347;
-    pub const OPCODE_WAIT_BGM2: Type = 348;
-    pub const OPCODE_WAIT_BGM_SIGNAL: Type = 349;
-    pub const OPCODE_WAIT_EFFECT: Type = 350;
-    pub const OPCODE_WAIT_END_ANIMATION: Type = 351;
-    pub const OPCODE_WAIT_EXECUTE_LIVES: Type = 352;
-    pub const OPCODE_WAIT_EXECUTE_OBJECT: Type = 353;
-    pub const OPCODE_WAIT_EXECUTE_PERFORMER: Type = 354;
-    pub const OPCODE_WAIT_FADE_IN: Type = 355;
-    pub const OPCODE_WAIT_LOCK_LIVES: Type = 356;
-    pub const OPCODE_WAIT_LOCK_OBJECT: Type = 357;
-    pub const OPCODE_WAIT_LOCK_PERFORMER: Type = 358;
-    pub const OPCODE_WAIT_LOCK_SUPERVISION: Type = 359;
-    pub const OPCODE_WAIT_ME: Type = 360;
-    pub const OPCODE_WAIT_MOVE_CAMERA: Type = 361;
-    pub const OPCODE_WAIT_MOVE_CAMERA2: Type = 362;
-    pub const OPCODE_WAIT_RANDOM: Type = 363;
-    pub const OPCODE_WAIT_SCREEN_FADE: Type = 364;
-    pub const OPCODE_WAIT_SCREEN_FADE_ALL: Type = 365;
-    pub const OPCODE_WAIT_SCREEN2_FADE: Type = 366;
-    pub const OPCODE_WAIT_SE: Type = 367;
-    pub const OPCODE_WAIT_SPECIAL_ACTING: Type = 368;
-    pub const OPCODE_WAIT_SUB_SCREEN: Type = 369;
-    pub const OPCODE_WAIT_SUB_SPECIAL_ACTING: Type = 370;
-    pub const OPCODE_WORLDMAP_BLINK_MARK: Type = 371;
-    pub const OPCODE_WORLDMAP_CHANGE_LEVEL: Type = 372;
-    pub const OPCODE_WORLDMAP_DELETE_ARROW: Type = 373;
-    pub const OPCODE_WORLDMAP_MOVE_CAMERA: Type = 374;
-    pub const OPCODE_WORLDMAP_OFF_MESSAGE: Type = 375;
-    pub const OPCODE_WORLDMAP_SET_ARROW: Type = 376;
-    pub const OPCODE_WORLDMAP_SET_CAMERA: Type = 377;
-    pub const OPCODE_WORLDMAP_SET_LEVEL: Type = 378;
-    pub const OPCODE_WORLDMAP_SET_MARK: Type = 379;
-    pub const OPCODE_WORLDMAP_SET_MESSAGE: Type = 380;
-    pub const OPCODE_WORLDMAP_SET_MESSAGE_PLACE: Type = 381;
-    pub const OPCODE_WORLDMAP_SET_MODE: Type = 382;
+impl script_opcode_id {
+    pub const OPCODE_NULL: script_opcode_id = script_opcode_id(0);
 }
-pub mod special_process_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const SPECIAL_PROC_NONE: Type = 0;
-    pub const SPECIAL_PROC_RETURN_DUNGEON: Type = 1;
-    pub const SPECIAL_PROC_INIT_MAIN_TEAM_AFTER_QUIZ: Type = 2;
-    pub const SPECIAL_PROC_0x3: Type = 3;
-    pub const SPECIAL_PROC_0x4: Type = 4;
-    pub const SPECIAL_PROC_NEXT_DAY: Type = 5;
-    pub const SPECIAL_PROC_0x6: Type = 6;
-    pub const SPECIAL_PROC_DUNGEON_HAD_REQUEST_DONE: Type = 7;
-    pub const SPECIAL_PROC_0x8: Type = 8;
-    pub const SPECIAL_PROC_0x9: Type = 9;
-    pub const SPECIAL_PROC_GET_SOS_MAIL_COUNT: Type = 10;
-    pub const SPECIAL_PROC_GET_SOS_MISSION_RETRIES_LEFT: Type = 11;
-    pub const SPECIAL_PROC_INIT_RANDOM_NPC_JOBS: Type = 12;
-    pub const SPECIAL_PROC_GET_RANDOM_NPC_JOB_TYPE: Type = 13;
-    pub const SPECIAL_PROC_GET_RANDOM_NPC_JOB_SUBTYPE: Type = 14;
-    pub const SPECIAL_PROC_GET_RANDOM_NPC_JOB_STILL_AVAILABLE: Type = 15;
-    pub const SPECIAL_PROC_ACCEPT_RANDOM_NPC_JOB: Type = 16;
-    pub const SPECIAL_PROC_0x11: Type = 17;
-    pub const SPECIAL_PROC_0x12: Type = 18;
-    pub const SPECIAL_PROC_KEY_WAIT_PRESS: Type = 19;
-    pub const SPECIAL_PROC_KEY_WAIT_INIT: Type = 20;
-    pub const SPECIAL_PROC_KEY_WAIT_CHECK: Type = 21;
-    pub const SPECIAL_PROC_0x16: Type = 22;
-    pub const SPECIAL_PROC_0x17: Type = 23;
-    pub const SPECIAL_PROC_0x18: Type = 24;
-    pub const SPECIAL_PROC_JUMP_TO_TITLE_SCREEN: Type = 25;
-    pub const SPECIAL_PROC_0x1A: Type = 26;
-    pub const SPECIAL_PROC_RETURN_TO_TITLE_SCREEN: Type = 27;
-    pub const SPECIAL_PROC_IS_RECRUITABLE_IN_TEAM: Type = 28;
-    pub const SPECIAL_PROC_GET_RECRUITABLE_CURRENT_LEVEL: Type = 29;
-    pub const SPECIAL_PROC_RECRUITABLE_CAN_ADD: Type = 30;
-    pub const SPECIAL_PROC_ADD_RECRUITABLE_TO_TEAM: Type = 31;
-    pub const SPECIAL_PROC_COUNT_ITEM_TYPE_IN_BAG: Type = 32;
-    pub const SPECIAL_PROC_COUNT_TABLE_ITEM_TYPE_IN_BAG: Type = 33;
-    pub const SPECIAL_PROC_COUNT_ITEM_TYPE_IN_STORAGE: Type = 34;
-    pub const SPECIAL_PROC_COUNT_TABLE_ITEM_TYPE_IN_STORAGE: Type = 35;
-    pub const SPECIAL_PROC_ADD_ITEM_TO_BAG: Type = 36;
-    pub const SPECIAL_PROC_ADD_TABLE_ITEM_TO_BAG: Type = 37;
-    pub const SPECIAL_PROC_ADD_ITEM_TO_STORAGE: Type = 38;
-    pub const SPECIAL_PROC_ADD_TABLE_ITEM_TO_STORAGE: Type = 39;
-    pub const SPECIAL_PROC_REMOVE_ITEMS_TYPE_IN_BAG: Type = 40;
-    pub const SPECIAL_PROC_REMOVE_TABLE_ITEMS_TYPE_IN_BAG: Type = 41;
-    pub const SPECIAL_PROC_0x2A: Type = 42;
-    pub const SPECIAL_PROC_0x2B: Type = 43;
-    pub const SPECIAL_PROC_PREPARE_MENU_ACCEPT_TEAM_MEMBER: Type = 44;
-    pub const SPECIAL_PROC_GET_HERO_KIND: Type = 45;
-    pub const SPECIAL_PROC_GET_PARTNER_KIND: Type = 46;
-    pub const SPECIAL_PROC_IS_TEAM_SETUP_HERO_AND_PARTNER_ONLY: Type = 47;
-    pub const SPECIAL_PROC_IS_TEAM_SETUP_PARTNER_AND_HERO_ONLY: Type = 48;
-    pub const SPECIAL_PROC_IS_TEAM_SETUP_CONTAINS_PARTNER_AND_HERO: Type = 49;
-    pub const SPECIAL_PROC_IS_TEAM_SETUP_SOLO: Type = 50;
-    pub const SPECIAL_PROC_SET_TEAM_SETUP_HERO_AND_PARTNER_ONLY: Type = 51;
-    pub const SPECIAL_PROC_SET_TEAM_SETUP_HERO_ONLY: Type = 52;
-    pub const SPECIAL_PROC_0x35: Type = 53;
-    pub const SPECIAL_PROC_STATUS_UPDATE: Type = 54;
-    pub const SPECIAL_PROC_0x37: Type = 55;
-    pub const SPECIAL_PROC_IS_BAG_FULL: Type = 56;
-    pub const SPECIAL_PROC_0x39: Type = 57;
-    pub const SPECIAL_PROC_0x3A: Type = 58;
-    pub const SPECIAL_PROC_0x3B: Type = 59;
-    pub const SPECIAL_PROC_SEND_SKY_GIFT_TO_GUILDMASTER: Type = 60;
-    pub const SPECIAL_PROC_0x3D: Type = 61;
-    pub const SPECIAL_PROC_0x3E: Type = 62;
+impl script_opcode_id {
+    pub const OPCODE_BACK_CHANGE_GROUND: script_opcode_id = script_opcode_id(1);
 }
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_BACK_EFFECT: script_opcode_id = script_opcode_id(2);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_BACK_SCROLL_OFFSET: script_opcode_id = script_opcode_id(3);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_BACK_SCROLL_SPEED: script_opcode_id = script_opcode_id(4);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_BANNER: script_opcode_id = script_opcode_id(5);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_BANNER2: script_opcode_id = script_opcode_id(6);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_EFFECT: script_opcode_id = script_opcode_id(7);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_DUNGEON_BANNER: script_opcode_id = script_opcode_id(8);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_GROUND: script_opcode_id = script_opcode_id(9);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_SPECIAL_EPISODE_BANNER: script_opcode_id = script_opcode_id(10);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_SPECIAL_EPISODE_BANNER2: script_opcode_id = script_opcode_id(11);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_SPECIAL_EPISODE_BANNER3: script_opcode_id = script_opcode_id(12);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_TITLE_BANNER: script_opcode_id = script_opcode_id(13);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_WEATHER: script_opcode_id = script_opcode_id(14);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_WEATHER_EFFECT: script_opcode_id = script_opcode_id(15);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_WEATHER_SCROLL_OFFSET: script_opcode_id = script_opcode_id(16);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK_SET_WEATHER_SCROLL_SPEED: script_opcode_id = script_opcode_id(17);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_BACK_EFFECT: script_opcode_id = script_opcode_id(18);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_BACK_SCROLL_OFFSET: script_opcode_id = script_opcode_id(19);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_BACK_SCROLL_SPEED: script_opcode_id = script_opcode_id(20);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_DATA: script_opcode_id = script_opcode_id(21);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_EFFECT: script_opcode_id = script_opcode_id(22);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_GROUND: script_opcode_id = script_opcode_id(23);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_MODE: script_opcode_id = script_opcode_id(24);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_SPECIAL_ACTING: script_opcode_id = script_opcode_id(25);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_WEATHER: script_opcode_id = script_opcode_id(26);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_WEATHER_EFFECT: script_opcode_id = script_opcode_id(27);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_WEATHER_SCROLL_OFFSET: script_opcode_id = script_opcode_id(28);
+}
+impl script_opcode_id {
+    pub const OPCODE_BACK2_SET_WEATHER_SCROLL_SPEED: script_opcode_id = script_opcode_id(29);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM_FADE_OUT: script_opcode_id = script_opcode_id(30);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM_PLAY: script_opcode_id = script_opcode_id(31);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM_PLAY_FADE_IN: script_opcode_id = script_opcode_id(32);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM_STOP: script_opcode_id = script_opcode_id(33);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM_CHANGE_VOLUME: script_opcode_id = script_opcode_id(34);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM2_FADE_OUT: script_opcode_id = script_opcode_id(35);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM2_PLAY: script_opcode_id = script_opcode_id(36);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM2_PLAY_FADE_IN: script_opcode_id = script_opcode_id(37);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM2_STOP: script_opcode_id = script_opcode_id(38);
+}
+impl script_opcode_id {
+    pub const OPCODE_BGM2_CHANGE_VOLUME: script_opcode_id = script_opcode_id(39);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH: script_opcode_id = script_opcode_id(40);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_BIT: script_opcode_id = script_opcode_id(41);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_DEBUG: script_opcode_id = script_opcode_id(42);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_EDIT: script_opcode_id = script_opcode_id(43);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_EXECUTE_SUB: script_opcode_id = script_opcode_id(44);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_PERFORMANCE: script_opcode_id = script_opcode_id(45);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_SCENARIO_NOW: script_opcode_id = script_opcode_id(46);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_SCENARIO_NOW_AFTER: script_opcode_id = script_opcode_id(47);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_SCENARIO_NOW_BEFORE: script_opcode_id = script_opcode_id(48);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_SCENARIO_AFTER: script_opcode_id = script_opcode_id(49);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_SCENARIO_BEFORE: script_opcode_id = script_opcode_id(50);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_SUM: script_opcode_id = script_opcode_id(51);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_VALUE: script_opcode_id = script_opcode_id(52);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_VARIABLE: script_opcode_id = script_opcode_id(53);
+}
+impl script_opcode_id {
+    pub const OPCODE_BRANCH_VARIATION: script_opcode_id = script_opcode_id(54);
+}
+impl script_opcode_id {
+    pub const OPCODE_CALL: script_opcode_id = script_opcode_id(55);
+}
+impl script_opcode_id {
+    pub const OPCODE_CALL_COMMON: script_opcode_id = script_opcode_id(56);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE2_DEFAULT: script_opcode_id = script_opcode_id(57);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE2_MY_POSITION: script_opcode_id = script_opcode_id(58);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE2_MYSELF: script_opcode_id = script_opcode_id(59);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE2_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(60);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE2_POSITION_MARK: script_opcode_id = script_opcode_id(61);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE3_DEFAULT: script_opcode_id = script_opcode_id(62);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE3_MY_POSITION: script_opcode_id = script_opcode_id(63);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE3_MYSELF: script_opcode_id = script_opcode_id(64);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE3_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(65);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE3_POSITION_MARK: script_opcode_id = script_opcode_id(66);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE_DEFAULT: script_opcode_id = script_opcode_id(67);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE_MY_POSITION: script_opcode_id = script_opcode_id(68);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE_MYSELF: script_opcode_id = script_opcode_id(69);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(70);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_MOVE_POSITION_MARK: script_opcode_id = script_opcode_id(71);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_SET_DEFAULT: script_opcode_id = script_opcode_id(72);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_SET_EFFECT: script_opcode_id = script_opcode_id(73);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_SET_MY_POSITION: script_opcode_id = script_opcode_id(74);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_SET_MYSELF: script_opcode_id = script_opcode_id(75);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA_SET_POSITION_MARK: script_opcode_id = script_opcode_id(76);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE2_DEFAULT: script_opcode_id = script_opcode_id(77);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE2_MY_POSITION: script_opcode_id = script_opcode_id(78);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE2_MYSELF: script_opcode_id = script_opcode_id(79);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE2_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(80);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE2_POSITION_MARK: script_opcode_id = script_opcode_id(81);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE3_DEFAULT: script_opcode_id = script_opcode_id(82);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE3_MY_POSITION: script_opcode_id = script_opcode_id(83);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE3_MYSELF: script_opcode_id = script_opcode_id(84);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE3_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(85);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE3_POSITION_MARK: script_opcode_id = script_opcode_id(86);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE_DEFAULT: script_opcode_id = script_opcode_id(87);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE_MY_POSITION: script_opcode_id = script_opcode_id(88);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE_MYSELF: script_opcode_id = script_opcode_id(89);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(90);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_MOVE_POSITION_MARK: script_opcode_id = script_opcode_id(91);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_SET_DEFAULT: script_opcode_id = script_opcode_id(92);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_SET_EFFECT: script_opcode_id = script_opcode_id(93);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_SET_MY_POSITION: script_opcode_id = script_opcode_id(94);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_SET_MYSELF: script_opcode_id = script_opcode_id(95);
+}
+impl script_opcode_id {
+    pub const OPCODE_CAMERA2_SET_POSITION_MARK: script_opcode_id = script_opcode_id(96);
+}
+impl script_opcode_id {
+    pub const OPCODE_CANCEL_CUT: script_opcode_id = script_opcode_id(97);
+}
+impl script_opcode_id {
+    pub const OPCODE_CANCEL_RECOVER_COMMON: script_opcode_id = script_opcode_id(98);
+}
+impl script_opcode_id {
+    pub const OPCODE_CASE: script_opcode_id = script_opcode_id(99);
+}
+impl script_opcode_id {
+    pub const OPCODE_CASE_MENU: script_opcode_id = script_opcode_id(100);
+}
+impl script_opcode_id {
+    pub const OPCODE_CASE_MENU2: script_opcode_id = script_opcode_id(101);
+}
+impl script_opcode_id {
+    pub const OPCODE_CASE_SCENARIO: script_opcode_id = script_opcode_id(102);
+}
+impl script_opcode_id {
+    pub const OPCODE_CASE_TEXT: script_opcode_id = script_opcode_id(103);
+}
+impl script_opcode_id {
+    pub const OPCODE_CASE_VALUE: script_opcode_id = script_opcode_id(104);
+}
+impl script_opcode_id {
+    pub const OPCODE_CASE_VARIABLE: script_opcode_id = script_opcode_id(105);
+}
+impl script_opcode_id {
+    pub const OPCODE_DEBUG_ASSERT: script_opcode_id = script_opcode_id(106);
+}
+impl script_opcode_id {
+    pub const OPCODE_DEBUG_PRINT: script_opcode_id = script_opcode_id(107);
+}
+impl script_opcode_id {
+    pub const OPCODE_DEBUG_PRINT_FLAG: script_opcode_id = script_opcode_id(108);
+}
+impl script_opcode_id {
+    pub const OPCODE_DEBUG_PRINT_SCENARIO: script_opcode_id = script_opcode_id(109);
+}
+impl script_opcode_id {
+    pub const OPCODE_DEFAULT_TEXT: script_opcode_id = script_opcode_id(110);
+}
+impl script_opcode_id {
+    pub const OPCODE_DESTROY: script_opcode_id = script_opcode_id(111);
+}
+impl script_opcode_id {
+    pub const OPCODE_END: script_opcode_id = script_opcode_id(112);
+}
+impl script_opcode_id {
+    pub const OPCODE_END_ANIMATION: script_opcode_id = script_opcode_id(113);
+}
+impl script_opcode_id {
+    pub const OPCODE_EXECUTE_ACTING: script_opcode_id = script_opcode_id(114);
+}
+impl script_opcode_id {
+    pub const OPCODE_EXECUTE_COMMON: script_opcode_id = script_opcode_id(115);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_CALC_BIT: script_opcode_id = script_opcode_id(116);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_CALC_VALUE: script_opcode_id = script_opcode_id(117);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_CALC_VARIABLE: script_opcode_id = script_opcode_id(118);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_CLEAR: script_opcode_id = script_opcode_id(119);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_INITIAL: script_opcode_id = script_opcode_id(120);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_SET: script_opcode_id = script_opcode_id(121);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_RESET_DUNGEON_RESULT: script_opcode_id = script_opcode_id(122);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_RESET_SCENARIO: script_opcode_id = script_opcode_id(123);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_SET_ADVENTURE_LOG: script_opcode_id = script_opcode_id(124);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_SET_DUNGEON_MODE: script_opcode_id = script_opcode_id(125);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_SET_DUNGEON_RESULT: script_opcode_id = script_opcode_id(126);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_SET_PERFORMANCE: script_opcode_id = script_opcode_id(127);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLAG_SET_SCENARIO: script_opcode_id = script_opcode_id(128);
+}
+impl script_opcode_id {
+    pub const OPCODE_FLASH: script_opcode_id = script_opcode_id(129);
+}
+impl script_opcode_id {
+    pub const OPCODE_HOLD: script_opcode_id = script_opcode_id(130);
+}
+impl script_opcode_id {
+    pub const OPCODE_ITEM_GET_VARIABLE: script_opcode_id = script_opcode_id(131);
+}
+impl script_opcode_id {
+    pub const OPCODE_ITEM_SET: script_opcode_id = script_opcode_id(132);
+}
+impl script_opcode_id {
+    pub const OPCODE_ITEM_SET_TABLE_DATA: script_opcode_id = script_opcode_id(133);
+}
+impl script_opcode_id {
+    pub const OPCODE_ITEM_SET_VARIABLE: script_opcode_id = script_opcode_id(134);
+}
+impl script_opcode_id {
+    pub const OPCODE_JUMP: script_opcode_id = script_opcode_id(135);
+}
+impl script_opcode_id {
+    pub const OPCODE_JUMP_COMMON: script_opcode_id = script_opcode_id(136);
+}
+impl script_opcode_id {
+    pub const OPCODE_LIVES: script_opcode_id = script_opcode_id(137);
+}
+impl script_opcode_id {
+    pub const OPCODE_LOAD_POSITION: script_opcode_id = script_opcode_id(138);
+}
+impl script_opcode_id {
+    pub const OPCODE_LOCK: script_opcode_id = script_opcode_id(139);
+}
+impl script_opcode_id {
+    pub const OPCODE_MAIN_ENTER_ADVENTURE: script_opcode_id = script_opcode_id(140);
+}
+impl script_opcode_id {
+    pub const OPCODE_MAIN_ENTER_DUNGEON: script_opcode_id = script_opcode_id(141);
+}
+impl script_opcode_id {
+    pub const OPCODE_MAIN_ENTER_GROUND: script_opcode_id = script_opcode_id(142);
+}
+impl script_opcode_id {
+    pub const OPCODE_MAIN_ENTER_GROUND_MULTI: script_opcode_id = script_opcode_id(143);
+}
+impl script_opcode_id {
+    pub const OPCODE_MAIN_ENTER_RESCUE_USER: script_opcode_id = script_opcode_id(144);
+}
+impl script_opcode_id {
+    pub const OPCODE_MAIN_ENTER_TRAINING: script_opcode_id = script_opcode_id(145);
+}
+impl script_opcode_id {
+    pub const OPCODE_MAIN_ENTER_TRAINING2: script_opcode_id = script_opcode_id(146);
+}
+impl script_opcode_id {
+    pub const OPCODE_MAIN_SET_GROUND: script_opcode_id = script_opcode_id(147);
+}
+impl script_opcode_id {
+    pub const OPCODE_ME_PLAY: script_opcode_id = script_opcode_id(148);
+}
+impl script_opcode_id {
+    pub const OPCODE_ME_STOP: script_opcode_id = script_opcode_id(149);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_CLOSE: script_opcode_id = script_opcode_id(150);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_CLOSE_ENFORCE: script_opcode_id = script_opcode_id(151);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_EXPLANATION: script_opcode_id = script_opcode_id(152);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_FACE_POSITION_OFFSET: script_opcode_id = script_opcode_id(153);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_IMITATION_SOUND: script_opcode_id = script_opcode_id(154);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_KEY_WAIT: script_opcode_id = script_opcode_id(155);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_MAIL: script_opcode_id = script_opcode_id(156);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_MENU: script_opcode_id = script_opcode_id(157);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_MONOLOGUE: script_opcode_id = script_opcode_id(158);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_NARRATION: script_opcode_id = script_opcode_id(159);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_NOTICE: script_opcode_id = script_opcode_id(160);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_EMPTY_ACTOR: script_opcode_id = script_opcode_id(161);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_RESET_ACTOR: script_opcode_id = script_opcode_id(162);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SET_ACTOR: script_opcode_id = script_opcode_id(163);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SET_FACE: script_opcode_id = script_opcode_id(164);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SET_FACE_EMPTY: script_opcode_id = script_opcode_id(165);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SET_FACE_ONLY: script_opcode_id = script_opcode_id(166);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SET_FACE_POSITION: script_opcode_id = script_opcode_id(167);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SET_WAIT_MODE: script_opcode_id = script_opcode_id(168);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SPECIAL_TALK: script_opcode_id = script_opcode_id(169);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SWITCH_MENU: script_opcode_id = script_opcode_id(170);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SWITCH_MENU2: script_opcode_id = script_opcode_id(171);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SWITCH_MONOLOGUE: script_opcode_id = script_opcode_id(172);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_SWITCH_TALK: script_opcode_id = script_opcode_id(173);
+}
+impl script_opcode_id {
+    pub const OPCODE_MESSAGE_TALK: script_opcode_id = script_opcode_id(174);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE2_POSITION: script_opcode_id = script_opcode_id(175);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE2_POSITION_LIVES: script_opcode_id = script_opcode_id(176);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE2_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(177);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE2_POSITION_MARK: script_opcode_id = script_opcode_id(178);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE2_POSITION_OFFSET_VARIADIC: script_opcode_id = script_opcode_id(179);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE2_POSITION_OFFSET: script_opcode_id = script_opcode_id(180);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE2_POSITION_OFFSET_RANDOM: script_opcode_id = script_opcode_id(181);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE3_POSITION: script_opcode_id = script_opcode_id(182);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE3_POSITION_LIVES: script_opcode_id = script_opcode_id(183);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE3_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(184);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE3_POSITION_MARK: script_opcode_id = script_opcode_id(185);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE3_POSITION_OFFSET_VARIADIC: script_opcode_id = script_opcode_id(186);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE3_POSITION_OFFSET: script_opcode_id = script_opcode_id(187);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE3_POSITION_OFFSET_RANDOM: script_opcode_id = script_opcode_id(188);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_DIRECTION: script_opcode_id = script_opcode_id(189);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_HEIGHT: script_opcode_id = script_opcode_id(190);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_POSITION: script_opcode_id = script_opcode_id(191);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_POSITION_LIVES: script_opcode_id = script_opcode_id(192);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_POSITION_LIVES_TIME: script_opcode_id = script_opcode_id(193);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(194);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_POSITION_MARK: script_opcode_id = script_opcode_id(195);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_POSITION_MARK_TIME: script_opcode_id = script_opcode_id(196);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_POSITION_OFFSET_VARIADIC: script_opcode_id = script_opcode_id(197);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_POSITION_OFFSET: script_opcode_id = script_opcode_id(198);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_SPECIAL: script_opcode_id = script_opcode_id(199);
+}
+impl script_opcode_id {
+    pub const OPCODE_MOVE_TURN: script_opcode_id = script_opcode_id(200);
+}
+impl script_opcode_id {
+    pub const OPCODE_OBJECT: script_opcode_id = script_opcode_id(201);
+}
+impl script_opcode_id {
+    pub const OPCODE_PAUSE_EFFECT: script_opcode_id = script_opcode_id(202);
+}
+impl script_opcode_id {
+    pub const OPCODE_PERFORMER: script_opcode_id = script_opcode_id(203);
+}
+impl script_opcode_id {
+    pub const OPCODE_PROCESS_SPECIAL: script_opcode_id = script_opcode_id(204);
+}
+impl script_opcode_id {
+    pub const OPCODE_PURSUE_TURN_LIVES: script_opcode_id = script_opcode_id(205);
+}
+impl script_opcode_id {
+    pub const OPCODE_PURSUE_TURN_LIVES2: script_opcode_id = script_opcode_id(206);
+}
+impl script_opcode_id {
+    pub const OPCODE_RESET_ATTRIBUTE: script_opcode_id = script_opcode_id(207);
+}
+impl script_opcode_id {
+    pub const OPCODE_RESET_FUNCTION_ATTRIBUTE: script_opcode_id = script_opcode_id(208);
+}
+impl script_opcode_id {
+    pub const OPCODE_RESET_HIT_ATTRIBUTE: script_opcode_id = script_opcode_id(209);
+}
+impl script_opcode_id {
+    pub const OPCODE_RESET_OUTPUT_ATTRIBUTE: script_opcode_id = script_opcode_id(210);
+}
+impl script_opcode_id {
+    pub const OPCODE_RESET_REPLY_ATTRIBUTE: script_opcode_id = script_opcode_id(211);
+}
+impl script_opcode_id {
+    pub const OPCODE_RESUME_EFFECT: script_opcode_id = script_opcode_id(212);
+}
+impl script_opcode_id {
+    pub const OPCODE_RETURN: script_opcode_id = script_opcode_id(213);
+}
+impl script_opcode_id {
+    pub const OPCODE_SAVE_POSITION: script_opcode_id = script_opcode_id(214);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_FADE_CHANGE: script_opcode_id = script_opcode_id(215);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_FADE_CHANGE_ALL: script_opcode_id = script_opcode_id(216);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_FADE_IN: script_opcode_id = script_opcode_id(217);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_FADE_IN_ALL: script_opcode_id = script_opcode_id(218);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_FADE_OUT: script_opcode_id = script_opcode_id(219);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_FADE_OUT_ALL: script_opcode_id = script_opcode_id(220);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_FLUSH_CHANGE: script_opcode_id = script_opcode_id(221);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_FLUSH_IN: script_opcode_id = script_opcode_id(222);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_FLUSH_OUT: script_opcode_id = script_opcode_id(223);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_WHITE_CHANGE: script_opcode_id = script_opcode_id(224);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_WHITE_CHANGE_ALL: script_opcode_id = script_opcode_id(225);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_WHITE_IN: script_opcode_id = script_opcode_id(226);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_WHITE_IN_ALL: script_opcode_id = script_opcode_id(227);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_WHITE_OUT: script_opcode_id = script_opcode_id(228);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN_WHITE_OUT_ALL: script_opcode_id = script_opcode_id(229);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_FADE_CHANGE: script_opcode_id = script_opcode_id(230);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_FADE_CHANGE_ALL: script_opcode_id = script_opcode_id(231);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_FADE_IN: script_opcode_id = script_opcode_id(232);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_FADE_IN_ALL: script_opcode_id = script_opcode_id(233);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_FADE_OUT: script_opcode_id = script_opcode_id(234);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_FADE_OUT_ALL: script_opcode_id = script_opcode_id(235);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_FLUSH_CHANGE: script_opcode_id = script_opcode_id(236);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_FLUSH_IN: script_opcode_id = script_opcode_id(237);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_FLUSH_OUT: script_opcode_id = script_opcode_id(238);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_WHITE_CHANGE: script_opcode_id = script_opcode_id(239);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_WHITE_CHANGE_ALL: script_opcode_id = script_opcode_id(240);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_WHITE_IN: script_opcode_id = script_opcode_id(241);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_WHITE_IN_ALL: script_opcode_id = script_opcode_id(242);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_WHITE_OUT: script_opcode_id = script_opcode_id(243);
+}
+impl script_opcode_id {
+    pub const OPCODE_SCREEN2_WHITE_OUT_ALL: script_opcode_id = script_opcode_id(244);
+}
+impl script_opcode_id {
+    pub const OPCODE_SE_CHANGE_PAN: script_opcode_id = script_opcode_id(245);
+}
+impl script_opcode_id {
+    pub const OPCODE_SE_CHANGE_VOLUME: script_opcode_id = script_opcode_id(246);
+}
+impl script_opcode_id {
+    pub const OPCODE_SE_FADE_OUT: script_opcode_id = script_opcode_id(247);
+}
+impl script_opcode_id {
+    pub const OPCODE_SE_PLAY: script_opcode_id = script_opcode_id(248);
+}
+impl script_opcode_id {
+    pub const OPCODE_SE_PLAY_FULL: script_opcode_id = script_opcode_id(249);
+}
+impl script_opcode_id {
+    pub const OPCODE_SE_PLAY_PAN: script_opcode_id = script_opcode_id(250);
+}
+impl script_opcode_id {
+    pub const OPCODE_SE_PLAY_VOLUME: script_opcode_id = script_opcode_id(251);
+}
+impl script_opcode_id {
+    pub const OPCODE_SE_STOP: script_opcode_id = script_opcode_id(252);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_ANIMATION: script_opcode_id = script_opcode_id(253);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_ATTRIBUTE: script_opcode_id = script_opcode_id(254);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_BLINK: script_opcode_id = script_opcode_id(255);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_DIRECTION: script_opcode_id = script_opcode_id(256);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_DIRECTION_LIVES: script_opcode_id = script_opcode_id(257);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_EFFECT: script_opcode_id = script_opcode_id(258);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_FUNCTION_ATTRIBUTE: script_opcode_id = script_opcode_id(259);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_HEIGHT: script_opcode_id = script_opcode_id(260);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_HIT_ATTRIBUTE: script_opcode_id = script_opcode_id(261);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_MOVE_RANGE: script_opcode_id = script_opcode_id(262);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_OUTPUT_ATTRIBUTE: script_opcode_id = script_opcode_id(263);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_POSITION: script_opcode_id = script_opcode_id(264);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_POSITION_INITIAL: script_opcode_id = script_opcode_id(265);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_POSITION_LIVES: script_opcode_id = script_opcode_id(266);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_POSITION_MARK: script_opcode_id = script_opcode_id(267);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_POSITION_OFFSET: script_opcode_id = script_opcode_id(268);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_POSITION_OFFSET_RANDOM: script_opcode_id = script_opcode_id(269);
+}
+impl script_opcode_id {
+    pub const OPCODE_SET_REPLY_ATTRIBUTE: script_opcode_id = script_opcode_id(270);
+}
+impl script_opcode_id {
+    pub const OPCODE_SETUP_OUTPUT_ATTRIBUTE_AND_ANIMATION: script_opcode_id = script_opcode_id(271);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE2_POSITION: script_opcode_id = script_opcode_id(272);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE2_POSITION_LIVES: script_opcode_id = script_opcode_id(273);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE2_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(274);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE2_POSITION_MARK: script_opcode_id = script_opcode_id(275);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE2_POSITION_OFFSET_VARIADIC: script_opcode_id = script_opcode_id(276);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE2_POSITION_OFFSET: script_opcode_id = script_opcode_id(277);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE2_POSITION_OFFSET_RANDOM: script_opcode_id = script_opcode_id(278);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE3_POSITION: script_opcode_id = script_opcode_id(279);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE3_POSITION_LIVES: script_opcode_id = script_opcode_id(280);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE3_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(281);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE3_POSITION_MARK: script_opcode_id = script_opcode_id(282);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE3_POSITION_OFFSET_VARIADIC: script_opcode_id = script_opcode_id(283);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE3_POSITION_OFFSET: script_opcode_id = script_opcode_id(284);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE3_POSITION_OFFSET_RANDOM: script_opcode_id = script_opcode_id(285);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE_HEIGHT: script_opcode_id = script_opcode_id(286);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE_POSITION: script_opcode_id = script_opcode_id(287);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE_POSITION_LIVES: script_opcode_id = script_opcode_id(288);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE_POSITION_LIVES_TIME: script_opcode_id = script_opcode_id(289);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE_POSITION_MARK_VARIADIC: script_opcode_id = script_opcode_id(290);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE_POSITION_MARK: script_opcode_id = script_opcode_id(291);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE_POSITION_MARK_TIME: script_opcode_id = script_opcode_id(292);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE_POSITION_OFFSET_VARIADIC: script_opcode_id = script_opcode_id(293);
+}
+impl script_opcode_id {
+    pub const OPCODE_SLIDE_POSITION_OFFSET: script_opcode_id = script_opcode_id(294);
+}
+impl script_opcode_id {
+    pub const OPCODE_SOUND_FADE_OUT: script_opcode_id = script_opcode_id(295);
+}
+impl script_opcode_id {
+    pub const OPCODE_SOUND_STOP: script_opcode_id = script_opcode_id(296);
+}
+impl script_opcode_id {
+    pub const OPCODE_STOP_ANIMATION: script_opcode_id = script_opcode_id(297);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_ACTING: script_opcode_id = script_opcode_id(298);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_ACTING_INVISIBLE: script_opcode_id = script_opcode_id(299);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_ACTING: script_opcode_id = script_opcode_id(300);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_ACTING_SUB: script_opcode_id = script_opcode_id(301);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_COMMON: script_opcode_id = script_opcode_id(302);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_ENTER: script_opcode_id = script_opcode_id(303);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_STATION: script_opcode_id = script_opcode_id(304);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_STATION_COMMON: script_opcode_id = script_opcode_id(305);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_STATION_COMMON_SUB: script_opcode_id =
+        script_opcode_id(306);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_STATION_SUB: script_opcode_id = script_opcode_id(307);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_EXPORT: script_opcode_id = script_opcode_id(308);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_EXECUTE_EXPORT_SUB: script_opcode_id = script_opcode_id(309);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_LOAD_STATION: script_opcode_id = script_opcode_id(310);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_REMOVE: script_opcode_id = script_opcode_id(311);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_REMOVE_ACTING: script_opcode_id = script_opcode_id(312);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_REMOVE_COMMON: script_opcode_id = script_opcode_id(313);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_SPECIAL_ACTING: script_opcode_id = script_opcode_id(314);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_STATION: script_opcode_id = script_opcode_id(315);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_STATION_COMMON: script_opcode_id = script_opcode_id(316);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION_SUSPEND: script_opcode_id = script_opcode_id(317);
+}
+impl script_opcode_id {
+    pub const OPCODE_SUPERVISION2_SPECIAL_ACTING: script_opcode_id = script_opcode_id(318);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH: script_opcode_id = script_opcode_id(319);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_DIRECTION: script_opcode_id = script_opcode_id(320);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_DIRECTION_LIVES: script_opcode_id = script_opcode_id(321);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_DIRECTION_LIVES2: script_opcode_id = script_opcode_id(322);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_DIRECTION_MARK: script_opcode_id = script_opcode_id(323);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_DUNGEON_MODE: script_opcode_id = script_opcode_id(324);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_LIVES: script_opcode_id = script_opcode_id(325);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_RANDOM: script_opcode_id = script_opcode_id(326);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_SCENARIO: script_opcode_id = script_opcode_id(327);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_SCENARIO_LEVEL: script_opcode_id = script_opcode_id(328);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_SECTOR: script_opcode_id = script_opcode_id(329);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_VALUE: script_opcode_id = script_opcode_id(330);
+}
+impl script_opcode_id {
+    pub const OPCODE_SWITCH_VARIABLE: script_opcode_id = script_opcode_id(331);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN2_DIRECTION: script_opcode_id = script_opcode_id(332);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN2_DIRECTION_LIVES: script_opcode_id = script_opcode_id(333);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN2_DIRECTION_LIVES2: script_opcode_id = script_opcode_id(334);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN2_DIRECTION_MARK: script_opcode_id = script_opcode_id(335);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN2_DIRECTION_TURN: script_opcode_id = script_opcode_id(336);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN3: script_opcode_id = script_opcode_id(337);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN_DIRECTION: script_opcode_id = script_opcode_id(338);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN_DIRECTION_LIVES: script_opcode_id = script_opcode_id(339);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN_DIRECTION_LIVES2: script_opcode_id = script_opcode_id(340);
+}
+impl script_opcode_id {
+    pub const OPCODE_TURN_DIRECTION_MARK: script_opcode_id = script_opcode_id(341);
+}
+impl script_opcode_id {
+    pub const OPCODE_UNLOCK: script_opcode_id = script_opcode_id(342);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT: script_opcode_id = script_opcode_id(343);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_ANIMATION: script_opcode_id = script_opcode_id(344);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_BACK_EFFECT: script_opcode_id = script_opcode_id(345);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_BACK2_EFFECT: script_opcode_id = script_opcode_id(346);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_BGM: script_opcode_id = script_opcode_id(347);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_BGM2: script_opcode_id = script_opcode_id(348);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_BGM_SIGNAL: script_opcode_id = script_opcode_id(349);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_EFFECT: script_opcode_id = script_opcode_id(350);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_END_ANIMATION: script_opcode_id = script_opcode_id(351);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_EXECUTE_LIVES: script_opcode_id = script_opcode_id(352);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_EXECUTE_OBJECT: script_opcode_id = script_opcode_id(353);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_EXECUTE_PERFORMER: script_opcode_id = script_opcode_id(354);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_FADE_IN: script_opcode_id = script_opcode_id(355);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_LOCK_LIVES: script_opcode_id = script_opcode_id(356);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_LOCK_OBJECT: script_opcode_id = script_opcode_id(357);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_LOCK_PERFORMER: script_opcode_id = script_opcode_id(358);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_LOCK_SUPERVISION: script_opcode_id = script_opcode_id(359);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_ME: script_opcode_id = script_opcode_id(360);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_MOVE_CAMERA: script_opcode_id = script_opcode_id(361);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_MOVE_CAMERA2: script_opcode_id = script_opcode_id(362);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_RANDOM: script_opcode_id = script_opcode_id(363);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_SCREEN_FADE: script_opcode_id = script_opcode_id(364);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_SCREEN_FADE_ALL: script_opcode_id = script_opcode_id(365);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_SCREEN2_FADE: script_opcode_id = script_opcode_id(366);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_SE: script_opcode_id = script_opcode_id(367);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_SPECIAL_ACTING: script_opcode_id = script_opcode_id(368);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_SUB_SCREEN: script_opcode_id = script_opcode_id(369);
+}
+impl script_opcode_id {
+    pub const OPCODE_WAIT_SUB_SPECIAL_ACTING: script_opcode_id = script_opcode_id(370);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_BLINK_MARK: script_opcode_id = script_opcode_id(371);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_CHANGE_LEVEL: script_opcode_id = script_opcode_id(372);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_DELETE_ARROW: script_opcode_id = script_opcode_id(373);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_MOVE_CAMERA: script_opcode_id = script_opcode_id(374);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_OFF_MESSAGE: script_opcode_id = script_opcode_id(375);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_SET_ARROW: script_opcode_id = script_opcode_id(376);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_SET_CAMERA: script_opcode_id = script_opcode_id(377);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_SET_LEVEL: script_opcode_id = script_opcode_id(378);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_SET_MARK: script_opcode_id = script_opcode_id(379);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_SET_MESSAGE: script_opcode_id = script_opcode_id(380);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_SET_MESSAGE_PLACE: script_opcode_id = script_opcode_id(381);
+}
+impl script_opcode_id {
+    pub const OPCODE_WORLDMAP_SET_MODE: script_opcode_id = script_opcode_id(382);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct script_opcode_id(pub crate::ctypes::c_uint);
+impl special_process_id {
+    pub const SPECIAL_PROC_NONE: special_process_id = special_process_id(0);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_RETURN_DUNGEON: special_process_id = special_process_id(1);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_INIT_MAIN_TEAM_AFTER_QUIZ: special_process_id = special_process_id(2);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x3: special_process_id = special_process_id(3);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x4: special_process_id = special_process_id(4);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_NEXT_DAY: special_process_id = special_process_id(5);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x6: special_process_id = special_process_id(6);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_DUNGEON_HAD_REQUEST_DONE: special_process_id = special_process_id(7);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x8: special_process_id = special_process_id(8);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x9: special_process_id = special_process_id(9);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_GET_SOS_MAIL_COUNT: special_process_id = special_process_id(10);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_GET_SOS_MISSION_RETRIES_LEFT: special_process_id =
+        special_process_id(11);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_INIT_RANDOM_NPC_JOBS: special_process_id = special_process_id(12);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_GET_RANDOM_NPC_JOB_TYPE: special_process_id = special_process_id(13);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_GET_RANDOM_NPC_JOB_SUBTYPE: special_process_id = special_process_id(14);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_GET_RANDOM_NPC_JOB_STILL_AVAILABLE: special_process_id =
+        special_process_id(15);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_ACCEPT_RANDOM_NPC_JOB: special_process_id = special_process_id(16);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x11: special_process_id = special_process_id(17);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x12: special_process_id = special_process_id(18);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_KEY_WAIT_PRESS: special_process_id = special_process_id(19);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_KEY_WAIT_INIT: special_process_id = special_process_id(20);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_KEY_WAIT_CHECK: special_process_id = special_process_id(21);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x16: special_process_id = special_process_id(22);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x17: special_process_id = special_process_id(23);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x18: special_process_id = special_process_id(24);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_JUMP_TO_TITLE_SCREEN: special_process_id = special_process_id(25);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x1A: special_process_id = special_process_id(26);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_RETURN_TO_TITLE_SCREEN: special_process_id = special_process_id(27);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_IS_RECRUITABLE_IN_TEAM: special_process_id = special_process_id(28);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_GET_RECRUITABLE_CURRENT_LEVEL: special_process_id =
+        special_process_id(29);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_RECRUITABLE_CAN_ADD: special_process_id = special_process_id(30);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_ADD_RECRUITABLE_TO_TEAM: special_process_id = special_process_id(31);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_COUNT_ITEM_TYPE_IN_BAG: special_process_id = special_process_id(32);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_COUNT_TABLE_ITEM_TYPE_IN_BAG: special_process_id =
+        special_process_id(33);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_COUNT_ITEM_TYPE_IN_STORAGE: special_process_id = special_process_id(34);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_COUNT_TABLE_ITEM_TYPE_IN_STORAGE: special_process_id =
+        special_process_id(35);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_ADD_ITEM_TO_BAG: special_process_id = special_process_id(36);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_ADD_TABLE_ITEM_TO_BAG: special_process_id = special_process_id(37);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_ADD_ITEM_TO_STORAGE: special_process_id = special_process_id(38);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_ADD_TABLE_ITEM_TO_STORAGE: special_process_id = special_process_id(39);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_REMOVE_ITEMS_TYPE_IN_BAG: special_process_id = special_process_id(40);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_REMOVE_TABLE_ITEMS_TYPE_IN_BAG: special_process_id =
+        special_process_id(41);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x2A: special_process_id = special_process_id(42);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x2B: special_process_id = special_process_id(43);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_PREPARE_MENU_ACCEPT_TEAM_MEMBER: special_process_id =
+        special_process_id(44);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_GET_HERO_KIND: special_process_id = special_process_id(45);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_GET_PARTNER_KIND: special_process_id = special_process_id(46);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_IS_TEAM_SETUP_HERO_AND_PARTNER_ONLY: special_process_id =
+        special_process_id(47);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_IS_TEAM_SETUP_PARTNER_AND_HERO_ONLY: special_process_id =
+        special_process_id(48);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_IS_TEAM_SETUP_CONTAINS_PARTNER_AND_HERO: special_process_id =
+        special_process_id(49);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_IS_TEAM_SETUP_SOLO: special_process_id = special_process_id(50);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_SET_TEAM_SETUP_HERO_AND_PARTNER_ONLY: special_process_id =
+        special_process_id(51);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_SET_TEAM_SETUP_HERO_ONLY: special_process_id = special_process_id(52);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x35: special_process_id = special_process_id(53);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_STATUS_UPDATE: special_process_id = special_process_id(54);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x37: special_process_id = special_process_id(55);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_IS_BAG_FULL: special_process_id = special_process_id(56);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x39: special_process_id = special_process_id(57);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x3A: special_process_id = special_process_id(58);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x3B: special_process_id = special_process_id(59);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_SEND_SKY_GIFT_TO_GUILDMASTER: special_process_id =
+        special_process_id(60);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x3D: special_process_id = special_process_id(61);
+}
+impl special_process_id {
+    pub const SPECIAL_PROC_0x3E: special_process_id = special_process_id(62);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct special_process_id(pub crate::ctypes::c_uint);
 pub mod common_routine_id {
     pub type Type = crate::ctypes::c_uint;
     pub const ROUTINE_END_TALK: Type = 0;
@@ -49828,7 +57621,7 @@ extern "C" {
     pub fn FatalError(prog_pos: prog_pos_info, fmt: *const crate::ctypes::c_char, ...);
 }
 extern "C" {
-    pub fn IsAuraBow(item_id: item_id::Type) -> bool_;
+    pub fn IsAuraBow(item_id: item_id) -> bool_;
 }
 extern "C" {
     pub fn SprintfStatic(
@@ -49844,7 +57637,7 @@ extern "C" {
     pub fn IsBagFull() -> bool_;
 }
 extern "C" {
-    pub fn CountItemTypeInBag(arg1: item_id::Type) -> crate::ctypes::c_int;
+    pub fn CountItemTypeInBag(arg1: item_id) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn AddItemToBag(item: *mut owned_item) -> bool_;
@@ -49865,11 +57658,11 @@ extern "C" {
     pub fn SetMoneyStored(amount: crate::ctypes::c_int);
 }
 extern "C" {
-    pub fn GetExclusiveItemOffset(item_id: item_id::Type) -> crate::ctypes::c_int;
+    pub fn GetExclusiveItemOffset(item_id: item_id) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn ApplyExclusiveItemStatBoosts(
-        item_id: item_id::Type,
+        item_id: item_id,
         atk_boost: *mut u8,
         sp_atk_boost: *mut u8,
         def_boost: *mut u8,
@@ -49877,15 +57670,12 @@ extern "C" {
     );
 }
 extern "C" {
-    pub fn SetExclusiveItemEffect(
-        effect_flags: *mut u32,
-        effect_id: exclusive_item_effect_id::Type,
-    );
+    pub fn SetExclusiveItemEffect(effect_flags: *mut u32, effect_id: exclusive_item_effect_id);
 }
 extern "C" {
     pub fn ExclusiveItemEffectFlagTest(
         effect_flags: *mut u32,
-        effect_id: exclusive_item_effect_id::Type,
+        effect_id: exclusive_item_effect_id,
     ) -> bool_;
 }
 extern "C" {
@@ -49903,7 +57693,7 @@ extern "C" {
     pub fn GetMoveTargetAndRange(move_: *mut move_, is_ai: bool_) -> move_target_and_range;
 }
 extern "C" {
-    pub fn GetMoveType(move_: *mut move_) -> type_id::Type;
+    pub fn GetMoveType(move_: *mut move_) -> type_id;
 }
 extern "C" {
     pub fn GetMoveBasePower(move_: *mut move_) -> crate::ctypes::c_int;
@@ -49918,13 +57708,13 @@ extern "C" {
     pub fn GetMoveCritChance(move_: *mut move_) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn IsRecoilMove(move_id: move_id::Type) -> bool_;
+    pub fn IsRecoilMove(move_id: move_id) -> bool_;
 }
 extern "C" {
-    pub fn IsPunchMove(move_id: move_id::Type) -> bool_;
+    pub fn IsPunchMove(move_id: move_id) -> bool_;
 }
 extern "C" {
-    pub fn GetMoveCategory(move_id: move_id::Type) -> move_category::Type;
+    pub fn GetMoveCategory(move_id: move_id) -> move_category::Type;
 }
 extern "C" {
     pub fn LoadWteFromRom(handle: *mut wte_handle, path: *const crate::ctypes::c_char, flags: u32);
@@ -50011,39 +57801,39 @@ extern "C" {
     pub fn InitEventFlagScriptVars();
 }
 extern "C" {
-    pub fn ZinitScriptVariable(local_var_vals: *mut crate::ctypes::c_void, id: script_var_id::Type);
+    pub fn ZinitScriptVariable(local_var_vals: *mut crate::ctypes::c_void, id: script_var_id);
 }
 extern "C" {
     pub fn LoadScriptVariableRaw(
         var: *mut script_var_desc,
         local_var_vals: *mut crate::ctypes::c_void,
-        id: script_var_id::Type,
+        id: script_var_id,
     );
 }
 extern "C" {
     pub fn LoadScriptVariableValue(
         local_var_vals: *mut crate::ctypes::c_void,
-        id: script_var_id::Type,
+        id: script_var_id,
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn LoadScriptVariableValueAtIndex(
         local_var_vals: *mut crate::ctypes::c_void,
-        id: script_var_id::Type,
+        id: script_var_id,
         idx: crate::ctypes::c_int,
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn SaveScriptVariableValue(
         local_var_vals: *mut crate::ctypes::c_void,
-        id: script_var_id::Type,
+        id: script_var_id,
         val: crate::ctypes::c_int,
     );
 }
 extern "C" {
     pub fn SaveScriptVariableValueAtIndex(
         local_var_vals: *mut crate::ctypes::c_void,
-        id: script_var_id::Type,
+        id: script_var_id,
         idx: crate::ctypes::c_int,
         val: crate::ctypes::c_int,
     );
@@ -50051,28 +57841,24 @@ extern "C" {
 extern "C" {
     pub fn LoadScriptVariableValueSum(
         local_var_vals: *mut crate::ctypes::c_void,
-        id: script_var_id::Type,
+        id: script_var_id,
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn LoadScriptVariableValueBytes(
-        id: script_var_id::Type,
+        id: script_var_id,
         dest: *mut crate::ctypes::c_void,
         n: u32,
     );
 }
 extern "C" {
-    pub fn SaveScriptVariableValueBytes(
-        id: script_var_id::Type,
-        src: *mut crate::ctypes::c_void,
-        n: u32,
-    );
+    pub fn SaveScriptVariableValueBytes(id: script_var_id, src: *mut crate::ctypes::c_void, n: u32);
 }
 extern "C" {
     pub fn ScriptVariablesEqual(
         local_var_vals: *mut crate::ctypes::c_void,
-        id1: script_var_id::Type,
-        id2: script_var_id::Type,
+        id1: script_var_id,
+        id2: script_var_id,
     ) -> bool_;
 }
 extern "C" {
@@ -50088,7 +57874,7 @@ extern "C" {
     pub fn InitScenarioScriptVars();
 }
 extern "C" {
-    pub fn SetScenarioScriptVar(id: script_var_id::Type, val0: u8, val1: u8);
+    pub fn SetScenarioScriptVar(id: script_var_id, val0: u8, val1: u8);
 }
 extern "C" {
     pub fn GetSpecialEpisodeType() -> crate::ctypes::c_int;
@@ -50172,10 +57958,10 @@ extern "C" {
     pub fn GetVictoriesOnOneFloor() -> u32;
 }
 extern "C" {
-    pub fn SetPokemonJoined(monster_id: monster_id::Type);
+    pub fn SetPokemonJoined(monster_id: monster_id);
 }
 extern "C" {
-    pub fn SetPokemonBattled(monster_id: monster_id::Type);
+    pub fn SetPokemonBattled(monster_id: monster_id);
 }
 extern "C" {
     pub fn GetNbPokemonBattled() -> u32;
@@ -50208,7 +57994,7 @@ extern "C" {
     pub fn ComputeSpecialCounters();
 }
 extern "C" {
-    pub fn RecruitSpecialPokemonLog(monster_id: monster_id::Type);
+    pub fn RecruitSpecialPokemonLog(monster_id: monster_id);
 }
 extern "C" {
     pub fn IncrementNbFainted();
@@ -50217,7 +58003,7 @@ extern "C" {
     pub fn GetNbFainted() -> u32;
 }
 extern "C" {
-    pub fn SetItemAcquired(item_id: item_id::Type);
+    pub fn SetItemAcquired(item_id: item_id);
 }
 extern "C" {
     pub fn GetNbItemAcquired() -> u32;
@@ -50253,51 +58039,51 @@ extern "C" {
     pub fn ShouldCauseGameOverOnFaint(joined_at: dungeon_id_8) -> bool_;
 }
 extern "C" {
-    pub fn GetMonsterGender(monster_id: monster_id::Type) -> u8;
+    pub fn GetMonsterGender(monster_id: monster_id) -> u8;
 }
 extern "C" {
-    pub fn GetSpriteSize(monster_id: monster_id::Type) -> u8;
+    pub fn GetSpriteSize(monster_id: monster_id) -> u8;
 }
 extern "C" {
-    pub fn GetSpriteFileSize(monster_id: monster_id::Type) -> u8;
+    pub fn GetSpriteFileSize(monster_id: monster_id) -> u8;
 }
 extern "C" {
-    pub fn GetMonsterPreEvolution(monster_id: monster_id::Type) -> monster_id::Type;
+    pub fn GetMonsterPreEvolution(monster_id: monster_id) -> monster_id;
 }
 extern "C" {
     pub fn GetEvolutions(
-        monster_id: monster_id::Type,
-        output_list: *mut monster_id::Type,
+        monster_id: monster_id,
+        output_list: *mut monster_id,
         skip_sprite_size_check: bool_,
         skip_shedinja_check: bool_,
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn GetMonsterIdFromSpawnEntry(arg1: *mut monster_spawn_entry) -> monster_id::Type;
+    pub fn GetMonsterIdFromSpawnEntry(arg1: *mut monster_spawn_entry) -> monster_id;
 }
 extern "C" {
-    pub fn GetMonsterGenderVeneer(monster_id: monster_id::Type) -> u8;
+    pub fn GetMonsterGenderVeneer(monster_id: monster_id) -> u8;
 }
 extern "C" {
     pub fn GetMonsterLevelFromSpawnEntry(entry: *mut monster_spawn_entry) -> u8;
 }
 extern "C" {
-    pub fn IsUnown(monster_id: monster_id::Type) -> bool_;
+    pub fn IsUnown(monster_id: monster_id) -> bool_;
 }
 extern "C" {
-    pub fn IsShaymin(monster_id: monster_id::Type) -> bool_;
+    pub fn IsShaymin(monster_id: monster_id) -> bool_;
 }
 extern "C" {
-    pub fn IsCastform(monster_id: monster_id::Type) -> bool_;
+    pub fn IsCastform(monster_id: monster_id) -> bool_;
 }
 extern "C" {
-    pub fn IsCherrim(monster_id: monster_id::Type) -> bool_;
+    pub fn IsCherrim(monster_id: monster_id) -> bool_;
 }
 extern "C" {
-    pub fn IsDeoxys(monster_id: monster_id::Type) -> bool_;
+    pub fn IsDeoxys(monster_id: monster_id) -> bool_;
 }
 extern "C" {
-    pub fn IsMonsterOnTeam(monster_id: monster_id::Type, param_2: crate::ctypes::c_int) -> bool_;
+    pub fn IsMonsterOnTeam(monster_id: monster_id, param_2: crate::ctypes::c_int) -> bool_;
 }
 extern "C" {
     pub fn GetTeamMemberData(index: u8) -> *mut team_member;
@@ -50312,7 +58098,7 @@ extern "C" {
     pub fn GetPartyMembers(party_members: *mut u16) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn IqSkillFlagTest(iq_skill_flags: *mut u32, iq_id: iq_skill_id::Type) -> bool_;
+    pub fn IqSkillFlagTest(iq_skill_flags: *mut u32, iq_id: iq_skill_id) -> bool_;
 }
 extern "C" {
     pub fn GetExplorerMazeMonster(entry_number: u8) -> *mut ground_monster;
@@ -50532,13 +58318,13 @@ extern "C" {
 extern "C" {
     pub fn ScriptSpecialProcessCall(
         param_1: *mut undefined4,
-        id: special_process_id::Type,
+        id: special_process_id,
         arg1: crate::ctypes::c_int,
         arg2: crate::ctypes::c_int,
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn GetSpecialRecruitmentSpecies(idx: crate::ctypes::c_int) -> monster_id::Type;
+    pub fn GetSpecialRecruitmentSpecies(idx: crate::ctypes::c_int) -> monster_id;
 }
 extern "C" {
     pub fn PrepareMenuAcceptTeamMember(idx: crate::ctypes::c_int);
@@ -50635,19 +58421,19 @@ extern "C" {
     pub fn UpdateMapSurveyorFlag() -> bool_;
 }
 extern "C" {
-    pub fn ItemIsActive(entity: *mut entity, item_id: item_id::Type) -> bool_;
+    pub fn ItemIsActive(entity: *mut entity, item_id: item_id) -> bool_;
 }
 extern "C" {
-    pub fn IsOnMonsterSpawnList(monster_id: monster_id::Type) -> bool_;
+    pub fn IsOnMonsterSpawnList(monster_id: monster_id) -> bool_;
 }
 extern "C" {
     pub fn GetLeader() -> *mut entity;
 }
 extern "C" {
-    pub fn GetMonsterIdToSpawn(spawn_weight: crate::ctypes::c_int) -> monster_id::Type;
+    pub fn GetMonsterIdToSpawn(spawn_weight: crate::ctypes::c_int) -> monster_id;
 }
 extern "C" {
-    pub fn GetMonsterLevelToSpawn(monster_id: monster_id::Type) -> u8;
+    pub fn GetMonsterLevelToSpawn(monster_id: monster_id) -> u8;
 }
 extern "C" {
     pub fn TickStatusTurnCounter(counter: *mut u8) -> u8;
@@ -50726,7 +58512,7 @@ extern "C" {
     pub fn ResetDamageDesc(damage_desc: *mut undefined4);
 }
 extern "C" {
-    pub fn GetSpriteIndex(monster_id: monster_id::Type) -> u16;
+    pub fn GetSpriteIndex(monster_id: monster_id) -> u16;
 }
 extern "C" {
     pub fn FloorNumberIsEven() -> bool_;
@@ -50742,10 +58528,10 @@ extern "C" {
     );
 }
 extern "C" {
-    pub fn GetKecleonIdToSpawnByFloor() -> monster_id::Type;
+    pub fn GetKecleonIdToSpawnByFloor() -> monster_id;
 }
 extern "C" {
-    pub fn LoadMonsterSprite(monster_id: monster_id::Type, param_2: undefined);
+    pub fn LoadMonsterSprite(monster_id: monster_id, param_2: undefined);
 }
 extern "C" {
     pub fn TryActivateSlowStart();
@@ -50757,7 +58543,7 @@ extern "C" {
     pub fn DefenderAbilityIsActive(
         attacker: *mut entity,
         defender: *mut entity,
-        ability_id: ability_id::Type,
+        ability_id: ability_id,
         attacker_ability_enabled: bool_,
     ) -> bool_;
 }
@@ -50771,22 +58557,22 @@ extern "C" {
     pub fn RestorePpAllMovesSetFlags(entity: *mut entity);
 }
 extern "C" {
-    pub fn MewSpawnCheck(monster_id: monster_id::Type, fail_if_mew: bool_) -> bool_;
+    pub fn MewSpawnCheck(monster_id: monster_id, fail_if_mew: bool_) -> bool_;
 }
 extern "C" {
     pub fn ExclusiveItemEffectIsActive(
         entity: *mut entity,
-        effect_id: exclusive_item_effect_id::Type,
+        effect_id: exclusive_item_effect_id,
     ) -> bool_;
 }
 extern "C" {
-    pub fn GetTeamMemberWithIqSkill(iq_skill: iq_skill_id::Type) -> *mut entity;
+    pub fn GetTeamMemberWithIqSkill(iq_skill: iq_skill_id) -> *mut entity;
 }
 extern "C" {
-    pub fn TeamMemberHasEnabledIqSkill(iq_skill: iq_skill_id::Type) -> bool_;
+    pub fn TeamMemberHasEnabledIqSkill(iq_skill: iq_skill_id) -> bool_;
 }
 extern "C" {
-    pub fn TeamLeaderIqSkillIsEnabled(iq_skill: iq_skill_id::Type) -> bool_;
+    pub fn TeamLeaderIqSkillIsEnabled(iq_skill: iq_skill_id) -> bool_;
 }
 extern "C" {
     pub fn HasLowHealth(entity: *mut entity) -> bool_;
@@ -50808,9 +58594,9 @@ extern "C" {
 }
 extern "C" {
     pub fn InitTeamMember(
-        arg1: monster_id::Type,
-        type_1: type_id::Type,
-        type_2: type_id::Type,
+        arg1: monster_id,
+        type_1: type_id,
+        type_2: type_id,
         team_member_data: *mut team_member,
         param_5: undefined,
         param_6: undefined,
@@ -50838,19 +58624,19 @@ extern "C" {
     pub fn NoGastroAcidStatus(entity: *mut entity) -> bool_;
 }
 extern "C" {
-    pub fn AbilityIsActive(entity: *mut entity, ability_id: ability_id::Type) -> bool_;
+    pub fn AbilityIsActive(entity: *mut entity, ability_id: ability_id) -> bool_;
 }
 extern "C" {
     pub fn LevitateIsActive(entity: *mut entity) -> bool_;
 }
 extern "C" {
-    pub fn MonsterIsType(entity: *mut entity, type_id: type_id::Type) -> bool_;
+    pub fn MonsterIsType(entity: *mut entity, type_id: type_id) -> bool_;
 }
 extern "C" {
-    pub fn IqSkillIsEnabled(entity: *mut entity, iq_id: iq_skill_id::Type) -> bool_;
+    pub fn IqSkillIsEnabled(entity: *mut entity, iq_id: iq_skill_id) -> bool_;
 }
 extern "C" {
-    pub fn GetMoveTypeForMonster(entity: *mut entity, move_: *mut move_) -> type_id::Type;
+    pub fn GetMoveTypeForMonster(entity: *mut entity, move_: *mut move_) -> type_id;
 }
 extern "C" {
     pub fn GetMovePower(entity: *mut entity, move_: *mut move_) -> crate::ctypes::c_int;
@@ -50869,7 +58655,7 @@ extern "C" {
     pub fn EvolveMonster(
         monster: *mut entity,
         param_2: *mut undefined4,
-        new_monster_id: monster_id::Type,
+        new_monster_id: monster_id,
     );
 }
 extern "C" {
@@ -50899,19 +58685,19 @@ extern "C" {
         attacker: *mut entity,
         defender: *mut entity,
         target_type_idx: crate::ctypes::c_int,
-        attack_type: type_id::Type,
+        attack_type: type_id,
     ) -> type_matchup::Type;
 }
 extern "C" {
     pub fn CalcDamage(
         attacker: *mut entity,
         defender: *mut entity,
-        attack_type: type_id::Type,
+        attack_type: type_id,
         attack_power: crate::ctypes::c_int,
         crit_chance: crate::ctypes::c_int,
         damage_out: *mut damage_data,
         damage_mult_fp: crate::ctypes::c_int,
-        move_id: move_id::Type,
+        move_id: move_id,
         param_9: crate::ctypes::c_int,
     );
 }
@@ -50921,8 +58707,8 @@ extern "C" {
         fixed_damage: crate::ctypes::c_int,
         param_3: undefined4,
         damage_out: *mut damage_data,
-        move_id: move_id::Type,
-        attack_type: type_id::Type,
+        move_id: move_id,
+        attack_type: type_id,
         param_7: i16,
         message_type: undefined4,
         param_9: undefined4,
@@ -50936,7 +58722,7 @@ extern "C" {
         fixed_damage: crate::ctypes::c_int,
         param_4: undefined4,
         damage_out: *mut damage_data,
-        attack_type: type_id::Type,
+        attack_type: type_id,
         move_category: move_category::Type,
         param_8: i16,
         message_type: undefined4,
@@ -50951,7 +58737,7 @@ extern "C" {
         fixed_damage: crate::ctypes::c_int,
         param_4: undefined4,
         damage_out: *mut damage_data,
-        attack_type: type_id::Type,
+        attack_type: type_id,
         move_category: move_category::Type,
         param_8: i16,
         param_9: undefined4,
@@ -50966,7 +58752,7 @@ extern "C" {
         fixed_damage: crate::ctypes::c_int,
         param_4: undefined4,
         damage_out: *mut damage_data,
-        attack_type: type_id::Type,
+        attack_type: type_id,
         param_7: i16,
         param_8: undefined4,
         param_9: undefined4,
@@ -51322,7 +59108,7 @@ extern "C" {
     pub fn ApplyGummiBoostsDungeonMode(
         user: *mut entity,
         target: *mut entity,
-        gummi_type: type_id::Type,
+        gummi_type: type_id,
         random_stat_boost: crate::ctypes::c_int,
     );
 }
@@ -51330,7 +59116,7 @@ extern "C" {
     pub fn GetMaxPpWrapper(move_: *mut move_) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn MoveIsNotPhysical(move_id: move_id::Type) -> bool_;
+    pub fn MoveIsNotPhysical(move_id: move_id) -> bool_;
 }
 extern "C" {
     pub fn TryPounce(user: *mut entity, target: *mut entity, direction: direction_id::Type);
@@ -51378,7 +59164,7 @@ extern "C" {
         attacker: *mut entity,
         defender: *mut entity,
         move_: *mut move_,
-        item_id: item_id::Type,
+        item_id: item_id,
     ) -> bool_;
 }
 extern "C" {
@@ -51396,7 +59182,7 @@ extern "C" {
         defender: *mut entity,
         move_: *mut move_,
         damage_mult_fp: crate::ctypes::c_int,
-        item_id: item_id::Type,
+        item_id: item_id,
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
@@ -51518,11 +59304,11 @@ extern "C" {
     );
 }
 extern "C" {
-    pub fn IsNotFullFloorFixedRoom(fixed_room_id: fixed_room_id::Type) -> bool_;
+    pub fn IsNotFullFloorFixedRoom(fixed_room_id: fixed_room_id) -> bool_;
 }
 extern "C" {
     pub fn GenerateFixedRoom(
-        fixed_room_id: fixed_room_id::Type,
+        fixed_room_id: fixed_room_id,
         floor_props: *mut floor_properties,
     ) -> bool_;
 }
@@ -51737,7 +59523,7 @@ extern "C" {
     pub fn IsHiddenStairsFloor() -> bool_;
 }
 extern "C" {
-    pub fn HasHeldItem(entity: *mut entity, item_id: item_id::Type) -> bool_;
+    pub fn HasHeldItem(entity: *mut entity, item_id: item_id) -> bool_;
 }
 extern "C" {
     pub fn IsOutlawOrChallengeRequestFloor() -> bool_;
@@ -51773,13 +59559,13 @@ extern "C" {
     pub fn IsDestinationFloorWithFixedRoom() -> bool_;
 }
 extern "C" {
-    pub fn GetItemToRetrieve() -> item_id::Type;
+    pub fn GetItemToRetrieve() -> item_id;
 }
 extern "C" {
-    pub fn GetItemToDeliver() -> item_id::Type;
+    pub fn GetItemToDeliver() -> item_id;
 }
 extern "C" {
-    pub fn GetSpecialTargetItem() -> item_id::Type;
+    pub fn GetSpecialTargetItem() -> item_id;
 }
 extern "C" {
     pub fn IsDestinationFloorWithItem() -> bool_;
@@ -51791,10 +59577,10 @@ extern "C" {
     pub fn IsDestinationFloorWithFleeingOutlaw() -> bool_;
 }
 extern "C" {
-    pub fn GetMissionTargetEnemy() -> monster_id::Type;
+    pub fn GetMissionTargetEnemy() -> monster_id;
 }
 extern "C" {
-    pub fn GetMissionEnemyMinionGroup(i: crate::ctypes::c_int) -> monster_id::Type;
+    pub fn GetMissionEnemyMinionGroup(i: crate::ctypes::c_int) -> monster_id;
 }
 extern "C" {
     pub fn FloorHasMissionMonster(mission_dst: *mut mission_destination_info) -> bool_;
