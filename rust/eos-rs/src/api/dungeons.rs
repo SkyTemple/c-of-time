@@ -1,5 +1,6 @@
 //! Structs and functions to interact with the data of dungeons, dungeon groups and fixed rooms
 //! in a general context.
+use crate::api::overlay::OverlayLoadLease;
 use crate::ffi;
 
 /// A dungeon ID with associated methods to get metadata.
@@ -15,12 +16,12 @@ impl DungeonGroupId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing dungeon group),
     /// otherwise this is UB.
-    pub unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn get(id: u32) -> Self {
         Self(id)
     }
 
     /// Returns the ID of this dungeon group.
-    pub fn id(&self) -> u32 {
+    pub const fn id(&self) -> u32 {
         self.0
     }
 }
@@ -38,13 +39,47 @@ impl DungeonId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing dungeon),
     /// otherwise this is UB.
-    pub unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn get(id: u32) -> Self {
         Self(id)
     }
 
     /// Returns the ID of this dungeon.
-    pub fn id(&self) -> u32 {
+    pub const fn id(&self) -> u32 {
         self.0
+    }
+
+    /// Returns whether this dungeon is considered as going upward or not
+    pub fn goes_up(&self) -> bool {
+        unsafe { ffi::DungeonGoesUp(*self) > 0 }
+    }
+
+    /// Returns the maximum rescue attempts allowed in this dungeon,
+    /// or -1 if rescues are disabled.
+    pub fn get_max_rescue_attempts(&self) -> i8 {
+        unsafe { ffi::GetMaxRescueAttempts(*self) }
+    }
+
+    /// Returns whether this dungeon as a joined at location is between
+    /// [`DungeonId::DUNGEON_JOINED_AT_BIDOOF`] and [`DungeonId::DUNGEON_DUMMY_0xE3`].
+    pub fn is_special_joined_at_location(&self) -> bool {
+        unsafe {
+            ffi::JoinedAtRangeCheck(ffi::dungeon_id_8 {
+                _bitfield_align_1: [],
+                _bitfield_1: ffi::dungeon_id_8::new_bitfield_1(*self),
+            }) > 0
+        }
+    }
+
+    /// Returns whether a game over should happen when a monster with this dungeon ID as
+    /// "joined at" value faints (as long as the other conditions are met).
+    /// It might have a more generic meaning.
+    pub fn should_cause_game_over_on_faint(&self) -> bool {
+        unsafe {
+            ffi::ShouldCauseGameOverOnFaint(ffi::dungeon_id_8 {
+                _bitfield_align_1: [],
+                _bitfield_1: ffi::dungeon_id_8::new_bitfield_1(*self),
+            }) > 0
+        }
     }
 }
 
@@ -61,12 +96,18 @@ impl FixedRoomId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing fixed room),
     /// otherwise this is UB.
-    pub unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn get(id: u32) -> Self {
         Self(id)
     }
 
     /// Returns the ID of this fixed room.
-    pub fn id(&self) -> u32 {
+    pub const fn id(&self) -> u32 {
         self.0
+    }
+
+    /// Checks if this ID corresponds to a fixed, full-floor layout.
+    pub fn is_full_floor_fixed_room(&self, _ov29: &OverlayLoadLease<29>) -> bool {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::IsNotFullFloorFixedRoom(*self) == 0 }
     }
 }

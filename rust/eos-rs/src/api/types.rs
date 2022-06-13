@@ -15,12 +15,12 @@ impl MonsterTypeId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing type),
     /// otherwise this is UB.
-    pub unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn get(id: u32) -> Self {
         Self(id)
     }
 
     /// Returns the ID of this type.
-    pub fn id(&self) -> u32 {
+    pub const fn id(&self) -> u32 {
         self.0
     }
 }

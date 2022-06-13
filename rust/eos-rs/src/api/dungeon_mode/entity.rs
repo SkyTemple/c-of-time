@@ -1,8 +1,6 @@
 use crate::api::dungeon_mode::*;
 
-/// Entity in a dungeon. Has a [`crate::api::dungeon_mode::DungeonEntityType`].
-/// Use the [`crate::api::dungeon_mode::DungeonEntityExt`] trait to access dungeon related
-/// functionality.
+/// Entity in a dungeon. Has a [`DungeonEntityType`].
 pub type DungeonEntity = ffi::entity;
 
 /// Extended info struct for [`DungeonEntity`] objects that are items.
@@ -14,12 +12,10 @@ pub type DungeonTile = ffi::tile;
 
 /// # Important safety note
 /// These implementations can assume that overlay 29 is loaded (since this is the
-/// only context dungeon entities are actually relevant). If you manually implement this trait,
-/// for some reason, you NEED to make sure overlay 29 is loaded when using some functions of this
-/// trait.
-/// If you use the DungeonEntity structs manually outside of dungeon mode, this trait will be
-/// unsafe to use.
-/// The trait and its functions are marked safe for convenience, since in its intended use case,
+/// only context dungeon entities are actually relevant). If you somehow manually construct types
+/// of this struct for some reason, you NEED to make sure overlay 29 is loaded when using some f
+/// unctions of this trait.
+/// The methods in this impl are marked safe for convenience, since in its intended use case,
 /// overlay 29 will always be loaded.
 impl DungeonEntity {
     /// Checks if a given entity is actually valid.

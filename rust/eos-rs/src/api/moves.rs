@@ -1,6 +1,7 @@
 //! Functions related to getting information about monster moves.
 
 use crate::api::dungeon_mode::MoveCategory;
+use crate::api::types::MonsterTypeId;
 use crate::ffi;
 
 /// A monster move.
@@ -196,7 +197,7 @@ impl Move {
     }
 
     /// Gets the type of the move.
-    pub fn get_type(&self) -> type_catalog::Type {
+    pub fn get_type(&self) -> MonsterTypeId {
         unsafe { ffi::GetMoveType(force_mut_ptr!(self)) }
     }
 
@@ -225,27 +226,27 @@ impl MoveId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing move),
     /// otherwise this is UB.
-    pub unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn get(id: u32) -> Self {
         Self(id)
     }
 
     /// Returns the ID of this move.
-    pub fn id(&self) -> u32 {
+    pub const fn id(&self) -> u32 {
         self.0
     }
 
     /// Checks if the move is a recoil move (affected by Reckless).
     pub fn is_recoil_move(&self) -> bool {
-        unsafe { ffi::IsRecoilMove(self) > 0 }
+        unsafe { ffi::IsRecoilMove(*self) > 0 }
     }
 
     /// Checks if the move is a punch move (affected by Iron Fist).
     pub fn is_punch_move(&self) -> bool {
-        unsafe { ffi::IsPunchMove(self) > 0 }
+        unsafe { ffi::IsPunchMove(*self) > 0 }
     }
 
     /// Gets a move's category (physical, special, status). Returns None if the category is invalid.
     pub fn get_category(&self) -> Option<MoveCategory> {
-        unsafe { ffi::GetMoveCategory(self) }.try_into().ok()
+        unsafe { ffi::GetMoveCategory(*self) }.try_into().ok()
     }
 }

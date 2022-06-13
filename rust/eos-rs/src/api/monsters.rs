@@ -16,12 +16,12 @@ impl MonsterSpeciesId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing monster species),
     /// otherwise this is UB.
-    pub unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn get(id: u32) -> Self {
         Self(id)
     }
 
     /// Returns the ID of this monster.
-    pub fn id(&self) -> u32 {
+    pub const fn id(&self) -> u32 {
         self.0
     }
 
@@ -68,15 +68,36 @@ impl MonsterSpeciesId {
                 include_shedinja as ffi::bool_,
             )
         };
-        if count >= MAX_EVOLUTIONS {
+        if count > MAX_EVOLUTIONS {
             // uh oh. Memory is corrupted now, so time to bail.
             // THIS PANIC IS NOT UNWIND SAFE (not that it matters).
             panic!("Monster has more than {} evolutions.", MAX_EVOLUTIONS);
         }
-        output_list
-            .into_iter()
-            .take(count as usize)
-            .map(ffi::monster_id) // Can't use the type alias as constructor.
-            .collect()
+        output_list.into_iter().take(count as usize).collect()
+    }
+
+    /// Checks if this is an Unown.
+    pub fn is_unown(&self) -> bool {
+        unsafe { ffi::IsUnown(*self) > 0 }
+    }
+
+    /// Checks if this is a Shaymin.
+    pub fn is_shaymin(&self) -> bool {
+        unsafe { ffi::IsShaymin(*self) > 0 }
+    }
+
+    /// Checks if this is a Castform.
+    pub fn is_castform(&self) -> bool {
+        unsafe { ffi::IsCastform(*self) > 0 }
+    }
+
+    /// Checks if this is a Cherrim.
+    pub fn is_cherrim(&self) -> bool {
+        unsafe { ffi::IsCherrim(*self) > 0 }
+    }
+
+    /// Checks if this is a Deoxys.
+    pub fn is_deoxys(&self) -> bool {
+        unsafe { ffi::IsDeoxys(*self) > 0 }
     }
 }

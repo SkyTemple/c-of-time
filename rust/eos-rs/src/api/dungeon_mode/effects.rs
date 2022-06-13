@@ -1,14 +1,15 @@
 use crate::api::dungeon_mode::*;
+use crate::api::items::ItemId;
 use crate::api::moves::Move;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
+use crate::api::types::MonsterTypeId;
 use crate::ctypes::*;
 use crate::ffi;
 use fixed::types::I24F8;
 
 /// Helper struct for emitting move and item effects.
 ///
-/// You may find more things to do with monsters in the [`DungeonMonsterExtWrite`] trait.
-///
+/// You may find more things to do with monsters in the [`DungeonMonsterMut`] struct.
 pub struct DungeonEffectsEmitter(OverlayLoadLease<29>);
 
 impl CreatableWithLease<29> for DungeonEffectsEmitter {
@@ -64,7 +65,7 @@ impl DungeonEffectsEmitter {
         defender: &mut DungeonEntity,
         used_move: &Move,
         damage_multiplier: I24F8,
-        item_id: Option<item_catalog::Type>,
+        item_id: Option<ItemId>,
     ) -> i32 {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
@@ -73,7 +74,7 @@ impl DungeonEffectsEmitter {
                 defender,
                 force_mut_ptr!(used_move),
                 damage_multiplier.to_bits() as c_int,
-                item_id.unwrap_or(item_catalog::ITEM_NOTHING),
+                item_id.unwrap_or(ItemId::ITEM_NOTHING),
             )
         }
     }
@@ -87,7 +88,7 @@ impl DungeonEffectsEmitter {
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
         used_move: &Move,
-        item_id: Option<item_catalog::Type>,
+        item_id: Option<ItemId>,
     ) -> bool {
         // SAFETY: We have a lease on the overlay existing.
         unsafe {
@@ -95,7 +96,7 @@ impl DungeonEffectsEmitter {
                 attacker,
                 defender,
                 force_mut_ptr!(used_move),
-                item_id.unwrap_or(item_catalog::ITEM_NOTHING),
+                item_id.unwrap_or(ItemId::ITEM_NOTHING),
             ) > 0
         }
     }
@@ -925,7 +926,7 @@ impl DungeonEffectsEmitter {
         &self,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
-        gummi_type: type_catalog::Type,
+        gummi_type: MonsterTypeId,
         stat_boost: i32,
     ) {
         // SAFETY: We have a lease on the overlay existing.

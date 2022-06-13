@@ -15,7 +15,6 @@ pub mod dungeon_generator;
 use core::ptr;
 pub use dungeon_struct::*;
 pub use effects::*;
-use entity::DungeonEntity;
 pub use entity::*;
 pub use enums::*;
 pub use message_log::*;
@@ -42,7 +41,7 @@ pub unsafe fn reset_damage_desc(damage_desc: *mut ffi::undefined4, _ov29: &Overl
     ffi::ResetDamageDesc(damage_desc);
 }
 
-/// [`crate::api::objects::DungeonMonsterRef::calc_damage`] seems to use scratch space of
+/// [`DungeonMonsterRef::calc_damage`] seems to use scratch space of
 /// some kind, which this function zeroes.
 ///
 /// # Safety

@@ -1,8 +1,11 @@
 //! General gameplay related functions that are always available.
 
+use crate::api::iq::IqSkillId;
+use crate::api::items::ItemId;
+use crate::api::monsters::MonsterSpeciesId;
 use crate::ffi;
-use crate::ffi::{exclusive_item_effect_id, item_id_16};
 use crate::util::OwnedSlice;
+use core::marker::PhantomData;
 use core::ptr;
 
 /// Describes an active team setup
@@ -55,135 +58,6 @@ pub fn key_wait_init() {
     }
 }
 
-/// Checks if an item is one of the aura bows received at the start of the game.
-pub fn is_aura_bow(item_id: item_catalog::Type) -> bool {
-    unsafe { ffi::IsAuraBow(item_id) > 0 }
-}
-
-/// Sets the amount of money the player is carrying, clamping the value to the range
-/// [0, MAX_MONEY_CARRIED].
-pub fn set_money_carried(money: i32) {
-    unsafe { ffi::SetMoneyCarried(money) }
-}
-
-/// Sets the amount of money the player has stored in the Duskull Bank, clamping the value to the
-/// range [0, MAX_MONEY_STORED].
-pub fn set_money_stored(money: i32) {
-    unsafe { ffi::SetMoneyStored(money) }
-}
-
-/// Checks if the player's bag is full.
-pub fn is_bag_full() -> bool {
-    unsafe { ffi::IsBagFull() > 0 }
-}
-
-/// Count the amount of the specified item in the player's bag.
-pub fn count_item_type_in_bag(item_id: item_catalog::Type) -> i32 {
-    unsafe { ffi::CountItemTypeInBag(item_id) }
-}
-
-/// Adds the specified amount of an item to the player's bag. Returns whether or not any
-/// items could be added.
-pub fn add_item_to_bag(item_id: item_catalog::Type, amount: u16) -> bool {
-    unsafe {
-        ffi::AddItemToBag(&mut ffi::owned_item {
-            id: item_id_16 {
-                _bitfield_align_1: [],
-                _bitfield_1: item_id_16::new_bitfield_1(item_id),
-            },
-            amount,
-        }) > 0
-    }
-}
-
-/// Special process 0x39.
-///
-/// This is *probably* is_storage_full: checks if the player's storage is full.
-pub fn is_storage_full() -> bool {
-    unsafe { ffi::ScriptSpecialProcess0x39() > 0 }
-}
-
-/// Count the amount of the specified item in the player's storage.
-pub fn count_item_type_in_storage(item_id: item_catalog::Type) -> i32 {
-    unsafe {
-        ffi::CountItemTypeInStorage(&mut ffi::owned_item {
-            id: item_id_16 {
-                _bitfield_align_1: [],
-                _bitfield_1: item_id_16::new_bitfield_1(item_id),
-            },
-            amount: 0,
-        })
-    }
-}
-
-/// Removes (the specified amount...?) of the given item type from the storage.
-pub fn remove_items_type_in_storage(item_id: item_catalog::Type, amount: u16) -> bool {
-    unsafe {
-        ffi::RemoveItemsTypeInStorage(&mut ffi::owned_item {
-            id: item_id_16 {
-                _bitfield_align_1: [],
-                _bitfield_1: item_id_16::new_bitfield_1(item_id),
-            },
-            amount,
-        }) > 0
-    }
-}
-
-/// Adds (the specified amount...?) of the given item type to the storage. Returns whether or not
-/// any items could be added.
-pub fn add_item_to_storage(item_id: item_catalog::Type, amount: u16) -> bool {
-    unsafe {
-        ffi::AddItemToStorage(&mut ffi::owned_item {
-            id: item_id_16 {
-                _bitfield_align_1: [],
-                _bitfield_1: item_id_16::new_bitfield_1(item_id),
-            },
-            amount,
-        }) > 0
-    }
-}
-
-/// Gets the exclusive item offset, which is the item ID relative to that of the first exclusive
-/// item, the Prism Ruff.
-pub fn get_exclusive_item_offset(item_id: item_catalog::Type) -> i32 {
-    unsafe { ffi::GetExclusiveItemOffset(item_id) }
-}
-
-/// Applies stat boosts from an exclusive item.
-pub fn apply_exclusive_item_stat_boosts(
-    item_id: item_catalog::Type,
-    atk_to_modify: &mut u8,
-    sp_atk_to_modify: &mut u8,
-    def_to_modify: &mut u8,
-    sp_def_to_modify: &mut u8,
-) {
-    unsafe {
-        ffi::ApplyExclusiveItemStatBoosts(
-            item_id,
-            atk_to_modify,
-            sp_atk_to_modify,
-            def_to_modify,
-            sp_def_to_modify,
-        )
-    }
-}
-
-/// Sets the bit for an exclusive item effect.
-pub fn set_exclusive_item_effect(
-    effect_flags: &mut u32,
-    effect_id: exclusive_item_effect_id::Type,
-) {
-    unsafe { ffi::SetExclusiveItemEffect(effect_flags, effect_id) }
-}
-
-/// Tests the exclusive item bitvector for a specific exclusive item effect.
-pub fn test_exclusive_item_effect_flag(
-    effect_flags: &mut u32,
-    effect_id: exclusive_item_effect_id::Type,
-) -> bool {
-    unsafe { ffi::ExclusiveItemEffectFlagTest(effect_flags, effect_id) > 0 }
-}
-
 /// Gets the single-byte language ID of the current program.
 ///
 /// The language ID appears to be used to index some global tables.
@@ -226,9 +100,19 @@ pub fn note_load_base() -> i32 {
 }
 
 /// Adventure log helper
-pub struct AdventureLog;
+pub struct AdventureLog(PhantomData<()>);
 
 impl AdventureLog {
+    /// Returns an internal reference to the adventore log. Note that this isn't a reference
+    /// to the actual struct in memory (yet).
+    ///
+    /// # Safety
+    /// This is unsafe, since it essentially borrows a global variable mutably, see
+    /// safety rules for `static mut`s.
+    pub unsafe fn get() -> Self {
+        Self(PhantomData)
+    }
+
     /// Sets the location of the adventure log struct in memory.
     ///
     /// Sets it in a static memory location.
@@ -339,12 +223,12 @@ impl AdventureLog {
     }
 
     /// Marks one monster as battled.
-    pub fn set_monster_battled(&mut self, monster_id: u32) {
+    pub fn set_monster_battled(&mut self, monster_id: MonsterSpeciesId) {
         unsafe { ffi::SetPokemonBattled(monster_id) };
     }
 
     /// Marks one monster as joined.
-    pub fn set_monster_joined(&mut self, monster_id: u32) {
+    pub fn set_monster_joined(&mut self, monster_id: MonsterSpeciesId) {
         unsafe { ffi::SetPokemonJoined(monster_id) };
     }
 
@@ -398,7 +282,7 @@ impl AdventureLog {
     }
 
     /// Marks a specified special monster as recruited in the adventure log.
-    pub fn set_special_monster_recruited(&mut self, monster_id: u32) {
+    pub fn set_special_monster_recruited(&mut self, monster_id: MonsterSpeciesId) {
         unsafe { ffi::RecruitSpecialPokemonLog(monster_id) };
     }
 
@@ -418,7 +302,7 @@ impl AdventureLog {
     }
 
     /// Marks one specific item as acquired.
-    pub fn set_item_acquired(&mut self, item_id: u32) {
+    pub fn set_item_acquired(&mut self, item_id: ItemId) {
         unsafe { ffi::SetItemAcquired(item_id) };
     }
 
@@ -440,38 +324,8 @@ impl AdventureLog {
     }
 }
 
-/// Returns whether the specified dungeon is considered as going upward or not
-pub fn dungeon_goes_up(dungeon_id: dungeon_catalog::Type) -> bool {
-    unsafe { ffi::DungeonGoesUp(dungeon_id) > 0 }
-}
-
-/// Checks if a monster ID is an Unown.
-pub fn is_unown(monster_id: monster_catalog::Type) -> bool {
-    unsafe { ffi::IsUnown(monster_id) > 0 }
-}
-
-/// Checks if a monster ID is a Shaymin.
-pub fn is_shaymin(monster_id: monster_catalog::Type) -> bool {
-    unsafe { ffi::IsShaymin(monster_id) > 0 }
-}
-
-/// Checks if a monster ID is a Castform.
-pub fn is_castform(monster_id: monster_catalog::Type) -> bool {
-    unsafe { ffi::IsCastform(monster_id) > 0 }
-}
-
-/// Checks if a monster ID is a Cherrim.
-pub fn is_cherrim(monster_id: monster_catalog::Type) -> bool {
-    unsafe { ffi::IsCherrim(monster_id) > 0 }
-}
-
-/// Checks if a monster ID is a Deoxys.
-pub fn is_deoxys(monster_id: monster_catalog::Type) -> bool {
-    unsafe { ffi::IsDeoxys(monster_id) > 0 }
-}
-
 /// Checks if a given monster is on the exploration team (not necessarily the active party)?
-pub fn is_monster_on_team(monster_id: monster_catalog::Type, param_2: i32) -> bool {
+pub fn is_monster_on_team(monster_id: MonsterSpeciesId, param_2: i32) -> bool {
     unsafe { ffi::IsMonsterOnTeam(monster_id, param_2) > 0 }
 }
 
@@ -501,7 +355,7 @@ pub fn count_party_members() -> i32 {
 }
 
 /// Tests whether an IQ skill with a given ID is active.
-pub fn iq_skill_flag_test(iq_skill_flags: &mut u32, iq_id: iq_skill_catalog::Type) -> bool {
+pub fn iq_skill_flag_test(iq_skill_flags: &mut u32, iq_id: IqSkillId) -> bool {
     unsafe { ffi::IqSkillFlagTest(iq_skill_flags, iq_id) > 0 }
 }
 
@@ -536,7 +390,7 @@ pub fn script_special_process_x17() {
 /// struct.
 pub fn item_at_table_idx(table_idx: i32) -> ffi::owned_item {
     let mut out = ffi::owned_item {
-        id: item_id_16 {
+        id: ffi::item_id_16 {
             _bitfield_align_1: [],
             _bitfield_1: Default::default(),
         },
@@ -556,32 +410,8 @@ pub fn was_dungeon_tip_shown(tip_id: i32) -> bool {
     unsafe { ffi::GetDungeonTipShown(tip_id) > 0 }
 }
 
-/// Returns whether a certain joined_at field value is between
-/// [`dungeon_catalog::DUNGEON_JOINED_AT_BIDOOF`] and [`dungeon_catalog::DUNGEON_DUMMY_0xE3`].
-pub fn is_special_joined_at_location(joined_at: dungeon_catalog::Type) -> bool {
-    unsafe {
-        ffi::JoinedAtRangeCheck(ffi::dungeon_id_8 {
-            _bitfield_align_1: [],
-            _bitfield_1: ffi::dungeon_id_8::new_bitfield_1(joined_at),
-        }) > 0
-    }
-}
-
-/// Returns whether a game over should happen when a monster with the specified joined_at ID faints
-/// (as long as the other conditions are met). It might have a more generic meaning.
-pub fn should_cause_game_over_on_faint(joined_at: dungeon_catalog::Type) -> bool {
-    unsafe {
-        ffi::ShouldCauseGameOverOnFaint(ffi::dungeon_id_8 {
-            _bitfield_align_1: [],
-            _bitfield_1: ffi::dungeon_id_8::new_bitfield_1(joined_at),
-        }) > 0
-    }
-}
-
 /// Returns the monster ID of the specified monster spawn entry.
-pub fn get_monster_id_from_spawn_entry(
-    spawn_entry: &ffi::monster_spawn_entry,
-) -> monster_catalog::Type {
+pub fn get_monster_id_from_spawn_entry(spawn_entry: &ffi::monster_spawn_entry) -> MonsterSpeciesId {
     unsafe { ffi::GetMonsterIdFromSpawnEntry(force_mut_ptr!(spawn_entry)) }
 }
 
@@ -607,12 +437,6 @@ pub unsafe fn apply_gummi_boosts(
     buffer: *mut crate::ctypes::c_void,
 ) {
     ffi::ApplyGummiBoostsGroundMode(param_1, param_2, param_3, param_4, param_5, param_6, buffer)
-}
-
-/// Returns the maximum rescue attempts allowed in the specified dungeon,
-/// or -1 if rescues are disabled.
-pub fn get_max_rescue_attempts(dungeon_id: dungeon_catalog::Type) -> i8 {
-    unsafe { ffi::GetMaxRescueAttempts(dungeon_id) }
 }
 
 /// Returns a struct containing information about a team member.

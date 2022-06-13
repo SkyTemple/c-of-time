@@ -125,7 +125,7 @@ where
     /// Create a new instance by providing a lease.
     ///
     /// # Important
-    /// Overlay 29 must not be unloaded during the lifetime of the returned object.
+    /// Overlay N must not be unloaded during the lifetime of the returned object.
     fn new(lease: OverlayLoadLease<N>) -> Self {
         Self::_create(lease)
     }
@@ -135,7 +135,7 @@ where
     /// This will panic if the overlay is not loaded.
     ///
     /// # Important
-    /// Overlay 29 must not be unloaded during the lifetime of the returned object.
+    /// Overlay N must not be unloaded during the lifetime of the returned object.
     fn new_checked() -> Self {
         Self::_create(OverlayLoadLease::<N>::acquire())
     }

@@ -19,6 +19,7 @@ use crate::api::dungeon_mode::GlobalDungeonData;
 use crate::api::dungeon_mode::dungeon_generator::{
     DungeonEntityGeneration, DungeonFloorGeneration,
 };
+use crate::api::dungeons::FixedRoomId;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ctypes::c_int;
 use crate::ffi;
@@ -44,7 +45,7 @@ impl<'a> GlobalDungeonStructureGenerator<'a> {
     /// Handles fixed room generation if the floor contains a fixed room.
     pub fn generate_fixed_room(
         &mut self,
-        fixed_room_id: fixed_room_catalog::Type,
+        fixed_room_id: FixedRoomId,
         properties: &ffi::floor_properties,
     ) -> bool {
         // SAFETY: We have a mutable reference to the dungeon.

@@ -1,20 +1,18 @@
+use crate::api::abilities::AbilityId;
 use crate::api::dungeon_mode::*;
+use crate::api::iq::IqSkillId;
+use crate::api::items::{ExclusiveItemEffectId, ItemId};
+use crate::api::monsters::MonsterSpeciesId;
 use crate::api::moves::*;
-use crate::ffi::type_id::Type;
+use crate::api::types::MonsterTypeId;
 use core::ops::{Deref, DerefMut};
 use fixed::types::I24F8;
 
 /// Reference type for the info struct for [`DungeonEntity`] objects that are monsters.
-///
-/// This and [`DungeonMonsterMut`] exist for ease of use with the
-/// [`crate::api::dungeon_mode::DungeonMonsterExtRead`] and
-/// [`crate::api::dungeon_mode::DungeonMonsterExtWrite`] traits, where some of their functions
-/// actually require the entity to work with, we store a reference to the entity struct in our
-/// monster wrapper structs.
-pub struct DungeonMonsterRef<'a>(pub &'a ffi::monster, pub &'a ffi::entity);
+pub struct DungeonMonsterRef<'a>(pub &'a ffi::monster, pub &'a DungeonEntity);
 
 /// Mutable reference type for the info struct for [`DungeonEntity`] objects that are monsters.
-pub struct DungeonMonsterMut<'a>(pub &'a mut ffi::monster, pub &'a mut ffi::entity);
+pub struct DungeonMonsterMut<'a>(pub &'a mut ffi::monster, pub &'a mut DungeonEntity);
 
 /// Essentially [`core::convert::AsRef`].
 /// (Sadly we can't use the `AsRef` trait, because it doesn't allow explicit lifetimes.)
@@ -50,21 +48,23 @@ impl<'a> DerefMut for DungeonMonsterMut<'a> {
 impl<'a> DungeonMonsterRef<'a> {
     /// Checks if the monster is a special story ally.
     /// This is a hard-coded check that looks at the monster's "Joined At" field.
-    /// If the value is in the range [ [`dungeon_catalog::DUNGEON_JOINED_AT_BIDOOF`], [`dungeon_catalog::DUNGEON_DUMMY_0xE3`] ],
-    /// this check will return true.
+    /// If the value is in the range [
+    /// [`crate::api::dungeons::DungeonId::DUNGEON_JOINED_AT_BIDOOF`],
+    /// [`crate::api::dungeons::DungeonId::DUNGEON_DUMMY_0xE3`]
+    /// ], this check will return true.
     pub fn is_special_story_ally(&self) -> bool {
         unsafe { ffi::IsSpecialStoryAlly(force_mut_ptr!(self.0)) > 0 }
     }
 
     /// Checks if the monster does not gain experience.
     /// This basically just inverts IsSpecialStoryAlly, with the exception of also checking for
-    /// the "Joined At" field being [`dungeon_catalog::DUNGEON_CLIENT`].
+    /// the "Joined At" field being [`crate::api::dungeons::DungeonId::DUNGEON_CLIENT`].
     pub fn is_experience_locked(&self) -> bool {
         unsafe { ffi::IsExperienceLocked(force_mut_ptr!(self.0)) > 0 }
     }
 
     /// Checks if the monster is holding a certain item that isn't disabled by Klutz.
-    pub fn is_holding_item(&self, item_id: u32) -> bool {
+    pub fn is_holding_item(&self, item_id: ItemId) -> bool {
         unsafe { ffi::ItemIsActive(force_mut_ptr!(self.1), item_id) > 0 }
     }
 
@@ -79,17 +79,17 @@ impl<'a> DungeonMonsterRef<'a> {
     }
 
     // Checks if the monster has a certain ability that isn't disabled by Gastro Acid.
-    pub fn is_ability_active(&self, ability_id: ability_catalog::Type) -> bool {
+    pub fn is_ability_active(&self, ability_id: AbilityId) -> bool {
         unsafe { ffi::AbilityIsActive(force_mut_ptr!(self.1), ability_id) > 0 }
     }
 
     /// Checks if the monster has a given type.
-    pub fn has_type(&self, type_id: type_catalog::Type) -> bool {
+    pub fn has_type(&self, type_id: MonsterTypeId) -> bool {
         unsafe { ffi::MonsterIsType(force_mut_ptr!(self.1), type_id) > 0 }
     }
 
     /// Checks if the monster has a certain IQ skill enabled.
-    pub fn is_iq_skill_enabled(&self, iq_skill_id: iq_skill_catalog::Type) -> bool {
+    pub fn is_iq_skill_enabled(&self, iq_skill_id: IqSkillId) -> bool {
         unsafe { ffi::IqSkillIsEnabled(force_mut_ptr!(self.1), iq_skill_id) > 0 }
     }
 
@@ -98,7 +98,7 @@ impl<'a> DungeonMonsterRef<'a> {
     pub fn is_defender_ability_active(
         &self,
         defender: &DungeonEntity,
-        defender_ability_id: ability_catalog::Type,
+        defender_ability_id: AbilityId,
         own_ability_is_active: bool,
     ) -> bool {
         unsafe {
@@ -112,10 +112,7 @@ impl<'a> DungeonMonsterRef<'a> {
     }
 
     /// Checks if a certain exclusive item effect is active for the monster.
-    pub fn is_exclusive_item_effect_active(
-        &self,
-        effect_id: exclusive_item_effect_catalog::Type,
-    ) -> bool {
+    pub fn is_exclusive_item_effect_active(&self, effect_id: ExclusiveItemEffectId) -> bool {
         unsafe { ffi::ExclusiveItemEffectIsActive(force_mut_ptr!(self.1), effect_id) > 0 }
     }
 
@@ -129,7 +126,7 @@ impl<'a> DungeonMonsterRef<'a> {
         &self,
         defender: &DungeonEntity,
         target_type_index: TargetTypeIndex,
-        attack_type: type_catalog::Type,
+        attack_type: MonsterTypeId,
     ) -> Option<DungeonTypeMatchup> {
         unsafe {
             ffi::GetTypeMatchup(
@@ -151,12 +148,12 @@ impl<'a> DungeonMonsterRef<'a> {
     pub fn calc_damage(
         &self,
         defender: &DungeonEntity,
-        attack_type: type_catalog::Type,
+        attack_type: MonsterTypeId,
         attack_power: i32,
         crit_chance: i32,
         damage_out: &mut ffi::damage_data,
         damage_multiplier: I24F8,
-        move_id: move_catalog::Type,
+        move_id: MoveId,
         param_9: i32,
     ) {
         unsafe {
@@ -191,8 +188,8 @@ impl<'a> DungeonMonsterRef<'a> {
         fixed_damage: i32,
         param_3: ffi::undefined4,
         damage_out: &mut ffi::damage_data,
-        move_id: move_catalog::Type,
-        attack_type: type_catalog::Type,
+        move_id: MoveId,
+        attack_type: MonsterTypeId,
         param_7: i16,
         message_type: ffi::undefined4,
         param_9: ffi::undefined4,
@@ -226,7 +223,7 @@ impl<'a> DungeonMonsterRef<'a> {
         fixed_damage: i32,
         param_4: ffi::undefined4,
         damage_out: &mut ffi::damage_data,
-        attack_type: type_catalog::Type,
+        attack_type: MonsterTypeId,
         move_category: MoveCategory,
         param_8: i16,
         message_type: ffi::undefined4,
@@ -240,7 +237,7 @@ impl<'a> DungeonMonsterRef<'a> {
             param_4,
             damage_out,
             attack_type,
-            move_category as move_catalog::Type,
+            move_category as ffi::move_category::Type,
             param_8,
             message_type,
             param_10,
@@ -261,24 +258,24 @@ impl<'a> DungeonMonsterRef<'a> {
         fixed_damage: i32,
         param_4: ffi::undefined4,
         damage_out: &mut ffi::damage_data,
-        attack_type: type_catalog::Type,
+        attack_type: MonsterTypeId,
         param_7: i16,
         message_type: ffi::undefined4,
         param_9: ffi::undefined4,
         param_10: ffi::undefined4,
     ) {
-        ffi::CalcDamageFixedNoCategory(
-            force_mut_ptr!(self.1),
-            force_mut_ptr!(defender),
-            fixed_damage,
-            param_4,
-            damage_out,
-            attack_type,
-            param_7,
-            message_type,
-            param_9,
-            param_10,
-        )
+            ffi::CalcDamageFixedNoCategory(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(defender),
+                fixed_damage,
+                param_4,
+                damage_out,
+                attack_type,
+                param_7,
+                message_type,
+                param_9,
+                param_10,
+            )
     }
 
     /// A wrapper (with potential side effects...?) around [`Self::calc_damage_fixed`].
@@ -287,13 +284,13 @@ impl<'a> DungeonMonsterRef<'a> {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    pub unsafe fn calc_damage_fixed_wrapper(
+    pub fn calc_damage_fixed_wrapper(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
         param_4: ffi::undefined4,
         damage_out: &mut ffi::damage_data,
-        attack_type: type_catalog::Type,
+        attack_type: MonsterTypeId,
         move_category: MoveCategory,
         param_8: i16,
         param_9: ffi::undefined4,
@@ -307,7 +304,7 @@ impl<'a> DungeonMonsterRef<'a> {
             param_4,
             damage_out,
             attack_type,
-            move_category as move_catalog::Type,
+            move_category as ffi::move_category::Type,
             param_8,
             param_9,
             param_10,
@@ -331,14 +328,14 @@ impl<'a> DungeonMonsterRef<'a> {
         param_5: ffi::undefined4,
         param_6: ffi::undefined4,
     ) {
-        ffi::CalcDamageProjectile(
-            force_mut_ptr!(self.1),
-            force_mut_ptr!(defender),
-            force_mut_ptr!(used_move),
-            move_power,
-            param_5,
-            param_6,
-        )
+            ffi::CalcDamageProjectile(
+                force_mut_ptr!(self.1),
+                force_mut_ptr!(defender),
+                force_mut_ptr!(used_move),
+                move_power,
+                param_5,
+                param_6,
+            )
     }
 
     /// Checks if a monster is holding an aura bow that isn't disabled by Klutz.
@@ -396,7 +393,7 @@ impl<'a> DungeonMonsterRef<'a> {
     }
 
     /// Checks if the monster has a certain held item.
-    pub fn has_held_item(&self, item_id: item_catalog::Type) -> bool {
+    pub fn has_held_item(&self, item_id: ItemId) -> bool {
         unsafe { ffi::HasHeldItem(force_mut_ptr!(self.1), item_id) > 0 }
     }
 
@@ -445,7 +442,7 @@ impl<'a> DungeonMonsterRef<'a> {
 
     /// Check the type of a move when used by a certain monster. Accounts for special cases
     /// such as Hidden Power, Weather Ball, the regular attack...
-    pub fn get_move_type_if_used_by_self(&self, the_move: &Move) -> Type {
+    pub fn get_move_type_if_used_by_self(&self, the_move: &Move) -> MonsterTypeId {
         unsafe { ffi::GetMoveTypeForMonster(force_mut_ptr!(self.1), force_mut_ptr!(the_move)) }
     }
 
@@ -499,12 +496,11 @@ impl<'a> DungeonMonsterMut<'a> {
     }
 
     /// Makes the specified monster evolve into the specified species.
-    pub fn evolve(
-        &mut self,
-        param_2: &mut ffi::undefined4,
-        new_monster_idx: monster_catalog::Type,
-    ) {
-        unsafe { ffi::EvolveMonster(force_mut_ptr!(self.1), param_2, new_monster_idx) }
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: MonsterSpeciesId) {
+        ffi::EvolveMonster(force_mut_ptr!(self.1), param_2, new_monster_idx)
     }
 
     /// Calculates the speed stage of a monster from its speed up/down counters. The second
