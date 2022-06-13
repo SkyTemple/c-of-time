@@ -2,11 +2,31 @@
 
 #[allow(unused_imports)] // for easier reference in the docs of script_special_process_call
 use crate::api::gameplay;
-#[allow(unused_imports)] // for easier reference in the docs of script_special_process_call
-use crate::api::objects::special_process_catalog::*;
-use crate::api::objects::*;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use crate::ffi;
+
+/// A special process ID with associated methods to get metadata.
+///
+/// Use the associated constants or the [`Self::get`] method to get instances of this.
+pub type SpecialProcessId = ffi::special_process_id;
+impl Copy for SpecialProcessId {}
+
+/// This impl provides general metadata about special processes in the game.
+impl SpecialProcessId {
+    /// Returns the ID struct for the special process with the given ID.
+    ///
+    /// # Safety
+    /// The caller must make sure the ID is valid (refers to an existing special process),
+    /// otherwise this is UB.
+    pub unsafe fn get(id: u32) -> Self {
+        Self(id)
+    }
+
+    /// Returns the ID of this special process.
+    pub fn id(&self) -> u32 {
+        self.0
+    }
+}
 
 /// Misc. and general ground mode functions, guarded by this struct.
 pub struct GroundModeContext(OverlayLoadLease<11>);

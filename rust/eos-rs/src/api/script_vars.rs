@@ -1,9 +1,7 @@
 //! Code for handling script variables.
 
-use crate::api::objects::script_var_catalog;
 use crate::ctypes::c_void;
 use crate::ffi;
-use crate::ffi::script_var_id::Type;
 use crate::ffi::script_var_type;
 use alloc::ffi::CString;
 use alloc::vec;
@@ -11,6 +9,52 @@ use alloc::vec::Vec;
 use core::ffi::CStr;
 use core::marker::PhantomData;
 use core::ptr;
+
+/// A script opcode ID with associated methods to get metadata.
+///
+/// Use the associated constants or the [`Self::get`] method to get instances of this.
+pub type ScriptOpcodeId = ffi::script_opcode_id;
+impl Copy for ScriptOpcodeId {}
+
+/// This impl provides general metadata about script opcodes in the game.
+impl ScriptOpcodeId {
+    /// Returns the ID struct for the script opcode with the given ID.
+    ///
+    /// # Safety
+    /// The caller must make sure the ID is valid (refers to an existing script opcode),
+    /// otherwise this is UB.
+    pub unsafe fn get(id: u32) -> Self {
+        Self(id)
+    }
+
+    /// Returns the ID of this script opcode.
+    pub fn id(&self) -> u32 {
+        self.0
+    }
+}
+
+/// A script variable ID with associated methods to get metadata.
+///
+/// Use the associated constants or the [`Self::get`] method to get instances of this.
+pub type ScriptVariableId = ffi::script_var_id;
+impl Copy for ScriptVariableId {}
+
+/// This impl provides general metadata about script variables in the game.
+impl ScriptVariableId {
+    /// Returns the ID struct for the script variable with the given ID.
+    ///
+    /// # Safety
+    /// The caller must make sure the ID is valid (refers to an existing script variable),
+    /// otherwise this is UB.
+    pub unsafe fn get(id: u32) -> Self {
+        Self(id)
+    }
+
+    /// Returns the ID of this script variable.
+    pub fn id(&self) -> u32 {
+        self.0
+    }
+}
 
 /// Value types of script variables.
 ///
@@ -383,18 +427,18 @@ impl ScriptVariables {
 }
 
 /// Reference to a global script variable, see [`ScriptVariableRead`].
-pub struct GlobalScriptVariableRef<'a>(script_var_catalog::Type, PhantomData<&'a ()>);
+pub struct GlobalScriptVariableRef<'a>(ScriptVariableId, PhantomData<&'a ()>);
 
 /// Mutable reference to a global script variable, see
 /// [`ScriptVariableRead`] and [`ScriptVariableWrite`].
-pub struct GlobalScriptVariableMut<'a>(script_var_catalog::Type, PhantomData<&'a ()>);
+pub struct GlobalScriptVariableMut<'a>(ScriptVariableId, PhantomData<&'a ()>);
 
 /// Reference to a local script variable, see [`ScriptVariableRead`].
-pub struct LocalScriptVariableRef<'a>(*mut c_void, script_var_catalog::Type, PhantomData<&'a ()>);
+pub struct LocalScriptVariableRef<'a>(*mut c_void, ScriptVariableId, PhantomData<&'a ()>);
 
 /// Mutable reference to a local script variable, see
 /// [`ScriptVariableRead`] and [`ScriptVariableWrite`].
-pub struct LocalScriptVariableMut<'a>(*mut c_void, script_var_catalog::Type, PhantomData<&'a ()>);
+pub struct LocalScriptVariableMut<'a>(*mut c_void, ScriptVariableId, PhantomData<&'a ()>);
 
 /// Read actions for script variables.
 #[allow(clippy::not_unsafe_ptr_arg_deref)]
@@ -403,7 +447,7 @@ pub trait ScriptVariableRead: PartialEq + Eq {
     fn internal_local_var_table(&self) -> *mut c_void;
 
     /// Returns the variable ID
-    fn id(&self) -> script_var_catalog::Type;
+    fn id(&self) -> ScriptVariableId;
 
     /// Loads a script variable descriptor for a given ID.
     fn descriptor(&self) -> &ffi::script_var {
@@ -700,7 +744,7 @@ impl<'a> ScriptVariableRead for GlobalScriptVariableRef<'a> {
         ptr::null_mut()
     }
 
-    fn id(&self) -> Type {
+    fn id(&self) -> ScriptVariableId {
         self.0
     }
 }
@@ -718,7 +762,7 @@ impl<'a> ScriptVariableRead for GlobalScriptVariableMut<'a> {
         ptr::null_mut()
     }
 
-    fn id(&self) -> Type {
+    fn id(&self) -> ScriptVariableId {
         self.0
     }
 }
@@ -742,7 +786,7 @@ impl<'a> ScriptVariableRead for LocalScriptVariableRef<'a> {
         self.0
     }
 
-    fn id(&self) -> Type {
+    fn id(&self) -> ScriptVariableId {
         self.1
     }
 }
@@ -764,7 +808,7 @@ impl<'a> ScriptVariableRead for LocalScriptVariableMut<'a> {
         self.0
     }
 
-    fn id(&self) -> Type {
+    fn id(&self) -> ScriptVariableId {
         self.1
     }
 }

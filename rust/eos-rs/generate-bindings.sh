@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Generates the bindings for the pmdsky-debug headers.
 # Note that bindgen needs to be in the path and pmdsky-debug needs to be checkout out.
+set -e
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -20,6 +21,7 @@ bindgen \
   --no-derive-debug \
   --default-enum-style moduleconsts \
   --newtype-enum ability_id \
+  --newtype-enum dungeon_id \
   --newtype-enum dungeon_group_id \
   --newtype-enum exclusive_item_effect_id \
   --newtype-enum fixed_room_id \
@@ -36,3 +38,19 @@ bindgen \
   -- \
   -target armv5te-none-eabi \
   > $SCRIPT_DIR/src/ffi.rs
+
+# Make fields of newtype enums private.
+sed -i 's/pub struct ability_id(pub /pub struct ability_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct dungeon_id(pub /pub struct dungeon_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct dungeon_group_id(pub /pub struct dungeon_group_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct exclusive_item_effect_id(pub /pub struct exclusive_item_effect_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct fixed_room_id(pub /pub struct fixed_room_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct iq_group_id(pub /pub struct iq_group_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct iq_skill_id(pub /pub struct iq_skill_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct item_id(pub /pub struct item_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct monster_id(pub /pub struct monster_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct move_id(pub /pub struct move_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct script_opcode_id(pub /pub struct script_opcode_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct script_var_id(pub /pub struct script_var_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct special_process_id(pub /pub struct special_process_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed -i 's/pub struct type_id(pub /pub struct type_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs

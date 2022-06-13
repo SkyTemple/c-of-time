@@ -1998,7 +1998,7 @@ impl monster_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct monster_id(pub crate::ctypes::c_uint);
+pub struct monster_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C)]
 #[repr(align(2))]
 pub struct monster_id_16 {
@@ -6229,7 +6229,7 @@ impl item_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct item_id(pub crate::ctypes::c_uint);
+pub struct item_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C)]
 #[repr(align(2))]
 pub struct item_id_16 {
@@ -6317,7 +6317,7 @@ impl type_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct type_id(pub crate::ctypes::c_uint);
+pub struct type_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct type_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -8059,7 +8059,7 @@ impl move_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct move_id(pub crate::ctypes::c_uint);
+pub struct move_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C)]
 #[repr(align(2))]
 pub struct move_id_16 {
@@ -8531,7 +8531,7 @@ impl ability_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct ability_id(pub crate::ctypes::c_uint);
+pub struct ability_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct ability_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -8559,265 +8559,777 @@ impl ability_id_8 {
         __bindgen_bitfield_unit
     }
 }
-pub mod dungeon_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const DUNGEON_TEST_DUNGEON: Type = 0;
-    pub const DUNGEON_BEACH_CAVE: Type = 1;
-    pub const DUNGEON_BEACH_CAVE_PIT: Type = 2;
-    pub const DUNGEON_DRENCHED_BLUFF: Type = 3;
-    pub const DUNGEON_MT_BRISTLE: Type = 4;
-    pub const DUNGEON_MT_BRISTLE_PEAK: Type = 5;
-    pub const DUNGEON_WATERFALL_CAVE: Type = 6;
-    pub const DUNGEON_APPLE_WOODS: Type = 7;
-    pub const DUNGEON_CRAGGY_COAST: Type = 8;
-    pub const DUNGEON_SIDE_PATH: Type = 9;
-    pub const DUNGEON_MT_HORN: Type = 10;
-    pub const DUNGEON_ROCK_PATH: Type = 11;
-    pub const DUNGEON_FOGGY_FOREST: Type = 12;
-    pub const DUNGEON_FOREST_PATH: Type = 13;
-    pub const DUNGEON_STEAM_CAVE: Type = 14;
-    pub const DUNGEON_UPPER_STEAM_CAVE: Type = 15;
-    pub const DUNGEON_STEAM_CAVE_PEAK: Type = 16;
-    pub const DUNGEON_AMP_PLAINS: Type = 17;
-    pub const DUNGEON_FAR_AMP_PLAINS: Type = 18;
-    pub const DUNGEON_AMP_CLEARING: Type = 19;
-    pub const DUNGEON_NORTHERN_DESERT: Type = 20;
-    pub const DUNGEON_QUICKSAND_CAVE: Type = 21;
-    pub const DUNGEON_QUICKSAND_PIT: Type = 22;
-    pub const DUNGEON_UNDERGROUND_LAKE: Type = 23;
-    pub const DUNGEON_CRYSTAL_CAVE: Type = 24;
-    pub const DUNGEON_CRYSTAL_CROSSING: Type = 25;
-    pub const DUNGEON_CRYSTAL_LAKE: Type = 26;
-    pub const DUNGEON_CHASM_CAVE: Type = 27;
-    pub const DUNGEON_DARK_HILL: Type = 28;
-    pub const DUNGEON_SEALED_RUIN: Type = 29;
-    pub const DUNGEON_DEEP_SEALED_RUIN: Type = 30;
-    pub const DUNGEON_SEALED_RUIN_PIT: Type = 31;
-    pub const DUNGEON_DUSK_FOREST: Type = 32;
-    pub const DUNGEON_DEEP_DUSK_FOREST: Type = 33;
-    pub const DUNGEON_TREESHROUD_FOREST: Type = 34;
-    pub const DUNGEON_BRINE_CAVE: Type = 35;
-    pub const DUNGEON_LOWER_BRINE_CAVE: Type = 36;
-    pub const DUNGEON_BRINE_CAVE_PIT: Type = 37;
-    pub const DUNGEON_HIDDEN_LAND: Type = 38;
-    pub const DUNGEON_HIDDEN_HIGHLAND: Type = 39;
-    pub const DUNGEON_OLD_RUINS: Type = 40;
-    pub const DUNGEON_TEMPORAL_TOWER: Type = 41;
-    pub const DUNGEON_TEMPORAL_SPIRE: Type = 42;
-    pub const DUNGEON_TEMPORAL_PINNACLE: Type = 43;
-    pub const DUNGEON_MYSTIFYING_FOREST: Type = 44;
-    pub const DUNGEON_MYSTIFYING_FOREST_CLEARING: Type = 45;
-    pub const DUNGEON_BLIZZARD_ISLAND: Type = 46;
-    pub const DUNGEON_CREVICE_CAVE: Type = 47;
-    pub const DUNGEON_LOWER_CREVICE_CAVE: Type = 48;
-    pub const DUNGEON_CREVICE_CAVE_PIT: Type = 49;
-    pub const DUNGEON_SURROUNDED_SEA: Type = 50;
-    pub const DUNGEON_MIRACLE_SEA: Type = 51;
-    pub const DUNGEON_DEEP_MIRACLE_SEA: Type = 52;
-    pub const DUNGEON_MIRACLE_SEABED: Type = 53;
-    pub const DUNGEON_ICE_AEGIS_CAVE: Type = 54;
-    pub const DUNGEON_REGICE_CHAMBER: Type = 55;
-    pub const DUNGEON_ROCK_AEGIS_CAVE: Type = 56;
-    pub const DUNGEON_REGIROCK_CHAMBER: Type = 57;
-    pub const DUNGEON_STEEL_AEGIS_CAVE: Type = 58;
-    pub const DUNGEON_REGISTEEL_CHAMBER: Type = 59;
-    pub const DUNGEON_AEGIS_CAVE_PIT: Type = 60;
-    pub const DUNGEON_REGIGIGAS_CHAMBER: Type = 61;
-    pub const DUNGEON_MT_TRAVAIL: Type = 62;
-    pub const DUNGEON_THE_NIGHTMARE: Type = 63;
-    pub const DUNGEON_SPACIAL_RIFT: Type = 64;
-    pub const DUNGEON_DEEP_SPACIAL_RIFT: Type = 65;
-    pub const DUNGEON_SPACIAL_RIFT_BOTTOM: Type = 66;
-    pub const DUNGEON_DARK_CRATER: Type = 67;
-    pub const DUNGEON_DEEP_DARK_CRATER: Type = 68;
-    pub const DUNGEON_DARK_CRATER_PIT: Type = 69;
-    pub const DUNGEON_CONCEALED_RUINS: Type = 70;
-    pub const DUNGEON_DEEP_CONCEALED_RUINS: Type = 71;
-    pub const DUNGEON_MARINE_RESORT: Type = 72;
-    pub const DUNGEON_BOTTOMLESS_SEA: Type = 73;
-    pub const DUNGEON_BOTTOMLESS_SEA_DEPTHS: Type = 74;
-    pub const DUNGEON_SHIMMER_DESERT: Type = 75;
-    pub const DUNGEON_SHIMMER_DESERT_PIT: Type = 76;
-    pub const DUNGEON_MT_AVALANCHE: Type = 77;
-    pub const DUNGEON_MT_AVALANCHE_PEAK: Type = 78;
-    pub const DUNGEON_GIANT_VOLCANO: Type = 79;
-    pub const DUNGEON_GIANT_VOLCANO_PEAK: Type = 80;
-    pub const DUNGEON_WORLD_ABYSS: Type = 81;
-    pub const DUNGEON_WORLD_ABYSS_PIT: Type = 82;
-    pub const DUNGEON_SKY_STAIRWAY: Type = 83;
-    pub const DUNGEON_SKY_STAIRWAY_APEX: Type = 84;
-    pub const DUNGEON_MYSTERY_JUNGLE: Type = 85;
-    pub const DUNGEON_DEEP_MYSTERY_JUNGLE: Type = 86;
-    pub const DUNGEON_SERENITY_RIVER: Type = 87;
-    pub const DUNGEON_LANDSLIDE_CAVE: Type = 88;
-    pub const DUNGEON_LUSH_PRAIRIE: Type = 89;
-    pub const DUNGEON_TINY_MEADOW: Type = 90;
-    pub const DUNGEON_LABYRINTH_CAVE: Type = 91;
-    pub const DUNGEON_ORAN_FOREST: Type = 92;
-    pub const DUNGEON_LAKE_AFAR: Type = 93;
-    pub const DUNGEON_HAPPY_OUTLOOK: Type = 94;
-    pub const DUNGEON_MY_MISTRAL: Type = 95;
-    pub const DUNGEON_SHIMMER_HILL: Type = 96;
-    pub const DUNGEON_LOST_WILDERNESS: Type = 97;
-    pub const DUNGEON_MIDNIGHT_FOREST: Type = 98;
-    pub const DUNGEON_ZERO_ISLE_NORTH: Type = 99;
-    pub const DUNGEON_ZERO_ISLE_EAST: Type = 100;
-    pub const DUNGEON_ZERO_ISLE_WEST: Type = 101;
-    pub const DUNGEON_ZERO_ISLE_SOUTH: Type = 102;
-    pub const DUNGEON_ZERO_ISLE_CENTER: Type = 103;
-    pub const DUNGEON_DESTINY_TOWER: Type = 104;
-    pub const DUNGEON_DUMMY_0x69: Type = 105;
-    pub const DUNGEON_DUMMY_0x6A: Type = 106;
-    pub const DUNGEON_OBLIVION_FOREST: Type = 107;
-    pub const DUNGEON_TREACHEROUS_WATERS: Type = 108;
-    pub const DUNGEON_SOUTHEASTERN_ISLANDS: Type = 109;
-    pub const DUNGEON_INFERNO_CAVE: Type = 110;
-    pub const DUNGEON_1ST_STATION_PASS: Type = 111;
-    pub const DUNGEON_2ND_STATION_PASS: Type = 112;
-    pub const DUNGEON_3RD_STATION_PASS: Type = 113;
-    pub const DUNGEON_4TH_STATION_PASS: Type = 114;
-    pub const DUNGEON_5TH_STATION_PASS: Type = 115;
-    pub const DUNGEON_6TH_STATION_PASS: Type = 116;
-    pub const DUNGEON_7TH_STATION_PASS: Type = 117;
-    pub const DUNGEON_8TH_STATION_PASS: Type = 118;
-    pub const DUNGEON_9TH_STATION_PASS: Type = 119;
-    pub const DUNGEON_SKY_PEAK_SUMMIT_PASS: Type = 120;
-    pub const DUNGEON_5TH_STATION_CLEARING: Type = 121;
-    pub const DUNGEON_SKY_PEAK_SUMMIT: Type = 122;
-    pub const DUNGEON_STAR_CAVE_SE1: Type = 123;
-    pub const DUNGEON_DEEP_STAR_CAVE: Type = 124;
-    pub const DUNGEON_DEEP_STAR_CAVE_TEAM_ROGUE: Type = 125;
-    pub const DUNGEON_STAR_CAVE_DEPTHS: Type = 126;
-    pub const DUNGEON_STAR_CAVE_PIT: Type = 127;
-    pub const DUNGEON_MURKY_FOREST: Type = 128;
-    pub const DUNGEON_EASTERN_CAVE: Type = 129;
-    pub const DUNGEON_FORTUNE_RAVINE: Type = 130;
-    pub const DUNGEON_FORTUNE_RAVINE_DEPTHS: Type = 131;
-    pub const DUNGEON_FORTUNE_RAVINE_PIT: Type = 132;
-    pub const DUNGEON_BARREN_VALLEY: Type = 133;
-    pub const DUNGEON_DEEP_BARREN_VALLEY: Type = 134;
-    pub const DUNGEON_BARREN_VALLEY_CLEARING: Type = 135;
-    pub const DUNGEON_DARK_WASTELAND: Type = 136;
-    pub const DUNGEON_TEMPORAL_TOWER_SE5: Type = 137;
-    pub const DUNGEON_TEMPORAL_SPIRE_SE5: Type = 138;
-    pub const DUNGEON_DUSK_FOREST_SE5: Type = 139;
-    pub const DUNGEON_BLACK_SWAMP: Type = 140;
-    pub const DUNGEON_SPACIAL_CLIFFS: Type = 141;
-    pub const DUNGEON_DARK_ICE_MOUNTAIN: Type = 142;
-    pub const DUNGEON_DARK_ICE_MOUNTAIN_PEAK: Type = 143;
-    pub const DUNGEON_DARK_ICE_MOUNTAIN_PINNACLE: Type = 144;
-    pub const DUNGEON_ICICLE_FOREST: Type = 145;
-    pub const DUNGEON_VAST_ICE_MOUNTAIN: Type = 146;
-    pub const DUNGEON_VAST_ICE_MOUNTAIN_PEAK: Type = 147;
-    pub const DUNGEON_VAST_ICE_MOUNTAIN_PINNACLE: Type = 148;
-    pub const DUNGEON_SOUTHERN_JUNGLE: Type = 149;
-    pub const DUNGEON_BOULDER_QUARRY: Type = 150;
-    pub const DUNGEON_DEEP_BOULDER_QUARRY: Type = 151;
-    pub const DUNGEON_BOULDER_QUARRY_CLEARING: Type = 152;
-    pub const DUNGEON_RIGHT_CAVE_PATH: Type = 153;
-    pub const DUNGEON_LEFT_CAVE_PATH: Type = 154;
-    pub const DUNGEON_LIMESTONE_CAVERN: Type = 155;
-    pub const DUNGEON_DEEP_LIMESTONE_CAVERN: Type = 156;
-    pub const DUNGEON_LIMESTONE_CAVERN_DEPTHS: Type = 157;
-    pub const DUNGEON_SPRING_CAVE: Type = 158;
-    pub const DUNGEON_UPPER_SPRING_CAVE_HAUNTER: Type = 159;
-    pub const DUNGEON_UPPER_SPRING_CAVE: Type = 160;
-    pub const DUNGEON_MIDDLE_SPRING_CAVE: Type = 161;
-    pub const DUNGEON_LOWER_SPRING_CAVE: Type = 162;
-    pub const DUNGEON_SPRING_CAVE_DEPTHS: Type = 163;
-    pub const DUNGEON_SPRING_CAVE_PIT: Type = 164;
-    pub const DUNGEON_LITTLE_PLAINS: Type = 165;
-    pub const DUNGEON_MT_CLEAR: Type = 166;
-    pub const DUNGEON_CHALLENGE_RIVER: Type = 167;
-    pub const DUNGEON_TRIAL_FOREST: Type = 168;
-    pub const DUNGEON_GUIDING_SEA: Type = 169;
-    pub const DUNGEON_HIDDEN_SHOPKEEPER_VILLAGE: Type = 170;
-    pub const DUNGEON_DUMMY_0xAB: Type = 171;
-    pub const DUNGEON_DUMMY_0xAC: Type = 172;
-    pub const DUNGEON_DUMMY_0xAD: Type = 173;
-    pub const DUNGEON_STAR_CAVE: Type = 174;
-    pub const DUNGEON_SHAYMIN_VILLAGE: Type = 175;
-    pub const DUNGEON_ARMALDOS_SHELTER: Type = 176;
-    pub const DUNGEON_LUMINOUS_SPRING: Type = 177;
-    pub const DUNGEON_HOT_SPRING: Type = 178;
-    pub const DUNGEON_RESCUE: Type = 179;
-    pub const DUNGEON_NORMAL_FLY_MAZE: Type = 180;
-    pub const DUNGEON_DARK_FIRE_MAZE: Type = 181;
-    pub const DUNGEON_ROCK_WATER_MAZE: Type = 182;
-    pub const DUNGEON_GRASS_MAZE: Type = 183;
-    pub const DUNGEON_ELEC_STEEL_MAZE: Type = 184;
-    pub const DUNGEON_ICE_GROUND_MAZE: Type = 185;
-    pub const DUNGEON_FIGHT_PSYCH_MAZE: Type = 186;
-    pub const DUNGEON_POISON_BUG_MAZE: Type = 187;
-    pub const DUNGEON_DRAGON_MAZE: Type = 188;
-    pub const DUNGEON_GHOST_MAZE: Type = 189;
-    pub const DUNGEON_EXPLORER_MAZE: Type = 190;
-    pub const DUNGEON_FINAL_MAZE: Type = 191;
-    pub const DUNGEON_DOJO_0xC0: Type = 192;
-    pub const DUNGEON_DOJO_0xC1: Type = 193;
-    pub const DUNGEON_DOJO_0xC2: Type = 194;
-    pub const DUNGEON_DOJO_0xC3: Type = 195;
-    pub const DUNGEON_DOJO_0xC4: Type = 196;
-    pub const DUNGEON_DOJO_0xC5: Type = 197;
-    pub const DUNGEON_DOJO_0xC6: Type = 198;
-    pub const DUNGEON_DOJO_0xC7: Type = 199;
-    pub const DUNGEON_DOJO_0xC8: Type = 200;
-    pub const DUNGEON_DOJO_0xC9: Type = 201;
-    pub const DUNGEON_DOJO_0xCA: Type = 202;
-    pub const DUNGEON_DOJO_0xCB: Type = 203;
-    pub const DUNGEON_DOJO_0xCC: Type = 204;
-    pub const DUNGEON_DOJO_0xCD: Type = 205;
-    pub const DUNGEON_DOJO_0xCE: Type = 206;
-    pub const DUNGEON_DOJO_0xCF: Type = 207;
-    pub const DUNGEON_DOJO_0xD0: Type = 208;
-    pub const DUNGEON_DOJO_0xD1: Type = 209;
-    pub const DUNGEON_DOJO_0xD2: Type = 210;
-    pub const DUNGEON_DOJO_0xD3: Type = 211;
-    pub const DUNGEON_RESCUE_DUNGEON: Type = 212;
-    pub const DUNGEON_BASE: Type = 213;
-    pub const DUNGEON_JOINED_AT_QUESTION_MARKS: Type = 214;
-    pub const DUNGEON_BEACH: Type = 215;
-    pub const DUNGEON_JOINED_AT_UNKNOWN: Type = 216;
-    pub const DUNGEON_JOINED_AT_BIDOOF: Type = 217;
-    pub const DUNGEON_JOINED_AT_GROVYLE: Type = 218;
-    pub const DUNGEON_JOINED_AT_CELEBI: Type = 219;
-    pub const DUNGEON_JOINED_AT_CHATOT: Type = 220;
-    pub const DUNGEON_JOINED_AT_CRESSELIA: Type = 221;
-    pub const DUNGEON_DUMMY_0xDE: Type = 222;
-    pub const DUNGEON_DUMMY_0xDF: Type = 223;
-    pub const DUNGEON_DUMMY_0xE0: Type = 224;
-    pub const DUNGEON_DUMMY_0xE1: Type = 225;
-    pub const DUNGEON_DUMMY_0xE2: Type = 226;
-    pub const DUNGEON_DUMMY_0xE3: Type = 227;
-    pub const DUNGEON_DUMMY_0xE4: Type = 228;
-    pub const DUNGEON_DUMMY_0xE5: Type = 229;
-    pub const DUNGEON_DUMMY_0xE6: Type = 230;
-    pub const DUNGEON_DUMMY_0xE7: Type = 231;
-    pub const DUNGEON_DUMMY_0xE8: Type = 232;
-    pub const DUNGEON_DUMMY_0xE9: Type = 233;
-    pub const DUNGEON_DUMMY_0xEA: Type = 234;
-    pub const DUNGEON_DUMMY_0xEB: Type = 235;
-    pub const DUNGEON_DUMMY_0xEC: Type = 236;
-    pub const DUNGEON_DUMMY_0xED: Type = 237;
-    pub const DUNGEON_DUMMY_0xEE: Type = 238;
-    pub const DUNGEON_DUMMY_0xEF: Type = 239;
-    pub const DUNGEON_DUMMY_0xF0: Type = 240;
-    pub const DUNGEON_JOINED_AT_MANAPHY_RECRUITED: Type = 241;
-    pub const DUNGEON_JOINED_AT_CRESSELIA_RECRUITED: Type = 242;
-    pub const DUNGEON_JOINED_AT_SHAYMIN_LAND_RECRUITED: Type = 243;
-    pub const DUNGEON_DUMMY_0xF4: Type = 244;
-    pub const DUNGEON_DUMMY_0xF5: Type = 245;
-    pub const DUNGEON_DUMMY_0xF6: Type = 246;
-    pub const DUNGEON_TREASURE_TOWN_0xF7: Type = 247;
-    pub const DUNGEON_TREASURE_TOWN_0xF8: Type = 248;
-    pub const DUNGEON_OUTSIDE: Type = 249;
-    pub const DUNGEON_CLIENT: Type = 250;
-    pub const DUNGEON_DUMMY_0xFB: Type = 251;
-    pub const DUNGEON_DUMMY_0xFC: Type = 252;
-    pub const DUNGEON_DUMMY_0xFD: Type = 253;
-    pub const DUNGEON_DUMMY_0xFE: Type = 254;
-    pub const DUNGEON_DUMMY_0xFF: Type = 255;
+impl dungeon_id {
+    pub const DUNGEON_TEST_DUNGEON: dungeon_id = dungeon_id(0);
 }
+impl dungeon_id {
+    pub const DUNGEON_BEACH_CAVE: dungeon_id = dungeon_id(1);
+}
+impl dungeon_id {
+    pub const DUNGEON_BEACH_CAVE_PIT: dungeon_id = dungeon_id(2);
+}
+impl dungeon_id {
+    pub const DUNGEON_DRENCHED_BLUFF: dungeon_id = dungeon_id(3);
+}
+impl dungeon_id {
+    pub const DUNGEON_MT_BRISTLE: dungeon_id = dungeon_id(4);
+}
+impl dungeon_id {
+    pub const DUNGEON_MT_BRISTLE_PEAK: dungeon_id = dungeon_id(5);
+}
+impl dungeon_id {
+    pub const DUNGEON_WATERFALL_CAVE: dungeon_id = dungeon_id(6);
+}
+impl dungeon_id {
+    pub const DUNGEON_APPLE_WOODS: dungeon_id = dungeon_id(7);
+}
+impl dungeon_id {
+    pub const DUNGEON_CRAGGY_COAST: dungeon_id = dungeon_id(8);
+}
+impl dungeon_id {
+    pub const DUNGEON_SIDE_PATH: dungeon_id = dungeon_id(9);
+}
+impl dungeon_id {
+    pub const DUNGEON_MT_HORN: dungeon_id = dungeon_id(10);
+}
+impl dungeon_id {
+    pub const DUNGEON_ROCK_PATH: dungeon_id = dungeon_id(11);
+}
+impl dungeon_id {
+    pub const DUNGEON_FOGGY_FOREST: dungeon_id = dungeon_id(12);
+}
+impl dungeon_id {
+    pub const DUNGEON_FOREST_PATH: dungeon_id = dungeon_id(13);
+}
+impl dungeon_id {
+    pub const DUNGEON_STEAM_CAVE: dungeon_id = dungeon_id(14);
+}
+impl dungeon_id {
+    pub const DUNGEON_UPPER_STEAM_CAVE: dungeon_id = dungeon_id(15);
+}
+impl dungeon_id {
+    pub const DUNGEON_STEAM_CAVE_PEAK: dungeon_id = dungeon_id(16);
+}
+impl dungeon_id {
+    pub const DUNGEON_AMP_PLAINS: dungeon_id = dungeon_id(17);
+}
+impl dungeon_id {
+    pub const DUNGEON_FAR_AMP_PLAINS: dungeon_id = dungeon_id(18);
+}
+impl dungeon_id {
+    pub const DUNGEON_AMP_CLEARING: dungeon_id = dungeon_id(19);
+}
+impl dungeon_id {
+    pub const DUNGEON_NORTHERN_DESERT: dungeon_id = dungeon_id(20);
+}
+impl dungeon_id {
+    pub const DUNGEON_QUICKSAND_CAVE: dungeon_id = dungeon_id(21);
+}
+impl dungeon_id {
+    pub const DUNGEON_QUICKSAND_PIT: dungeon_id = dungeon_id(22);
+}
+impl dungeon_id {
+    pub const DUNGEON_UNDERGROUND_LAKE: dungeon_id = dungeon_id(23);
+}
+impl dungeon_id {
+    pub const DUNGEON_CRYSTAL_CAVE: dungeon_id = dungeon_id(24);
+}
+impl dungeon_id {
+    pub const DUNGEON_CRYSTAL_CROSSING: dungeon_id = dungeon_id(25);
+}
+impl dungeon_id {
+    pub const DUNGEON_CRYSTAL_LAKE: dungeon_id = dungeon_id(26);
+}
+impl dungeon_id {
+    pub const DUNGEON_CHASM_CAVE: dungeon_id = dungeon_id(27);
+}
+impl dungeon_id {
+    pub const DUNGEON_DARK_HILL: dungeon_id = dungeon_id(28);
+}
+impl dungeon_id {
+    pub const DUNGEON_SEALED_RUIN: dungeon_id = dungeon_id(29);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_SEALED_RUIN: dungeon_id = dungeon_id(30);
+}
+impl dungeon_id {
+    pub const DUNGEON_SEALED_RUIN_PIT: dungeon_id = dungeon_id(31);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUSK_FOREST: dungeon_id = dungeon_id(32);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_DUSK_FOREST: dungeon_id = dungeon_id(33);
+}
+impl dungeon_id {
+    pub const DUNGEON_TREESHROUD_FOREST: dungeon_id = dungeon_id(34);
+}
+impl dungeon_id {
+    pub const DUNGEON_BRINE_CAVE: dungeon_id = dungeon_id(35);
+}
+impl dungeon_id {
+    pub const DUNGEON_LOWER_BRINE_CAVE: dungeon_id = dungeon_id(36);
+}
+impl dungeon_id {
+    pub const DUNGEON_BRINE_CAVE_PIT: dungeon_id = dungeon_id(37);
+}
+impl dungeon_id {
+    pub const DUNGEON_HIDDEN_LAND: dungeon_id = dungeon_id(38);
+}
+impl dungeon_id {
+    pub const DUNGEON_HIDDEN_HIGHLAND: dungeon_id = dungeon_id(39);
+}
+impl dungeon_id {
+    pub const DUNGEON_OLD_RUINS: dungeon_id = dungeon_id(40);
+}
+impl dungeon_id {
+    pub const DUNGEON_TEMPORAL_TOWER: dungeon_id = dungeon_id(41);
+}
+impl dungeon_id {
+    pub const DUNGEON_TEMPORAL_SPIRE: dungeon_id = dungeon_id(42);
+}
+impl dungeon_id {
+    pub const DUNGEON_TEMPORAL_PINNACLE: dungeon_id = dungeon_id(43);
+}
+impl dungeon_id {
+    pub const DUNGEON_MYSTIFYING_FOREST: dungeon_id = dungeon_id(44);
+}
+impl dungeon_id {
+    pub const DUNGEON_MYSTIFYING_FOREST_CLEARING: dungeon_id = dungeon_id(45);
+}
+impl dungeon_id {
+    pub const DUNGEON_BLIZZARD_ISLAND: dungeon_id = dungeon_id(46);
+}
+impl dungeon_id {
+    pub const DUNGEON_CREVICE_CAVE: dungeon_id = dungeon_id(47);
+}
+impl dungeon_id {
+    pub const DUNGEON_LOWER_CREVICE_CAVE: dungeon_id = dungeon_id(48);
+}
+impl dungeon_id {
+    pub const DUNGEON_CREVICE_CAVE_PIT: dungeon_id = dungeon_id(49);
+}
+impl dungeon_id {
+    pub const DUNGEON_SURROUNDED_SEA: dungeon_id = dungeon_id(50);
+}
+impl dungeon_id {
+    pub const DUNGEON_MIRACLE_SEA: dungeon_id = dungeon_id(51);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_MIRACLE_SEA: dungeon_id = dungeon_id(52);
+}
+impl dungeon_id {
+    pub const DUNGEON_MIRACLE_SEABED: dungeon_id = dungeon_id(53);
+}
+impl dungeon_id {
+    pub const DUNGEON_ICE_AEGIS_CAVE: dungeon_id = dungeon_id(54);
+}
+impl dungeon_id {
+    pub const DUNGEON_REGICE_CHAMBER: dungeon_id = dungeon_id(55);
+}
+impl dungeon_id {
+    pub const DUNGEON_ROCK_AEGIS_CAVE: dungeon_id = dungeon_id(56);
+}
+impl dungeon_id {
+    pub const DUNGEON_REGIROCK_CHAMBER: dungeon_id = dungeon_id(57);
+}
+impl dungeon_id {
+    pub const DUNGEON_STEEL_AEGIS_CAVE: dungeon_id = dungeon_id(58);
+}
+impl dungeon_id {
+    pub const DUNGEON_REGISTEEL_CHAMBER: dungeon_id = dungeon_id(59);
+}
+impl dungeon_id {
+    pub const DUNGEON_AEGIS_CAVE_PIT: dungeon_id = dungeon_id(60);
+}
+impl dungeon_id {
+    pub const DUNGEON_REGIGIGAS_CHAMBER: dungeon_id = dungeon_id(61);
+}
+impl dungeon_id {
+    pub const DUNGEON_MT_TRAVAIL: dungeon_id = dungeon_id(62);
+}
+impl dungeon_id {
+    pub const DUNGEON_THE_NIGHTMARE: dungeon_id = dungeon_id(63);
+}
+impl dungeon_id {
+    pub const DUNGEON_SPACIAL_RIFT: dungeon_id = dungeon_id(64);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_SPACIAL_RIFT: dungeon_id = dungeon_id(65);
+}
+impl dungeon_id {
+    pub const DUNGEON_SPACIAL_RIFT_BOTTOM: dungeon_id = dungeon_id(66);
+}
+impl dungeon_id {
+    pub const DUNGEON_DARK_CRATER: dungeon_id = dungeon_id(67);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_DARK_CRATER: dungeon_id = dungeon_id(68);
+}
+impl dungeon_id {
+    pub const DUNGEON_DARK_CRATER_PIT: dungeon_id = dungeon_id(69);
+}
+impl dungeon_id {
+    pub const DUNGEON_CONCEALED_RUINS: dungeon_id = dungeon_id(70);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_CONCEALED_RUINS: dungeon_id = dungeon_id(71);
+}
+impl dungeon_id {
+    pub const DUNGEON_MARINE_RESORT: dungeon_id = dungeon_id(72);
+}
+impl dungeon_id {
+    pub const DUNGEON_BOTTOMLESS_SEA: dungeon_id = dungeon_id(73);
+}
+impl dungeon_id {
+    pub const DUNGEON_BOTTOMLESS_SEA_DEPTHS: dungeon_id = dungeon_id(74);
+}
+impl dungeon_id {
+    pub const DUNGEON_SHIMMER_DESERT: dungeon_id = dungeon_id(75);
+}
+impl dungeon_id {
+    pub const DUNGEON_SHIMMER_DESERT_PIT: dungeon_id = dungeon_id(76);
+}
+impl dungeon_id {
+    pub const DUNGEON_MT_AVALANCHE: dungeon_id = dungeon_id(77);
+}
+impl dungeon_id {
+    pub const DUNGEON_MT_AVALANCHE_PEAK: dungeon_id = dungeon_id(78);
+}
+impl dungeon_id {
+    pub const DUNGEON_GIANT_VOLCANO: dungeon_id = dungeon_id(79);
+}
+impl dungeon_id {
+    pub const DUNGEON_GIANT_VOLCANO_PEAK: dungeon_id = dungeon_id(80);
+}
+impl dungeon_id {
+    pub const DUNGEON_WORLD_ABYSS: dungeon_id = dungeon_id(81);
+}
+impl dungeon_id {
+    pub const DUNGEON_WORLD_ABYSS_PIT: dungeon_id = dungeon_id(82);
+}
+impl dungeon_id {
+    pub const DUNGEON_SKY_STAIRWAY: dungeon_id = dungeon_id(83);
+}
+impl dungeon_id {
+    pub const DUNGEON_SKY_STAIRWAY_APEX: dungeon_id = dungeon_id(84);
+}
+impl dungeon_id {
+    pub const DUNGEON_MYSTERY_JUNGLE: dungeon_id = dungeon_id(85);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_MYSTERY_JUNGLE: dungeon_id = dungeon_id(86);
+}
+impl dungeon_id {
+    pub const DUNGEON_SERENITY_RIVER: dungeon_id = dungeon_id(87);
+}
+impl dungeon_id {
+    pub const DUNGEON_LANDSLIDE_CAVE: dungeon_id = dungeon_id(88);
+}
+impl dungeon_id {
+    pub const DUNGEON_LUSH_PRAIRIE: dungeon_id = dungeon_id(89);
+}
+impl dungeon_id {
+    pub const DUNGEON_TINY_MEADOW: dungeon_id = dungeon_id(90);
+}
+impl dungeon_id {
+    pub const DUNGEON_LABYRINTH_CAVE: dungeon_id = dungeon_id(91);
+}
+impl dungeon_id {
+    pub const DUNGEON_ORAN_FOREST: dungeon_id = dungeon_id(92);
+}
+impl dungeon_id {
+    pub const DUNGEON_LAKE_AFAR: dungeon_id = dungeon_id(93);
+}
+impl dungeon_id {
+    pub const DUNGEON_HAPPY_OUTLOOK: dungeon_id = dungeon_id(94);
+}
+impl dungeon_id {
+    pub const DUNGEON_MY_MISTRAL: dungeon_id = dungeon_id(95);
+}
+impl dungeon_id {
+    pub const DUNGEON_SHIMMER_HILL: dungeon_id = dungeon_id(96);
+}
+impl dungeon_id {
+    pub const DUNGEON_LOST_WILDERNESS: dungeon_id = dungeon_id(97);
+}
+impl dungeon_id {
+    pub const DUNGEON_MIDNIGHT_FOREST: dungeon_id = dungeon_id(98);
+}
+impl dungeon_id {
+    pub const DUNGEON_ZERO_ISLE_NORTH: dungeon_id = dungeon_id(99);
+}
+impl dungeon_id {
+    pub const DUNGEON_ZERO_ISLE_EAST: dungeon_id = dungeon_id(100);
+}
+impl dungeon_id {
+    pub const DUNGEON_ZERO_ISLE_WEST: dungeon_id = dungeon_id(101);
+}
+impl dungeon_id {
+    pub const DUNGEON_ZERO_ISLE_SOUTH: dungeon_id = dungeon_id(102);
+}
+impl dungeon_id {
+    pub const DUNGEON_ZERO_ISLE_CENTER: dungeon_id = dungeon_id(103);
+}
+impl dungeon_id {
+    pub const DUNGEON_DESTINY_TOWER: dungeon_id = dungeon_id(104);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0x69: dungeon_id = dungeon_id(105);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0x6A: dungeon_id = dungeon_id(106);
+}
+impl dungeon_id {
+    pub const DUNGEON_OBLIVION_FOREST: dungeon_id = dungeon_id(107);
+}
+impl dungeon_id {
+    pub const DUNGEON_TREACHEROUS_WATERS: dungeon_id = dungeon_id(108);
+}
+impl dungeon_id {
+    pub const DUNGEON_SOUTHEASTERN_ISLANDS: dungeon_id = dungeon_id(109);
+}
+impl dungeon_id {
+    pub const DUNGEON_INFERNO_CAVE: dungeon_id = dungeon_id(110);
+}
+impl dungeon_id {
+    pub const DUNGEON_1ST_STATION_PASS: dungeon_id = dungeon_id(111);
+}
+impl dungeon_id {
+    pub const DUNGEON_2ND_STATION_PASS: dungeon_id = dungeon_id(112);
+}
+impl dungeon_id {
+    pub const DUNGEON_3RD_STATION_PASS: dungeon_id = dungeon_id(113);
+}
+impl dungeon_id {
+    pub const DUNGEON_4TH_STATION_PASS: dungeon_id = dungeon_id(114);
+}
+impl dungeon_id {
+    pub const DUNGEON_5TH_STATION_PASS: dungeon_id = dungeon_id(115);
+}
+impl dungeon_id {
+    pub const DUNGEON_6TH_STATION_PASS: dungeon_id = dungeon_id(116);
+}
+impl dungeon_id {
+    pub const DUNGEON_7TH_STATION_PASS: dungeon_id = dungeon_id(117);
+}
+impl dungeon_id {
+    pub const DUNGEON_8TH_STATION_PASS: dungeon_id = dungeon_id(118);
+}
+impl dungeon_id {
+    pub const DUNGEON_9TH_STATION_PASS: dungeon_id = dungeon_id(119);
+}
+impl dungeon_id {
+    pub const DUNGEON_SKY_PEAK_SUMMIT_PASS: dungeon_id = dungeon_id(120);
+}
+impl dungeon_id {
+    pub const DUNGEON_5TH_STATION_CLEARING: dungeon_id = dungeon_id(121);
+}
+impl dungeon_id {
+    pub const DUNGEON_SKY_PEAK_SUMMIT: dungeon_id = dungeon_id(122);
+}
+impl dungeon_id {
+    pub const DUNGEON_STAR_CAVE_SE1: dungeon_id = dungeon_id(123);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_STAR_CAVE: dungeon_id = dungeon_id(124);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_STAR_CAVE_TEAM_ROGUE: dungeon_id = dungeon_id(125);
+}
+impl dungeon_id {
+    pub const DUNGEON_STAR_CAVE_DEPTHS: dungeon_id = dungeon_id(126);
+}
+impl dungeon_id {
+    pub const DUNGEON_STAR_CAVE_PIT: dungeon_id = dungeon_id(127);
+}
+impl dungeon_id {
+    pub const DUNGEON_MURKY_FOREST: dungeon_id = dungeon_id(128);
+}
+impl dungeon_id {
+    pub const DUNGEON_EASTERN_CAVE: dungeon_id = dungeon_id(129);
+}
+impl dungeon_id {
+    pub const DUNGEON_FORTUNE_RAVINE: dungeon_id = dungeon_id(130);
+}
+impl dungeon_id {
+    pub const DUNGEON_FORTUNE_RAVINE_DEPTHS: dungeon_id = dungeon_id(131);
+}
+impl dungeon_id {
+    pub const DUNGEON_FORTUNE_RAVINE_PIT: dungeon_id = dungeon_id(132);
+}
+impl dungeon_id {
+    pub const DUNGEON_BARREN_VALLEY: dungeon_id = dungeon_id(133);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_BARREN_VALLEY: dungeon_id = dungeon_id(134);
+}
+impl dungeon_id {
+    pub const DUNGEON_BARREN_VALLEY_CLEARING: dungeon_id = dungeon_id(135);
+}
+impl dungeon_id {
+    pub const DUNGEON_DARK_WASTELAND: dungeon_id = dungeon_id(136);
+}
+impl dungeon_id {
+    pub const DUNGEON_TEMPORAL_TOWER_SE5: dungeon_id = dungeon_id(137);
+}
+impl dungeon_id {
+    pub const DUNGEON_TEMPORAL_SPIRE_SE5: dungeon_id = dungeon_id(138);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUSK_FOREST_SE5: dungeon_id = dungeon_id(139);
+}
+impl dungeon_id {
+    pub const DUNGEON_BLACK_SWAMP: dungeon_id = dungeon_id(140);
+}
+impl dungeon_id {
+    pub const DUNGEON_SPACIAL_CLIFFS: dungeon_id = dungeon_id(141);
+}
+impl dungeon_id {
+    pub const DUNGEON_DARK_ICE_MOUNTAIN: dungeon_id = dungeon_id(142);
+}
+impl dungeon_id {
+    pub const DUNGEON_DARK_ICE_MOUNTAIN_PEAK: dungeon_id = dungeon_id(143);
+}
+impl dungeon_id {
+    pub const DUNGEON_DARK_ICE_MOUNTAIN_PINNACLE: dungeon_id = dungeon_id(144);
+}
+impl dungeon_id {
+    pub const DUNGEON_ICICLE_FOREST: dungeon_id = dungeon_id(145);
+}
+impl dungeon_id {
+    pub const DUNGEON_VAST_ICE_MOUNTAIN: dungeon_id = dungeon_id(146);
+}
+impl dungeon_id {
+    pub const DUNGEON_VAST_ICE_MOUNTAIN_PEAK: dungeon_id = dungeon_id(147);
+}
+impl dungeon_id {
+    pub const DUNGEON_VAST_ICE_MOUNTAIN_PINNACLE: dungeon_id = dungeon_id(148);
+}
+impl dungeon_id {
+    pub const DUNGEON_SOUTHERN_JUNGLE: dungeon_id = dungeon_id(149);
+}
+impl dungeon_id {
+    pub const DUNGEON_BOULDER_QUARRY: dungeon_id = dungeon_id(150);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_BOULDER_QUARRY: dungeon_id = dungeon_id(151);
+}
+impl dungeon_id {
+    pub const DUNGEON_BOULDER_QUARRY_CLEARING: dungeon_id = dungeon_id(152);
+}
+impl dungeon_id {
+    pub const DUNGEON_RIGHT_CAVE_PATH: dungeon_id = dungeon_id(153);
+}
+impl dungeon_id {
+    pub const DUNGEON_LEFT_CAVE_PATH: dungeon_id = dungeon_id(154);
+}
+impl dungeon_id {
+    pub const DUNGEON_LIMESTONE_CAVERN: dungeon_id = dungeon_id(155);
+}
+impl dungeon_id {
+    pub const DUNGEON_DEEP_LIMESTONE_CAVERN: dungeon_id = dungeon_id(156);
+}
+impl dungeon_id {
+    pub const DUNGEON_LIMESTONE_CAVERN_DEPTHS: dungeon_id = dungeon_id(157);
+}
+impl dungeon_id {
+    pub const DUNGEON_SPRING_CAVE: dungeon_id = dungeon_id(158);
+}
+impl dungeon_id {
+    pub const DUNGEON_UPPER_SPRING_CAVE_HAUNTER: dungeon_id = dungeon_id(159);
+}
+impl dungeon_id {
+    pub const DUNGEON_UPPER_SPRING_CAVE: dungeon_id = dungeon_id(160);
+}
+impl dungeon_id {
+    pub const DUNGEON_MIDDLE_SPRING_CAVE: dungeon_id = dungeon_id(161);
+}
+impl dungeon_id {
+    pub const DUNGEON_LOWER_SPRING_CAVE: dungeon_id = dungeon_id(162);
+}
+impl dungeon_id {
+    pub const DUNGEON_SPRING_CAVE_DEPTHS: dungeon_id = dungeon_id(163);
+}
+impl dungeon_id {
+    pub const DUNGEON_SPRING_CAVE_PIT: dungeon_id = dungeon_id(164);
+}
+impl dungeon_id {
+    pub const DUNGEON_LITTLE_PLAINS: dungeon_id = dungeon_id(165);
+}
+impl dungeon_id {
+    pub const DUNGEON_MT_CLEAR: dungeon_id = dungeon_id(166);
+}
+impl dungeon_id {
+    pub const DUNGEON_CHALLENGE_RIVER: dungeon_id = dungeon_id(167);
+}
+impl dungeon_id {
+    pub const DUNGEON_TRIAL_FOREST: dungeon_id = dungeon_id(168);
+}
+impl dungeon_id {
+    pub const DUNGEON_GUIDING_SEA: dungeon_id = dungeon_id(169);
+}
+impl dungeon_id {
+    pub const DUNGEON_HIDDEN_SHOPKEEPER_VILLAGE: dungeon_id = dungeon_id(170);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xAB: dungeon_id = dungeon_id(171);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xAC: dungeon_id = dungeon_id(172);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xAD: dungeon_id = dungeon_id(173);
+}
+impl dungeon_id {
+    pub const DUNGEON_STAR_CAVE: dungeon_id = dungeon_id(174);
+}
+impl dungeon_id {
+    pub const DUNGEON_SHAYMIN_VILLAGE: dungeon_id = dungeon_id(175);
+}
+impl dungeon_id {
+    pub const DUNGEON_ARMALDOS_SHELTER: dungeon_id = dungeon_id(176);
+}
+impl dungeon_id {
+    pub const DUNGEON_LUMINOUS_SPRING: dungeon_id = dungeon_id(177);
+}
+impl dungeon_id {
+    pub const DUNGEON_HOT_SPRING: dungeon_id = dungeon_id(178);
+}
+impl dungeon_id {
+    pub const DUNGEON_RESCUE: dungeon_id = dungeon_id(179);
+}
+impl dungeon_id {
+    pub const DUNGEON_NORMAL_FLY_MAZE: dungeon_id = dungeon_id(180);
+}
+impl dungeon_id {
+    pub const DUNGEON_DARK_FIRE_MAZE: dungeon_id = dungeon_id(181);
+}
+impl dungeon_id {
+    pub const DUNGEON_ROCK_WATER_MAZE: dungeon_id = dungeon_id(182);
+}
+impl dungeon_id {
+    pub const DUNGEON_GRASS_MAZE: dungeon_id = dungeon_id(183);
+}
+impl dungeon_id {
+    pub const DUNGEON_ELEC_STEEL_MAZE: dungeon_id = dungeon_id(184);
+}
+impl dungeon_id {
+    pub const DUNGEON_ICE_GROUND_MAZE: dungeon_id = dungeon_id(185);
+}
+impl dungeon_id {
+    pub const DUNGEON_FIGHT_PSYCH_MAZE: dungeon_id = dungeon_id(186);
+}
+impl dungeon_id {
+    pub const DUNGEON_POISON_BUG_MAZE: dungeon_id = dungeon_id(187);
+}
+impl dungeon_id {
+    pub const DUNGEON_DRAGON_MAZE: dungeon_id = dungeon_id(188);
+}
+impl dungeon_id {
+    pub const DUNGEON_GHOST_MAZE: dungeon_id = dungeon_id(189);
+}
+impl dungeon_id {
+    pub const DUNGEON_EXPLORER_MAZE: dungeon_id = dungeon_id(190);
+}
+impl dungeon_id {
+    pub const DUNGEON_FINAL_MAZE: dungeon_id = dungeon_id(191);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC0: dungeon_id = dungeon_id(192);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC1: dungeon_id = dungeon_id(193);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC2: dungeon_id = dungeon_id(194);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC3: dungeon_id = dungeon_id(195);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC4: dungeon_id = dungeon_id(196);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC5: dungeon_id = dungeon_id(197);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC6: dungeon_id = dungeon_id(198);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC7: dungeon_id = dungeon_id(199);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC8: dungeon_id = dungeon_id(200);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xC9: dungeon_id = dungeon_id(201);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xCA: dungeon_id = dungeon_id(202);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xCB: dungeon_id = dungeon_id(203);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xCC: dungeon_id = dungeon_id(204);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xCD: dungeon_id = dungeon_id(205);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xCE: dungeon_id = dungeon_id(206);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xCF: dungeon_id = dungeon_id(207);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xD0: dungeon_id = dungeon_id(208);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xD1: dungeon_id = dungeon_id(209);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xD2: dungeon_id = dungeon_id(210);
+}
+impl dungeon_id {
+    pub const DUNGEON_DOJO_0xD3: dungeon_id = dungeon_id(211);
+}
+impl dungeon_id {
+    pub const DUNGEON_RESCUE_DUNGEON: dungeon_id = dungeon_id(212);
+}
+impl dungeon_id {
+    pub const DUNGEON_BASE: dungeon_id = dungeon_id(213);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_QUESTION_MARKS: dungeon_id = dungeon_id(214);
+}
+impl dungeon_id {
+    pub const DUNGEON_BEACH: dungeon_id = dungeon_id(215);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_UNKNOWN: dungeon_id = dungeon_id(216);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_BIDOOF: dungeon_id = dungeon_id(217);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_GROVYLE: dungeon_id = dungeon_id(218);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_CELEBI: dungeon_id = dungeon_id(219);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_CHATOT: dungeon_id = dungeon_id(220);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_CRESSELIA: dungeon_id = dungeon_id(221);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xDE: dungeon_id = dungeon_id(222);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xDF: dungeon_id = dungeon_id(223);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE0: dungeon_id = dungeon_id(224);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE1: dungeon_id = dungeon_id(225);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE2: dungeon_id = dungeon_id(226);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE3: dungeon_id = dungeon_id(227);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE4: dungeon_id = dungeon_id(228);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE5: dungeon_id = dungeon_id(229);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE6: dungeon_id = dungeon_id(230);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE7: dungeon_id = dungeon_id(231);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE8: dungeon_id = dungeon_id(232);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xE9: dungeon_id = dungeon_id(233);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xEA: dungeon_id = dungeon_id(234);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xEB: dungeon_id = dungeon_id(235);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xEC: dungeon_id = dungeon_id(236);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xED: dungeon_id = dungeon_id(237);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xEE: dungeon_id = dungeon_id(238);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xEF: dungeon_id = dungeon_id(239);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xF0: dungeon_id = dungeon_id(240);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_MANAPHY_RECRUITED: dungeon_id = dungeon_id(241);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_CRESSELIA_RECRUITED: dungeon_id = dungeon_id(242);
+}
+impl dungeon_id {
+    pub const DUNGEON_JOINED_AT_SHAYMIN_LAND_RECRUITED: dungeon_id = dungeon_id(243);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xF4: dungeon_id = dungeon_id(244);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xF5: dungeon_id = dungeon_id(245);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xF6: dungeon_id = dungeon_id(246);
+}
+impl dungeon_id {
+    pub const DUNGEON_TREASURE_TOWN_0xF7: dungeon_id = dungeon_id(247);
+}
+impl dungeon_id {
+    pub const DUNGEON_TREASURE_TOWN_0xF8: dungeon_id = dungeon_id(248);
+}
+impl dungeon_id {
+    pub const DUNGEON_OUTSIDE: dungeon_id = dungeon_id(249);
+}
+impl dungeon_id {
+    pub const DUNGEON_CLIENT: dungeon_id = dungeon_id(250);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xFB: dungeon_id = dungeon_id(251);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xFC: dungeon_id = dungeon_id(252);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xFD: dungeon_id = dungeon_id(253);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xFE: dungeon_id = dungeon_id(254);
+}
+impl dungeon_id {
+    pub const DUNGEON_DUMMY_0xFF: dungeon_id = dungeon_id(255);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct dungeon_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct dungeon_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -8825,18 +9337,18 @@ pub struct dungeon_id_8 {
 }
 impl dungeon_id_8 {
     #[inline]
-    pub fn val(&self) -> dungeon_id::Type {
+    pub fn val(&self) -> dungeon_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: dungeon_id::Type) {
+    pub fn set_val(&mut self, val: dungeon_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 8u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: dungeon_id::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+    pub fn new_bitfield_1(val: dungeon_id) -> __BindgenBitfieldUnit<[u8; 1usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 8u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -8853,18 +9365,18 @@ pub struct dungeon_id_16 {
 }
 impl dungeon_id_16 {
     #[inline]
-    pub fn val(&self) -> dungeon_id::Type {
+    pub fn val(&self) -> dungeon_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 16u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: dungeon_id::Type) {
+    pub fn set_val(&mut self, val: dungeon_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 16u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: dungeon_id::Type) -> __BindgenBitfieldUnit<[u8; 2usize]> {
+    pub fn new_bitfield_1(val: dungeon_id) -> __BindgenBitfieldUnit<[u8; 2usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 16u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -9175,7 +9687,7 @@ impl dungeon_group_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct dungeon_group_id(pub crate::ctypes::c_uint);
+pub struct dungeon_group_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct dungeon_group_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -9647,7 +10159,7 @@ impl iq_skill_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct iq_skill_id(pub crate::ctypes::c_uint);
+pub struct iq_skill_id(pub(crate) crate::ctypes::c_uint);
 impl iq_group_id {
     pub const IQ_GROUP_A: iq_group_id = iq_group_id(0);
 }
@@ -9698,7 +10210,7 @@ impl iq_group_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct iq_group_id(pub crate::ctypes::c_uint);
+pub struct iq_group_id(pub(crate) crate::ctypes::c_uint);
 pub mod direction_id {
     pub type Type = crate::ctypes::c_uint;
     pub const DIR_DOWN: Type = 0;
@@ -10761,7 +11273,7 @@ impl exclusive_item_effect_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct exclusive_item_effect_id(pub crate::ctypes::c_uint);
+pub struct exclusive_item_effect_id(pub(crate) crate::ctypes::c_uint);
 pub mod shop_item_positions {
     pub type Type = crate::ctypes::c_uint;
     pub const SHOP_POSITION_0: Type = 0;
@@ -11782,7 +12294,7 @@ impl fixed_room_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct fixed_room_id(pub crate::ctypes::c_uint);
+pub struct fixed_room_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct fixed_room_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -52086,7 +52598,7 @@ impl script_var_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct script_var_id(pub crate::ctypes::c_uint);
+pub struct script_var_id(pub(crate) crate::ctypes::c_uint);
 pub mod script_var_type {
     pub type Type = crate::ctypes::c_uint;
     pub const VARTYPE_NONE: Type = 0;
@@ -53280,7 +53792,7 @@ impl script_opcode_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct script_opcode_id(pub crate::ctypes::c_uint);
+pub struct script_opcode_id(pub(crate) crate::ctypes::c_uint);
 impl special_process_id {
     pub const SPECIAL_PROC_NONE: special_process_id = special_process_id(0);
 }
@@ -53484,7 +53996,7 @@ impl special_process_id {
 }
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
-pub struct special_process_id(pub crate::ctypes::c_uint);
+pub struct special_process_id(pub(crate) crate::ctypes::c_uint);
 pub mod common_routine_id {
     pub type Type = crate::ctypes::c_uint;
     pub const ROUTINE_END_TALK: Type = 0;
@@ -58027,10 +58539,10 @@ extern "C" {
     pub fn CeilFixedPoint(val_fp: u32) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn DungeonGoesUp(dungeon_id: dungeon_id::Type) -> bool_;
+    pub fn DungeonGoesUp(dungeon_id: dungeon_id) -> bool_;
 }
 extern "C" {
-    pub fn GetMaxRescueAttempts(dungeon_id: dungeon_id::Type) -> i8;
+    pub fn GetMaxRescueAttempts(dungeon_id: dungeon_id) -> i8;
 }
 extern "C" {
     pub fn JoinedAtRangeCheck(joined_at: dungeon_id_8) -> bool_;

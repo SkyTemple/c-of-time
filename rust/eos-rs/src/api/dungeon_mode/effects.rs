@@ -1,5 +1,5 @@
 use crate::api::dungeon_mode::*;
-use crate::api::objects::*;
+use crate::api::moves::Move;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use crate::ctypes::*;
 use crate::ffi;

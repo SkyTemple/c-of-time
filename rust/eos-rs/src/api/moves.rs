@@ -1,8 +1,16 @@
 //! Functions related to getting information about monster moves.
 
 use crate::api::dungeon_mode::MoveCategory;
-use crate::api::objects::{type_catalog, Move};
 use crate::ffi;
+
+/// A monster move.
+pub type Move = ffi::move_;
+
+/// A move ID with associated methods to get metadata.
+///
+/// Use the associated constants or the [`Self::get`] method to get instances of this.
+pub type MoveId = ffi::move_id;
+impl Copy for MoveId {}
 
 #[repr(u32)]
 #[derive(PartialEq, Eq, Clone, Copy)]
@@ -158,88 +166,86 @@ impl TryFrom<MoveTargetAndRange> for ffi::move_target_and_range {
     }
 }
 
-/// Game functions related to [`Move`]s.
-pub trait MoveExt {
+/// See [`MoveId`] for additional metadata methods.
+impl Move {
+    /// Returns the move ID
+    pub fn id(&self) -> MoveId {
+        self.id.val()
+    }
+
     /// Gets the move target-and-range field. See struct move_target_and_range in the C headers.
-    fn get_target_and_range(&self, is_ai: bool) -> MoveTargetAndRange;
+    pub fn get_target_and_range(&self, is_ai: bool) -> MoveTargetAndRange {
+        unsafe { ffi::GetMoveTargetAndRange(force_mut_ptr!(self), is_ai as ffi::bool_) }.into()
+    }
 
     /// Gets the base power of the move.
-    fn get_base_power(&self) -> i32;
+    pub fn get_base_power(&self) -> i32 {
+        unsafe { ffi::GetMoveBasePower(force_mut_ptr!(self)) }
+    }
 
     /// Gets the maximum PP for the move.
     ///
     /// Returns max PP for the given move, capped at 99.
-    fn get_max_pp(&self) -> i32;
-
-    /// Gets the critical hit chance of the move.
-    fn get_crit_chance(&self) -> i32;
-
-    /// Checks if the move is a recoil move (affected by Reckless).
-    fn is_recoil_move(&self) -> bool;
-
-    /// Checks if the move is a punch move (affected by Iron Fist).
-    fn is_punch_move(&self) -> bool;
-
-    /// Gets a move's category (physical, special, status). Returns None if the catgeory is invalid.
-    fn get_category(&self) -> Option<MoveCategory>;
-
-    /// Gets the type of the move.
-    fn get_type(&self) -> type_catalog::Type;
-
-    /// Gets the accuracy1 value for the move.
-    fn get_accuracy1(&self) -> u8;
-
-    /// Gets the accuracy2 value for the move.
-    fn get_accuracy2(&self) -> u8;
-
-    /// Gets the `ai_condition_random_chance` value for the move.
-    fn get_ai_condition_random_chance(&self) -> u8;
-}
-
-impl MoveExt for Move {
-    fn get_target_and_range(&self, is_ai: bool) -> MoveTargetAndRange {
-        unsafe { ffi::GetMoveTargetAndRange(force_mut_ptr!(self), is_ai as ffi::bool_) }.into()
-    }
-
-    fn get_base_power(&self) -> i32 {
-        unsafe { ffi::GetMoveBasePower(force_mut_ptr!(self)) }
-    }
-
-    fn get_max_pp(&self) -> i32 {
+    pub fn get_max_pp(&self) -> i32 {
         unsafe { ffi::GetMaxPp(force_mut_ptr!(self)) }
     }
 
-    fn get_crit_chance(&self) -> i32 {
+    /// Gets the critical hit chance of the move.
+    pub fn get_crit_chance(&self) -> i32 {
         unsafe { ffi::GetMoveCritChance(force_mut_ptr!(self)) }
     }
 
-    fn is_recoil_move(&self) -> bool {
-        unsafe { ffi::IsRecoilMove(self.id.val()) > 0 }
-    }
-
-    fn is_punch_move(&self) -> bool {
-        unsafe { ffi::IsPunchMove(self.id.val()) > 0 }
-    }
-
-    fn get_category(&self) -> Option<MoveCategory> {
-        unsafe { ffi::GetMoveCategory(self.id.val()) }
-            .try_into()
-            .ok()
-    }
-
-    fn get_type(&self) -> type_catalog::Type {
+    /// Gets the type of the move.
+    pub fn get_type(&self) -> type_catalog::Type {
         unsafe { ffi::GetMoveType(force_mut_ptr!(self)) }
     }
 
-    fn get_accuracy1(&self) -> u8 {
+    /// Gets the accuracy1 value for the move.
+    pub fn get_accuracy1(&self) -> u8 {
         unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 0) }
     }
 
-    fn get_accuracy2(&self) -> u8 {
+    /// Gets the accuracy2 value for the move.
+    pub fn get_accuracy2(&self) -> u8 {
         unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 1) }
     }
 
-    fn get_ai_condition_random_chance(&self) -> u8 {
+    /// Gets the `ai_condition_random_chance` value for the move.
+    pub fn get_ai_condition_random_chance(&self) -> u8 {
         unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 2) }
+    }
+}
+
+/// This impl provides general metadata about moves in the game.
+///
+/// See [`Move`] for additional metadata methods.
+impl MoveId {
+    /// Returns the ID struct for the move with the given ID.
+    ///
+    /// # Safety
+    /// The caller must make sure the ID is valid (refers to an existing move),
+    /// otherwise this is UB.
+    pub unsafe fn get(id: u32) -> Self {
+        Self(id)
+    }
+
+    /// Returns the ID of this move.
+    pub fn id(&self) -> u32 {
+        self.0
+    }
+
+    /// Checks if the move is a recoil move (affected by Reckless).
+    pub fn is_recoil_move(&self) -> bool {
+        unsafe { ffi::IsRecoilMove(self) > 0 }
+    }
+
+    /// Checks if the move is a punch move (affected by Iron Fist).
+    pub fn is_punch_move(&self) -> bool {
+        unsafe { ffi::IsPunchMove(self) > 0 }
+    }
+
+    /// Gets a move's category (physical, special, status). Returns None if the category is invalid.
+    pub fn get_category(&self) -> Option<MoveCategory> {
+        unsafe { ffi::GetMoveCategory(self) }.try_into().ok()
     }
 }

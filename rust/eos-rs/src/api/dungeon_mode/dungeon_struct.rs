@@ -1,5 +1,4 @@
 use crate::api::dungeon_mode::*;
-use crate::api::objects::*;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ffi;
 use alloc::vec::Vec;

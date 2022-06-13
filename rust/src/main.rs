@@ -5,8 +5,9 @@ extern crate eos_rs;
 
 use eos_rs::prelude::*;
 use eos_rs::api::objects::*;
-use eos_rs::api::dungeon_mode::{DungeonEffectsEmitter, DungeonEntityExt, DungeonRng, LogMessageBuilder};
+use eos_rs::api::dungeon_mode::{DungeonEffectsEmitter, DungeonEntity, DungeonEntityExt, DungeonItem, DungeonRng, LogMessageBuilder};
 use eos_rs::api::fixed::I24F8;
+use eos_rs::api::moves::Move;
 use eos_rs::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use eos_rs::api::random;
 use eos_rs::ffi;

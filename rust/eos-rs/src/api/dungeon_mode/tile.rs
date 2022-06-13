@@ -1,19 +1,22 @@
 use crate::api::dungeon_mode::*;
-use crate::api::objects::*;
 use crate::ffi;
 use core::slice;
 
-/// Extension trait for [`DungeonTile`].
-///
 /// # Important safety note
-/// Please see the safety note of [`DungeonEntityExt`]. It also applies to this trait.
-pub trait DungeonTileExt {
+/// Please see the safety note of [`DungeonEntity`]. It also applies to this impl.
+impl DungeonTile {
     /// Initializes the tile struct.
-    fn init(&mut self);
+    pub fn init(&mut self) {
+        unsafe { ffi::InitializeTile(self as *mut _) };
+    }
 
     /// Gets the terrain type of a tile.
     /// Returns None if the terrain type is invalid.
-    fn get_terrain(&self) -> Option<TerrainType>;
+    pub fn get_terrain(&self) -> Option<TerrainType> {
+        unsafe { ffi::GetTileTerrain(force_mut_ptr!(self)) }
+            .try_into()
+            .ok()
+    }
 
     /// Set the terrain of a specific tile to be an obstacle (wall or secondary terrain).
     ///
@@ -21,24 +24,7 @@ pub trait DungeonTileExt {
     ///
     /// Secondary terrain (water/lava) can only be placed in the specified room.
     /// If the tile room index does not match, a wall will be placed instead.
-    fn set_terrain_obstacle_checked(&mut self, secondary_terrain: bool, room_index: u8);
-
-    /// Set a specific tile to have secondary terrain (water/lava), but only if it's a passable wall.
-    fn set_secondary_terrain_on_wall(&mut self);
-}
-
-impl DungeonTileExt for DungeonTile {
-    fn init(&mut self) {
-        unsafe { ffi::InitializeTile(self as *mut _) };
-    }
-
-    fn get_terrain(&self) -> Option<TerrainType> {
-        unsafe { ffi::GetTileTerrain(force_mut_ptr!(self)) }
-            .try_into()
-            .ok()
-    }
-
-    fn set_terrain_obstacle_checked(&mut self, secondary_terrain: bool, room_index: u8) {
+    pub fn set_terrain_obstacle_checked(&mut self, secondary_terrain: bool, room_index: u8) {
         unsafe {
             ffi::SetTerrainObstacleChecked(
                 self as *mut _,
@@ -48,7 +34,8 @@ impl DungeonTileExt for DungeonTile {
         }
     }
 
-    fn set_secondary_terrain_on_wall(&mut self) {
+    /// Set a specific tile to have secondary terrain (water/lava), but only if it's a passable wall.
+    pub fn set_secondary_terrain_on_wall(&mut self) {
         unsafe { ffi::SetSecondaryTerrainOnWall(self as *mut _) }
     }
 }

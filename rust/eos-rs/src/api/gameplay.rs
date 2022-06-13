@@ -1,6 +1,5 @@
 //! General gameplay related functions that are always available.
 
-use crate::api::objects::*;
 use crate::ffi;
 use crate::ffi::{exclusive_item_effect_id, item_id_16};
 use crate::util::OwnedSlice;

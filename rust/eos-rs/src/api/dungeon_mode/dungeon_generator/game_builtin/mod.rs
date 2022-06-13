@@ -19,7 +19,6 @@ use crate::api::dungeon_mode::GlobalDungeonData;
 use crate::api::dungeon_mode::dungeon_generator::{
     DungeonEntityGeneration, DungeonFloorGeneration,
 };
-use crate::api::objects::fixed_room_catalog;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ctypes::c_int;
 use crate::ffi;

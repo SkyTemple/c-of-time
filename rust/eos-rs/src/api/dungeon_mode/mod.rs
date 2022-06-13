@@ -12,10 +12,10 @@ mod tile;
 
 pub mod dungeon_generator;
 
-use crate::api::objects::DungeonEntity;
 use core::ptr;
 pub use dungeon_struct::*;
 pub use effects::*;
+use entity::DungeonEntity;
 pub use entity::*;
 pub use enums::*;
 pub use message_log::*;
