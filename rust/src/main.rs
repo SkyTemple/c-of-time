@@ -30,10 +30,7 @@ HasLowHealth+0:
 }
 
 // !!!!
-// NOTE: When adding your own code and removing the examples here, make sure to also remove
-// the example C item and move effects and special processes found in ../../src. But don't remove
-// the entire `CustomApplyItemEffect`, `CustomApplyMoveEffect` or `CustomScriptSpecialProcessCall`
-// functions, only the example effects and switch cases for them.
+// NOTE: When adding your own code and removing the examples here. See the README.md more more info.
 // !!!!
 
 /// This silly little patch overrides the low-health check by reversing it.
