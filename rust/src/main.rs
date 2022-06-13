@@ -4,12 +4,13 @@
 extern crate eos_rs;
 
 use eos_rs::prelude::*;
-use eos_rs::api::objects::*;
-use eos_rs::api::dungeon_mode::{DungeonEffectsEmitter, DungeonEntity, DungeonEntityExt, DungeonItem, DungeonRng, LogMessageBuilder};
+use eos_rs::api::dungeon_mode::{DungeonEffectsEmitter, DungeonEntity, DungeonItem, DungeonRng, LogMessageBuilder};
 use eos_rs::api::fixed::I24F8;
 use eos_rs::api::moves::Move;
 use eos_rs::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use eos_rs::api::random;
+use eos_rs::api::items::ItemId;
+use eos_rs::api::moves::MoveId;
 use eos_rs::ffi;
 use eos_rs::log_impl::register_logger;
 
@@ -20,8 +21,8 @@ patches! {
     has_high_health,
     print_args: special_process 101,
     just_panic: special_process 102,
-    oran_berry_burn: item_effect item_catalog::ITEM_ORAN_BERRY,
-    cut_badly_poisoned: move_effect move_catalog::MOVE_CUT,
+    oran_berry_burn: item_effect ItemId::ITEM_ORAN_BERRY,
+    cut_badly_poisoned: move_effect MoveId::MOVE_CUT,
     "
 HasLowHealth+0:
   B has_high_health
@@ -133,7 +134,7 @@ pub fn oran_berry_burn(
     // We check if the item is actually Oran Berry. This isn't really needed,
     // since c-of-time will make sure this is only called for Oran Berry,
     // but for demonstration purposes we do it anyway.
-    if used_item.id.val() == item_catalog::ITEM_ORAN_BERRY {
+    if used_item.id.val() == ItemId::ITEM_ORAN_BERRY {
         info!("oran_berry_burn detected Oran Berry.");
         match effects.try_inflict_burn_status(user, target, false, true, false) {
             true => info!("oran_berry_burn successfully burned."),
@@ -154,7 +155,7 @@ pub fn cut_badly_poisoned(
     // We check if the move is actually Cut. This isn't really needed,
     // since c-of-time will make sure this is only called for Cut,
     // but for demonstration purposes we do it anyway.
-    if used_move.id.val() == move_catalog::MOVE_CUT {
+    if used_move.id.val() == MoveId::MOVE_CUT {
         info!("cut_badly_poisoned detected Cut.");
         if random::rand_i32(0..4) == 0 {
             info!("cut_badly_poisoned rolled a 0.");

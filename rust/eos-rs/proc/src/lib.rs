@@ -148,8 +148,8 @@ use eos_rs_patches_def::PatchesDef;
 ///     has_high_health,
 ///     print_args: special_process 101,
 ///     just_panic: special_process 102,
-///     oran_berry_burn: item_effect eos_rs::item_catalog::ITEM_ORAN_BERRY,
-///     cut_badly_poisoned: eos_rs::move_effect move_catalog::MOVE_CUT,
+///     oran_berry_burn: item_effect eos_rs::api::items::ItemId::ITEM_ORAN_BERRY,
+///     cut_badly_poisoned: eos_rs::api::moves:: MoveId::MOVE_CUT,
 ///     "
 /// HasLowHealth+0:
 ///   B has_high_health
