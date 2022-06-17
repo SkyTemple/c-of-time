@@ -585,3 +585,80 @@ pub fn get_monster_id_from_spawn_entry(
 ) -> monster_catalog::Type {
     unsafe { ffi::GetMonsterIdFromSpawnEntry(force_mut_ptr!(spawn_entry)) }
 }
+
+/// Returns the level of the monster defined in the specified monster spawn entry.
+pub fn get_monster_level_from_spawn_entry(spawn_entry: &ffi::monster_spawn_entry) -> u8 {
+    unsafe { ffi::GetMonsterLevelFromSpawnEntry(force_mut_ptr!(spawn_entry)) }
+}
+
+/// Applies the IQ boosts from eating a Gummi to the target monster.
+///
+/// You should not use this in dungeon mode.
+/// Use [`crate::api::dungeon_mode::DungeonEffectsEmitter::apply_gummi_boosts`] instead.
+pub fn apply_gummi_boosts(
+    param_1: &mut ffi::undefined2,
+    param_2: &mut ffi::undefined2,
+    param_3: &mut ffi::undefined,
+    param_4: &mut ffi::undefined,
+    param_5: ffi::undefined2,
+    param_6: ffi::undefined,
+    buffer: &mut crate::ctypes::c_void,
+) {
+    unsafe {
+        ffi::ApplyGummiBoostsGroundMode(
+            param_1, param_2, param_3, param_4, param_5, param_6, buffer,
+        )
+    }
+}
+
+/// Returns the maximum rescue attempts allowed in the specified dungeon,
+/// or -1 if rescues are disabled.
+pub fn get_max_rescue_attempts(dungeon_id: dungeon_catalog::Type) -> i8 {
+    unsafe { ffi::GetMaxRescueAttempts(dungeon_id) }
+}
+
+/// Returns a struct containing information about a team member.
+pub fn get_team_member_data<'a>(member_id: u8) -> Option<&'a ffi::team_member> {
+    let ptr = unsafe { ffi::GetTeamMemberData(member_id) };
+    if ptr.is_null() {
+        None
+    } else {
+        Some(unsafe { &*ptr })
+    }
+}
+
+/// Returns a struct containing information about a team member.
+pub fn get_team_member_data_mut<'a>(member_id: u8) -> Option<&'a mut ffi::team_member> {
+    let ptr = unsafe { ffi::GetTeamMemberData(member_id) };
+    if ptr.is_null() {
+        None
+    } else {
+        Some(unsafe { &mut *ptr })
+    }
+}
+
+/// Returns the data of a monster sent into the Explorer Dojo using the "exchange teams" option.
+///
+/// `entry_number` must be a value between \[0,3\].
+pub fn get_explorer_dojo_monster_data<'a>(entry_number: u8) -> Option<&'a ffi::ground_monster> {
+    let ptr = unsafe { ffi::GetExplorerMazeMonster(entry_number) };
+    if ptr.is_null() {
+        None
+    } else {
+        Some(unsafe { &*ptr })
+    }
+}
+
+/// Returns the data of a monster sent into the Explorer Dojo using the "exchange teams" option.
+///
+/// `entry_number` must be a value between \[0,3\].
+pub fn get_explorer_dojo_monster_data_mut<'a>(
+    entry_number: u8,
+) -> Option<&'a mut ffi::ground_monster> {
+    let ptr = unsafe { ffi::GetExplorerMazeMonster(entry_number) };
+    if ptr.is_null() {
+        None
+    } else {
+        Some(unsafe { &mut *ptr })
+    }
+}

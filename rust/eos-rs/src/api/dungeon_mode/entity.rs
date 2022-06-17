@@ -42,6 +42,12 @@ pub trait DungeonEntityExt {
     /// This returns the trap info struct for the entity,
     /// panics if the entity is not a trap.
     fn info_for_trap_mut(&mut self) -> Option<&mut DungeonTrap>;
+
+    /// Returns the tile, that the entity is located at.
+    fn get_tile(&self) -> Option<&DungeonTile>;
+
+    /// Returns the tile, that the entity is located at.
+    fn get_tile_mut(&mut self) -> Option<&mut DungeonTile>;
 }
 
 impl DungeonEntityExt for DungeonEntity {
@@ -112,6 +118,24 @@ impl DungeonEntityExt for DungeonEntity {
             unsafe { Some(&mut *(self.info as *mut DungeonTrap)) }
         } else {
             None
+        }
+    }
+
+    fn get_tile(&self) -> Option<&DungeonTile> {
+        let ptr = unsafe { ffi::GetTileAtEntity(force_mut_ptr!(self)) };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &*ptr })
+        }
+    }
+
+    fn get_tile_mut(&mut self) -> Option<&mut DungeonTile> {
+        let ptr = unsafe { ffi::GetTileAtEntity(self) };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
         }
     }
 }

@@ -255,12 +255,12 @@ impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
     }
 
     /// Gets the number of times the player can still be rescued in this dungeon.
-    pub fn get_rescue_attempts_left(&self) -> u8 {
+    pub fn get_rescue_attempts_left(&self) -> i8 {
         self.0.as_ref().rescue_attempts_left
     }
 
     /// Sets the number of times the player can still be rescued in this dungeon.
-    pub fn set_rescue_attempts_left(&mut self, value: u8) {
+    pub fn set_rescue_attempts_left(&mut self, value: i8) {
         self.0.as_mut().rescue_attempts_left = value
     }
 
@@ -676,16 +676,16 @@ impl<'a> GlobalDungeonData<'a> {
         &mut self.1
     }
 
-    /// Seems to initialize the dungeon struct from specified dungeon data.
-    ///
-    /// The signature will be updated once we know more about this function.
-    pub fn initialize_dungeon(
+    /// Called at the start of a dungeon. Initializes the dungeon struct from specified dungeon
+    /// data. Includes a loop that does not break until the dungeon is cleared, and another one
+    /// inside it that runs until the current floor ends.
+    pub fn run_dungeon(
         &mut self,
-        dungeon_data: &mut ffi::undefined,
+        dungeon_init_data: &mut ffi::dungeon_init,
         dungeon: &mut ffi::dungeon,
     ) -> i32 {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::InitializeDungeon(dungeon_data as *mut _, dungeon as *mut _) }
+        unsafe { ffi::RunDungeon(dungeon_init_data, dungeon) }
     }
 
     /// Returns an abstraction over the game's builtin dungeon generator. This
@@ -736,24 +736,30 @@ impl<'a> GlobalDungeonData<'a> {
 
     /// Returns the tile at the given coordinates.
     ///
-    /// If the coordinates are out-of-bounds, this seems to return some kind of default tile.
+    /// If the coordinates are out-of-bounds, this seems to return a copy of a default tile.
     pub fn get_tile(&self, x: i32, y: i32) -> &DungeonTile {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
-        unsafe { &*ffi::GetTile(x, y) }
+        unsafe { &*ffi::GetTileSafe(x, y) }
     }
 
     /// Returns the tile at the given coordinates.
     ///
-    /// If the coordinates are out-of-bounds, this seems to return some kind of default tile.
+    /// If the coordinates are out-of-bounds, this seems to return a copy of a default tile.
     pub fn get_tile_mut(&mut self, x: i32, y: i32) -> &mut DungeonTile {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
-        unsafe { &mut *ffi::GetTile(x, y) }
+        unsafe { &mut *ffi::GetTileSafe(x, y) }
     }
 
     /// Checks if gravity is active on the floor.
     pub fn is_gravity_active(&self) -> bool {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GravityIsActive() > 0 }
+    }
+
+    /// Checks if the current floor is a secret bazaar or a secret room.
+    pub fn is_secret_floor(&self) -> bool {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::IsSecretFloor() > 0 }
     }
 
     /// Checks if the current floor is the Secret Bazaar.
@@ -1118,6 +1124,253 @@ impl<'a> GlobalDungeonData<'a> {
     ) {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::DisplayMessage2(param_1, message_id, wait_for_input as ffi::bool_) }
+    }
+
+    /// Attempts to trigger a forced loss of the type set with [`Self::set_forced_loss_reason`].
+    ///
+    /// Returns whether the forced loss happens or not.
+    ///
+    /// The flag controls, if the function will not check for the end of the floor condition and
+    /// will skip other (unknown) actions in case of forced loss.
+    pub fn try_forced_loss(&mut self, skip_floor_end_check: bool) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::TryForcedLoss(skip_floor_end_check as ffi::bool_) > 0 }
+    }
+
+    /// Sets the Map Surveyor flag in the dungeon struct to true if a team member has Map Surveyor,
+    /// sets it to false otherwise.
+    ///
+    /// This function has two variants: in the EU ROM, it will return true if the flag was changed.
+    /// The NA version will return the new value of the flag instead.
+    pub fn update_map_surveyor_flag(&mut self) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::UpdateMapSurveyorFlag() > 0 }
+    }
+
+    /// Get the id of the monster to be randomly spawned.
+    pub fn get_monster_id_to_spawn(&mut self, is_for_monster_house: bool) -> monster_catalog::Type {
+        let weight_id = if is_for_monster_house { 1 } else { 0 };
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetMonsterIdToSpawn(weight_id) }
+    }
+
+    /// Get the level of the monster to be spawned, given its id.
+    ///
+    /// Returns the level of the monster to be spawned, or 1 if the specified ID can't be found on
+    /// the floor's spawn table.
+    pub fn get_monster_level_to_spawn(&mut self, monster_id: monster_catalog::Type) -> u8 {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetMonsterLevelToSpawn(monster_id) }
+    }
+
+    /// Ticks down a turn counter for a status condition. If the counter equals 0x7F,
+    /// it will not be decreased.
+    ///
+    /// Returns the new counter value.
+    pub fn tick_status_turn_counter(&mut self, counter: &mut u8) -> u8 {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::TickStatusTurnCounter(counter) }
+    }
+
+    /// The main function which executes the actions that take place in a fractional turn.
+    ///
+    /// Called in a loop by [`Self::run_dungeon`] while [`Self::is_floor_over`] returns
+    /// false.
+    ///
+    /// The flag should set to true when the function is first called during a floor.
+    pub fn run_fractional_turn(&mut self, is_first_loop: bool) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::RunFractionalTurn(is_first_loop as ffi::bool_) }
+    }
+
+    /// Handles the leader's turn. Includes a movement speed check that might cause it to return
+    /// early if the leader isn't fast enough to act in this fractional turn. If that check
+    /// (and some others) pass, the function does not return until the leader performs an action.
+    ///
+    /// Returns true, if the leader has performed an action.
+    pub fn run_leader_turn(&mut self, param_1: ffi::undefined) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::RunLeaderTurn(param_1) > 0 }
+    }
+
+    /// Called at the beginning of [`Self::run_fractional_turn`]. Executed only if
+    /// FRACTIONAL_TURN_SEQUENCE\[fractional_turn * 2\] is not 0.
+    /// First it calls [`Self::try_spawn_monster_and_tick_spawn_counter`], then tries to activate
+    /// the Plus and Minus abilities for both allies and enemies, and finally calls
+    /// [`Self::try_forced_loss`].
+    pub fn try_spawn_monster_and_activate_plus_minus(&mut self) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::TrySpawnMonsterAndActivatePlusMinus() }
+    }
+
+    /// Checks if the current floor should end, and updates [`ffi::dungeon::floor_loop_status`]
+    /// if required.
+    ///
+    /// If the player has been defeated, sets [`ffi::dungeon::floor_loop_status`] to
+    /// [`ffi::floor_loop_status::FLOOR_LOOP_LEADER_FAINTED`].
+    ///
+    /// If [`ffi::dungeon::end_floor_flag`] is 1 or 2, sets [`ffi::dungeon::floor_loop_status`] to
+    /// [`ffi::floor_loop_status::FLOOR_LOOP_NEXT_FLOOR`].
+    pub fn is_floor_over(&self) -> bool {
+        // SAFETY: We hold a valid reference to the global dungeon struct.
+        unsafe { ffi::IsFloorOver() > 0 }
+    }
+
+    /// Decrements [`ffi::dungeon::wind_turns`] and displays a wind warning message if required.
+    pub fn decrement_wind_counter(&self) {
+        // SAFETY: We hold a valid reference to the global dungeon struct.
+        unsafe { ffi::DecrementWindCounter() }
+    }
+
+    /// If the current floor number is even, returns female Kecleon's id (default: 0x3D7),
+    /// otherwise returns male Kecleon's id (default: 0x17F).
+    pub fn get_kecleon_id_to_spawn_by_floor(&self) -> monster_catalog::Type {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetKecleonIdToSpawnByFloor() }
+    }
+
+    /// Loads the sprite of the specified monster to use it in a dungeon.
+    pub fn load_monster_sprite(
+        &mut self,
+        monster_id: monster_catalog::Type,
+        param_2: ffi::undefined,
+    ) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::LoadMonsterSprite(monster_id, param_2) }
+    }
+
+    /// If the monster id parameter is 0x97 (Mew), returns false if either
+    /// [`ffi::dungeon::mew_cannot_spawn`] or the second parameter are true.
+    ///
+    /// Called before spawning an enemy, appears to be checking if Mew can spawn on the current floor.
+    pub fn mew_spawn_check(
+        &self,
+        monster_id: monster_catalog::Type,
+        force_fail_if_mew: bool,
+    ) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::MewSpawnCheck(monster_id, force_fail_if_mew as ffi::bool_) > 0 }
+    }
+
+    /// Returns an entity reference to the first team member which has the specified iq skill.
+    pub fn get_team_member_with_iq_skill(
+        &self,
+        iq_skill: iq_skill_catalog::Type,
+    ) -> Option<&DungeonEntity> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        let ptr = unsafe { ffi::GetTeamMemberWithIqSkill(iq_skill) };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &*ptr })
+        }
+    }
+
+    /// Returns an entity reference to the first team member which has the specified iq skill.
+    pub fn get_team_member_with_iq_skill_mut(
+        &mut self,
+        iq_skill: iq_skill_catalog::Type,
+    ) -> Option<&mut DungeonEntity> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        let ptr = unsafe { ffi::GetTeamMemberWithIqSkill(iq_skill) };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// Returns true if any team member has the specified iq skill.
+    pub fn team_member_has_enabled_iq_skill(&self, iq_skill: iq_skill_catalog::Type) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::TeamMemberHasEnabledIqSkill(iq_skill) > 0 }
+    }
+
+    /// Returns true the leader has the specified iq skill.
+    pub fn team_leader_has_enabled_iq_skill(&self, iq_skill: iq_skill_catalog::Type) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::TeamLeaderIqSkillIsEnabled(iq_skill) > 0 }
+    }
+
+    /// Initializes the team when entering a dungeon.
+    pub fn init_team(&mut self, param_1: ffi::undefined) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::InitTeam(param_1) }
+    }
+
+    /// Initializes a team member. Run at the start of each floor in a dungeon.
+    pub fn init_team_member(
+        &mut self,
+        arg1: monster_catalog::Type,
+        type_1: type_catalog::Type,
+        type_2: type_catalog::Type,
+        team_member_data: &mut ffi::team_member,
+        param_5: ffi::undefined,
+        param_6: ffi::undefined,
+        param_7: ffi::undefined,
+        param_8: ffi::undefined,
+        param_9: ffi::undefined,
+    ) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe {
+            ffi::InitTeamMember(
+                arg1,
+                type_1,
+                type_2,
+                team_member_data,
+                param_5,
+                param_6,
+                param_7,
+                param_8,
+                param_9,
+            )
+        }
+    }
+
+    /// Spawns the given monster on a tile. Returns None, if the game returned a null-pointer after
+    /// the spawn.
+    pub fn spawn_monster(
+        &mut self,
+        spawn_data: &mut ffi::spawned_monster_data,
+        force_awake: bool,
+    ) -> Option<&mut DungeonEntity> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        let ptr = unsafe { ffi::SpawnMonster(spawn_data, force_awake as ffi::bool_) };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// Runs a check over all monsters on the field for the ability Slow Start, and lowers the
+    /// speed of those who have it.
+    pub fn try_activate_slow_start(&mut self) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::TryActivateSlowStart() }
+    }
+
+    /// Runs a check over all monsters on the field for abilities that affect the weather and
+    /// changes the floor's weather accordingly.
+    pub fn try_activate_artificial_weather_abilities(&mut self) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::TryActivateArtificialWeatherAbilities() }
+    }
+
+    /// First ticks up the spawn counter, and if it's equal or greater than the spawn cooldown,
+    /// it will try to spawn an enemy if the number of enemies is below the spawn cap.
+    ///
+    /// If the spawn counter is greater than 900, it will instead perform the special spawn caused
+    /// by the ability Illuminate.
+    pub fn try_spawn_monster_and_tick_spawn_counter(&mut self) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::TrySpawnMonsterAndTickSpawnCounter() }
+    }
+
+    /// Returns [`ffi::dungeon_generation_info::field_0xc`] for the global dungeon struct.
+    pub fn get_dungeon_gen_info_unk_0c(&self) -> ffi::undefined4 {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetDungeonGenInfoUnk0C() }
     }
 
     #[cfg_attr(docsrs, doc(cfg(feature = "eu")))]
