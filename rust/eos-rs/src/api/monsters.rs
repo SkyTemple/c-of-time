@@ -101,3 +101,9 @@ impl MonsterSpeciesId {
         unsafe { ffi::IsDeoxys(*self) > 0 }
     }
 }
+
+impl From<MonsterSpeciesId> for u32 {
+    fn from(v: MonsterSpeciesId) -> Self {
+        v.0
+    }
+}

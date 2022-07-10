@@ -56,6 +56,12 @@ impl ItemId {
     }
 }
 
+impl From<ItemId> for u32 {
+    fn from(v: ItemId) -> Self {
+        v.0
+    }
+}
+
 /// An exclusive item effect ID with associated methods to get metadata.
 ///
 /// Use the associated constants or the [`Self::get`] method to get instances of this.
@@ -86,6 +92,12 @@ impl ExclusiveItemEffectId {
     /// Tests the exclusive item bitvector for a specific exclusive item effect.
     pub fn test_exclusive_item_effect_flag(&self, effect_flags: &mut u32) -> bool {
         unsafe { ffi::ExclusiveItemEffectFlagTest(effect_flags, *self) > 0 }
+    }
+}
+
+impl From<ExclusiveItemEffectId> for u32 {
+    fn from(v: ExclusiveItemEffectId) -> Self {
+        v.0
     }
 }
 

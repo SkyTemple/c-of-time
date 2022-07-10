@@ -33,6 +33,12 @@ impl ScriptOpcodeId {
     }
 }
 
+impl From<ScriptOpcodeId> for u32 {
+    fn from(v: ScriptOpcodeId) -> Self {
+        v.0
+    }
+}
+
 /// A script variable ID with associated methods to get metadata.
 ///
 /// Use the associated constants or the [`Self::get`] method to get instances of this.
@@ -58,6 +64,12 @@ impl ScriptVariableId {
     /// Whether or not this variable is a local variable (as opposed to a global one).
     fn is_local(&self) -> bool {
         self.0 >= ScriptVariableId::VAR_LOCAL0.0
+    }
+}
+
+impl From<ScriptVariableId> for u32 {
+    fn from(v: ScriptVariableId) -> Self {
+        v.0
     }
 }
 

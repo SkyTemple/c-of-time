@@ -25,6 +25,12 @@ impl IqGroupId {
     }
 }
 
+impl From<IqGroupId> for u32 {
+    fn from(v: IqGroupId) -> Self {
+        v.0
+    }
+}
+
 /// An IQ Skill ID with associated methods to get metadata.
 ///
 /// Use the associated constants or the [`Self::get`] method to get instances of this.
@@ -45,5 +51,11 @@ impl IqSkillId {
     /// Returns the ID of this IQ Skill.
     pub const fn id(&self) -> u32 {
         self.0
+    }
+}
+
+impl From<IqSkillId> for u32 {
+    fn from(v: IqSkillId) -> Self {
+        v.0
     }
 }

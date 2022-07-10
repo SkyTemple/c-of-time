@@ -24,3 +24,9 @@ impl AbilityId {
         self.0
     }
 }
+
+impl From<AbilityId> for u32 {
+    fn from(v: AbilityId) -> Self {
+        v.0
+    }
+}

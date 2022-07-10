@@ -250,3 +250,9 @@ impl MoveId {
         unsafe { ffi::GetMoveCategory(*self) }.try_into().ok()
     }
 }
+
+impl From<MoveId> for u32 {
+    fn from(v: MoveId) -> Self {
+        v.0
+    }
+}

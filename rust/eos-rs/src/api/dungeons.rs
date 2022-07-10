@@ -26,6 +26,12 @@ impl DungeonGroupId {
     }
 }
 
+impl From<DungeonGroupId> for u32 {
+    fn from(v: DungeonGroupId) -> Self {
+        v.0
+    }
+}
+
 /// A dungeon group ID with associated methods to get metadata.
 ///
 /// Use the associated constants or the [`Self::get`] method to get instances of this.
@@ -83,6 +89,12 @@ impl DungeonId {
     }
 }
 
+impl From<DungeonId> for u32 {
+    fn from(v: DungeonId) -> Self {
+        v.0
+    }
+}
+
 /// A fixed room ID with associated methods to get metadata.
 ///
 /// Use the associated constants or the [`Self::get`] method to get instances of this.
@@ -109,5 +121,11 @@ impl FixedRoomId {
     pub fn is_full_floor_fixed_room(&self, _ov29: &OverlayLoadLease<29>) -> bool {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::IsNotFullFloorFixedRoom(*self) == 0 }
+    }
+}
+
+impl From<FixedRoomId> for u32 {
+    fn from(v: FixedRoomId) -> Self {
+        v.0
     }
 }

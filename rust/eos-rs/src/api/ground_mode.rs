@@ -33,6 +33,12 @@ impl SpecialProcessId {
     }
 }
 
+impl From<SpecialProcessId> for u32 {
+    fn from(v: SpecialProcessId) -> Self {
+        v.0
+    }
+}
+
 /// Misc. and general ground mode functions, guarded by this struct.
 pub struct GroundModeContext(OverlayLoadLease<11>);
 

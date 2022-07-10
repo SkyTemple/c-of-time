@@ -24,3 +24,9 @@ impl MonsterTypeId {
         self.0
     }
 }
+
+impl From<MonsterTypeId> for u32 {
+    fn from(v: MonsterTypeId) -> Self {
+        v.0
+    }
+}
