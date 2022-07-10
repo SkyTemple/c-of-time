@@ -103,7 +103,7 @@ pub fn note_load_base() -> i32 {
 pub struct AdventureLog(PhantomData<()>);
 
 impl AdventureLog {
-    /// Returns an internal reference to the adventore log. Note that this isn't a reference
+    /// Returns an internal reference to the adventure log. Note that this isn't a reference
     /// to the actual struct in memory (yet).
     ///
     /// # Safety
