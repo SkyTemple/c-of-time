@@ -48,7 +48,7 @@ impl DungeonEntity {
     }
 
     /// This returns the item info struct for the entity,
-    /// panics if the entity is not an item.
+    /// returns None if the entity is not an item.
     pub fn info_for_item(&self) -> Option<&DungeonItem> {
         if self.entity_type() == Some(DungeonEntityType::Item) {
             unsafe { Some(&*(self.info as *const DungeonItem)) }
@@ -58,7 +58,7 @@ impl DungeonEntity {
     }
 
     /// This returns the trap info struct for the entity,
-    /// panics if the entity is not a trap.
+    /// returns None if the entity is not a trap.
     pub fn info_for_trap(&self) -> Option<&DungeonTrap> {
         if self.entity_type() == Some(DungeonEntityType::Trap) {
             unsafe { Some(&*(self.info as *const DungeonTrap)) }
@@ -68,7 +68,7 @@ impl DungeonEntity {
     }
 
     /// This returns the monster info struct for the entity,
-    /// panics if the entity is not a monster.
+    /// returns None if the entity is not a monster.
     pub fn info_for_monster_mut(&mut self) -> Option<DungeonMonsterMut> {
         if self.entity_type() == Some(DungeonEntityType::Monster) {
             unsafe {
@@ -83,7 +83,7 @@ impl DungeonEntity {
     }
 
     /// This returns the item info struct for the entity,
-    /// panics if the entity is not an item.
+    /// returns None if the entity is not an item.
     pub fn info_for_item_mut(&mut self) -> Option<&mut DungeonItem> {
         if self.entity_type() == Some(DungeonEntityType::Item) {
             unsafe { Some(&mut *(self.info as *mut DungeonItem)) }
@@ -93,7 +93,7 @@ impl DungeonEntity {
     }
 
     /// This returns the trap info struct for the entity,
-    /// panics if the entity is not a trap.
+    /// returns None if the entity is not a trap.
     pub fn info_for_trap_mut(&mut self) -> Option<&mut DungeonTrap> {
         if self.entity_type() == Some(DungeonEntityType::Trap) {
             unsafe { Some(&mut *(self.info as *mut DungeonTrap)) }
