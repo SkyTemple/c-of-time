@@ -23,7 +23,7 @@ impl ScriptOpcodeId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing script opcode),
     /// otherwise this is UB.
-    pub const unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn new(id: u32) -> Self {
         Self(id)
     }
 
@@ -46,7 +46,7 @@ impl ScriptVariableId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing script variable),
     /// otherwise this is UB.
-    pub const unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn new(id: u32) -> Self {
         Self(id)
     }
 

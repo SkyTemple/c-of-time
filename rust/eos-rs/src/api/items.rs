@@ -16,7 +16,7 @@ impl ItemId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing item),
     /// otherwise this is UB.
-    pub const unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn new(id: u32) -> Self {
         Self(id)
     }
 
@@ -69,7 +69,7 @@ impl ExclusiveItemEffectId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing exclusive item effect),
     /// otherwise this is UB.
-    pub const unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn new(id: u32) -> Self {
         Self(id)
     }
 

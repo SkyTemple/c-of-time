@@ -15,7 +15,7 @@ impl IqGroupId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing IQ Group),
     /// otherwise this is UB.
-    pub const unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn new(id: u32) -> Self {
         Self(id)
     }
 
@@ -38,7 +38,7 @@ impl IqSkillId {
     /// # Safety
     /// The caller must make sure the ID is valid (refers to an existing IQ Skill),
     /// otherwise this is UB.
-    pub const unsafe fn get(id: u32) -> Self {
+    pub const unsafe fn new(id: u32) -> Self {
         Self(id)
     }
 
