@@ -9,19 +9,14 @@ use core::ops::{Deref, DerefMut};
 use fixed::types::I24F8;
 
 /// Reference type for the info struct for [`DungeonEntity`] objects that are monsters.
+///
+/// For methods, see the [`DungeonMonsterRead`] and [`DungeonMonsterWrite`] traits.
 pub struct DungeonMonsterRef<'a>(pub &'a ffi::monster, pub &'a DungeonEntity);
 
 /// Mutable reference type for the info struct for [`DungeonEntity`] objects that are monsters.
+///
+/// For methods, see the [`DungeonMonsterWrite`] trait.
 pub struct DungeonMonsterMut<'a>(pub &'a mut ffi::monster, pub &'a mut DungeonEntity);
-
-/// Essentially [`core::convert::AsRef`].
-/// (Sadly we can't use the `AsRef` trait, because it doesn't allow explicit lifetimes.)
-impl<'a> DungeonMonsterMut<'a> {
-    /// Get a [`DungeonMonsterRef`] from this [`DungeonMonsterMut`].
-    pub fn as_ref(&'a self) -> DungeonMonsterRef<'a> {
-        DungeonMonsterRef(self.0, self.1)
-    }
-}
 
 impl<'a> Deref for DungeonMonsterRef<'a> {
     type Target = ffi::monster;
@@ -43,59 +38,66 @@ impl<'a> DerefMut for DungeonMonsterMut<'a> {
     }
 }
 
+/// Trait for [`DungeonMonsterRef`] and [`DungeonMonsterMut`] (read operations).
+///
 /// # Important safety note
-/// Please see the safety note of [`DungeonEntity`]. It also applies to this impl.
-impl<'a> DungeonMonsterRef<'a> {
+/// Please see the safety note of [`DungeonEntity`]. It also applies to this trait.
+pub trait DungeonMonsterRead: private::Sealed {
+    #[doc(hidden)]
+    fn entity(&self) -> &DungeonEntity;
+    #[doc(hidden)]
+    fn monster(&self) -> &ffi::monster;
+
     /// Checks if the monster is a special story ally.
     /// This is a hard-coded check that looks at the monster's "Joined At" field.
     /// If the value is in the range [
     /// [`crate::api::dungeons::DungeonId::DUNGEON_JOINED_AT_BIDOOF`],
     /// [`crate::api::dungeons::DungeonId::DUNGEON_DUMMY_0xE3`]
     /// ], this check will return true.
-    pub fn is_special_story_ally(&self) -> bool {
-        unsafe { ffi::IsSpecialStoryAlly(force_mut_ptr!(self.0)) > 0 }
+    fn is_special_story_ally(&self) -> bool {
+        unsafe { ffi::IsSpecialStoryAlly(force_mut_ptr!(self.monster())) > 0 }
     }
 
     /// Checks if the monster does not gain experience.
     /// This basically just inverts IsSpecialStoryAlly, with the exception of also checking for
     /// the "Joined At" field being [`crate::api::dungeons::DungeonId::DUNGEON_CLIENT`].
-    pub fn is_experience_locked(&self) -> bool {
-        unsafe { ffi::IsExperienceLocked(force_mut_ptr!(self.0)) > 0 }
+    fn is_experience_locked(&self) -> bool {
+        unsafe { ffi::IsExperienceLocked(force_mut_ptr!(self.monster())) > 0 }
     }
 
     /// Checks if the monster is holding a certain item that isn't disabled by Klutz.
-    pub fn is_holding_item(&self, item_id: ItemId) -> bool {
-        unsafe { ffi::ItemIsActive(force_mut_ptr!(self.1), item_id) > 0 }
+    fn is_holding_item(&self, item_id: ItemId) -> bool {
+        unsafe { ffi::ItemIsActive(force_mut_ptr!(self.entity()), item_id) > 0 }
     }
 
     /// Checks if the monster is at low health (below 25% rounded down).
-    pub fn has_low_health(&self) -> bool {
-        unsafe { ffi::HasLowHealth(force_mut_ptr!(self.1)) > 0 }
+    fn has_low_health(&self) -> bool {
+        unsafe { ffi::HasLowHealth(force_mut_ptr!(self.entity())) > 0 }
     }
 
     /// Checks if the monster has the Gastro Acid status.
-    pub fn gastro_acid_status(&self) -> bool {
-        unsafe { ffi::NoGastroAcidStatus(force_mut_ptr!(self.0)) == 0 }
+    fn gastro_acid_status(&self) -> bool {
+        unsafe { ffi::NoGastroAcidStatus(force_mut_ptr!(self.monster())) == 0 }
     }
 
     // Checks if the monster has a certain ability that isn't disabled by Gastro Acid.
-    pub fn is_ability_active(&self, ability_id: AbilityId) -> bool {
-        unsafe { ffi::AbilityIsActive(force_mut_ptr!(self.1), ability_id) > 0 }
+    fn is_ability_active(&self, ability_id: AbilityId) -> bool {
+        unsafe { ffi::AbilityIsActive(force_mut_ptr!(self.entity()), ability_id) > 0 }
     }
 
     /// Checks if the monster has a given type.
-    pub fn has_type(&self, type_id: MonsterTypeId) -> bool {
-        unsafe { ffi::MonsterIsType(force_mut_ptr!(self.1), type_id) > 0 }
+    fn has_type(&self, type_id: MonsterTypeId) -> bool {
+        unsafe { ffi::MonsterIsType(force_mut_ptr!(self.entity()), type_id) > 0 }
     }
 
     /// Checks if the monster has a certain IQ skill enabled.
-    pub fn is_iq_skill_enabled(&self, iq_skill_id: IqSkillId) -> bool {
-        unsafe { ffi::IqSkillIsEnabled(force_mut_ptr!(self.1), iq_skill_id) > 0 }
+    fn is_iq_skill_enabled(&self, iq_skill_id: IqSkillId) -> bool {
+        unsafe { ffi::IqSkillIsEnabled(force_mut_ptr!(self.entity()), iq_skill_id) > 0 }
     }
 
     /// Checks if a defender has an active ability that isn't disabled by an attacker's (self)
     /// Mold Breaker.
-    pub fn is_defender_ability_active(
+    fn is_defender_ability_active(
         &self,
         defender: &DungeonEntity,
         defender_ability_id: AbilityId,
@@ -103,7 +105,7 @@ impl<'a> DungeonMonsterRef<'a> {
     ) -> bool {
         unsafe {
             ffi::DefenderAbilityIsActive(
-                force_mut_ptr!(self.1),
+                force_mut_ptr!(self.entity()),
                 force_mut_ptr!(defender),
                 defender_ability_id,
                 own_ability_is_active as ffi::bool_,
@@ -112,8 +114,8 @@ impl<'a> DungeonMonsterRef<'a> {
     }
 
     /// Checks if a certain exclusive item effect is active for the monster.
-    pub fn is_exclusive_item_effect_active(&self, effect_id: ExclusiveItemEffectId) -> bool {
-        unsafe { ffi::ExclusiveItemEffectIsActive(force_mut_ptr!(self.1), effect_id) > 0 }
+    fn is_exclusive_item_effect_active(&self, effect_id: ExclusiveItemEffectId) -> bool {
+        unsafe { ffi::ExclusiveItemEffectIsActive(force_mut_ptr!(self.entity()), effect_id) > 0 }
     }
 
     /// Gets the type matchup for a given combat interaction. Attacker is self.
@@ -122,7 +124,7 @@ impl<'a> DungeonMonsterRef<'a> {
     /// done solely using the attack and target type parameters.
     ///
     /// This factors in some conditional effects like exclusive items, statuses, etc.
-    pub fn get_type_matchup(
+    fn get_type_matchup(
         &self,
         defender: &DungeonEntity,
         target_type_index: TargetTypeIndex,
@@ -130,7 +132,7 @@ impl<'a> DungeonMonsterRef<'a> {
     ) -> Option<DungeonTypeMatchup> {
         unsafe {
             ffi::GetTypeMatchup(
-                force_mut_ptr!(self.1),
+                force_mut_ptr!(self.entity()),
                 force_mut_ptr!(defender),
                 target_type_index as i32,
                 attack_type,
@@ -145,7 +147,7 @@ impl<'a> DungeonMonsterRef<'a> {
     /// damage_out, param_9 is also unknown.
     ///
     /// The signature of this method WILL change once we figure out what the parameters are.
-    pub fn calc_damage(
+    fn calc_damage(
         &self,
         defender: &DungeonEntity,
         attack_type: MonsterTypeId,
@@ -158,7 +160,7 @@ impl<'a> DungeonMonsterRef<'a> {
     ) {
         unsafe {
             ffi::CalcDamage(
-                force_mut_ptr!(self.1),
+                force_mut_ptr!(self.entity()),
                 force_mut_ptr!(defender),
                 attack_type,
                 attack_power,
@@ -183,7 +185,7 @@ impl<'a> DungeonMonsterRef<'a> {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    pub unsafe fn calc_recoil_damage_fixed(
+    unsafe fn calc_recoil_damage_fixed(
         &self,
         fixed_damage: i32,
         param_3: ffi::undefined4,
@@ -196,7 +198,7 @@ impl<'a> DungeonMonsterRef<'a> {
         param_10: ffi::undefined4,
     ) {
         ffi::CalcRecoilDamageFixed(
-            force_mut_ptr!(self.1),
+            force_mut_ptr!(self.entity()),
             fixed_damage,
             param_3,
             damage_out,
@@ -217,7 +219,7 @@ impl<'a> DungeonMonsterRef<'a> {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    pub unsafe fn calc_damage_fixed(
+    unsafe fn calc_damage_fixed(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -231,7 +233,7 @@ impl<'a> DungeonMonsterRef<'a> {
         param_11: ffi::undefined4,
     ) {
         ffi::CalcDamageFixed(
-            force_mut_ptr!(self.1),
+            force_mut_ptr!(self.entity()),
             force_mut_ptr!(defender),
             fixed_damage,
             param_4,
@@ -252,7 +254,7 @@ impl<'a> DungeonMonsterRef<'a> {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    pub unsafe fn calc_damage_fixed_no_category(
+    unsafe fn calc_damage_fixed_no_category(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -264,18 +266,18 @@ impl<'a> DungeonMonsterRef<'a> {
         param_9: ffi::undefined4,
         param_10: ffi::undefined4,
     ) {
-            ffi::CalcDamageFixedNoCategory(
-                force_mut_ptr!(self.1),
-                force_mut_ptr!(defender),
-                fixed_damage,
-                param_4,
-                damage_out,
-                attack_type,
-                param_7,
-                message_type,
-                param_9,
-                param_10,
-            )
+        ffi::CalcDamageFixedNoCategory(
+            force_mut_ptr!(self.entity()),
+            force_mut_ptr!(defender),
+            fixed_damage,
+            param_4,
+            damage_out,
+            attack_type,
+            param_7,
+            message_type,
+            param_9,
+            param_10,
+        )
     }
 
     /// A wrapper (with potential side effects...?) around [`Self::calc_damage_fixed`].
@@ -284,7 +286,7 @@ impl<'a> DungeonMonsterRef<'a> {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    pub fn calc_damage_fixed_wrapper(
+    unsafe fn calc_damage_fixed_wrapper(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -298,7 +300,7 @@ impl<'a> DungeonMonsterRef<'a> {
         param_11: ffi::undefined4,
     ) {
         ffi::CalcDamageFixedWrapper(
-            force_mut_ptr!(self.1),
+            force_mut_ptr!(self.entity()),
             force_mut_ptr!(defender),
             fixed_damage,
             param_4,
@@ -320,7 +322,7 @@ impl<'a> DungeonMonsterRef<'a> {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    pub fn calc_damage_projectile(
+    fn calc_damage_projectile(
         &self,
         defender: &DungeonEntity,
         used_move: &Move,
@@ -328,44 +330,48 @@ impl<'a> DungeonMonsterRef<'a> {
         param_5: ffi::undefined4,
         param_6: ffi::undefined4,
     ) {
-            ffi::CalcDamageProjectile(
-                force_mut_ptr!(self.1),
-                force_mut_ptr!(defender),
-                force_mut_ptr!(used_move),
-                move_power,
-                param_5,
-                param_6,
-            )
+        ffi::CalcDamageProjectile(
+            force_mut_ptr!(self.entity()),
+            force_mut_ptr!(defender),
+            force_mut_ptr!(used_move),
+            move_power,
+            param_5,
+            param_6,
+        )
     }
 
     /// Checks if a monster is holding an aura bow that isn't disabled by Klutz.
-    pub fn is_aura_bow_active(&self) -> bool {
-        unsafe { ffi::AuraBowIsActive(force_mut_ptr!(self.1)) > 0 }
+    fn is_aura_bow_active(&self) -> bool {
+        unsafe { ffi::AuraBowIsActive(force_mut_ptr!(self.entity())) > 0 }
     }
 
     /// Gets the exclusive item boost for attack/special attack for a monster.
     /// Panics if the move category is not physical or special.
-    pub fn get_exclusive_item_offense_boost(&self, move_category: MoveCategory) -> i32 {
+    fn get_exclusive_item_offense_boost(&self, move_category: MoveCategory) -> i32 {
         if move_category == MoveCategory::Special || move_category == MoveCategory::None {
             panic!("get_exclusive_item_offense_boost called with invalid move category");
         }
-        unsafe { ffi::ExclusiveItemOffenseBoost(force_mut_ptr!(self.1), move_category as c_int) }
+        unsafe {
+            ffi::ExclusiveItemOffenseBoost(force_mut_ptr!(self.entity()), move_category as c_int)
+        }
     }
 
     /// Gets the exclusive item boost for defense/special defense for a monster.
     /// Panics if the move category is not physical or special.
-    pub fn get_exclusive_item_defense_boost(&self, move_category: MoveCategory) -> i32 {
+    fn get_exclusive_item_defense_boost(&self, move_category: MoveCategory) -> i32 {
         if move_category == MoveCategory::Special || move_category == MoveCategory::None {
             panic!("get_exclusive_item_offense_boost called with invalid move category");
         }
-        unsafe { ffi::ExclusiveItemDefenseBoost(force_mut_ptr!(self.1), move_category as c_int) }
+        unsafe {
+            ffi::ExclusiveItemDefenseBoost(force_mut_ptr!(self.entity()), move_category as c_int)
+        }
     }
 
     /// Checks if a monster is currently immune to Ground-type moves for reasons other than typing and ability.
     ///
     /// This includes checks for Gravity and Magnet Rise.
-    pub fn has_conditional_ground_immunity(&self) -> bool {
-        unsafe { ffi::HasConditionalGroundImmunity(force_mut_ptr!(self.1)) > 0 }
+    fn has_conditional_ground_immunity(&self) -> bool {
+        unsafe { ffi::HasConditionalGroundImmunity(force_mut_ptr!(self.entity())) > 0 }
     }
 
     /// Gets the move target-and-range field when used by a given entity.
@@ -374,10 +380,10 @@ impl<'a> DungeonMonsterRef<'a> {
     /// The values in the returned tuple are None, if they are invalid (or we don't know them yet).
     ///
     /// See [`Move::get_target_and_range`] for more information.
-    pub fn get_move_target_and_range(&self, the_move: &Move, is_ai: bool) -> MoveTargetAndRange {
+    fn get_move_target_and_range(&self, the_move: &Move, is_ai: bool) -> MoveTargetAndRange {
         unsafe {
             ffi::GetEntityMoveTargetAndRange(
-                force_mut_ptr!(self.1),
+                force_mut_ptr!(self.entity()),
                 force_mut_ptr!(the_move),
                 is_ai as ffi::bool_,
             )
@@ -386,20 +392,20 @@ impl<'a> DungeonMonsterRef<'a> {
     }
 
     /// Get the weather, as experienced by the monster.
-    pub fn get_apparent_weather(&self) -> Option<Weather> {
-        unsafe { ffi::GetApparentWeather(force_mut_ptr!(self.1)) }
+    fn get_apparent_weather(&self) -> Option<Weather> {
+        unsafe { ffi::GetApparentWeather(force_mut_ptr!(self.entity())) }
             .try_into()
             .ok()
     }
 
     /// Checks if the monster has a certain held item.
-    pub fn has_held_item(&self, item_id: ItemId) -> bool {
-        unsafe { ffi::HasHeldItem(force_mut_ptr!(self.1), item_id) > 0 }
+    fn has_held_item(&self, item_id: ItemId) -> bool {
+        unsafe { ffi::HasHeldItem(force_mut_ptr!(self.entity()), item_id) > 0 }
     }
 
     /// Gets the power of a move, factoring in Ginseng/Space Globe boosts.
-    pub fn get_move_power(&self, the_move: &Move) -> i32 {
-        unsafe { ffi::GetMovePower(force_mut_ptr!(self.1), force_mut_ptr!(the_move)) }
+    fn get_move_power(&self, the_move: &Move) -> i32 {
+        unsafe { ffi::GetMovePower(force_mut_ptr!(self.entity()), force_mut_ptr!(the_move)) }
     }
 
     /// Seems to calculate the duration of a volatile status on a monster.
@@ -410,10 +416,10 @@ impl<'a> DungeonMonsterRef<'a> {
     /// * `turn_range` - lower & higher ends of the turn range
     /// * `effects` - flag for whether or not to factor in the Self Curer IQ skill and the
     ///               Natural Cure ability
-    pub fn calc_status_duration(&self, turn_range: &[u16; 2], effects: bool) -> i32 {
+    fn calc_status_duration(&self, turn_range: &[u16; 2], effects: bool) -> i32 {
         unsafe {
             ffi::CalcStatusDuration(
-                force_mut_ptr!(self.1),
+                force_mut_ptr!(self.entity()),
                 force_mut_ptr!(turn_range.as_ptr()),
                 effects as ffi::bool_,
             )
@@ -423,61 +429,72 @@ impl<'a> DungeonMonsterRef<'a> {
     /// Returns the number of attacks that a monster can do in one turn (1 or 2).
     ///
     /// Checks for the abilities Swift Swim, Chlorophyll, Unburden, and for exclusive items.
-    pub fn get_number_of_attacks(&self) -> i32 {
-        unsafe { ffi::GetNumberOfAttacks(force_mut_ptr!(self.1)) }
+    fn get_number_of_attacks(&self) -> i32 {
+        unsafe { ffi::GetNumberOfAttacks(force_mut_ptr!(self.entity())) }
     }
 
     /// Checks if a monster is levitating (has the effect of Levitate and Gravity is not active)
-    pub fn is_levitating(&self) -> bool {
-        unsafe { ffi::LevitateIsActive(force_mut_ptr!(self.1)) > 0 }
+    fn is_levitating(&self) -> bool {
+        unsafe { ffi::LevitateIsActive(force_mut_ptr!(self.entity())) > 0 }
     }
 
     /// Checks if the monster is under the effect of Conversion 2 (its type was changed). Returns
     /// `None` if the value is invalid.
-    pub fn is_conversion2_active(&self) -> Option<Conversion2Status> {
-        unsafe { ffi::Conversion2IsActive(force_mut_ptr!(self.1)) }
+    fn is_conversion2_active(&self) -> Option<Conversion2Status> {
+        unsafe { ffi::Conversion2IsActive(force_mut_ptr!(self.entity())) }
             .try_into()
             .ok()
     }
 
     /// Check the type of a move when used by a certain monster. Accounts for special cases
     /// such as Hidden Power, Weather Ball, the regular attack...
-    pub fn get_move_type_if_used_by_self(&self, the_move: &Move) -> MonsterTypeId {
-        unsafe { ffi::GetMoveTypeForMonster(force_mut_ptr!(self.1), force_mut_ptr!(the_move)) }
+    fn get_move_type_if_used_by_self(&self, the_move: &Move) -> MonsterTypeId {
+        unsafe {
+            ffi::GetMoveTypeForMonster(force_mut_ptr!(self.entity()), force_mut_ptr!(the_move))
+        }
     }
 
     /// Returns the animation id to be applied to a monster that has the sleep, napping,
     /// nightmare or bide status.
-    pub fn get_sleep_animation_id(&self) -> u8 {
-        unsafe { ffi::GetSleepAnimationId(force_mut_ptr!(self.1)) }
+    fn get_sleep_animation_id(&self) -> u8 {
+        unsafe { ffi::GetSleepAnimationId(force_mut_ptr!(self.entity())) }
     }
 
     /// Returns true if the monster has the blinded status, or if it is not the leader and is
     /// holding Y-Ray Specs.
-    pub fn is_blinded(&self, check_held_item: bool) -> bool {
-        unsafe { ffi::IsBlinded(force_mut_ptr!(self.1), check_held_item as ffi::bool_) > 0 }
+    fn is_blinded(&self, check_held_item: bool) -> bool {
+        unsafe { ffi::IsBlinded(force_mut_ptr!(self.entity()), check_held_item as ffi::bool_) > 0 }
     }
 }
 
+/// Trait for [`DungeonMonsterMut`] (write operations).
+///
+/// You may find more operations in [`DungeonEffectsEmitter`].
+///
 /// # Important safety note
-/// Please see the safety note of [`DungeonEntity`]. It also applies to this impl.
-impl<'a> DungeonMonsterMut<'a> {
+/// Please see the safety note of [`DungeonEntity`]. It also applies to this trait.
+trait DungeonMonsterWrite: private::Sealed {
+    #[doc(hidden)]
+    fn entity_mut(&mut self) -> &mut DungeonEntity;
+    #[doc(hidden)]
+    fn monster_mut(&mut self) -> &mut ffi::monster;
+
     /// Updates the PP of any moves that were used the a monster, if PP should be consumed.
-    pub fn update_move_pp(&mut self, should_consume_pp: bool) {
-        unsafe { ffi::UpdateMovePp(self.1, should_consume_pp as ffi::bool_) }
+    fn update_move_pp(&mut self, should_consume_pp: bool) {
+        unsafe { ffi::UpdateMovePp(self.entity_mut(), should_consume_pp as ffi::bool_) }
     }
 
     /// Checks if the monster has the ability Truant, and if so tries to apply the pause status
     /// to it.
-    pub fn try_activate_truant(&mut self) {
-        unsafe { ffi::TryActivateTruant(self.1) }
+    fn try_activate_truant(&mut self) {
+        unsafe { ffi::TryActivateTruant(self.entity_mut()) }
     }
 
     /// Tries to change a monster into one of its weather-related alternative forms.
     ///
     /// Applies to Castform and Cherrim, and checks for their unique abilities.
-    pub fn try_weather_form_change(&mut self) {
-        unsafe { ffi::TryWeatherFormChange(self.1) }
+    fn try_weather_form_change(&mut self) {
+        unsafe { ffi::TryWeatherFormChange(self.entity_mut()) }
     }
 
     /// Restores PP for all moves, clears flags [`Move::f_consume_2_pp`],
@@ -485,22 +502,22 @@ impl<'a> DungeonMonsterMut<'a> {
     /// [`Move::f_consume_pp`].
     ///
     /// Called when a monster is revived.
-    pub fn restore_pp_for_all_moves_set_flags(&mut self) {
-        unsafe { ffi::RestorePpAllMovesSetFlags(self.1) }
+    fn restore_pp_for_all_moves_set_flags(&mut self) {
+        unsafe { ffi::RestorePpAllMovesSetFlags(self.entity_mut()) }
     }
 
     /// Checks if the specified enemy should evolve because it just defeated an ally, and if so,
     /// attempts to evolve it.
-    pub fn evolve_this_enemy_if_should(&mut self) {
-        unsafe { ffi::EnemyEvolution(force_mut_ptr!(self.1)) }
+    fn evolve_this_enemy_if_should(&mut self) {
+        unsafe { ffi::EnemyEvolution(force_mut_ptr!(self.entity_mut())) }
     }
 
     /// Makes the specified monster evolve into the specified species.
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    pub unsafe fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: MonsterSpeciesId) {
-        ffi::EvolveMonster(force_mut_ptr!(self.1), param_2, new_monster_idx)
+    unsafe fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: MonsterSpeciesId) {
+        ffi::EvolveMonster(force_mut_ptr!(self.entity_mut()), param_2, new_monster_idx)
     }
 
     /// Calculates the speed stage of a monster from its speed up/down counters. The second
@@ -511,13 +528,13 @@ impl<'a> DungeonMonsterMut<'a> {
     /// Shaymin-sky and enemy Kecleon during a thief alert get a flat +1 always.
     ///
     /// The calculated speed stage is both returned and saved in the monster's statuses struct.
-    pub fn calc_speed_stage(&mut self, counter_weight: i32) -> i32 {
-        unsafe { ffi::CalcSpeedStage(self.1, counter_weight) }
+    fn calc_speed_stage(&mut self, counter_weight: i32) -> i32 {
+        unsafe { ffi::CalcSpeedStage(self.entity_mut(), counter_weight) }
     }
 
     /// Sets the monster's reflect damage countdown to 4.
-    pub fn set_reflect_damage_countdown_to_four(&mut self) {
-        unsafe { ffi::SetReflectDamageCountdownTo4(self.1) }
+    fn set_reflect_damage_countdown_to_four(&mut self) {
+        unsafe { ffi::SetReflectDamageCountdownTo4(self.entity_mut()) }
     }
 
     /// Executes the set action for the specified monster.
@@ -525,7 +542,46 @@ impl<'a> DungeonMonsterMut<'a> {
     /// Used for both AI actions and player-inputted actions. If the action is not ACTION_NOTHING,
     /// ACTION_PASS_TURN, ACTION_WALK or ACTION_UNK_4, the monster's already_acted field is set to
     /// true.
-    pub fn execute_action(&mut self) {
-        unsafe { ffi::ExecuteMonsterAction(self.1) }
+    fn execute_action(&mut self) {
+        unsafe { ffi::ExecuteMonsterAction(self.entity_mut()) }
     }
+}
+
+impl<'a> DungeonMonsterRead for DungeonMonsterRef<'a> {
+    fn entity(&self) -> &DungeonEntity {
+        self.1
+    }
+
+    fn monster(&self) -> &ffi::monster {
+        self.0
+    }
+}
+
+impl<'a> DungeonMonsterRead for DungeonMonsterMut<'a> {
+    fn entity(&self) -> &DungeonEntity {
+        self.1
+    }
+
+    fn monster(&self) -> &ffi::monster {
+        self.0
+    }
+}
+
+impl<'a> DungeonMonsterWrite for DungeonMonsterMut<'a> {
+    fn entity_mut(&mut self) -> &mut DungeonEntity {
+        self.1
+    }
+
+    fn monster_mut(&mut self) -> &mut ffi::monster {
+        self.0
+    }
+}
+
+mod private {
+    use super::{DungeonMonsterMut, DungeonMonsterRef};
+
+    pub trait Sealed {}
+
+    impl<'a> Sealed for DungeonMonsterRef<'a> {}
+    impl<'a> Sealed for DungeonMonsterMut<'a> {}
 }
