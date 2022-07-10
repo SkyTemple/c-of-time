@@ -1,19 +1,19 @@
 pub mod target_region;
 
-use std::{env, fs};
+use crate::target_region::TargetRegion;
+use eos_rs_patches_def::PatchesDef;
+use glob::glob;
 use std::fs::{read_to_string, remove_file};
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::str::FromStr;
-use glob::glob;
-use syn::{ItemMacro, parse2, parse_file};
+use std::{env, fs};
 use syn::visit::Visit;
-use crate::target_region::TargetRegion;
-use eos_rs_patches_def::PatchesDef;
+use syn::{parse2, parse_file, ItemMacro};
 use which::which;
 
 struct SourceVisitor<'a> {
-    cotpatch: &'a mut String
+    cotpatch: &'a mut String,
 }
 
 impl<'a> SourceVisitor<'a> {
@@ -32,7 +32,7 @@ impl<'ast> Visit<'ast> for SourceVisitor<'ast> {
         // TODO: This doesn't actually make sure this is *our* patches macro.
         if name.unwrap().to_string().as_str() == "patches" {
             // Process a patches macro.
-            let input = i.mac.tokens.clone().into();
+            let input = i.mac.tokens.clone();
             let def = parse2::<PatchesDef>(input).unwrap();
             if let Some(glue) = def.glue {
                 self.cotpatch.push_str(&glue);
@@ -45,7 +45,12 @@ impl<'ast> Visit<'ast> for SourceVisitor<'ast> {
 pub fn compile_c_code(makefile: &Path) {
     let makefile_dir = makefile.parent().unwrap();
     let make_cmd = Command::new("make")
-        .args(["-f", makefile.to_str().unwrap(), "buildobjs", "EXTRA_CFLAGS=-D COT_RUST"])
+        .args([
+            "-f",
+            makefile.to_str().unwrap(),
+            "buildobjs",
+            "EXTRA_CFLAGS=-D COT_RUST",
+        ])
         .current_dir(makefile_dir)
         .status()
         .expect("Failed to run make.");
@@ -56,33 +61,42 @@ pub fn compile_c_code(makefile: &Path) {
     remove_file(makefile_dir.join("out.bin")).ok();
 
     // This will create .o files in the build directory.
-    for obj in glob(&format!("{}/*.o", makefile_dir.join("build").to_str().unwrap())).unwrap().flatten() {
+    for obj in glob(&format!(
+        "{}/*.o",
+        makefile_dir.join("build").to_str().unwrap()
+    ))
+    .unwrap()
+    .flatten()
+    {
         println!("cargo:rustc-link-arg={}", obj.to_str().unwrap());
     }
-
 }
 
 // This generates the pmdsky-debug symbols for the linker.
 // Python 3 must be in the PATH.
 pub fn generate_symbols_for_linker(cot_rot: &Path) {
-    let target_region = TargetRegion::from_target_env()
-        .expect("Failed to determine game region. Make sure your target name ends with -na, -ja or -eu.");
+    let target_region = TargetRegion::from_target_env().expect(
+        "Failed to determine game region. Make sure your target name ends with -na, -ja or -eu.",
+    );
 
-    static ERR: &str = "Failed to run command to generate symbols for linker. Is 'python3' in your PATH?";
+    static ERR: &str =
+        "Failed to run command to generate symbols for linker. Is 'python3' in your PATH?";
 
     let python = which("python3").unwrap_or_else(|_| {
         panic!("Was unable to find Python 3. Is it installed?");
     });
 
     let make_cmd = Command::new(python)
-        .args(["scripts/generate_linkerscript.py", target_region.as_str_upper()])
+        .args([
+            "scripts/generate_linkerscript.py",
+            target_region.as_str_upper(),
+        ])
         .current_dir(cot_rot)
         .status()
         .expect(ERR);
 
     assert!(make_cmd.success(), "{}", ERR);
 }
-
 
 /// This collects the glue code from the !patches macro and dumps it into a .cotpatch file
 pub fn generate_cotpatch(out_file: &Path) {
@@ -91,8 +105,10 @@ pub fn generate_cotpatch(out_file: &Path) {
         .unwrap()
         .join("src/main.rs");
 
-    let content = read_to_string(&fname).expect(&format!("Unable to read Rust source file: {:?}", &fname));
-    let syntax = parse_file(&content).expect(&format!("Unable to parse Rust source file: {:?}", &fname));
+    let content = read_to_string(&fname)
+        .unwrap_or_else(|_| panic!("Unable to read Rust source file: {:?}", &fname));
+    let syntax = parse_file(&content)
+        .unwrap_or_else(|_| panic!("Unable to parse Rust source file: {:?}", &fname));
 
     let mut cotpatch = String::new();
 
@@ -100,5 +116,5 @@ pub fn generate_cotpatch(out_file: &Path) {
     visitor.visit_file(&syntax);
 
     fs::write(out_file, cotpatch)
-        .expect(&format!("Unable to write to file: {:?}", out_file));
+        .unwrap_or_else(|_| panic!("Unable to write to file: {:?}", out_file));
 }

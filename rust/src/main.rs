@@ -3,16 +3,18 @@
 
 extern crate eos_rs;
 
-use eos_rs::prelude::*;
-use eos_rs::api::dungeon_mode::{DungeonEffectsEmitter, DungeonEntity, DungeonItem, DungeonRng, LogMessageBuilder};
+use eos_rs::api::dungeon_mode::{
+    DungeonEffectsEmitter, DungeonEntity, DungeonItem, DungeonRng, LogMessageBuilder,
+};
 use eos_rs::api::fixed::I24F8;
+use eos_rs::api::items::ItemId;
 use eos_rs::api::moves::Move;
+use eos_rs::api::moves::MoveId;
 use eos_rs::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use eos_rs::api::random;
-use eos_rs::api::items::ItemId;
-use eos_rs::api::moves::MoveId;
 use eos_rs::ffi;
 use eos_rs::log_impl::register_logger;
+use eos_rs::prelude::*;
 
 // This defines the patches that will be written to the game, the syntax should hopefully
 // be somewhat self-explanatory.
@@ -51,9 +53,8 @@ HasLowHealth+0:
 /// want to comment out the logic that logs messages in this function first (otherwise good luck
 /// using an item or move ;) ).
 #[no_mangle]
-pub extern "C" fn has_high_health(
-    entity: *mut DungeonEntity,
-) -> ffi::bool_ {
+#[allow(clippy::not_unsafe_ptr_arg_deref)] // Clippy denies this by default. For demo purposes, we allow it.
+pub extern "C" fn has_high_health(entity: *mut DungeonEntity) -> ffi::bool_ {
     // This is only required for non-special process / effects patches.
     register_logger();
     info!("In has_high_health");
@@ -67,7 +68,9 @@ pub extern "C" fn has_high_health(
     // directly, those are in the `ffi` module.
     // They are all completely outside of the management of Rust and are unsafe.
     // You need to make sure it's actually ok to call them like this:
-    unsafe { assert!(ffi::EntityIsValid(entity) > 0); }
+    unsafe {
+        assert!(ffi::EntityIsValid(entity) > 0);
+    }
 
     // Get reference from raw pointer. You can generally assume that the game
     // gives you valid pointers. In some cases it might be a good idea to at least
@@ -77,9 +80,7 @@ pub extern "C" fn has_high_health(
 
     // We get the info for monsters. This will return None, if the entity isn't a monster.
     // You can also check the type in entity.type_.
-    let monster_info = entity
-        .info_for_monster()
-        .expect("Entity is not a monster");
+    let monster_info = entity.info_for_monster().expect("Entity is not a monster");
     let high_hp = monster_info.hp >= monster_info.max_hp_stat / 4;
 
     // The dungeon mode has it's own RNG function, we use that one here.
@@ -109,7 +110,10 @@ pub extern "C" fn has_high_health(
 
 /// This just prints the parameters to the log.
 pub fn print_args(arg1: i16, arg2: i16, _ov11: &OverlayLoadLease<11>) -> i32 {
-    info!("Running special process 101... You put in these parameters: {}, {}", arg1, arg2);
+    info!(
+        "Running special process 101... You put in these parameters: {}, {}",
+        arg1, arg2
+    );
     0
 }
 
@@ -125,7 +129,7 @@ pub fn oran_berry_burn(
     user: &mut DungeonEntity,
     target: &mut DungeonEntity,
     used_item: &mut DungeonItem,
-    _is_thrown: bool
+    _is_thrown: bool,
 ) {
     info!("oran_berry_burn called.");
     // We check if the item is actually Oran Berry. This isn't really needed,
@@ -146,7 +150,7 @@ pub fn cut_badly_poisoned(
     effects: &DungeonEffectsEmitter,
     user: &mut DungeonEntity,
     target: &mut DungeonEntity,
-    used_move: &mut Move
+    used_move: &mut Move,
 ) -> bool {
     info!("cut_badly_poisoned called.");
     // We check if the move is actually Cut. This isn't really needed,

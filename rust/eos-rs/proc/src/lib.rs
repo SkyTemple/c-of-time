@@ -1,6 +1,6 @@
+use eos_rs_patches_def::PatchesDef;
 use quote::quote;
 use syn::parse_macro_input;
-use eos_rs_patches_def::PatchesDef;
 
 /// This generates the entrypoints for item & move effects and special processes.
 /// This macro needs to be called exactly once and only in the `main` module.
@@ -169,20 +169,23 @@ pub fn patches(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input: proc_macro::TokenStream = input.into();
     let def: PatchesDef = parse_macro_input!(input as PatchesDef);
 
-    let item_effects_cases = def.item_effects.iter()
-        .map(|(idx, fn_name)| quote! {
+    let item_effects_cases = def.item_effects.iter().map(|(idx, fn_name)| {
+        quote! {
             #idx => {#fn_name(&effects, user, target, used_item, is_thrown > 0); 1},
-        });
+        }
+    });
 
-    let move_effects_cases = def.move_effects.iter()
-        .map(|(idx, fn_name)| quote! {
+    let move_effects_cases = def.move_effects.iter().map(|(idx, fn_name)| {
+        quote! {
             #idx => {data.out_dealt_damage = #fn_name(&effects, user, target, used_move) as u8; 1},
-        });
+        }
+    });
 
-    let special_processes_cases = def.special_processes.iter()
-        .map(|(idx, fn_name)| quote! {
+    let special_processes_cases = def.special_processes.iter().map(|(idx, fn_name)| {
+        quote! {
             #idx => *return_val = #fn_name(arg1, arg2, &lease),
-        });
+        }
+    });
 
     (quote! {
         #[no_mangle]
@@ -238,5 +241,6 @@ pub fn patches(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
                 _ => eos_rs::prelude::warn!("Unhandled special process id: {}", special_process_id),
             }
         }
-    }).into()
+    })
+    .into()
 }
