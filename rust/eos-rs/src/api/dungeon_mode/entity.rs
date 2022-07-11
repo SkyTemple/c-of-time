@@ -33,7 +33,7 @@ impl DungeonEntity {
     }
 
     /// This returns the monster info struct for the entity,
-    /// panics if the entity is not a monster.
+    /// returns None if the entity is not a monster.
     pub fn info_for_monster(&self) -> Option<DungeonMonsterRef> {
         if self.entity_type() == Some(DungeonEntityType::Monster) {
             unsafe {
