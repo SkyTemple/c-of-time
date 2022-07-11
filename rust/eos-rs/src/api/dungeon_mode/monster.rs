@@ -90,7 +90,10 @@ pub trait DungeonMonsterExtRead {
     /// damage_out, some other parameters are also unknown.
     ///
     /// The signature of this method WILL change once we figure out what the parameters are.
-    fn calc_recoil_damage_fixed(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    unsafe fn calc_recoil_damage_fixed(
         &self,
         fixed_damage: i32,
         param_3: ffi::undefined4,
@@ -108,7 +111,10 @@ pub trait DungeonMonsterExtRead {
     /// damage_out, some other parameters are also unknown.
     ///
     /// The signature of this method WILL change once we figure out what the parameters are.
-    fn calc_damage_fixed(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    unsafe fn calc_damage_fixed(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -126,7 +132,10 @@ pub trait DungeonMonsterExtRead {
     /// set to [`MoveCategory::None`].
     ///
     /// The signature of this method WILL change once we figure out what the parameters are.
-    fn calc_damage_fixed_no_category(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    unsafe fn calc_damage_fixed_no_category(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -142,7 +151,10 @@ pub trait DungeonMonsterExtRead {
     /// A wrapper (with potential side effects...?) around [`Self::calc_damage_fixed`].
     ///
     /// The signature of this method WILL change once we figure out what the parameters are.
-    fn calc_damage_fixed_wrapper(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    unsafe fn calc_damage_fixed_wrapper(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -161,7 +173,10 @@ pub trait DungeonMonsterExtRead {
     /// One of `param_5` or `param_6` is probably the output struct.
     ///
     /// The signature of this method WILL change once we figure out what the parameters are.
-    fn calc_damage_projectile(
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    unsafe fn calc_damage_projectile(
         &self,
         defender: &DungeonEntity,
         used_move: &Move,
@@ -269,7 +284,14 @@ pub trait DungeonMonsterExtWrite {
     fn evolve_this_enemy_if_should(&mut self);
 
     /// Makes the specified monster evolve into the specified species.
-    fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: monster_catalog::Type);
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    unsafe fn evolve(
+        &mut self,
+        param_2: *mut ffi::undefined4,
+        new_monster_idx: monster_catalog::Type,
+    );
 
     /// Calculates the speed stage of a monster from its speed up/down counters. The second
     /// parameter is the weight of each counter (how many stages it will add/remove), but appears
@@ -392,7 +414,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         }
     }
 
-    fn calc_recoil_damage_fixed(
+    unsafe fn calc_recoil_damage_fixed(
         &self,
         fixed_damage: i32,
         param_3: ffi::undefined4,
@@ -404,23 +426,21 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         param_9: ffi::undefined4,
         param_10: ffi::undefined4,
     ) {
-        unsafe {
-            ffi::CalcRecoilDamageFixed(
-                force_mut_ptr!(self.1),
-                fixed_damage,
-                param_3,
-                damage_out,
-                move_id,
-                attack_type,
-                param_7,
-                message_type,
-                param_9,
-                param_10,
-            )
-        }
+        ffi::CalcRecoilDamageFixed(
+            force_mut_ptr!(self.1),
+            fixed_damage,
+            param_3,
+            damage_out,
+            move_id,
+            attack_type,
+            param_7,
+            message_type,
+            param_9,
+            param_10,
+        )
     }
 
-    fn calc_damage_fixed(
+    unsafe fn calc_damage_fixed(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -433,24 +453,22 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         param_10: ffi::undefined4,
         param_11: ffi::undefined4,
     ) {
-        unsafe {
-            ffi::CalcDamageFixed(
-                force_mut_ptr!(self.1),
-                force_mut_ptr!(defender),
-                fixed_damage,
-                param_4,
-                damage_out,
-                attack_type,
-                move_category as move_catalog::Type,
-                param_8,
-                message_type,
-                param_10,
-                param_11,
-            )
-        }
+        ffi::CalcDamageFixed(
+            force_mut_ptr!(self.1),
+            force_mut_ptr!(defender),
+            fixed_damage,
+            param_4,
+            damage_out,
+            attack_type,
+            move_category as move_catalog::Type,
+            param_8,
+            message_type,
+            param_10,
+            param_11,
+        )
     }
 
-    fn calc_damage_fixed_no_category(
+    unsafe fn calc_damage_fixed_no_category(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -462,23 +480,21 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         param_9: ffi::undefined4,
         param_10: ffi::undefined4,
     ) {
-        unsafe {
-            ffi::CalcDamageFixedNoCategory(
-                force_mut_ptr!(self.1),
-                force_mut_ptr!(defender),
-                fixed_damage,
-                param_4,
-                damage_out,
-                attack_type,
-                param_7,
-                message_type,
-                param_9,
-                param_10,
-            )
-        }
+        ffi::CalcDamageFixedNoCategory(
+            force_mut_ptr!(self.1),
+            force_mut_ptr!(defender),
+            fixed_damage,
+            param_4,
+            damage_out,
+            attack_type,
+            param_7,
+            message_type,
+            param_9,
+            param_10,
+        )
     }
 
-    fn calc_damage_fixed_wrapper(
+    unsafe fn calc_damage_fixed_wrapper(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -491,24 +507,22 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         param_10: ffi::undefined4,
         param_11: ffi::undefined4,
     ) {
-        unsafe {
-            ffi::CalcDamageFixedWrapper(
-                force_mut_ptr!(self.1),
-                force_mut_ptr!(defender),
-                fixed_damage,
-                param_4,
-                damage_out,
-                attack_type,
-                move_category as move_catalog::Type,
-                param_8,
-                param_9,
-                param_10,
-                param_11,
-            )
-        }
+        ffi::CalcDamageFixedWrapper(
+            force_mut_ptr!(self.1),
+            force_mut_ptr!(defender),
+            fixed_damage,
+            param_4,
+            damage_out,
+            attack_type,
+            move_category as move_catalog::Type,
+            param_8,
+            param_9,
+            param_10,
+            param_11,
+        )
     }
 
-    fn calc_damage_projectile(
+    unsafe fn calc_damage_projectile(
         &self,
         defender: &DungeonEntity,
         used_move: &Move,
@@ -516,16 +530,14 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterRef<'a> {
         param_5: ffi::undefined4,
         param_6: ffi::undefined4,
     ) {
-        unsafe {
-            ffi::CalcDamageProjectile(
-                force_mut_ptr!(self.1),
-                force_mut_ptr!(defender),
-                force_mut_ptr!(used_move),
-                move_power,
-                param_5,
-                param_6,
-            )
-        }
+        ffi::CalcDamageProjectile(
+            force_mut_ptr!(self.1),
+            force_mut_ptr!(defender),
+            force_mut_ptr!(used_move),
+            move_power,
+            param_5,
+            param_6,
+        )
     }
 
     fn is_aura_bow_active(&self) -> bool {
@@ -698,7 +710,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         )
     }
 
-    fn calc_recoil_damage_fixed(
+    unsafe fn calc_recoil_damage_fixed(
         &self,
         fixed_damage: i32,
         param_3: ffi::undefined4,
@@ -723,7 +735,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         )
     }
 
-    fn calc_damage_fixed(
+    unsafe fn calc_damage_fixed(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -750,7 +762,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         )
     }
 
-    fn calc_damage_fixed_no_category(
+    unsafe fn calc_damage_fixed_no_category(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -775,7 +787,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         )
     }
 
-    fn calc_damage_fixed_wrapper(
+    unsafe fn calc_damage_fixed_wrapper(
         &self,
         defender: &DungeonEntity,
         fixed_damage: i32,
@@ -802,7 +814,7 @@ impl<'a> DungeonMonsterExtRead for DungeonMonsterMut<'a> {
         )
     }
 
-    fn calc_damage_projectile(
+    unsafe fn calc_damage_projectile(
         &self,
         defender: &DungeonEntity,
         used_move: &Move,
@@ -898,8 +910,12 @@ impl<'a> DungeonMonsterExtWrite for DungeonMonsterMut<'a> {
         unsafe { ffi::EnemyEvolution(force_mut_ptr!(self.1)) }
     }
 
-    fn evolve(&mut self, param_2: &mut ffi::undefined4, new_monster_idx: monster_catalog::Type) {
-        unsafe { ffi::EvolveMonster(force_mut_ptr!(self.1), param_2, new_monster_idx) }
+    unsafe fn evolve(
+        &mut self,
+        param_2: *mut ffi::undefined4,
+        new_monster_idx: monster_catalog::Type,
+    ) {
+        ffi::EvolveMonster(force_mut_ptr!(self.1), param_2, new_monster_idx)
     }
 
     /// Calculates the speed stage of a monster from its speed up/down counters. The second
