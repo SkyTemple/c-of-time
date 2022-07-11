@@ -10,12 +10,12 @@ use fixed::types::I24F8;
 
 /// Reference type for the info struct for [`DungeonEntity`] objects that are monsters.
 ///
-/// For methods, see the [`DungeonMonsterRead`] and [`DungeonMonsterWrite`] traits.
+/// For methods, see the [`DungeonMonsterRead`] trait.
 pub struct DungeonMonsterRef<'a>(pub &'a ffi::monster, pub &'a DungeonEntity);
 
 /// Mutable reference type for the info struct for [`DungeonEntity`] objects that are monsters.
 ///
-/// For methods, see the [`DungeonMonsterWrite`] trait.
+/// For methods, see the [`DungeonMonsterRead`] and [`DungeonMonsterWrite`] traits.
 pub struct DungeonMonsterMut<'a>(pub &'a mut ffi::monster, pub &'a mut DungeonEntity);
 
 impl<'a> Deref for DungeonMonsterRef<'a> {
