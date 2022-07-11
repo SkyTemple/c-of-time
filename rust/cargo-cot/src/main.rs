@@ -1,14 +1,14 @@
-use std::ffi::{OsStr, OsString};
-use std::path::{Path, PathBuf};
-use std::{env, fs, process};
-use std::env::current_dir;
-use std::io::Read;
-use std::iter::once;
-use std::process::{Command, Stdio};
 use ansi_term::{Color, Style};
 use clap::{AppSettings, Parser, Subcommand};
-use serde_json::Value;
 use eos_rs_build::target_region::TargetRegion;
+use serde_json::Value;
+use std::env::current_dir;
+use std::ffi::{OsStr, OsString};
+use std::io::Read;
+use std::iter::once;
+use std::path::{Path, PathBuf};
+use std::process::{Command, Stdio};
+use std::{env, fs, process};
 use which::which;
 
 const ABOUT: &str = "
@@ -16,11 +16,11 @@ Cargo extension to build c-of-time projects and burn/write them to a ROM.";
 
 #[derive(Parser, Debug)]
 #[clap(
-name = "cargo-cot",
-bin_name = "cargo",
-version,
-disable_help_subcommand = true,
-propagate_version = true,
+    name = "cargo-cot",
+    bin_name = "cargo",
+    version,
+    disable_help_subcommand = true,
+    propagate_version = true
 )]
 #[allow(dead_code)]
 enum Opt {
@@ -82,7 +82,7 @@ enum Commands {
         /// Any additional argument after '--' will be forwarded to cargo build.
         #[clap(last = true, parse(from_os_str))]
         cargo_args: Vec<OsString>,
-    }
+    },
 }
 
 fn main() -> ! {
@@ -95,14 +95,24 @@ fn main() -> ! {
     let build_cargo_args;
 
     match command {
-        Commands::Build { region, release, cargo_args } => {
+        Commands::Build {
+            region,
+            release,
+            cargo_args,
+        } => {
             build_region_str = region;
             build_release = release;
             build_cargo_args = cargo_args;
             burn_rom_path = None;
             burn_rom_out_path = None;
         }
-        Commands::Burn { region, release, cargo_args, rom_path, out_path } => {
+        Commands::Burn {
+            region,
+            release,
+            cargo_args,
+            rom_path,
+            out_path,
+        } => {
             build_region_str = region;
             build_release = release;
             build_cargo_args = cargo_args;
@@ -112,7 +122,11 @@ fn main() -> ! {
     }
 
     let manifest_dir = get_manifest_dir(&build_cargo_args);
-    assert!(manifest_dir.exists(), "The manifest directory must exist: {:?}", manifest_dir);
+    assert!(
+        manifest_dir.exists(),
+        "The manifest directory must exist: {:?}",
+        manifest_dir
+    );
 
     let build_region_str = match build_region_str {
         None => {
@@ -122,20 +136,27 @@ fn main() -> ! {
                     eprintln!("{}", Color::Red.paint("Error: A region must be specified."));
                     process::exit(1)
                 }
-                Some(build_region_str) => build_region_str
+                Some(build_region_str) => build_region_str,
             }
         }
-        Some(build_region_str) => build_region_str
+        Some(build_region_str) => build_region_str,
     };
 
     match TargetRegion::from_str(build_region_str) {
         Ok(build_region) => {
-            cargo_build(manifest_dir.as_path(), &build_region, build_release, build_cargo_args);
+            cargo_build(
+                manifest_dir.as_path(),
+                &build_region,
+                build_release,
+                build_cargo_args,
+            );
             if let Some(rom_path) = burn_rom_path {
                 burn(
-                    manifest_dir.as_path(), &build_region,
-                    rom_path, burn_rom_out_path.unwrap(),
-                    build_release
+                    manifest_dir.as_path(),
+                    &build_region,
+                    rom_path,
+                    burn_rom_out_path.unwrap(),
+                    build_release,
                 );
             }
             process::exit(0)
@@ -150,7 +171,14 @@ fn main() -> ! {
 fn cargo_metadata_region(manifest_dir: &Path) -> Option<String> {
     let cargo = env::var_os("CARGO").unwrap_or_else(|| OsString::from("cargo"));
     let mut child = Command::new(cargo)
-        .args(["metadata", "--no-deps", "--manifest-path", manifest_dir.join("Cargo.toml").to_string_lossy().as_ref(), "--format-version", "1"])
+        .args([
+            "metadata",
+            "--no-deps",
+            "--manifest-path",
+            manifest_dir.join("Cargo.toml").to_string_lossy().as_ref(),
+            "--format-version",
+            "1",
+        ])
         .stdout(Stdio::piped())
         .stderr(Stdio::inherit())
         .spawn()
@@ -160,7 +188,12 @@ fn cargo_metadata_region(manifest_dir: &Path) -> Option<String> {
         process::exit(exit.code().unwrap_or(1));
     }
     let mut output = vec![];
-    child.stdout.take().unwrap().read_to_end(&mut output).unwrap();
+    child
+        .stdout
+        .take()
+        .unwrap()
+        .read_to_end(&mut output)
+        .unwrap();
     let output_parsed: Value = serde_json::from_str(&String::from_utf8(output).unwrap()).unwrap();
 
     if let Value::Object(package) = output_parsed {
@@ -175,19 +208,35 @@ fn cargo_metadata_region(manifest_dir: &Path) -> Option<String> {
     None
 }
 
-fn cargo_build(manifest_dir: &Path, build_region: &TargetRegion, build_release: bool, build_cargo_args: Vec<OsString>) {
+fn cargo_build(
+    manifest_dir: &Path,
+    build_region: &TargetRegion,
+    build_release: bool,
+    build_cargo_args: Vec<OsString>,
+) {
     let target_fname = build_region.target_str();
     let target_file = manifest_dir.join(&format!("{}.json", target_fname));
     if !target_file.exists() {
-        eprintln!("{}", Color::Red.paint(
-            format!("Error: The target file '{}.json' was not found in the manifest directory.", target_fname)
-        ));
+        eprintln!(
+            "{}",
+            Color::Red.paint(format!(
+                "Error: The target file '{}.json' was not found in the manifest directory.",
+                target_fname
+            ))
+        );
         process::exit(1)
     };
     let cargo = env::var_os("CARGO").unwrap_or_else(|| OsString::from("cargo"));
-    let mut args_iter: Box<dyn Iterator<Item=OsString>> = Box::new([
-        "build".into(), "-Zbuild-std=core,alloc".into(), "--target".into(), target_file.into_os_string()
-    ].into_iter().chain(build_cargo_args.into_iter()));
+    let mut args_iter: Box<dyn Iterator<Item = OsString>> = Box::new(
+        [
+            "build".into(),
+            "-Zbuild-std=core,alloc".into(),
+            "--target".into(),
+            target_file.into_os_string(),
+        ]
+        .into_iter()
+        .chain(build_cargo_args.into_iter()),
+    );
     if build_release {
         args_iter = Box::new(args_iter.chain(once(OsString::from("--release"))));
     }
@@ -202,21 +251,33 @@ fn cargo_build(manifest_dir: &Path, build_region: &TargetRegion, build_release: 
     }
 }
 
-fn burn(manifest_dir: &Path, build_region: &TargetRegion, rom_path: PathBuf, rom_out_path: PathBuf, build_release: bool) {
+fn burn(
+    manifest_dir: &Path,
+    build_region: &TargetRegion,
+    rom_path: PathBuf,
+    rom_out_path: PathBuf,
+    build_release: bool,
+) {
     let cot_base_path = manifest_dir.parent().unwrap();
 
     let out_dir_profile = if build_release { "release" } else { "debug" };
-    let elf_path = manifest_dir.join(
-        format!("target/{}/{}/eos-rs-bin.elf", build_region.target_str(), out_dir_profile)
-    );
-    let bin_path = manifest_dir.join(
-        format!("target/{}/{}/eos-rs-bin.bin", build_region.target_str(), out_dir_profile)
-    );
+    let elf_path = manifest_dir.join(format!(
+        "target/{}/{}/eos-rs-bin.elf",
+        build_region.target_str(),
+        out_dir_profile
+    ));
+    let bin_path = manifest_dir.join(format!(
+        "target/{}/{}/eos-rs-bin.bin",
+        build_region.target_str(),
+        out_dir_profile
+    ));
 
     print_info("Starting burning...");
 
     let objcopy = which("arm-none-eabi-objcopy").unwrap_or_else(|_| {
-        print_error("Was unable to find 'arm-none-eabi-objcopy' command. Is DevkitPro correctly set up?");
+        print_error(
+            "Was unable to find 'arm-none-eabi-objcopy' command. Is DevkitPro correctly set up?",
+        );
         process::exit(1);
     });
 
@@ -227,19 +288,36 @@ fn burn(manifest_dir: &Path, build_region: &TargetRegion, rom_path: PathBuf, rom
     let python = get_python_interpreter(cot_base_path);
 
     print_task("Extracting & stripping binary...");
-    burn_run(objcopy, &["--strip-all", "-O", "binary", elf_path.to_str().unwrap(), bin_path.to_str().unwrap()], manifest_dir);
+    burn_run(
+        objcopy,
+        &[
+            "--strip-all",
+            "-O",
+            "binary",
+            elf_path.to_str().unwrap(),
+            bin_path.to_str().unwrap(),
+        ],
+        manifest_dir,
+    );
 
     print_task("Running patcher...");
-    burn_run(python,&[
-        "scripts/patch.py",
-        build_region.as_str_upper(),
-        rom_path.to_str().unwrap(),
-        bin_path.to_str().unwrap(),
-        elf_path.to_str().unwrap(),
-        rom_out_path.to_str().unwrap()
-    ], cot_base_path);
+    burn_run(
+        python,
+        &[
+            "scripts/patch.py",
+            build_region.as_str_upper(),
+            rom_path.to_str().unwrap(),
+            bin_path.to_str().unwrap(),
+            elf_path.to_str().unwrap(),
+            rom_out_path.to_str().unwrap(),
+        ],
+        cot_base_path,
+    );
 
-    print_success(format!("Output ROM written to: {}", rom_out_path.to_string_lossy()))
+    print_success(format!(
+        "Output ROM written to: {}",
+        rom_out_path.to_string_lossy()
+    ))
 }
 
 fn get_manifest_dir(cargo_args: &[OsString]) -> PathBuf {
@@ -271,22 +349,43 @@ fn get_python_interpreter(base_dir: &Path) -> PathBuf {
             print_error("Was unable to find Python 3. Is it installed?");
             process::exit(1);
         });
-        burn_run(&base_python, &["-m", "venv", base_dir.join("venv").to_str().unwrap()], base_dir);
+        burn_run(
+            &base_python,
+            &["-m", "venv", base_dir.join("venv").to_str().unwrap()],
+            base_dir,
+        );
         if !interpreter_path.exists() {
             print_error("Was unable to find the Python interpreter after creating the venv.");
             process::exit(1);
         }
-        burn_run(&interpreter_path, &["-m", "pip", "install", "ndspy", "keystone-engine", "pyyaml"], base_dir);
+        burn_run(
+            &interpreter_path,
+            &["-m", "pip", "install", "ndspy", "keystone-engine", "pyyaml"],
+            base_dir,
+        );
     }
 
-    print_note(format!("Using Python interpreter at: {}", interpreter_path.to_string_lossy()));
+    print_note(format!(
+        "Using Python interpreter at: {}",
+        interpreter_path.to_string_lossy()
+    ));
     interpreter_path
 }
 
 fn burn_run<S: AsRef<OsStr>>(cmd: S, args: &[&str], dir: &Path) {
     let arg_list = args.to_vec().join(" ");
-    burn_print("$", format!("{} {}", cmd.as_ref().to_string_lossy(), arg_list), Color::Purple, false, false);
-    assert!(dir.exists(), "The working directory for the command ({:?}) does not exist.", dir);
+    burn_print(
+        "$",
+        format!("{} {}", cmd.as_ref().to_string_lossy(), arg_list),
+        Color::Purple,
+        false,
+        false,
+    );
+    assert!(
+        dir.exists(),
+        "The working directory for the command ({:?}) does not exist.",
+        dir
+    );
     let exit = Command::new(cmd)
         .args(args)
         .current_dir(dir)
@@ -344,5 +443,9 @@ fn burn_print<S: AsRef<str>>(icon: &str, msg: S, color_icon: Color, color_msg: b
         style_msg.foreground = Some(color_icon);
     }
 
-    println!("{} {}", style_icon.paint(icon), style_msg.paint(msg.as_ref()));
+    println!(
+        "{} {}",
+        style_icon.paint(icon),
+        style_msg.paint(msg.as_ref())
+    );
 }

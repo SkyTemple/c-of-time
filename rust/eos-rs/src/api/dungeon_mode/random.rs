@@ -1,4 +1,4 @@
-use crate::api::objects::DungeonEntity;
+use crate::api::dungeon_mode::entity::DungeonEntity;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use crate::api::random::{rand_u16_internal, Rng};
 use crate::ctypes::c_int;

@@ -1,4 +1,4 @@
-use crate::api::objects::*;
+use crate::api::dungeon_mode::entity::DungeonEntity;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use crate::ctypes::*;
 use crate::ffi;

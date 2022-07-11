@@ -1,6 +1,10 @@
 use crate::api::dungeon_mode::*;
-use crate::api::objects::*;
+use crate::api::dungeons::{DungeonGroupId, DungeonId};
+use crate::api::iq::IqSkillId;
+use crate::api::items::ItemId;
+use crate::api::monsters::MonsterSpeciesId;
 use crate::api::overlay::OverlayLoadLease;
+use crate::api::types::MonsterTypeId;
 use crate::ffi;
 use alloc::vec::Vec;
 
@@ -34,22 +38,22 @@ impl Dungeon<ffi::dungeon> {
 /// Manipulate the dungeon.
 impl<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>> Dungeon<T> {
     /// Dungeon ID.
-    pub fn id(&self) -> dungeon_catalog::Type {
+    pub fn id(&self) -> DungeonId {
         self.0.as_ref().id.val()
     }
 
     /// Set Dungeon ID.
-    pub fn set_id(&mut self, id: dungeon_catalog::Type) {
+    pub fn set_id(&mut self, id: DungeonId) {
         self.0.as_mut().id.set_val(id);
     }
 
     /// Dungeon group ID.
-    pub fn group_id(&self) -> dungeon_group_catalog::Type {
+    pub fn group_id(&self) -> DungeonGroupId {
         self.0.as_ref().group_id.val()
     }
 
     /// Set Dungeon group ID.
-    pub fn set_group_id(&mut self, id: dungeon_group_catalog::Type) {
+    pub fn set_group_id(&mut self, id: DungeonGroupId) {
         self.0.as_mut().group_id.set_val(id);
     }
 
@@ -788,11 +792,6 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::IsNormalFloor() > 0 }
     }
 
-    /// Checks if a fixed room ID corresponds to a fixed, full-floor layout.
-    pub fn is_full_floor_fixed_rooms(&self, fixed_room_id: fixed_room_catalog::Type) -> bool {
-        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::IsNotFullFloorFixedRoom(fixed_room_id) == 0 }
-    }
     /// Checks if a position (x, y) is out of bounds on the map:
     /// !((0 <= x <= 55) && (0 <= y <= 31)).
     pub fn is_pos_out_of_bounds(&self, x: i32, y: i32) -> bool {
@@ -910,21 +909,21 @@ impl<'a> GlobalDungeonData<'a> {
 
     /// Get the ID of the item that needs to be retrieve on the current floor for a mission,
     /// if one exists.
-    pub fn get_item_to_retrieve(&self) -> item_catalog::Type {
+    pub fn get_item_to_retrieve(&self) -> ItemId {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetItemToRetrieve() }
     }
 
     /// Get the ID of the item that needs to be delivered to a mission client on the current floor,
     /// if one exists.
-    pub fn get_item_to_deliver(&self) -> item_catalog::Type {
+    pub fn get_item_to_deliver(&self) -> ItemId {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetItemToDeliver() }
     }
 
     /// Get the ID of the special target item for a Sealed Chamber or Treasure Memo mission on
     /// the current floor.
-    pub fn get_special_target_item(&self) -> item_catalog::Type {
+    pub fn get_special_target_item(&self) -> ItemId {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetSpecialTargetItem() }
     }
@@ -953,7 +952,7 @@ impl<'a> GlobalDungeonData<'a> {
 
     /// Get the monster ID of the target enemy to be defeated on the current floor for a mission,
     /// if one exists.
-    pub fn get_mission_target_enemy(&self) -> monster_catalog::Type {
+    pub fn get_mission_target_enemy(&self) -> MonsterSpeciesId {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetMissionTargetEnemy() }
     }
@@ -963,7 +962,7 @@ impl<'a> GlobalDungeonData<'a> {
     ///
     /// Note that a single minion group can correspond to multiple actual minions of the same
     /// species. There can be up to 2 minion groups.
-    pub fn get_mission_enemy_minion_group(&self, minion_group_index: i32) -> monster_catalog::Type {
+    pub fn get_mission_enemy_minion_group(&self, minion_group_index: i32) -> MonsterSpeciesId {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetMissionEnemyMinionGroup(minion_group_index) }
     }
@@ -1000,7 +999,7 @@ impl<'a> GlobalDungeonData<'a> {
 
     /// Returns true if the specified monster is included in the floor's monster spawn list
     /// (the modified list after a maximum of 14 different species were chosen).
-    pub fn is_on_monster_spawn_list(&self, monster_id: monster_catalog::Type) -> bool {
+    pub fn is_on_monster_spawn_list(&self, monster_id: MonsterSpeciesId) -> bool {
         unsafe { ffi::IsOnMonsterSpawnList(monster_id) > 0 }
     }
 
@@ -1027,7 +1026,7 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Gets the sprite index of the specified monster on this floor
-    pub fn get_monster_sprite_index(&self, monster_idx: monster_catalog::Type) -> u16 {
+    pub fn get_monster_sprite_index(&self, monster_idx: MonsterSpeciesId) -> u16 {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetSpriteIndex(monster_idx) }
     }
@@ -1154,7 +1153,7 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Get the id of the monster to be randomly spawned.
-    pub fn get_monster_id_to_spawn(&mut self, is_for_monster_house: bool) -> monster_catalog::Type {
+    pub fn get_monster_id_to_spawn(&mut self, is_for_monster_house: bool) -> MonsterSpeciesId {
         let weight_id = if is_for_monster_house { 1 } else { 0 };
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetMonsterIdToSpawn(weight_id) }
@@ -1164,7 +1163,7 @@ impl<'a> GlobalDungeonData<'a> {
     ///
     /// Returns the level of the monster to be spawned, or 1 if the specified ID can't be found on
     /// the floor's spawn table.
-    pub fn get_monster_level_to_spawn(&mut self, monster_id: monster_catalog::Type) -> u8 {
+    pub fn get_monster_level_to_spawn(&mut self, monster_id: MonsterSpeciesId) -> u8 {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetMonsterLevelToSpawn(monster_id) }
     }
@@ -1232,7 +1231,7 @@ impl<'a> GlobalDungeonData<'a> {
 
     /// If the current floor number is even, returns female Kecleon's id (default: 0x3D7),
     /// otherwise returns male Kecleon's id (default: 0x17F).
-    pub fn get_kecleon_id_to_spawn_by_floor(&self) -> monster_catalog::Type {
+    pub fn get_kecleon_id_to_spawn_by_floor(&self) -> MonsterSpeciesId {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetKecleonIdToSpawnByFloor() }
     }
@@ -1243,7 +1242,7 @@ impl<'a> GlobalDungeonData<'a> {
     /// The caller must make sure the undefined params are valid for this function.
     pub unsafe fn load_monster_sprite(
         &mut self,
-        monster_id: monster_catalog::Type,
+        monster_id: MonsterSpeciesId,
         param_2: ffi::undefined,
     ) {
         ffi::LoadMonsterSprite(monster_id, param_2)
@@ -1253,20 +1252,13 @@ impl<'a> GlobalDungeonData<'a> {
     /// [`ffi::dungeon::mew_cannot_spawn`] or the second parameter are true.
     ///
     /// Called before spawning an enemy, appears to be checking if Mew can spawn on the current floor.
-    pub fn mew_spawn_check(
-        &self,
-        monster_id: monster_catalog::Type,
-        force_fail_if_mew: bool,
-    ) -> bool {
+    pub fn mew_spawn_check(&self, monster_id: MonsterSpeciesId, force_fail_if_mew: bool) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::MewSpawnCheck(monster_id, force_fail_if_mew as ffi::bool_) > 0 }
     }
 
     /// Returns an entity reference to the first team member which has the specified iq skill.
-    pub fn get_team_member_with_iq_skill(
-        &self,
-        iq_skill: iq_skill_catalog::Type,
-    ) -> Option<&DungeonEntity> {
+    pub fn get_team_member_with_iq_skill(&self, iq_skill: IqSkillId) -> Option<&DungeonEntity> {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         let ptr = unsafe { ffi::GetTeamMemberWithIqSkill(iq_skill) };
         if ptr.is_null() {
@@ -1279,7 +1271,7 @@ impl<'a> GlobalDungeonData<'a> {
     /// Returns an entity reference to the first team member which has the specified iq skill.
     pub fn get_team_member_with_iq_skill_mut(
         &mut self,
-        iq_skill: iq_skill_catalog::Type,
+        iq_skill: IqSkillId,
     ) -> Option<&mut DungeonEntity> {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         let ptr = unsafe { ffi::GetTeamMemberWithIqSkill(iq_skill) };
@@ -1291,13 +1283,13 @@ impl<'a> GlobalDungeonData<'a> {
     }
 
     /// Returns true if any team member has the specified iq skill.
-    pub fn team_member_has_enabled_iq_skill(&self, iq_skill: iq_skill_catalog::Type) -> bool {
+    pub fn team_member_has_enabled_iq_skill(&self, iq_skill: IqSkillId) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::TeamMemberHasEnabledIqSkill(iq_skill) > 0 }
     }
 
     /// Returns true the leader has the specified iq skill.
-    pub fn team_leader_has_enabled_iq_skill(&self, iq_skill: iq_skill_catalog::Type) -> bool {
+    pub fn team_leader_has_enabled_iq_skill(&self, iq_skill: IqSkillId) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::TeamLeaderIqSkillIsEnabled(iq_skill) > 0 }
     }
@@ -1316,9 +1308,9 @@ impl<'a> GlobalDungeonData<'a> {
     /// The caller must make sure the undefined params are valid for this function.
     pub unsafe fn init_team_member(
         &mut self,
-        arg1: monster_catalog::Type,
-        type_1: type_catalog::Type,
-        type_2: type_catalog::Type,
+        arg1: MonsterSpeciesId,
+        type_1: MonsterTypeId,
+        type_2: MonsterTypeId,
         team_member_data: &mut ffi::team_member,
         param_5: ffi::undefined,
         param_6: ffi::undefined,

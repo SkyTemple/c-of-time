@@ -4,7 +4,8 @@ use std::fmt::{Debug, Display, Formatter};
 
 #[derive(Debug)]
 pub enum TargetRegionError {
-    Unknown(String), Missing
+    Unknown(String),
+    Missing,
 }
 
 impl Display for TargetRegionError {
@@ -23,17 +24,20 @@ impl Display for TargetRegionError {
 impl Error for TargetRegionError {}
 
 pub enum TargetRegion {
-    Eu, Na, Ja
+    Eu,
+    Na,
+    Ja,
 }
 
 impl TargetRegion {
     /// Build from a string.
+    #[allow(clippy::should_implement_trait)]
     pub fn from_str<S: AsRef<str>>(string: S) -> Result<Self, TargetRegionError> {
         match string.as_ref().to_lowercase().as_str() {
             "eu" => Ok(Self::Eu),
             "na" => Ok(Self::Na),
             "ja" => Ok(Self::Ja),
-            x => Err(TargetRegionError::Unknown(x.to_string()))
+            x => Err(TargetRegionError::Unknown(x.to_string())),
         }
     }
 
@@ -41,7 +45,7 @@ impl TargetRegion {
     pub fn from_target_env() -> Result<Self, TargetRegionError> {
         match env::var("TARGET") {
             Ok(target_str) => Self::from_target_string(target_str),
-            Err(_) => Err(TargetRegionError::Missing)
+            Err(_) => Err(TargetRegionError::Missing),
         }
     }
 
@@ -58,7 +62,7 @@ impl TargetRegion {
         match self {
             TargetRegion::Eu => "eu",
             TargetRegion::Na => "na",
-            TargetRegion::Ja => "ja"
+            TargetRegion::Ja => "ja",
         }
     }
 
@@ -66,7 +70,7 @@ impl TargetRegion {
         match self {
             TargetRegion::Eu => "EU",
             TargetRegion::Na => "NA",
-            TargetRegion::Ja => "JA"
+            TargetRegion::Ja => "JA",
         }
     }
 
@@ -75,7 +79,7 @@ impl TargetRegion {
         match self {
             TargetRegion::Eu => "armv5te-none-ndseoseabi-eu",
             TargetRegion::Na => "armv5te-none-ndseoseabi-na",
-            TargetRegion::Ja => "armv5te-none-ndseoseabi-ja"
+            TargetRegion::Ja => "armv5te-none-ndseoseabi-ja",
         }
     }
 }
