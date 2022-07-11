@@ -1240,7 +1240,11 @@ impl<'a> GlobalDungeonData<'a> {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    pub unsafe fn load_monster_sprite(&mut self, monster_id: MonsterSpeciesId, param_2: ffi::undefined) {
+    pub unsafe fn load_monster_sprite(
+        &mut self,
+        monster_id: MonsterSpeciesId,
+        param_2: ffi::undefined,
+    ) {
         ffi::LoadMonsterSprite(monster_id, param_2)
     }
 

@@ -137,8 +137,8 @@ pub trait DungeonMonsterRead: private::Sealed {
                 target_type_index as i32,
                 attack_type,
             )
-                .try_into()
-                .ok()
+            .try_into()
+            .ok()
         }
     }
 
@@ -322,7 +322,7 @@ pub trait DungeonMonsterRead: private::Sealed {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    fn calc_damage_projectile(
+    unsafe fn calc_damage_projectile(
         &self,
         defender: &DungeonEntity,
         used_move: &Move,
@@ -388,7 +388,7 @@ pub trait DungeonMonsterRead: private::Sealed {
                 is_ai as ffi::bool_,
             )
         }
-            .into()
+        .into()
     }
 
     /// Get the weather, as experienced by the monster.
