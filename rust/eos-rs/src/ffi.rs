@@ -10212,7 +10212,8 @@ impl iq_group_id {
 #[derive(Clone, Hash, PartialEq, Eq)]
 pub struct iq_group_id(pub(crate) crate::ctypes::c_uint);
 pub mod direction_id {
-    pub type Type = crate::ctypes::c_uint;
+    pub type Type = crate::ctypes::c_int;
+    pub const DIR_NONE: Type = -1;
     pub const DIR_DOWN: Type = 0;
     pub const DIR_DOWN_RIGHT: Type = 1;
     pub const DIR_RIGHT: Type = 2;
@@ -14308,7 +14309,8 @@ pub struct monster {
     pub action_id: action_16,
     pub direction: direction_id_8,
     pub field_0x4d: undefined,
-    pub action_use_idx: u16,
+    pub action_use_idx: u8,
+    pub field_0x4F: undefined,
     pub field_0x50: undefined,
     pub field_0x51: undefined,
     pub field_0x52: undefined,
@@ -14412,7 +14414,7 @@ pub struct monster {
     pub field_0x17b: undefined,
     pub field_0x17c: undefined,
     pub field_0x17d: undefined,
-    pub target_pixel_pos: position,
+    pub target_pos: position,
     pub pixel_pos: position,
     pub field_0x186: undefined,
     pub field_0x187: undefined,
@@ -15985,7 +15987,7 @@ pub struct guest_monster {
 #[repr(C)]
 pub struct ai_possible_move {
     pub can_be_used: bool_,
-    pub field_0x1: undefined,
+    pub direction: direction_id_8,
     pub field_0x2: undefined,
     pub field_0x3: undefined,
     pub weight: crate::ctypes::c_int,
@@ -57913,6 +57915,21 @@ pub struct main_ground_data {
     pub events: *mut undefined,
 }
 extern "C" {
+    pub fn ShouldMonsterRunAwayVariationOutlawCheck(
+        monster: *mut entity,
+        param_2: undefined,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn AiMovement(monster: *mut entity, param_2: undefined);
+}
+extern "C" {
+    pub fn CalculateAiTargetPos(monster: *mut entity);
+}
+extern "C" {
+    pub fn ChooseAiMove(monster: *mut entity);
+}
+extern "C" {
     pub fn InitMemAllocTable();
 }
 extern "C" {
@@ -58208,6 +58225,9 @@ extern "C" {
     pub fn GetMoveType(move_: *mut move_) -> type_id;
 }
 extern "C" {
+    pub fn GetMoveAiWeight(move_: *mut move_) -> u8;
+}
+extern "C" {
     pub fn GetMoveBasePower(move_: *mut move_) -> crate::ctypes::c_int;
 }
 extern "C" {
@@ -58218,6 +58238,9 @@ extern "C" {
 }
 extern "C" {
     pub fn GetMoveCritChance(move_: *mut move_) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsMoveRangeString19(move_: *mut move_) -> bool_;
 }
 extern "C" {
     pub fn IsRecoilMove(move_id: move_id) -> bool_;
@@ -58558,6 +58581,9 @@ extern "C" {
 }
 extern "C" {
     pub fn GetSpriteFileSize(monster_id: monster_id) -> u8;
+}
+extern "C" {
+    pub fn GetCanMoveFlag(monster_id: monster_id) -> bool_;
 }
 extern "C" {
     pub fn GetMonsterPreEvolution(monster_id: monster_id) -> monster_id;
@@ -58923,6 +58949,12 @@ extern "C" {
     pub fn GetTileAtEntity(entity: *mut entity) -> *mut tile;
 }
 extern "C" {
+    pub fn CanTargetEntity(user: *mut entity, target: *mut entity) -> bool_;
+}
+extern "C" {
+    pub fn CanTargetPosition(monster: *mut entity, position: *mut position) -> bool_;
+}
+extern "C" {
     pub fn SubstitutePlaceholderStringTags(
         string_id: crate::ctypes::c_int,
         entity: *mut entity,
@@ -58939,13 +58971,32 @@ extern "C" {
     pub fn IsOnMonsterSpawnList(monster_id: monster_id) -> bool_;
 }
 extern "C" {
-    pub fn GetLeader() -> *mut entity;
-}
-extern "C" {
     pub fn GetMonsterIdToSpawn(spawn_weight: crate::ctypes::c_int) -> monster_id;
 }
 extern "C" {
     pub fn GetMonsterLevelToSpawn(monster_id: monster_id) -> u8;
+}
+extern "C" {
+    pub fn GetDirectionTowardsPosition(
+        origin: *mut position,
+        target: *mut position,
+    ) -> direction_id::Type;
+}
+extern "C" {
+    pub fn GetChebyshevDistance(
+        position_a: *mut position,
+        position_b: *mut position,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsPositionInSight(
+        origin: *mut position,
+        target: *mut position,
+        user_has_dropeye: bool_,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn GetLeader() -> *mut entity;
 }
 extern "C" {
     pub fn TickStatusTurnCounter(counter: *mut u8) -> u8;
@@ -59000,7 +59051,32 @@ extern "C" {
     pub fn TrySwitchPlace(user: *mut entity, target: *mut entity);
 }
 extern "C" {
-    pub fn SetForcedLossReason(forced_loss_reason: forced_loss_reason::Type);
+    pub fn ClearMonsterActionFields(monster_action_field: *mut crate::ctypes::c_void);
+}
+extern "C" {
+    pub fn SetMonsterActionFields(
+        monster_action_field: *mut crate::ctypes::c_void,
+        action_id: action_16,
+    );
+}
+extern "C" {
+    pub fn SetActionPassTurnOrWalk(
+        monster_action_field: *mut crate::ctypes::c_void,
+        monster_id: monster_id,
+    );
+}
+extern "C" {
+    pub fn SetActionRegularAttack(
+        monster_action_field: *mut crate::ctypes::c_void,
+        direction: direction_id::Type,
+    );
+}
+extern "C" {
+    pub fn SetActionUseMoveAi(
+        monster_action_field: *mut crate::ctypes::c_void,
+        move_index: u8,
+        direction: direction_id::Type,
+    );
 }
 extern "C" {
     pub fn RunFractionalTurn(is_first_loop: bool_);
@@ -59016,6 +59092,9 @@ extern "C" {
 }
 extern "C" {
     pub fn DecrementWindCounter();
+}
+extern "C" {
+    pub fn SetForcedLossReason(forced_loss_reason: forced_loss_reason::Type);
 }
 extern "C" {
     pub fn GetForcedLossReason() -> forced_loss_reason::Type;
@@ -59038,6 +59117,9 @@ extern "C" {
         faint_reason: crate::ctypes::c_int,
         killer: *mut entity,
     );
+}
+extern "C" {
+    pub fn UpdateAiTargetPos(monster: *mut entity);
 }
 extern "C" {
     pub fn GetKecleonIdToSpawnByFloor() -> monster_id;
@@ -59067,6 +59149,9 @@ extern "C" {
 }
 extern "C" {
     pub fn RestorePpAllMovesSetFlags(entity: *mut entity);
+}
+extern "C" {
+    pub fn ShouldMonsterHeadToStairs(entity: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn MewSpawnCheck(monster_id: monster_id, fail_if_mew: bool_) -> bool_;
@@ -59121,6 +59206,9 @@ extern "C" {
     pub fn ExecuteMonsterAction(monster: *mut entity);
 }
 extern "C" {
+    pub fn HasStatusThatPreventsActing(monster: *mut entity) -> bool_;
+}
+extern "C" {
     pub fn CalcSpeedStage(
         entity: *mut entity,
         counter_weight: crate::ctypes::c_int,
@@ -59133,6 +59221,25 @@ extern "C" {
     pub fn GetNumberOfAttacks(entity: *mut entity) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn IsMonsterCornered(monster: *mut entity) -> bool_;
+}
+extern "C" {
+    pub fn CanAttackInDirection(monster: *mut entity, direction: direction_id::Type) -> bool_;
+}
+extern "C" {
+    pub fn CanAiMonsterMoveInDirection(
+        monster: *mut entity,
+        direction: direction_id::Type,
+        out_monster_in_target_position: *mut entity,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn ShouldMonsterRunAway(monster: *mut entity) -> bool_;
+}
+extern "C" {
+    pub fn ShouldMonsterRunAwayVariation(monster: *mut entity, param_2: undefined) -> bool_;
+}
+extern "C" {
     pub fn NoGastroAcidStatus(entity: *mut entity) -> bool_;
 }
 extern "C" {
@@ -59143,6 +59250,12 @@ extern "C" {
 }
 extern "C" {
     pub fn MonsterIsType(entity: *mut entity, type_id: type_id) -> bool_;
+}
+extern "C" {
+    pub fn CanSeeInvisibleMonsters(entity: *mut entity) -> bool_;
+}
+extern "C" {
+    pub fn HasDropeyeStatus(entity: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn IqSkillIsEnabled(entity: *mut entity, iq_id: iq_skill_id) -> bool_;
@@ -59191,6 +59304,9 @@ extern "C" {
 }
 extern "C" {
     pub fn EndCringeClassStatus(user: *mut entity, target: *mut entity);
+}
+extern "C" {
+    pub fn RunMonsterAi(monster: *mut entity, param_2: undefined);
 }
 extern "C" {
     pub fn GetTypeMatchup(
@@ -59589,6 +59705,32 @@ extern "C" {
     pub fn Conversion2IsActive(entity: *mut entity) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn AiConsiderMove(
+        ai_possible_move: *mut ai_possible_move,
+        monster: *mut entity,
+        move_: *mut move_,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn TryAddTargetToAiTargetList(
+        current_num_targets: crate::ctypes::c_int,
+        move_ai_range: move_target_and_range,
+        user: *mut entity,
+        target: *mut entity,
+        move_: *mut move_,
+        check_all_conditions: bool_,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsAiTargetEligible(
+        move_ai_range: move_target_and_range,
+        user: *mut entity,
+        target: *mut entity,
+        move_: *mut move_,
+        check_all_conditions: bool_,
+    ) -> bool_;
+}
+extern "C" {
     pub fn IsTargetInRange(
         user: *mut entity,
         target: *mut entity,
@@ -59666,10 +59808,31 @@ extern "C" {
     ) -> bool_;
 }
 extern "C" {
+    pub fn CanAiUseMove(
+        monster: *mut entity,
+        move_index: crate::ctypes::c_int,
+        extra_checks: bool_,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn CanMonsterUseMove(monster: *mut entity, move_: *mut move_, extra_checks: bool_)
+        -> bool_;
+}
+extern "C" {
     pub fn UpdateMovePp(entity: *mut entity, can_consume_pp: bool_);
 }
 extern "C" {
     pub fn LowerSshort(x: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetMoveAnimationId(
+        move_: *mut move_,
+        apparent_weather: weather_id::Type,
+        should_play_alternative_animation: bool_,
+    ) -> u16;
+}
+extern "C" {
+    pub fn ShouldMovePlayAlternativeAnimation(user: *mut entity, move_: *mut move_) -> bool_;
 }
 extern "C" {
     pub fn DealDamageWithRecoil(
@@ -59717,6 +59880,9 @@ extern "C" {
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn StatusCheckerCheck(attacker: *mut entity, move_: *mut move_) -> bool_;
+}
+extern "C" {
     pub fn GetApparentWeather(entity: *mut entity) -> weather_id::Type;
 }
 extern "C" {
@@ -59727,6 +59893,9 @@ extern "C" {
 }
 extern "C" {
     pub fn GetTileSafe(x: crate::ctypes::c_int, y: crate::ctypes::c_int) -> *mut tile;
+}
+extern "C" {
+    pub fn GetStairsRoom() -> u8;
 }
 extern "C" {
     pub fn GravityIsActive() -> bool_;
