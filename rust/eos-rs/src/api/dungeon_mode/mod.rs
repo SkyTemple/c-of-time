@@ -71,6 +71,19 @@ pub fn advance_frame(_ov29: &OverlayLoadLease<29>) {
     unsafe { ffi::AdvanceFrame(0 as ffi::undefined) }
 }
 
+/// Returns the Chebyshev distance between two positions. Calculated as max(abs(x0-x1), abs(y0-y1)).
+pub fn get_chebyshev_distance(_ov29: &OverlayLoadLease<29>, pos1: &ffi::position, pos2: &ffi::position) -> i32 {
+    unsafe { ffi::GetChebyshevDistance(force_mut_ptr!(pos1), force_mut_ptr!(pos2)) }
+}
+
+/// Checks if a given target position is in sight from a given origin position.
+///
+/// There's multiple factors that affect this check, but generally, it's true if both
+/// positions are in the same room or within 2 tiles of each other.
+pub fn is_position_in_sight(_ov29: &OverlayLoadLease<29>, origin: &ffi::position, target: &ffi::position, user_has_dropeye: bool) -> bool {
+    unsafe { ffi::IsPositionInSight(force_mut_ptr!(origin), force_mut_ptr!(target), user_has_dropeye as ffi::bool_) > 0 }
+}
+
 /// Graphically displays any pending actions that have happened but haven't been shown on screen
 /// yet.
 ///
