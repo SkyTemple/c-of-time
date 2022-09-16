@@ -31,9 +31,6 @@
 // Allow std for tests. Make sure to NOT cross-compile when using tests.
 #![cfg_attr(not(test), no_std)]
 #![feature(alloc_error_handler)]
-// This will be stable pretty soon:
-#![feature(alloc_c_string)]
-#![feature(core_c_str)]
 #![feature(allocator_api)]
 #![feature(nonnull_slice_from_raw_parts)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
