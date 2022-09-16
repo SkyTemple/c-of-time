@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 import sys
 import glob
+from pathlib import Path
+
 from yaml import load, Loader
 
 region = sys.argv[1]
+itcm_region = region + "-ITCM"
 
 linkerscript_lines = []
 all_symbols = set()
 
 linkerscript_lines.append("/* THIS FILE IS AUTO-GENERATED. DO NOT MODIFY! */")
 
-for yaml_file_path in glob.glob("pmdsky-debug/symbols/*.yml"):
+for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
   with open(yaml_file_path, 'r') as f:
     linkerscript_lines.append("")
     linkerscript_lines.append(f"/* --- {yaml_file_path} --- */")
@@ -39,9 +42,13 @@ for yaml_file_path in glob.glob("pmdsky-debug/symbols/*.yml"):
       for function in symbols:
         name = function['name']
         addresses = function['address']
-        if region in addresses:
+        addr = None
+        if itcm_region in addresses:
+          addr = addresses[itcm_region]
+        elif region in addresses:
           addr = addresses[region]
 
+        if addr is not None:
           if isinstance(addr, list):
             if len(addr) == 0:
               continue
