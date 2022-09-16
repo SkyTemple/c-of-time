@@ -52,6 +52,7 @@ HasLowHealth+0:
 /// If you want to test the item and move effects bundled with this `main.rs`, you probably
 /// want to comment out the logic that logs messages in this function first (otherwise good luck
 /// using an item or move ;) ).
+#[allow(clippy::not_unsafe_ptr_arg_deref)]  // The unsafe operations we do are safe the way we use them.
 #[no_mangle]
 #[allow(clippy::not_unsafe_ptr_arg_deref)] // Clippy denies this by default. For demo purposes, we allow it.
 pub extern "C" fn has_high_health(entity: *mut DungeonEntity) -> ffi::bool_ {
