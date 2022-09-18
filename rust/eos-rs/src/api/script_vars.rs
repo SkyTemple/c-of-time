@@ -1,9 +1,7 @@
 //! Code for handling script variables.
 
-use crate::api::objects::script_var_catalog;
 use crate::ctypes::c_void;
 use crate::ffi;
-use crate::ffi::script_var_id::Type;
 use crate::ffi::script_var_type;
 use alloc::ffi::CString;
 use alloc::vec;
@@ -11,6 +9,79 @@ use alloc::vec::Vec;
 use core::ffi::CStr;
 use core::marker::PhantomData;
 use core::ptr;
+
+/// A script opcode ID with associated methods to get metadata.
+///
+/// Use the associated constants or the [`Self::get`] method to get instances of this.
+pub type ScriptOpcodeId = ffi::script_opcode_id;
+impl Copy for ScriptOpcodeId {}
+
+/// This impl provides general metadata about script opcodes in the game.
+impl ScriptOpcodeId {
+    /// Returns the ID struct for the script opcode with the given ID.
+    ///
+    /// # Safety
+    /// The caller must make sure the ID is valid (refers to an existing script opcode),
+    /// otherwise this is UB.
+    pub const unsafe fn new(id: u32) -> Self {
+        Self(id)
+    }
+
+    /// Returns the ID of this script opcode.
+    pub const fn id(&self) -> u32 {
+        self.0
+    }
+}
+
+impl From<ScriptOpcodeId> for u32 {
+    fn from(v: ScriptOpcodeId) -> Self {
+        v.0
+    }
+}
+
+/// A script variable ID with associated methods to get metadata.
+///
+/// Use the associated constants or the [`Self::get`] method to get instances of this.
+pub type ScriptVariableId = ffi::script_var_id;
+impl Copy for ScriptVariableId {}
+
+/// This impl provides general metadata about script variables in the game.
+impl ScriptVariableId {
+    /// Returns the ID struct for the script variable with the given ID.
+    ///
+    /// # Safety
+    /// The caller must make sure the ID is valid (refers to an existing script variable),
+    /// otherwise this is UB.
+    pub const unsafe fn new(id: u32) -> Self {
+        Self(id)
+    }
+
+    /// Returns the ID of this script variable.
+    pub const fn id(&self) -> u32 {
+        self.0
+    }
+
+    /// Whether or not this variable is a local variable (as opposed to a global one).
+    fn is_local(&self) -> bool {
+        self.0 >= ScriptVariableId::VAR_LOCAL0.0
+    }
+}
+
+impl From<ScriptVariableId> for u32 {
+    fn from(v: ScriptVariableId) -> Self {
+        v.0
+    }
+}
+
+pub trait AsScriptVariableId {
+    fn as_id(&self) -> ScriptVariableId;
+}
+
+impl AsScriptVariableId for ScriptVariableId {
+    fn as_id(&self) -> ScriptVariableId {
+        *self
+    }
+}
 
 /// Value types of script variables.
 ///
@@ -119,8 +190,9 @@ pub trait UnwrapScriptVariableValueAs<T> {
 
 impl UnwrapScriptVariableValueAs<()> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) {
-        assert!(
-            as_type == ScriptVariableValueType::None,
+        assert_eq!(
+            as_type,
+            ScriptVariableValueType::None,
             "Invalid use of `unwrap_as`"
         );
         match self {
@@ -132,8 +204,9 @@ impl UnwrapScriptVariableValueAs<()> for ScriptVariableValue {
 
 impl UnwrapScriptVariableValueAs<bool> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> bool {
-        assert!(
-            as_type == ScriptVariableValueType::Bit,
+        assert_eq!(
+            as_type,
+            ScriptVariableValueType::Bit,
             "Invalid use of `unwrap_as`"
         );
         match self {
@@ -145,8 +218,9 @@ impl UnwrapScriptVariableValueAs<bool> for ScriptVariableValue {
 
 impl UnwrapScriptVariableValueAs<CString> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> CString {
-        assert!(
-            as_type == ScriptVariableValueType::String,
+        assert_eq!(
+            as_type,
+            ScriptVariableValueType::String,
             "Invalid use of `unwrap_as`"
         );
         match self {
@@ -158,8 +232,9 @@ impl UnwrapScriptVariableValueAs<CString> for ScriptVariableValue {
 
 impl UnwrapScriptVariableValueAs<u8> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> u8 {
-        assert!(
-            as_type == ScriptVariableValueType::U8,
+        assert_eq!(
+            as_type,
+            ScriptVariableValueType::U8,
             "Invalid use of `unwrap_as`"
         );
         match self {
@@ -171,8 +246,9 @@ impl UnwrapScriptVariableValueAs<u8> for ScriptVariableValue {
 
 impl UnwrapScriptVariableValueAs<u16> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> u16 {
-        assert!(
-            as_type == ScriptVariableValueType::U16,
+        assert_eq!(
+            as_type,
+            ScriptVariableValueType::U16,
             "Invalid use of `unwrap_as`"
         );
         match self {
@@ -184,8 +260,9 @@ impl UnwrapScriptVariableValueAs<u16> for ScriptVariableValue {
 
 impl UnwrapScriptVariableValueAs<u32> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> u32 {
-        assert!(
-            as_type == ScriptVariableValueType::U32,
+        assert_eq!(
+            as_type,
+            ScriptVariableValueType::U32,
             "Invalid use of `unwrap_as`"
         );
         match self {
@@ -197,8 +274,9 @@ impl UnwrapScriptVariableValueAs<u32> for ScriptVariableValue {
 
 impl UnwrapScriptVariableValueAs<i8> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> i8 {
-        assert!(
-            as_type == ScriptVariableValueType::I8,
+        assert_eq!(
+            as_type,
+            ScriptVariableValueType::I8,
             "Invalid use of `unwrap_as`"
         );
         match self {
@@ -210,8 +288,9 @@ impl UnwrapScriptVariableValueAs<i8> for ScriptVariableValue {
 
 impl UnwrapScriptVariableValueAs<i16> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> i16 {
-        assert!(
-            as_type == ScriptVariableValueType::I16,
+        assert_eq!(
+            as_type,
+            ScriptVariableValueType::I16,
             "Invalid use of `unwrap_as`"
         );
         match self {
@@ -223,8 +302,9 @@ impl UnwrapScriptVariableValueAs<i16> for ScriptVariableValue {
 
 impl UnwrapScriptVariableValueAs<i32> for ScriptVariableValue {
     fn unwrap_as(self, as_type: ScriptVariableValueType) -> i32 {
-        assert!(
-            as_type == ScriptVariableValueType::I32,
+        assert_eq!(
+            as_type,
+            ScriptVariableValueType::I32,
             "Invalid use of `unwrap_as`"
         );
         match self {
@@ -236,9 +316,18 @@ impl UnwrapScriptVariableValueAs<i32> for ScriptVariableValue {
 }
 
 /// Helper struct for manipulating the global and local script variables.
-pub struct ScriptVariables;
+pub struct ScriptVariables(PhantomData<()>);
 
 impl ScriptVariables {
+    /// Returns a struct for manipulating global and local script variables.
+    ///
+    /// # Safety
+    /// This is unsafe, since it essentially borrows a global mutable variable (`static mut`), see
+    /// safety rules for `static mut`s.
+    pub unsafe fn get() -> Self {
+        Self(PhantomData)
+    }
+
     /// Initialize the script variable values table (SCRIPT_VARS_VALUES).
     ///
     /// The whole table is first zero-initialized. Then, all script variable values are first
@@ -251,18 +340,15 @@ impl ScriptVariables {
 
     /// Get a reference to the global variable. This must not be used
     /// for local variables.
-    pub fn global_variable(&self, var_id: script_var_catalog::Type) -> GlobalScriptVariableRef {
-        assert!(!is_local(var_id));
+    pub fn global_variable(&self, var_id: ScriptVariableId) -> GlobalScriptVariableRef {
+        assert!(!var_id.is_local());
         GlobalScriptVariableRef(var_id, PhantomData)
     }
 
     /// Get a mutable reference to the global variable. This must not be used
     /// for local variables.
-    pub fn global_variable_mut(
-        &mut self,
-        var_id: script_var_catalog::Type,
-    ) -> GlobalScriptVariableMut {
-        assert!(!(is_local(var_id)));
+    pub fn global_variable_mut(&mut self, var_id: ScriptVariableId) -> GlobalScriptVariableMut {
+        assert!(!(var_id.is_local()));
         GlobalScriptVariableMut(var_id, PhantomData)
     }
 
@@ -274,9 +360,9 @@ impl ScriptVariables {
     pub unsafe fn local_variable(
         &self,
         local_var_vals: *mut c_void,
-        var_id: script_var_catalog::Type,
+        var_id: ScriptVariableId,
     ) -> LocalScriptVariableRef {
-        assert!(is_local(var_id));
+        assert!(var_id.is_local());
         LocalScriptVariableRef(local_var_vals, var_id, PhantomData)
     }
 
@@ -288,9 +374,9 @@ impl ScriptVariables {
     pub unsafe fn local_variable_mut(
         &mut self,
         local_var_vals: *mut c_void,
-        var_id: script_var_catalog::Type,
+        var_id: ScriptVariableId,
     ) -> LocalScriptVariableMut {
-        assert!(is_local(var_id));
+        assert!(var_id.is_local());
         LocalScriptVariableMut(local_var_vals, var_id, PhantomData)
     }
 
@@ -383,27 +469,26 @@ impl ScriptVariables {
 }
 
 /// Reference to a global script variable, see [`ScriptVariableRead`].
-pub struct GlobalScriptVariableRef<'a>(script_var_catalog::Type, PhantomData<&'a ()>);
+pub struct GlobalScriptVariableRef<'a>(ScriptVariableId, PhantomData<&'a ()>);
 
 /// Mutable reference to a global script variable, see
 /// [`ScriptVariableRead`] and [`ScriptVariableWrite`].
-pub struct GlobalScriptVariableMut<'a>(script_var_catalog::Type, PhantomData<&'a ()>);
+pub struct GlobalScriptVariableMut<'a>(ScriptVariableId, PhantomData<&'a ()>);
 
 /// Reference to a local script variable, see [`ScriptVariableRead`].
-pub struct LocalScriptVariableRef<'a>(*mut c_void, script_var_catalog::Type, PhantomData<&'a ()>);
+pub struct LocalScriptVariableRef<'a>(*mut c_void, ScriptVariableId, PhantomData<&'a ()>);
 
 /// Mutable reference to a local script variable, see
 /// [`ScriptVariableRead`] and [`ScriptVariableWrite`].
-pub struct LocalScriptVariableMut<'a>(*mut c_void, script_var_catalog::Type, PhantomData<&'a ()>);
+pub struct LocalScriptVariableMut<'a>(*mut c_void, ScriptVariableId, PhantomData<&'a ()>);
 
 /// Read actions for script variables.
-#[allow(clippy::not_unsafe_ptr_arg_deref)]
 pub trait ScriptVariableRead: PartialEq + Eq {
     #[doc(hidden)]
     fn internal_local_var_table(&self) -> *mut c_void;
 
     /// Returns the variable ID
-    fn id(&self) -> script_var_catalog::Type;
+    fn id(&self) -> ScriptVariableId;
 
     /// Loads a script variable descriptor for a given ID.
     fn descriptor(&self) -> &ffi::script_var {
@@ -418,9 +503,9 @@ pub trait ScriptVariableRead: PartialEq + Eq {
         }
     }
 
-    /// Returns whether or not this is a local variable
+    /// Returns whether or not this is a local variable (as opposed to a global one).
     fn is_local(&self) -> bool {
-        is_local(self.id())
+        self.id().is_local()
     }
 
     /// Returns the type of the variable
@@ -577,22 +662,30 @@ pub trait ScriptVariableRead: PartialEq + Eq {
     ///
     /// Hint: Implementors of this trait also implement `PartialEq` and `Eq`, so you can use those
     /// instead if the underlying type is the same.
-    fn eq(&self, other_id: script_var_catalog::Type) -> bool {
-        if is_local(self.id()) != (is_local(other_id)) {
+    fn var_eq<S: AsScriptVariableId>(&self, other: S) -> bool {
+        if self.id().is_local() != other.as_id().is_local() {
             return false;
         }
         unsafe {
-            ffi::ScriptVariablesEqual(self.internal_local_var_table(), self.id(), other_id) > 0
+            ffi::ScriptVariablesEqual(self.internal_local_var_table(), self.id(), other.as_id()) > 0
         }
     }
 }
 
+impl<T> AsScriptVariableId for T
+where
+    T: ScriptVariableRead,
+{
+    fn as_id(&self) -> ScriptVariableId {
+        self.id()
+    }
+}
+
 /// Write actions for script variables.
-#[allow(clippy::not_unsafe_ptr_arg_deref)]
 pub trait ScriptVariableWrite: ScriptVariableRead {
     /// Zero-initialize the values of the given script variable.
-    fn zero_init(&mut self, var_id: script_var_catalog::Type) {
-        assert!(var_id < script_var_catalog::VAR_LOCAL0);
+    fn zero_init(&mut self, var_id: ScriptVariableId) {
+        assert!(var_id.is_local());
         unsafe { ffi::ZinitScriptVariable(self.internal_local_var_table(), self.id()) }
     }
 
@@ -700,7 +793,7 @@ impl<'a> ScriptVariableRead for GlobalScriptVariableRef<'a> {
         ptr::null_mut()
     }
 
-    fn id(&self) -> Type {
+    fn id(&self) -> ScriptVariableId {
         self.0
     }
 }
@@ -718,7 +811,7 @@ impl<'a> ScriptVariableRead for GlobalScriptVariableMut<'a> {
         ptr::null_mut()
     }
 
-    fn id(&self) -> Type {
+    fn id(&self) -> ScriptVariableId {
         self.0
     }
 }
@@ -726,7 +819,6 @@ impl<'a> ScriptVariableRead for GlobalScriptVariableMut<'a> {
 impl<'a> ScriptVariableWrite for GlobalScriptVariableMut<'a> {}
 
 impl<'a> PartialEq for LocalScriptVariableRef<'a> {
-    #[allow(clippy::not_unsafe_ptr_arg_deref)]
     fn eq(&self, other: &Self) -> bool {
         if self.0 != other.0 {
             return false;
@@ -742,13 +834,12 @@ impl<'a> ScriptVariableRead for LocalScriptVariableRef<'a> {
         self.0
     }
 
-    fn id(&self) -> Type {
+    fn id(&self) -> ScriptVariableId {
         self.1
     }
 }
 
 impl<'a> PartialEq for LocalScriptVariableMut<'a> {
-    #[allow(clippy::not_unsafe_ptr_arg_deref)]
     fn eq(&self, other: &Self) -> bool {
         if self.0 != other.0 {
             return false;
@@ -764,14 +855,9 @@ impl<'a> ScriptVariableRead for LocalScriptVariableMut<'a> {
         self.0
     }
 
-    fn id(&self) -> Type {
+    fn id(&self) -> ScriptVariableId {
         self.1
     }
 }
 
 impl<'a> ScriptVariableWrite for LocalScriptVariableMut<'a> {}
-
-#[inline(always)]
-fn is_local(var_id: script_var_catalog::Type) -> bool {
-    var_id >= script_var_catalog::VAR_LOCAL0
-}
