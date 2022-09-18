@@ -40,31 +40,23 @@ bindgen \
   > $SCRIPT_DIR/src/ffi.rs
 
 # Make fields of newtype enums private.
-sed 's/pub struct ability_id(pub /pub struct ability_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct dungeon_id(pub /pub struct dungeon_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct dungeon_group_id(pub /pub struct dungeon_group_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct exclusive_item_effect_id(pub /pub struct exclusive_item_effect_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct fixed_room_id(pub /pub struct fixed_room_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct iq_group_id(pub /pub struct iq_group_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct iq_skill_id(pub /pub struct iq_skill_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct item_id(pub /pub struct item_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct monster_id(pub /pub struct monster_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct move_id(pub /pub struct move_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct script_opcode_id(pub /pub struct script_opcode_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct script_var_id(pub /pub struct script_var_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct special_process_id(pub /pub struct special_process_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
-sed 's/pub struct type_id(pub /pub struct type_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs > .tmp
-mv .tmp $SCRIPT_DIR/src/ffi.rs
+sed_inplace() {
+    # sed -i isn't portable
+    sed "$1" "$2" > "$2.tmp"
+    mv "$2.tmp" "$2"
+}
+
+sed_inplace 's/pub struct ability_id(pub /pub struct ability_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct dungeon_id(pub /pub struct dungeon_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct dungeon_group_id(pub /pub struct dungeon_group_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct exclusive_item_effect_id(pub /pub struct exclusive_item_effect_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct fixed_room_id(pub /pub struct fixed_room_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct iq_group_id(pub /pub struct iq_group_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct iq_skill_id(pub /pub struct iq_skill_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct item_id(pub /pub struct item_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct monster_id(pub /pub struct monster_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct move_id(pub /pub struct move_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct script_opcode_id(pub /pub struct script_opcode_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct script_var_id(pub /pub struct script_var_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct special_process_id(pub /pub struct special_process_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct type_id(pub /pub struct type_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
