@@ -43,6 +43,7 @@ for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
         name = function['name']
         addresses = function['address']
         addr = None
+        # *-ITCM regions are runtime overrides for the normal addresses
         if itcm_region in addresses:
           addr = addresses[itcm_region]
         elif region in addresses:
