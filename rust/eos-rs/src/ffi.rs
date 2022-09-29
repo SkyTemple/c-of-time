@@ -16627,7 +16627,7 @@ pub struct dungeon {
     pub field_0x0: undefined,
     pub field_0x1: undefined,
     pub field_0x2: undefined,
-    pub field_0x3: undefined,
+    pub target_monster_not_found_flag: bool_,
     pub field_0x4: undefined,
     pub stepped_on_stairs: bool_,
     pub end_floor_flag: u8,
@@ -60949,6 +60949,9 @@ extern "C" {
     pub fn IsDestinationFloorWithMonster() -> bool_;
 }
 extern "C" {
+    pub fn LoadMissionMonsterSprites();
+}
+extern "C" {
     pub fn MissionTargetEnemyIsDefeated() -> bool_;
 }
 extern "C" {
@@ -60980,6 +60983,12 @@ extern "C" {
 }
 extern "C" {
     pub fn GetMissionEnemyMinionGroup(i: crate::ctypes::c_int) -> monster_id;
+}
+extern "C" {
+    pub fn SetTargetMonsterNotFoundFlag(value: bool_);
+}
+extern "C" {
+    pub fn GetTargetMonsterNotFoundFlag() -> bool_;
 }
 extern "C" {
     pub fn FloorHasMissionMonster(mission_dst: *mut mission_destination_info) -> bool_;

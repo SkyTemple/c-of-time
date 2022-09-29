@@ -863,6 +863,15 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::IsDestinationFloorWithMonster() > 0 }
     }
 
+    /// Loads the sprites of monsters that appear on the current floor because of a mission,
+    /// if applicable.
+    ///
+    /// This includes monsters to be rescued, outlaws and its minions.
+    pub fn load_mission_monster_sprites(&mut self) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::LoadMissionMonsterSprites() }
+    }
+
     /// Returns the index of the room that contains the stairs.
     pub fn get_stairs_room(&self) -> u8 {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
@@ -971,6 +980,18 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn get_mission_enemy_minion_group(&self, minion_group_index: i32) -> MonsterSpeciesId {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetMissionEnemyMinionGroup(minion_group_index) }
+    }
+
+    /// Gets the value of [`ffi::dungeon::target_monster_not_found_flag`].
+    pub fn get_target_monster_not_found_flag(&self) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetTargetMonsterNotFoundFlag() > 0 }
+    }
+
+    /// Sets [`ffi::dungeon::target_monster_not_found_flag`] to the specified value.
+    pub fn set_target_monster_not_found_flag(&mut self, value: bool) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::SetTargetMonsterNotFoundFlag(value as ffi::bool_) }
     }
 
     /// Gets a reference to the entity that is currently leading the team, or None if none of
