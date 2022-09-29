@@ -849,8 +849,8 @@ pub trait DungeonMonsterWrite: private::Sealed {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    fn run_ai(&mut self, param: ffi::undefined) {
-        unsafe { ffi::RunMonsterAi(self.entity_mut(), param) }
+    unsafe fn run_ai(&mut self, param: ffi::undefined) {
+        ffi::RunMonsterAi(self.entity_mut(), param)
     }
 
     /// The AI uses this function to check if a move has any potential targets, to calculate the
@@ -911,6 +911,21 @@ pub trait DungeonMonsterWrite: private::Sealed {
             force_mut_ptr!(the_move),
             check_all_conditions as ffi::bool_,
         )
+    }
+
+    /// Sets the monster's status_icon_flags bitfield according to its current status effects.
+    /// Does not affect a Sudowoodo in the "permanent sleep" state
+    /// ([`ffi::statuses::sleep`] == 0x7F).
+    ///
+    /// Some of the status effect in monster:statuses are used as an index to access an array,
+    /// where every group of 8 bytes represents a bitmask. All masks are added in a bitwise OR and
+    /// then stored in [`ffi::monster::status_icons`].
+    ///
+    /// Also sets icon flags for [`ffi::statuses::exposed`], [`ffi::statuses::grudge`],
+    /// critical HP and lowered stats with explicit checks, and applies the effect of the
+    /// Identifier Orb (see [`ffi::dungeon::identify_orb_flag`]).
+    fn update_status_icon_flags(&mut self) {
+        unsafe { ffi::UpdateStatusIconFlags(self.entity_mut()) }
     }
 }
 

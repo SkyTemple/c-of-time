@@ -14308,6 +14308,567 @@ pub struct statuses {
     pub stockpile_stage: u8,
 }
 #[repr(C)]
+pub struct status_icon_flags {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 5usize]>,
+    pub field_0x5: undefined,
+    pub field_0x6: undefined,
+    pub field_0x7: undefined,
+}
+impl status_icon_flags {
+    #[inline]
+    pub fn f_sleepless(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_sleepless(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_burn(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_burn(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_poison(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_poison(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_toxic(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_toxic(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_confused(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_confused(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(4usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_cowering(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_cowering(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(5usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_taunt(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(6usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_taunt(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(6usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_encore(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(7usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_encore(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(7usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_reflect(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(8usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_reflect(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(8usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_safeguard(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(9usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_safeguard(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(9usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_light_screen(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(10usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_light_screen(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(10usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_protect(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(11usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_protect(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(11usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_endure(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(12usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_endure(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(12usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_low_hp(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(13usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_low_hp(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(13usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_curse(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(14usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_curse(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(14usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_embargo(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(15usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_embargo(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(15usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_sure_shot(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(16usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_sure_shot(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(16usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_whiffer(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(17usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_whiffer(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(17usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_set_damage(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(18usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_set_damage(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(18usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_focus_energy(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(19usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_focus_energy(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(19usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_blinded(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(20usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_blinded(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(20usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_cross_eyed(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(21usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_cross_eyed(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(21usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_eyedrops(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(22usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_eyedrops(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(22usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_muzzled(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(23usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_muzzled(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(23usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_grudge(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(24usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_grudge(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(24usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_exposed(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(25usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_exposed(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(25usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_sleep(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(26usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_sleep(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(26usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_lowered_stat(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(27usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_lowered_stat(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(27usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_heal_block(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(28usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_heal_block(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(28usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_miracle_eye(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(29usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_miracle_eye(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(29usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_red_exclamation_mark(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(30usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_red_exclamation_mark(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(30usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_magnet_rise(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(31usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_magnet_rise(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(31usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_freeze(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(32usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_freeze(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(32usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags_unk2(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(33usize, 7u8) as u8) }
+    }
+    #[inline]
+    pub fn set_flags_unk2(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(33usize, 7u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        f_sleepless: bool_,
+        f_burn: bool_,
+        f_poison: bool_,
+        f_toxic: bool_,
+        f_confused: bool_,
+        f_cowering: bool_,
+        f_taunt: bool_,
+        f_encore: bool_,
+        f_reflect: bool_,
+        f_safeguard: bool_,
+        f_light_screen: bool_,
+        f_protect: bool_,
+        f_endure: bool_,
+        f_low_hp: bool_,
+        f_curse: bool_,
+        f_embargo: bool_,
+        f_sure_shot: bool_,
+        f_whiffer: bool_,
+        f_set_damage: bool_,
+        f_focus_energy: bool_,
+        f_blinded: bool_,
+        f_cross_eyed: bool_,
+        f_eyedrops: bool_,
+        f_muzzled: bool_,
+        f_grudge: bool_,
+        f_exposed: bool_,
+        f_sleep: bool_,
+        f_lowered_stat: bool_,
+        f_heal_block: bool_,
+        f_miracle_eye: bool_,
+        f_red_exclamation_mark: bool_,
+        f_magnet_rise: bool_,
+        f_freeze: bool_,
+        flags_unk2: u8,
+    ) -> __BindgenBitfieldUnit<[u8; 5usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 5usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let f_sleepless: u8 = unsafe { ::core::mem::transmute(f_sleepless) };
+            f_sleepless as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let f_burn: u8 = unsafe { ::core::mem::transmute(f_burn) };
+            f_burn as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 1u8, {
+            let f_poison: u8 = unsafe { ::core::mem::transmute(f_poison) };
+            f_poison as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let f_toxic: u8 = unsafe { ::core::mem::transmute(f_toxic) };
+            f_toxic as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 1u8, {
+            let f_confused: u8 = unsafe { ::core::mem::transmute(f_confused) };
+            f_confused as u64
+        });
+        __bindgen_bitfield_unit.set(5usize, 1u8, {
+            let f_cowering: u8 = unsafe { ::core::mem::transmute(f_cowering) };
+            f_cowering as u64
+        });
+        __bindgen_bitfield_unit.set(6usize, 1u8, {
+            let f_taunt: u8 = unsafe { ::core::mem::transmute(f_taunt) };
+            f_taunt as u64
+        });
+        __bindgen_bitfield_unit.set(7usize, 1u8, {
+            let f_encore: u8 = unsafe { ::core::mem::transmute(f_encore) };
+            f_encore as u64
+        });
+        __bindgen_bitfield_unit.set(8usize, 1u8, {
+            let f_reflect: u8 = unsafe { ::core::mem::transmute(f_reflect) };
+            f_reflect as u64
+        });
+        __bindgen_bitfield_unit.set(9usize, 1u8, {
+            let f_safeguard: u8 = unsafe { ::core::mem::transmute(f_safeguard) };
+            f_safeguard as u64
+        });
+        __bindgen_bitfield_unit.set(10usize, 1u8, {
+            let f_light_screen: u8 = unsafe { ::core::mem::transmute(f_light_screen) };
+            f_light_screen as u64
+        });
+        __bindgen_bitfield_unit.set(11usize, 1u8, {
+            let f_protect: u8 = unsafe { ::core::mem::transmute(f_protect) };
+            f_protect as u64
+        });
+        __bindgen_bitfield_unit.set(12usize, 1u8, {
+            let f_endure: u8 = unsafe { ::core::mem::transmute(f_endure) };
+            f_endure as u64
+        });
+        __bindgen_bitfield_unit.set(13usize, 1u8, {
+            let f_low_hp: u8 = unsafe { ::core::mem::transmute(f_low_hp) };
+            f_low_hp as u64
+        });
+        __bindgen_bitfield_unit.set(14usize, 1u8, {
+            let f_curse: u8 = unsafe { ::core::mem::transmute(f_curse) };
+            f_curse as u64
+        });
+        __bindgen_bitfield_unit.set(15usize, 1u8, {
+            let f_embargo: u8 = unsafe { ::core::mem::transmute(f_embargo) };
+            f_embargo as u64
+        });
+        __bindgen_bitfield_unit.set(16usize, 1u8, {
+            let f_sure_shot: u8 = unsafe { ::core::mem::transmute(f_sure_shot) };
+            f_sure_shot as u64
+        });
+        __bindgen_bitfield_unit.set(17usize, 1u8, {
+            let f_whiffer: u8 = unsafe { ::core::mem::transmute(f_whiffer) };
+            f_whiffer as u64
+        });
+        __bindgen_bitfield_unit.set(18usize, 1u8, {
+            let f_set_damage: u8 = unsafe { ::core::mem::transmute(f_set_damage) };
+            f_set_damage as u64
+        });
+        __bindgen_bitfield_unit.set(19usize, 1u8, {
+            let f_focus_energy: u8 = unsafe { ::core::mem::transmute(f_focus_energy) };
+            f_focus_energy as u64
+        });
+        __bindgen_bitfield_unit.set(20usize, 1u8, {
+            let f_blinded: u8 = unsafe { ::core::mem::transmute(f_blinded) };
+            f_blinded as u64
+        });
+        __bindgen_bitfield_unit.set(21usize, 1u8, {
+            let f_cross_eyed: u8 = unsafe { ::core::mem::transmute(f_cross_eyed) };
+            f_cross_eyed as u64
+        });
+        __bindgen_bitfield_unit.set(22usize, 1u8, {
+            let f_eyedrops: u8 = unsafe { ::core::mem::transmute(f_eyedrops) };
+            f_eyedrops as u64
+        });
+        __bindgen_bitfield_unit.set(23usize, 1u8, {
+            let f_muzzled: u8 = unsafe { ::core::mem::transmute(f_muzzled) };
+            f_muzzled as u64
+        });
+        __bindgen_bitfield_unit.set(24usize, 1u8, {
+            let f_grudge: u8 = unsafe { ::core::mem::transmute(f_grudge) };
+            f_grudge as u64
+        });
+        __bindgen_bitfield_unit.set(25usize, 1u8, {
+            let f_exposed: u8 = unsafe { ::core::mem::transmute(f_exposed) };
+            f_exposed as u64
+        });
+        __bindgen_bitfield_unit.set(26usize, 1u8, {
+            let f_sleep: u8 = unsafe { ::core::mem::transmute(f_sleep) };
+            f_sleep as u64
+        });
+        __bindgen_bitfield_unit.set(27usize, 1u8, {
+            let f_lowered_stat: u8 = unsafe { ::core::mem::transmute(f_lowered_stat) };
+            f_lowered_stat as u64
+        });
+        __bindgen_bitfield_unit.set(28usize, 1u8, {
+            let f_heal_block: u8 = unsafe { ::core::mem::transmute(f_heal_block) };
+            f_heal_block as u64
+        });
+        __bindgen_bitfield_unit.set(29usize, 1u8, {
+            let f_miracle_eye: u8 = unsafe { ::core::mem::transmute(f_miracle_eye) };
+            f_miracle_eye as u64
+        });
+        __bindgen_bitfield_unit.set(30usize, 1u8, {
+            let f_red_exclamation_mark: u8 =
+                unsafe { ::core::mem::transmute(f_red_exclamation_mark) };
+            f_red_exclamation_mark as u64
+        });
+        __bindgen_bitfield_unit.set(31usize, 1u8, {
+            let f_magnet_rise: u8 = unsafe { ::core::mem::transmute(f_magnet_rise) };
+            f_magnet_rise as u64
+        });
+        __bindgen_bitfield_unit.set(32usize, 1u8, {
+            let f_freeze: u8 = unsafe { ::core::mem::transmute(f_freeze) };
+            f_freeze as u64
+        });
+        __bindgen_bitfield_unit.set(33usize, 7u8, {
+            let flags_unk2: u8 = unsafe { ::core::mem::transmute(flags_unk2) };
+            flags_unk2 as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
 pub struct monster {
     pub _bitfield_align_1: [u8; 0],
     pub _bitfield_1: __BindgenBitfieldUnit<[u8; 2usize]>,
@@ -14593,14 +15154,7 @@ pub struct monster {
     pub field_0x215: undefined,
     pub field_0x216: undefined,
     pub field_0x217: undefined,
-    pub field_0x218: undefined,
-    pub field_0x219: undefined,
-    pub field_0x21a: undefined,
-    pub field_0x21b: undefined,
-    pub field_0x21c: undefined,
-    pub field_0x21d: undefined,
-    pub field_0x21e: undefined,
-    pub field_0x21f: undefined,
+    pub status_icons: status_icon_flags,
     pub field_0x220: undefined,
     pub field_0x221: undefined,
     pub field_0x222: undefined,
@@ -16939,7 +17493,7 @@ pub struct dungeon {
     pub field_0x78a: undefined,
     pub leader_running: bool_,
     pub field_0x78c: undefined,
-    pub field_0x78d: undefined,
+    pub identify_orb_flag: bool_,
     pub pass_turn: bool_,
     pub field_0x78f: undefined,
     pub thief_alert: bool_,
@@ -59127,6 +59681,9 @@ extern "C" {
 }
 extern "C" {
     pub fn ItemIsActive(entity: *mut entity, item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn UpdateStatusIconFlags(entity: *mut entity);
 }
 extern "C" {
     pub fn IsOnMonsterSpawnList(monster_id: monster_id) -> bool_;
