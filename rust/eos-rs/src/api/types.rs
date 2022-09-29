@@ -4,7 +4,7 @@ use crate::ffi;
 
 /// A monster type ID with associated methods to get metadata.
 ///
-/// Use the associated constants or the [`Self::get`] method to get instances of this.
+/// Use the associated constants or the [`Self::new`] method to get instances of this.
 pub type MonsterTypeId = ffi::type_id;
 impl Copy for MonsterTypeId {}
 
