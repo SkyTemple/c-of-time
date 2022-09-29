@@ -5,7 +5,7 @@ use core::marker::PhantomData;
 
 /// An item ID with associated methods to get metadata.
 ///
-/// Use the associated constants or the [`Self::get`] method to get instances of this.
+/// Use the associated constants or the [`Self::new`] method to get instances of this.
 pub type ItemId = ffi::item_id;
 impl Copy for ItemId {}
 
@@ -64,7 +64,7 @@ impl From<ItemId> for u32 {
 
 /// An exclusive item effect ID with associated methods to get metadata.
 ///
-/// Use the associated constants or the [`Self::get`] method to get instances of this.
+/// Use the associated constants or the [`Self::new`] method to get instances of this.
 pub type ExclusiveItemEffectId = ffi::exclusive_item_effect_id;
 impl Copy for ExclusiveItemEffectId {}
 

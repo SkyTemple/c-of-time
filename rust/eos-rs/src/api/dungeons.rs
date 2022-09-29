@@ -5,7 +5,7 @@ use crate::ffi;
 
 /// A dungeon ID with associated methods to get metadata.
 ///
-/// Use the associated constants or the [`Self::get`] method to get instances of this.
+/// Use the associated constants or the [`Self::new`] method to get instances of this.
 pub type DungeonGroupId = ffi::dungeon_group_id;
 impl Copy for DungeonGroupId {}
 
@@ -34,7 +34,7 @@ impl From<DungeonGroupId> for u32 {
 
 /// A dungeon group ID with associated methods to get metadata.
 ///
-/// Use the associated constants or the [`Self::get`] method to get instances of this.
+/// Use the associated constants or the [`Self::new`] method to get instances of this.
 pub type DungeonId = ffi::dungeon_id;
 impl Copy for DungeonId {}
 
@@ -97,7 +97,7 @@ impl From<DungeonId> for u32 {
 
 /// A fixed room ID with associated methods to get metadata.
 ///
-/// Use the associated constants or the [`Self::get`] method to get instances of this.
+/// Use the associated constants or the [`Self::new`] method to get instances of this.
 pub type FixedRoomId = ffi::fixed_room_id;
 impl Copy for FixedRoomId {}
 

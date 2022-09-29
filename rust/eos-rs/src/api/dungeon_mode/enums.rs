@@ -212,7 +212,7 @@ impl TryFrom<ffi::dungeon_objective::Type> for DungeonObjective {
     }
 }
 
-#[repr(u32)]
+#[repr(i32)]
 #[derive(PartialEq, Eq, Clone, Copy)]
 /// Direction on the dungeon grid
 pub enum Direction {

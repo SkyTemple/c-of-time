@@ -340,6 +340,22 @@ pub trait DungeonMonsterRead: private::Sealed {
         )
     }
 
+    /// Checks if a monster can target another entity when controlled by the AI.
+    ///
+    /// More specifically, it checks if the target is invisible, if the user can see invisible
+    /// monsters, if the user is blinded and if the target position is in sight from the position
+    /// of the user (this last check is done by calling [`is_position_in_sight`]
+    /// with the user's and the target's position).
+    fn can_target_entity(&self, target: &DungeonEntity) -> bool {
+        unsafe { ffi::CanTargetEntity(force_mut_ptr!(self.entity()), force_mut_ptr!(target)) > 0 }
+    }
+
+    /// Checks if a monster can target a position. This function just calls
+    /// [`is_position_in_sight`] using the position of the user as the origin.
+    fn can_target_position(&self, target: &ffi::position) -> bool {
+        unsafe { ffi::CanTargetPosition(force_mut_ptr!(self.entity()), force_mut_ptr!(target)) > 0 }
+    }
+
     /// Checks if a monster is holding an aura bow that isn't disabled by Klutz.
     fn is_aura_bow_active(&self) -> bool {
         unsafe { ffi::AuraBowIsActive(force_mut_ptr!(self.entity())) > 0 }
@@ -465,6 +481,186 @@ pub trait DungeonMonsterRead: private::Sealed {
     fn is_blinded(&self, check_held_item: bool) -> bool {
         unsafe { ffi::IsBlinded(force_mut_ptr!(self.entity()), check_held_item as ffi::bool_) > 0 }
     }
+
+    /// Checks if a monster should run away from other monsters.
+    fn should_monster_run_away(&self) -> bool {
+        unsafe { ffi::ShouldMonsterRunAway(force_mut_ptr!(self.entity())) > 0 }
+    }
+
+    /// Calls [`Self::should_monster_run_away`] and returns its result.
+    /// It also calls another function if the result was true.
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    unsafe fn should_monster_run_away_variation(&self, param: ffi::undefined) -> bool {
+        unsafe { ffi::ShouldMonsterRunAwayVariation(force_mut_ptr!(self.entity()), param) > 0 }
+    }
+
+    /// Calls [`Self::should_monster_run_away_variation`]. If the result is true, returns true.
+    /// Otherwise, returns true only if the monster's behavior field is equal to
+    /// [`ffi::monster_behavior::BEHAVIOR_FLEEING_OUTLAW`].
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    unsafe fn should_monster_run_away_variation_outlaw_check(&self, param: ffi::undefined) -> bool {
+        unsafe {
+            ffi::ShouldMonsterRunAwayVariationOutlawCheck(force_mut_ptr!(self.entity()), param) > 0
+        }
+    }
+
+    /// Checks if this monster should try to reach the stairs when controlled by the AI.
+    fn should_head_to_stairs(&self) -> bool {
+        unsafe { ffi::ShouldMonsterHeadToStairs(force_mut_ptr!(self.entity())) > 0 }
+    }
+
+    /// Returns true if the monster has any status problem that prevents it from acting.
+    fn has_status_that_prevents_acting(&self) -> bool {
+        unsafe { ffi::HasStatusThatPreventsActing(force_mut_ptr!(self.entity())) > 0 }
+    }
+
+    /// True if ths monster is cornered (it can't move in any direction)
+    fn is_cornered(&self) -> bool {
+        unsafe { ffi::IsMonsterCornered(force_mut_ptr!(self.entity())) > 0 }
+    }
+
+    /// Returns whether a monster can attack in a given direction.
+    ///
+    /// The check fails if the destination tile is impassable, contains a monster that isn't of
+    /// type [`DungeonEntityType::Monster`] or if the monster can't directly move
+    /// from the current tile into the destination tile.
+    fn can_attack_in_direction(&self, direction: Direction) -> bool {
+        unsafe {
+            ffi::CanAttackInDirection(
+                force_mut_ptr!(self.entity()),
+                direction as ffi::direction_id::Type,
+            ) > 0
+        }
+    }
+
+    /// Checks whether this monster if AI-controlled can move in the specified direction.
+    ///
+    /// Accounts for walls, other monsters on the target position and IQ skills that might prevent
+    /// a monster from moving into a specific location, such as House Avoider, Trap Avoider or
+    /// Lava Evader.
+    ///
+    /// Returns an empty `Ok` on success, and on error returns whether ot not the path was blocked
+    /// by an entity.
+    fn can_ai_move_self_in_direction(&self, direction: Direction) -> Result<(), bool> {
+        unsafe {
+            let mut was_entity = 0;
+            let success = ffi::CanAiMonsterMoveInDirection(
+                force_mut_ptr!(self.entity()),
+                direction as ffi::direction_id::Type,
+                &mut was_entity,
+            ) > 0;
+            if success {
+                Ok(())
+            } else if was_entity > 0 {
+                Err(true)
+            } else {
+                Err(false)
+            }
+        }
+    }
+
+    /// Returns whether this monster can see other invisible monsters.
+    ///
+    /// To be precise, this function returns true if the monster is holding Goggle Specs or if it
+    /// has the status [`ffi::status_id::STATUS_EYEDROPS`].
+    fn can_see_invisible_monsters(&self) -> bool {
+        unsafe { ffi::CanSeeInvisibleMonsters(force_mut_ptr!(self.entity())) > 0 }
+    }
+
+    /// Returns whether a certain monster is under the effect of [`ffi::status_id::STATUS_DROPEYE`].
+    fn has_dropeye_status(&self) -> bool {
+        unsafe { ffi::HasDropeyeStatus(force_mut_ptr!(self.entity())) > 0 }
+    }
+
+    /// Checks if a given target is eligible to be targeted by the AI with a certain move.
+    ///
+    /// If `check_all_conditions` is `true` check all the possible [`MoveAiCondition`] values,
+    /// false to only check for [`MoveAiCondition::Random`] (if the move has a different
+    /// ai condition, the result will be `false`).
+    ///
+    /// Panics if any field in the `MoveTargetAndRange` is None or the conversion into the ffi
+    /// type fails for any other reason.
+    fn is_target_eligible(
+        &self,
+        move_ai_range: MoveTargetAndRange,
+        target: &DungeonEntity,
+        the_move: &Move,
+        check_all_conditions: bool,
+    ) -> bool {
+        unsafe {
+            ffi::IsAiTargetEligible(
+                move_ai_range.try_into().expect("Invalid MoveAiCondition."),
+                force_mut_ptr!(self.entity()),
+                force_mut_ptr!(target),
+                force_mut_ptr!(the_move),
+                check_all_conditions as ffi::bool_,
+            ) > 0
+        }
+    }
+
+    /// Checks if a monster can use the given move. Will always return true for the regular attack.
+    /// Will return false if the move if the flag [`Move::f_disabled`] is true, if the flag
+    /// [`Move::f_sealed`] is true.
+    ///
+    /// If `extra_checks` is true check whether the move is out of PP, whether it can be used under
+    /// the taunted status and whether the encore status prevents using the move.
+    fn can_use_move(&self, the_move: &Move, extra_checks: bool) -> bool {
+        unsafe {
+            ffi::CanMonsterUseMove(
+                force_mut_ptr!(self.entity()),
+                force_mut_ptr!(the_move),
+                extra_checks as ffi::bool_,
+            ) > 0
+        }
+    }
+
+    /// Checks if an AI-controlled monster can use a move.
+    /// Will return false if the any of the flags [`Move::f_exists`],
+    /// [`Move::f_subsequent_in_link_chain`] or [`Move::f_disabled`] is true. The function does not
+    /// check if the flag [`Move::f_enabled_for_ai`] is set.
+    ///
+    /// This function also returns true if the call to [`Self::can_use_move`] is true.
+    /// The function contains a loop that is supposed to check other moves after the specified one,
+    /// but the loop breaks after it finds a move that isn't linked, which is always true given the
+    /// checks in place at the start of the function.
+    ///
+    /// If `extra_checks` is true check whether the move is out of PP, whether it can be used under
+    /// the taunted status and whether the encore status prevents using the move.
+    ///
+    /// # Safety
+    /// The caller must make sure the move index is not out of bounds (normally 0-3).
+    unsafe fn can_ai_use_move_unchecked(&self, move_index: i32, extra_checks: bool) -> bool {
+        ffi::CanAiUseMove(
+            force_mut_ptr!(self.entity()),
+            move_index,
+            extra_checks as ffi::bool_,
+        ) > 0
+    }
+
+    /// Checked version of [`Self::can_ai_use_move_unchecked`], that panics if the move index
+    /// is > 3.
+    fn can_ai_use_move(&self, move_index: u8, extra_checks: bool) -> bool {
+        if move_index > 3 {
+            panic!("Move index out of range: {}", move_index)
+        } else {
+            unsafe { self.can_ai_use_move_unchecked(move_index as i32, extra_checks) }
+        }
+    }
+
+    /// Determines if using a given move against its intended targets would be redundant because
+    /// all of them already have the effect caused by said move.
+    ///
+    /// Returns true if it makes sense to use the move, false if it would be redundant given the
+    /// effects it causes and the effects that all the targets already have.
+    fn status_checker_check(&self, the_move: &Move) -> bool {
+        unsafe {
+            ffi::StatusCheckerCheck(force_mut_ptr!(self.entity()), force_mut_ptr!(the_move)) > 0
+        }
+    }
 }
 
 /// Trait for [`DungeonMonsterMut`] (write operations).
@@ -473,7 +669,7 @@ pub trait DungeonMonsterRead: private::Sealed {
 ///
 /// # Important safety note
 /// Please see the safety note of [`DungeonEntity`]. It also applies to this trait.
-trait DungeonMonsterWrite: private::Sealed {
+pub trait DungeonMonsterWrite: private::Sealed {
     #[doc(hidden)]
     fn entity_mut(&mut self) -> &mut DungeonEntity;
     #[doc(hidden)]
@@ -544,6 +740,175 @@ trait DungeonMonsterWrite: private::Sealed {
     /// true.
     fn execute_action(&mut self) {
         unsafe { ffi::ExecuteMonsterAction(self.entity_mut()) }
+    }
+
+    /// Used by the AI to determine the direction in which a monster should move.
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    fn ai_movement(&mut self, param: ffi::undefined) {
+        unsafe { ffi::AiMovement(self.entity_mut(), param) }
+    }
+
+    /// Calculates the target position of an AI-controlled monster and stores it in
+    /// the monster's [`ffi::monster::ai_target_pos`] field.
+    fn calculate_ai_target_pos(&mut self) {
+        unsafe { ffi::CalculateAiTargetPos(self.entity_mut()) }
+    }
+
+    /// Determines if an AI-controlled monster will use a move and which one it will use.
+    fn choose_ai_move(&mut self) {
+        unsafe { ffi::ChooseAiMove(self.entity_mut()) }
+    }
+
+    /// Clears the fields related to AI in the monster's data struct, setting them all to 0.
+    /// Specifically, [`ffi::monster::action_id`], [`ffi::monster::action_use_idx`]
+    /// and [`ffi::monster::field_0x54`] are cleared.
+    fn clear_monster_action_fields(&mut self) {
+        unsafe {
+            ffi::ClearMonsterActionFields(
+                &mut self.monster_mut().action_id as *mut ffi::action_16 as *mut c_void,
+            )
+        }
+    }
+
+    /// Sets some the fields related to AI in the monster's data struct.
+    /// Specifically, [`ffi::monster::action_id`], [`ffi::monster::action_use_idx`]
+    /// and [`ffi::monster::field_0x54`].
+    /// The last 2 are always set to 0.
+    fn set_monster_action_fields(&mut self, action_id: ffi::action::Type) {
+        unsafe {
+            ffi::SetMonsterActionFields(
+                &mut self.monster_mut().action_id as *mut ffi::action_16 as *mut c_void,
+                ffi::action_16 {
+                    _bitfield_align_1: [],
+                    _bitfield_1: ffi::action_16::new_bitfield_1(action_id),
+                },
+            )
+        }
+    }
+
+    /// Sets a monster's action to [`ffi::action::ACTION_PASS_TURN`] or
+    /// [`ffi::action::ACTION_WALK`], depending on the result of
+    /// [`MonsterSpeciesId::get_can_move_flag`] for the monster's ID.
+    fn set_action_pass_turn_or_walk(&mut self, monster_id: MonsterSpeciesId) {
+        unsafe {
+            ffi::SetActionPassTurnOrWalk(
+                &mut self.monster_mut().action_id as *mut ffi::action_16 as *mut c_void,
+                monster_id,
+            )
+        }
+    }
+
+    /// Sets a monster's action to [`ffi::action::ACTION_REGULAR_ATTACK`],
+    /// with a specified direction.
+    fn set_action_regular_attack(&mut self, direction: Direction) {
+        unsafe {
+            ffi::SetActionRegularAttack(
+                &mut self.monster_mut().action_id as *mut ffi::action_16 as *mut c_void,
+                direction as ffi::direction_id::Type,
+            )
+        }
+    }
+
+    /// Sets a monster's action to [`ffi::action::ACTION_USE_MOVE_AI`], with a specified direction and
+    /// move index.
+    ///
+    /// # Safety
+    /// The caller must make sure the move index is not out of bounds (normally 0-3).
+    unsafe fn set_action_use_move_ai_unchecked(&mut self, move_index: u8, direction: Direction) {
+        ffi::SetActionUseMoveAi(
+            &mut self.monster_mut().action_id as *mut ffi::action_16 as *mut c_void,
+            move_index as u8,
+            direction as ffi::direction_id::Type,
+        )
+    }
+
+    /// Sets a monster's action to [`ffi::action::ACTION_USE_MOVE_AI`], with a specified direction and
+    /// move index.
+    ///
+    /// Panics if the move index is out of bounds (> 3).
+    fn set_action_use_move_ai(&mut self, move_index: u8, direction: Direction) {
+        if move_index > 3 {
+            panic!("Move index out of range: {}", move_index)
+        } else {
+            unsafe { self.set_action_use_move_ai_unchecked(move_index, direction) }
+        }
+    }
+
+    /// Updates t monster's [`ffi::monster::target_pos`] field based on its current position and
+    /// the direction in which it plans to attack.
+    fn update_ai_target_pos(&mut self) {
+        unsafe { ffi::UpdateAiTargetPos(self.entity_mut()) }
+    }
+
+    /// Runs the AI for a single monster to determine whether the monster can act and which action
+    /// it should perform if so.
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    fn run_ai(&mut self, param: ffi::undefined) {
+        unsafe { ffi::RunMonsterAi(self.entity_mut(), param) }
+    }
+
+    /// The AI uses this function to check if a move has any potential targets, to calculate the
+    /// list of potential targets and to calculate the move's special weight.
+    /// This weight will be higher if the monster has weak-type picker and the target is weak to the
+    /// move (allies only, enemies always get a result of 1 even if the move is super effective).
+    /// More things could affect the result.
+    /// This function also sets the flag can_be_used on the ai_possible_move struct if it makes
+    /// sense to use it.
+    /// More research is needed. There's more documentation about this special weight. Does all the
+    /// documented behavior happen in this function?
+    ///
+    /// Returns the move's calculated weight
+    fn ai_consider_move(
+        &mut self,
+        ai_possible_move: &mut ffi::ai_possible_move,
+        the_move: &Move,
+    ) -> i32 {
+        unsafe {
+            ffi::AiConsiderMove(
+                ai_possible_move,
+                self.entity_mut(),
+                force_mut_ptr!(the_move),
+            )
+        }
+    }
+
+    /// Checks if the specified target is eligible to be targeted by the AI and if so adds it to
+    /// the list of targets. This function also fills an array that seems to contain the directions
+    /// in which the user should turn to look at each of the targets in the list, as well as a
+    /// third unknown array.
+    ///
+    /// If `check_all_conditions` is `true` check all the possible [`MoveAiCondition`] values,
+    /// false to only check for [`MoveAiCondition::Random`] (if the move has a different
+    /// ai condition, the result will be `false`).
+    ///
+    /// Panics if any field in the `MoveTargetAndRange` is None or the conversion into the ffi
+    /// type fails for any other reason.
+    ///
+    /// Returns the new length of the AI target list.
+    ///
+    /// # Safety
+    /// The length of the target list must be correct.
+    unsafe fn try_add_target_to_ai_target_list(
+        &mut self,
+        current_num_targets: i32,
+        move_ai_range: MoveTargetAndRange,
+        target: &DungeonEntity,
+        the_move: &Move,
+        check_all_conditions: bool,
+    ) -> i32 {
+        // TODO: Manage handling the target list length, once we know where it is.
+        ffi::TryAddTargetToAiTargetList(
+            current_num_targets,
+            move_ai_range.try_into().expect("Invalid MoveAiCondition."),
+            self.entity_mut(),
+            force_mut_ptr!(target),
+            force_mut_ptr!(the_move),
+            check_all_conditions as ffi::bool_,
+        )
     }
 }
 

@@ -5,7 +5,7 @@ use alloc::vec::Vec;
 
 /// A monster species ID with associated methods to get metadata.
 ///
-/// Use the associated constants or the [`Self::get`] method to get instances of this.
+/// Use the associated constants or the [`Self::new`] method to get instances of this.
 pub type MonsterSpeciesId = ffi::monster_id;
 impl Copy for MonsterSpeciesId {}
 
@@ -99,6 +99,11 @@ impl MonsterSpeciesId {
     /// Checks if this is a Deoxys.
     pub fn is_deoxys(&self) -> bool {
         unsafe { ffi::IsDeoxys(*self) > 0 }
+    }
+
+    /// Returns the flag that determines if a monster can move in dungeons.
+    pub fn get_can_move_flag(&self) -> bool {
+        unsafe { ffi::GetCanMoveFlag(*self) > 0 }
     }
 }
 

@@ -1,6 +1,6 @@
 //! Functions related to getting information about monster moves.
 
-use crate::api::dungeon_mode::MoveCategory;
+use crate::api::dungeon_mode::{DungeonEntity, MoveCategory, Weather};
 use crate::api::types::MonsterTypeId;
 use crate::ffi;
 
@@ -9,7 +9,7 @@ pub type Move = ffi::move_;
 
 /// A move ID with associated methods to get metadata.
 ///
-/// Use the associated constants or the [`Self::get`] method to get instances of this.
+/// Use the associated constants or the [`Self::new`] method to get instances of this.
 pub type MoveId = ffi::move_id;
 impl Copy for MoveId {}
 
@@ -196,9 +196,19 @@ impl Move {
         unsafe { ffi::GetMoveCritChance(force_mut_ptr!(self)) }
     }
 
+    /// Returns whether a move's range string is 19 ("User").
+    pub fn is_move_range_string_19(&self) -> bool {
+        unsafe { ffi::IsMoveRangeString19(force_mut_ptr!(self)) > 0 }
+    }
+
     /// Gets the type of the move.
     pub fn get_type(&self) -> MonsterTypeId {
         unsafe { ffi::GetMoveType(force_mut_ptr!(self)) }
+    }
+
+    /// Gets the AI weight of a move.
+    pub fn get_ai_weight(&self) -> u8 {
+        unsafe { ffi::GetMoveAiWeight(force_mut_ptr!(self)) }
     }
 
     /// Gets the accuracy1 value for the move.
@@ -214,6 +224,37 @@ impl Move {
     /// Gets the `ai_condition_random_chance` value for the move.
     pub fn get_ai_condition_random_chance(&self) -> u8 {
         unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 2) }
+    }
+
+    /// Checks whether a moved used by a monster should play its alternative animation.
+    /// Includes checks for Curse, Snore, Sleep Talk, Solar Beam and 2-turn moves.
+    pub fn should_play_alternative_animation(&self, user: &DungeonEntity) -> bool {
+        unsafe {
+            ffi::ShouldMovePlayAlternativeAnimation(force_mut_ptr!(self), force_mut_ptr!(user)) > 0
+        }
+    }
+
+    /// Returns the move animation ID that should be played for a move.
+    /// It contains a check for weather ball. After that, if the parameter
+    /// `should_play_alternative_animation` is false, the move ID is returned.
+    ///
+    /// `should_play_alternative_animation` can be retrieved with
+    /// [`Self::should_play_alternative_animation`].
+    ///
+    /// If it's true, there's a bunch of manual ID checks that result on a certain hardcoded return
+    /// value.
+    pub fn get_animation_id(
+        &self,
+        apparent_weather: Weather,
+        should_play_alternative_animation: bool,
+    ) -> u16 {
+        unsafe {
+            ffi::GetMoveAnimationId(
+                force_mut_ptr!(self),
+                apparent_weather as ffi::weather_id::Type,
+                should_play_alternative_animation as ffi::bool_,
+            )
+        }
     }
 }
 

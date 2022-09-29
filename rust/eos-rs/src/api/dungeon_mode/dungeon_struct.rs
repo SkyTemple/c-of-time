@@ -863,6 +863,12 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::IsDestinationFloorWithMonster() > 0 }
     }
 
+    /// Returns the index of the room that contains the stairs.
+    pub fn get_stairs_room(&self) -> u8 {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetStairsRoom() }
+    }
+
     /// Checks if a given floor is a mission destination with a special monster, either a target to rescue or an enemy to defeat.
     ///
     /// Mission types with a monster on the destination floor:
