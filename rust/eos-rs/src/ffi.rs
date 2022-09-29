@@ -12402,6 +12402,215 @@ impl floor_layout_8 {
         __bindgen_bitfield_unit
     }
 }
+#[repr(C)]
+pub struct iovec {
+    pub iov_base: *mut crate::ctypes::c_void,
+    pub iov_len: u32,
+}
+#[repr(C)]
+pub struct rect16_xywh {
+    pub x: i16,
+    pub y: i16,
+    pub w: i16,
+    pub h: i16,
+}
+#[repr(C)]
+pub struct rgb {
+    pub r: u8,
+    pub b: u8,
+    pub g: u8,
+    pub unused: u8,
+}
+#[repr(C)]
+pub struct file_stream {
+    pub field_0x0: undefined4,
+    pub field_0x4: undefined4,
+    pub field_0x8: undefined4,
+    pub field_0xc: undefined4,
+    pub field_0x10: undefined4,
+    pub field_0x14: undefined4,
+    pub field_0x18: undefined4,
+    pub field_0x1c: undefined4,
+    pub field_0x20: undefined4,
+    pub start_address: *mut crate::ctypes::c_void,
+    pub end_address: *mut crate::ctypes::c_void,
+    pub current_address: *mut crate::ctypes::c_void,
+    pub field_0x30: undefined4,
+    pub field_0x34: undefined4,
+    pub field_0x38: undefined4,
+    pub field_0x3c: undefined4,
+    pub field_0x40: undefined4,
+    pub field_0x44: undefined4,
+}
+pub mod pack_file_id {
+    pub type Type = crate::ctypes::c_uint;
+    pub const PACK_ARCHIVE_MONSTER: Type = 0;
+    pub const PACK_ARCHIVE_M_ATTACK: Type = 1;
+    pub const PACK_ARCHIVE_M_GROUND: Type = 2;
+    pub const PACK_ARCHIVE_EFFECT: Type = 3;
+    pub const PACK_ARCHIVE_DUNGEON: Type = 4;
+    pub const PACK_ARCHIVE_M_LEVEL: Type = 5;
+}
+#[repr(C)]
+pub struct pack_file_table_of_content {
+    pub offset: u32,
+    pub length: u32,
+}
+#[repr(C)]
+pub struct pack_file_opened {
+    pub table_of_content: *mut pack_file_table_of_content,
+    pub zero: undefined4,
+    pub nb_entry_table_of_content: u32,
+    pub opened_file: file_stream,
+}
+#[repr(C)]
+pub struct pack_alloc_and_load_result {
+    pub data: *mut crate::ctypes::c_void,
+    pub length: u32,
+}
+#[repr(C)]
+pub struct wte_handle {
+    pub content: *mut crate::ctypes::c_void,
+    pub header: *mut wte_header,
+}
+#[repr(C)]
+#[repr(align(2))]
+pub struct wte_texture_params {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 2usize]>,
+}
+impl wte_texture_params {
+    #[inline]
+    pub fn texture_smult(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 3u8) as u8) }
+    }
+    #[inline]
+    pub fn set_texture_smult(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 3u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn texture_tmult(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 3u8) as u8) }
+    }
+    #[inline]
+    pub fn set_texture_tmult(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 3u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn unused6(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(6usize, 2u8) as u8) }
+    }
+    #[inline]
+    pub fn set_unused6(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(6usize, 2u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn format(&self) -> texture_format::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(8usize, 3u8) as u32) }
+    }
+    #[inline]
+    pub fn set_format(&mut self, val: texture_format::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(8usize, 3u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn repeat_x(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(11usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_repeat_x(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(11usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn repeat_y(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(12usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_repeat_y(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(12usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn unusedD(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(13usize, 3u8) as u8) }
+    }
+    #[inline]
+    pub fn set_unusedD(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(13usize, 3u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        texture_smult: u8,
+        texture_tmult: u8,
+        unused6: u8,
+        format: texture_format::Type,
+        repeat_x: bool_,
+        repeat_y: bool_,
+        unusedD: u8,
+    ) -> __BindgenBitfieldUnit<[u8; 2usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 3u8, {
+            let texture_smult: u8 = unsafe { ::core::mem::transmute(texture_smult) };
+            texture_smult as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 3u8, {
+            let texture_tmult: u8 = unsafe { ::core::mem::transmute(texture_tmult) };
+            texture_tmult as u64
+        });
+        __bindgen_bitfield_unit.set(6usize, 2u8, {
+            let unused6: u8 = unsafe { ::core::mem::transmute(unused6) };
+            unused6 as u64
+        });
+        __bindgen_bitfield_unit.set(8usize, 3u8, {
+            let format: u32 = unsafe { ::core::mem::transmute(format) };
+            format as u64
+        });
+        __bindgen_bitfield_unit.set(11usize, 1u8, {
+            let repeat_x: u8 = unsafe { ::core::mem::transmute(repeat_x) };
+            repeat_x as u64
+        });
+        __bindgen_bitfield_unit.set(12usize, 1u8, {
+            let repeat_y: u8 = unsafe { ::core::mem::transmute(repeat_y) };
+            repeat_y as u64
+        });
+        __bindgen_bitfield_unit.set(13usize, 3u8, {
+            let unusedD: u8 = unsafe { ::core::mem::transmute(unusedD) };
+            unusedD as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+pub struct wte_header {
+    pub signature: [crate::ctypes::c_char; 4usize],
+    pub texture: *mut crate::ctypes::c_void,
+    pub texture_size: u32,
+    pub params: wte_texture_params,
+    pub _padding_0xe: u16,
+    pub texture_bounds: rect16_xywh,
+    pub palette: *mut rgb,
+    pub color_amt: u16,
+    pub _padding_0x1e: u16,
+}
 pub type va_list = *mut crate::ctypes::c_void;
 #[repr(C)]
 pub struct slice {
@@ -12416,11 +12625,6 @@ pub type slice_append_fn_t = ::core::option::Option<
         data_len: u32,
     ) -> bool_,
 >;
-#[repr(C)]
-pub struct iovec {
-    pub iov_base: *mut crate::ctypes::c_void,
-    pub iov_len: u32,
-}
 #[repr(C)]
 pub struct prog_pos_info {
     pub file: *mut crate::ctypes::c_char,
@@ -12715,184 +12919,6 @@ pub struct mem_arena_getters {
 pub struct owned_item {
     pub id: item_id_16,
     pub amount: u16,
-}
-#[repr(C)]
-pub struct rect16_xywh {
-    pub x: i16,
-    pub y: i16,
-    pub w: i16,
-    pub h: i16,
-}
-#[repr(C)]
-pub struct rgb {
-    pub r: u8,
-    pub b: u8,
-    pub g: u8,
-    pub unused: u8,
-}
-#[repr(C)]
-pub struct file_stream {
-    pub field_0x0: undefined4,
-    pub field_0x4: undefined4,
-    pub field_0x8: undefined4,
-    pub field_0xc: undefined4,
-    pub field_0x10: undefined4,
-    pub field_0x14: undefined4,
-    pub field_0x18: undefined4,
-    pub field_0x1c: undefined4,
-    pub field_0x20: undefined4,
-    pub start_address: *mut crate::ctypes::c_void,
-    pub end_address: *mut crate::ctypes::c_void,
-    pub current_address: *mut crate::ctypes::c_void,
-    pub field_0x30: undefined4,
-    pub field_0x34: undefined4,
-    pub field_0x38: undefined4,
-    pub field_0x3c: undefined4,
-    pub field_0x40: undefined4,
-    pub field_0x44: undefined4,
-}
-#[repr(C)]
-pub struct wte_handle {
-    pub content: *mut crate::ctypes::c_void,
-    pub header: *mut wte_header,
-}
-#[repr(C)]
-#[repr(align(2))]
-pub struct wte_texture_params {
-    pub _bitfield_align_1: [u8; 0],
-    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 2usize]>,
-}
-impl wte_texture_params {
-    #[inline]
-    pub fn texture_smult(&self) -> u8 {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 3u8) as u8) }
-    }
-    #[inline]
-    pub fn set_texture_smult(&mut self, val: u8) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(0usize, 3u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn texture_tmult(&self) -> u8 {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 3u8) as u8) }
-    }
-    #[inline]
-    pub fn set_texture_tmult(&mut self, val: u8) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(3usize, 3u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn unused6(&self) -> u8 {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(6usize, 2u8) as u8) }
-    }
-    #[inline]
-    pub fn set_unused6(&mut self, val: u8) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(6usize, 2u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn format(&self) -> texture_format::Type {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(8usize, 3u8) as u32) }
-    }
-    #[inline]
-    pub fn set_format(&mut self, val: texture_format::Type) {
-        unsafe {
-            let val: u32 = ::core::mem::transmute(val);
-            self._bitfield_1.set(8usize, 3u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn repeat_x(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(11usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_repeat_x(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(11usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn repeat_y(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(12usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_repeat_y(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(12usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn unusedD(&self) -> u8 {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(13usize, 3u8) as u8) }
-    }
-    #[inline]
-    pub fn set_unusedD(&mut self, val: u8) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(13usize, 3u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn new_bitfield_1(
-        texture_smult: u8,
-        texture_tmult: u8,
-        unused6: u8,
-        format: texture_format::Type,
-        repeat_x: bool_,
-        repeat_y: bool_,
-        unusedD: u8,
-    ) -> __BindgenBitfieldUnit<[u8; 2usize]> {
-        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
-        __bindgen_bitfield_unit.set(0usize, 3u8, {
-            let texture_smult: u8 = unsafe { ::core::mem::transmute(texture_smult) };
-            texture_smult as u64
-        });
-        __bindgen_bitfield_unit.set(3usize, 3u8, {
-            let texture_tmult: u8 = unsafe { ::core::mem::transmute(texture_tmult) };
-            texture_tmult as u64
-        });
-        __bindgen_bitfield_unit.set(6usize, 2u8, {
-            let unused6: u8 = unsafe { ::core::mem::transmute(unused6) };
-            unused6 as u64
-        });
-        __bindgen_bitfield_unit.set(8usize, 3u8, {
-            let format: u32 = unsafe { ::core::mem::transmute(format) };
-            format as u64
-        });
-        __bindgen_bitfield_unit.set(11usize, 1u8, {
-            let repeat_x: u8 = unsafe { ::core::mem::transmute(repeat_x) };
-            repeat_x as u64
-        });
-        __bindgen_bitfield_unit.set(12usize, 1u8, {
-            let repeat_y: u8 = unsafe { ::core::mem::transmute(repeat_y) };
-            repeat_y as u64
-        });
-        __bindgen_bitfield_unit.set(13usize, 3u8, {
-            let unusedD: u8 = unsafe { ::core::mem::transmute(unusedD) };
-            unusedD as u64
-        });
-        __bindgen_bitfield_unit
-    }
-}
-#[repr(C)]
-pub struct wte_header {
-    pub signature: [crate::ctypes::c_char; 4usize],
-    pub texture: *mut crate::ctypes::c_void,
-    pub texture_size: u32,
-    pub params: wte_texture_params,
-    pub _padding_0xe: u16,
-    pub texture_bounds: rect16_xywh,
-    pub palette: *mut rgb,
-    pub color_amt: u16,
-    pub _padding_0x1e: u16,
 }
 #[repr(C)]
 #[repr(align(4))]
@@ -58148,6 +58174,40 @@ extern "C" {
 }
 extern "C" {
     pub fn FatalError(prog_pos: prog_pos_info, fmt: *const crate::ctypes::c_char, ...);
+}
+extern "C" {
+    pub fn OpenAllPackFiles();
+}
+extern "C" {
+    pub fn GetFileLengthInPackWithPackNb(pack_id: pack_file_id::Type, file_index: u32) -> u32;
+}
+extern "C" {
+    pub fn LoadFileInPackWithPackId(
+        pack_id: pack_file_id::Type,
+        output_buffer: *mut crate::ctypes::c_void,
+        file_index: u32,
+    ) -> u32;
+}
+extern "C" {
+    pub fn AllocAndLoadFileInPack(
+        pack_id: pack_file_id::Type,
+        file_index: u32,
+        output: *mut pack_alloc_and_load_result,
+        malloc_flags: u32,
+    );
+}
+extern "C" {
+    pub fn OpenPackFile(pack_file: *mut pack_file_opened, file_name: *const crate::ctypes::c_char);
+}
+extern "C" {
+    pub fn GetFileLengthInPack(pack_file: *mut pack_file_opened, file_index: u32) -> u32;
+}
+extern "C" {
+    pub fn LoadFileInPack(
+        pack_file: *mut pack_file_opened,
+        output_buffer: *mut crate::ctypes::c_void,
+        file_index: u32,
+    ) -> u32;
 }
 extern "C" {
     pub fn IsAuraBow(item_id: item_id) -> bool_;

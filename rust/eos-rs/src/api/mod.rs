@@ -16,6 +16,7 @@ pub mod messages;
 pub mod monsters;
 pub mod moves;
 pub mod overlay;
+pub mod pack_file;
 pub mod random;
 pub mod script_vars;
 pub mod sir0;
