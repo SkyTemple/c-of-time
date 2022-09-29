@@ -65,7 +65,7 @@ impl DungeonId {
         unsafe { ffi::GetMaxRescueAttempts(*self) }
     }
 
-    /// Returns whether this dungeon as a joined at location is between
+    /// Returns whether this dungeon has a joined at location between
     /// [`DungeonId::DUNGEON_JOINED_AT_BIDOOF`] and [`DungeonId::DUNGEON_DUMMY_0xE3`].
     pub fn is_special_joined_at_location(&self) -> bool {
         unsafe {
@@ -76,12 +76,11 @@ impl DungeonId {
         }
     }
 
-    /// Returns whether a game over should happen when a monster with this dungeon ID as
-    /// "joined at" value faints (as long as the other conditions are met).
-    /// It might have a more generic meaning.
-    pub fn should_cause_game_over_on_faint(&self) -> bool {
+    /// Returns whether a certain joined_at field value is equal to [`DungeonId::DUNGEON_BEACH`] or
+    /// is between [`DungeonId::DUNGEON_DUMMY_0xEC`] and [`DungeonId::DUNGEON_DUMMY_0xF0`].
+    pub fn is_special_joined_at_location2(&self) -> bool {
         unsafe {
-            ffi::ShouldCauseGameOverOnFaint(ffi::dungeon_id_8 {
+            ffi::JoinedAtRangeCheck2(ffi::dungeon_id_8 {
                 _bitfield_align_1: [],
                 _bitfield_1: ffi::dungeon_id_8::new_bitfield_1(*self),
             }) > 0
