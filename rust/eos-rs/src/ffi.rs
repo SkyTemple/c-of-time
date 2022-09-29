@@ -13262,8 +13262,7 @@ pub struct team_member {
     pub field_0x4: undefined,
     pub field_0x5: undefined,
     pub iq: u16,
-    pub field_0x8: undefined,
-    pub field_0x9: undefined,
+    pub field_0x8: undefined2,
     pub field_0xA: undefined,
     pub field_0xB: undefined,
     pub field_0xC: undefined,
@@ -58631,7 +58630,7 @@ extern "C" {
     pub fn JoinedAtRangeCheck(joined_at: dungeon_id_8) -> bool_;
 }
 extern "C" {
-    pub fn ShouldCauseGameOverOnFaint(joined_at: dungeon_id_8) -> bool_;
+    pub fn JoinedAtRangeCheck2(joined_at: dungeon_id_8) -> bool_;
 }
 extern "C" {
     pub fn GetMonsterGender(monster_id: monster_id) -> u8;
@@ -58682,6 +58681,9 @@ extern "C" {
 }
 extern "C" {
     pub fn IsMonsterOnTeam(monster_id: monster_id, param_2: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn CheckTeamMemberField8(param_1: undefined2) -> bool_;
 }
 extern "C" {
     pub fn GetTeamMemberData(index: u8) -> *mut team_member;
@@ -58905,13 +58907,13 @@ extern "C" {
     pub fn DivideInt(
         dividend: crate::ctypes::c_int,
         divisor: crate::ctypes::c_int,
-    ) -> crate::ctypes::c_int;
+    ) -> crate::ctypes::c_ulonglong;
 }
 extern "C" {
-    pub fn DivideUInt(dividend: u32, divisor: u32) -> u32;
+    pub fn DivideUInt(dividend: u32, divisor: u32) -> crate::ctypes::c_ulonglong;
 }
 extern "C" {
-    pub fn DivideUIntNoZeroCheck(dividend: u32, divisor: u32) -> u32;
+    pub fn DivideUIntNoZeroCheck(dividend: u32, divisor: u32) -> crate::ctypes::c_ulonglong;
 }
 extern "C" {
     pub fn ScriptSpecialProcessCall(
@@ -59000,7 +59002,7 @@ extern "C" {
     pub fn FixedRoomIsSubstituteRoom() -> bool_;
 }
 extern "C" {
-    pub fn ShouldGameOverOnImportantTeamMemberFaint() -> bool_;
+    pub fn StoryRestrictionsEnabled() -> bool_;
 }
 extern "C" {
     pub fn FadeToBlack();

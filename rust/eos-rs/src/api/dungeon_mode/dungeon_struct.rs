@@ -997,10 +997,15 @@ impl<'a> GlobalDungeonData<'a> {
         }
     }
 
-    /// Returns true if the player should get kicked out of the dungeon if an important team member
-    /// (like the partner or certain story allies) faints.
-    pub fn should_game_over_on_important_team_member_faint(&self) -> bool {
-        unsafe { ffi::ShouldGameOverOnImportantTeamMemberFaint() > 0 }
+    /// Returns true if certain special restrictions are enabled.
+    ///
+    /// If true, you will get kicked out of the dungeon if a team member that passes the
+    /// [`DungeonId::is_special_joined_at_location2`] check faints.
+    ///
+    /// Returns `!ffi::dungeon::nonstory_flag || ffi::dungeon::hidden_land_flag`
+    ///
+    pub fn story_restrictions_enabled(&self) -> bool {
+        unsafe { ffi::StoryRestrictionsEnabled() > 0 }
     }
 
     /// Returns true if the specified monster is included in the floor's monster spawn list
@@ -1381,6 +1386,17 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn get_dungeon_gen_info_unk_0c(&self) -> ffi::undefined4 {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetDungeonGenInfoUnk0C() }
+    }
+
+    /// Checks if a value obtained from [`ffi::team_member::field_0x8`] is equal to certain values.
+    ///
+    /// This is known to return true for some or all of the guest monsters (if the value is equal
+    /// to 0x55AA or 0x5AA5).
+    ///
+    /// # Note
+    /// The underlying function [`ffi::CheckTeamMemberField8`] does not need overlay29 to be loaded.
+    pub fn check_team_member_field_8(&self, team_member: &ffi::team_member) -> bool {
+        unsafe { ffi::CheckTeamMemberField8(team_member.field_0x8) > 0 }
     }
 
     #[cfg_attr(docsrs, doc(cfg(feature = "eu")))]
