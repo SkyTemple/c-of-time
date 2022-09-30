@@ -11353,6 +11353,33 @@ impl exclusive_item_effect_id {
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
 pub struct exclusive_item_effect_id(pub(crate) crate::ctypes::c_uint);
+#[repr(C, packed)]
+pub struct exclusive_item_effect_id_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl exclusive_item_effect_id_8 {
+    #[inline]
+    pub fn val(&self) -> exclusive_item_effect_id {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: exclusive_item_effect_id) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(val: exclusive_item_effect_id) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
 pub mod shop_item_positions {
     pub type Type = crate::ctypes::c_uint;
     pub const SHOP_POSITION_0: Type = 0;
@@ -12994,9 +13021,16 @@ pub struct mem_arena_getters {
     pub get_free_arena: get_free_arena_fn_t,
 }
 #[repr(C)]
-pub struct owned_item {
+pub struct overlay_load_entry {
+    pub group: overlay_group_id::Type,
+    pub entrypoint: *mut crate::ctypes::c_void,
+    pub destructor: *mut crate::ctypes::c_void,
+    pub frame_update: *mut crate::ctypes::c_void,
+}
+#[repr(C)]
+pub struct bulk_item {
     pub id: item_id_16,
-    pub amount: u16,
+    pub quantity: u16,
 }
 #[repr(C)]
 #[repr(align(4))]
@@ -13787,6 +13821,30 @@ pub struct uvec2 {
 pub struct vec2 {
     pub x: i32,
     pub y: i32,
+}
+#[repr(C)]
+pub struct exclusive_item_stat_boost_entry {
+    pub atk: i8,
+    pub sp_atk: i8,
+    pub def: i8,
+    pub sp_def: i8,
+}
+#[repr(C)]
+pub struct exclusive_item_effect_entry {
+    pub effect_id: exclusive_item_effect_id_8,
+    pub foreign_idx: u8,
+}
+#[repr(C)]
+pub struct rankup_table_entry {
+    pub field_0x0: undefined,
+    pub field_0x1: undefined,
+    pub field_0x2: undefined,
+    pub field_0x3: undefined,
+    pub field_0x4: crate::ctypes::c_int,
+    pub field_0x8: crate::ctypes::c_int,
+    pub field_0xc: i16,
+    pub field_0xe: undefined,
+    pub field_0xf: undefined,
 }
 #[repr(C)]
 pub struct position {
@@ -16264,6 +16322,24 @@ impl floor_properties {
     }
 }
 #[repr(C)]
+pub struct tileset_property {
+    pub field_0x0: i32,
+    pub field_0x4: u8,
+    pub field_0x5: u8,
+    pub field_0x6: u8,
+    pub _padding: u8,
+    pub field_0x8: i16,
+    pub field_0xa: u8,
+    pub field_0xb: u8,
+}
+#[repr(C)]
+pub struct level_tilemap_list_entry {
+    pub field_0x0: i16,
+    pub field_0x2: u8,
+    pub field_0x3: u8,
+    pub field_0x4: undefined4,
+}
+#[repr(C)]
 pub struct monster_spawn_entry {
     pub level_mult_512: u16,
     pub incremental_spawn_weight: u16,
@@ -16516,8 +16592,7 @@ impl dungeon_restriction {
 }
 #[repr(C)]
 pub struct fixed_room_item_spawn_entry {
-    pub id: item_id_16,
-    pub quantity: u16,
+    pub item: bulk_item,
     pub field_0x4: undefined,
     pub field_0x5: undefined,
     pub field_0x6: undefined,
@@ -21605,6 +21680,41 @@ pub mod script_entity_id {
     pub const ENTITY_NPC_MEGAYANMA: Type = 384;
     pub const ENTITY_NPC_PINPUKU: Type = 385;
 }
+pub mod special_episode_type {
+    pub type Type = crate::ctypes::c_uint;
+    pub const EPISODE_BIDOOFS_WISH: Type = 0;
+    pub const EPISODE_IGGLYBUFF_THE_PRODIGY: Type = 1;
+    pub const EPISODE_TODAYS_OH_MY_GOSH: Type = 2;
+    pub const EPISODE_HERE_COMES_TEAM_CHARM: Type = 3;
+    pub const EPISODE_IN_THE_FUTURE_OF_DARKNESS: Type = 4;
+}
+#[repr(C, packed)]
+pub struct special_episode_type_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl special_episode_type_8 {
+    #[inline]
+    pub fn val(&self) -> special_episode_type::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: special_episode_type::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(val: special_episode_type::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
 pub mod script_level_id_na {
     pub type Type = crate::ctypes::c_uint;
     pub const LEVEL_NA_S00P01A: Type = 0;
@@ -24783,19 +24893,19 @@ extern "C" {
     pub fn CountItemTypeInBag(arg1: item_id) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn AddItemToBag(item: *mut owned_item) -> bool_;
+    pub fn AddItemToBag(item: *mut bulk_item) -> bool_;
 }
 extern "C" {
     pub fn ScriptSpecialProcess0x39() -> bool_;
 }
 extern "C" {
-    pub fn CountItemTypeInStorage(item: *mut owned_item) -> crate::ctypes::c_int;
+    pub fn CountItemTypeInStorage(item: *mut bulk_item) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn RemoveItemsTypeInStorage(item: *mut owned_item) -> bool_;
+    pub fn RemoveItemsTypeInStorage(item: *mut bulk_item) -> bool_;
 }
 extern "C" {
-    pub fn AddItemToStorage(item: *mut owned_item) -> bool_;
+    pub fn AddItemToStorage(item: *mut bulk_item) -> bool_;
 }
 extern "C" {
     pub fn SetMoneyStored(amount: crate::ctypes::c_int);
@@ -25191,6 +25301,9 @@ extern "C" {
     pub fn JoinedAtRangeCheck2(joined_at: dungeon_id_8) -> bool_;
 }
 extern "C" {
+    pub fn GetRankUpEntry(rank: crate::ctypes::c_int) -> *mut rankup_table_entry;
+}
+extern "C" {
     pub fn GetMonsterGender(monster_id: monster_id) -> u8;
 }
 extern "C" {
@@ -25283,7 +25396,7 @@ extern "C" {
     pub fn ScriptSpecialProcess0x17();
 }
 extern "C" {
-    pub fn ItemAtTableIdx(idx: crate::ctypes::c_int, item: *mut owned_item);
+    pub fn ItemAtTableIdx(idx: crate::ctypes::c_int, item: *mut bulk_item);
 }
 extern "C" {
     pub fn WaitForInterrupt();
@@ -25666,7 +25779,7 @@ extern "C" {
 extern "C" {
     pub fn CalcStatusDuration(
         entity: *mut entity,
-        turn_range: *mut u16,
+        turn_range: *mut i16,
         iq_skill_effects: bool_,
     ) -> crate::ctypes::c_int;
 }
@@ -27026,6 +27139,718 @@ extern "C" {
 }
 extern "C" {
     pub fn HelpMenuLoop() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub static mut MEMORY_ALLOCATION_TABLE: mem_alloc_table;
+}
+extern "C" {
+    pub static mut DEFAULT_MEMORY_ARENA: mem_arena;
+}
+extern "C" {
+    pub static mut DEFAULT_MEMORY_ARENA_BLOCKS: [mem_block; 256usize];
+}
+extern "C" {
+    pub static mut DEFAULT_MEMORY_ARENA_SIZE: u32;
+}
+extern "C" {
+    pub static mut AURA_BOW_ID_LAST: item_id;
+}
+extern "C" {
+    pub static mut NUMBER_OF_ITEMS: u32;
+}
+extern "C" {
+    pub static mut MAX_MONEY_CARRIED: u32;
+}
+extern "C" {
+    pub static mut MAX_MONEY_STORED: u32;
+}
+extern "C" {
+    pub static mut SCRIPT_VARS_VALUES_PTR: *mut script_var_value_table;
+}
+extern "C" {
+    pub static mut MONSTER_ID_LIMIT: u32;
+}
+extern "C" {
+    pub static mut MAX_RECRUITABLE_TEAM_MEMBERS: u32;
+}
+extern "C" {
+    pub static mut CART_REMOVED_IMG_DATA: [undefined; 0usize];
+}
+extern "C" {
+    pub static mut EXCLUSIVE_ITEM_STAT_BOOST_DATA: [exclusive_item_stat_boost_entry; 15usize];
+}
+extern "C" {
+    pub static mut EXCLUSIVE_ITEM_EFFECT_DATA: [exclusive_item_effect_entry; 956usize];
+}
+extern "C" {
+    pub static mut RECOIL_MOVE_LIST: [move_id_16; 11usize];
+}
+extern "C" {
+    pub static mut PUNCH_MOVE_LIST: [move_id_16; 16usize];
+}
+extern "C" {
+    pub static mut SCRIPT_VARS_LOCALS: script_local_var_table;
+}
+extern "C" {
+    pub static mut SCRIPT_VARS: script_var_table;
+}
+extern "C" {
+    pub static mut DUNGEON_DATA_LIST: [dungeon_data_list_entry; 180usize];
+}
+extern "C" {
+    pub static mut DUNGEON_RESTRICTIONS: [dungeon_restriction; 256usize];
+}
+extern "C" {
+    pub static mut SPECIAL_BAND_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut MUNCH_BELT_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut GUMMI_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut MIN_IQ_EXCLUSIVE_MOVE_USER: i32;
+}
+extern "C" {
+    pub static mut WONDER_GUMMI_IQ_GAIN: i16;
+}
+extern "C" {
+    pub static mut AURA_BOW_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut MIN_IQ_ITEM_MASTER: i32;
+}
+extern "C" {
+    pub static mut DEF_SCARF_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut POWER_BAND_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut WONDER_GUMMI_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut ZINC_BAND_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut TACTICS_UNLOCK_LEVEL_TABLE: [i16; 12usize];
+}
+extern "C" {
+    pub static mut OUTLAW_LEVEL_TABLE: [i16; 16usize];
+}
+extern "C" {
+    pub static mut OUTLAW_MINION_LEVEL_TABLE: [i16; 16usize];
+}
+extern "C" {
+    pub static mut IQ_SKILL_RESTRICTIONS: [i16; 69usize];
+}
+extern "C" {
+    pub static mut SECONDARY_TERRAIN_TYPES: [secondary_terrain_type_8; 200usize];
+}
+extern "C" {
+    pub static mut IQ_SKILLS: [i32; 69usize];
+}
+extern "C" {
+    pub static mut IQ_GROUP_SKILLS: [u8; 400usize];
+}
+extern "C" {
+    pub static mut IQ_GUMMI_GAIN_TABLE: [[i16; 18usize]; 18usize];
+}
+extern "C" {
+    pub static mut GUMMI_BELLY_RESTORE_TABLE: [[i16; 18usize]; 18usize];
+}
+extern "C" {
+    pub static mut BAG_CAPACITY_TABLE: [u32; 8usize];
+}
+extern "C" {
+    pub static mut SPECIAL_EPISODE_MAIN_CHARACTERS: [monster_id_16; 100usize];
+}
+extern "C" {
+    pub static mut GUEST_MONSTER_DATA: [guest_monster; 18usize];
+}
+extern "C" {
+    pub static mut RANK_UP_TABLE: [rankup_table_entry; 13usize];
+}
+extern "C" {
+    pub static mut MONSTER_SPRITE_DATA: [undefined; 1200usize];
+}
+extern "C" {
+    pub static mut EVENTS: [script_level; 0usize];
+}
+extern "C" {
+    pub static mut ENTITIES: [script_entity; 386usize];
+}
+extern "C" {
+    pub static mut MAP_MARKER_PLACEMENTS: [map_marker; 310usize];
+}
+extern "C" {
+    pub static mut MEMORY_ALLOCATION_ARENA_GETTERS: mem_arena_getters;
+}
+extern "C" {
+    pub static mut PRNG_SEQUENCE_NUM: u16;
+}
+extern "C" {
+    pub static mut LOADED_OVERLAY_GROUP_0: overlay_group_id::Type;
+}
+extern "C" {
+    pub static mut LOADED_OVERLAY_GROUP_1: overlay_group_id::Type;
+}
+extern "C" {
+    pub static mut LOADED_OVERLAY_GROUP_2: overlay_group_id::Type;
+}
+extern "C" {
+    pub static mut PACK_FILE_OPENED: *mut pack_file_opened;
+}
+extern "C" {
+    pub static mut PACK_FILE_PATHS_TABLE: [*const crate::ctypes::c_char; 6usize];
+}
+extern "C" {
+    pub static mut MOVE_DATA_TABLE_PTR: *mut move_data_table;
+}
+extern "C" {
+    pub static mut NOTIFY_NOTE: bool_;
+}
+extern "C" {
+    pub static mut DEFAULT_HERO_ID: monster_id_16;
+}
+extern "C" {
+    pub static mut DEFAULT_PARTNER_ID: monster_id_16;
+}
+extern "C" {
+    pub static mut GAME_MODE: u8;
+}
+extern "C" {
+    pub static mut ADVENTURE_LOG_PTR: *mut adventure_log;
+}
+extern "C" {
+    pub static mut ITEM_TABLES_PTRS_1: [*mut crate::ctypes::c_void; 26usize];
+}
+extern "C" {
+    pub static mut SMD_EVENTS_FUN_TABLE: [*mut crate::ctypes::c_void; 127usize];
+}
+extern "C" {
+    pub static mut FIRST_DUNGEON_WITH_MONSTER_HOUSE_TRAPS: dungeon_id_8;
+}
+extern "C" {
+    pub static mut BAD_POISON_DAMAGE_COOLDOWN: i16;
+}
+extern "C" {
+    pub static mut PROTEIN_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut SPAWN_CAP_NO_MONSTER_HOUSE: i16;
+}
+extern "C" {
+    pub static mut OREN_BERRY_DAMAGE: i16;
+}
+extern "C" {
+    pub static mut SITRUS_BERRY_HP_RESTORATION: i16;
+}
+extern "C" {
+    pub static mut EXP_ELITE_EXP_BOOST: i16;
+}
+extern "C" {
+    pub static mut MONSTER_HOUSE_MAX_NON_MONSTER_SPAWNS: i16;
+}
+extern "C" {
+    pub static mut GOLD_THORN_POWER: i16;
+}
+extern "C" {
+    pub static mut SPAWN_COOLDOWN: i16;
+}
+extern "C" {
+    pub static mut ORAN_BERRY_FULL_HP_BOOST: i16;
+}
+extern "C" {
+    pub static mut LIFE_SEED_HP_BOOST: i16;
+}
+extern "C" {
+    pub static mut EXCLUSIVE_ITEM_EXP_BOOST: i16;
+}
+extern "C" {
+    pub static mut INTIMIDATOR_ACTIVATION_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ORAN_BERRY_HP_RESTORATION: i16;
+}
+extern "C" {
+    pub static mut SITRUS_BERRY_FULL_HP_BOOST: i16;
+}
+extern "C" {
+    pub static mut BURN_DAMAGE_COOLDOWN: i16;
+}
+extern "C" {
+    pub static mut STICK_POWER: i16;
+}
+extern "C" {
+    pub static mut SPAWN_COOLDOWN_THIEF_ALERT: i16;
+}
+extern "C" {
+    pub static mut MONSTER_HOUSE_MAX_MONSTER_SPAWNS: i16;
+}
+extern "C" {
+    pub static mut SPEED_BOOST_TURNS: i16;
+}
+extern "C" {
+    pub static mut MIRACLE_CHEST_EXP_BOOST: i16;
+}
+extern "C" {
+    pub static mut WONDER_CHEST_EXP_BOOST: i16;
+}
+extern "C" {
+    pub static mut SPAWN_CAP_WITH_MONSTER_HOUSE: i16;
+}
+extern "C" {
+    pub static mut POISON_DAMAGE_COOLDOWN: i16;
+}
+extern "C" {
+    pub static mut GEO_PEBBLE_DAMAGE: i16;
+}
+extern "C" {
+    pub static mut GRAVELEROCK_DAMAGE: i16;
+}
+extern "C" {
+    pub static mut RARE_FOSSIL_DAMAGE: i16;
+}
+extern "C" {
+    pub static mut GINSENG_CHANCE_3: i16;
+}
+extern "C" {
+    pub static mut ZINC_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut IRON_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut CALCIUM_STAT_BOOST: i16;
+}
+extern "C" {
+    pub static mut CORSOLA_TWIG_POWER: i16;
+}
+extern "C" {
+    pub static mut CACNEA_SPIKE_POWER: i16;
+}
+extern "C" {
+    pub static mut GOLD_FANG_POWER: i16;
+}
+extern "C" {
+    pub static mut SILVER_SPIKE_POWER: i16;
+}
+extern "C" {
+    pub static mut IRON_THORN_POWER: i16;
+}
+extern "C" {
+    pub static mut SLEEP_DURATION_RANGE: [i16; 2usize];
+}
+extern "C" {
+    pub static mut POWER_PITCHER_DAMAGE_MULTIPLIER: crate::ctypes::c_int;
+}
+extern "C" {
+    pub static mut AIR_BLADE_DAMAGE_MULTIPLIER: crate::ctypes::c_int;
+}
+extern "C" {
+    pub static mut SPEED_BOOST_DURATION_RANGE: [i16; 2usize];
+}
+extern "C" {
+    pub static mut OFFENSIVE_STAT_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
+}
+extern "C" {
+    pub static mut DEFENSIVE_STAT_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
+}
+extern "C" {
+    pub static mut RANDOM_MUSIC_ID_TABLE: [[music_id_16; 4usize]; 30usize];
+}
+extern "C" {
+    pub static mut MALE_ACCURACY_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
+}
+extern "C" {
+    pub static mut MALE_EVASION_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
+}
+extern "C" {
+    pub static mut FEMALE_ACCURACY_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
+}
+extern "C" {
+    pub static mut FEMALE_EVASION_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
+}
+extern "C" {
+    pub static mut MUSIC_ID_TABLE: [music_id_16; 170usize];
+}
+extern "C" {
+    pub static mut TYPE_MATCHUP_TABLE: type_matchup_table;
+}
+extern "C" {
+    pub static mut FIXED_ROOM_MONSTER_SPAWN_STATS_TABLE:
+        [fixed_room_monster_spawn_stats_entry; 99usize];
+}
+extern "C" {
+    pub static mut TILESET_PROPERTIES: [tileset_property; 199usize];
+}
+extern "C" {
+    pub static mut FIXED_ROOM_PROPERTIES_TABLE: [fixed_room_properties_entry; 256usize];
+}
+extern "C" {
+    pub static mut SCRIPT_OP_CODES: script_opcode_table;
+}
+extern "C" {
+    pub static mut C_ROUTINES: common_routine_table;
+}
+extern "C" {
+    pub static mut OBJECTS: [script_object; 0usize];
+}
+extern "C" {
+    pub static mut RECRUITMENT_TABLE_LOCATIONS: [dungeon_id_16; 22usize];
+}
+extern "C" {
+    pub static mut RECRUITMENT_TABLE_LEVELS: [i16; 22usize];
+}
+extern "C" {
+    pub static mut RECRUITMENT_TABLE_SPECIES: [monster_id_16; 22usize];
+}
+extern "C" {
+    pub static mut LEVEL_TILEMAP_LIST: [level_tilemap_list_entry; 81usize];
+}
+extern "C" {
+    pub static mut OVERLAY11_OVERLAY_LOAD_TABLE: [overlay_load_entry; 21usize];
+}
+extern "C" {
+    pub static mut GROUND_STATE_PTRS: main_ground_data;
+}
+extern "C" {
+    pub static mut STARTERS_PARTNER_IDS: [monster_id_16; 21usize];
+}
+extern "C" {
+    pub static mut STARTERS_HERO_IDS: [monster_id_16; 32usize];
+}
+extern "C" {
+    pub static mut STARTERS_STRINGS: [u16; 48usize];
+}
+extern "C" {
+    pub static mut QUIZ_QUESTION_STRINGS: [u16; 66usize];
+}
+extern "C" {
+    pub static mut QUIZ_ANSWER_STRINGS: [u16; 176usize];
+}
+extern "C" {
+    pub static mut UNKNOWN_MENU_1: [undefined; 72usize];
+}
+extern "C" {
+    pub static mut DUNGEON_STRUCT_SIZE: u32;
+}
+extern "C" {
+    pub static mut MAX_HP_CAP: i32;
+}
+extern "C" {
+    pub static mut OFFSET_OF_DUNGEON_FLOOR_PROPERTIES: u32;
+}
+extern "C" {
+    pub static mut SPAWN_RAND_MAX: i32;
+}
+extern "C" {
+    pub static mut DUNGEON_PRNG_LCG_MULTIPLIER: u32;
+}
+extern "C" {
+    pub static mut DUNGEON_PRNG_LCG_INCREMENT_SECONDARY: u32;
+}
+extern "C" {
+    pub static mut KECLEON_FEMALE_ID: monster_id;
+}
+extern "C" {
+    pub static mut KECLEON_MALE_ID: monster_id;
+}
+extern "C" {
+    pub static mut MSG_ID_SLOW_START: i32;
+}
+extern "C" {
+    pub static mut EXPERIENCE_POINT_GAIN_CAP: i32;
+}
+extern "C" {
+    pub static mut JUDGMENT_MOVE_ID: move_id;
+}
+extern "C" {
+    pub static mut REGULAR_ATTACK_MOVE_ID: move_id;
+}
+extern "C" {
+    pub static mut DEOXYS_ATTACK_ID: monster_id;
+}
+extern "C" {
+    pub static mut DEOXYS_SPEED_ID: monster_id;
+}
+extern "C" {
+    pub static mut GIRATINA_ALTERED_ID: monster_id;
+}
+extern "C" {
+    pub static mut PUNISHMENT_MOVE_ID: move_id;
+}
+extern "C" {
+    pub static mut OFFENSE_STAT_MAX: i32;
+}
+extern "C" {
+    pub static mut PROJECTILE_MOVE_ID: move_id;
+}
+extern "C" {
+    pub static mut BELLY_LOST_PER_TURN: crate::ctypes::c_int;
+}
+extern "C" {
+    pub static mut MOVE_TARGET_AND_RANGE_SPECIAL_USER_HEALING: move_target_and_range;
+}
+extern "C" {
+    pub static mut PLAIN_SEED_VALUE: i32;
+}
+extern "C" {
+    pub static mut MAX_ELIXIR_PP_RESTORATION: i32;
+}
+extern "C" {
+    pub static mut SLIP_SEED_VALUE: i32;
+}
+extern "C" {
+    pub static mut CASTFORM_NORMAL_FORM_MALE_ID: monster_id;
+}
+extern "C" {
+    pub static mut CASTFORM_NORMAL_FORM_FEMALE_ID: monster_id;
+}
+extern "C" {
+    pub static mut CHERRIM_SUNSHINE_FORM_MALE_ID: monster_id;
+}
+extern "C" {
+    pub static mut CHERRIM_OVERCAST_FORM_FEMALE_ID: monster_id;
+}
+extern "C" {
+    pub static mut CHERRIM_SUNSHINE_FORM_FEMALE_ID: monster_id;
+}
+extern "C" {
+    pub static mut FLOOR_GENERATION_STATUS_PTR: *mut floor_generation_status;
+}
+extern "C" {
+    pub static mut OFFSET_OF_DUNGEON_N_NORMAL_ITEM_SPAWNS: u32;
+}
+extern "C" {
+    pub static mut DUNGEON_GRID_COLUMN_BYTES: u32;
+}
+extern "C" {
+    pub static mut DEFAULT_MAX_POSITION: i32;
+}
+extern "C" {
+    pub static mut OFFSET_OF_DUNGEON_GUARANTEED_ITEM_ID: u32;
+}
+extern "C" {
+    pub static mut FIXED_ROOM_TILE_SPAWN_TABLE: [fixed_room_tile_spawn_entry; 11usize];
+}
+extern "C" {
+    pub static mut FIXED_ROOM_REVISIT_OVERRIDES: [fixed_room_id_8; 256usize];
+}
+extern "C" {
+    pub static mut FIXED_ROOM_MONSTER_SPAWN_TABLE: [fixed_room_monster_spawn_entry; 120usize];
+}
+extern "C" {
+    pub static mut FIXED_ROOM_ITEM_SPAWN_TABLE: [fixed_room_item_spawn_entry; 63usize];
+}
+extern "C" {
+    pub static mut FIXED_ROOM_ENTITY_SPAWN_TABLE: [fixed_room_entity_spawn_entry; 269usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_MUZZLED: [status_icon_flags; 2usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_MAGNET_RISE: [status_icon_flags; 2usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_MIRACLE_EYE: [status_icon_flags; 3usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_LEECH_SEED: [status_icon_flags; 3usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_LONG_TOSS: [status_icon_flags; 3usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_BLINDED: [status_icon_flags; 5usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_BURN: [status_icon_flags; 5usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_SURE_SHOT: [status_icon_flags; 5usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_INVISIBLE: [status_icon_flags; 5usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_SLEEP: [status_icon_flags; 8usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_CURSE: [status_icon_flags; 7usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_FREEZE: [status_icon_flags; 8usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_CRINGE: [status_icon_flags; 8usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_BIDE: [status_icon_flags; 14usize];
+}
+extern "C" {
+    pub static mut STATUS_ICON_ARRAY_REFLECT: [status_icon_flags; 18usize];
+}
+extern "C" {
+    pub static mut DIRECTIONS_XY: [[i16; 2usize]; 8usize];
+}
+extern "C" {
+    pub static mut ITEM_CATEGORY_ACTIONS: [action_16; 16usize];
+}
+extern "C" {
+    pub static mut FRACTIONAL_TURN_SEQUENCE: [i16; 125usize];
+}
+extern "C" {
+    pub static mut BELLY_DRAIN_IN_WALLS_INT: u16;
+}
+extern "C" {
+    pub static mut BELLY_DRAIN_IN_WALLS_THOUSANDTHS: u16;
+}
+extern "C" {
+    pub static mut SPATK_STAT_IDX: i32;
+}
+extern "C" {
+    pub static mut ATK_STAT_IDX: i32;
+}
+extern "C" {
+    pub static mut CORNER_CARDINAL_NEIGHBOR_IS_OPEN: [[bool_; 8usize]; 4usize];
+}
+extern "C" {
+    pub static mut DUNGEON_PTR: *mut dungeon;
+}
+extern "C" {
+    pub static mut DUNGEON_PTR_MASTER: *mut dungeon;
+}
+extern "C" {
+    pub static mut LEADER_PTR: *mut entity;
+}
+extern "C" {
+    pub static mut DUNGEON_PRNG_STATE: prng_state;
+}
+extern "C" {
+    pub static mut DUNGEON_PRNG_STATE_SECONDARY_VALUES: [u32; 5usize];
+}
+extern "C" {
+    pub static mut EXCL_ITEM_EFFECTS_WEATHER_ATK_SPEED_BOOST: [exclusive_item_effect_id_8; 8usize];
+}
+extern "C" {
+    pub static mut EXCL_ITEM_EFFECTS_WEATHER_MOVE_SPEED_BOOST: [exclusive_item_effect_id_8; 8usize];
+}
+extern "C" {
+    pub static mut EXCL_ITEM_EFFECTS_WEATHER_NO_STATUS: [exclusive_item_effect_id_8; 8usize];
+}
+extern "C" {
+    pub static mut EXCL_ITEM_EFFECTS_EVASION_BOOST: [exclusive_item_effect_id_8; 8usize];
+}
+extern "C" {
+    pub static mut DEFAULT_TILE: tile;
+}
+extern "C" {
+    pub static mut FIXED_ROOM_DATA_PTR: *mut crate::ctypes::c_void;
+}
+extern "C" {
+    pub static mut DUNGEON_COLORMAP_PTR: *mut rgb;
+}
+extern "C" {
+    pub static mut DUNGEON_STRUCT: dungeon;
+}
+extern "C" {
+    pub static mut MOVE_DATA_TABLE: move_data_table;
+}
+extern "C" {
+    pub static mut FRAMES_SINCE_LAUNCH: u32;
+}
+extern "C" {
+    pub static mut BAG_ITEMS: [item; 50usize];
+}
+extern "C" {
+    pub static mut BAG_ITEMS_PTR: *mut item;
+}
+extern "C" {
+    pub static mut STORAGE_ITEMS: [item_id_16; 1000usize];
+}
+extern "C" {
+    pub static mut STORAGE_ITEM_QUANTITIES: [u16; 1000usize];
+}
+extern "C" {
+    pub static mut KECLEON_SHOP_ITEMS_PTR: *mut bulk_item;
+}
+extern "C" {
+    pub static mut KECLEON_SHOP_ITEMS: [bulk_item; 8usize];
+}
+extern "C" {
+    pub static mut UNUSED_KECLEON_SHOP_ITEMS: [bulk_item; 8usize];
+}
+extern "C" {
+    pub static mut KECLEON_WARES_ITEMS_PTR: *mut bulk_item;
+}
+extern "C" {
+    pub static mut KECLEON_WARES_ITEMS: [bulk_item; 4usize];
+}
+extern "C" {
+    pub static mut UNUSED_KECLEON_WARES_ITEMS: [bulk_item; 4usize];
+}
+extern "C" {
+    pub static mut MONEY_CARRIED: i32;
+}
+extern "C" {
+    pub static mut MONEY_STORED: i32;
+}
+extern "C" {
+    pub static mut LAST_NEW_MOVE: move_;
+}
+extern "C" {
+    pub static mut SCRIPT_VARS_VALUES: script_var_value_table;
+}
+extern "C" {
+    pub static mut BAG_LEVEL: u8;
+}
+extern "C" {
+    pub static mut DEBUG_SPECIAL_EPISODE_NUMBER: special_episode_type_8;
+}
+extern "C" {
+    pub static mut PENDING_DUNGEON_ID: dungeon_id_8;
+}
+extern "C" {
+    pub static mut PENDING_STARTING_FLOOR: u8;
+}
+extern "C" {
+    pub static mut PLAY_TIME_SECONDS: u32;
+}
+extern "C" {
+    pub static mut PLAY_TIME_FRAME_COUNTER: u8;
+}
+extern "C" {
+    pub static mut TEAM_NAME: [crate::ctypes::c_char; 10usize];
+}
+extern "C" {
+    pub static mut HERO_SPECIES_ID: monster_id_16;
+}
+extern "C" {
+    pub static mut HERO_NICKNAME: [crate::ctypes::c_char; 10usize];
+}
+extern "C" {
+    pub static mut PARTNER_SPECIES_ID: monster_id_16;
+}
+extern "C" {
+    pub static mut LEADER_IQ_SKILLS: [u32; 3usize];
+}
+extern "C" {
+    pub static mut LEADER_NICKNAME: [crate::ctypes::c_char; 10usize];
+}
+extern "C" {
+    pub static mut PARTY_MEMBER_2_IQ_SKILLS: [u32; 3usize];
+}
+extern "C" {
+    pub static mut FRAMES_SINCE_LAUNCH_TIMES_THREE: u32;
+}
+extern "C" {
+    pub static mut TURNING_ON_THE_SPOT_FLAG: bool_;
+}
+extern "C" {
+    pub static mut FLOOR_GENERATION_STATUS: floor_generation_status;
 }
 #[repr(C)]
 pub struct move_effect_input {
