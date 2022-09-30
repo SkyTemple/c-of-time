@@ -537,33 +537,31 @@ pub trait DungeonMonsterRead: private::Sealed {
         }
     }
 
-    // TODO: Stubbed out until the definition of CanAiMonsterMoveInDirection is fixed (
-    //       third parameter seems to be a bool instead).
-    // /// Checks whether this monster if AI-controlled can move in the specified direction.
-    // ///
-    // /// Accounts for walls, other monsters on the target position and IQ skills that might prevent
-    // /// a monster from moving into a specific location, such as House Avoider, Trap Avoider or
-    // /// Lava Evader.
-    // ///
-    // /// Returns an empty `Ok` on success, and on error returns whether ot not the path was blocked
-    // /// by an entity.
-    // fn can_ai_move_self_in_direction(&self, direction: Direction) -> Result<(), bool> {
-    //     unsafe {
-    //         let mut was_entity = 0;
-    //         let success = ffi::CanAiMonsterMoveInDirection(
-    //             force_mut_ptr!(self.entity()),
-    //             direction as ffi::direction_id::Type,
-    //             &mut was_entity,
-    //         ) > 0;
-    //         if success {
-    //             Ok(())
-    //         } else if was_entity > 0 {
-    //             Err(true)
-    //         } else {
-    //             Err(false)
-    //         }
-    //     }
-    // }
+    /// Checks whether this monster if AI-controlled can move in the specified direction.
+    ///
+    /// Accounts for walls, other monsters on the target position and IQ skills that might prevent
+    /// a monster from moving into a specific location, such as House Avoider, Trap Avoider or
+    /// Lava Evader.
+    ///
+    /// Returns an empty `Ok` on success, and on error returns whether ot not the path was blocked
+    /// by an entity.
+    fn can_ai_move_self_in_direction(&self, direction: Direction) -> Result<(), bool> {
+        unsafe {
+            let mut was_entity = 0;
+            let success = ffi::CanAiMonsterMoveInDirection(
+                force_mut_ptr!(self.entity()),
+                direction as ffi::direction_id::Type,
+                &mut was_entity,
+            ) > 0;
+            if success {
+                Ok(())
+            } else if was_entity > 0 {
+                Err(true)
+            } else {
+                Err(false)
+            }
+        }
+    }
 
     /// Returns whether this monster can see other invisible monsters.
     ///
