@@ -25981,7 +25981,7 @@ extern "C" {
     pub fn CanAiMonsterMoveInDirection(
         monster: *mut entity,
         direction: direction_id::Type,
-        out_monster_in_target_position: *mut entity,
+        out_monster_in_target_position: *mut bool_,
     ) -> bool_;
 }
 extern "C" {
