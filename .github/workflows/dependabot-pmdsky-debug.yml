@@ -1,0 +1,80 @@
+# This Github Action is only for Dependabot builds and only
+# progresses if the PR is for pmdsky-debug.
+#
+# It tries to update the ffi for eos-rs and then tries to build.
+# If that succeeds it commits and pushes the ffi changes.
+name: update eos-rs ffi
+on: pull_request
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  update:
+    if: github.actor == 'dependabot[bot]'
+    name: Update eos-rs ffi
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout and see if this is for pmdsky-debug
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Check if this is a pmdsky-debug update.
+        run: |
+          if [[ "$(git diff-tree --no-commit-id --name-only -r HEAD)" == "pmdsky-debug" ]]; then
+            echo "IS_PMDSKY_DEBUG=yes" >> $GITHUB_ENV
+          fi
+      - name: Backup current ffi file
+        if: ${{ env.IS_PMDSKY_DEBUG == 'yes' }}
+        run: |
+          cp rust/eos-rs/src/ffi.rs /tmp/ffi.rs
+
+      # 2. Install everything and generate bindings
+      - name: Install Toolchain
+        if: ${{ env.IS_PMDSKY_DEBUG == 'yes' }}
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          profile: minimal
+          components: rustfmt, clippy, rust-src
+          override: true
+      - name: Install bindgen
+        if: ${{ env.IS_PMDSKY_DEBUG == 'yes' }}
+        uses: actions-rs/install@v0.1
+        with:
+          crate: bindgen
+          version: latest
+          use-tool-cache: true
+      - name: Set up Clang
+        if: ${{ env.IS_PMDSKY_DEBUG == 'yes' }}
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
+      - name: Run bindgen
+        if: ${{ env.IS_PMDSKY_DEBUG == 'yes' }}
+        working-directory: rust/eos-rs
+        run: ./generate-bindings.sh
+
+      # 3. Check if everything still compiles
+      - name: "[CHECK] with Clippy"
+        if: ${{ env.IS_PMDSKY_DEBUG == 'yes' }}
+        uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: -Zbuild-std=core,alloc --target rust/armv5te-none-ndseoseabi-na.json --manifest-path rust/eos-rs/Cargo.toml -- -D warnings
+
+      # 4. Check for changes and commit
+      - name: Check if we need to commit
+        if: ${{ env.IS_PMDSKY_DEBUG == 'yes' }}
+        run: |
+          echo "NUM_CHANGED_LINES=$(diff -y --suppress-common-lines /tmp/ffi.rs rust/eos-rs/src/ffi.rs | wc -l)" >> $GITHUB_ENV
+      - name: Commit and Push
+        if: ${{ env.IS_PMDSKY_DEBUG == 'yes' && env.NUM_CHANGED_LINES > 1 }}
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: rust/eos-rs/src/ffi.rs
+          message: 'Update eos-rs ffi bindings'
+          push: true

@@ -4,6 +4,7 @@ name: eos-rs - ffi check
 
 jobs:
   ffi-check:
+    if: github.actor != 'dependabot[bot]'  # See dependabot-pmdsky-debug.yml
     name: FFI Bindgen Check
     runs-on: ubuntu-latest
     steps:
