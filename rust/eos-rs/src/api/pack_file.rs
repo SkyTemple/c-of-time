@@ -3,7 +3,6 @@
 use crate::ctypes::c_void;
 use crate::ffi;
 use alloc::ffi::CString;
-use alloc::vec;
 use alloc::vec::Vec;
 use core::mem::MaybeUninit;
 
@@ -51,14 +50,13 @@ pub unsafe fn get_file_length_in_pack_by_pack_number(
 /// The file number must be valid.
 pub unsafe fn load_file_in_pack(pack: &mut ffi::pack_file_opened, file_number: u32) -> Vec<u8> {
     let size = get_file_length_in_pack(pack, file_number) as usize;
-    let mut dst = vec![0; size];
+    let mut dst = Vec::with_capacity(size);
     let actual_size =
         ffi::LoadFileInPack(pack, dst.as_mut_ptr() as *mut c_void, file_number) as usize;
     if actual_size > size {
         panic!("Pack file mismatch while reading.")
-    } else {
-        dst.resize(actual_size, 0);
     }
+    dst.set_len(size);
     dst
 }
 
@@ -74,15 +72,14 @@ pub unsafe fn load_file_in_pack_by_pack_number(
     file_number: u32,
 ) -> Vec<u8> {
     let size = get_file_length_in_pack_by_pack_number(pack_number, file_number) as usize;
-    let mut dst = vec![0; size];
+    let mut dst = Vec::with_capacity(size);
     let actual_size =
         ffi::LoadFileInPackWithPackId(pack_number, dst.as_mut_ptr() as *mut c_void, file_number)
             as usize;
     if actual_size > size {
         panic!("Pack file mismatch while reading.")
-    } else {
-        dst.resize(actual_size, 0);
     }
+    dst.set_len(size);
     dst
 }
 

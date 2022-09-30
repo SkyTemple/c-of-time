@@ -1186,7 +1186,7 @@ impl<'a> GlobalDungeonData<'a> {
 
     /// Get the id of the monster to be randomly spawned.
     pub fn get_monster_id_to_spawn(&mut self, is_for_monster_house: bool) -> MonsterSpeciesId {
-        let weight_id = i32::from(is_for_monster_house);
+        let weight_id = is_for_monster_house as i32;
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::GetMonsterIdToSpawn(weight_id) }
     }
