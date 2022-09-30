@@ -1,5 +1,7 @@
 //! Structs and functions to interact with the data of items in a general context.
 
+use crate::api::overlay::OverlayLoadLease;
+use crate::ctypes::c_int;
 use crate::ffi;
 use core::marker::PhantomData;
 
@@ -25,6 +27,11 @@ impl ItemId {
         self.0
     }
 
+    /// Returns the category ID of this item.
+    pub fn category(&self) -> ItemCategoryId {
+        unsafe { ffi::GetItemCategory(*self) }
+    }
+
     /// Checks if the item is one of the aura bows received at the start of the game.
     pub fn is_aura_bow(&self) -> bool {
         unsafe { ffi::IsAuraBow(*self) > 0 }
@@ -34,6 +41,19 @@ impl ItemId {
     /// item, the Prism Ruff.
     pub fn get_exclusive_item_offset(&self) -> i32 {
         unsafe { ffi::GetExclusiveItemOffset(*self) }
+    }
+
+    /// Returns the action ID that corresponds to an item given its ID.
+    ///
+    /// The action is based on the category of the item (see `ITEM_CATEGORY_ACTIONS`), unless the
+    /// specified ID is 0x16B, in which case `ACTION_UNK_35` is returned.
+    ///
+    /// Some items can have unexpected actions, such as thrown items, which have `ACTION_NOTHING`.
+    /// This is done to prevent duplicate actions from being listed in the menu (since items always
+    /// have a "throw" option), since a return value of `ACTION_NOTHING` prevents the option from
+    /// showing up in the menu.
+    pub fn get_dungeon_item_action(&self, _ov29: OverlayLoadLease<29>) -> ffi::action::Type {
+        unsafe { ffi::GetItemAction(self.0 as c_int) }
     }
 
     /// Applies stat boosts from an exclusive item.
@@ -97,6 +117,35 @@ impl ExclusiveItemEffectId {
 
 impl From<ExclusiveItemEffectId> for u32 {
     fn from(v: ExclusiveItemEffectId) -> Self {
+        v.0
+    }
+}
+
+/// An item category ID with associated methods to get metadata.
+///
+/// Use the associated constants or the [`Self::new`] method to get instances of this.
+pub type ItemCategoryId = ffi::item_category;
+impl Copy for ItemCategoryId {}
+
+/// This impl provides general metadata about item categories in the game.
+impl ItemCategoryId {
+    /// Returns the ID struct for the item category with the given ID.
+    ///
+    /// # Safety
+    /// The caller must make sure the ID is valid (refers to an existing item),
+    /// otherwise this is UB.
+    pub const unsafe fn new(id: u32) -> Self {
+        Self(id)
+    }
+
+    /// Returns the ID of this item category.
+    pub const fn id(&self) -> u32 {
+        self.0
+    }
+}
+
+impl From<ItemCategoryId> for u32 {
+    fn from(v: ItemCategoryId) -> Self {
         v.0
     }
 }

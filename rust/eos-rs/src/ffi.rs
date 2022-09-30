@@ -6258,6 +6258,84 @@ impl item_id_16 {
         __bindgen_bitfield_unit
     }
 }
+impl item_category {
+    pub const CATEGORY_THROWN_LINE: item_category = item_category(0);
+}
+impl item_category {
+    pub const CATEGORY_THROWN_ARC: item_category = item_category(1);
+}
+impl item_category {
+    pub const CATEGORY_BERRIES_SEEDS_VITAMINS: item_category = item_category(2);
+}
+impl item_category {
+    pub const CATEGORY_FOOD_GUMMIES: item_category = item_category(3);
+}
+impl item_category {
+    pub const CATEGORY_HELD_ITEMS: item_category = item_category(4);
+}
+impl item_category {
+    pub const CATEGORY_TMS_HMS: item_category = item_category(5);
+}
+impl item_category {
+    pub const CATEGORY_POKE: item_category = item_category(6);
+}
+impl item_category {
+    pub const CATEGORY_UNK_7: item_category = item_category(7);
+}
+impl item_category {
+    pub const CATEGORY_OTHER: item_category = item_category(8);
+}
+impl item_category {
+    pub const CATEGORY_ORBS: item_category = item_category(9);
+}
+impl item_category {
+    pub const CATEGORY_LINK_BOX: item_category = item_category(10);
+}
+impl item_category {
+    pub const CATEGORY_USED_TM: item_category = item_category(11);
+}
+impl item_category {
+    pub const CATEGORY_TREASURE_BOXES_1: item_category = item_category(12);
+}
+impl item_category {
+    pub const CATEGORY_TREASURE_BOXES_2: item_category = item_category(13);
+}
+impl item_category {
+    pub const CATEGORY_TREASURE_BOXES_3: item_category = item_category(14);
+}
+impl item_category {
+    pub const CATEGORY_EXCLUSIVE_ITEMS: item_category = item_category(15);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct item_category(pub crate::ctypes::c_uint);
+#[repr(C, packed)]
+pub struct item_category_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl item_category_8 {
+    #[inline]
+    pub fn val(&self) -> item_category {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: item_category) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(val: item_category) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
 impl type_id {
     pub const TYPE_NONE: type_id = type_id(0);
 }
@@ -58862,6 +58940,9 @@ extern "C" {
     ) -> u32;
 }
 extern "C" {
+    pub fn GetItemCategoryVeneer(item_id: item_id) -> item_category;
+}
+extern "C" {
     pub fn IsAuraBow(item_id: item_id) -> bool_;
 }
 extern "C" {
@@ -58870,6 +58951,9 @@ extern "C" {
         format: *const crate::ctypes::c_char,
         ...
     ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetItemCategory(item_id: item_id) -> item_category;
 }
 extern "C" {
     pub fn SetMoneyCarried(amount: crate::ctypes::c_int);
@@ -59280,6 +59364,9 @@ extern "C" {
     pub fn GetMaxRescueAttempts(dungeon_id: dungeon_id) -> i8;
 }
 extern "C" {
+    pub fn GetLeaderChangeFlag(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
     pub fn JoinedAtRangeCheck(joined_at: dungeon_id_8) -> bool_;
 }
 extern "C" {
@@ -59569,6 +59656,15 @@ extern "C" {
     pub fn DivideUIntNoZeroCheck(dividend: u32, divisor: u32) -> crate::ctypes::c_ulonglong;
 }
 extern "C" {
+    pub fn CreateMainMenus();
+}
+extern "C" {
+    pub fn AddMainMenuOption(action_id: crate::ctypes::c_int, enabled: bool_);
+}
+extern "C" {
+    pub fn AddSubMenuOption(action_id: crate::ctypes::c_int, enabled: bool_);
+}
+extern "C" {
     pub fn ScriptSpecialProcessCall(
         param_1: *mut undefined4,
         id: special_process_id,
@@ -59782,6 +59878,12 @@ extern "C" {
         monster_action_field: *mut crate::ctypes::c_void,
         monster_id: monster_id,
     );
+}
+extern "C" {
+    pub fn GetItemAction(item_id: crate::ctypes::c_int) -> action::Type;
+}
+extern "C" {
+    pub fn AddDungeonSubMenuOption(action_id: crate::ctypes::c_int, enabled: bool_);
 }
 extern "C" {
     pub fn SetActionRegularAttack(
@@ -61072,6 +61174,14 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn YesNoMenu(
+        param_1: undefined,
+        message_id: crate::ctypes::c_int,
+        default_option: crate::ctypes::c_int,
+        param_4: undefined,
+    ) -> bool_;
+}
+extern "C" {
     pub fn DisplayMessageInternal(
         message_id: crate::ctypes::c_int,
         wait_for_input: bool_,
@@ -61080,6 +61190,24 @@ extern "C" {
         param_5: undefined4,
         param_6: undefined4,
     );
+}
+extern "C" {
+    pub fn OthersMenuLoop() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn OthersMenu() -> undefined;
+}
+extern "C" {
+    pub fn TeamMenu(leader: *mut entity) -> undefined;
+}
+extern "C" {
+    pub fn RestMenu();
+}
+extern "C" {
+    pub fn RecruitmentSearchMenuLoop() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn HelpMenuLoop() -> crate::ctypes::c_int;
 }
 #[repr(C)]
 pub struct move_effect_input {

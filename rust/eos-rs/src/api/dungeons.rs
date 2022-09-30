@@ -65,6 +65,12 @@ impl DungeonId {
         unsafe { ffi::GetMaxRescueAttempts(*self) }
     }
 
+    /// Returns true if the flag that allows changing leaders is set in the restrictions of this
+    /// dungeon.
+    pub fn get_leader_change_flag(&self) -> bool {
+        unsafe { ffi::GetLeaderChangeFlag(*self) > 0 }
+    }
+
     /// Returns whether this dungeon has a joined at location between
     /// [`DungeonId::DUNGEON_JOINED_AT_BIDOOF`] and [`DungeonId::DUNGEON_DUMMY_0xE3`].
     pub fn is_special_joined_at_location(&self) -> bool {

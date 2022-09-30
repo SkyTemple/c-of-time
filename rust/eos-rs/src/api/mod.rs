@@ -21,5 +21,6 @@ pub mod random;
 pub mod script_vars;
 pub mod sir0;
 pub mod sys;
+pub mod top_menu;
 pub mod types;
 pub mod wte;

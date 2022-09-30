@@ -28,6 +28,7 @@ bindgen \
   --newtype-enum iq_group_id \
   --newtype-enum iq_skill_id \
   --newtype-enum item_id \
+  --newtype-enum item_category \
   --newtype-enum monster_id \
   --newtype-enum move_id \
   --newtype-enum script_opcode_id \
