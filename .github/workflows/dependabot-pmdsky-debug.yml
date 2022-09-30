@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   update:
-    if: github.actor == 'theCapypara'
+    if: github.actor == 'dependabot[bot]'
     name: Update eos-rs ffi
     runs-on: ubuntu-latest
     steps:
