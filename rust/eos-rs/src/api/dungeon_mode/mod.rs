@@ -11,6 +11,7 @@ mod random;
 mod tile;
 
 pub mod dungeon_generator;
+pub mod menus;
 
 use core::ptr;
 pub use dungeon_struct::*;
