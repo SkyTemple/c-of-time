@@ -388,13 +388,13 @@ pub fn script_special_process_x17() {
 ///
 /// Once we find out more about the item table, this function will probably move to a wrapper
 /// struct.
-pub fn item_at_table_idx(table_idx: i32) -> ffi::owned_item {
-    let mut out = ffi::owned_item {
+pub fn item_at_table_idx(table_idx: i32) -> ffi::bulk_item {
+    let mut out = ffi::bulk_item {
         id: ffi::item_id_16 {
             _bitfield_align_1: [],
             _bitfield_1: Default::default(),
         },
-        amount: 0,
+        quantity: 0,
     };
     unsafe { ffi::ItemAtTableIdx(table_idx, &mut out) }
     out

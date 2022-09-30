@@ -218,14 +218,14 @@ impl InventoryBag {
 
     /// Adds the specified amount of an item to the player's bag. Returns whether or not any
     /// items could be added.
-    pub fn add_item(&mut self, item_id: ItemId, amount: u16) -> bool {
+    pub fn add_item(&mut self, item_id: ItemId, quantity: u16) -> bool {
         unsafe {
-            ffi::AddItemToBag(&mut ffi::owned_item {
+            ffi::AddItemToBag(&mut ffi::bulk_item {
                 id: ffi::item_id_16 {
                     _bitfield_align_1: [],
                     _bitfield_1: ffi::item_id_16::new_bitfield_1(item_id),
                 },
-                amount,
+                quantity,
             }) > 0
         }
     }
@@ -255,39 +255,39 @@ impl InventoryStorage {
     /// Count the amount of the specified item in the player's storage.
     pub fn count_item_type(&self, item_id: ItemId) -> i32 {
         unsafe {
-            ffi::CountItemTypeInStorage(&mut ffi::owned_item {
+            ffi::CountItemTypeInStorage(&mut ffi::bulk_item {
                 id: ffi::item_id_16 {
                     _bitfield_align_1: [],
                     _bitfield_1: ffi::item_id_16::new_bitfield_1(item_id),
                 },
-                amount: 0,
+                quantity: 0,
             })
         }
     }
 
     /// Adds the specified amount of an item to the player's bag. Returns whether or not any
     /// items could be added.
-    pub fn add_item(&mut self, item_id: ItemId, amount: u16) -> bool {
+    pub fn add_item(&mut self, item_id: ItemId, quantity: u16) -> bool {
         unsafe {
-            ffi::AddItemToStorage(&mut ffi::owned_item {
+            ffi::AddItemToStorage(&mut ffi::bulk_item {
                 id: ffi::item_id_16 {
                     _bitfield_align_1: [],
                     _bitfield_1: ffi::item_id_16::new_bitfield_1(item_id),
                 },
-                amount,
+                quantity,
             }) > 0
         }
     }
 
     /// Removes (the specified amount...?) of the given item type from the storage.
-    pub fn remove_item(&mut self, item_id: ItemId, amount: u16) -> bool {
+    pub fn remove_item(&mut self, item_id: ItemId, quantity: u16) -> bool {
         unsafe {
-            ffi::RemoveItemsTypeInStorage(&mut ffi::owned_item {
+            ffi::RemoveItemsTypeInStorage(&mut ffi::bulk_item {
                 id: ffi::item_id_16 {
                     _bitfield_align_1: [],
                     _bitfield_1: ffi::item_id_16::new_bitfield_1(item_id),
                 },
-                amount,
+                quantity,
             }) > 0
         }
     }
