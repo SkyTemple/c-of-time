@@ -24,7 +24,10 @@ jobs:
           submodules: true
       - name: Check if this is a pmdsky-debug update.
         run: |
-          if [[ "$(git diff-tree --no-commit-id --name-only -r HEAD)" == "pmdsky-debug" ]]; then
+          echo "Changelist:"
+          CHANGELIST=$(git diff-tree --no-commit-id --name-only -r HEAD)
+          echo "$CHANGELIST"
+          if [[ "$CHANGELIST" == "pmdsky-debug" ]]; then
             echo "IS_PMDSKY_DEBUG=1" >> $GITHUB_ENV
           fi
       - name: Backup current ffi file
