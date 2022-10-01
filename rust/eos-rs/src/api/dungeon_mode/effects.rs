@@ -1,4 +1,5 @@
 use crate::api::dungeon_mode::*;
+use crate::api::enums::{Direction, WarpType};
 use crate::api::items::ItemId;
 use crate::api::moves::Move;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};

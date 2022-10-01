@@ -1,6 +1,7 @@
 //! Functions related to getting information about monster moves.
 
-use crate::api::dungeon_mode::{DungeonEntity, MoveCategory, Weather};
+use crate::api::dungeon_mode::DungeonEntity;
+use crate::api::enums::{MoveCategory, Weather};
 use crate::api::types::MonsterTypeId;
 use crate::ffi;
 

@@ -1,8 +1,11 @@
 //! General gameplay related functions that are always available.
 
+use crate::api::dungeons::DungeonId;
+use crate::api::enums::{MissionGenerationResult, MissionType};
 use crate::api::iq::IqSkillId;
 use crate::api::items::ItemId;
 use crate::api::monsters::MonsterSpeciesId;
+use crate::ctypes::c_int;
 use crate::ffi;
 use crate::util::OwnedSlice;
 use core::marker::PhantomData;
@@ -364,6 +367,127 @@ pub fn get_sos_mail_count(param_1: i32, param_2: bool) -> i32 {
     unsafe { ffi::GetSosMailCount(param_1, param_2 as ffi::bool_) }
 }
 
+/// Attempts to generate a random mission.
+///
+/// Returns the result, `None` is returned if the game returns an invalid result internally.
+///
+/// # Safety
+/// The caller must make sure the undefined params are valid for this function.
+pub fn generate_mission(
+    unknown: &mut ffi::undefined,
+    mission_data: &mut ffi::mission,
+) -> Option<MissionGenerationResult> {
+    unsafe { ffi::GenerateMission(unknown, mission_data).try_into().ok() }
+}
+
+/// Generates the missions displayed on the Job Bulletin Board and the Outlaw Notice Board.
+pub fn generate_daily_missions() {
+    unsafe { ffi::GenerateDailyMissions() }
+}
+
+enum _DoMissionCheckType {
+    General(usize),
+    Accepted,
+}
+
+enum _DoMissionCheckResult {
+    General(Option<usize>),
+    Accepted(bool),
+}
+
+fn _do_mission_check(
+    check_type: _DoMissionCheckType,
+    mission_type: MissionType,
+    dungeon_id: DungeonId,
+) -> _DoMissionCheckResult {
+    let mission_type_group = mission_type.group() as ffi::mission_type::Type;
+    let mission_subtype = mission_type.c_subtype();
+
+    // TODO: This may not actually be safe if the game does anything else with this ominous struct.
+    #[repr(C)]
+    struct MissionSubtypeStruct {
+        subtype: ffi::mission_subtype,
+        // just to reduce the chance this ends badly, we add some padidng bytes
+        _pad: [u8; 127],
+    }
+    let mut mission_subtype_struct = MissionSubtypeStruct {
+        subtype: mission_subtype,
+        _pad: [0; 127],
+    };
+
+    unsafe {
+        match check_type {
+            _DoMissionCheckType::General(start_index) => {
+                let result = ffi::GetMissionByTypeAndDungeon(
+                    start_index as c_int,
+                    mission_type_group,
+                    &mut mission_subtype_struct as *mut MissionSubtypeStruct as *mut ffi::undefined,
+                    dungeon_id,
+                );
+
+                _DoMissionCheckResult::General(if result < 0 {
+                    None
+                } else {
+                    Some(result as usize)
+                })
+            }
+
+            _DoMissionCheckType::Accepted => _DoMissionCheckResult::Accepted(
+                ffi::CheckAcceptedMissionByTypeAndDungeon(
+                    mission_type_group,
+                    &mut mission_subtype_struct as *mut MissionSubtypeStruct as *mut ffi::undefined,
+                    dungeon_id,
+                ) > 0,
+            ),
+        }
+    }
+}
+
+/// Returns the position on the mission list of the first mission of the specified type that takes
+/// place in the specified dungeon.
+///
+/// If the type of the mission has a subtype, the subtype of the checked mission must match
+/// too.
+pub fn get_mission_by_type_and_dungeon(
+    start_index: usize,
+    mission_type: MissionType,
+    dungeon_id: DungeonId,
+) -> Option<usize> {
+    match _do_mission_check(
+        _DoMissionCheckType::General(start_index),
+        mission_type,
+        dungeon_id,
+    ) {
+        _DoMissionCheckResult::General(r) => r,
+        _DoMissionCheckResult::Accepted(_) => unreachable!(),
+    }
+}
+
+/// Returns true if there are any accepted missions on the mission list that are of the specified
+/// type and take place in the specified dungeon.
+///
+/// If the type of the mission has a subtype, the subtype of the checked mission must match
+/// too.
+pub fn check_accepted_mission_by_type_and_dungeon(
+    mission_type: MissionType,
+    dungeon_id: DungeonId,
+) -> bool {
+    match _do_mission_check(_DoMissionCheckType::Accepted, mission_type, dungeon_id) {
+        _DoMissionCheckResult::General(_) => unreachable!(),
+        _DoMissionCheckResult::Accepted(r) => r,
+    }
+}
+
+/// Given a mission struct, clears some of it fields.
+///
+/// In particular, [`ffi::mission::status`] is set to
+/// [`ffi::mission_status::MISSION_STATUS_INVALID`], [`ffi::mission::dungeon_id`] is set to -1,
+/// [`ffi::mission::floor`] is set to 0 and [`ffi::mission::reward_type`] is set
+/// to [`ffi::mission_reward_type::MISSION_REWARD_MONEY`].
+pub fn clear_mission_data(mission: &mut ffi::mission) {
+    unsafe { ffi::ClearMissionData(mission) }
+}
+
 /// Returns the number of missions completed.
 pub fn dungeon_had_request_done(param_1: i32, param_2: bool) -> i32 {
     unsafe { ffi::GetSosMailCount(param_1, param_2 as ffi::bool_) }
@@ -398,6 +522,15 @@ pub fn item_at_table_idx(table_idx: i32) -> ffi::bulk_item {
     };
     unsafe { ffi::ItemAtTableIdx(table_idx, &mut out) }
     out
+}
+
+/// Checks whether the specified monster has been attacked by the player at some point in their
+/// adventure during an exploration.
+///
+/// The check is performed using the result of passing the ID to
+/// [`MonsterSpeciesId::base_gender_form`].
+pub fn has_monster_been_attacked_in_dungeons(monster_id: MonsterSpeciesId) -> bool {
+    unsafe { ffi::HasMonsterBeenAttackedInDungeons(monster_id) > 0 }
 }
 
 /// Marks a dungeon tip as already shown to the player
@@ -437,6 +570,46 @@ pub unsafe fn apply_gummi_boosts(
     buffer: *mut crate::ctypes::c_void,
 ) {
     ffi::ApplyGummiBoostsGroundMode(param_1, param_2, param_3, param_4, param_5, param_6, buffer)
+}
+
+/// Returns the data of the player monster (first slot in Chimecho Assembly).
+pub fn get_hero_data<'a>() -> Option<&'a ffi::ground_monster> {
+    let ptr = unsafe { ffi::GetHeroData() };
+    if ptr.is_null() {
+        None
+    } else {
+        Some(unsafe { &*ptr })
+    }
+}
+
+/// Returns the data of the player monster (first slot in Chimecho Assembly), mutably.
+pub fn get_hero_data_mut<'a>() -> Option<&'a mut ffi::ground_monster> {
+    let ptr = unsafe { ffi::GetHeroData() };
+    if ptr.is_null() {
+        None
+    } else {
+        Some(unsafe { &mut *ptr })
+    }
+}
+
+/// Returns the data of the partner monster (second slot in Chimecho Assembly).
+pub fn get_partner_data<'a>() -> Option<&'a ffi::ground_monster> {
+    let ptr = unsafe { ffi::GetPartnerData() };
+    if ptr.is_null() {
+        None
+    } else {
+        Some(unsafe { &*ptr })
+    }
+}
+
+/// Returns the data of the partner monster (second slot in Chimecho Assembly), mutably.
+pub fn get_partner_data_mut<'a>() -> Option<&'a mut ffi::ground_monster> {
+    let ptr = unsafe { ffi::GetPartnerData() };
+    if ptr.is_null() {
+        None
+    } else {
+        Some(unsafe { &mut *ptr })
+    }
 }
 
 /// Returns a struct containing information about a team member.

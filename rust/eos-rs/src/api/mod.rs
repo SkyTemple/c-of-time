@@ -3,6 +3,7 @@
 pub mod abilities;
 pub mod dungeon_mode;
 pub mod dungeons;
+pub mod enums;
 pub mod fixed;
 pub mod gameplay;
 pub mod ground_mode;
@@ -17,6 +18,7 @@ pub mod monsters;
 pub mod moves;
 pub mod overlay;
 pub mod pack_file;
+pub mod personality_test;
 pub mod random;
 pub mod script_vars;
 pub mod sir0;

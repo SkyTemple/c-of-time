@@ -1,3 +1,4 @@
+//! Various enums used by the game.
 use crate::ffi;
 use crate::ffi::type_matchup::Type;
 
@@ -57,6 +58,29 @@ impl TryFrom<ffi::entity_type::Type> for DungeonEntityType {
             ffi::entity_type::ENTITY_ITEM => Ok(DungeonEntityType::Item),
             ffi::entity_type::ENTITY_HIDDEN_STAIRS => Ok(DungeonEntityType::HiddenStairs),
             _ => Err(()),
+        }
+    }
+}
+
+#[repr(u32)]
+#[derive(PartialEq, Eq, Clone, Copy)]
+/// The gender of a monster.
+pub enum MonsterGender {
+    Invalid = ffi::monster_gender::GENDER_INVALID,
+    Male = ffi::monster_gender::GENDER_MALE,
+    Female = ffi::monster_gender::GENDER_FEMALE,
+    Genderless = ffi::monster_gender::GENDER_GENDERLESS,
+}
+
+/// Invalid values for the enum are converted into [`Self::Invalid`]
+impl From<ffi::monster_gender::Type> for MonsterGender {
+    fn from(value: ffi::entity_type::Type) -> Self {
+        match value {
+            ffi::monster_gender::GENDER_INVALID => MonsterGender::Invalid,
+            ffi::monster_gender::GENDER_MALE => MonsterGender::Male,
+            ffi::monster_gender::GENDER_FEMALE => MonsterGender::Female,
+            ffi::monster_gender::GENDER_GENDERLESS => MonsterGender::Genderless,
+            _ => MonsterGender::Invalid,
         }
     }
 }
@@ -333,6 +357,37 @@ impl TryFrom<ffi::floor_loop_status::Type> for FloorLoopStatus {
 
 #[repr(u32)]
 #[derive(PartialEq, Eq, Clone, Copy)]
+/// Indicates whether or not the attempt of generating a mission was successful or not.
+pub enum MissionGenerationResult {
+    /// Mission was successfully generated
+    Success = ffi::mission_generation_result::MISSION_GENERATION_SUCCESS,
+    /// Mission generation failed.
+    Failure = ffi::mission_generation_result::MISSION_GENERATION_FAILURE,
+    /// Mission generation failed, the game should not try to generate more.
+    GlobalFailure = ffi::mission_generation_result::MISSION_GENERATION_GLOBAL_FAILURE,
+}
+
+impl TryFrom<ffi::mission_generation_result::Type> for MissionGenerationResult {
+    type Error = ();
+
+    fn try_from(value: Type) -> Result<Self, Self::Error> {
+        match value {
+            ffi::mission_generation_result::MISSION_GENERATION_SUCCESS => {
+                Ok(MissionGenerationResult::Success)
+            }
+            ffi::mission_generation_result::MISSION_GENERATION_FAILURE => {
+                Ok(MissionGenerationResult::Failure)
+            }
+            ffi::mission_generation_result::MISSION_GENERATION_GLOBAL_FAILURE => {
+                Ok(MissionGenerationResult::GlobalFailure)
+            }
+            _ => Err(()),
+        }
+    }
+}
+
+#[repr(u32)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 /// Group of mission type on a dungeon floor.
 pub enum MissionTypeGroup {
     RescueClient = ffi::mission_type::MISSION_RESCUE_CLIENT,
@@ -426,18 +481,36 @@ impl MissionType {
             mission_subtype = s.assume_init();
             match self {
                 MissionType::ExploreWithClient(v) => {
-                    *mission_subtype.explore.as_mut() = (*v) as ffi::mission_subtype_explore::Type;
+                    *mission_subtype.explore.as_mut() = ffi::mission_subtype_explore_8 {
+                        _bitfield_align_1: [],
+                        _bitfield_1: ffi::mission_subtype_explore_8::new_bitfield_1(
+                            (*v) as ffi::mission_subtype_explore::Type,
+                        ),
+                    };
                 }
                 MissionType::TakeItemFromOutlaw(v) => {
-                    *mission_subtype.take_item.as_mut() =
-                        (*v) as ffi::mission_subtype_take_item::Type;
+                    *mission_subtype.take_item.as_mut() = ffi::mission_subtype_take_item_8 {
+                        _bitfield_align_1: [],
+                        _bitfield_1: ffi::mission_subtype_take_item_8::new_bitfield_1(
+                            (*v) as ffi::mission_subtype_take_item::Type,
+                        ),
+                    };
                 }
                 MissionType::ArrestOutlaw(v) => {
-                    *mission_subtype.outlaw.as_mut() = (*v) as ffi::mission_subtype_outlaw::Type;
+                    *mission_subtype.outlaw.as_mut() = ffi::mission_subtype_outlaw_8 {
+                        _bitfield_align_1: [],
+                        _bitfield_1: ffi::mission_subtype_outlaw_8::new_bitfield_1(
+                            (*v) as ffi::mission_subtype_outlaw::Type,
+                        ),
+                    };
                 }
                 MissionType::ChallengeRequest(v) => {
-                    *mission_subtype.challenge.as_mut() =
-                        (*v) as ffi::mission_subtype_challenge::Type;
+                    *mission_subtype.challenge.as_mut() = ffi::mission_subtype_challenge_8 {
+                        _bitfield_align_1: [],
+                        _bitfield_1: ffi::mission_subtype_challenge_8::new_bitfield_1(
+                            (*v) as ffi::mission_subtype_challenge::Type,
+                        ),
+                    };
                 }
                 _ => *mission_subtype.none.as_mut() = 0,
             }
@@ -479,7 +552,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeExplore {
 
     fn try_from(value: ffi::mission_subtype) -> Result<Self, Self::Error> {
         // SAFETY: We just copy the value and we check if it's a valid enum value.
-        Self::try_from(*unsafe { value.explore.as_ref() })
+        Self::try_from(unsafe { value.explore.as_ref().val() })
     }
 }
 
@@ -516,7 +589,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeTakeItem {
 
     fn try_from(value: ffi::mission_subtype) -> Result<Self, Self::Error> {
         // SAFETY: We just copy the value and we check if it's a valid enum value.
-        Self::try_from(*unsafe { value.take_item.as_ref() })
+        Self::try_from(unsafe { value.take_item.as_ref().val() })
     }
 }
 
@@ -571,7 +644,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeOutlaw {
 
     fn try_from(value: ffi::mission_subtype) -> Result<Self, Self::Error> {
         // SAFETY: We just copy the value and we check if it's a valid enum value.
-        Self::try_from(*unsafe { value.outlaw.as_ref() })
+        Self::try_from(unsafe { value.outlaw.as_ref().val() })
     }
 }
 
@@ -620,7 +693,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeChallenge {
 
     fn try_from(value: ffi::mission_subtype) -> Result<Self, Self::Error> {
         // SAFETY: We just copy the value and we check if it's a valid enum value.
-        Self::try_from(*unsafe { value.challenge.as_ref() })
+        Self::try_from(unsafe { value.challenge.as_ref().val() })
     }
 }
 

@@ -3,7 +3,6 @@
 mod dungeon_struct;
 mod effects;
 mod entity;
-mod enums;
 mod message_log;
 mod monster;
 mod moves;
@@ -13,11 +12,11 @@ mod tile;
 pub mod dungeon_generator;
 pub mod menus;
 
+use crate::api::enums::Direction;
 use core::ptr;
 pub use dungeon_struct::*;
 pub use effects::*;
 pub use entity::*;
-pub use enums::*;
 pub use message_log::*;
 pub use monster::*;
 pub use moves::*;

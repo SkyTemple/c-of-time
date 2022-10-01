@@ -10289,6 +10289,13 @@ impl iq_group_id {
 #[repr(transparent)]
 #[derive(Clone, Hash, PartialEq, Eq)]
 pub struct iq_group_id(pub(crate) crate::ctypes::c_uint);
+pub mod monster_gender {
+    pub type Type = crate::ctypes::c_uint;
+    pub const GENDER_INVALID: Type = 0;
+    pub const GENDER_MALE: Type = 1;
+    pub const GENDER_FEMALE: Type = 2;
+    pub const GENDER_GENDERLESS: Type = 3;
+}
 pub mod direction_id {
     pub type Type = crate::ctypes::c_int;
     pub const DIR_NONE: Type = -1;
@@ -11553,12 +11560,71 @@ pub mod mission_subtype_explore {
     pub const MISSION_EXPLORE_NORMAL: Type = 0;
     pub const MISSION_EXPLORE_SEALED_CHAMBER: Type = 1;
     pub const MISSION_EXPLORE_GOLDEN_CHAMBER: Type = 2;
+    pub const MISSION_EXPLORE_NEW_DUNGEON: Type = 3;
+}
+#[repr(C, packed)]
+pub struct mission_subtype_explore_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl mission_subtype_explore_8 {
+    #[inline]
+    pub fn val(&self) -> mission_subtype_explore::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: mission_subtype_explore::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        val: mission_subtype_explore::Type,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
 }
 pub mod mission_subtype_take_item {
     pub type Type = crate::ctypes::c_uint;
     pub const MISSION_TAKE_ITEM_NORMAL_OUTLAW: Type = 0;
     pub const MISSION_TAKE_ITEM_HIDDEN_OUTLAW: Type = 1;
     pub const MISSION_TAKE_ITEM_FLEEING_OUTLAW: Type = 2;
+}
+#[repr(C, packed)]
+pub struct mission_subtype_take_item_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl mission_subtype_take_item_8 {
+    #[inline]
+    pub fn val(&self) -> mission_subtype_take_item::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: mission_subtype_take_item::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        val: mission_subtype_take_item::Type,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
 }
 pub mod mission_subtype_outlaw {
     pub type Type = crate::ctypes::c_uint;
@@ -11571,6 +11637,35 @@ pub mod mission_subtype_outlaw {
     pub const MISSION_OUTLAW_HIDEOUT: Type = 6;
     pub const MISSION_OUTLAW_MONSTER_HOUSE: Type = 7;
 }
+#[repr(C, packed)]
+pub struct mission_subtype_outlaw_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl mission_subtype_outlaw_8 {
+    #[inline]
+    pub fn val(&self) -> mission_subtype_outlaw::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: mission_subtype_outlaw::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        val: mission_subtype_outlaw::Type,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
 pub mod mission_subtype_challenge {
     pub type Type = crate::ctypes::c_uint;
     pub const MISSION_CHALLENGE_NORMAL: Type = 0;
@@ -11580,14 +11675,160 @@ pub mod mission_subtype_challenge {
     pub const MISSION_CHALLENGE_SUICUNE: Type = 4;
     pub const MISSION_CHALLENGE_JIRACHI: Type = 5;
 }
+#[repr(C, packed)]
+pub struct mission_subtype_challenge_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl mission_subtype_challenge_8 {
+    #[inline]
+    pub fn val(&self) -> mission_subtype_challenge::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: mission_subtype_challenge::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        val: mission_subtype_challenge::Type,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
 #[repr(C)]
 pub struct mission_subtype {
-    pub none: __BindgenUnionField<crate::ctypes::c_int>,
-    pub explore: __BindgenUnionField<mission_subtype_explore::Type>,
-    pub take_item: __BindgenUnionField<mission_subtype_take_item::Type>,
-    pub outlaw: __BindgenUnionField<mission_subtype_outlaw::Type>,
-    pub challenge: __BindgenUnionField<mission_subtype_challenge::Type>,
-    pub bindgen_union_field: u32,
+    pub none: __BindgenUnionField<u8>,
+    pub explore: __BindgenUnionField<mission_subtype_explore_8>,
+    pub take_item: __BindgenUnionField<mission_subtype_take_item_8>,
+    pub outlaw: __BindgenUnionField<mission_subtype_outlaw_8>,
+    pub challenge: __BindgenUnionField<mission_subtype_challenge_8>,
+    pub bindgen_union_field: u8,
+}
+pub mod mission_reward_type {
+    pub type Type = crate::ctypes::c_uint;
+    pub const MISSION_REWARD_MONEY: Type = 0;
+    pub const MISSION_REWARD_MONEY_AND_MORE: Type = 1;
+    pub const MISSION_REWARD_ITEM: Type = 2;
+    pub const MISSION_REWARD_ITEM_AND_MORE: Type = 3;
+    pub const MISSION_REWARD_ITEM_HIDDEN: Type = 4;
+    pub const MISSION_REWARD_MONEY_HIDDEN: Type = 5;
+    pub const MISSION_REWARD_SPECIAL: Type = 6;
+}
+#[repr(C, packed)]
+pub struct mission_reward_type_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl mission_reward_type_8 {
+    #[inline]
+    pub fn val(&self) -> mission_reward_type::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: mission_reward_type::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(val: mission_reward_type::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+pub mod mission_restriction_type {
+    pub type Type = crate::ctypes::c_uint;
+    pub const MISSION_RESTRICTION_NONE: Type = 0;
+    pub const MISSION_RESTRICTION_TYPE: Type = 1;
+    pub const MISSION_RESTRICTION_MONSTER: Type = 2;
+}
+#[repr(C, packed)]
+pub struct mission_restriction_type_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl mission_restriction_type_8 {
+    #[inline]
+    pub fn val(&self) -> mission_restriction_type::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: mission_restriction_type::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        val: mission_restriction_type::Type,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+pub struct mission_restriction {
+    pub monster_id: __BindgenUnionField<monster_id_16>,
+    pub type_id: __BindgenUnionField<type_id_8>,
+    pub bindgen_union_field: u16,
+}
+pub mod mission_status {
+    pub type Type = crate::ctypes::c_uint;
+    pub const MISSION_STATUS_INVALID: Type = 0;
+    pub const MISSION_STATUS_UNK_1: Type = 1;
+    pub const MISSION_STATUS_UNK_2: Type = 2;
+    pub const MISSION_STATUS_UNK_3: Type = 3;
+    pub const MISSION_STATUS_SUSPENDED: Type = 4;
+    pub const MISSION_STATUS_ACCEPTED: Type = 5;
+    pub const MISSION_STATUS_DONE: Type = 6;
+    pub const MISSION_STATUS_UNK_7: Type = 7;
+    pub const MISSION_STATUS_UNK_8: Type = 8;
+}
+#[repr(C, packed)]
+pub struct mission_status_8 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+}
+impl mission_status_8 {
+    #[inline]
+    pub fn val(&self) -> mission_status::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: mission_status::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 8u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(val: mission_status::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 8u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
 }
 pub mod forced_loss_reason {
     pub type Type = crate::ctypes::c_uint;
@@ -13498,7 +13739,7 @@ impl team_member {
 }
 #[repr(C)]
 pub struct dungeon_floor_pair {
-    pub dungeon_id: u8,
+    pub dungeon_id: dungeon_id_8,
     pub floor_id: u8,
 }
 #[repr(C)]
@@ -13847,6 +14088,32 @@ pub struct rankup_table_entry {
     pub field_0xf: undefined,
 }
 #[repr(C)]
+pub struct mission {
+    pub status: mission_status_8,
+    pub type_: mission_type_8,
+    pub subtype: mission_subtype,
+    pub field_0x3: undefined,
+    pub dungeon_id: dungeon_id_8,
+    pub floor: u8,
+    pub field_0x6: undefined,
+    pub field_0x7: undefined,
+    pub field_0x8: crate::ctypes::c_int,
+    pub field_0xc: undefined,
+    pub field_0xd: undefined,
+    pub client: monster_id_16,
+    pub target: monster_id_16,
+    pub field_0x12: i16,
+    pub field_0x14: i16,
+    pub reward_type: mission_reward_type_8,
+    pub field_0x17: undefined,
+    pub item_reward: item_id_16,
+    pub restriction_type: mission_restriction_type_8,
+    pub field_0x1b: undefined,
+    pub restriction: mission_restriction,
+    pub field_0x1e: undefined,
+    pub field_0x1f: undefined,
+}
+#[repr(C)]
 pub struct position {
     pub x: i16,
     pub y: i16,
@@ -13883,11 +14150,11 @@ impl item {
         }
     }
     #[inline]
-    pub fn flags_unk2(&self) -> u8 {
+    pub fn f_unpaid(&self) -> bool_ {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
     }
     #[inline]
-    pub fn set_flags_unk2(&mut self, val: u8) {
+    pub fn set_f_unpaid(&mut self, val: bool_) {
         unsafe {
             let val: u8 = ::core::mem::transmute(val);
             self._bitfield_1.set(2usize, 1u8, val as u64)
@@ -13930,7 +14197,7 @@ impl item {
     pub fn new_bitfield_1(
         f_exists: bool_,
         f_in_shop: bool_,
-        flags_unk2: u8,
+        f_unpaid: bool_,
         f_sticky: bool_,
         f_set: bool_,
         flags_unk5: u8,
@@ -13945,8 +14212,8 @@ impl item {
             f_in_shop as u64
         });
         __bindgen_bitfield_unit.set(2usize, 1u8, {
-            let flags_unk2: u8 = unsafe { ::core::mem::transmute(flags_unk2) };
-            flags_unk2 as u64
+            let f_unpaid: u8 = unsafe { ::core::mem::transmute(f_unpaid) };
+            f_unpaid as u64
         });
         __bindgen_bitfield_unit.set(3usize, 1u8, {
             let f_sticky: u8 = unsafe { ::core::mem::transmute(f_sticky) };
@@ -16373,6 +16640,11 @@ pub struct dungeon_data_list_entry {
     pub dungeon_data_index_mappa_s: u8,
     pub n_preceding_floors_group: u8,
     pub n_total_floors_group: u8,
+}
+#[repr(C)]
+pub struct dungeon_group_and_group_floor {
+    pub group_id: dungeon_group_id_8,
+    pub group_floor: u8,
 }
 #[repr(C)]
 pub struct dungeon_restriction {
@@ -21715,6 +21987,12 @@ impl special_episode_type_8 {
         __bindgen_bitfield_unit
     }
 }
+pub mod mission_generation_result {
+    pub type Type = crate::ctypes::c_uint;
+    pub const MISSION_GENERATION_SUCCESS: Type = 0;
+    pub const MISSION_GENERATION_FAILURE: Type = 1;
+    pub const MISSION_GENERATION_GLOBAL_FAILURE: Type = 2;
+}
 pub mod script_level_id_na {
     pub type Type = crate::ctypes::c_uint;
     pub const LEVEL_NA_S00P01A: Type = 0;
@@ -25148,6 +25426,9 @@ extern "C" {
     pub fn InitDungeonListScriptVars();
 }
 extern "C" {
+    pub fn HasMonsterBeenAttackedInDungeons(monster_id: monster_id) -> bool_;
+}
+extern "C" {
     pub fn SetDungeonTipShown(tip_id: crate::ctypes::c_int);
 }
 extern "C" {
@@ -25155,6 +25436,27 @@ extern "C" {
 }
 extern "C" {
     pub fn MonsterSpawnsEnabled() -> bool_;
+}
+extern "C" {
+    pub fn GetNbFloors(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetNbFloorsPlusOne(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetDungeonGroup(dungeon_id: dungeon_id) -> dungeon_group_id;
+}
+extern "C" {
+    pub fn GetNbPrecedingFloors(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetNbFloorsDungeonGroup(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DungeonFloorToGroupFloor(
+        out_group_data: *mut dungeon_group_and_group_floor,
+        dungeon_and_floor: *mut dungeon_floor_pair,
+    );
 }
 extern "C" {
     pub fn SetAdventureLogStructLocation();
@@ -25304,7 +25606,7 @@ extern "C" {
     pub fn GetRankUpEntry(rank: crate::ctypes::c_int) -> *mut rankup_table_entry;
 }
 extern "C" {
-    pub fn GetMonsterGender(monster_id: monster_id) -> u8;
+    pub fn GetMonsterGender(monster_id: monster_id) -> monster_gender::Type;
 }
 extern "C" {
     pub fn GetSpriteSize(monster_id: monster_id) -> u8;
@@ -25327,10 +25629,13 @@ extern "C" {
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn GetBaseForm(arg1: monster_id) -> monster_id;
+}
+extern "C" {
     pub fn GetMonsterIdFromSpawnEntry(arg1: *mut monster_spawn_entry) -> monster_id;
 }
 extern "C" {
-    pub fn GetMonsterGenderVeneer(monster_id: monster_id) -> u8;
+    pub fn GetMonsterGenderVeneer(monster_id: monster_id) -> monster_gender::Type;
 }
 extern "C" {
     pub fn GetMonsterLevelFromSpawnEntry(entry: *mut monster_spawn_entry) -> u8;
@@ -25351,7 +25656,16 @@ extern "C" {
     pub fn IsDeoxys(monster_id: monster_id) -> bool_;
 }
 extern "C" {
+    pub fn FemaleToMaleForm(monster_id: monster_id) -> monster_id;
+}
+extern "C" {
     pub fn IsMonsterOnTeam(monster_id: monster_id, param_2: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn GetHeroData() -> *mut ground_monster;
+}
+extern "C" {
+    pub fn GetPartnerData() -> *mut ground_monster;
 }
 extern "C" {
     pub fn CheckTeamMemberField8(param_1: undefined2) -> bool_;
@@ -25378,6 +25692,15 @@ extern "C" {
     pub fn GetSosMailCount(param_1: crate::ctypes::c_int, param_2: bool_) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn GenerateMission(
+        param_1: *mut undefined,
+        mission_data: *mut mission,
+    ) -> mission_generation_result::Type;
+}
+extern "C" {
+    pub fn GenerateDailyMissions();
+}
+extern "C" {
     pub fn DungeonRequestsDone(param_1: u8, param_2: bool_) -> crate::ctypes::c_int;
 }
 extern "C" {
@@ -25385,6 +25708,36 @@ extern "C" {
 }
 extern "C" {
     pub fn AnyDungeonRequestsDone(param_1: u8) -> bool_;
+}
+extern "C" {
+    pub fn GetMissionByTypeAndDungeon(
+        start_index: crate::ctypes::c_int,
+        mission_type: mission_type::Type,
+        subtype_struct: *mut undefined,
+        dungeon_id: dungeon_id,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CheckAcceptedMissionByTypeAndDungeon(
+        mission_type: mission_type::Type,
+        subtype_struct: *mut undefined,
+        dungeon_id: dungeon_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn ClearMissionData(mission: *mut mission);
+}
+extern "C" {
+    pub fn IsMonsterMissionAllowed(monster_id: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn CanMonsterBeUsedForMissionWrapper(monster_id: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn CanMonsterBeUsedForMission(monster_id: monster_id, check_story_banned: bool_) -> bool_;
+}
+extern "C" {
+    pub fn IsMonsterMissionAllowedStory(monster_id: monster_id) -> bool_;
 }
 extern "C" {
     pub fn ScriptSpecialProcess0x3D();
@@ -25652,6 +26005,9 @@ extern "C" {
     pub fn StatusUpdate();
 }
 extern "C" {
+    pub fn GetPersonality() -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn DungeonAlloc() -> *mut dungeon;
 }
 extern "C" {
@@ -25851,6 +26207,9 @@ extern "C" {
     pub fn GetForcedLossReason() -> forced_loss_reason::Type;
 }
 extern "C" {
+    pub fn ChangeLeader();
+}
+extern "C" {
     pub fn ResetDamageDesc(damage_desc: *mut undefined4);
 }
 extern "C" {
@@ -25943,8 +26302,8 @@ extern "C" {
 extern "C" {
     pub fn InitTeamMember(
         arg1: monster_id,
-        type_1: type_id,
-        type_2: type_id,
+        x_position: i16,
+        y_position: i16,
         team_member_data: *mut team_member,
         param_5: undefined,
         param_6: undefined,
@@ -26958,6 +27317,12 @@ extern "C" {
     pub fn HasHeldItem(entity: *mut entity, item_id: item_id) -> bool_;
 }
 extern "C" {
+    pub fn CheckTeamItemsFlags(flags: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn CheckActiveChallengeRequest() -> bool_;
+}
+extern "C" {
     pub fn IsOutlawOrChallengeRequestFloor() -> bool_;
 }
 extern "C" {
@@ -27274,6 +27639,12 @@ extern "C" {
 }
 extern "C" {
     pub static mut MONSTER_SPRITE_DATA: [undefined; 1200usize];
+}
+extern "C" {
+    pub static mut MISSION_BANNED_STORY_MONSTERS: [monster_id_16; 21usize];
+}
+extern "C" {
+    pub static mut MISSION_BANNED_MONSTERS: [monster_id_16; 124usize];
 }
 extern "C" {
     pub static mut EVENTS: [script_level; 0usize];

@@ -1,5 +1,6 @@
 //! Structs and functions to interact with the data of monsters in a general context.
 
+use crate::api::enums::MonsterGender;
 use crate::ffi;
 use alloc::vec::Vec;
 
@@ -25,10 +26,26 @@ impl MonsterSpeciesId {
         self.0
     }
 
+    /// Checks if the specified monster ID corresponds to any of the pokémon that have multiple
+    /// forms and returns the ID of the base form if so. If it doesn't, the same ID is returned.
+    ///
+    /// Some of the monsters included in the check are Unown, Cherrim and Deoxys.
+    pub fn base_form(&self) -> MonsterSpeciesId {
+        unsafe { ffi::GetBaseForm(*self) }
+    }
+
+    /// Returns the ID of the first form of the specified monster if the specified ID corresponds
+    /// to a secondary form with female gender and the first form has male gender.
+    ///
+    /// If those conditions don't meet, returns the same ID unchanged.
+    pub fn base_gender_form(&self) -> MonsterSpeciesId {
+        unsafe { ffi::FemaleToMaleForm(*self) }
+    }
+
     /// Returns the gender field of the monster.
-    pub fn gender(&self) -> u8 {
+    pub fn gender(&self) -> MonsterGender {
         // TODO: Enum.
-        unsafe { ffi::GetMonsterGender(*self) }
+        unsafe { ffi::GetMonsterGender(*self).into() }
     }
 
     /// Returns the sprite size of the monster. If the size is between 1 and 6,
@@ -104,6 +121,46 @@ impl MonsterSpeciesId {
     /// Returns the flag that determines if a monster can move in dungeons.
     pub fn get_can_move_flag(&self) -> bool {
         unsafe { ffi::GetCanMoveFlag(*self) > 0 }
+    }
+
+    /// Checks if this monster is contained in the [`ffi::MISSION_BANNED_MONSTERS`] array.
+    /// The function converts the ID by calling [`Self::base_form`] and
+    /// [`Self::base_gender_form`] first.
+    pub fn is_mission_allowed(&self) -> bool {
+        unsafe { ffi::IsMonsterMissionAllowed(*self) > 0 }
+    }
+
+    /// Checks if the specified monster should be allowed to be part of a mission (probably as the
+    /// client or the target), accounting for the progress on the story.
+    ///
+    /// If `PERFORMANCE_PROGRESS_FLAG[9]` is true, the function returns true.
+    /// If it isn't, the function checks if the specified monster is contained in the
+    /// [`ffi::MISSION_BANNED_STORY_MONSTERS`] array, or if it corresponds to the ID of the player
+    /// or the  partner.
+    ///
+    /// The function converts the ID by calling [`Self::base_form`] and [`Self::base_gender_form`]
+    /// first.
+    pub fn is_mission_allowed_story(&self) -> bool {
+        unsafe { ffi::IsMonsterMissionAllowedStory(*self) > 0 }
+    }
+
+    /// Returns whether this monster can be used (probably as the client or as the target) when
+    /// generating a mission.
+    ///
+    /// Excluded monsters include those that haven't been fought in dungeons yet, the second form
+    /// of certain monsters and, if `PERFORMANCE_PROGRESS_FLAG[9]` is 0, monsters in
+    /// [`ffi::MISSION_BANNED_MONSTERS`, the species of the player and the species of the partner.
+    ///
+    pub fn can_be_used_for_mission(
+        &self,
+        exclude_monsters_in_mission_banned_monsters: bool,
+    ) -> bool {
+        unsafe {
+            ffi::CanMonsterBeUsedForMission(
+                *self,
+                exclude_monsters_in_mission_banned_monsters as ffi::bool_,
+            ) > 0
+        }
     }
 }
 

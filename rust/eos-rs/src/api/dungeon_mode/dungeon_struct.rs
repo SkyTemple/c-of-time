@@ -1,10 +1,13 @@
 use crate::api::dungeon_mode::*;
 use crate::api::dungeons::{DungeonGroupId, DungeonId};
+use crate::api::enums::{
+    DungeonObjective, FloorLoopStatus, FloorType, ForcedLossReason, MissionType, MissionTypeGroup,
+    Weather,
+};
 use crate::api::iq::IqSkillId;
 use crate::api::items::ItemId;
 use crate::api::monsters::MonsterSpeciesId;
 use crate::api::overlay::OverlayLoadLease;
-use crate::api::types::MonsterTypeId;
 use crate::ffi;
 use alloc::vec::Vec;
 
@@ -1057,6 +1060,15 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::GetForcedLossReason() }.try_into().ok()
     }
 
+    /// Tries to change the current leader to the monster specified by [`ffi::dungeon::new_leader`].
+    /// Accounts for situations that can prevent changing leaders, such as having stolen from a
+    /// Kecleon shop. If one of those situations prevents changing leaders, prints the
+    /// corresponding message to the message log.
+    pub fn change_leader(&mut self) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::ChangeLeader() }
+    }
+
     /// Gets the sprite index of the specified monster on this floor
     pub fn get_monster_sprite_index(&self, monster_idx: MonsterSpeciesId) -> u16 {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
@@ -1341,8 +1353,8 @@ impl<'a> GlobalDungeonData<'a> {
     pub unsafe fn init_team_member(
         &mut self,
         arg1: MonsterSpeciesId,
-        type_1: MonsterTypeId,
-        type_2: MonsterTypeId,
+        x_pos: i16,
+        y_pos: i16,
         team_member_data: &mut ffi::team_member,
         param_5: ffi::undefined,
         param_6: ffi::undefined,
@@ -1352,8 +1364,8 @@ impl<'a> GlobalDungeonData<'a> {
     ) {
         ffi::InitTeamMember(
             arg1,
-            type_1,
-            type_2,
+            x_pos,
+            y_pos,
             team_member_data,
             param_5,
             param_6,
@@ -1418,6 +1430,23 @@ impl<'a> GlobalDungeonData<'a> {
     /// The underlying function [`ffi::CheckTeamMemberField8`] does not need overlay29 to be loaded.
     pub fn check_team_member_field_8(&self, team_member: &ffi::team_member) -> bool {
         unsafe { ffi::CheckTeamMemberField8(team_member.field_0x8) > 0 }
+    }
+
+    /// Checks whether any of the items in the bag or any of the items carried by team members has
+    /// any of the specified flags set in its flags field:
+    ///
+    /// `(0 = f_exists, 1 = f_in_shop, 2 = f_unpaid, etc.)`
+    ///
+    /// Returns true if any of the items of the team has the specified flags set, false otherwise.
+    pub fn check_team_items_flag(&self, flags: i32) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::CheckTeamItemsFlags(flags) > 0 }
+    }
+
+    /// Checks if there's an active challenge request on the current dungeon.
+    pub fn check_active_challenge_request(&self) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::CheckActiveChallengeRequest() > 0 }
     }
 
     #[cfg_attr(docsrs, doc(cfg(feature = "eu")))]
