@@ -537,15 +537,15 @@ pub trait DungeonMonsterRead: private::Sealed {
         }
     }
 
-    /// Checks whether this monster if AI-controlled can move in the specified direction.
+    /// Returns whether the AI could not move the monster in the specified direction.
     ///
     /// Accounts for walls, other monsters on the target position and IQ skills that might prevent
     /// a monster from moving into a specific location, such as House Avoider, Trap Avoider or
     /// Lava Evader.
     ///
-    /// Returns an empty `Ok` on success, and on error returns whether ot not the path was blocked
-    /// by an entity.
-    fn can_ai_move_self_in_direction(&self, direction: Direction) -> Result<(), bool> {
+    /// Returns a `None` if there are no obstructions. If there are, the `Some` contains a boolean,
+    /// that is true if the way is blocked by another entity.
+    fn ai_obstruction_in_direction(&self, direction: Direction) -> Option<bool> {
         unsafe {
             let mut was_entity = 0;
             let success = ffi::CanAiMonsterMoveInDirection(
@@ -554,11 +554,11 @@ pub trait DungeonMonsterRead: private::Sealed {
                 &mut was_entity,
             ) > 0;
             if success {
-                Ok(())
+                None
             } else if was_entity > 0 {
-                Err(true)
+                Some(true)
             } else {
-                Err(false)
+                Some(false)
             }
         }
     }
