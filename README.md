@@ -76,7 +76,7 @@ error "section '.text' will not fit in region 'out'"
 ### Expanding the available space
 To work around this issue, you can extend the space allocated in the overlay. **If you decide to extend the space, you do so at your own risk. Be careful since this space might be used by future patches!** Check the [list of assigned areas](https://docs.google.com/document/d/1Rs4icdYtiM6KYnWxMkdlw7jpWrH7qw5v6LOfDWIiYho) to find out if patches used in your ROM are affected.
 
-The value of the Origin must a multiple of 16 (end with 0 in hexadecimal). That mean the added amount of bytes must also be a multiple of 16.
+The value of `ORIGIN` must a multiple of 16 (end with 0 in hexadecimal). Therefore, the amount of bytes added to `LENGTH` must also be a multiple of 16.
 
 To extend the allocated space, open `linker.ld` and edit the following line:
 ```
