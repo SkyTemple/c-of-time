@@ -14,17 +14,15 @@ continue reading the `README.md` in the `rust` directory.
 If you want to build pure C projects, continue below.
 
 ## Project setup
-1. Install [Python](https://www.python.org/downloads/) and [devkitpro](https://devkitpro.org/wiki/Getting_Started).
-    - If you're using Windows, follow the next steps within MSYS (refer to the installation guide for instructions on how to launch it)
-    - On Unix platforms, you might need to relaunch your terminal after the installation
-1. After you've followed the devkitpro installation guide, add the Nintendo DS modules with `sudo dkp-pacman -S nds-dev`.
-1. Clone this repository *recursively* with `git clone --recursive https://github.com/tech-ticks/c-of-time.git`. Make sure that you enter the correct directory before continuing (e.g. `cd c-of-time`).
-1. Install Python dependencies: `pip3 install pyyaml keystone-engine ndspy`
-1. Patch a Pokémon Mystery Dungeon: Explorers of Sky ROM with the [`ExtraSpace` patch by End45](https://github.com/End45/EoS-asm-hacks/blob/main/src/ExtraSpace.asm). You can apply the patch with [SkyTemple](https://skytemple.org):
+1. Install [Python](https://www.python.org/downloads/).
+2. Install GCC and Binutils for `arm-none-eabi`. See [install_gcc.md](install_gcc.md) for information on how to install it.
+3. Clone this repository *recursively* with `git clone --recursive https://github.com/tech-ticks/c-of-time.git`. Make sure that you enter the correct directory before continuing (e.g. `cd c-of-time`).
+4. Install Python dependencies: `pip3 install pyyaml keystone-engine ndspy`
+5. Patch a Pokémon Mystery Dungeon: Explorers of Sky ROM with the [`ExtraSpace` patch by End45](https://github.com/End45/EoS-asm-hacks/blob/main/src/ExtraSpace.asm). You can apply the patch with [SkyTemple](https://skytemple.org):
     1. Open the ROM in SkyTemple
-    1. Click *ASM Patches* and switch to the *Utility* tab
-    1. Select the *ExtraSpace* patch and click *Apply*
-1. Place the ROM in `[project root]/rom.nds`
+    2. Click *ASM Patches* (*Patches > ASM* in SkyTemple 1.4+) and switch to the *Utility* tab
+    3. Select the *ExtraSpace* patch and click *Apply*
+6. Place the ROM in `[project root]/rom.nds`
     - **US ROM offsets are used by default.** If you're using a EU ROM, change the `REGION` variable in `Makefile` to `EU`.
 
 ## Building

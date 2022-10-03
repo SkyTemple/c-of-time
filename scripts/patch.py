@@ -20,8 +20,6 @@ overlay_bin_path = sys.argv[3]
 overlay_elf_path = sys.argv[4]
 rom_out_path = sys.argv[5]
 
-tool_path = os.path.join(os.environ["DEVKITARM"], "bin")
-
 overlay_symbols_lookup = {} # Key = symbol_name: string, value = offset: int
 rom_symbols_lookup = {}     # Key = symbol_name: string, value = offset_and_overlay_id: Tuple<int, int>
 
@@ -61,8 +59,7 @@ def load_linkerscript_symbols():
             rom_symbols_lookup[symbol_name] = (offset, overlay_index)
 
 def load_overlay_symbols():
-  nm_path = os.path.join(tool_path, "arm-none-eabi-nm")
-  process = Popen([nm_path, overlay_elf_path], stdout=PIPE)
+  process = Popen(["arm-none-eabi-nm", overlay_elf_path], stdout=PIPE)
   (stdout, stderr) = process.communicate()
   exit_code = process.wait()
   assert exit_code == 0, f"nm failed with code {exit_code}"

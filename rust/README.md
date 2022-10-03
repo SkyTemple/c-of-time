@@ -8,18 +8,15 @@ Everything you need to get started is in this repository.
 
 ## Project setup
 1. Install a Rust nightly toolchain, preferably with [Rustup](https://rustup.rs/).
-2. Install [Python](https://www.python.org/downloads/) and [devkitpro](https://devkitpro.org/wiki/Getting_Started).
-    - If you're using Windows, follow the next steps within MSYS (refer to the installation guide for instructions on 
-      how to launch it)
-    - On Unix platforms, you might need to relaunch your terminal after the installation
-3. Make sure the devkitpro's ARM binaries are in your PATH (eg. `/opt/devkitpro/devkitARM/bin`).
-4. After you've followed the devkitpro installation guide, add the Nintendo DS modules with `sudo dkp-pacman -S nds-dev`.
+2. Install [Python](https://www.python.org/downloads/).
+3. Install GCC and Binutils for `arm-none-eabi`. See [install_gcc.md](../install_gcc.md) for information on how to install it.
+4. Install Python dependencies: `pip3 install pyyaml keystone-engine ndspy`
 5. Clone this repository *recursively* with `git clone --recursive https://github.com/tech-ticks/c-of-time.git`. 
    Make sure that you enter the correct directory before continuing (e.g. `cd c-of-time/rust`).
 6. Patch a Pokémon Mystery Dungeon: Explorers of Sky ROM with the
    [`ExtraSpace` patch by End45](https://github.com/End45/EoS-asm-hacks/blob/main/src/ExtraSpace.asm). You can apply the patch with [SkyTemple](https://skytemple.org):
     1. Open the ROM in SkyTemple
-    2. Click *ASM Patches* and switch to the *Utility* tab
+    2. Click *ASM Patches* (*Patches > ASM* in SkyTemple 1.4+) and switch to the *Utility* tab
     3. Select the *ExtraSpace* patch and click *Apply*
 7. Install the `cargo-cot` Cargo extension, by running `cargo install --path ./cargo-cot`.
 

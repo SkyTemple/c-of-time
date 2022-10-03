@@ -116,8 +116,9 @@ fn main() -> ! {
             build_region_str = region;
             build_release = release;
             build_cargo_args = cargo_args;
-            burn_rom_path = Some(rom_path);
-            burn_rom_out_path = Some(out_path);
+            burn_rom_path = Some(fs::canonicalize(rom_path).expect("The ROM path does not exist."));
+            burn_rom_out_path =
+                Some(fs::canonicalize(out_path).expect("The out path does not exist."));
         }
     }
 
