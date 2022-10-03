@@ -23,6 +23,8 @@ since the tools need to be in your platform's `PATH`.
 - Download it from ARM, see `All Platforms` below.
 - Download it as part of devkitpro, see `All Platforms` below.
 
+Please note that this setup is currently untested on ARM64-based Macs.
+
 ### Linux
 - Install it via your system's package manager:
   - Debian/Ubuntu: `sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi`
