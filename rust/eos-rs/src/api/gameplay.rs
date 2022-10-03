@@ -403,16 +403,14 @@ fn _do_mission_check(
     let mission_type_group = mission_type.group() as ffi::mission_type::Type;
     let mission_subtype = mission_type.c_subtype();
 
-    // TODO: This may not actually be safe if the game does anything else with this ominous struct.
+    // As far as we know by checking the ASM the functions only check the first byte of the struct
+    // passed in, so this should be safe enough.
     #[repr(C)]
     struct MissionSubtypeStruct {
         subtype: ffi::mission_subtype,
-        // just to reduce the chance this ends badly, we add some padidng bytes
-        _pad: [u8; 127],
     }
     let mut mission_subtype_struct = MissionSubtypeStruct {
         subtype: mission_subtype,
-        _pad: [0; 127],
     };
 
     unsafe {
