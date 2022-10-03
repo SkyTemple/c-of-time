@@ -32,7 +32,7 @@ since the tools need to be in your platform's `PATH`.
 - Download it as part of devkitpro, see `All Platforms` below.
 
 ### All platforms
-- [Download it from ARM](https://developer.arm.com/downloads/-/gnu-rm)
+- [Download it from ARM](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
 - [Download devkitpro](https://devkitpro.org/wiki/Getting_Started)
 
 ### Updating PATH
