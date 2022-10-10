@@ -1,12 +1,42 @@
+# This file is based off DevkitARM's Makefile template and the included DevkitARM make files.
 #---------------------------------------------------------------------------------
 .SUFFIXES:
 #---------------------------------------------------------------------------------
 
-ifeq ($(strip $(DEVKITARM)),)
-$(error "Please set DEVKITARM in your environment. export DEVKITARM=<path to>devkitARM")
-endif
+#---------------------------------------------------------------------------------
+# the prefix on the compiler executables
+#---------------------------------------------------------------------------------
+PREFIX          :=      arm-none-eabi-
 
-include $(DEVKITARM)/ds_rules
+export CC       :=      $(PREFIX)gcc
+export CXX      :=      $(PREFIX)g++
+export AS       :=      $(PREFIX)as
+export AR       :=      $(PREFIX)gcc-ar
+export OBJCOPY  :=      $(PREFIX)objcopy
+export STRIP    :=      $(PREFIX)strip
+export NM       :=      $(PREFIX)gcc-nm
+export RANLIB   :=      $(PREFIX)gcc-ranlib
+
+#---------------------------------------------------------------------------------
+%.o: %.c
+	$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(CFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+#---------------------------------------------------------------------------------
+%.o: %.m
+	$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(OBJCFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+#---------------------------------------------------------------------------------
+%.o: %.s
+	$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d -x assembler-with-cpp $(ASFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+#---------------------------------------------------------------------------------
+%.o: %.S
+	$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d -x assembler-with-cpp $(ASFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+#---------------------------------------------------------------------------------
+%.elf:
+	echo linking $(notdir $@)
+	$(LD)  $(LDFLAGS) $(OFILES) $(LIBPATHS) $(LIBS) -o $@
 
 #---------------------------------------------------------------------------------
 # TARGET is the name of the output
