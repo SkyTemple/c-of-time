@@ -48,4 +48,4 @@ jobs:
         uses: actions-rs/clippy-check@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          args: -Zbuild-std=core,alloc --manifest-path rust/cargo-cot/Cargo.toml -- -D warnings
+          args: --manifest-path rust/cargo-cot/Cargo.toml -- -D warnings
