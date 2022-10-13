@@ -1,5 +1,5 @@
 use ansi_term::{Color, Style};
-use clap::{AppSettings, Parser, Subcommand};
+use clap::{Parser, Subcommand};
 use eos_rs_build::target_region::TargetRegion;
 use serde_json::Value;
 use std::env::current_dir;
@@ -29,7 +29,6 @@ enum Opt {
     version,
     about = ABOUT,
     override_usage = "cargo cot [COMMAND] [OPTIONS] [<args>]",
-    setting = AppSettings::DeriveDisplayOrder,
     disable_version_flag = true
     )]
     Cot {
@@ -55,7 +54,7 @@ enum Commands {
         release: bool,
 
         /// Any additional argument after '--' will be forwarded to cargo build.
-        #[clap(last = true, parse(from_os_str))]
+        #[clap(last = true, value_parser)]
         cargo_args: Vec<OsString>,
     },
 
@@ -80,7 +79,7 @@ enum Commands {
         release: bool,
 
         /// Any additional argument after '--' will be forwarded to cargo build.
-        #[clap(last = true, parse(from_os_str))]
+        #[clap(last = true, value_parser)]
         cargo_args: Vec<OsString>,
     },
 }
