@@ -98,7 +98,7 @@ impl DungeonGridMutator {
         ov29: OverlayLoadLease<29>,
     ) -> Self {
         assert!(width <= GRID_CAPACITY_DIM && height <= GRID_CAPACITY_DIM);
-        assert!(in_cells.len() >= width as usize * height as usize);
+        assert!(in_cells.len() >= width * height);
 
         let mut cells_iter = in_cells.into_iter().peekable();
 
@@ -151,7 +151,7 @@ impl DungeonGridMutator {
         let height = GRID_CAPACITY_DIM;
         assert!(width <= GRID_CAPACITY_DIM);
         // The game stops after the last column that had cells, so this is the actual capacity:
-        let min_grid_size = (GRID_CAPACITY_DIM * (width - 1) + height) as usize;
+        let min_grid_size = GRID_CAPACITY_DIM * (width - 1) + height;
         let mut cells;
         // SAFETY: We know the grid vector will be big enough.
         //         We also know the height is at least 15, so all cells will be initialized.

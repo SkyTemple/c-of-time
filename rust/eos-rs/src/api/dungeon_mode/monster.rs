@@ -820,7 +820,7 @@ pub trait DungeonMonsterWrite: private::Sealed {
     unsafe fn set_action_use_move_ai_unchecked(&mut self, move_index: u8, direction: Direction) {
         ffi::SetActionUseMoveAi(
             &mut self.monster_mut().action_id as *mut ffi::action_16 as *mut c_void,
-            move_index as u8,
+            move_index,
             direction as ffi::direction_id::Type,
         )
     }
