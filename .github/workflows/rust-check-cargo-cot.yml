@@ -1,0 +1,51 @@
+on:
+  pull_request:
+    paths:
+      rust/cargo-cot/**
+  push:
+    branches:
+      - main
+    paths:
+      rust/cargo-cot/**
+
+name: cargo-cot - check and test
+
+jobs:
+  format-check:
+    name: Rustfmt Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          profile: minimal
+          components: rustfmt
+          override: true
+
+      - name: Run cargo fmt
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --manifest-path rust/cargo-cot/Cargo.toml --verbose -- --check
+
+  clippy:
+    name: Clippy Checks
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          profile: minimal
+          components: clippy, rust-src
+          override: true
+
+      - name: Run Clippy check
+        uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --manifest-path rust/cargo-cot/Cargo.toml -- -D warnings
