@@ -1,5 +1,6 @@
 use crate::api::abilities::AbilityId;
 use crate::api::dungeon_mode::*;
+use crate::api::enums::*;
 use crate::api::iq::IqSkillId;
 use crate::api::items::{ExclusiveItemEffectId, ItemId};
 use crate::api::monsters::MonsterSpeciesId;

@@ -2,6 +2,7 @@
 //! in a general context.
 use crate::api::overlay::OverlayLoadLease;
 use crate::ffi;
+use core::mem::MaybeUninit;
 
 /// A dungeon ID with associated methods to get metadata.
 ///
@@ -52,6 +53,58 @@ impl DungeonId {
     /// Returns the ID of this dungeon.
     pub const fn id(&self) -> u32 {
         self.0
+    }
+
+    /// Returns the number of floors of the given dungeon.
+    ///
+    /// The result is hardcoded for certain dungeons, such as dojo mazes.
+    pub fn number_floors(&self) -> i32 {
+        unsafe { ffi::GetNbFloors(*self) }
+    }
+
+    /// Returns the dungeon group associated to the given dungeon.
+    ///
+    /// For IDs greater or equal to [`DungeonId::DUNGEON_NORMAL_FLY_MAZE`],
+    /// returns [`DungeonGroupId::DGROUP_MAROWAK_DOJO`].
+    pub fn group(&self) -> DungeonGroupId {
+        unsafe { ffi::GetDungeonGroup(*self) }
+    }
+
+    /// Given a dungeon ID, returns the total amount of floors summed by all the previous dungeons
+    /// in its group.
+    ///
+    /// The value is normally pulled from
+    /// [`ffi::dungeon_data_list_entry::n_preceding_floors_group`], except for dungeons with an
+    /// ID >= [`DungeonId::DUNGEON_NORMAL_FLY_MAZE`], for which this function always returns 0.
+    pub fn number_preceding_floors(&self) -> i32 {
+        unsafe { ffi::GetNbPrecedingFloors(*self) }
+    }
+
+    /// Returns the total amount of floors among all the dungeons in the dungeon group of the
+    /// specified dungeon.
+    pub fn number_floors_in_group(&self) -> i32 {
+        unsafe { ffi::GetNbFloorsDungeonGroup(*self) }
+    }
+
+    /// Given this dungeon ID and a floor number, returns a struct with the corresponding dungeon
+    /// group and floor number in that group.
+    ///
+    /// The function normally uses the data in mappa_s.bin to calculate the result, but there's
+    /// some dungeons (such as dojo mazes) that have hardcoded return values.
+    pub fn conv_floor_to_group_floor(&self, dungeon_floor_number: u8) -> (DungeonGroupId, u8) {
+        let mut out: MaybeUninit<ffi::dungeon_group_and_group_floor> = MaybeUninit::zeroed();
+        let mut inp = ffi::dungeon_floor_pair {
+            dungeon_id: ffi::dungeon_id_8 {
+                _bitfield_align_1: [],
+                _bitfield_1: ffi::dungeon_id_8::new_bitfield_1(*self),
+            },
+            floor_id: dungeon_floor_number,
+        };
+        unsafe {
+            ffi::DungeonFloorToGroupFloor(out.as_mut_ptr(), &mut inp);
+            let out = out.assume_init();
+            (out.group_id.val(), out.group_floor)
+        }
     }
 
     /// Returns whether this dungeon is considered as going upward or not

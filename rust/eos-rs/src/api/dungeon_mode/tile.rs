@@ -1,4 +1,5 @@
 use crate::api::dungeon_mode::*;
+use crate::api::enums::TerrainType;
 use crate::ffi;
 use core::slice;
 

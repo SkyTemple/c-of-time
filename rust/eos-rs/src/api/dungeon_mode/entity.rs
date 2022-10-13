@@ -1,4 +1,5 @@
 use crate::api::dungeon_mode::*;
+use crate::api::enums::DungeonEntityType;
 
 /// Entity in a dungeon. Has a [`DungeonEntityType`].
 pub type DungeonEntity = ffi::entity;
