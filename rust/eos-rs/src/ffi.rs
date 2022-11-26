@@ -14537,6 +14537,25 @@ pub struct mission {
     pub field_0x1f: undefined,
 }
 #[repr(C)]
+pub struct quiz_answer_points_entry {
+    pub field_0x0: undefined,
+    pub field_0x1: undefined,
+    pub field_0x2: undefined,
+    pub field_0x3: undefined,
+    pub field_0x4: undefined,
+    pub field_0x5: undefined,
+    pub field_0x6: undefined,
+    pub field_0x7: undefined,
+    pub field_0x8: undefined,
+    pub field_0x9: undefined,
+    pub field_0xa: undefined,
+    pub field_0xb: undefined,
+    pub field_0xc: undefined,
+    pub field_0xd: undefined,
+    pub field_0xe: undefined,
+    pub field_0xf: undefined,
+}
+#[repr(C)]
 pub struct position {
     pub x: i16,
     pub y: i16,
@@ -24898,6 +24917,17 @@ pub struct partner_talk_kind_table_entry {
     pub talk_kind: talk_kind::Type,
     pub id: monster_id,
 }
+#[repr(C)]
+pub struct bar_item {
+    pub id: item_id_16,
+    pub field_0x2: i16,
+    pub field_0x4: i16,
+    pub field_0x6: i16,
+    pub field_0x8: i16,
+    pub field_0xa: i16,
+    pub field_0xc: i16,
+    pub field_0xe: [undefined; 8usize],
+}
 extern "C" {
     pub fn ShouldMonsterRunAwayVariationOutlawCheck(
         monster: *mut entity,
@@ -24912,6 +24942,9 @@ extern "C" {
 }
 extern "C" {
     pub fn ChooseAiMove(monster: *mut entity);
+}
+extern "C" {
+    pub fn EntryArm9();
 }
 extern "C" {
     pub fn InitMemAllocTable();
@@ -25995,6 +26028,9 @@ extern "C" {
     pub fn DivideUIntNoZeroCheck(dividend: u32, divisor: u32) -> crate::ctypes::c_ulonglong;
 }
 extern "C" {
+    pub fn EntryArm7();
+}
+extern "C" {
     pub fn CreateMainMenus();
 }
 extern "C" {
@@ -26060,7 +26096,40 @@ extern "C" {
     pub fn StatusUpdate();
 }
 extern "C" {
+    pub fn EntryOverlay13();
+}
+extern "C" {
+    pub fn ExitOverlay13();
+}
+extern "C" {
+    pub fn Overlay13SwitchFunctionNa238A1C8() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn Overlay13SwitchFunctionNa238A574();
+}
+extern "C" {
     pub fn GetPersonality() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetOptionStringFromID(
+        output: *mut crate::ctypes::c_char,
+        option_id: crate::ctypes::c_int,
+    ) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
+    pub fn WaitForNextStep(switch_case: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetBarItem(item_id: item_id) -> *mut bar_item;
+}
+extern "C" {
+    pub fn GetRecruitableMonsterAll() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetRecruitableMonsterList() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetRecruitableMonsterListRestricted() -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn DungeonAlloc() -> *mut dungeon;
@@ -27629,6 +27698,15 @@ extern "C" {
     pub fn HelpMenuLoop() -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn EntryOverlay31();
+}
+extern "C" {
+    pub fn DungeonMenuSwitch(idx: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn ExplorersOfSkyMain(mode: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub static mut MEMORY_ALLOCATION_TABLE: mem_alloc_table;
 }
 extern "C" {
@@ -28041,7 +28119,31 @@ extern "C" {
     pub static mut QUIZ_ANSWER_STRINGS: [u16; 176usize];
 }
 extern "C" {
-    pub static mut UNKNOWN_MENU_1: [undefined; 72usize];
+    pub static mut QUIZ_ANSWER_POINTS: [quiz_answer_points_entry; 174usize];
+}
+extern "C" {
+    pub static mut QUIZ_DEBUG_MENU: [undefined; 72usize];
+}
+extern "C" {
+    pub static mut QUIZ_QUESTION_ANSWER_ASSOCIATIONS: [u16; 66usize];
+}
+extern "C" {
+    pub static mut EVO_MENU_STRING_IDS: [u16; 26usize];
+}
+extern "C" {
+    pub static mut OVERLAY17_FUNCTION_POINTER_TABLE: [*mut crate::ctypes::c_void; 42usize];
+}
+extern "C" {
+    pub static mut OVERLAY18_FUNCTION_POINTER_TABLE: [*mut crate::ctypes::c_void; 76usize];
+}
+extern "C" {
+    pub static mut BAR_UNLOCKABLE_DUNGEONS_TABLE: [dungeon_id_16; 6usize];
+}
+extern "C" {
+    pub static mut BAR_RECRUITABLE_MONSTER_TABLE: [monster_id_16; 108usize];
+}
+extern "C" {
+    pub static mut BAR_AVAILABLE_ITEMS: [bar_item; 66usize];
 }
 extern "C" {
     pub static mut DUNGEON_STRUCT_SIZE: u32;

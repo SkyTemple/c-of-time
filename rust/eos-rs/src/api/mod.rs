@@ -12,6 +12,7 @@ pub mod ground_mode;
 pub mod io;
 pub mod iq;
 pub mod items;
+pub mod juice_bar;
 pub mod math;
 pub mod messages;
 pub mod monsters;
