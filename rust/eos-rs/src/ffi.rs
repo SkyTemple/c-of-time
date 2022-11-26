@@ -16636,6 +16636,55 @@ pub struct level_tilemap_list_entry {
     pub field_0x4: undefined4,
 }
 #[repr(C)]
+pub struct move_animation {
+    pub field_0x0: i16,
+    pub field_0x2: i16,
+    pub field_0x4: i16,
+    pub field_0x6: i16,
+    pub field_0x8: u8,
+    pub field_0x9: undefined,
+    pub field_0xa: undefined,
+    pub field_0xb: undefined,
+    pub field_0xc: undefined,
+    pub field_0xd: undefined,
+    pub field_0xe: undefined,
+    pub field_0xf: undefined,
+    pub field_0x10: undefined,
+    pub field_0x11: i8,
+    pub field_0x12: u16,
+    pub field_0x14: i16,
+    pub field_0x16: u16,
+}
+#[repr(C)]
+pub struct special_monster_move_animation {
+    pub field_0x0: i16,
+    pub field_0x2: undefined,
+    pub field_0x3: i8,
+    pub field_0x4: i16,
+}
+#[repr(C)]
+pub struct item_animation {
+    pub field_0x0: i16,
+    pub field_0x2: i16,
+}
+#[repr(C)]
+pub struct trap_animation {
+    pub field_0x0: i16,
+}
+#[repr(C)]
+pub struct effect_animation {
+    pub field_0x0: crate::ctypes::c_int,
+    pub field_0x4: crate::ctypes::c_int,
+    pub field_0x8: crate::ctypes::c_int,
+    pub field_0xc: crate::ctypes::c_int,
+    pub field_0x10: crate::ctypes::c_int,
+    pub field_0x14: crate::ctypes::c_int,
+    pub field_0x18: u8,
+    pub field_0x19: i8,
+    pub field_0x1a: u8,
+    pub field_0x1b: u8,
+}
+#[repr(C)]
 pub struct monster_spawn_entry {
     pub level_mult_512: u16,
     pub incremental_spawn_weight: u16,
@@ -17058,6 +17107,30 @@ pub struct ai_possible_move {
     pub field_0x2: undefined,
     pub field_0x3: undefined,
     pub weight: crate::ctypes::c_int,
+}
+#[repr(C)]
+pub struct weather_attributes {
+    pub weather_ball_type: type_id_8,
+    pub _padding: u8,
+    pub castform_male_id: monster_id_16,
+    pub castform_female_id: monster_id_16,
+}
+#[repr(C)]
+pub struct nature_power_entry {
+    pub field_0x0: undefined4,
+    pub field_0x4: *mut undefined,
+}
+#[repr(C)]
+pub struct natural_gift_item_info {
+    pub item_id: item_id_16,
+    pub type_id: type_id_8,
+    pub _padding: u8,
+    pub base_power_minus_one: i16,
+}
+#[repr(C)]
+pub struct metronome_table_entry {
+    pub move_id: move_id,
+    pub field_0x4: *mut undefined,
 }
 #[repr(C)]
 pub struct dungeon_menu_entry {
@@ -26045,6 +26118,32 @@ extern "C" {
     pub fn AddSubMenuOption(action_id: crate::ctypes::c_int, enabled: bool_);
 }
 extern "C" {
+    pub fn GetEffectAnimation(anim_id: crate::ctypes::c_int) -> *mut effect_animation;
+}
+extern "C" {
+    pub fn GetMoveAnimation(move_id: move_id) -> *mut move_animation;
+}
+extern "C" {
+    pub fn GetSpecialMonsterMoveAnimation(
+        ent_id: crate::ctypes::c_int,
+    ) -> *mut special_monster_move_animation;
+}
+extern "C" {
+    pub fn GetTrapAnimation(trap_id: trap_id) -> i16;
+}
+extern "C" {
+    pub fn GetItemAnimation1(item_id: item_id) -> i16;
+}
+extern "C" {
+    pub fn GetItemAnimation2(item_id: item_id) -> i16;
+}
+extern "C" {
+    pub fn GetMoveAnimationSpeed(move_id: move_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CheckEndDungeon(end_cond: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn ScriptSpecialProcessCall(
         param_1: *mut undefined4,
         id: special_process_id,
@@ -27964,6 +28063,9 @@ extern "C" {
     pub static mut OREN_BERRY_DAMAGE: i16;
 }
 extern "C" {
+    pub static mut UNOWN_STONE_DROP_CHANCE: crate::ctypes::c_int;
+}
+extern "C" {
     pub static mut SITRUS_BERRY_HP_RESTORATION: i16;
 }
 extern "C" {
@@ -28075,13 +28177,31 @@ extern "C" {
     pub static mut SPEED_BOOST_DURATION_RANGE: [i16; 2usize];
 }
 extern "C" {
+    pub static mut WEATHER_ATTRIBUTE_TABLE: [weather_attributes; 8usize];
+}
+extern "C" {
     pub static mut OFFENSIVE_STAT_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
 }
 extern "C" {
     pub static mut DEFENSIVE_STAT_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
 }
 extern "C" {
+    pub static mut NATURE_POWER_TABLE: [nature_power_entry; 15usize];
+}
+extern "C" {
+    pub static mut PLUCK_ITEM_EAT_TABLE: [undefined; 132usize];
+}
+extern "C" {
+    pub static mut RECRUITMENT_LEVEL_BOOST_TABLE: [i16; 102usize];
+}
+extern "C" {
+    pub static mut NATURAL_GIFT_ITEM_TABLE: [natural_gift_item_info; 34usize];
+}
+extern "C" {
     pub static mut RANDOM_MUSIC_ID_TABLE: [[music_id_16; 4usize]; 30usize];
+}
+extern "C" {
+    pub static mut SHOP_ITEM_CHANCES: [i16; 144usize];
 }
 extern "C" {
     pub static mut MALE_ACCURACY_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
@@ -28106,10 +28226,28 @@ extern "C" {
         [fixed_room_monster_spawn_stats_entry; 99usize];
 }
 extern "C" {
+    pub static mut METRONOME_TABLE: [metronome_table_entry; 168usize];
+}
+extern "C" {
     pub static mut TILESET_PROPERTIES: [tileset_property; 199usize];
 }
 extern "C" {
     pub static mut FIXED_ROOM_PROPERTIES_TABLE: [fixed_room_properties_entry; 256usize];
+}
+extern "C" {
+    pub static mut TRAP_ANIMATION_INFO: [trap_animation; 26usize];
+}
+extern "C" {
+    pub static mut ITEM_ANIMATION_INFO: [item_animation; 1400usize];
+}
+extern "C" {
+    pub static mut MOVE_ANIMATION_INFO: [move_animation; 563usize];
+}
+extern "C" {
+    pub static mut EFFECT_ANIMATION_INFO: [effect_animation; 700usize];
+}
+extern "C" {
+    pub static mut SPECIAL_MONSTER_MOVE_ANIMATION_INFO: [special_monster_move_animation; 7422usize];
 }
 extern "C" {
     pub static mut SCRIPT_OP_CODES: script_opcode_table;
