@@ -24928,6 +24928,11 @@ pub struct bar_item {
     pub field_0xc: i16,
     pub field_0xe: [undefined; 8usize],
 }
+#[repr(C)]
+pub struct ground_weather_entry {
+    pub field_0x0: i16,
+    pub field_0x2: i16,
+}
 extern "C" {
     pub fn ShouldMonsterRunAwayVariationOutlawCheck(
         monster: *mut entity,
@@ -26091,6 +26096,36 @@ extern "C" {
 }
 extern "C" {
     pub fn ScriptSpecialProcess0x16(param_1: bool_);
+}
+extern "C" {
+    pub fn LoadBackgroundAttributes(
+        bg_attr_str: *mut crate::ctypes::c_char,
+        bg_id: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn LoadMapType10(
+        buf: *mut crate::ctypes::c_void,
+        map_id: crate::ctypes::c_int,
+        dungeon_info_str: *mut undefined,
+        additional_info: undefined4,
+    );
+}
+extern "C" {
+    pub fn LoadMapType11(
+        buf: *mut crate::ctypes::c_void,
+        map_id: crate::ctypes::c_int,
+        dungeon_info_str: *mut undefined,
+        additional_info: undefined4,
+    );
+}
+extern "C" {
+    pub fn GetSpecialLayoutBackground(
+        bg_id: crate::ctypes::c_int,
+        dungeon_info_str: *mut undefined,
+        additional_info: undefined4,
+        copy_fixed_room_layout: bool_,
+    );
 }
 extern "C" {
     pub fn StatusUpdate();
@@ -28083,6 +28118,9 @@ extern "C" {
     pub static mut C_ROUTINES: common_routine_table;
 }
 extern "C" {
+    pub static mut GROUND_WAN_FILES_TABLE: [[crate::ctypes::c_char; 12usize]; 343usize];
+}
+extern "C" {
     pub static mut OBJECTS: [script_object; 0usize];
 }
 extern "C" {
@@ -28102,6 +28140,21 @@ extern "C" {
 }
 extern "C" {
     pub static mut GROUND_STATE_PTRS: main_ground_data;
+}
+extern "C" {
+    pub static mut SCRIPT_COMMAND_PARSING_DATA: [undefined; 32usize];
+}
+extern "C" {
+    pub static mut SCRIPT_OP_CODE_NAMES: [crate::ctypes::c_char; 0usize];
+}
+extern "C" {
+    pub static mut OVERLAY11_DEBUG_STRINGS: [crate::ctypes::c_char; 0usize];
+}
+extern "C" {
+    pub static mut C_ROUTINE_NAMES: [crate::ctypes::c_char; 0usize];
+}
+extern "C" {
+    pub static mut GROUND_WEATHER_TABLE: [ground_weather_entry; 12usize];
 }
 extern "C" {
     pub static mut STARTERS_PARTNER_IDS: [monster_id_16; 21usize];
