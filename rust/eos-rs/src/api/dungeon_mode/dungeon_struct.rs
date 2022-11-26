@@ -1421,15 +1421,16 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::GetDungeonGenInfoUnk0C() }
     }
 
-    /// Checks if a value obtained from [`ffi::team_member::field_0x8`] is equal to certain values.
+    /// Checks if a value obtained from [`ffi::team_member::member_index`] is equal to certain
+    /// values.
     ///
     /// This is known to return true for some or all of the guest monsters (if the value is equal
     /// to 0x55AA or 0x5AA5).
     ///
     /// # Note
     /// The underlying function [`ffi::CheckTeamMemberField8`] does not need overlay29 to be loaded.
-    pub fn check_team_member_field_8(&self, team_member: &ffi::team_member) -> bool {
-        unsafe { ffi::CheckTeamMemberField8(team_member.field_0x8) > 0 }
+    pub fn check_team_member_index(&self, team_member: &ffi::team_member) -> bool {
+        unsafe { ffi::CheckTeamMemberField8(team_member.member_index as ffi::undefined2) > 0 }
     }
 
     /// Checks whether any of the items in the bag or any of the items carried by team members has

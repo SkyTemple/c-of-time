@@ -12745,6 +12745,417 @@ impl floor_layout_8 {
     }
 }
 #[repr(C)]
+pub struct item {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+    pub held_by: u8,
+    pub quantity: u16,
+    pub id: item_id_16,
+}
+impl item {
+    #[inline]
+    pub fn f_exists(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_exists(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_in_shop(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_in_shop(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_unpaid(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_unpaid(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_sticky(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_sticky(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_set(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_set(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(4usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags_unk5(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 3u8) as u8) }
+    }
+    #[inline]
+    pub fn set_flags_unk5(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(5usize, 3u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        f_exists: bool_,
+        f_in_shop: bool_,
+        f_unpaid: bool_,
+        f_sticky: bool_,
+        f_set: bool_,
+        flags_unk5: u8,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let f_exists: u8 = unsafe { ::core::mem::transmute(f_exists) };
+            f_exists as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let f_in_shop: u8 = unsafe { ::core::mem::transmute(f_in_shop) };
+            f_in_shop as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 1u8, {
+            let f_unpaid: u8 = unsafe { ::core::mem::transmute(f_unpaid) };
+            f_unpaid as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let f_sticky: u8 = unsafe { ::core::mem::transmute(f_sticky) };
+            f_sticky as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 1u8, {
+            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
+            f_set as u64
+        });
+        __bindgen_bitfield_unit.set(5usize, 3u8, {
+            let flags_unk5: u8 = unsafe { ::core::mem::transmute(flags_unk5) };
+            flags_unk5 as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+pub struct move_ {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+    pub field_0x1: undefined,
+    pub _bitfield_align_2: [u8; 0],
+    pub _bitfield_2: __BindgenBitfieldUnit<[u8; 2usize]>,
+    pub id: move_id_16,
+    pub pp: u8,
+    pub ginseng: u8,
+}
+impl move_ {
+    #[inline]
+    pub fn f_exists(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_exists(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_subsequent_in_link_chain(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_subsequent_in_link_chain(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_enabled_for_ai(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_enabled_for_ai(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_set(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_set(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_last_used(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_last_used(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(4usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_disabled(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_disabled(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(5usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags0_unk6(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(6usize, 2u8) as u8) }
+    }
+    #[inline]
+    pub fn set_flags0_unk6(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(6usize, 2u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        f_exists: bool_,
+        f_subsequent_in_link_chain: bool_,
+        f_enabled_for_ai: bool_,
+        f_set: bool_,
+        f_last_used: bool_,
+        f_disabled: bool_,
+        flags0_unk6: u8,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let f_exists: u8 = unsafe { ::core::mem::transmute(f_exists) };
+            f_exists as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let f_subsequent_in_link_chain: u8 =
+                unsafe { ::core::mem::transmute(f_subsequent_in_link_chain) };
+            f_subsequent_in_link_chain as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 1u8, {
+            let f_enabled_for_ai: u8 = unsafe { ::core::mem::transmute(f_enabled_for_ai) };
+            f_enabled_for_ai as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
+            f_set as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 1u8, {
+            let f_last_used: u8 = unsafe { ::core::mem::transmute(f_last_used) };
+            f_last_used as u64
+        });
+        __bindgen_bitfield_unit.set(5usize, 1u8, {
+            let f_disabled: u8 = unsafe { ::core::mem::transmute(f_disabled) };
+            f_disabled as u64
+        });
+        __bindgen_bitfield_unit.set(6usize, 2u8, {
+            let flags0_unk6: u8 = unsafe { ::core::mem::transmute(flags0_unk6) };
+            flags0_unk6 as u64
+        });
+        __bindgen_bitfield_unit
+    }
+    #[inline]
+    pub fn f_sealed(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(0usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_sealed(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags2_unk1(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(1usize, 2u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags2_unk1(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(1usize, 2u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_consume_pp(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(3usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_consume_pp(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_consume_2_pp(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(4usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_consume_2_pp(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(4usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags2_unk5(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(5usize, 1u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags2_unk5(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(5usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_consume_4_pp(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(6usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_consume_4_pp(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(6usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags2_unk7(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(7usize, 1u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags2_unk7(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(7usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags2_unk8(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(8usize, 1u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags2_unk8(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(8usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_exclusive_item_pp_boost(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(9usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_exclusive_item_pp_boost(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(9usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags3_unk10(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(10usize, 6u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags3_unk10(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(10usize, 6u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_2(
+        f_sealed: bool_,
+        flags2_unk1: u16,
+        f_consume_pp: bool_,
+        f_consume_2_pp: bool_,
+        flags2_unk5: u16,
+        f_consume_4_pp: bool_,
+        flags2_unk7: u16,
+        flags2_unk8: u16,
+        f_exclusive_item_pp_boost: bool_,
+        flags3_unk10: u16,
+    ) -> __BindgenBitfieldUnit<[u8; 2usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let f_sealed: u8 = unsafe { ::core::mem::transmute(f_sealed) };
+            f_sealed as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 2u8, {
+            let flags2_unk1: u16 = unsafe { ::core::mem::transmute(flags2_unk1) };
+            flags2_unk1 as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let f_consume_pp: u8 = unsafe { ::core::mem::transmute(f_consume_pp) };
+            f_consume_pp as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 1u8, {
+            let f_consume_2_pp: u8 = unsafe { ::core::mem::transmute(f_consume_2_pp) };
+            f_consume_2_pp as u64
+        });
+        __bindgen_bitfield_unit.set(5usize, 1u8, {
+            let flags2_unk5: u16 = unsafe { ::core::mem::transmute(flags2_unk5) };
+            flags2_unk5 as u64
+        });
+        __bindgen_bitfield_unit.set(6usize, 1u8, {
+            let f_consume_4_pp: u8 = unsafe { ::core::mem::transmute(f_consume_4_pp) };
+            f_consume_4_pp as u64
+        });
+        __bindgen_bitfield_unit.set(7usize, 1u8, {
+            let flags2_unk7: u16 = unsafe { ::core::mem::transmute(flags2_unk7) };
+            flags2_unk7 as u64
+        });
+        __bindgen_bitfield_unit.set(8usize, 1u8, {
+            let flags2_unk8: u16 = unsafe { ::core::mem::transmute(flags2_unk8) };
+            flags2_unk8 as u64
+        });
+        __bindgen_bitfield_unit.set(9usize, 1u8, {
+            let f_exclusive_item_pp_boost: u8 =
+                unsafe { ::core::mem::transmute(f_exclusive_item_pp_boost) };
+            f_exclusive_item_pp_boost as u64
+        });
+        __bindgen_bitfield_unit.set(10usize, 6u8, {
+            let flags3_unk10: u16 = unsafe { ::core::mem::transmute(flags3_unk10) };
+            flags3_unk10 as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
 pub struct iovec {
     pub iov_base: *mut crate::ctypes::c_void,
     pub iov_len: u32,
@@ -13607,15 +14018,13 @@ pub struct team_member {
     pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
     pub is_leader: bool_,
     pub level: u8,
-    pub field_0x3: undefined,
-    pub field_0x4: undefined,
+    pub joined_at: dungeon_id_8,
+    pub joined_at_floor: u8,
     pub field_0x5: undefined,
     pub iq: u16,
-    pub field_0x8: undefined2,
-    pub field_0xA: undefined,
-    pub field_0xB: undefined,
-    pub field_0xC: undefined,
-    pub field_0xD: undefined,
+    pub member_index: i16,
+    pub team_index: i16,
+    pub id: monster_id_16,
     pub current_hp: u16,
     pub max_hp: u16,
     pub atk: i8,
@@ -13625,67 +14034,16 @@ pub struct team_member {
     pub field_0x16: undefined,
     pub field_0x17: undefined,
     pub exp: crate::ctypes::c_int,
-    pub field_0x1C: undefined,
-    pub field_0x1D: undefined,
-    pub field_0x1E: undefined,
-    pub field_0x1F: undefined,
-    pub field_0x20: undefined,
-    pub field_0x21: undefined,
-    pub field_0x22: undefined,
-    pub field_0x23: undefined,
-    pub field_0x24: undefined,
-    pub field_0x25: undefined,
-    pub field_0x26: undefined,
-    pub field_0x27: undefined,
-    pub field_0x28: undefined,
-    pub field_0x29: undefined,
-    pub field_0x2A: undefined,
-    pub field_0x2B: undefined,
-    pub field_0x2C: undefined,
-    pub field_0x2D: undefined,
-    pub field_0x2E: undefined,
-    pub field_0x2F: undefined,
-    pub field_0x30: undefined,
-    pub field_0x31: undefined,
-    pub field_0x32: undefined,
-    pub field_0x33: undefined,
-    pub field_0x34: undefined,
-    pub field_0x35: undefined,
-    pub field_0x36: undefined,
-    pub field_0x37: undefined,
-    pub field_0x38: undefined,
-    pub field_0x39: undefined,
-    pub field_0x3A: undefined,
-    pub field_0x3B: undefined,
+    pub moves: [move_; 4usize],
     pub field_0x3C: undefined,
     pub field_0x3D: undefined,
-    pub field_0x3E: undefined,
-    pub field_0x3F: undefined,
-    pub field_0x40: undefined,
-    pub field_0x41: undefined,
-    pub field_0x42: undefined,
-    pub field_0x43: undefined,
-    pub field_0x44: undefined,
-    pub field_0x45: undefined,
-    pub field_0x46: undefined,
-    pub field_0x47: undefined,
-    pub field_0x48: undefined,
-    pub field_0x49: undefined,
-    pub field_0x4A: undefined,
-    pub field_0x4B: undefined,
-    pub field_0x4C: undefined,
-    pub field_0x4D: undefined,
-    pub field_0x4E: undefined,
-    pub field_0x4F: undefined,
-    pub field_0x50: undefined,
-    pub field_0x51: undefined,
-    pub field_0x52: undefined,
-    pub field_0x53: undefined,
-    pub field_0x54: undefined,
-    pub field_0x55: undefined,
-    pub field_0x56: undefined,
-    pub field_0x57: undefined,
-    pub field_0x58: undefined,
+    pub held_item: item,
+    pub belly: i16,
+    pub belly_thousandths: i16,
+    pub max_belly: i16,
+    pub max_belly_thousandths: i16,
+    pub iq_skill_flags: [u32; 3usize],
+    pub tactic: tactic_id_8,
     pub field_0x59: undefined,
     pub field_0x5A: undefined,
     pub field_0x5B: undefined,
@@ -14115,118 +14473,6 @@ pub struct position {
     pub y: i16,
 }
 #[repr(C)]
-pub struct item {
-    pub _bitfield_align_1: [u8; 0],
-    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
-    pub held_by: u8,
-    pub quantity: u16,
-    pub id: item_id_16,
-}
-impl item {
-    #[inline]
-    pub fn f_exists(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_exists(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(0usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_in_shop(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_in_shop(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(1usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_unpaid(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_unpaid(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(2usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_sticky(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_sticky(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(3usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_set(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_set(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(4usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags_unk5(&self) -> u8 {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 3u8) as u8) }
-    }
-    #[inline]
-    pub fn set_flags_unk5(&mut self, val: u8) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(5usize, 3u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn new_bitfield_1(
-        f_exists: bool_,
-        f_in_shop: bool_,
-        f_unpaid: bool_,
-        f_sticky: bool_,
-        f_set: bool_,
-        flags_unk5: u8,
-    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
-        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
-        __bindgen_bitfield_unit.set(0usize, 1u8, {
-            let f_exists: u8 = unsafe { ::core::mem::transmute(f_exists) };
-            f_exists as u64
-        });
-        __bindgen_bitfield_unit.set(1usize, 1u8, {
-            let f_in_shop: u8 = unsafe { ::core::mem::transmute(f_in_shop) };
-            f_in_shop as u64
-        });
-        __bindgen_bitfield_unit.set(2usize, 1u8, {
-            let f_unpaid: u8 = unsafe { ::core::mem::transmute(f_unpaid) };
-            f_unpaid as u64
-        });
-        __bindgen_bitfield_unit.set(3usize, 1u8, {
-            let f_sticky: u8 = unsafe { ::core::mem::transmute(f_sticky) };
-            f_sticky as u64
-        });
-        __bindgen_bitfield_unit.set(4usize, 1u8, {
-            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
-            f_set as u64
-        });
-        __bindgen_bitfield_unit.set(5usize, 3u8, {
-            let flags_unk5: u8 = unsafe { ::core::mem::transmute(flags_unk5) };
-            flags_unk5 as u64
-        });
-        __bindgen_bitfield_unit
-    }
-}
-#[repr(C)]
 pub struct trap {
     pub id: trap_id_8,
     pub team: u8,
@@ -14270,305 +14516,6 @@ impl trap {
         __bindgen_bitfield_unit.set(1usize, 7u8, {
             let flags_unk1: u8 = unsafe { ::core::mem::transmute(flags_unk1) };
             flags_unk1 as u64
-        });
-        __bindgen_bitfield_unit
-    }
-}
-#[repr(C)]
-pub struct move_ {
-    pub _bitfield_align_1: [u8; 0],
-    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
-    pub field_0x1: undefined,
-    pub _bitfield_align_2: [u8; 0],
-    pub _bitfield_2: __BindgenBitfieldUnit<[u8; 2usize]>,
-    pub id: move_id_16,
-    pub pp: u8,
-    pub ginseng: u8,
-}
-impl move_ {
-    #[inline]
-    pub fn f_exists(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_exists(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(0usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_subsequent_in_link_chain(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_subsequent_in_link_chain(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(1usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_enabled_for_ai(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_enabled_for_ai(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(2usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_set(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_set(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(3usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_last_used(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_last_used(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(4usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_disabled(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_disabled(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(5usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags0_unk6(&self) -> u8 {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(6usize, 2u8) as u8) }
-    }
-    #[inline]
-    pub fn set_flags0_unk6(&mut self, val: u8) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(6usize, 2u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn new_bitfield_1(
-        f_exists: bool_,
-        f_subsequent_in_link_chain: bool_,
-        f_enabled_for_ai: bool_,
-        f_set: bool_,
-        f_last_used: bool_,
-        f_disabled: bool_,
-        flags0_unk6: u8,
-    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
-        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
-        __bindgen_bitfield_unit.set(0usize, 1u8, {
-            let f_exists: u8 = unsafe { ::core::mem::transmute(f_exists) };
-            f_exists as u64
-        });
-        __bindgen_bitfield_unit.set(1usize, 1u8, {
-            let f_subsequent_in_link_chain: u8 =
-                unsafe { ::core::mem::transmute(f_subsequent_in_link_chain) };
-            f_subsequent_in_link_chain as u64
-        });
-        __bindgen_bitfield_unit.set(2usize, 1u8, {
-            let f_enabled_for_ai: u8 = unsafe { ::core::mem::transmute(f_enabled_for_ai) };
-            f_enabled_for_ai as u64
-        });
-        __bindgen_bitfield_unit.set(3usize, 1u8, {
-            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
-            f_set as u64
-        });
-        __bindgen_bitfield_unit.set(4usize, 1u8, {
-            let f_last_used: u8 = unsafe { ::core::mem::transmute(f_last_used) };
-            f_last_used as u64
-        });
-        __bindgen_bitfield_unit.set(5usize, 1u8, {
-            let f_disabled: u8 = unsafe { ::core::mem::transmute(f_disabled) };
-            f_disabled as u64
-        });
-        __bindgen_bitfield_unit.set(6usize, 2u8, {
-            let flags0_unk6: u8 = unsafe { ::core::mem::transmute(flags0_unk6) };
-            flags0_unk6 as u64
-        });
-        __bindgen_bitfield_unit
-    }
-    #[inline]
-    pub fn f_sealed(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(0usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_sealed(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(0usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags2_unk1(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(1usize, 2u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags2_unk1(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(1usize, 2u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_consume_pp(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(3usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_consume_pp(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(3usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_consume_2_pp(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(4usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_consume_2_pp(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(4usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags2_unk5(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(5usize, 1u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags2_unk5(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(5usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_consume_4_pp(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(6usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_consume_4_pp(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(6usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags2_unk7(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(7usize, 1u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags2_unk7(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(7usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags2_unk8(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(8usize, 1u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags2_unk8(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(8usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_exclusive_item_pp_boost(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(9usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_exclusive_item_pp_boost(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(9usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags3_unk10(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(10usize, 6u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags3_unk10(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(10usize, 6u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn new_bitfield_2(
-        f_sealed: bool_,
-        flags2_unk1: u16,
-        f_consume_pp: bool_,
-        f_consume_2_pp: bool_,
-        flags2_unk5: u16,
-        f_consume_4_pp: bool_,
-        flags2_unk7: u16,
-        flags2_unk8: u16,
-        f_exclusive_item_pp_boost: bool_,
-        flags3_unk10: u16,
-    ) -> __BindgenBitfieldUnit<[u8; 2usize]> {
-        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
-        __bindgen_bitfield_unit.set(0usize, 1u8, {
-            let f_sealed: u8 = unsafe { ::core::mem::transmute(f_sealed) };
-            f_sealed as u64
-        });
-        __bindgen_bitfield_unit.set(1usize, 2u8, {
-            let flags2_unk1: u16 = unsafe { ::core::mem::transmute(flags2_unk1) };
-            flags2_unk1 as u64
-        });
-        __bindgen_bitfield_unit.set(3usize, 1u8, {
-            let f_consume_pp: u8 = unsafe { ::core::mem::transmute(f_consume_pp) };
-            f_consume_pp as u64
-        });
-        __bindgen_bitfield_unit.set(4usize, 1u8, {
-            let f_consume_2_pp: u8 = unsafe { ::core::mem::transmute(f_consume_2_pp) };
-            f_consume_2_pp as u64
-        });
-        __bindgen_bitfield_unit.set(5usize, 1u8, {
-            let flags2_unk5: u16 = unsafe { ::core::mem::transmute(flags2_unk5) };
-            flags2_unk5 as u64
-        });
-        __bindgen_bitfield_unit.set(6usize, 1u8, {
-            let f_consume_4_pp: u8 = unsafe { ::core::mem::transmute(f_consume_4_pp) };
-            f_consume_4_pp as u64
-        });
-        __bindgen_bitfield_unit.set(7usize, 1u8, {
-            let flags2_unk7: u16 = unsafe { ::core::mem::transmute(flags2_unk7) };
-            flags2_unk7 as u64
-        });
-        __bindgen_bitfield_unit.set(8usize, 1u8, {
-            let flags2_unk8: u16 = unsafe { ::core::mem::transmute(flags2_unk8) };
-            flags2_unk8 as u64
-        });
-        __bindgen_bitfield_unit.set(9usize, 1u8, {
-            let f_exclusive_item_pp_boost: u8 =
-                unsafe { ::core::mem::transmute(f_exclusive_item_pp_boost) };
-            f_exclusive_item_pp_boost as u64
-        });
-        __bindgen_bitfield_unit.set(10usize, 6u8, {
-            let flags3_unk10: u16 = unsafe { ::core::mem::transmute(flags3_unk10) };
-            flags3_unk10 as u64
         });
         __bindgen_bitfield_unit
     }
@@ -15325,7 +15272,7 @@ pub struct monster {
     pub ability1: ability_id_8,
     pub ability2: ability_id_8,
     pub held_item: item,
-    pub held_item_id: u16,
+    pub held_item_id: item_id_16,
     pub prev_pos: position,
     pub prev_pos2: position,
     pub prev_pos3: position,
@@ -28193,22 +28140,10 @@ extern "C" {
     pub static mut TEAM_NAME: [crate::ctypes::c_char; 10usize];
 }
 extern "C" {
-    pub static mut HERO_SPECIES_ID: monster_id_16;
+    pub static mut TEAM_MEMBER_LIST: [ground_monster; 555usize];
 }
 extern "C" {
-    pub static mut HERO_NICKNAME: [crate::ctypes::c_char; 10usize];
-}
-extern "C" {
-    pub static mut PARTNER_SPECIES_ID: monster_id_16;
-}
-extern "C" {
-    pub static mut LEADER_IQ_SKILLS: [u32; 3usize];
-}
-extern "C" {
-    pub static mut LEADER_NICKNAME: [crate::ctypes::c_char; 10usize];
-}
-extern "C" {
-    pub static mut PARTY_MEMBER_2_IQ_SKILLS: [u32; 3usize];
+    pub static mut TEAM_ACTIVE_ROSTER: [team_member; 7usize];
 }
 extern "C" {
     pub static mut FRAMES_SINCE_LAUNCH_TIMES_THREE: u32;
