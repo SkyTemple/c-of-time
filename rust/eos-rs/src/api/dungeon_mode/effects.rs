@@ -1,6 +1,6 @@
 use crate::api::dungeon_mode::*;
 use crate::api::enums::{Direction, WarpType};
-use crate::api::items::ItemId;
+use crate::api::items::{Item, ItemId};
 use crate::api::moves::Move;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 use crate::api::types::MonsterTypeId;
@@ -901,7 +901,7 @@ impl DungeonEffectsEmitter {
         param_3: ffi::undefined4,
         attacker: &mut DungeonEntity,
         defender: &mut DungeonEntity,
-        item: &mut DungeonItem,
+        item: &mut Item,
     ) {
         ffi::ApplyItemEffect(param_1, param_2, param_3, attacker, defender, item)
     }

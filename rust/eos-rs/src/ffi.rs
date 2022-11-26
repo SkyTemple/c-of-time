@@ -10392,35 +10392,87 @@ pub mod entity_type {
     pub const ENTITY_HIDDEN_STAIRS: Type = 5;
     pub const ENTITY_TEMPORARY: Type = 6;
 }
-pub mod trap_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const TRAP_NULL_TRAP: Type = 0;
-    pub const TRAP_MUD_TRAP: Type = 1;
-    pub const TRAP_STICKY_TRAP: Type = 2;
-    pub const TRAP_GRIMY_TRAP: Type = 3;
-    pub const TRAP_SUMMON_TRAP: Type = 4;
-    pub const TRAP_PITFALL_TRAP: Type = 5;
-    pub const TRAP_WARP_TRAP: Type = 6;
-    pub const TRAP_GUST_TRAP: Type = 7;
-    pub const TRAP_SPIN_TRAP: Type = 8;
-    pub const TRAP_SLUMBER_TRAP: Type = 9;
-    pub const TRAP_SLOW_TRAP: Type = 10;
-    pub const TRAP_SEAL_TRAP: Type = 11;
-    pub const TRAP_POISON_TRAP: Type = 12;
-    pub const TRAP_SELFDESTRUCT_TRAP: Type = 13;
-    pub const TRAP_EXPLOSION_TRAP: Type = 14;
-    pub const TRAP_PP_ZERO_TRAP: Type = 15;
-    pub const TRAP_CHESTNUT_TRAP: Type = 16;
-    pub const TRAP_WONDER_TILE: Type = 17;
-    pub const TRAP_POKEMON_TRAP: Type = 18;
-    pub const TRAP_SPIKED_TILE: Type = 19;
-    pub const TRAP_STEALTH_ROCK: Type = 20;
-    pub const TRAP_TOXIC_SPIKES: Type = 21;
-    pub const TRAP_TRIP_TRAP: Type = 22;
-    pub const TRAP_RANDOM_TRAP: Type = 23;
-    pub const TRAP_GRUDGE_TRAP: Type = 24;
-    pub const TRAP_NONE: Type = 25;
+impl trap_id {
+    pub const TRAP_NULL_TRAP: trap_id = trap_id(0);
 }
+impl trap_id {
+    pub const TRAP_MUD_TRAP: trap_id = trap_id(1);
+}
+impl trap_id {
+    pub const TRAP_STICKY_TRAP: trap_id = trap_id(2);
+}
+impl trap_id {
+    pub const TRAP_GRIMY_TRAP: trap_id = trap_id(3);
+}
+impl trap_id {
+    pub const TRAP_SUMMON_TRAP: trap_id = trap_id(4);
+}
+impl trap_id {
+    pub const TRAP_PITFALL_TRAP: trap_id = trap_id(5);
+}
+impl trap_id {
+    pub const TRAP_WARP_TRAP: trap_id = trap_id(6);
+}
+impl trap_id {
+    pub const TRAP_GUST_TRAP: trap_id = trap_id(7);
+}
+impl trap_id {
+    pub const TRAP_SPIN_TRAP: trap_id = trap_id(8);
+}
+impl trap_id {
+    pub const TRAP_SLUMBER_TRAP: trap_id = trap_id(9);
+}
+impl trap_id {
+    pub const TRAP_SLOW_TRAP: trap_id = trap_id(10);
+}
+impl trap_id {
+    pub const TRAP_SEAL_TRAP: trap_id = trap_id(11);
+}
+impl trap_id {
+    pub const TRAP_POISON_TRAP: trap_id = trap_id(12);
+}
+impl trap_id {
+    pub const TRAP_SELFDESTRUCT_TRAP: trap_id = trap_id(13);
+}
+impl trap_id {
+    pub const TRAP_EXPLOSION_TRAP: trap_id = trap_id(14);
+}
+impl trap_id {
+    pub const TRAP_PP_ZERO_TRAP: trap_id = trap_id(15);
+}
+impl trap_id {
+    pub const TRAP_CHESTNUT_TRAP: trap_id = trap_id(16);
+}
+impl trap_id {
+    pub const TRAP_WONDER_TILE: trap_id = trap_id(17);
+}
+impl trap_id {
+    pub const TRAP_POKEMON_TRAP: trap_id = trap_id(18);
+}
+impl trap_id {
+    pub const TRAP_SPIKED_TILE: trap_id = trap_id(19);
+}
+impl trap_id {
+    pub const TRAP_STEALTH_ROCK: trap_id = trap_id(20);
+}
+impl trap_id {
+    pub const TRAP_TOXIC_SPIKES: trap_id = trap_id(21);
+}
+impl trap_id {
+    pub const TRAP_TRIP_TRAP: trap_id = trap_id(22);
+}
+impl trap_id {
+    pub const TRAP_RANDOM_TRAP: trap_id = trap_id(23);
+}
+impl trap_id {
+    pub const TRAP_GRUDGE_TRAP: trap_id = trap_id(24);
+}
+impl trap_id {
+    pub const TRAP_NONE: trap_id = trap_id(25);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct trap_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct trap_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -10428,18 +10480,18 @@ pub struct trap_id_8 {
 }
 impl trap_id_8 {
     #[inline]
-    pub fn val(&self) -> trap_id::Type {
+    pub fn val(&self) -> trap_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: trap_id::Type) {
+    pub fn set_val(&mut self, val: trap_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 8u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: trap_id::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+    pub fn new_bitfield_1(val: trap_id) -> __BindgenBitfieldUnit<[u8; 1usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 8u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -12744,6 +12796,12 @@ impl floor_layout_8 {
         __bindgen_bitfield_unit
     }
 }
+pub mod gen_item_stickiness {
+    pub type Type = crate::ctypes::c_uint;
+    pub const GEN_ITEM_STICKY_RANDOM: Type = 0;
+    pub const GEN_ITEM_STICKY_ALWAYS: Type = 1;
+    pub const GEN_ITEM_STICKY_NEVER: Type = 2;
+}
 #[repr(C)]
 pub struct item {
     pub _bitfield_align_1: [u8; 0],
@@ -13904,22 +13962,22 @@ impl ground_move {
         }
     }
     #[inline]
-    pub fn flags_unk3(&self) -> bool_ {
+    pub fn f_set(&self) -> bool_ {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
     }
     #[inline]
-    pub fn set_flags_unk3(&mut self, val: bool_) {
+    pub fn set_f_set(&mut self, val: bool_) {
         unsafe {
             let val: u8 = ::core::mem::transmute(val);
             self._bitfield_1.set(3usize, 1u8, val as u64)
         }
     }
     #[inline]
-    pub fn flags_unk4(&self) -> bool_ {
+    pub fn f_last_used(&self) -> bool_ {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
     }
     #[inline]
-    pub fn set_flags_unk4(&mut self, val: bool_) {
+    pub fn set_f_last_used(&mut self, val: bool_) {
         unsafe {
             let val: u8 = ::core::mem::transmute(val);
             self._bitfield_1.set(4usize, 1u8, val as u64)
@@ -13952,8 +14010,8 @@ impl ground_move {
         f_exists: bool_,
         f_subsequent_in_link_chain: bool_,
         f_enabled_for_ai: bool_,
-        flags_unk3: bool_,
-        flags_unk4: bool_,
+        f_set: bool_,
+        f_last_used: bool_,
         f_disabled: bool_,
         flags_unk6: u8,
     ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
@@ -13972,12 +14030,12 @@ impl ground_move {
             f_enabled_for_ai as u64
         });
         __bindgen_bitfield_unit.set(3usize, 1u8, {
-            let flags_unk3: u8 = unsafe { ::core::mem::transmute(flags_unk3) };
-            flags_unk3 as u64
+            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
+            f_set as u64
         });
         __bindgen_bitfield_unit.set(4usize, 1u8, {
-            let flags_unk4: u8 = unsafe { ::core::mem::transmute(flags_unk4) };
-            flags_unk4 as u64
+            let f_last_used: u8 = unsafe { ::core::mem::transmute(f_last_used) };
+            f_last_used as u64
         });
         __bindgen_bitfield_unit.set(5usize, 1u8, {
             let f_disabled: u8 = unsafe { ::core::mem::transmute(f_disabled) };
@@ -13995,10 +14053,10 @@ pub struct ground_monster {
     pub is_valid: bool_,
     pub level: i8,
     pub joined_at: dungeon_id_8,
-    pub field_0x3: undefined,
+    pub joined_at_floor: u8,
     pub id: monster_id_16,
-    pub field_0x6: undefined,
-    pub field_0x7: undefined,
+    pub level_at_first_evo: i8,
+    pub level_at_second_evo: i8,
     pub iq: u16,
     pub max_hp: u16,
     pub atk: i8,
@@ -14381,6 +14439,17 @@ pub struct dungeon_init {
     pub field_0x1A9: undefined,
     pub field_0x1AA: undefined,
     pub field_0x1AB: undefined,
+}
+#[repr(C)]
+pub struct global_progress {
+    pub unk_pokemon_flags1: [undefined; 148usize],
+    pub field_0x94: [undefined; 4usize],
+    pub unk_pokemon_flags2: [undefined; 148usize],
+    pub exclusive_pokemon_flags: [undefined; 23usize],
+    pub dungeon_max_reached_floor: [undefined; 180usize],
+    pub field_0x1f7: undefined,
+    pub nb_adventures: undefined4,
+    pub field_0x1fc: [undefined; 16usize],
 }
 #[repr(C)]
 pub struct adventure_log {
@@ -15247,7 +15316,7 @@ pub struct monster {
     pub hidden_power_type: type_id_8,
     pub field_0x47: undefined,
     pub joined_at: dungeon_id_8,
-    pub field_0x49: undefined,
+    pub joined_at_floor: u8,
     pub action_id: action_16,
     pub direction: direction_id_8,
     pub field_0x4d: undefined,
@@ -16407,10 +16476,8 @@ pub struct floor_generation_status {
     pub field_0x13: undefined,
     pub n_rooms: crate::ctypes::c_int,
     pub secondary_structures_budget: crate::ctypes::c_int,
-    pub hidden_stairs_spawn_x: u16,
-    pub hidden_stairs_spawn_y: u16,
-    pub kecleon_shop_middle_x: u16,
-    pub kecleon_shop_middle_y: u16,
+    pub hidden_stairs_spawn: position,
+    pub kecleon_shop_middle: position,
     pub n_tiles_reachable_from_stairs: crate::ctypes::c_int,
     pub layout: floor_layout::Type,
     pub hidden_stairs_type: hidden_stairs_type::Type,
@@ -16947,7 +17014,7 @@ pub struct guest_monster {
     pub name: *mut crate::ctypes::c_char,
     pub id: monster_id_16,
     pub joined_at: dungeon_id_8,
-    pub field_0x7: undefined,
+    pub joined_at_floor: u8,
     pub moves: [move_id_16; 4usize],
     pub max_hp: i16,
     pub level: u8,
@@ -17759,10 +17826,8 @@ pub struct dungeon {
     pub field_0x7c9: undefined,
     pub field_0x7ca: undefined,
     pub field_0x7cb: undefined,
-    pub field_0x7cc: undefined,
-    pub field_0x7cd: undefined,
-    pub field_0x7ce: undefined,
-    pub field_0x7cf: undefined,
+    pub boost_max_money_amount: bool_,
+    pub _padding_0x7cd: [u8; 3usize],
     pub field_0x7d0: undefined,
     pub field_0x7d1: undefined,
     pub field_0x7d2: undefined,
@@ -18635,7 +18700,7 @@ pub struct dungeon {
     pub field_0x12b22: undefined,
     pub field_0x12b23: undefined,
     pub field_0x12b24: undefined,
-    pub field_0x12b25: undefined,
+    pub boost_hidden_stairs_spawn_chance: bool_,
     pub field_0x12b26: undefined,
     pub field_0x12b27: undefined,
     pub entity_table: entity_table,
@@ -21936,6 +22001,15 @@ pub mod mission_generation_result {
     pub const MISSION_GENERATION_FAILURE: Type = 1;
     pub const MISSION_GENERATION_GLOBAL_FAILURE: Type = 2;
 }
+pub mod talk_kind {
+    pub type Type = crate::ctypes::c_uint;
+    pub const TALK_NONE: Type = 0;
+    pub const TALK_PARTNER_MALE_SPECIAL: Type = 1;
+    pub const TALK_PARTNER_DEFAULT: Type = 2;
+    pub const TALK_PARTNER_FEMALE_SPECIAL: Type = 3;
+    pub const TALK_HERO_MALE: Type = 4;
+    pub const TALK_HERO_FEMALE: Type = 5;
+}
 pub mod script_level_id_na {
     pub type Type = crate::ctypes::c_uint;
     pub const LEVEL_NA_S00P01A: Type = 0;
@@ -24819,6 +24893,11 @@ pub struct main_ground_data {
     pub performers: *mut undefined,
     pub events: *mut undefined,
 }
+#[repr(C)]
+pub struct partner_talk_kind_table_entry {
+    pub talk_kind: talk_kind::Type,
+    pub id: monster_id,
+}
 extern "C" {
     pub fn ShouldMonsterRunAwayVariationOutlawCheck(
         monster: *mut entity,
@@ -25092,7 +25171,19 @@ extern "C" {
     pub fn GetItemCategoryVeneer(item_id: item_id) -> item_category;
 }
 extern "C" {
+    pub fn IsThrownItem(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn IsNotMoney(item_id: item_id) -> bool_;
+}
+extern "C" {
     pub fn IsAuraBow(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn InitItem(item: *mut item, item_id: item_id, quantity: u16, sticky: bool_);
+}
+extern "C" {
+    pub fn InitStandardItem(item: *mut item, item_id: item_id, sticky: bool_);
 }
 extern "C" {
     pub fn SprintfStatic(
@@ -25102,7 +25193,19 @@ extern "C" {
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn GetExclusiveItemOffsetEnsureValid(item_id: item_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsItemValid(arg1: item_id) -> bool_;
+}
+extern "C" {
     pub fn GetItemCategory(item_id: item_id) -> item_category;
+}
+extern "C" {
+    pub fn EnsureValidItem(arg1: item_id) -> item_id;
+}
+extern "C" {
+    pub fn GetThrownItemQuantityLimit(arg1: item_id, limit_idx: crate::ctypes::c_int) -> u8;
 }
 extern "C" {
     pub fn SetMoneyCarried(amount: crate::ctypes::c_int);
@@ -25111,7 +25214,10 @@ extern "C" {
     pub fn IsBagFull() -> bool_;
 }
 extern "C" {
-    pub fn CountItemTypeInBag(arg1: item_id) -> crate::ctypes::c_int;
+    pub fn CountItemTypeInBag(item_id: item_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsItemInBag(item_id: item_id) -> bool_;
 }
 extern "C" {
     pub fn AddItemToBag(item: *mut bulk_item) -> bool_;
@@ -25367,6 +25473,12 @@ extern "C" {
 }
 extern "C" {
     pub fn InitDungeonListScriptVars();
+}
+extern "C" {
+    pub fn GlobalProgressAlloc() -> *mut global_progress;
+}
+extern "C" {
+    pub fn ResetGlobalProgress();
 }
 extern "C" {
     pub fn HasMonsterBeenAttackedInDungeons(monster_id: monster_id) -> bool_;
@@ -25990,6 +26102,13 @@ extern "C" {
     pub fn GetTileAtEntity(entity: *mut entity) -> *mut tile;
 }
 extern "C" {
+    pub fn SpawnTrap(trap_id: trap_id, position: *mut position, team: u8, flags: u8)
+        -> *mut entity;
+}
+extern "C" {
+    pub fn SpawnItemEntity(position: *mut position) -> *mut entity;
+}
+extern "C" {
     pub fn CanTargetEntity(user: *mut entity, target: *mut entity) -> bool_;
 }
 extern "C" {
@@ -26148,6 +26267,12 @@ extern "C" {
 }
 extern "C" {
     pub fn GetForcedLossReason() -> forced_loss_reason::Type;
+}
+extern "C" {
+    pub fn BindTrapToTile(tile: *mut tile, trap: *mut entity, is_visible: bool_);
+}
+extern "C" {
+    pub fn SpawnEnemyTrapAtPos(trap_id: trap_id, x: i16, y: i16, flags: u8, is_visible: bool_);
 }
 extern "C" {
     pub fn ChangeLeader();
@@ -26957,6 +27082,12 @@ extern "C" {
     pub fn IsSecretBazaar() -> bool_;
 }
 extern "C" {
+    pub fn ShouldBoostHiddenStairsSpawnChance() -> bool_;
+}
+extern "C" {
+    pub fn SetShouldBoostHiddenStairsSpawnChance(value: bool_);
+}
+extern "C" {
     pub fn IsSecretRoom() -> bool_;
 }
 extern "C" {
@@ -26991,6 +27122,9 @@ extern "C" {
 }
 extern "C" {
     pub fn DungeonRand100() -> u32;
+}
+extern "C" {
+    pub fn ClearHiddenStairs();
 }
 extern "C" {
     pub fn FlagHallwayJunctions(
@@ -27248,25 +27382,71 @@ extern "C" {
     pub fn ResetInnerBoundaryTileRows();
 }
 extern "C" {
-    pub fn SpawnStairs(pos: *mut u8, gen_info: *mut dungeon_generation_info, hidden_stairs: bool_);
+    pub fn SpawnStairs(
+        pos: *mut u8,
+        gen_info: *mut dungeon_generation_info,
+        hidden_stairs_type: hidden_stairs_type::Type,
+    );
+}
+extern "C" {
+    pub fn GetHiddenStairsType(
+        gen_info: *mut dungeon_generation_info,
+        floor_props: *mut floor_properties,
+    ) -> hidden_stairs_type::Type;
+}
+extern "C" {
+    pub fn ResetHiddenStairsSpawn();
 }
 extern "C" {
     pub fn LoadFixedRoomData();
 }
 extern "C" {
+    pub fn GenerateItemExplicit(item: *mut item, item_id: item_id, quantity: u16, sticky: bool_);
+}
+extern "C" {
+    pub fn GenerateAndSpawnItem(
+        item_id: item_id,
+        x: i16,
+        y: i16,
+        quantity: u16,
+        sticky: bool_,
+        check_in_bag: bool_,
+    );
+}
+extern "C" {
     pub fn IsHiddenStairsFloor() -> bool_;
+}
+extern "C" {
+    pub fn GenerateCleanItem(item: *mut item, item_id: item_id);
+}
+extern "C" {
+    pub fn SpawnItem(position: *mut position, item: *mut item, flag: bool_) -> bool_;
 }
 extern "C" {
     pub fn HasHeldItem(entity: *mut entity, item_id: item_id) -> bool_;
 }
 extern "C" {
+    pub fn GenerateMoneyQuantity(item: *mut item, max_amount: crate::ctypes::c_int);
+}
+extern "C" {
     pub fn CheckTeamItemsFlags(flags: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn GenerateItem(
+        item: *mut item,
+        item_id: item_id,
+        quantity: u16,
+        sticky_type: gen_item_stickiness::Type,
+    );
 }
 extern "C" {
     pub fn CheckActiveChallengeRequest() -> bool_;
 }
 extern "C" {
     pub fn IsOutlawOrChallengeRequestFloor() -> bool_;
+}
+extern "C" {
+    pub fn IsDestinationFloor() -> bool_;
 }
 extern "C" {
     pub fn IsCurrentMissionType(type_: mission_type::Type) -> bool_;
@@ -27497,6 +27677,9 @@ extern "C" {
     pub static mut PUNCH_MOVE_LIST: [move_id_16; 16usize];
 }
 extern "C" {
+    pub static mut PARTNER_TALK_KIND_TABLE: [partner_talk_kind_table_entry; 11usize];
+}
+extern "C" {
     pub static mut SCRIPT_VARS_LOCALS: script_local_var_table;
 }
 extern "C" {
@@ -27563,6 +27746,9 @@ extern "C" {
     pub static mut IQ_GROUP_SKILLS: [u8; 400usize];
 }
 extern "C" {
+    pub static mut MONEY_QUANTITY_TABLE: [crate::ctypes::c_int; 100usize];
+}
+extern "C" {
     pub static mut IQ_GUMMI_GAIN_TABLE: [[i16; 18usize]; 18usize];
 }
 extern "C" {
@@ -27620,6 +27806,9 @@ extern "C" {
     pub static mut PACK_FILE_PATHS_TABLE: [*const crate::ctypes::c_char; 6usize];
 }
 extern "C" {
+    pub static mut ITEM_DATA_TABLE_PTRS: [*mut crate::ctypes::c_void; 3usize];
+}
+extern "C" {
     pub static mut MOVE_DATA_TABLE_PTR: *mut move_data_table;
 }
 extern "C" {
@@ -27633,6 +27822,9 @@ extern "C" {
 }
 extern "C" {
     pub static mut GAME_MODE: u8;
+}
+extern "C" {
+    pub static mut GLOBAL_PROGRESS_PTR: *mut global_progress;
 }
 extern "C" {
     pub static mut ADVENTURE_LOG_PTR: *mut adventure_log;
@@ -27762,6 +27954,9 @@ extern "C" {
 }
 extern "C" {
     pub static mut AIR_BLADE_DAMAGE_MULTIPLIER: crate::ctypes::c_int;
+}
+extern "C" {
+    pub static mut HIDDEN_STAIRS_SPAWN_CHANCE_MULTIPLIER: crate::ctypes::c_int;
 }
 extern "C" {
     pub static mut SPEED_BOOST_DURATION_RANGE: [i16; 2usize];
@@ -28060,6 +28255,9 @@ extern "C" {
 }
 extern "C" {
     pub static mut DEFAULT_TILE: tile;
+}
+extern "C" {
+    pub static mut HIDDEN_STAIRS_SPAWN_BLOCKED: bool_;
 }
 extern "C" {
     pub static mut FIXED_ROOM_DATA_PTR: *mut crate::ctypes::c_void;

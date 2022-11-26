@@ -1,3 +1,4 @@
+use crate::api::dungeon_mode::traps::TrapId;
 use crate::api::dungeon_mode::*;
 use crate::api::dungeons::{DungeonGroupId, DungeonId};
 use crate::api::enums::{
@@ -5,7 +6,7 @@ use crate::api::enums::{
     Weather,
 };
 use crate::api::iq::IqSkillId;
-use crate::api::items::ItemId;
+use crate::api::items::{Item, ItemId};
 use crate::api::monsters::MonsterSpeciesId;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ffi;
@@ -20,7 +21,7 @@ use alloc::vec::Vec;
 /// To access the raw struct, use [`Self::inner`].
 pub struct Dungeon<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>>(T);
 
-/// Create new dungeon structs.
+/// Dungeon structs.
 ///
 /// To get a reference to the global dungeon struct instead, use [`GlobalDungeonData::get`]
 /// and then [`GlobalDungeonData::inner`].
@@ -795,6 +796,24 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::IsNormalFloor() > 0 }
     }
 
+    /// Gets the boost_hidden_stairs_spawn_chance field on the dungeon struct.
+    pub fn should_boost_hidden_stairs_spawn_chance(&self) -> bool {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::ShouldBoostHiddenStairsSpawnChance() > 0 }
+    }
+
+    /// Sets the boost_hidden_stairs_spawn_chance field on the dungeon struct to the given value.
+    pub fn set_should_boost_hidden_stairs_spawn_chance(&mut self, value: bool) {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::SetShouldBoostHiddenStairsSpawnChance(value as ffi::bool_) }
+    }
+
+    /// Clears the tile (terrain and spawns) on which Hidden Stairs are spawned, if applicable.
+    pub fn clear_hidden_stairs(&mut self) {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::ClearHiddenStairs() }
+    }
+
     /// Checks if a position (x, y) is out of bounds on the map:
     /// !((0 <= x <= 55) && (0 <= y <= 31)).
     pub fn is_pos_out_of_bounds(&self, x: i32, y: i32) -> bool {
@@ -814,6 +833,12 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn is_outlaw_or_challenge_request_floor(&self) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::IsOutlawOrChallengeRequestFloor() > 0 }
+    }
+
+    /// Checks if the current floor is a mission destination floor.
+    pub fn is_destination_floor(&self) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::IsDestinationFloor() > 0 }
     }
 
     /// Checks if the current floor is an active mission destination of a given type group.
@@ -1384,6 +1409,111 @@ impl<'a> GlobalDungeonData<'a> {
     ) -> Option<&mut DungeonEntity> {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         let ptr = unsafe { ffi::SpawnMonster(spawn_data, force_awake as ffi::bool_) };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// A convenience wrapper around `Self::spawn_trap` and `DungeonTile::bind_trap`
+    /// (or to be precise the game's functions, see implementation!).
+    ///
+    /// Always passes 0 for the team parameter (making it an enemy trap).
+    pub fn spawn_enemy_trap_bound(
+        &mut self,
+        trap_id: TrapId,
+        x_position: i16,
+        y_position: i16,
+        flags: u8,
+        is_visible: bool,
+    ) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe {
+            ffi::SpawnEnemyTrapAtPos(
+                trap_id,
+                x_position,
+                y_position,
+                flags,
+                is_visible as ffi::bool_,
+            )
+        };
+    }
+
+    /// Spawns a trap on the floor. Fails if there are more than 64 traps already on the floor.
+    ///
+    /// This modifies the appropriate fields on the dungeon struct, initializing new entries
+    /// in the entity table and the trap info list.
+    pub fn spawn_trap(
+        &mut self,
+        trap_id: TrapId,
+        position: &ffi::position,
+        team: u8,
+        flags: u8,
+    ) -> Option<&mut DungeonEntity> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        let ptr = unsafe { ffi::SpawnTrap(trap_id, force_mut_ptr!(position), team, flags) };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// Spawns an item on the floor. Fails if there are more than 64 items already on the floor.
+    ///
+    /// This calls [`Self::spawn_item_entity`], fills in the item info struct, sets the entity to
+    /// be visible, binds the entity to the tile it occupies, updates the n_items counter on the
+    /// dungeon struct, and various other bits of bookkeeping.
+    ///
+    /// Hint: Consider using [`Self::generate_and_spawn_item`] instead for ease of use.
+    pub fn spawn_item(
+        &'a mut self,
+        position: &ffi::position,
+        item: &'a mut Item,
+        flag: bool,
+    ) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::SpawnItem(force_mut_ptr!(position), item, flag as ffi::bool_) > 0 }
+    }
+
+    /// Generates an item with [`Item::generate_explicit`], then spawns it with
+    /// [`Self::spawn_item`].
+    ///
+    /// If the check-in-bag flag is set and the player's bag already contains an item with the
+    /// given ID, a Reviver Seed will be spawned instead.
+    ///
+    /// It seems like this function is only ever called in one place, with an item ID of 0x49
+    /// (Reviver Seed).
+    pub fn generate_and_spawn_item(
+        &mut self,
+        item_id: ItemId,
+        x: i16,
+        y: i16,
+        quantity: u16,
+        sticky: bool,
+        check_in_bag: bool,
+    ) {
+        unsafe {
+            ffi::GenerateAndSpawnItem(
+                item_id,
+                x,
+                y,
+                quantity,
+                sticky as ffi::bool_,
+                check_in_bag as ffi::bool_,
+            )
+        }
+    }
+
+    /// Spawns a blank item entity on the floor.
+    /// Fails if there are more than 64 items already on the floor.
+    ///
+    /// This initializes a new entry in the entity table and points it to the corresponding
+    /// slot in the item info list.
+    pub fn spawn_item_entity(&mut self, position: &ffi::position) -> Option<&mut DungeonEntity> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        let ptr = unsafe { ffi::SpawnItemEntity(force_mut_ptr!(position)) };
         if ptr.is_null() {
             None
         } else {

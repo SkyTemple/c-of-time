@@ -4,6 +4,7 @@ use crate::api::overlay::OverlayLoadLease;
 use crate::ctypes::c_int;
 use crate::ffi;
 use core::marker::PhantomData;
+use core::mem;
 
 /// An item ID with associated methods to get metadata.
 ///
@@ -32,6 +33,28 @@ impl ItemId {
         unsafe { ffi::GetItemCategory(*self) }
     }
 
+    // Returns whether or not this item is an item that can be thrown
+    // (`ItemCategoryId::CATEGORY_THROWN_LINE` or `ItemCategoryId::CATEGORY_THROWN_ARC`).
+    pub fn can_be_thrown(&self) -> bool {
+        unsafe { ffi::IsThrownItem(*self) > 0 }
+    }
+
+    // Checks if this item ID is valid(?).
+    pub fn is_valid(&self) -> bool {
+        unsafe { ffi::IsItemValid(*self) > 0 }
+    }
+
+    // Checks if the given item ID is valid (using `Self::is_valid`).
+    // If so, return the given item ID. Otherwise, return `ItemId::ITEM_PLAIN_SEED`.
+    pub fn fallback_if_invalid(self) -> Self {
+        unsafe { ffi::EnsureValidItem(self) }
+    }
+
+    // Returns whether or not this item is `Self::ITEM_POKE`.
+    pub fn is_money(&self) -> bool {
+        unsafe { ffi::IsNotMoney(*self) == 0 }
+    }
+
     /// Checks if the item is one of the aura bows received at the start of the game.
     pub fn is_aura_bow(&self) -> bool {
         unsafe { ffi::IsAuraBow(*self) > 0 }
@@ -54,6 +77,25 @@ impl ItemId {
     /// showing up in the menu.
     pub fn get_dungeon_item_action(&self, _ov29: OverlayLoadLease<29>) -> ffi::action::Type {
         unsafe { ffi::GetItemAction(self.0 as c_int) }
+    }
+
+    /// Gets the exclusive item offset, which is the item ID relative to that of the first
+    /// exclusive item, the Prism Ruff.
+    ///
+    /// If the given item ID is not a valid item ID, `ItemId::ITEM_PLAIN_SEED` (0x55) is returned.
+    /// This is a bug, since 0x55 is the valid exclusive item offset for the Icy Globe.
+    pub fn get_exclusive_item_offset_checked_for_validity(&self) -> i32 {
+        unsafe { ffi::GetExclusiveItemOffsetEnsureValid(*self) }
+    }
+
+    /// Get the minimum quantity for this (thrown) item ID.
+    pub fn get_thrown_item_quantity_minimum(&self) -> u8 {
+        unsafe { ffi::GetThrownItemQuantityLimit(*self, 0) }
+    }
+
+    /// Get the maximum quantity for this (thrown) item ID.
+    pub fn get_thrown_item_quantity_maximum(&self) -> u8 {
+        unsafe { ffi::GetThrownItemQuantityLimit(*self, 1) }
     }
 
     /// Applies stat boosts from an exclusive item.
@@ -79,6 +121,43 @@ impl ItemId {
 impl From<ItemId> for u32 {
     fn from(v: ItemId) -> Self {
         v.0
+    }
+}
+
+/// An item slot. It has a quantity if it's stackable
+/// and optionally a reference to an entity that holds it.
+///
+/// A quantity of zero indicates that the item is not stackable.
+pub type Item = ffi::item;
+
+impl Item {
+    /// Allocates a new item.
+    ///
+    /// This will resolve the quantity based on the item type:
+    ///
+    /// - For Poké, the quantity code will always be set to 1.
+    /// - For thrown items, the quantity code will be randomly generated on the range of valid
+    ///   quantities for that item type.
+    /// - For non-stackable items, the quantity code will always be set to 0.
+    /// - Otherwise, the quantity will be assigned from the quantity argument.
+    pub fn new(item_id: ItemId, quantity: u16, sticky: bool) -> Self {
+        // SAFETY: We init the value right after.
+        let mut slf: Self = unsafe { mem::zeroed() };
+        slf.init(item_id, quantity, sticky);
+        slf
+    }
+
+    /// Initialize an item struct with the given information.
+    ///
+    /// This will resolve the quantity based on the item type:
+    ///
+    /// - For Poké, the quantity code will always be set to 1.
+    /// - For thrown items, the quantity code will be randomly generated on the range of valid
+    ///   quantities for that item type.
+    /// - For non-stackable items, the quantity code will always be set to 0.
+    /// - Otherwise, the quantity will be assigned from the quantity argument.
+    pub fn init(&mut self, item_id: ItemId, quantity: u16, sticky: bool) {
+        unsafe { ffi::InitItem(self, item_id, quantity, sticky as ffi::bool_) }
     }
 }
 
@@ -209,6 +288,11 @@ impl InventoryBag {
     /// Checks if the player's bag is full.
     pub fn is_full(&self) -> bool {
         unsafe { ffi::IsBagFull() > 0 }
+    }
+
+    /// Count the amount of the specified item in the player's bag.
+    pub fn is_in_bag(&self, item_id: ItemId) -> bool {
+        unsafe { ffi::IsItemInBag(item_id) > 0 }
     }
 
     /// Count the amount of the specified item in the player's bag.

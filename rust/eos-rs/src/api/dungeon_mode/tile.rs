@@ -39,6 +39,12 @@ impl DungeonTile {
     pub fn set_secondary_terrain_on_wall(&mut self) {
         unsafe { ffi::SetSecondaryTerrainOnWall(self as *mut _) }
     }
+
+    /// Sets this tile's associated object to be the given trap,
+    /// and sets the visibility of the trap.
+    pub fn bind_trap(&mut self, trap: &mut DungeonEntity, is_visible: bool) {
+        unsafe { ffi::BindTrapToTile(self, trap, is_visible as ffi::bool_) }
+    }
 }
 
 /// Functions for reading from a tile grid.

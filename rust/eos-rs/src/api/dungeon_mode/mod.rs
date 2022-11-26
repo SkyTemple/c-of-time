@@ -10,7 +10,9 @@ mod random;
 mod tile;
 
 pub mod dungeon_generator;
+pub mod items;
 pub mod menus;
+pub mod traps;
 
 use crate::api::enums::Direction;
 use core::ptr;

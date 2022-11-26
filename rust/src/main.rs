@@ -4,10 +4,10 @@
 extern crate eos_rs;
 
 use eos_rs::api::dungeon_mode::{
-    DungeonEffectsEmitter, DungeonEntity, DungeonItem, DungeonRng, LogMessageBuilder,
+    DungeonEffectsEmitter, DungeonEntity, DungeonRng, LogMessageBuilder,
 };
 use eos_rs::api::fixed::I24F8;
-use eos_rs::api::items::ItemId;
+use eos_rs::api::items::{Item, ItemId};
 use eos_rs::api::moves::Move;
 use eos_rs::api::moves::MoveId;
 use eos_rs::api::overlay::{CreatableWithLease, OverlayLoadLease};
@@ -41,7 +41,7 @@ HasLowHealth+0:
 /// considered having low health.
 ///
 /// Just for demonstration purposes it also randomly (1/100 chance) outputs the phrase
-/// "oh no! [string:1] has high health!" to the console, where [string:1] is replaced with
+/// "oh no! \[string:1\] has high health!" to the console, where \[string:1\] is replaced with
 /// the monster that is being checked.
 ///
 /// You will notice that this will corrupt the text display (and eventually other parts of the
@@ -52,7 +52,7 @@ HasLowHealth+0:
 /// If you want to test the item and move effects bundled with this `main.rs`, you probably
 /// want to comment out the logic that logs messages in this function first (otherwise good luck
 /// using an item or move ;) ).
-#[allow(clippy::not_unsafe_ptr_arg_deref)]  // The unsafe operations we do are safe the way we use them.
+#[allow(clippy::not_unsafe_ptr_arg_deref)] // The unsafe operations we do are safe the way we use them.
 #[no_mangle]
 #[allow(clippy::not_unsafe_ptr_arg_deref)] // Clippy denies this by default. For demo purposes, we allow it.
 pub extern "C" fn has_high_health(entity: *mut DungeonEntity) -> ffi::bool_ {
@@ -129,7 +129,7 @@ pub fn oran_berry_burn(
     effects: &DungeonEffectsEmitter,
     user: &mut DungeonEntity,
     target: &mut DungeonEntity,
-    used_item: &mut DungeonItem,
+    used_item: &mut Item,
     _is_thrown: bool,
 ) {
     info!("oran_berry_burn called.");
