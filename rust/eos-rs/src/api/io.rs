@@ -118,9 +118,7 @@ pub mod file {
             unsafe {
                 // This can only be false if this has somehow gotten out of sync, but let's just be
                 // safe here...
-                if COUNT_IN_FILE_TRANSFER_MODE > 0 {
-                    COUNT_IN_FILE_TRANSFER_MODE -= 1;
-                }
+                COUNT_IN_FILE_TRANSFER_MODE = COUNT_IN_FILE_TRANSFER_MODE.saturating_sub(1);
                 if COUNT_IN_FILE_TRANSFER_MODE == 0 {
                     ffi::DataTransferStop();
                 }

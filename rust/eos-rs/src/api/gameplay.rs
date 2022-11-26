@@ -373,7 +373,7 @@ pub fn get_sos_mail_count(param_1: i32, param_2: bool) -> i32 {
 ///
 /// # Safety
 /// The caller must make sure the undefined params are valid for this function.
-pub fn generate_mission(
+pub unsafe fn generate_mission(
     unknown: &mut ffi::undefined,
     mission_data: &mut ffi::mission,
 ) -> Option<MissionGenerationResult> {
