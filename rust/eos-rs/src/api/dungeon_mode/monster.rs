@@ -747,8 +747,8 @@ pub trait DungeonMonsterWrite: private::Sealed {
     ///
     /// # Safety
     /// The caller must make sure the undefined params are valid for this function.
-    fn ai_movement(&mut self, param: ffi::undefined) {
-        unsafe { ffi::AiMovement(self.entity_mut(), param) }
+    unsafe fn ai_movement(&mut self, param: ffi::undefined) {
+        ffi::AiMovement(self.entity_mut(), param)
     }
 
     /// Calculates the target position of an AI-controlled monster and stores it in
