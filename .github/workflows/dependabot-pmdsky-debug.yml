@@ -49,7 +49,7 @@ jobs:
         if: env.IS_PMDSKY_DEBUG
         uses: actions-rs/install@v0.1
         with:
-          crate: bindgen
+          crate: bindgen-cli
           version: latest
           use-tool-cache: true
       - name: Set up Clang
