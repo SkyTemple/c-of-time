@@ -11,6 +11,7 @@ use crate::api::monsters::MonsterSpeciesId;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ffi;
 use alloc::vec::Vec;
+use core::mem::MaybeUninit;
 
 /// The Rust-safe wrapped master struct that contains the state of the dungeon.
 /// Can be owned or mutably borrowed from a low-level [`ffi::dungeon`].
@@ -621,7 +622,11 @@ impl Default for ffi::dungeon {
 /// To generate dungeons and manipulate floors layouts, you can get the game's
 /// builtin generator with [`Self::get_builtin_dungeon_generator`], or configure the global
 /// state of the current floor correctly and use [`Self::generate_floor`].
-pub struct GlobalDungeonData<'a>(&'a OverlayLoadLease<29>, Dungeon<&'a mut ffi::dungeon>);
+pub struct GlobalDungeonData<'a>(
+    &'a OverlayLoadLease<29>,
+    Dungeon<&'a mut ffi::dungeon>,
+    DungeonEffectsEmitter<'a>,
+);
 
 impl<'a> GlobalDungeonData<'a> {
     /// Checks if the global dungeon pointer is null.
@@ -641,7 +646,11 @@ impl<'a> GlobalDungeonData<'a> {
     pub unsafe fn get(ov29: &'a OverlayLoadLease<29>) -> Self {
         let ptr = ffi::GetDungeonPtrMaster();
         assert!(!ptr.is_null(), "Global dungeon pointer is null!");
-        Self(ov29, Dungeon(&mut *ffi::GetDungeonPtrMaster()))
+        Self(
+            ov29,
+            Dungeon(&mut *ffi::GetDungeonPtrMaster()),
+            DungeonEffectsEmitter(ov29),
+        )
     }
 
     /// This will allocate a new dungeon struct and update the global dungeon pointer to it.
@@ -653,7 +662,16 @@ impl<'a> GlobalDungeonData<'a> {
     /// You need to make sure no other borrows over the global dungeon struct
     /// (or any of it's values) exist.
     pub unsafe fn alloc(ov29: &'a OverlayLoadLease<29>) -> Self {
-        Self(ov29, Dungeon(&mut *ffi::DungeonAlloc()))
+        Self(
+            ov29,
+            Dungeon(&mut *ffi::DungeonAlloc()),
+            DungeonEffectsEmitter(ov29),
+        )
+    }
+
+    /// Get the effects handler.
+    pub fn effects(&'a mut self) -> &'a mut DungeonEffectsEmitter<'a> {
+        &mut self.2
     }
 
     /// Zeros out the struct pointed to by the global dungeon pointer.
@@ -1109,7 +1127,7 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn handle_faint(
         &mut self,
         fainted_entity: &mut DungeonEntity,
-        faint_reason: i32,
+        faint_reason: ffi::faint_reason,
         killer: &mut DungeonEntity,
     ) {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
@@ -1521,6 +1539,52 @@ impl<'a> GlobalDungeonData<'a> {
         }
     }
 
+    /// Appears to spawn an enemy item drop at a specified location, with a log message.
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn spawn_enemy_item_drop(
+        &mut self,
+        entity: &mut DungeonEntity,
+        item_entity: &mut DungeonEntity,
+        item: &mut Item,
+        param_4: i32,
+        dir_xy: &mut i16,
+        param_6: ffi::undefined,
+    ) {
+        ffi::SpawnEnemyItemDrop(entity, item_entity, item, param_4, dir_xy, param_6)
+    }
+
+    /// Wraps [`Self::spawn_enemy_item_drop`] in a more convenient interface.
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn spawn_enemy_item_drop_wrapper(
+        &mut self,
+        entity: &mut DungeonEntity,
+        pos: &mut ffi::position,
+        item: &mut Item,
+        param_4: ffi::undefined4,
+    ) {
+        ffi::SpawnEnemyItemDropWrapper(entity, pos, item, param_4)
+    }
+
+    /// Determine if a defeated monster should drop a Unown Stone, and generate the item if so.
+    ///
+    /// Checks that the current dungeon isn't a Marowak Dojo training maze, and that the monster
+    /// is an Unown. If so, there's a 21% chance that an Unown Stone will be generated.
+    pub fn try_generate_unown_drop(monster_id: MonsterSpeciesId) -> Option<Item> {
+        unsafe {
+            let mut res: MaybeUninit<Item> = MaybeUninit::zeroed();
+            let generated = ffi::TryGenerateUnownStoneDrop(res.as_mut_ptr(), monster_id) > 0;
+            if generated {
+                Some(res.assume_init())
+            } else {
+                None
+            }
+        }
+    }
+
     /// Runs a check over all monsters on the field for the ability Slow Start, and lowers the
     /// speed of those who have it.
     pub fn try_activate_slow_start(&mut self) {
@@ -1578,6 +1642,12 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn check_active_challenge_request(&self) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::CheckActiveChallengeRequest() > 0 }
+    }
+
+    /// Check if the current dungeon is one of the training mazes in Marowak Dojo
+    /// (this excludes Final Maze).
+    pub fn is_marowak_training_maze(&self) -> bool {
+        unsafe { ffi::IsMarowakTrainingMaze() > 0 }
     }
 
     #[cfg_attr(docsrs, doc(cfg(feature = "eu")))]

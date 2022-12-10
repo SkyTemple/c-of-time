@@ -2,7 +2,9 @@
 
 use crate::api::enums::MonsterGender;
 use crate::ffi;
+use crate::ffi::GetLowKickMultiplier;
 use alloc::vec::Vec;
+use fixed::types::I24F8;
 
 /// A monster species ID with associated methods to get metadata.
 ///
@@ -161,6 +163,11 @@ impl MonsterSpeciesId {
                 exclude_monsters_in_mission_banned_monsters as ffi::bool_,
             ) > 0
         }
+    }
+
+    /// Gets the Low Kick (and Grass Knot) damage multiplier for the given species.
+    pub fn get_low_kick_multiplier(&self) -> I24F8 {
+        unsafe { I24F8::from_num(GetLowKickMultiplier(*self)) }
     }
 }
 

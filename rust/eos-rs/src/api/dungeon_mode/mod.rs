@@ -32,16 +32,11 @@ use crate::ffi;
 
 // Misc dungeon functions.
 
-/// Seems to zero some damage description struct, which is output by the damage
-/// calculation function.
-///
-/// # Safety
-/// This resets some global data. The caller needs to make sure pointers to this space
-/// are set up correctly and no references to the area exist.
-///
-/// The caller must make sure the undefined params are valid for this function.
-pub unsafe fn reset_damage_desc(damage_desc: *mut ffi::undefined4, _ov29: &OverlayLoadLease<29>) {
-    ffi::ResetDamageDesc(damage_desc);
+/// Zeroes the damage data struct, which is output by the damage calculation function.
+pub fn reset_damage_data(damage_data: &mut ffi::damage_data, _ov29: &OverlayLoadLease<29>) {
+    unsafe {
+        ffi::ResetDamageData(damage_data);
+    }
 }
 
 /// [`DungeonMonsterRef::calc_damage`] seems to use scratch space of

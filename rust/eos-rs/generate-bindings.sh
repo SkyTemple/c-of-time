@@ -32,6 +32,7 @@ bindgen \
   --newtype-enum script_var_id \
   --newtype-enum special_process_id \
   --newtype-enum type_id \
+  --default-non-copy-union-style manually_drop \
   $SCRIPT_DIR/include.h \
   -- \
   -target armv5te-none-eabi \

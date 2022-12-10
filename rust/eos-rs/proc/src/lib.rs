@@ -49,8 +49,8 @@ use syn::parse_macro_input;
 ///
 /// ### Signature of raw patch functions registered this way:
 /// ```
-/// pub fn function(
-///     effects: &eos_rs::api::dungeon_mode::DungeonEffectsEmitter,
+/// pub fn function<'a>(
+///     global_dungeon: &'a mut eos_rs::api::dungeon_mode::GlobalDungeonData<'a>,
 ///     user: &mut eos_rs::api::objects::DungeonEntity,
 ///     target: &mut eos_rs::api::objects::DungeonEntity,
 ///     used_item: &mut eos_rs::api::objects::DungeonItem,
@@ -68,8 +68,8 @@ use syn::parse_macro_input;
 ///
 /// ### Signature of raw patch functions registered this way:
 /// ```
-/// pub fn function(
-///     effects: &eos_rs::api::dungeon_mode::DungeonEffectsEmitter,
+/// pub fn function<'a>(
+///     global_dungeon: &'a mut eos_rs::api::dungeon_mode::GlobalDungeonData<'a>,
 ///     user: &mut eos_rs::api::objects::DungeonEntity,
 ///     target: &mut eos_rs::api::objects::DungeonEntity,
 ///     used_move: &mut eos_rs::api::objects::Move
@@ -171,13 +171,13 @@ pub fn patches(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 
     let item_effects_cases = def.item_effects.iter().map(|(idx, fn_name)| {
         quote! {
-            #idx => {#fn_name(&effects, user, target, used_item, is_thrown > 0); 1},
+            #idx => {#fn_name(&mut dungeon, user, target, used_item, is_thrown > 0); 1},
         }
     });
 
     let move_effects_cases = def.move_effects.iter().map(|(idx, fn_name)| {
         quote! {
-            #idx => {data.out_dealt_damage = #fn_name(&effects, user, target, used_move) as u8; 1},
+            #idx => {data.out_dealt_damage = #fn_name(&mut dungeon, user, target, used_move) as u8; 1},
         }
     });
 
@@ -196,7 +196,8 @@ pub fn patches(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
             is_thrown: eos_rs::ffi::bool_
         ) -> eos_rs::ffi::bool_ {
             eos_rs::log_impl::register_logger();
-            let effects = eos_rs::api::dungeon_mode::DungeonEffectsEmitter::new_unchecked();
+            let lease = eos_rs::api::overlay::OverlayLoadLease::acquire_unchecked();
+            let mut dungeon = eos_rs::api::dungeon_mode::GlobalDungeonData::get(&lease);
             let user = &mut *user;
             let target = &mut *target;
             let used_item = &mut *used_item;
@@ -214,7 +215,8 @@ pub fn patches(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
             used_move: *mut eos_rs::ffi::move_,
         ) -> eos_rs::ffi::bool_ {
             eos_rs::log_impl::register_logger();
-            let effects = eos_rs::api::dungeon_mode::DungeonEffectsEmitter::new_unchecked();
+            let lease = eos_rs::api::overlay::OverlayLoadLease::acquire_unchecked();
+            let mut dungeon = eos_rs::api::dungeon_mode::GlobalDungeonData::get(&lease);
             let user = &mut *user;
             let target = &mut *target;
             let used_move = &mut *used_move;

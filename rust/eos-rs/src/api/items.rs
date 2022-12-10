@@ -1,5 +1,7 @@
 //! Structs and functions to interact with the data of items in a general context.
 
+use crate::api::_common::get_faint_reason;
+use crate::api::moves::MoveId;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ctypes::c_int;
 use crate::ffi;
@@ -115,6 +117,14 @@ impl ItemId {
                 sp_def_to_modify,
             )
         }
+    }
+
+    /// Gets the faint reason code (see HandleFaint) for a given move-item combination.
+    ///         
+    /// If there's no item, the reason code is the move ID. If the item is an orb, return
+    /// FAINT_REASON_ORB_ITEM. Otherwise, return FAINT_REASON_NON_ORB_ITEM.
+    pub fn get_faint_reason(&self, move_id: MoveId) -> ffi::faint_reason {
+        get_faint_reason(move_id, *self)
     }
 }
 

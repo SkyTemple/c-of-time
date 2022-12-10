@@ -1,5 +1,6 @@
 //! High level API.
 
+pub(crate) mod _common;
 pub mod abilities;
 pub mod dungeon_mode;
 pub mod dungeons;

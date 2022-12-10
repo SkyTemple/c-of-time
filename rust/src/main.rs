@@ -3,9 +3,7 @@
 
 extern crate eos_rs;
 
-use eos_rs::api::dungeon_mode::{
-    DungeonEffectsEmitter, DungeonEntity, DungeonRng, LogMessageBuilder,
-};
+use eos_rs::api::dungeon_mode::{DungeonEntity, DungeonRng, GlobalDungeonData, LogMessageBuilder};
 use eos_rs::api::fixed::I24F8;
 use eos_rs::api::items::{Item, ItemId};
 use eos_rs::api::moves::Move;
@@ -125,8 +123,14 @@ pub fn just_panic(_: i16, _: i16, _: &OverlayLoadLease<11>) -> i32 {
 }
 
 /// This causes the oran berry to afflict the burn status on the target.
-pub fn oran_berry_burn(
-    effects: &DungeonEffectsEmitter,
+///
+/// Note that `global_dungeon` technically "contains" `user` and `target`, highlighting
+/// again that the strict borrowing rules that Rust normally enforces are sometimes enforced
+/// somewhat liberally, both because we can't for sure say which operations really modify which
+/// regions of memory and to make these bindings somewhat easy and sensible to use.
+/// Tread with caution!
+pub fn oran_berry_burn<'a>(
+    global_dungeon: &'a mut GlobalDungeonData<'a>,
     user: &mut DungeonEntity,
     target: &mut DungeonEntity,
     used_item: &mut Item,
@@ -138,7 +142,10 @@ pub fn oran_berry_burn(
     // but for demonstration purposes we do it anyway.
     if used_item.id.val() == ItemId::ITEM_ORAN_BERRY {
         info!("oran_berry_burn detected Oran Berry.");
-        match effects.try_inflict_burn_status(user, target, false, true, false) {
+        match global_dungeon
+            .effects()
+            .try_inflict_burn_status(user, target, false, true, false)
+        {
             true => info!("oran_berry_burn successfully burned."),
             false => warn!("oran_berry_burn failed to burn."),
         }
@@ -147,8 +154,8 @@ pub fn oran_berry_burn(
 
 /// This causes the target to be badly poisoned when using the Cut move (1 in 4 chance).
 /// Move effect functions must return whether or not they dealt damage.
-pub fn cut_badly_poisoned(
-    effects: &DungeonEffectsEmitter,
+pub fn cut_badly_poisoned<'a>(
+    global_dungeon: &'a mut GlobalDungeonData<'a>,
     user: &mut DungeonEntity,
     target: &mut DungeonEntity,
     used_move: &mut Move,
@@ -158,6 +165,7 @@ pub fn cut_badly_poisoned(
     // since c-of-time will make sure this is only called for Cut,
     // but for demonstration purposes we do it anyway.
     if used_move.id.val() == MoveId::MOVE_CUT {
+        let effects = global_dungeon.effects();
         info!("cut_badly_poisoned detected Cut.");
         if random::rand_i32(0..4) == 0 {
             info!("cut_badly_poisoned rolled a 0.");

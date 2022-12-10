@@ -85,49 +85,6 @@ where
         }
     }
 }
-#[repr(C)]
-pub struct __BindgenUnionField<T>(::core::marker::PhantomData<T>);
-impl<T> __BindgenUnionField<T> {
-    #[inline]
-    pub const fn new() -> Self {
-        __BindgenUnionField(::core::marker::PhantomData)
-    }
-    #[inline]
-    pub unsafe fn as_ref(&self) -> &T {
-        ::core::mem::transmute(self)
-    }
-    #[inline]
-    pub unsafe fn as_mut(&mut self) -> &mut T {
-        ::core::mem::transmute(self)
-    }
-}
-impl<T> ::core::default::Default for __BindgenUnionField<T> {
-    #[inline]
-    fn default() -> Self {
-        Self::new()
-    }
-}
-impl<T> ::core::clone::Clone for __BindgenUnionField<T> {
-    #[inline]
-    fn clone(&self) -> Self {
-        Self::new()
-    }
-}
-impl<T> ::core::marker::Copy for __BindgenUnionField<T> {}
-impl<T> ::core::fmt::Debug for __BindgenUnionField<T> {
-    fn fmt(&self, fmt: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        fmt.write_str("__BindgenUnionField")
-    }
-}
-impl<T> ::core::hash::Hash for __BindgenUnionField<T> {
-    fn hash<H: ::core::hash::Hasher>(&self, _state: &mut H) {}
-}
-impl<T> ::core::cmp::PartialEq for __BindgenUnionField<T> {
-    fn eq(&self, _other: &__BindgenUnionField<T>) -> bool {
-        true
-    }
-}
-impl<T> ::core::cmp::Eq for __BindgenUnionField<T> {}
 pub type bool_ = u8;
 pub type wchar_t = crate::ctypes::c_short;
 pub type undefined1 = u8;
@@ -10374,6 +10331,52 @@ impl secondary_terrain_type_8 {
         __bindgen_bitfield_unit
     }
 }
+pub mod nature_power_variant {
+    pub type Type = crate::ctypes::c_uint;
+    pub const NATURE_POWER_SURF: Type = 0;
+    pub const NATURE_POWER_STUN_SPORE: Type = 1;
+    pub const NATURE_POWER_SHADOW_BALL: Type = 2;
+    pub const NATURE_POWER_SWIFT: Type = 3;
+    pub const NATURE_POWER_EARTHQUAKE: Type = 4;
+    pub const NATURE_POWER_RAZOR_LEAF: Type = 5;
+    pub const NATURE_POWER_BUBBLEBEAM: Type = 6;
+    pub const NATURE_POWER_ROCK_SLIDE: Type = 7;
+    pub const NATURE_POWER_EARTHQUAKE_2: Type = 8;
+    pub const NATURE_POWER_TRI_ATTACK: Type = 9;
+    pub const NATURE_POWER_HYDRO_PUMP: Type = 10;
+    pub const NATURE_POWER_BLIZZARD: Type = 11;
+    pub const NATURE_POWER_ICE_BEAM: Type = 12;
+    pub const NATURE_POWER_SEED_BOMB: Type = 13;
+    pub const NATURE_POWER_MUD_BOMB: Type = 14;
+}
+#[repr(C)]
+#[repr(align(2))]
+pub struct nature_power_variant_16 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 2usize]>,
+}
+impl nature_power_variant_16 {
+    #[inline]
+    pub fn val(&self) -> nature_power_variant::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 16u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: nature_power_variant::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 16u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(val: nature_power_variant::Type) -> __BindgenBitfieldUnit<[u8; 2usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 16u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
 pub mod mobility_type {
     pub type Type = crate::ctypes::c_uint;
     pub const MOBILITY_NORMAL: Type = 0;
@@ -11753,13 +11756,12 @@ impl mission_subtype_challenge_8 {
     }
 }
 #[repr(C)]
-pub struct mission_subtype {
-    pub none: __BindgenUnionField<u8>,
-    pub explore: __BindgenUnionField<mission_subtype_explore_8>,
-    pub take_item: __BindgenUnionField<mission_subtype_take_item_8>,
-    pub outlaw: __BindgenUnionField<mission_subtype_outlaw_8>,
-    pub challenge: __BindgenUnionField<mission_subtype_challenge_8>,
-    pub bindgen_union_field: u8,
+pub union mission_subtype {
+    pub none: ::core::mem::ManuallyDrop<u8>,
+    pub explore: ::core::mem::ManuallyDrop<mission_subtype_explore_8>,
+    pub take_item: ::core::mem::ManuallyDrop<mission_subtype_take_item_8>,
+    pub outlaw: ::core::mem::ManuallyDrop<mission_subtype_outlaw_8>,
+    pub challenge: ::core::mem::ManuallyDrop<mission_subtype_challenge_8>,
 }
 pub mod mission_reward_type {
     pub type Type = crate::ctypes::c_uint;
@@ -11834,10 +11836,9 @@ impl mission_restriction_type_8 {
     }
 }
 #[repr(C)]
-pub struct mission_restriction {
-    pub monster_id: __BindgenUnionField<monster_id_16>,
-    pub type_id: __BindgenUnionField<type_id_8>,
-    pub bindgen_union_field: u16,
+pub union mission_restriction {
+    pub monster_id: ::core::mem::ManuallyDrop<monster_id_16>,
+    pub type_id: ::core::mem::ManuallyDrop<type_id_8>,
 }
 pub mod mission_status {
     pub type Type = crate::ctypes::c_uint;
@@ -11877,6 +11878,16 @@ impl mission_status_8 {
         });
         __bindgen_bitfield_unit
     }
+}
+pub mod faint_reason_non_move {
+    pub type Type = crate::ctypes::c_uint;
+    pub const FAINT_REASON_ITEM_ORB: Type = 610;
+    pub const FAINT_REASON_ITEM_NON_ORB: Type = 611;
+}
+#[repr(C)]
+pub union faint_reason {
+    pub move_: ::core::mem::ManuallyDrop<move_id>,
+    pub other: ::core::mem::ManuallyDrop<faint_reason_non_move::Type>,
 }
 pub mod forced_loss_reason {
     pub type Type = crate::ctypes::c_uint;
@@ -16044,10 +16055,9 @@ impl visibility_flags {
     }
 }
 #[repr(C)]
-pub struct spawn_or_visibility_flags {
-    pub spawn: __BindgenUnionField<spawn_flags>,
-    pub visibility: __BindgenUnionField<visibility_flags>,
-    pub bindgen_union_field: u16,
+pub union spawn_or_visibility_flags {
+    pub spawn: ::core::mem::ManuallyDrop<spawn_flags>,
+    pub visibility: ::core::mem::ManuallyDrop<visibility_flags>,
 }
 #[repr(C)]
 pub struct tile {
@@ -16624,7 +16634,7 @@ pub struct tileset_property {
     pub field_0x5: u8,
     pub field_0x6: u8,
     pub _padding: u8,
-    pub field_0x8: i16,
+    pub nature_power_variant: nature_power_variant_16,
     pub field_0xa: u8,
     pub field_0xb: u8,
 }
@@ -17115,10 +17125,19 @@ pub struct weather_attributes {
     pub castform_male_id: monster_id_16,
     pub castform_female_id: monster_id_16,
 }
+pub type move_effect_fn_t = ::core::option::Option<
+    unsafe extern "C" fn(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_,
+>;
 #[repr(C)]
-pub struct nature_power_entry {
-    pub field_0x0: undefined4,
-    pub field_0x4: *mut undefined,
+pub struct wildcard_move_desc {
+    pub move_id: move_id_16,
+    pub _padding: u16,
+    pub do_move: move_effect_fn_t,
 }
 #[repr(C)]
 pub struct natural_gift_item_info {
@@ -17126,11 +17145,6 @@ pub struct natural_gift_item_info {
     pub type_id: type_id_8,
     pub _padding: u8,
     pub base_power_minus_one: i16,
-}
-#[repr(C)]
-pub struct metronome_table_entry {
-    pub move_id: move_id,
-    pub field_0x4: *mut undefined,
 }
 #[repr(C)]
 pub struct dungeon_menu_entry {
@@ -25757,6 +25771,9 @@ extern "C" {
     pub fn DungeonGoesUp(dungeon_id: dungeon_id) -> bool_;
 }
 extern "C" {
+    pub fn TreasureBoxDropsEnabled(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
     pub fn GetMaxRescueAttempts(dungeon_id: dungeon_id) -> i8;
 }
 extern "C" {
@@ -26104,6 +26121,15 @@ extern "C" {
 }
 extern "C" {
     pub fn DivideUIntNoZeroCheck(dividend: u32, divisor: u32) -> crate::ctypes::c_ulonglong;
+}
+extern "C" {
+    pub fn GetFaintReason(arg1: move_id, arg2: item_id) -> faint_reason;
+}
+extern "C" {
+    pub fn InitMove(move_: *mut move_, arg1: move_id);
+}
+extern "C" {
+    pub fn GetLowKickMultiplier(monster_id: monster_id) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn EntryArm7();
@@ -26481,7 +26507,7 @@ extern "C" {
     pub fn ChangeLeader();
 }
 extern "C" {
-    pub fn ResetDamageDesc(damage_desc: *mut undefined4);
+    pub fn ResetDamageData(damage: *mut damage_data);
 }
 extern "C" {
     pub fn GetSpriteIndex(monster_id: monster_id) -> u16;
@@ -26495,7 +26521,7 @@ extern "C" {
 extern "C" {
     pub fn HandleFaint(
         fainted_entity: *mut entity,
-        faint_reason: crate::ctypes::c_int,
+        faint_reason: faint_reason,
         killer: *mut entity,
     );
 }
@@ -26674,7 +26700,7 @@ extern "C" {
         damage_data: *mut damage_data,
         param_4: undefined4,
         param_5: *mut undefined4,
-        param_6: *mut undefined4,
+        faint_reason: faint_reason,
     ) -> bool_;
 }
 extern "C" {
@@ -27216,7 +27242,7 @@ extern "C" {
     pub fn ShouldMovePlayAlternativeAnimation(user: *mut entity, move_: *mut move_) -> bool_;
 }
 extern "C" {
-    pub fn DealDamageWithRecoil(
+    pub fn DoMoveDamageWithRecoil(
         attacker: *mut entity,
         defender: *mut entity,
         move_: *mut move_,
@@ -27247,17 +27273,17 @@ extern "C" {
         defender: *mut entity,
         move_: *mut move_,
         power: crate::ctypes::c_int,
-        param_5: undefined4,
-        param_6: undefined4,
-    );
+        damage_mult_fp: crate::ctypes::c_int,
+        item_id: item_id,
+    ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn CalcDamageFinal(
         attacker: *mut entity,
         defender: *mut entity,
         move_: *mut move_,
-        param_4: undefined4,
-        param_5: *mut undefined4,
+        damage_out: *mut damage_data,
+        faint_reason: faint_reason,
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
@@ -27820,6 +27846,1118 @@ extern "C" {
     pub fn OthersMenu() -> undefined;
 }
 extern "C" {
+    pub fn IsMarowakTrainingMaze() -> bool_;
+}
+extern "C" {
+    pub fn TrySpawnEnemyItemDrop(attacker: *mut entity, defender: *mut entity);
+}
+extern "C" {
+    pub fn GetFaintReasonWrapper(move_: *mut move_, item_id: item_id) -> faint_reason;
+}
+extern "C" {
+    pub fn DoMoveDamage(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveIronTail(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveYawn(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveNightmare(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCharm(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEncore(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSuperFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePainSplit(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTorment(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSwagger(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageCringe30(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveWhirlpool(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFakeTears(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSpite(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSmokescreen(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFlatter(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveWillOWisp(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveReturn(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFlameWheel(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveGust(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveParalyze(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageLowerDef20(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBite(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageParalyze20(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEndeavor(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFacade(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageLowerSpeed20(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBrickBreak(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRockTomb(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageDrain(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveReversal(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSmellingSalt(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMetalSound(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTickle(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveOutrage(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageWeightDependent(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveAncientPower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRapidSpin(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageFreeze15(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveScaryFace(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRockClimb(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEarthquake(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn GetNaturePowerVariant() -> nature_power_variant::Type;
+}
+extern "C" {
+    pub fn DoMoveNaturePower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveLick(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFissure(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveExtrasensory(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveAbsorb(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSkillSwap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHeadbutt(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDoubleEdge(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSandAttack(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamagePoison40(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSacredFire(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSheerCold(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageLowerAccuracy40(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTwister(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTwineedle(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSeismicToss(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSupersonic(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTaunt(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHornDrill(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveThundershock(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveThunderWave(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBlock(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePoisonGas(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveToxic(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePoisonFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePoisonSting(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTriAttack(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSwapItems(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTripleKick(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMudSlap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveThief(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRolePlay(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveLeer(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFakeOut(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePayDay(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCurse(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSuperpower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDynamicPunch(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveKnockOff(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSecretPower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDizzyPunch(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveImprison(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFeatherDance(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBeatUp(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBlastBurn(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCrushClaw(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBlazeKick(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePresent(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEruption(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePoisonTail(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRoar(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageConstrict10(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveWrap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMagnitude(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMistBall(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDestinyBond(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHiddenPower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveAttract(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCopycat(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFrustration(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveLeechSeed(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDreamEater(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDragonRage(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageLowerSpecialDefense50(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFling(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoHammerArm(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveGastroAcid(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCloseCombat(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveGuardSwap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveThunderFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDefog(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTrumpCard(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveIceFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePsychoShift(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEmbargo(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBrine(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveNaturalGift(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveGyroBall(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveChargeBeam(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageEatItem(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveLastResort(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageHpDependent(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHeartSwap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePowerSwap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFeint(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFlareBlitz(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFireFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMiracleEye(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveWakeUpSlap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHeadSmash(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCaptivate(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageInlined(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn GenerateStandardItem(
+        item: *mut item,
+        item_id: item_id,
+        sticky_type: gen_item_stickiness::Type,
+    );
+}
+extern "C" {
+    pub fn SpawnEnemyItemDropWrapper(
+        entity: *mut entity,
+        pos: *mut position,
+        item: *mut item,
+        param_4: undefined4,
+    );
+}
+extern "C" {
+    pub fn SpawnEnemyItemDrop(
+        entity: *mut entity,
+        item_entity: *mut entity,
+        item: *mut item,
+        param_4: crate::ctypes::c_int,
+        dir_xy: *mut i16,
+        param_6: undefined,
+    );
+}
+extern "C" {
+    pub fn TryGenerateUnownStoneDrop(item: *mut item, monster_id: monster_id) -> bool_;
+}
+extern "C" {
     pub fn TeamMenu(leader: *mut entity) -> undefined;
 }
 extern "C" {
@@ -28048,6 +29186,12 @@ extern "C" {
     pub static mut SMD_EVENTS_FUN_TABLE: [*mut crate::ctypes::c_void; 127usize];
 }
 extern "C" {
+    pub static mut FAINT_REASON_CODE_ORB_ITEM: faint_reason_non_move::Type;
+}
+extern "C" {
+    pub static mut FAINT_REASON_CODE_NON_ORB_ITEM: faint_reason_non_move::Type;
+}
+extern "C" {
     pub static mut FIRST_DUNGEON_WITH_MONSTER_HOUSE_TRAPS: dungeon_id_8;
 }
 extern "C" {
@@ -28063,7 +29207,7 @@ extern "C" {
     pub static mut OREN_BERRY_DAMAGE: i16;
 }
 extern "C" {
-    pub static mut UNOWN_STONE_DROP_CHANCE: crate::ctypes::c_int;
+    pub static mut UNOWN_STONE_DROP_CHANCE: i16;
 }
 extern "C" {
     pub static mut SITRUS_BERRY_HP_RESTORATION: i16;
@@ -28186,10 +29330,10 @@ extern "C" {
     pub static mut DEFENSIVE_STAT_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
 }
 extern "C" {
-    pub static mut NATURE_POWER_TABLE: [nature_power_entry; 15usize];
+    pub static mut NATURE_POWER_TABLE: [wildcard_move_desc; 15usize];
 }
 extern "C" {
-    pub static mut PLUCK_ITEM_EAT_TABLE: [undefined; 132usize];
+    pub static mut APPLES_AND_BERRIES_ITEM_IDS: [item_id_16; 66usize];
 }
 extern "C" {
     pub static mut RECRUITMENT_LEVEL_BOOST_TABLE: [i16; 102usize];
@@ -28226,7 +29370,7 @@ extern "C" {
         [fixed_room_monster_spawn_stats_entry; 99usize];
 }
 extern "C" {
-    pub static mut METRONOME_TABLE: [metronome_table_entry; 168usize];
+    pub static mut METRONOME_TABLE: [wildcard_move_desc; 168usize];
 }
 extern "C" {
     pub static mut TILESET_PROPERTIES: [tileset_property; 199usize];
@@ -28248,6 +29392,138 @@ extern "C" {
 }
 extern "C" {
     pub static mut SPECIAL_MONSTER_MOVE_ANIMATION_INFO: [special_monster_move_animation; 7422usize];
+}
+extern "C" {
+    pub static mut IRON_TAIL_LOWER_DEFENSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut TWINEEDLE_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut EXTRASENSORY_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ROCK_SLIDE_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut CRUNCH_LOWER_DEFENSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut MUDDY_WATER_LOWER_ACCURACY_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ANCIENTPOWER_BOOST_CHANCE: i16;
+}
+extern "C" {
+    pub static mut POISON_TAIL_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut THUNDERSHOCK_PARALYZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut HEADBUTT_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut FIRE_FANG_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut SACRED_FIRE_BURN_CHANCE: i16;
+}
+extern "C" {
+    pub static mut WHIRLPOOL_CONSTRICTION_CHANCE: i16;
+}
+extern "C" {
+    pub static mut MIST_BALL_LOWER_SPECIAL_ATTACK_CHANCE: i16;
+}
+extern "C" {
+    pub static mut CHARGE_BEAM_BOOST_SPECIAL_ATTACK_CHANCE: i16;
+}
+extern "C" {
+    pub static mut LUSTER_PURGE_LOWER_SPECIAL_DEFENSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut CONSTRICT_LOWER_SPEED_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ICE_FANG_FREEZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut SMOG_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut LICK_PARALYZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut THUNDER_FANG_PARALYZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut BITE_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ICE_FANG_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut BLAZE_KICK_BURN_CHANCE: i16;
+}
+extern "C" {
+    pub static mut DIZZY_PUNCH_CONFUSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut SECRET_POWER_EFFECT_CHANCE: i16;
+}
+extern "C" {
+    pub static mut CRUSH_CLAW_LOWER_DEFENSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut BLIZZARD_FREEZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut POISON_STING_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut POISON_FANG_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut THUNDER_PARALYZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut TWISTER_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut FAKE_OUT_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut THUNDER_FANG_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut FLARE_BLITZ_BURN_CHANCE: i16;
+}
+extern "C" {
+    pub static mut FLAME_WHEEL_BURN_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ROCK_CLIMB_CONFUSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut TRI_ATTACK_STATUS_CHANCE: i16;
+}
+extern "C" {
+    pub static mut DRAGON_RAGE_FIXED_DAMAGE: i16;
+}
+extern "C" {
+    pub static mut FACADE_DAMAGE_MULTIPLIER: crate::ctypes::c_int;
+}
+extern "C" {
+    pub static mut IMPRISON_TURN_RANGE: [i16; 2usize];
+}
+extern "C" {
+    pub static mut NIGHTMARE_TURN_RANGE: [i16; 2usize];
+}
+extern "C" {
+    pub static mut SMOKESCREEN_TURN_RANGE: [i16; 2usize];
+}
+extern "C" {
+    pub static mut YAWN_TURN_RANGE: [i16; 2usize];
 }
 extern "C" {
     pub static mut SCRIPT_OP_CODES: script_opcode_table;

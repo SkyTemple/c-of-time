@@ -320,25 +320,53 @@ pub trait DungeonMonsterRead: private::Sealed {
     /// One of `param_5` or `param_6` is probably the output struct.
     ///
     /// The signature of this method WILL change once we figure out what the parameters are.
-    ///
-    /// # Safety
-    /// The caller must make sure the undefined params are valid for this function.
-    unsafe fn calc_damage_projectile(
+    fn calc_damage_projectile(
         &self,
         defender: &DungeonEntity,
         used_move: &Move,
         move_power: i32,
-        param_5: ffi::undefined4,
-        param_6: ffi::undefined4,
-    ) {
-        ffi::CalcDamageProjectile(
-            force_mut_ptr!(self.entity()),
-            force_mut_ptr!(defender),
-            force_mut_ptr!(used_move),
-            move_power,
-            param_5,
-            param_6,
-        )
+        damage_multiplier: I24F8,
+        item_id: ItemId,
+    ) -> i32 {
+        unsafe {
+            ffi::CalcDamageProjectile(
+                force_mut_ptr!(self.entity()),
+                force_mut_ptr!(defender),
+                force_mut_ptr!(used_move),
+                move_power,
+                damage_multiplier.to_bits(),
+                item_id,
+            )
+        }
+    }
+
+    /// Last function called by [`DungeonEffectsEmitter::deal_damage`] to determine the final
+    /// damage dealt by the move.
+    ///
+    /// The result of this call is the return value of DealDamage.
+    ///
+    /// # Arguments
+    /// * `attacker` - attacker pointer
+    /// * `defender` - defender pointer
+    /// * `the_move` - pointer to move data
+    /// * `damage_out` - struct containing info about the damage calculation
+    /// * `faint_reason` - faint reason
+    fn calc_damage_final(
+        &self,
+        defender: &DungeonEntity,
+        used_move: &Move,
+        damage_out: &mut ffi::damage_data,
+        faint_reason: ffi::faint_reason,
+    ) -> i32 {
+        unsafe {
+            ffi::CalcDamageFinal(
+                force_mut_ptr!(self.entity()),
+                force_mut_ptr!(defender),
+                force_mut_ptr!(used_move),
+                damage_out,
+                faint_reason,
+            )
+        }
     }
 
     /// Checks if a monster can target another entity when controlled by the AI.
