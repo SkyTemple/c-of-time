@@ -116,5 +116,5 @@ pub fn generate_cotpatch(out_file: &Path) {
     visitor.visit_file(&syntax);
 
     fs::write(out_file, cotpatch)
-        .unwrap_or_else(|_| panic!("Unable to write to file: {:?}", out_file));
+        .unwrap_or_else(|_| panic!("Unable to write to file: {out_file:?}"));
 }
