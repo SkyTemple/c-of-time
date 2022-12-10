@@ -1311,13 +1311,16 @@ impl<'a> GlobalDungeonData<'a> {
         ffi::RunLeaderTurn(param_1) > 0
     }
 
-    /// This appears to be the function that actually performs the leader's action within
-    /// [`Self::run_leader_turn`].
+    /// Sets the leader's action field depending on the inputs given by the player.
     ///
-    /// Note: unverified, ported from Irdkwia's notes
-    pub fn perform_leader_action(&mut self) {
+    /// This function also accounts for other special situations that can force a certain action,
+    /// such as when the leader is running. The function also takes care of opening the main menu
+    /// when X is pressed.
+    ///
+    /// The function generally doesn't return until the player has an action set.
+    pub fn set_leader_action(&mut self) {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::PerformLeaderAction() }
+        unsafe { ffi::SetLeaderAction() }
     }
 
     /// Called at the beginning of [`Self::run_fractional_turn`]. Executed only if

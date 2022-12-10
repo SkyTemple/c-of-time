@@ -153,1666 +153,3331 @@ impl monster_id {
     pub const MONSTER_NONE: monster_id = monster_id(0);
 }
 impl monster_id {
+    pub const MONSTER_NONE_SECONDARY: monster_id = monster_id(600);
+}
+impl monster_id {
     pub const MONSTER_BULBASAUR: monster_id = monster_id(1);
+}
+impl monster_id {
+    pub const MONSTER_BULBASAUR_SECONDARY: monster_id = monster_id(601);
 }
 impl monster_id {
     pub const MONSTER_IVYSAUR: monster_id = monster_id(2);
 }
 impl monster_id {
+    pub const MONSTER_IVYSAUR_SECONDARY: monster_id = monster_id(602);
+}
+impl monster_id {
     pub const MONSTER_VENUSAUR: monster_id = monster_id(3);
+}
+impl monster_id {
+    pub const MONSTER_VENUSAUR_SECONDARY: monster_id = monster_id(603);
 }
 impl monster_id {
     pub const MONSTER_CHARMANDER: monster_id = monster_id(4);
 }
 impl monster_id {
+    pub const MONSTER_CHARMANDER_SECONDARY: monster_id = monster_id(604);
+}
+impl monster_id {
     pub const MONSTER_CHARMELEON: monster_id = monster_id(5);
+}
+impl monster_id {
+    pub const MONSTER_CHARMELEON_SECONDARY: monster_id = monster_id(605);
 }
 impl monster_id {
     pub const MONSTER_CHARIZARD: monster_id = monster_id(6);
 }
 impl monster_id {
+    pub const MONSTER_CHARIZARD_SECONDARY: monster_id = monster_id(606);
+}
+impl monster_id {
     pub const MONSTER_SQUIRTLE: monster_id = monster_id(7);
+}
+impl monster_id {
+    pub const MONSTER_SQUIRTLE_SECONDARY: monster_id = monster_id(607);
 }
 impl monster_id {
     pub const MONSTER_WARTORTLE: monster_id = monster_id(8);
 }
 impl monster_id {
+    pub const MONSTER_WARTORTLE_SECONDARY: monster_id = monster_id(608);
+}
+impl monster_id {
     pub const MONSTER_BLASTOISE: monster_id = monster_id(9);
+}
+impl monster_id {
+    pub const MONSTER_BLASTOISE_SECONDARY: monster_id = monster_id(609);
 }
 impl monster_id {
     pub const MONSTER_CATERPIE: monster_id = monster_id(10);
 }
 impl monster_id {
+    pub const MONSTER_CATERPIE_SECONDARY: monster_id = monster_id(610);
+}
+impl monster_id {
     pub const MONSTER_METAPOD: monster_id = monster_id(11);
+}
+impl monster_id {
+    pub const MONSTER_METAPOD_SECONDARY: monster_id = monster_id(611);
 }
 impl monster_id {
     pub const MONSTER_BUTTERFREE: monster_id = monster_id(12);
 }
 impl monster_id {
+    pub const MONSTER_BUTTERFREE_SECONDARY: monster_id = monster_id(612);
+}
+impl monster_id {
     pub const MONSTER_WEEDLE: monster_id = monster_id(13);
+}
+impl monster_id {
+    pub const MONSTER_WEEDLE_SECONDARY: monster_id = monster_id(613);
 }
 impl monster_id {
     pub const MONSTER_KAKUNA: monster_id = monster_id(14);
 }
 impl monster_id {
+    pub const MONSTER_KAKUNA_SECONDARY: monster_id = monster_id(614);
+}
+impl monster_id {
     pub const MONSTER_BEEDRILL: monster_id = monster_id(15);
+}
+impl monster_id {
+    pub const MONSTER_BEEDRILL_SECONDARY: monster_id = monster_id(615);
 }
 impl monster_id {
     pub const MONSTER_PIDGEY: monster_id = monster_id(16);
 }
 impl monster_id {
+    pub const MONSTER_PIDGEY_SECONDARY: monster_id = monster_id(616);
+}
+impl monster_id {
     pub const MONSTER_PIDGEOTTO: monster_id = monster_id(17);
+}
+impl monster_id {
+    pub const MONSTER_PIDGEOTTO_SECONDARY: monster_id = monster_id(617);
 }
 impl monster_id {
     pub const MONSTER_PIDGEOT: monster_id = monster_id(18);
 }
 impl monster_id {
+    pub const MONSTER_PIDGEOT_SECONDARY: monster_id = monster_id(618);
+}
+impl monster_id {
     pub const MONSTER_RATTATA: monster_id = monster_id(19);
+}
+impl monster_id {
+    pub const MONSTER_RATTATA_SECONDARY: monster_id = monster_id(619);
 }
 impl monster_id {
     pub const MONSTER_RATICATE: monster_id = monster_id(20);
 }
 impl monster_id {
+    pub const MONSTER_RATICATE_SECONDARY: monster_id = monster_id(620);
+}
+impl monster_id {
     pub const MONSTER_SPEAROW: monster_id = monster_id(21);
+}
+impl monster_id {
+    pub const MONSTER_SPEAROW_SECONDARY: monster_id = monster_id(621);
 }
 impl monster_id {
     pub const MONSTER_FEAROW: monster_id = monster_id(22);
 }
 impl monster_id {
+    pub const MONSTER_FEAROW_SECONDARY: monster_id = monster_id(622);
+}
+impl monster_id {
     pub const MONSTER_EKANS: monster_id = monster_id(23);
+}
+impl monster_id {
+    pub const MONSTER_EKANS_SECONDARY: monster_id = monster_id(623);
 }
 impl monster_id {
     pub const MONSTER_ARBOK: monster_id = monster_id(24);
 }
 impl monster_id {
+    pub const MONSTER_ARBOK_SECONDARY: monster_id = monster_id(624);
+}
+impl monster_id {
     pub const MONSTER_PIKACHU: monster_id = monster_id(25);
+}
+impl monster_id {
+    pub const MONSTER_PIKACHU_SECONDARY: monster_id = monster_id(625);
 }
 impl monster_id {
     pub const MONSTER_RAICHU: monster_id = monster_id(26);
 }
 impl monster_id {
+    pub const MONSTER_RAICHU_SECONDARY: monster_id = monster_id(626);
+}
+impl monster_id {
     pub const MONSTER_SANDSHREW: monster_id = monster_id(27);
+}
+impl monster_id {
+    pub const MONSTER_SANDSHREW_SECONDARY: monster_id = monster_id(627);
 }
 impl monster_id {
     pub const MONSTER_SANDSLASH: monster_id = monster_id(28);
 }
 impl monster_id {
+    pub const MONSTER_SANDSLASH_SECONDARY: monster_id = monster_id(628);
+}
+impl monster_id {
     pub const MONSTER_NIDORAN_F: monster_id = monster_id(29);
+}
+impl monster_id {
+    pub const MONSTER_NIDORAN_F_SECONDARY: monster_id = monster_id(629);
 }
 impl monster_id {
     pub const MONSTER_NIDORINA: monster_id = monster_id(30);
 }
 impl monster_id {
+    pub const MONSTER_NIDORINA_SECONDARY: monster_id = monster_id(630);
+}
+impl monster_id {
     pub const MONSTER_NIDOQUEEN: monster_id = monster_id(31);
+}
+impl monster_id {
+    pub const MONSTER_NIDOQUEEN_SECONDARY: monster_id = monster_id(631);
 }
 impl monster_id {
     pub const MONSTER_NIDORAN_M: monster_id = monster_id(32);
 }
 impl monster_id {
+    pub const MONSTER_NIDORAN_M_SECONDARY: monster_id = monster_id(632);
+}
+impl monster_id {
     pub const MONSTER_NIDORINO: monster_id = monster_id(33);
+}
+impl monster_id {
+    pub const MONSTER_NIDORINO_SECONDARY: monster_id = monster_id(633);
 }
 impl monster_id {
     pub const MONSTER_NIDOKING: monster_id = monster_id(34);
 }
 impl monster_id {
+    pub const MONSTER_NIDOKING_SECONDARY: monster_id = monster_id(634);
+}
+impl monster_id {
     pub const MONSTER_CLEFAIRY: monster_id = monster_id(35);
+}
+impl monster_id {
+    pub const MONSTER_CLEFAIRY_SECONDARY: monster_id = monster_id(635);
 }
 impl monster_id {
     pub const MONSTER_CLEFABLE: monster_id = monster_id(36);
 }
 impl monster_id {
+    pub const MONSTER_CLEFABLE_SECONDARY: monster_id = monster_id(636);
+}
+impl monster_id {
     pub const MONSTER_VULPIX: monster_id = monster_id(37);
+}
+impl monster_id {
+    pub const MONSTER_VULPIX_SECONDARY: monster_id = monster_id(637);
 }
 impl monster_id {
     pub const MONSTER_NINETALES: monster_id = monster_id(38);
 }
 impl monster_id {
+    pub const MONSTER_NINETALES_SECONDARY: monster_id = monster_id(638);
+}
+impl monster_id {
     pub const MONSTER_JIGGLYPUFF: monster_id = monster_id(39);
+}
+impl monster_id {
+    pub const MONSTER_JIGGLYPUFF_SECONDARY: monster_id = monster_id(639);
 }
 impl monster_id {
     pub const MONSTER_WIGGLYTUFF: monster_id = monster_id(40);
 }
 impl monster_id {
+    pub const MONSTER_WIGGLYTUFF_SECONDARY: monster_id = monster_id(640);
+}
+impl monster_id {
     pub const MONSTER_ZUBAT: monster_id = monster_id(41);
+}
+impl monster_id {
+    pub const MONSTER_ZUBAT_SECONDARY: monster_id = monster_id(641);
 }
 impl monster_id {
     pub const MONSTER_GOLBAT: monster_id = monster_id(42);
 }
 impl monster_id {
+    pub const MONSTER_GOLBAT_SECONDARY: monster_id = monster_id(642);
+}
+impl monster_id {
     pub const MONSTER_ODDISH: monster_id = monster_id(43);
+}
+impl monster_id {
+    pub const MONSTER_ODDISH_SECONDARY: monster_id = monster_id(643);
 }
 impl monster_id {
     pub const MONSTER_GLOOM: monster_id = monster_id(44);
 }
 impl monster_id {
+    pub const MONSTER_GLOOM_SECONDARY: monster_id = monster_id(644);
+}
+impl monster_id {
     pub const MONSTER_VILEPLUME: monster_id = monster_id(45);
+}
+impl monster_id {
+    pub const MONSTER_VILEPLUME_SECONDARY: monster_id = monster_id(645);
 }
 impl monster_id {
     pub const MONSTER_PARAS: monster_id = monster_id(46);
 }
 impl monster_id {
+    pub const MONSTER_PARAS_SECONDARY: monster_id = monster_id(646);
+}
+impl monster_id {
     pub const MONSTER_PARASECT: monster_id = monster_id(47);
+}
+impl monster_id {
+    pub const MONSTER_PARASECT_SECONDARY: monster_id = monster_id(647);
 }
 impl monster_id {
     pub const MONSTER_VENONAT: monster_id = monster_id(48);
 }
 impl monster_id {
+    pub const MONSTER_VENONAT_SECONDARY: monster_id = monster_id(648);
+}
+impl monster_id {
     pub const MONSTER_VENOMOTH: monster_id = monster_id(49);
+}
+impl monster_id {
+    pub const MONSTER_VENOMOTH_SECONDARY: monster_id = monster_id(649);
 }
 impl monster_id {
     pub const MONSTER_DIGLETT: monster_id = monster_id(50);
 }
 impl monster_id {
+    pub const MONSTER_DIGLETT_SECONDARY: monster_id = monster_id(650);
+}
+impl monster_id {
     pub const MONSTER_DUGTRIO: monster_id = monster_id(51);
+}
+impl monster_id {
+    pub const MONSTER_DUGTRIO_SECONDARY: monster_id = monster_id(651);
 }
 impl monster_id {
     pub const MONSTER_MEOWTH: monster_id = monster_id(52);
 }
 impl monster_id {
+    pub const MONSTER_MEOWTH_SECONDARY: monster_id = monster_id(652);
+}
+impl monster_id {
     pub const MONSTER_PERSIAN: monster_id = monster_id(53);
+}
+impl monster_id {
+    pub const MONSTER_PERSIAN_SECONDARY: monster_id = monster_id(653);
 }
 impl monster_id {
     pub const MONSTER_PSYDUCK: monster_id = monster_id(54);
 }
 impl monster_id {
+    pub const MONSTER_PSYDUCK_SECONDARY: monster_id = monster_id(654);
+}
+impl monster_id {
     pub const MONSTER_GOLDUCK: monster_id = monster_id(55);
+}
+impl monster_id {
+    pub const MONSTER_GOLDUCK_SECONDARY: monster_id = monster_id(655);
 }
 impl monster_id {
     pub const MONSTER_MANKEY: monster_id = monster_id(56);
 }
 impl monster_id {
+    pub const MONSTER_MANKEY_SECONDARY: monster_id = monster_id(656);
+}
+impl monster_id {
     pub const MONSTER_PRIMEAPE: monster_id = monster_id(57);
+}
+impl monster_id {
+    pub const MONSTER_PRIMEAPE_SECONDARY: monster_id = monster_id(657);
 }
 impl monster_id {
     pub const MONSTER_GROWLITHE: monster_id = monster_id(58);
 }
 impl monster_id {
+    pub const MONSTER_GROWLITHE_SECONDARY: monster_id = monster_id(658);
+}
+impl monster_id {
     pub const MONSTER_ARCANINE: monster_id = monster_id(59);
+}
+impl monster_id {
+    pub const MONSTER_ARCANINE_SECONDARY: monster_id = monster_id(659);
 }
 impl monster_id {
     pub const MONSTER_POLIWAG: monster_id = monster_id(60);
 }
 impl monster_id {
+    pub const MONSTER_POLIWAG_SECONDARY: monster_id = monster_id(660);
+}
+impl monster_id {
     pub const MONSTER_POLIWHIRL: monster_id = monster_id(61);
+}
+impl monster_id {
+    pub const MONSTER_POLIWHIRL_SECONDARY: monster_id = monster_id(661);
 }
 impl monster_id {
     pub const MONSTER_POLIWRATH: monster_id = monster_id(62);
 }
 impl monster_id {
+    pub const MONSTER_POLIWRATH_SECONDARY: monster_id = monster_id(662);
+}
+impl monster_id {
     pub const MONSTER_ABRA: monster_id = monster_id(63);
+}
+impl monster_id {
+    pub const MONSTER_ABRA_SECONDARY: monster_id = monster_id(663);
 }
 impl monster_id {
     pub const MONSTER_KADABRA: monster_id = monster_id(64);
 }
 impl monster_id {
+    pub const MONSTER_KADABRA_SECONDARY: monster_id = monster_id(664);
+}
+impl monster_id {
     pub const MONSTER_ALAKAZAM: monster_id = monster_id(65);
+}
+impl monster_id {
+    pub const MONSTER_ALAKAZAM_SECONDARY: monster_id = monster_id(665);
 }
 impl monster_id {
     pub const MONSTER_MACHOP: monster_id = monster_id(66);
 }
 impl monster_id {
+    pub const MONSTER_MACHOP_SECONDARY: monster_id = monster_id(666);
+}
+impl monster_id {
     pub const MONSTER_MACHOKE: monster_id = monster_id(67);
+}
+impl monster_id {
+    pub const MONSTER_MACHOKE_SECONDARY: monster_id = monster_id(667);
 }
 impl monster_id {
     pub const MONSTER_MACHAMP: monster_id = monster_id(68);
 }
 impl monster_id {
+    pub const MONSTER_MACHAMP_SECONDARY: monster_id = monster_id(668);
+}
+impl monster_id {
     pub const MONSTER_BELLSPROUT: monster_id = monster_id(69);
+}
+impl monster_id {
+    pub const MONSTER_BELLSPROUT_SECONDARY: monster_id = monster_id(669);
 }
 impl monster_id {
     pub const MONSTER_WEEPINBELL: monster_id = monster_id(70);
 }
 impl monster_id {
+    pub const MONSTER_WEEPINBELL_SECONDARY: monster_id = monster_id(670);
+}
+impl monster_id {
     pub const MONSTER_VICTREEBEL: monster_id = monster_id(71);
+}
+impl monster_id {
+    pub const MONSTER_VICTREEBEL_SECONDARY: monster_id = monster_id(671);
 }
 impl monster_id {
     pub const MONSTER_TENTACOOL: monster_id = monster_id(72);
 }
 impl monster_id {
+    pub const MONSTER_TENTACOOL_SECONDARY: monster_id = monster_id(672);
+}
+impl monster_id {
     pub const MONSTER_TENTACRUEL: monster_id = monster_id(73);
+}
+impl monster_id {
+    pub const MONSTER_TENTACRUEL_SECONDARY: monster_id = monster_id(673);
 }
 impl monster_id {
     pub const MONSTER_GEODUDE: monster_id = monster_id(74);
 }
 impl monster_id {
+    pub const MONSTER_GEODUDE_SECONDARY: monster_id = monster_id(674);
+}
+impl monster_id {
     pub const MONSTER_GRAVELER: monster_id = monster_id(75);
+}
+impl monster_id {
+    pub const MONSTER_GRAVELER_SECONDARY: monster_id = monster_id(675);
 }
 impl monster_id {
     pub const MONSTER_GOLEM: monster_id = monster_id(76);
 }
 impl monster_id {
+    pub const MONSTER_GOLEM_SECONDARY: monster_id = monster_id(676);
+}
+impl monster_id {
     pub const MONSTER_PONYTA: monster_id = monster_id(77);
+}
+impl monster_id {
+    pub const MONSTER_PONYTA_SECONDARY: monster_id = monster_id(677);
 }
 impl monster_id {
     pub const MONSTER_RAPIDASH: monster_id = monster_id(78);
 }
 impl monster_id {
+    pub const MONSTER_RAPIDASH_SECONDARY: monster_id = monster_id(678);
+}
+impl monster_id {
     pub const MONSTER_SLOWPOKE: monster_id = monster_id(79);
+}
+impl monster_id {
+    pub const MONSTER_SLOWPOKE_SECONDARY: monster_id = monster_id(679);
 }
 impl monster_id {
     pub const MONSTER_SLOWBRO: monster_id = monster_id(80);
 }
 impl monster_id {
+    pub const MONSTER_SLOWBRO_SECONDARY: monster_id = monster_id(680);
+}
+impl monster_id {
     pub const MONSTER_MAGNEMITE: monster_id = monster_id(81);
+}
+impl monster_id {
+    pub const MONSTER_MAGNEMITE_SECONDARY: monster_id = monster_id(681);
 }
 impl monster_id {
     pub const MONSTER_MAGNETON: monster_id = monster_id(82);
 }
 impl monster_id {
+    pub const MONSTER_MAGNETON_SECONDARY: monster_id = monster_id(682);
+}
+impl monster_id {
     pub const MONSTER_FARFETCHD: monster_id = monster_id(83);
+}
+impl monster_id {
+    pub const MONSTER_FARFETCHD_SECONDARY: monster_id = monster_id(683);
 }
 impl monster_id {
     pub const MONSTER_DODUO: monster_id = monster_id(84);
 }
 impl monster_id {
+    pub const MONSTER_DODUO_SECONDARY: monster_id = monster_id(684);
+}
+impl monster_id {
     pub const MONSTER_DODRIO: monster_id = monster_id(85);
+}
+impl monster_id {
+    pub const MONSTER_DODRIO_SECONDARY: monster_id = monster_id(685);
 }
 impl monster_id {
     pub const MONSTER_SEEL: monster_id = monster_id(86);
 }
 impl monster_id {
+    pub const MONSTER_SEEL_SECONDARY: monster_id = monster_id(686);
+}
+impl monster_id {
     pub const MONSTER_DEWGONG: monster_id = monster_id(87);
+}
+impl monster_id {
+    pub const MONSTER_DEWGONG_SECONDARY: monster_id = monster_id(687);
 }
 impl monster_id {
     pub const MONSTER_GRIMER: monster_id = monster_id(88);
 }
 impl monster_id {
+    pub const MONSTER_GRIMER_SECONDARY: monster_id = monster_id(688);
+}
+impl monster_id {
     pub const MONSTER_MUK: monster_id = monster_id(89);
+}
+impl monster_id {
+    pub const MONSTER_MUK_SECONDARY: monster_id = monster_id(689);
 }
 impl monster_id {
     pub const MONSTER_SHELLDER: monster_id = monster_id(90);
 }
 impl monster_id {
+    pub const MONSTER_SHELLDER_SECONDARY: monster_id = monster_id(690);
+}
+impl monster_id {
     pub const MONSTER_CLOYSTER: monster_id = monster_id(91);
+}
+impl monster_id {
+    pub const MONSTER_CLOYSTER_SECONDARY: monster_id = monster_id(691);
 }
 impl monster_id {
     pub const MONSTER_GASTLY: monster_id = monster_id(92);
 }
 impl monster_id {
+    pub const MONSTER_GASTLY_SECONDARY: monster_id = monster_id(692);
+}
+impl monster_id {
     pub const MONSTER_HAUNTER: monster_id = monster_id(93);
+}
+impl monster_id {
+    pub const MONSTER_HAUNTER_SECONDARY: monster_id = monster_id(693);
 }
 impl monster_id {
     pub const MONSTER_GENGAR: monster_id = monster_id(94);
 }
 impl monster_id {
+    pub const MONSTER_GENGAR_SECONDARY: monster_id = monster_id(694);
+}
+impl monster_id {
     pub const MONSTER_ONIX: monster_id = monster_id(95);
+}
+impl monster_id {
+    pub const MONSTER_ONIX_SECONDARY: monster_id = monster_id(695);
 }
 impl monster_id {
     pub const MONSTER_DROWZEE: monster_id = monster_id(96);
 }
 impl monster_id {
+    pub const MONSTER_DROWZEE_SECONDARY: monster_id = monster_id(696);
+}
+impl monster_id {
     pub const MONSTER_HYPNO: monster_id = monster_id(97);
+}
+impl monster_id {
+    pub const MONSTER_HYPNO_SECONDARY: monster_id = monster_id(697);
 }
 impl monster_id {
     pub const MONSTER_KRABBY: monster_id = monster_id(98);
 }
 impl monster_id {
+    pub const MONSTER_KRABBY_SECONDARY: monster_id = monster_id(698);
+}
+impl monster_id {
     pub const MONSTER_KINGLER: monster_id = monster_id(99);
+}
+impl monster_id {
+    pub const MONSTER_KINGLER_SECONDARY: monster_id = monster_id(699);
 }
 impl monster_id {
     pub const MONSTER_VOLTORB: monster_id = monster_id(100);
 }
 impl monster_id {
+    pub const MONSTER_VOLTORB_SECONDARY: monster_id = monster_id(700);
+}
+impl monster_id {
     pub const MONSTER_ELECTRODE: monster_id = monster_id(101);
+}
+impl monster_id {
+    pub const MONSTER_ELECTRODE_SECONDARY: monster_id = monster_id(701);
 }
 impl monster_id {
     pub const MONSTER_EXEGGCUTE: monster_id = monster_id(102);
 }
 impl monster_id {
+    pub const MONSTER_EXEGGCUTE_SECONDARY: monster_id = monster_id(702);
+}
+impl monster_id {
     pub const MONSTER_EXEGGUTOR: monster_id = monster_id(103);
+}
+impl monster_id {
+    pub const MONSTER_EXEGGUTOR_SECONDARY: monster_id = monster_id(703);
 }
 impl monster_id {
     pub const MONSTER_CUBONE: monster_id = monster_id(104);
 }
 impl monster_id {
+    pub const MONSTER_CUBONE_SECONDARY: monster_id = monster_id(704);
+}
+impl monster_id {
     pub const MONSTER_MAROWAK: monster_id = monster_id(105);
+}
+impl monster_id {
+    pub const MONSTER_MAROWAK_SECONDARY: monster_id = monster_id(705);
 }
 impl monster_id {
     pub const MONSTER_HITMONLEE: monster_id = monster_id(106);
 }
 impl monster_id {
+    pub const MONSTER_HITMONLEE_SECONDARY: monster_id = monster_id(706);
+}
+impl monster_id {
     pub const MONSTER_HITMONCHAN: monster_id = monster_id(107);
+}
+impl monster_id {
+    pub const MONSTER_HITMONCHAN_SECONDARY: monster_id = monster_id(707);
 }
 impl monster_id {
     pub const MONSTER_LICKITUNG: monster_id = monster_id(108);
 }
 impl monster_id {
+    pub const MONSTER_LICKITUNG_SECONDARY: monster_id = monster_id(708);
+}
+impl monster_id {
     pub const MONSTER_KOFFING: monster_id = monster_id(109);
+}
+impl monster_id {
+    pub const MONSTER_KOFFING_SECONDARY: monster_id = monster_id(709);
 }
 impl monster_id {
     pub const MONSTER_WEEZING: monster_id = monster_id(110);
 }
 impl monster_id {
+    pub const MONSTER_WEEZING_SECONDARY: monster_id = monster_id(710);
+}
+impl monster_id {
     pub const MONSTER_RHYHORN: monster_id = monster_id(111);
+}
+impl monster_id {
+    pub const MONSTER_RHYHORN_SECONDARY: monster_id = monster_id(711);
 }
 impl monster_id {
     pub const MONSTER_RHYDON: monster_id = monster_id(112);
 }
 impl monster_id {
+    pub const MONSTER_RHYDON_SECONDARY: monster_id = monster_id(712);
+}
+impl monster_id {
     pub const MONSTER_CHANSEY: monster_id = monster_id(113);
+}
+impl monster_id {
+    pub const MONSTER_CHANSEY_SECONDARY: monster_id = monster_id(713);
 }
 impl monster_id {
     pub const MONSTER_TANGELA: monster_id = monster_id(114);
 }
 impl monster_id {
+    pub const MONSTER_TANGELA_SECONDARY: monster_id = monster_id(714);
+}
+impl monster_id {
     pub const MONSTER_KANGASKHAN: monster_id = monster_id(115);
+}
+impl monster_id {
+    pub const MONSTER_KANGASKHAN_SECONDARY: monster_id = monster_id(715);
 }
 impl monster_id {
     pub const MONSTER_HORSEA: monster_id = monster_id(116);
 }
 impl monster_id {
+    pub const MONSTER_HORSEA_SECONDARY: monster_id = monster_id(716);
+}
+impl monster_id {
     pub const MONSTER_SEADRA: monster_id = monster_id(117);
+}
+impl monster_id {
+    pub const MONSTER_SEADRA_SECONDARY: monster_id = monster_id(717);
 }
 impl monster_id {
     pub const MONSTER_GOLDEEN: monster_id = monster_id(118);
 }
 impl monster_id {
+    pub const MONSTER_GOLDEEN_SECONDARY: monster_id = monster_id(718);
+}
+impl monster_id {
     pub const MONSTER_SEAKING: monster_id = monster_id(119);
+}
+impl monster_id {
+    pub const MONSTER_SEAKING_SECONDARY: monster_id = monster_id(719);
 }
 impl monster_id {
     pub const MONSTER_STARYU: monster_id = monster_id(120);
 }
 impl monster_id {
+    pub const MONSTER_STARYU_SECONDARY: monster_id = monster_id(720);
+}
+impl monster_id {
     pub const MONSTER_STARMIE: monster_id = monster_id(121);
+}
+impl monster_id {
+    pub const MONSTER_STARMIE_SECONDARY: monster_id = monster_id(721);
 }
 impl monster_id {
     pub const MONSTER_MR_MIME: monster_id = monster_id(122);
 }
 impl monster_id {
+    pub const MONSTER_MR_MIME_SECONDARY: monster_id = monster_id(722);
+}
+impl monster_id {
     pub const MONSTER_SCYTHER: monster_id = monster_id(123);
+}
+impl monster_id {
+    pub const MONSTER_SCYTHER_SECONDARY: monster_id = monster_id(723);
 }
 impl monster_id {
     pub const MONSTER_JYNX: monster_id = monster_id(124);
 }
 impl monster_id {
+    pub const MONSTER_JYNX_SECONDARY: monster_id = monster_id(724);
+}
+impl monster_id {
     pub const MONSTER_ELECTABUZZ: monster_id = monster_id(125);
+}
+impl monster_id {
+    pub const MONSTER_ELECTABUZZ_SECONDARY: monster_id = monster_id(725);
 }
 impl monster_id {
     pub const MONSTER_MAGMAR: monster_id = monster_id(126);
 }
 impl monster_id {
+    pub const MONSTER_MAGMAR_SECONDARY: monster_id = monster_id(726);
+}
+impl monster_id {
     pub const MONSTER_PINSIR: monster_id = monster_id(127);
+}
+impl monster_id {
+    pub const MONSTER_PINSIR_SECONDARY: monster_id = monster_id(727);
 }
 impl monster_id {
     pub const MONSTER_TAUROS: monster_id = monster_id(128);
 }
 impl monster_id {
+    pub const MONSTER_TAUROS_SECONDARY: monster_id = monster_id(728);
+}
+impl monster_id {
     pub const MONSTER_MAGIKARP: monster_id = monster_id(129);
+}
+impl monster_id {
+    pub const MONSTER_MAGIKARP_SECONDARY: monster_id = monster_id(729);
 }
 impl monster_id {
     pub const MONSTER_GYARADOS: monster_id = monster_id(130);
 }
 impl monster_id {
+    pub const MONSTER_GYARADOS_SECONDARY: monster_id = monster_id(730);
+}
+impl monster_id {
     pub const MONSTER_LAPRAS: monster_id = monster_id(131);
+}
+impl monster_id {
+    pub const MONSTER_LAPRAS_SECONDARY: monster_id = monster_id(731);
 }
 impl monster_id {
     pub const MONSTER_DITTO: monster_id = monster_id(132);
 }
 impl monster_id {
+    pub const MONSTER_DITTO_SECONDARY: monster_id = monster_id(732);
+}
+impl monster_id {
     pub const MONSTER_EEVEE: monster_id = monster_id(133);
+}
+impl monster_id {
+    pub const MONSTER_EEVEE_SECONDARY: monster_id = monster_id(733);
 }
 impl monster_id {
     pub const MONSTER_VAPOREON: monster_id = monster_id(134);
 }
 impl monster_id {
+    pub const MONSTER_VAPOREON_SECONDARY: monster_id = monster_id(734);
+}
+impl monster_id {
     pub const MONSTER_JOLTEON: monster_id = monster_id(135);
+}
+impl monster_id {
+    pub const MONSTER_JOLTEON_SECONDARY: monster_id = monster_id(735);
 }
 impl monster_id {
     pub const MONSTER_FLAREON: monster_id = monster_id(136);
 }
 impl monster_id {
+    pub const MONSTER_FLAREON_SECONDARY: monster_id = monster_id(736);
+}
+impl monster_id {
     pub const MONSTER_PORYGON: monster_id = monster_id(137);
+}
+impl monster_id {
+    pub const MONSTER_PORYGON_SECONDARY: monster_id = monster_id(737);
 }
 impl monster_id {
     pub const MONSTER_OMANYTE: monster_id = monster_id(138);
 }
 impl monster_id {
+    pub const MONSTER_OMANYTE_SECONDARY: monster_id = monster_id(738);
+}
+impl monster_id {
     pub const MONSTER_OMASTAR: monster_id = monster_id(139);
+}
+impl monster_id {
+    pub const MONSTER_OMASTAR_SECONDARY: monster_id = monster_id(739);
 }
 impl monster_id {
     pub const MONSTER_KABUTO: monster_id = monster_id(140);
 }
 impl monster_id {
+    pub const MONSTER_KABUTO_SECONDARY: monster_id = monster_id(740);
+}
+impl monster_id {
     pub const MONSTER_KABUTOPS: monster_id = monster_id(141);
+}
+impl monster_id {
+    pub const MONSTER_KABUTOPS_SECONDARY: monster_id = monster_id(741);
 }
 impl monster_id {
     pub const MONSTER_AERODACTYL: monster_id = monster_id(142);
 }
 impl monster_id {
+    pub const MONSTER_AERODACTYL_SECONDARY: monster_id = monster_id(742);
+}
+impl monster_id {
     pub const MONSTER_SNORLAX: monster_id = monster_id(143);
+}
+impl monster_id {
+    pub const MONSTER_SNORLAX_SECONDARY: monster_id = monster_id(743);
 }
 impl monster_id {
     pub const MONSTER_ARTICUNO: monster_id = monster_id(144);
 }
 impl monster_id {
+    pub const MONSTER_ARTICUNO_SECONDARY: monster_id = monster_id(744);
+}
+impl monster_id {
     pub const MONSTER_ZAPDOS: monster_id = monster_id(145);
+}
+impl monster_id {
+    pub const MONSTER_ZAPDOS_SECONDARY: monster_id = monster_id(745);
 }
 impl monster_id {
     pub const MONSTER_MOLTRES: monster_id = monster_id(146);
 }
 impl monster_id {
+    pub const MONSTER_MOLTRES_SECONDARY: monster_id = monster_id(746);
+}
+impl monster_id {
     pub const MONSTER_DRATINI: monster_id = monster_id(147);
+}
+impl monster_id {
+    pub const MONSTER_DRATINI_SECONDARY: monster_id = monster_id(747);
 }
 impl monster_id {
     pub const MONSTER_DRAGONAIR: monster_id = monster_id(148);
 }
 impl monster_id {
+    pub const MONSTER_DRAGONAIR_SECONDARY: monster_id = monster_id(748);
+}
+impl monster_id {
     pub const MONSTER_DRAGONITE: monster_id = monster_id(149);
+}
+impl monster_id {
+    pub const MONSTER_DRAGONITE_SECONDARY: monster_id = monster_id(749);
 }
 impl monster_id {
     pub const MONSTER_MEWTWO: monster_id = monster_id(150);
 }
 impl monster_id {
+    pub const MONSTER_MEWTWO_SECONDARY: monster_id = monster_id(750);
+}
+impl monster_id {
     pub const MONSTER_MEW: monster_id = monster_id(151);
+}
+impl monster_id {
+    pub const MONSTER_MEW_SECONDARY: monster_id = monster_id(751);
 }
 impl monster_id {
     pub const MONSTER_CHIKORITA: monster_id = monster_id(152);
 }
 impl monster_id {
+    pub const MONSTER_CHIKORITA_SECONDARY: monster_id = monster_id(752);
+}
+impl monster_id {
     pub const MONSTER_BAYLEEF: monster_id = monster_id(153);
+}
+impl monster_id {
+    pub const MONSTER_BAYLEEF_SECONDARY: monster_id = monster_id(753);
 }
 impl monster_id {
     pub const MONSTER_MEGANIUM: monster_id = monster_id(154);
 }
 impl monster_id {
+    pub const MONSTER_MEGANIUM_SECONDARY: monster_id = monster_id(754);
+}
+impl monster_id {
     pub const MONSTER_CYNDAQUIL: monster_id = monster_id(155);
+}
+impl monster_id {
+    pub const MONSTER_CYNDAQUIL_SECONDARY: monster_id = monster_id(755);
 }
 impl monster_id {
     pub const MONSTER_QUILAVA: monster_id = monster_id(156);
 }
 impl monster_id {
+    pub const MONSTER_QUILAVA_SECONDARY: monster_id = monster_id(756);
+}
+impl monster_id {
     pub const MONSTER_TYPHLOSION: monster_id = monster_id(157);
+}
+impl monster_id {
+    pub const MONSTER_TYPHLOSION_SECONDARY: monster_id = monster_id(757);
 }
 impl monster_id {
     pub const MONSTER_TOTODILE: monster_id = monster_id(158);
 }
 impl monster_id {
+    pub const MONSTER_TOTODILE_SECONDARY: monster_id = monster_id(758);
+}
+impl monster_id {
     pub const MONSTER_CROCONAW: monster_id = monster_id(159);
+}
+impl monster_id {
+    pub const MONSTER_CROCONAW_SECONDARY: monster_id = monster_id(759);
 }
 impl monster_id {
     pub const MONSTER_FERALIGATR: monster_id = monster_id(160);
 }
 impl monster_id {
+    pub const MONSTER_FERALIGATR_SECONDARY: monster_id = monster_id(760);
+}
+impl monster_id {
     pub const MONSTER_SENTRET: monster_id = monster_id(161);
+}
+impl monster_id {
+    pub const MONSTER_SENTRET_SECONDARY: monster_id = monster_id(761);
 }
 impl monster_id {
     pub const MONSTER_FURRET: monster_id = monster_id(162);
 }
 impl monster_id {
+    pub const MONSTER_FURRET_SECONDARY: monster_id = monster_id(762);
+}
+impl monster_id {
     pub const MONSTER_HOOTHOOT: monster_id = monster_id(163);
+}
+impl monster_id {
+    pub const MONSTER_HOOTHOOT_SECONDARY: monster_id = monster_id(763);
 }
 impl monster_id {
     pub const MONSTER_NOCTOWL: monster_id = monster_id(164);
 }
 impl monster_id {
+    pub const MONSTER_NOCTOWL_SECONDARY: monster_id = monster_id(764);
+}
+impl monster_id {
     pub const MONSTER_LEDYBA: monster_id = monster_id(165);
+}
+impl monster_id {
+    pub const MONSTER_LEDYBA_SECONDARY: monster_id = monster_id(765);
 }
 impl monster_id {
     pub const MONSTER_LEDIAN: monster_id = monster_id(166);
 }
 impl monster_id {
+    pub const MONSTER_LEDIAN_SECONDARY: monster_id = monster_id(766);
+}
+impl monster_id {
     pub const MONSTER_SPINARAK: monster_id = monster_id(167);
+}
+impl monster_id {
+    pub const MONSTER_SPINARAK_SECONDARY: monster_id = monster_id(767);
 }
 impl monster_id {
     pub const MONSTER_ARIADOS: monster_id = monster_id(168);
 }
 impl monster_id {
+    pub const MONSTER_ARIADOS_SECONDARY: monster_id = monster_id(768);
+}
+impl monster_id {
     pub const MONSTER_CROBAT: monster_id = monster_id(169);
+}
+impl monster_id {
+    pub const MONSTER_CROBAT_SECONDARY: monster_id = monster_id(769);
 }
 impl monster_id {
     pub const MONSTER_CHINCHOU: monster_id = monster_id(170);
 }
 impl monster_id {
+    pub const MONSTER_CHINCHOU_SECONDARY: monster_id = monster_id(770);
+}
+impl monster_id {
     pub const MONSTER_LANTURN: monster_id = monster_id(171);
+}
+impl monster_id {
+    pub const MONSTER_LANTURN_SECONDARY: monster_id = monster_id(771);
 }
 impl monster_id {
     pub const MONSTER_PICHU: monster_id = monster_id(172);
 }
 impl monster_id {
+    pub const MONSTER_PICHU_SECONDARY: monster_id = monster_id(772);
+}
+impl monster_id {
     pub const MONSTER_CLEFFA: monster_id = monster_id(173);
+}
+impl monster_id {
+    pub const MONSTER_CLEFFA_SECONDARY: monster_id = monster_id(773);
 }
 impl monster_id {
     pub const MONSTER_IGGLYBUFF: monster_id = monster_id(174);
 }
 impl monster_id {
+    pub const MONSTER_IGGLYBUFF_SECONDARY: monster_id = monster_id(774);
+}
+impl monster_id {
     pub const MONSTER_TOGEPI: monster_id = monster_id(175);
+}
+impl monster_id {
+    pub const MONSTER_TOGEPI_SECONDARY: monster_id = monster_id(775);
 }
 impl monster_id {
     pub const MONSTER_TOGETIC: monster_id = monster_id(176);
 }
 impl monster_id {
+    pub const MONSTER_TOGETIC_SECONDARY: monster_id = monster_id(776);
+}
+impl monster_id {
     pub const MONSTER_NATU: monster_id = monster_id(177);
+}
+impl monster_id {
+    pub const MONSTER_NATU_SECONDARY: monster_id = monster_id(777);
 }
 impl monster_id {
     pub const MONSTER_XATU: monster_id = monster_id(178);
 }
 impl monster_id {
+    pub const MONSTER_XATU_SECONDARY: monster_id = monster_id(778);
+}
+impl monster_id {
     pub const MONSTER_MAREEP: monster_id = monster_id(179);
+}
+impl monster_id {
+    pub const MONSTER_MAREEP_SECONDARY: monster_id = monster_id(779);
 }
 impl monster_id {
     pub const MONSTER_FLAAFFY: monster_id = monster_id(180);
 }
 impl monster_id {
+    pub const MONSTER_FLAAFFY_SECONDARY: monster_id = monster_id(780);
+}
+impl monster_id {
     pub const MONSTER_AMPHAROS: monster_id = monster_id(181);
+}
+impl monster_id {
+    pub const MONSTER_AMPHAROS_SECONDARY: monster_id = monster_id(781);
 }
 impl monster_id {
     pub const MONSTER_BELLOSSOM: monster_id = monster_id(182);
 }
 impl monster_id {
+    pub const MONSTER_BELLOSSOM_SECONDARY: monster_id = monster_id(782);
+}
+impl monster_id {
     pub const MONSTER_MARILL: monster_id = monster_id(183);
+}
+impl monster_id {
+    pub const MONSTER_MARILL_SECONDARY: monster_id = monster_id(783);
 }
 impl monster_id {
     pub const MONSTER_AZUMARILL: monster_id = monster_id(184);
 }
 impl monster_id {
+    pub const MONSTER_AZUMARILL_SECONDARY: monster_id = monster_id(784);
+}
+impl monster_id {
     pub const MONSTER_SUDOWOODO: monster_id = monster_id(185);
+}
+impl monster_id {
+    pub const MONSTER_SUDOWOODO_SECONDARY: monster_id = monster_id(785);
 }
 impl monster_id {
     pub const MONSTER_POLITOED: monster_id = monster_id(186);
 }
 impl monster_id {
+    pub const MONSTER_POLITOED_SECONDARY: monster_id = monster_id(786);
+}
+impl monster_id {
     pub const MONSTER_HOPPIP: monster_id = monster_id(187);
+}
+impl monster_id {
+    pub const MONSTER_HOPPIP_SECONDARY: monster_id = monster_id(787);
 }
 impl monster_id {
     pub const MONSTER_SKIPLOOM: monster_id = monster_id(188);
 }
 impl monster_id {
+    pub const MONSTER_SKIPLOOM_SECONDARY: monster_id = monster_id(788);
+}
+impl monster_id {
     pub const MONSTER_JUMPLUFF: monster_id = monster_id(189);
+}
+impl monster_id {
+    pub const MONSTER_JUMPLUFF_SECONDARY: monster_id = monster_id(789);
 }
 impl monster_id {
     pub const MONSTER_AIPOM: monster_id = monster_id(190);
 }
 impl monster_id {
+    pub const MONSTER_AIPOM_SECONDARY: monster_id = monster_id(790);
+}
+impl monster_id {
     pub const MONSTER_SUNKERN: monster_id = monster_id(191);
+}
+impl monster_id {
+    pub const MONSTER_SUNKERN_SECONDARY: monster_id = monster_id(791);
 }
 impl monster_id {
     pub const MONSTER_SUNFLORA: monster_id = monster_id(192);
 }
 impl monster_id {
+    pub const MONSTER_SUNFLORA_SECONDARY: monster_id = monster_id(792);
+}
+impl monster_id {
     pub const MONSTER_YANMA: monster_id = monster_id(193);
+}
+impl monster_id {
+    pub const MONSTER_YANMA_SECONDARY: monster_id = monster_id(793);
 }
 impl monster_id {
     pub const MONSTER_WOOPER: monster_id = monster_id(194);
 }
 impl monster_id {
+    pub const MONSTER_WOOPER_SECONDARY: monster_id = monster_id(794);
+}
+impl monster_id {
     pub const MONSTER_QUAGSIRE: monster_id = monster_id(195);
+}
+impl monster_id {
+    pub const MONSTER_QUAGSIRE_SECONDARY: monster_id = monster_id(795);
 }
 impl monster_id {
     pub const MONSTER_ESPEON: monster_id = monster_id(196);
 }
 impl monster_id {
+    pub const MONSTER_ESPEON_SECONDARY: monster_id = monster_id(796);
+}
+impl monster_id {
     pub const MONSTER_UMBREON: monster_id = monster_id(197);
+}
+impl monster_id {
+    pub const MONSTER_UMBREON_SECONDARY: monster_id = monster_id(797);
 }
 impl monster_id {
     pub const MONSTER_MURKROW: monster_id = monster_id(198);
 }
 impl monster_id {
+    pub const MONSTER_MURKROW_SECONDARY: monster_id = monster_id(798);
+}
+impl monster_id {
     pub const MONSTER_SLOWKING: monster_id = monster_id(199);
+}
+impl monster_id {
+    pub const MONSTER_SLOWKING_SECONDARY: monster_id = monster_id(799);
 }
 impl monster_id {
     pub const MONSTER_MISDREAVUS: monster_id = monster_id(200);
 }
 impl monster_id {
+    pub const MONSTER_MISDREAVUS_SECONDARY: monster_id = monster_id(800);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_A: monster_id = monster_id(201);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_A_SECONDARY: monster_id = monster_id(801);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_B: monster_id = monster_id(202);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_B_SECONDARY: monster_id = monster_id(802);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_C: monster_id = monster_id(203);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_C_SECONDARY: monster_id = monster_id(803);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_D: monster_id = monster_id(204);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_D_SECONDARY: monster_id = monster_id(804);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_E: monster_id = monster_id(205);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_E_SECONDARY: monster_id = monster_id(805);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_F: monster_id = monster_id(206);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_F_SECONDARY: monster_id = monster_id(806);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_G: monster_id = monster_id(207);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_G_SECONDARY: monster_id = monster_id(807);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_H: monster_id = monster_id(208);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_H_SECONDARY: monster_id = monster_id(808);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_I: monster_id = monster_id(209);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_I_SECONDARY: monster_id = monster_id(809);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_J: monster_id = monster_id(210);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_J_SECONDARY: monster_id = monster_id(810);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_K: monster_id = monster_id(211);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_K_SECONDARY: monster_id = monster_id(811);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_L: monster_id = monster_id(212);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_L_SECONDARY: monster_id = monster_id(812);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_M: monster_id = monster_id(213);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_M_SECONDARY: monster_id = monster_id(813);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_N: monster_id = monster_id(214);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_N_SECONDARY: monster_id = monster_id(814);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_O: monster_id = monster_id(215);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_O_SECONDARY: monster_id = monster_id(815);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_P: monster_id = monster_id(216);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_P_SECONDARY: monster_id = monster_id(816);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_Q: monster_id = monster_id(217);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_Q_SECONDARY: monster_id = monster_id(817);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_R: monster_id = monster_id(218);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_R_SECONDARY: monster_id = monster_id(818);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_S: monster_id = monster_id(219);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_S_SECONDARY: monster_id = monster_id(819);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_T: monster_id = monster_id(220);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_T_SECONDARY: monster_id = monster_id(820);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_U: monster_id = monster_id(221);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_U_SECONDARY: monster_id = monster_id(821);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_V: monster_id = monster_id(222);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_V_SECONDARY: monster_id = monster_id(822);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_W: monster_id = monster_id(223);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_W_SECONDARY: monster_id = monster_id(823);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_X: monster_id = monster_id(224);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_X_SECONDARY: monster_id = monster_id(824);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_Y: monster_id = monster_id(225);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_Y_SECONDARY: monster_id = monster_id(825);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_Z: monster_id = monster_id(226);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_Z_SECONDARY: monster_id = monster_id(826);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_EXCLAMATION: monster_id = monster_id(227);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_EXCLAMATION_SECONDARY: monster_id = monster_id(827);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_QUESTION: monster_id = monster_id(228);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_QUESTION_SECONDARY: monster_id = monster_id(828);
+}
+impl monster_id {
     pub const MONSTER_WOBBUFFET: monster_id = monster_id(229);
+}
+impl monster_id {
+    pub const MONSTER_WOBBUFFET_SECONDARY: monster_id = monster_id(829);
 }
 impl monster_id {
     pub const MONSTER_GIRAFARIG: monster_id = monster_id(230);
 }
 impl monster_id {
+    pub const MONSTER_GIRAFARIG_SECONDARY: monster_id = monster_id(830);
+}
+impl monster_id {
     pub const MONSTER_PINECO: monster_id = monster_id(231);
+}
+impl monster_id {
+    pub const MONSTER_PINECO_SECONDARY: monster_id = monster_id(831);
 }
 impl monster_id {
     pub const MONSTER_FORRETRESS: monster_id = monster_id(232);
 }
 impl monster_id {
+    pub const MONSTER_FORRETRESS_SECONDARY: monster_id = monster_id(832);
+}
+impl monster_id {
     pub const MONSTER_DUNSPARCE: monster_id = monster_id(233);
+}
+impl monster_id {
+    pub const MONSTER_DUNSPARCE_SECONDARY: monster_id = monster_id(833);
 }
 impl monster_id {
     pub const MONSTER_GLIGAR: monster_id = monster_id(234);
 }
 impl monster_id {
+    pub const MONSTER_GLIGAR_SECONDARY: monster_id = monster_id(834);
+}
+impl monster_id {
     pub const MONSTER_STEELIX: monster_id = monster_id(235);
+}
+impl monster_id {
+    pub const MONSTER_STEELIX_SECONDARY: monster_id = monster_id(835);
 }
 impl monster_id {
     pub const MONSTER_SNUBBULL: monster_id = monster_id(236);
 }
 impl monster_id {
+    pub const MONSTER_SNUBBULL_SECONDARY: monster_id = monster_id(836);
+}
+impl monster_id {
     pub const MONSTER_GRANBULL: monster_id = monster_id(237);
+}
+impl monster_id {
+    pub const MONSTER_GRANBULL_SECONDARY: monster_id = monster_id(837);
 }
 impl monster_id {
     pub const MONSTER_QWILFISH: monster_id = monster_id(238);
 }
 impl monster_id {
+    pub const MONSTER_QWILFISH_SECONDARY: monster_id = monster_id(838);
+}
+impl monster_id {
     pub const MONSTER_SCIZOR: monster_id = monster_id(239);
+}
+impl monster_id {
+    pub const MONSTER_SCIZOR_SECONDARY: monster_id = monster_id(839);
 }
 impl monster_id {
     pub const MONSTER_SHUCKLE: monster_id = monster_id(240);
 }
 impl monster_id {
+    pub const MONSTER_SHUCKLE_SECONDARY: monster_id = monster_id(840);
+}
+impl monster_id {
     pub const MONSTER_HERACROSS: monster_id = monster_id(241);
+}
+impl monster_id {
+    pub const MONSTER_HERACROSS_SECONDARY: monster_id = monster_id(841);
 }
 impl monster_id {
     pub const MONSTER_SNEASEL: monster_id = monster_id(242);
 }
 impl monster_id {
+    pub const MONSTER_SNEASEL_SECONDARY: monster_id = monster_id(842);
+}
+impl monster_id {
     pub const MONSTER_TEDDIURSA: monster_id = monster_id(243);
+}
+impl monster_id {
+    pub const MONSTER_TEDDIURSA_SECONDARY: monster_id = monster_id(843);
 }
 impl monster_id {
     pub const MONSTER_URSARING: monster_id = monster_id(244);
 }
 impl monster_id {
+    pub const MONSTER_URSARING_SECONDARY: monster_id = monster_id(844);
+}
+impl monster_id {
     pub const MONSTER_SLUGMA: monster_id = monster_id(245);
+}
+impl monster_id {
+    pub const MONSTER_SLUGMA_SECONDARY: monster_id = monster_id(845);
 }
 impl monster_id {
     pub const MONSTER_MAGCARGO: monster_id = monster_id(246);
 }
 impl monster_id {
+    pub const MONSTER_MAGCARGO_SECONDARY: monster_id = monster_id(846);
+}
+impl monster_id {
     pub const MONSTER_SWINUB: monster_id = monster_id(247);
+}
+impl monster_id {
+    pub const MONSTER_SWINUB_SECONDARY: monster_id = monster_id(847);
 }
 impl monster_id {
     pub const MONSTER_PILOSWINE: monster_id = monster_id(248);
 }
 impl monster_id {
+    pub const MONSTER_PILOSWINE_SECONDARY: monster_id = monster_id(848);
+}
+impl monster_id {
     pub const MONSTER_CORSOLA: monster_id = monster_id(249);
+}
+impl monster_id {
+    pub const MONSTER_CORSOLA_SECONDARY: monster_id = monster_id(849);
 }
 impl monster_id {
     pub const MONSTER_REMORAID: monster_id = monster_id(250);
 }
 impl monster_id {
+    pub const MONSTER_REMORAID_SECONDARY: monster_id = monster_id(850);
+}
+impl monster_id {
     pub const MONSTER_OCTILLERY: monster_id = monster_id(251);
+}
+impl monster_id {
+    pub const MONSTER_OCTILLERY_SECONDARY: monster_id = monster_id(851);
 }
 impl monster_id {
     pub const MONSTER_DELIBIRD: monster_id = monster_id(252);
 }
 impl monster_id {
+    pub const MONSTER_DELIBIRD_SECONDARY: monster_id = monster_id(852);
+}
+impl monster_id {
     pub const MONSTER_MANTINE: monster_id = monster_id(253);
+}
+impl monster_id {
+    pub const MONSTER_MANTINE_SECONDARY: monster_id = monster_id(853);
 }
 impl monster_id {
     pub const MONSTER_SKARMORY: monster_id = monster_id(254);
 }
 impl monster_id {
+    pub const MONSTER_SKARMORY_SECONDARY: monster_id = monster_id(854);
+}
+impl monster_id {
     pub const MONSTER_HOUNDOUR: monster_id = monster_id(255);
+}
+impl monster_id {
+    pub const MONSTER_HOUNDOUR_SECONDARY: monster_id = monster_id(855);
 }
 impl monster_id {
     pub const MONSTER_HOUNDOOM: monster_id = monster_id(256);
 }
 impl monster_id {
+    pub const MONSTER_HOUNDOOM_SECONDARY: monster_id = monster_id(856);
+}
+impl monster_id {
     pub const MONSTER_KINGDRA: monster_id = monster_id(257);
+}
+impl monster_id {
+    pub const MONSTER_KINGDRA_SECONDARY: monster_id = monster_id(857);
 }
 impl monster_id {
     pub const MONSTER_PHANPY: monster_id = monster_id(258);
 }
 impl monster_id {
+    pub const MONSTER_PHANPY_SECONDARY: monster_id = monster_id(858);
+}
+impl monster_id {
     pub const MONSTER_DONPHAN: monster_id = monster_id(259);
+}
+impl monster_id {
+    pub const MONSTER_DONPHAN_SECONDARY: monster_id = monster_id(859);
 }
 impl monster_id {
     pub const MONSTER_PORYGON2: monster_id = monster_id(260);
 }
 impl monster_id {
+    pub const MONSTER_PORYGON2_SECONDARY: monster_id = monster_id(860);
+}
+impl monster_id {
     pub const MONSTER_STANTLER: monster_id = monster_id(261);
+}
+impl monster_id {
+    pub const MONSTER_STANTLER_SECONDARY: monster_id = monster_id(861);
 }
 impl monster_id {
     pub const MONSTER_SMEARGLE: monster_id = monster_id(262);
 }
 impl monster_id {
+    pub const MONSTER_SMEARGLE_SECONDARY: monster_id = monster_id(862);
+}
+impl monster_id {
     pub const MONSTER_TYROGUE: monster_id = monster_id(263);
+}
+impl monster_id {
+    pub const MONSTER_TYROGUE_SECONDARY: monster_id = monster_id(863);
 }
 impl monster_id {
     pub const MONSTER_HITMONTOP: monster_id = monster_id(264);
 }
 impl monster_id {
+    pub const MONSTER_HITMONTOP_SECONDARY: monster_id = monster_id(864);
+}
+impl monster_id {
     pub const MONSTER_SMOOCHUM: monster_id = monster_id(265);
+}
+impl monster_id {
+    pub const MONSTER_SMOOCHUM_SECONDARY: monster_id = monster_id(865);
 }
 impl monster_id {
     pub const MONSTER_ELEKID: monster_id = monster_id(266);
 }
 impl monster_id {
+    pub const MONSTER_ELEKID_SECONDARY: monster_id = monster_id(866);
+}
+impl monster_id {
     pub const MONSTER_MAGBY: monster_id = monster_id(267);
+}
+impl monster_id {
+    pub const MONSTER_MAGBY_SECONDARY: monster_id = monster_id(867);
 }
 impl monster_id {
     pub const MONSTER_MILTANK: monster_id = monster_id(268);
 }
 impl monster_id {
+    pub const MONSTER_MILTANK_SECONDARY: monster_id = monster_id(868);
+}
+impl monster_id {
     pub const MONSTER_BLISSEY: monster_id = monster_id(269);
+}
+impl monster_id {
+    pub const MONSTER_BLISSEY_SECONDARY: monster_id = monster_id(869);
 }
 impl monster_id {
     pub const MONSTER_RAIKOU: monster_id = monster_id(270);
 }
 impl monster_id {
+    pub const MONSTER_RAIKOU_SECONDARY: monster_id = monster_id(870);
+}
+impl monster_id {
     pub const MONSTER_ENTEI: monster_id = monster_id(271);
+}
+impl monster_id {
+    pub const MONSTER_ENTEI_SECONDARY: monster_id = monster_id(871);
 }
 impl monster_id {
     pub const MONSTER_SUICUNE: monster_id = monster_id(272);
 }
 impl monster_id {
+    pub const MONSTER_SUICUNE_SECONDARY: monster_id = monster_id(872);
+}
+impl monster_id {
     pub const MONSTER_LARVITAR: monster_id = monster_id(273);
+}
+impl monster_id {
+    pub const MONSTER_LARVITAR_SECONDARY: monster_id = monster_id(873);
 }
 impl monster_id {
     pub const MONSTER_PUPITAR: monster_id = monster_id(274);
 }
 impl monster_id {
+    pub const MONSTER_PUPITAR_SECONDARY: monster_id = monster_id(874);
+}
+impl monster_id {
     pub const MONSTER_TYRANITAR: monster_id = monster_id(275);
+}
+impl monster_id {
+    pub const MONSTER_TYRANITAR_SECONDARY: monster_id = monster_id(875);
 }
 impl monster_id {
     pub const MONSTER_LUGIA: monster_id = monster_id(276);
 }
 impl monster_id {
+    pub const MONSTER_LUGIA_SECONDARY: monster_id = monster_id(876);
+}
+impl monster_id {
     pub const MONSTER_HO_OH: monster_id = monster_id(277);
+}
+impl monster_id {
+    pub const MONSTER_HO_OH_SECONDARY: monster_id = monster_id(877);
 }
 impl monster_id {
     pub const MONSTER_CELEBI: monster_id = monster_id(278);
 }
 impl monster_id {
+    pub const MONSTER_CELEBI_SECONDARY: monster_id = monster_id(878);
+}
+impl monster_id {
     pub const MONSTER_SHINY_CELEBI: monster_id = monster_id(279);
+}
+impl monster_id {
+    pub const MONSTER_SHINY_CELEBI_SECONDARY: monster_id = monster_id(879);
 }
 impl monster_id {
     pub const MONSTER_TREECKO: monster_id = monster_id(280);
 }
 impl monster_id {
+    pub const MONSTER_TREECKO_SECONDARY: monster_id = monster_id(880);
+}
+impl monster_id {
     pub const MONSTER_GROVYLE: monster_id = monster_id(281);
+}
+impl monster_id {
+    pub const MONSTER_GROVYLE_SECONDARY: monster_id = monster_id(881);
 }
 impl monster_id {
     pub const MONSTER_SCEPTILE: monster_id = monster_id(282);
 }
 impl monster_id {
+    pub const MONSTER_SCEPTILE_SECONDARY: monster_id = monster_id(882);
+}
+impl monster_id {
     pub const MONSTER_TORCHIC: monster_id = monster_id(283);
+}
+impl monster_id {
+    pub const MONSTER_TORCHIC_SECONDARY: monster_id = monster_id(883);
 }
 impl monster_id {
     pub const MONSTER_COMBUSKEN: monster_id = monster_id(284);
 }
 impl monster_id {
+    pub const MONSTER_COMBUSKEN_SECONDARY: monster_id = monster_id(884);
+}
+impl monster_id {
     pub const MONSTER_BLAZIKEN: monster_id = monster_id(285);
+}
+impl monster_id {
+    pub const MONSTER_BLAZIKEN_SECONDARY: monster_id = monster_id(885);
 }
 impl monster_id {
     pub const MONSTER_MUDKIP: monster_id = monster_id(286);
 }
 impl monster_id {
+    pub const MONSTER_MUDKIP_SECONDARY: monster_id = monster_id(886);
+}
+impl monster_id {
     pub const MONSTER_MARSHTOMP: monster_id = monster_id(287);
+}
+impl monster_id {
+    pub const MONSTER_MARSHTOMP_SECONDARY: monster_id = monster_id(887);
 }
 impl monster_id {
     pub const MONSTER_SWAMPERT: monster_id = monster_id(288);
 }
 impl monster_id {
+    pub const MONSTER_SWAMPERT_SECONDARY: monster_id = monster_id(888);
+}
+impl monster_id {
     pub const MONSTER_POOCHYENA: monster_id = monster_id(289);
+}
+impl monster_id {
+    pub const MONSTER_POOCHYENA_SECONDARY: monster_id = monster_id(889);
 }
 impl monster_id {
     pub const MONSTER_MIGHTYENA: monster_id = monster_id(290);
 }
 impl monster_id {
+    pub const MONSTER_MIGHTYENA_SECONDARY: monster_id = monster_id(890);
+}
+impl monster_id {
     pub const MONSTER_ZIGZAGOON: monster_id = monster_id(291);
+}
+impl monster_id {
+    pub const MONSTER_ZIGZAGOON_SECONDARY: monster_id = monster_id(891);
 }
 impl monster_id {
     pub const MONSTER_LINOONE: monster_id = monster_id(292);
 }
 impl monster_id {
+    pub const MONSTER_LINOONE_SECONDARY: monster_id = monster_id(892);
+}
+impl monster_id {
     pub const MONSTER_WURMPLE: monster_id = monster_id(293);
+}
+impl monster_id {
+    pub const MONSTER_WURMPLE_SECONDARY: monster_id = monster_id(893);
 }
 impl monster_id {
     pub const MONSTER_SILCOON: monster_id = monster_id(294);
 }
 impl monster_id {
+    pub const MONSTER_SILCOON_SECONDARY: monster_id = monster_id(894);
+}
+impl monster_id {
     pub const MONSTER_BEAUTIFLY: monster_id = monster_id(295);
+}
+impl monster_id {
+    pub const MONSTER_BEAUTIFLY_SECONDARY: monster_id = monster_id(895);
 }
 impl monster_id {
     pub const MONSTER_CASCOON: monster_id = monster_id(296);
 }
 impl monster_id {
+    pub const MONSTER_CASCOON_SECONDARY: monster_id = monster_id(896);
+}
+impl monster_id {
     pub const MONSTER_DUSTOX: monster_id = monster_id(297);
+}
+impl monster_id {
+    pub const MONSTER_DUSTOX_SECONDARY: monster_id = monster_id(897);
 }
 impl monster_id {
     pub const MONSTER_LOTAD: monster_id = monster_id(298);
 }
 impl monster_id {
+    pub const MONSTER_LOTAD_SECONDARY: monster_id = monster_id(898);
+}
+impl monster_id {
     pub const MONSTER_LOMBRE: monster_id = monster_id(299);
+}
+impl monster_id {
+    pub const MONSTER_LOMBRE_SECONDARY: monster_id = monster_id(899);
 }
 impl monster_id {
     pub const MONSTER_LUDICOLO: monster_id = monster_id(300);
 }
 impl monster_id {
+    pub const MONSTER_LUDICOLO_SECONDARY: monster_id = monster_id(900);
+}
+impl monster_id {
     pub const MONSTER_SEEDOT: monster_id = monster_id(301);
+}
+impl monster_id {
+    pub const MONSTER_SEEDOT_SECONDARY: monster_id = monster_id(901);
 }
 impl monster_id {
     pub const MONSTER_NUZLEAF: monster_id = monster_id(302);
 }
 impl monster_id {
+    pub const MONSTER_NUZLEAF_SECONDARY: monster_id = monster_id(902);
+}
+impl monster_id {
     pub const MONSTER_SHIFTRY: monster_id = monster_id(303);
+}
+impl monster_id {
+    pub const MONSTER_SHIFTRY_SECONDARY: monster_id = monster_id(903);
 }
 impl monster_id {
     pub const MONSTER_TAILLOW: monster_id = monster_id(304);
 }
 impl monster_id {
+    pub const MONSTER_TAILLOW_SECONDARY: monster_id = monster_id(904);
+}
+impl monster_id {
     pub const MONSTER_SWELLOW: monster_id = monster_id(305);
+}
+impl monster_id {
+    pub const MONSTER_SWELLOW_SECONDARY: monster_id = monster_id(905);
 }
 impl monster_id {
     pub const MONSTER_WINGULL: monster_id = monster_id(306);
 }
 impl monster_id {
+    pub const MONSTER_WINGULL_SECONDARY: monster_id = monster_id(906);
+}
+impl monster_id {
     pub const MONSTER_PELIPPER: monster_id = monster_id(307);
+}
+impl monster_id {
+    pub const MONSTER_PELIPPER_SECONDARY: monster_id = monster_id(907);
 }
 impl monster_id {
     pub const MONSTER_RALTS: monster_id = monster_id(308);
 }
 impl monster_id {
+    pub const MONSTER_RALTS_SECONDARY: monster_id = monster_id(908);
+}
+impl monster_id {
     pub const MONSTER_KIRLIA: monster_id = monster_id(309);
+}
+impl monster_id {
+    pub const MONSTER_KIRLIA_SECONDARY: monster_id = monster_id(909);
 }
 impl monster_id {
     pub const MONSTER_GARDEVOIR: monster_id = monster_id(310);
 }
 impl monster_id {
+    pub const MONSTER_GARDEVOIR_SECONDARY: monster_id = monster_id(910);
+}
+impl monster_id {
     pub const MONSTER_SURSKIT: monster_id = monster_id(311);
+}
+impl monster_id {
+    pub const MONSTER_SURSKIT_SECONDARY: monster_id = monster_id(911);
 }
 impl monster_id {
     pub const MONSTER_MASQUERAIN: monster_id = monster_id(312);
 }
 impl monster_id {
+    pub const MONSTER_MASQUERAIN_SECONDARY: monster_id = monster_id(912);
+}
+impl monster_id {
     pub const MONSTER_SHROOMISH: monster_id = monster_id(313);
+}
+impl monster_id {
+    pub const MONSTER_SHROOMISH_SECONDARY: monster_id = monster_id(913);
 }
 impl monster_id {
     pub const MONSTER_BRELOOM: monster_id = monster_id(314);
 }
 impl monster_id {
+    pub const MONSTER_BRELOOM_SECONDARY: monster_id = monster_id(914);
+}
+impl monster_id {
     pub const MONSTER_SLAKOTH: monster_id = monster_id(315);
+}
+impl monster_id {
+    pub const MONSTER_SLAKOTH_SECONDARY: monster_id = monster_id(915);
 }
 impl monster_id {
     pub const MONSTER_VIGOROTH: monster_id = monster_id(316);
 }
 impl monster_id {
+    pub const MONSTER_VIGOROTH_SECONDARY: monster_id = monster_id(916);
+}
+impl monster_id {
     pub const MONSTER_SLAKING: monster_id = monster_id(317);
+}
+impl monster_id {
+    pub const MONSTER_SLAKING_SECONDARY: monster_id = monster_id(917);
 }
 impl monster_id {
     pub const MONSTER_NINCADA: monster_id = monster_id(318);
 }
 impl monster_id {
+    pub const MONSTER_NINCADA_SECONDARY: monster_id = monster_id(918);
+}
+impl monster_id {
     pub const MONSTER_NINJASK: monster_id = monster_id(319);
+}
+impl monster_id {
+    pub const MONSTER_NINJASK_SECONDARY: monster_id = monster_id(919);
 }
 impl monster_id {
     pub const MONSTER_SHEDINJA: monster_id = monster_id(320);
 }
 impl monster_id {
+    pub const MONSTER_SHEDINJA_SECONDARY: monster_id = monster_id(920);
+}
+impl monster_id {
     pub const MONSTER_WHISMUR: monster_id = monster_id(321);
+}
+impl monster_id {
+    pub const MONSTER_WHISMUR_SECONDARY: monster_id = monster_id(921);
 }
 impl monster_id {
     pub const MONSTER_LOUDRED: monster_id = monster_id(322);
 }
 impl monster_id {
+    pub const MONSTER_LOUDRED_SECONDARY: monster_id = monster_id(922);
+}
+impl monster_id {
     pub const MONSTER_EXPLOUD: monster_id = monster_id(323);
+}
+impl monster_id {
+    pub const MONSTER_EXPLOUD_SECONDARY: monster_id = monster_id(923);
 }
 impl monster_id {
     pub const MONSTER_MAKUHITA: monster_id = monster_id(324);
 }
 impl monster_id {
+    pub const MONSTER_MAKUHITA_SECONDARY: monster_id = monster_id(924);
+}
+impl monster_id {
     pub const MONSTER_HARIYAMA: monster_id = monster_id(325);
+}
+impl monster_id {
+    pub const MONSTER_HARIYAMA_SECONDARY: monster_id = monster_id(925);
 }
 impl monster_id {
     pub const MONSTER_AZURILL: monster_id = monster_id(326);
 }
 impl monster_id {
+    pub const MONSTER_AZURILL_SECONDARY: monster_id = monster_id(926);
+}
+impl monster_id {
     pub const MONSTER_NOSEPASS: monster_id = monster_id(327);
+}
+impl monster_id {
+    pub const MONSTER_NOSEPASS_SECONDARY: monster_id = monster_id(927);
 }
 impl monster_id {
     pub const MONSTER_SKITTY: monster_id = monster_id(328);
 }
 impl monster_id {
+    pub const MONSTER_SKITTY_SECONDARY: monster_id = monster_id(928);
+}
+impl monster_id {
     pub const MONSTER_DELCATTY: monster_id = monster_id(329);
+}
+impl monster_id {
+    pub const MONSTER_DELCATTY_SECONDARY: monster_id = monster_id(929);
 }
 impl monster_id {
     pub const MONSTER_SABLEYE: monster_id = monster_id(330);
 }
 impl monster_id {
+    pub const MONSTER_SABLEYE_SECONDARY: monster_id = monster_id(930);
+}
+impl monster_id {
     pub const MONSTER_MAWILE: monster_id = monster_id(331);
+}
+impl monster_id {
+    pub const MONSTER_MAWILE_SECONDARY: monster_id = monster_id(931);
 }
 impl monster_id {
     pub const MONSTER_ARON: monster_id = monster_id(332);
 }
 impl monster_id {
+    pub const MONSTER_ARON_SECONDARY: monster_id = monster_id(932);
+}
+impl monster_id {
     pub const MONSTER_LAIRON: monster_id = monster_id(333);
+}
+impl monster_id {
+    pub const MONSTER_LAIRON_SECONDARY: monster_id = monster_id(933);
 }
 impl monster_id {
     pub const MONSTER_AGGRON: monster_id = monster_id(334);
 }
 impl monster_id {
+    pub const MONSTER_AGGRON_SECONDARY: monster_id = monster_id(934);
+}
+impl monster_id {
     pub const MONSTER_MEDITITE: monster_id = monster_id(335);
+}
+impl monster_id {
+    pub const MONSTER_MEDITITE_SECONDARY: monster_id = monster_id(935);
 }
 impl monster_id {
     pub const MONSTER_MEDICHAM: monster_id = monster_id(336);
 }
 impl monster_id {
+    pub const MONSTER_MEDICHAM_SECONDARY: monster_id = monster_id(936);
+}
+impl monster_id {
     pub const MONSTER_ELECTRIKE: monster_id = monster_id(337);
+}
+impl monster_id {
+    pub const MONSTER_ELECTRIKE_SECONDARY: monster_id = monster_id(937);
 }
 impl monster_id {
     pub const MONSTER_MANECTRIC: monster_id = monster_id(338);
 }
 impl monster_id {
+    pub const MONSTER_MANECTRIC_SECONDARY: monster_id = monster_id(938);
+}
+impl monster_id {
     pub const MONSTER_PLUSLE: monster_id = monster_id(339);
+}
+impl monster_id {
+    pub const MONSTER_PLUSLE_SECONDARY: monster_id = monster_id(939);
 }
 impl monster_id {
     pub const MONSTER_MINUN: monster_id = monster_id(340);
 }
 impl monster_id {
+    pub const MONSTER_MINUN_SECONDARY: monster_id = monster_id(940);
+}
+impl monster_id {
     pub const MONSTER_VOLBEAT: monster_id = monster_id(341);
+}
+impl monster_id {
+    pub const MONSTER_VOLBEAT_SECONDARY: monster_id = monster_id(941);
 }
 impl monster_id {
     pub const MONSTER_ILLUMISE: monster_id = monster_id(342);
 }
 impl monster_id {
+    pub const MONSTER_ILLUMISE_SECONDARY: monster_id = monster_id(942);
+}
+impl monster_id {
     pub const MONSTER_ROSELIA: monster_id = monster_id(343);
+}
+impl monster_id {
+    pub const MONSTER_ROSELIA_SECONDARY: monster_id = monster_id(943);
 }
 impl monster_id {
     pub const MONSTER_GULPIN: monster_id = monster_id(344);
 }
 impl monster_id {
+    pub const MONSTER_GULPIN_SECONDARY: monster_id = monster_id(944);
+}
+impl monster_id {
     pub const MONSTER_SWALOT: monster_id = monster_id(345);
+}
+impl monster_id {
+    pub const MONSTER_SWALOT_SECONDARY: monster_id = monster_id(945);
 }
 impl monster_id {
     pub const MONSTER_CARVANHA: monster_id = monster_id(346);
 }
 impl monster_id {
+    pub const MONSTER_CARVANHA_SECONDARY: monster_id = monster_id(946);
+}
+impl monster_id {
     pub const MONSTER_SHARPEDO: monster_id = monster_id(347);
+}
+impl monster_id {
+    pub const MONSTER_SHARPEDO_SECONDARY: monster_id = monster_id(947);
 }
 impl monster_id {
     pub const MONSTER_WAILMER: monster_id = monster_id(348);
 }
 impl monster_id {
+    pub const MONSTER_WAILMER_SECONDARY: monster_id = monster_id(948);
+}
+impl monster_id {
     pub const MONSTER_WAILORD: monster_id = monster_id(349);
+}
+impl monster_id {
+    pub const MONSTER_WAILORD_SECONDARY: monster_id = monster_id(949);
 }
 impl monster_id {
     pub const MONSTER_NUMEL: monster_id = monster_id(350);
 }
 impl monster_id {
+    pub const MONSTER_NUMEL_SECONDARY: monster_id = monster_id(950);
+}
+impl monster_id {
     pub const MONSTER_CAMERUPT: monster_id = monster_id(351);
+}
+impl monster_id {
+    pub const MONSTER_CAMERUPT_SECONDARY: monster_id = monster_id(951);
 }
 impl monster_id {
     pub const MONSTER_TORKOAL: monster_id = monster_id(352);
 }
 impl monster_id {
+    pub const MONSTER_TORKOAL_SECONDARY: monster_id = monster_id(952);
+}
+impl monster_id {
     pub const MONSTER_SPOINK: monster_id = monster_id(353);
+}
+impl monster_id {
+    pub const MONSTER_SPOINK_SECONDARY: monster_id = monster_id(953);
 }
 impl monster_id {
     pub const MONSTER_GRUMPIG: monster_id = monster_id(354);
 }
 impl monster_id {
+    pub const MONSTER_GRUMPIG_SECONDARY: monster_id = monster_id(954);
+}
+impl monster_id {
     pub const MONSTER_SPINDA: monster_id = monster_id(355);
+}
+impl monster_id {
+    pub const MONSTER_SPINDA_SECONDARY: monster_id = monster_id(955);
 }
 impl monster_id {
     pub const MONSTER_TRAPINCH: monster_id = monster_id(356);
 }
 impl monster_id {
+    pub const MONSTER_TRAPINCH_SECONDARY: monster_id = monster_id(956);
+}
+impl monster_id {
     pub const MONSTER_VIBRAVA: monster_id = monster_id(357);
+}
+impl monster_id {
+    pub const MONSTER_VIBRAVA_SECONDARY: monster_id = monster_id(957);
 }
 impl monster_id {
     pub const MONSTER_FLYGON: monster_id = monster_id(358);
 }
 impl monster_id {
+    pub const MONSTER_FLYGON_SECONDARY: monster_id = monster_id(958);
+}
+impl monster_id {
     pub const MONSTER_CACNEA: monster_id = monster_id(359);
+}
+impl monster_id {
+    pub const MONSTER_CACNEA_SECONDARY: monster_id = monster_id(959);
 }
 impl monster_id {
     pub const MONSTER_CACTURNE: monster_id = monster_id(360);
 }
 impl monster_id {
+    pub const MONSTER_CACTURNE_SECONDARY: monster_id = monster_id(960);
+}
+impl monster_id {
     pub const MONSTER_SWABLU: monster_id = monster_id(361);
+}
+impl monster_id {
+    pub const MONSTER_SWABLU_SECONDARY: monster_id = monster_id(961);
 }
 impl monster_id {
     pub const MONSTER_ALTARIA: monster_id = monster_id(362);
 }
 impl monster_id {
+    pub const MONSTER_ALTARIA_SECONDARY: monster_id = monster_id(962);
+}
+impl monster_id {
     pub const MONSTER_ZANGOOSE: monster_id = monster_id(363);
+}
+impl monster_id {
+    pub const MONSTER_ZANGOOSE_SECONDARY: monster_id = monster_id(963);
 }
 impl monster_id {
     pub const MONSTER_SEVIPER: monster_id = monster_id(364);
 }
 impl monster_id {
+    pub const MONSTER_SEVIPER_SECONDARY: monster_id = monster_id(964);
+}
+impl monster_id {
     pub const MONSTER_LUNATONE: monster_id = monster_id(365);
+}
+impl monster_id {
+    pub const MONSTER_LUNATONE_SECONDARY: monster_id = monster_id(965);
 }
 impl monster_id {
     pub const MONSTER_SOLROCK: monster_id = monster_id(366);
 }
 impl monster_id {
+    pub const MONSTER_SOLROCK_SECONDARY: monster_id = monster_id(966);
+}
+impl monster_id {
     pub const MONSTER_BARBOACH: monster_id = monster_id(367);
+}
+impl monster_id {
+    pub const MONSTER_BARBOACH_SECONDARY: monster_id = monster_id(967);
 }
 impl monster_id {
     pub const MONSTER_WHISCASH: monster_id = monster_id(368);
 }
 impl monster_id {
+    pub const MONSTER_WHISCASH_SECONDARY: monster_id = monster_id(968);
+}
+impl monster_id {
     pub const MONSTER_CORPHISH: monster_id = monster_id(369);
+}
+impl monster_id {
+    pub const MONSTER_CORPHISH_SECONDARY: monster_id = monster_id(969);
 }
 impl monster_id {
     pub const MONSTER_CRAWDAUNT: monster_id = monster_id(370);
 }
 impl monster_id {
+    pub const MONSTER_CRAWDAUNT_SECONDARY: monster_id = monster_id(970);
+}
+impl monster_id {
     pub const MONSTER_BALTOY: monster_id = monster_id(371);
+}
+impl monster_id {
+    pub const MONSTER_BALTOY_SECONDARY: monster_id = monster_id(971);
 }
 impl monster_id {
     pub const MONSTER_CLAYDOL: monster_id = monster_id(372);
 }
 impl monster_id {
+    pub const MONSTER_CLAYDOL_SECONDARY: monster_id = monster_id(972);
+}
+impl monster_id {
     pub const MONSTER_LILEEP: monster_id = monster_id(373);
+}
+impl monster_id {
+    pub const MONSTER_LILEEP_SECONDARY: monster_id = monster_id(973);
 }
 impl monster_id {
     pub const MONSTER_CRADILY: monster_id = monster_id(374);
 }
 impl monster_id {
+    pub const MONSTER_CRADILY_SECONDARY: monster_id = monster_id(974);
+}
+impl monster_id {
     pub const MONSTER_ANORITH: monster_id = monster_id(375);
+}
+impl monster_id {
+    pub const MONSTER_ANORITH_SECONDARY: monster_id = monster_id(975);
 }
 impl monster_id {
     pub const MONSTER_ARMALDO: monster_id = monster_id(376);
 }
 impl monster_id {
+    pub const MONSTER_ARMALDO_SECONDARY: monster_id = monster_id(976);
+}
+impl monster_id {
     pub const MONSTER_FEEBAS: monster_id = monster_id(377);
+}
+impl monster_id {
+    pub const MONSTER_FEEBAS_SECONDARY: monster_id = monster_id(977);
 }
 impl monster_id {
     pub const MONSTER_MILOTIC: monster_id = monster_id(378);
 }
 impl monster_id {
+    pub const MONSTER_MILOTIC_SECONDARY: monster_id = monster_id(978);
+}
+impl monster_id {
     pub const MONSTER_CASTFORM_NORMAL: monster_id = monster_id(379);
+}
+impl monster_id {
+    pub const MONSTER_CASTFORM_NORMAL_SECONDARY: monster_id = monster_id(979);
 }
 impl monster_id {
     pub const MONSTER_CASTFORM_SNOWY: monster_id = monster_id(380);
 }
 impl monster_id {
+    pub const MONSTER_CASTFORM_SNOWY_SECONDARY: monster_id = monster_id(980);
+}
+impl monster_id {
     pub const MONSTER_CASTFORM_SUNNY: monster_id = monster_id(381);
+}
+impl monster_id {
+    pub const MONSTER_CASTFORM_SUNNY_SECONDARY: monster_id = monster_id(981);
 }
 impl monster_id {
     pub const MONSTER_CASTFORM_RAINY: monster_id = monster_id(382);
 }
 impl monster_id {
+    pub const MONSTER_CASTFORM_RAINY_SECONDARY: monster_id = monster_id(982);
+}
+impl monster_id {
     pub const MONSTER_KECLEON: monster_id = monster_id(383);
+}
+impl monster_id {
+    pub const MONSTER_KECLEON_SECONDARY: monster_id = monster_id(983);
 }
 impl monster_id {
     pub const MONSTER_PURPLE_KECLEON: monster_id = monster_id(384);
 }
 impl monster_id {
+    pub const MONSTER_PURPLE_KECLEON_SECONDARY: monster_id = monster_id(984);
+}
+impl monster_id {
     pub const MONSTER_SHUPPET: monster_id = monster_id(385);
+}
+impl monster_id {
+    pub const MONSTER_SHUPPET_SECONDARY: monster_id = monster_id(985);
 }
 impl monster_id {
     pub const MONSTER_BANETTE: monster_id = monster_id(386);
 }
 impl monster_id {
+    pub const MONSTER_BANETTE_SECONDARY: monster_id = monster_id(986);
+}
+impl monster_id {
     pub const MONSTER_DUSKULL: monster_id = monster_id(387);
+}
+impl monster_id {
+    pub const MONSTER_DUSKULL_SECONDARY: monster_id = monster_id(987);
 }
 impl monster_id {
     pub const MONSTER_DUSCLOPS: monster_id = monster_id(388);
 }
 impl monster_id {
+    pub const MONSTER_DUSCLOPS_SECONDARY: monster_id = monster_id(988);
+}
+impl monster_id {
     pub const MONSTER_TROPIUS: monster_id = monster_id(389);
+}
+impl monster_id {
+    pub const MONSTER_TROPIUS_SECONDARY: monster_id = monster_id(989);
 }
 impl monster_id {
     pub const MONSTER_CHIMECHO: monster_id = monster_id(390);
 }
 impl monster_id {
+    pub const MONSTER_CHIMECHO_SECONDARY: monster_id = monster_id(990);
+}
+impl monster_id {
     pub const MONSTER_ABSOL: monster_id = monster_id(391);
+}
+impl monster_id {
+    pub const MONSTER_ABSOL_SECONDARY: monster_id = monster_id(991);
 }
 impl monster_id {
     pub const MONSTER_WYNAUT: monster_id = monster_id(392);
 }
 impl monster_id {
+    pub const MONSTER_WYNAUT_SECONDARY: monster_id = monster_id(992);
+}
+impl monster_id {
     pub const MONSTER_SNORUNT: monster_id = monster_id(393);
+}
+impl monster_id {
+    pub const MONSTER_SNORUNT_SECONDARY: monster_id = monster_id(993);
 }
 impl monster_id {
     pub const MONSTER_GLALIE: monster_id = monster_id(394);
 }
 impl monster_id {
+    pub const MONSTER_GLALIE_SECONDARY: monster_id = monster_id(994);
+}
+impl monster_id {
     pub const MONSTER_SPHEAL: monster_id = monster_id(395);
+}
+impl monster_id {
+    pub const MONSTER_SPHEAL_SECONDARY: monster_id = monster_id(995);
 }
 impl monster_id {
     pub const MONSTER_SEALEO: monster_id = monster_id(396);
 }
 impl monster_id {
+    pub const MONSTER_SEALEO_SECONDARY: monster_id = monster_id(996);
+}
+impl monster_id {
     pub const MONSTER_WALREIN: monster_id = monster_id(397);
+}
+impl monster_id {
+    pub const MONSTER_WALREIN_SECONDARY: monster_id = monster_id(997);
 }
 impl monster_id {
     pub const MONSTER_CLAMPERL: monster_id = monster_id(398);
 }
 impl monster_id {
+    pub const MONSTER_CLAMPERL_SECONDARY: monster_id = monster_id(998);
+}
+impl monster_id {
     pub const MONSTER_HUNTAIL: monster_id = monster_id(399);
+}
+impl monster_id {
+    pub const MONSTER_HUNTAIL_SECONDARY: monster_id = monster_id(999);
 }
 impl monster_id {
     pub const MONSTER_GOREBYSS: monster_id = monster_id(400);
 }
 impl monster_id {
+    pub const MONSTER_GOREBYSS_SECONDARY: monster_id = monster_id(1000);
+}
+impl monster_id {
     pub const MONSTER_RELICANTH: monster_id = monster_id(401);
+}
+impl monster_id {
+    pub const MONSTER_RELICANTH_SECONDARY: monster_id = monster_id(1001);
 }
 impl monster_id {
     pub const MONSTER_LUVDISC: monster_id = monster_id(402);
 }
 impl monster_id {
+    pub const MONSTER_LUVDISC_SECONDARY: monster_id = monster_id(1002);
+}
+impl monster_id {
     pub const MONSTER_BAGON: monster_id = monster_id(403);
+}
+impl monster_id {
+    pub const MONSTER_BAGON_SECONDARY: monster_id = monster_id(1003);
 }
 impl monster_id {
     pub const MONSTER_SHELGON: monster_id = monster_id(404);
 }
 impl monster_id {
+    pub const MONSTER_SHELGON_SECONDARY: monster_id = monster_id(1004);
+}
+impl monster_id {
     pub const MONSTER_SALAMENCE: monster_id = monster_id(405);
+}
+impl monster_id {
+    pub const MONSTER_SALAMENCE_SECONDARY: monster_id = monster_id(1005);
 }
 impl monster_id {
     pub const MONSTER_BELDUM: monster_id = monster_id(406);
 }
 impl monster_id {
+    pub const MONSTER_BELDUM_SECONDARY: monster_id = monster_id(1006);
+}
+impl monster_id {
     pub const MONSTER_METANG: monster_id = monster_id(407);
+}
+impl monster_id {
+    pub const MONSTER_METANG_SECONDARY: monster_id = monster_id(1007);
 }
 impl monster_id {
     pub const MONSTER_METAGROSS: monster_id = monster_id(408);
 }
 impl monster_id {
+    pub const MONSTER_METAGROSS_SECONDARY: monster_id = monster_id(1008);
+}
+impl monster_id {
     pub const MONSTER_REGIROCK: monster_id = monster_id(409);
+}
+impl monster_id {
+    pub const MONSTER_REGIROCK_SECONDARY: monster_id = monster_id(1009);
 }
 impl monster_id {
     pub const MONSTER_REGICE: monster_id = monster_id(410);
 }
 impl monster_id {
+    pub const MONSTER_REGICE_SECONDARY: monster_id = monster_id(1010);
+}
+impl monster_id {
     pub const MONSTER_REGISTEEL: monster_id = monster_id(411);
+}
+impl monster_id {
+    pub const MONSTER_REGISTEEL_SECONDARY: monster_id = monster_id(1011);
 }
 impl monster_id {
     pub const MONSTER_LATIAS: monster_id = monster_id(412);
 }
 impl monster_id {
+    pub const MONSTER_LATIAS_SECONDARY: monster_id = monster_id(1012);
+}
+impl monster_id {
     pub const MONSTER_LATIOS: monster_id = monster_id(413);
+}
+impl monster_id {
+    pub const MONSTER_LATIOS_SECONDARY: monster_id = monster_id(1013);
 }
 impl monster_id {
     pub const MONSTER_KYOGRE: monster_id = monster_id(414);
 }
 impl monster_id {
+    pub const MONSTER_KYOGRE_SECONDARY: monster_id = monster_id(1014);
+}
+impl monster_id {
     pub const MONSTER_GROUDON: monster_id = monster_id(415);
+}
+impl monster_id {
+    pub const MONSTER_GROUDON_SECONDARY: monster_id = monster_id(1015);
 }
 impl monster_id {
     pub const MONSTER_RAYQUAZA: monster_id = monster_id(416);
 }
 impl monster_id {
+    pub const MONSTER_RAYQUAZA_SECONDARY: monster_id = monster_id(1016);
+}
+impl monster_id {
     pub const MONSTER_JIRACHI: monster_id = monster_id(417);
+}
+impl monster_id {
+    pub const MONSTER_JIRACHI_SECONDARY: monster_id = monster_id(1017);
 }
 impl monster_id {
     pub const MONSTER_DEOXYS_NORMAL: monster_id = monster_id(418);
 }
 impl monster_id {
+    pub const MONSTER_DEOXYS_NORMAL_SECONDARY: monster_id = monster_id(1018);
+}
+impl monster_id {
     pub const MONSTER_DEOXYS_ATTACH: monster_id = monster_id(419);
+}
+impl monster_id {
+    pub const MONSTER_DEOXYS_ATTACH_SECONDARY: monster_id = monster_id(1019);
 }
 impl monster_id {
     pub const MONSTER_DEOXYS_DEFENSE: monster_id = monster_id(420);
 }
 impl monster_id {
+    pub const MONSTER_DEOXYS_DEFENSE_SECONDARY: monster_id = monster_id(1020);
+}
+impl monster_id {
     pub const MONSTER_DEOXYS_SPEED: monster_id = monster_id(421);
+}
+impl monster_id {
+    pub const MONSTER_DEOXYS_SPEED_SECONDARY: monster_id = monster_id(1021);
 }
 impl monster_id {
     pub const MONSTER_TURTWIG: monster_id = monster_id(422);
 }
 impl monster_id {
+    pub const MONSTER_TURTWIG_SECONDARY: monster_id = monster_id(1022);
+}
+impl monster_id {
     pub const MONSTER_GROTLE: monster_id = monster_id(423);
+}
+impl monster_id {
+    pub const MONSTER_GROTLE_SECONDARY: monster_id = monster_id(1023);
 }
 impl monster_id {
     pub const MONSTER_TORTERRA: monster_id = monster_id(424);
 }
 impl monster_id {
+    pub const MONSTER_TORTERRA_SECONDARY: monster_id = monster_id(1024);
+}
+impl monster_id {
     pub const MONSTER_CHIMCHAR: monster_id = monster_id(425);
+}
+impl monster_id {
+    pub const MONSTER_CHIMCHAR_SECONDARY: monster_id = monster_id(1025);
 }
 impl monster_id {
     pub const MONSTER_MONFERNO: monster_id = monster_id(426);
 }
 impl monster_id {
+    pub const MONSTER_MONFERNO_SECONDARY: monster_id = monster_id(1026);
+}
+impl monster_id {
     pub const MONSTER_INFERNAPE: monster_id = monster_id(427);
+}
+impl monster_id {
+    pub const MONSTER_INFERNAPE_SECONDARY: monster_id = monster_id(1027);
 }
 impl monster_id {
     pub const MONSTER_PIPLUP: monster_id = monster_id(428);
 }
 impl monster_id {
+    pub const MONSTER_PIPLUP_SECONDARY: monster_id = monster_id(1028);
+}
+impl monster_id {
     pub const MONSTER_PRINPLUP: monster_id = monster_id(429);
+}
+impl monster_id {
+    pub const MONSTER_PRINPLUP_SECONDARY: monster_id = monster_id(1029);
 }
 impl monster_id {
     pub const MONSTER_EMPOLEON: monster_id = monster_id(430);
 }
 impl monster_id {
+    pub const MONSTER_EMPOLEON_SECONDARY: monster_id = monster_id(1030);
+}
+impl monster_id {
     pub const MONSTER_STARLY: monster_id = monster_id(431);
+}
+impl monster_id {
+    pub const MONSTER_STARLY_SECONDARY: monster_id = monster_id(1031);
 }
 impl monster_id {
     pub const MONSTER_STARAVIA: monster_id = monster_id(432);
 }
 impl monster_id {
+    pub const MONSTER_STARAVIA_SECONDARY: monster_id = monster_id(1032);
+}
+impl monster_id {
     pub const MONSTER_STARAPTOR: monster_id = monster_id(433);
+}
+impl monster_id {
+    pub const MONSTER_STARAPTOR_SECONDARY: monster_id = monster_id(1033);
 }
 impl monster_id {
     pub const MONSTER_BIDOOF: monster_id = monster_id(434);
 }
 impl monster_id {
+    pub const MONSTER_BIDOOF_SECONDARY: monster_id = monster_id(1034);
+}
+impl monster_id {
     pub const MONSTER_BIBAREL: monster_id = monster_id(435);
+}
+impl monster_id {
+    pub const MONSTER_BIBAREL_SECONDARY: monster_id = monster_id(1035);
 }
 impl monster_id {
     pub const MONSTER_KRICKETOT: monster_id = monster_id(436);
 }
 impl monster_id {
+    pub const MONSTER_KRICKETOT_SECONDARY: monster_id = monster_id(1036);
+}
+impl monster_id {
     pub const MONSTER_KRICKETUNE: monster_id = monster_id(437);
+}
+impl monster_id {
+    pub const MONSTER_KRICKETUNE_SECONDARY: monster_id = monster_id(1037);
 }
 impl monster_id {
     pub const MONSTER_SHINX: monster_id = monster_id(438);
 }
 impl monster_id {
+    pub const MONSTER_SHINX_SECONDARY: monster_id = monster_id(1038);
+}
+impl monster_id {
     pub const MONSTER_LUXIO: monster_id = monster_id(439);
+}
+impl monster_id {
+    pub const MONSTER_LUXIO_SECONDARY: monster_id = monster_id(1039);
 }
 impl monster_id {
     pub const MONSTER_LUXRAY: monster_id = monster_id(440);
 }
 impl monster_id {
+    pub const MONSTER_LUXRAY_SECONDARY: monster_id = monster_id(1040);
+}
+impl monster_id {
     pub const MONSTER_BUDEW: monster_id = monster_id(441);
+}
+impl monster_id {
+    pub const MONSTER_BUDEW_SECONDARY: monster_id = monster_id(1041);
 }
 impl monster_id {
     pub const MONSTER_ROSERADE: monster_id = monster_id(442);
 }
 impl monster_id {
+    pub const MONSTER_ROSERADE_SECONDARY: monster_id = monster_id(1042);
+}
+impl monster_id {
     pub const MONSTER_CRANIDOS: monster_id = monster_id(443);
+}
+impl monster_id {
+    pub const MONSTER_CRANIDOS_SECONDARY: monster_id = monster_id(1043);
 }
 impl monster_id {
     pub const MONSTER_RAMPARDOS: monster_id = monster_id(444);
 }
 impl monster_id {
+    pub const MONSTER_RAMPARDOS_SECONDARY: monster_id = monster_id(1044);
+}
+impl monster_id {
     pub const MONSTER_SHIELDON: monster_id = monster_id(445);
+}
+impl monster_id {
+    pub const MONSTER_SHIELDON_SECONDARY: monster_id = monster_id(1045);
 }
 impl monster_id {
     pub const MONSTER_BASTIODON: monster_id = monster_id(446);
 }
 impl monster_id {
+    pub const MONSTER_BASTIODON_SECONDARY: monster_id = monster_id(1046);
+}
+impl monster_id {
     pub const MONSTER_BURMY_SANDY: monster_id = monster_id(447);
+}
+impl monster_id {
+    pub const MONSTER_BURMY_SANDY_SECONDARY: monster_id = monster_id(1047);
 }
 impl monster_id {
     pub const MONSTER_BURMY_PLANT: monster_id = monster_id(448);
 }
 impl monster_id {
+    pub const MONSTER_BURMY_PLANT_SECONDARY: monster_id = monster_id(1048);
+}
+impl monster_id {
     pub const MONSTER_BURMY_TRASH: monster_id = monster_id(449);
+}
+impl monster_id {
+    pub const MONSTER_BURMY_TRASH_SECONDARY: monster_id = monster_id(1049);
 }
 impl monster_id {
     pub const MONSTER_WORMADAM_SANDY: monster_id = monster_id(450);
 }
 impl monster_id {
+    pub const MONSTER_WORMADAM_SANDY_SECONDARY: monster_id = monster_id(1050);
+}
+impl monster_id {
     pub const MONSTER_WORMADAM_PLANT: monster_id = monster_id(451);
+}
+impl monster_id {
+    pub const MONSTER_WORMADAM_PLANT_SECONDARY: monster_id = monster_id(1051);
 }
 impl monster_id {
     pub const MONSTER_WORMADAM_TRASH: monster_id = monster_id(452);
 }
 impl monster_id {
+    pub const MONSTER_WORMADAM_TRASH_SECONDARY: monster_id = monster_id(1052);
+}
+impl monster_id {
     pub const MONSTER_MOTHIM: monster_id = monster_id(453);
+}
+impl monster_id {
+    pub const MONSTER_MOTHIM_SECONDARY: monster_id = monster_id(1053);
 }
 impl monster_id {
     pub const MONSTER_COMBEE: monster_id = monster_id(454);
 }
 impl monster_id {
+    pub const MONSTER_COMBEE_SECONDARY: monster_id = monster_id(1054);
+}
+impl monster_id {
     pub const MONSTER_VESPIQUEN: monster_id = monster_id(455);
+}
+impl monster_id {
+    pub const MONSTER_VESPIQUEN_SECONDARY: monster_id = monster_id(1055);
 }
 impl monster_id {
     pub const MONSTER_PACHIRISU: monster_id = monster_id(456);
 }
 impl monster_id {
+    pub const MONSTER_PACHIRISU_SECONDARY: monster_id = monster_id(1056);
+}
+impl monster_id {
     pub const MONSTER_BUIZEL: monster_id = monster_id(457);
+}
+impl monster_id {
+    pub const MONSTER_BUIZEL_SECONDARY: monster_id = monster_id(1057);
 }
 impl monster_id {
     pub const MONSTER_FLOATZEL: monster_id = monster_id(458);
 }
 impl monster_id {
+    pub const MONSTER_FLOATZEL_SECONDARY: monster_id = monster_id(1058);
+}
+impl monster_id {
     pub const MONSTER_CHERUBI: monster_id = monster_id(459);
+}
+impl monster_id {
+    pub const MONSTER_CHERUBI_SECONDARY: monster_id = monster_id(1059);
 }
 impl monster_id {
     pub const MONSTER_CHERRIM_OVERCAST: monster_id = monster_id(460);
 }
 impl monster_id {
+    pub const MONSTER_CHERRIM_OVERCAST_SECONDARY: monster_id = monster_id(1060);
+}
+impl monster_id {
     pub const MONSTER_CHERRIM_SUNSHINE: monster_id = monster_id(461);
+}
+impl monster_id {
+    pub const MONSTER_CHERRIM_SUNSHINE_SECONDARY: monster_id = monster_id(1061);
 }
 impl monster_id {
     pub const MONSTER_SHELLOS_EAST: monster_id = monster_id(462);
 }
 impl monster_id {
+    pub const MONSTER_SHELLOS_EAST_SECONDARY: monster_id = monster_id(1062);
+}
+impl monster_id {
     pub const MONSTER_SHELLOS_WEST: monster_id = monster_id(463);
+}
+impl monster_id {
+    pub const MONSTER_SHELLOS_WEST_SECONDARY: monster_id = monster_id(1063);
 }
 impl monster_id {
     pub const MONSTER_GASTRODON_EAST: monster_id = monster_id(464);
 }
 impl monster_id {
+    pub const MONSTER_GASTRODON_EAST_SECONDARY: monster_id = monster_id(1064);
+}
+impl monster_id {
     pub const MONSTER_GASTRODON_WEST: monster_id = monster_id(465);
+}
+impl monster_id {
+    pub const MONSTER_GASTRODON_WEST_SECONDARY: monster_id = monster_id(1065);
 }
 impl monster_id {
     pub const MONSTER_AMBIPOM: monster_id = monster_id(466);
 }
 impl monster_id {
+    pub const MONSTER_AMBIPOM_SECONDARY: monster_id = monster_id(1066);
+}
+impl monster_id {
     pub const MONSTER_DRIFLOON: monster_id = monster_id(467);
+}
+impl monster_id {
+    pub const MONSTER_DRIFLOON_SECONDARY: monster_id = monster_id(1067);
 }
 impl monster_id {
     pub const MONSTER_DRIFBLIM: monster_id = monster_id(468);
 }
 impl monster_id {
+    pub const MONSTER_DRIFBLIM_SECONDARY: monster_id = monster_id(1068);
+}
+impl monster_id {
     pub const MONSTER_BUNEARY: monster_id = monster_id(469);
+}
+impl monster_id {
+    pub const MONSTER_BUNEARY_SECONDARY: monster_id = monster_id(1069);
 }
 impl monster_id {
     pub const MONSTER_LOPUNNY: monster_id = monster_id(470);
 }
 impl monster_id {
+    pub const MONSTER_LOPUNNY_SECONDARY: monster_id = monster_id(1070);
+}
+impl monster_id {
     pub const MONSTER_MISMAGIUS: monster_id = monster_id(471);
+}
+impl monster_id {
+    pub const MONSTER_MISMAGIUS_SECONDARY: monster_id = monster_id(1071);
 }
 impl monster_id {
     pub const MONSTER_HONCHKROW: monster_id = monster_id(472);
 }
 impl monster_id {
+    pub const MONSTER_HONCHKROW_SECONDARY: monster_id = monster_id(1072);
+}
+impl monster_id {
     pub const MONSTER_GLAMEOW: monster_id = monster_id(473);
+}
+impl monster_id {
+    pub const MONSTER_GLAMEOW_SECONDARY: monster_id = monster_id(1073);
 }
 impl monster_id {
     pub const MONSTER_PURUGLY: monster_id = monster_id(474);
 }
 impl monster_id {
+    pub const MONSTER_PURUGLY_SECONDARY: monster_id = monster_id(1074);
+}
+impl monster_id {
     pub const MONSTER_CHINGLING: monster_id = monster_id(475);
+}
+impl monster_id {
+    pub const MONSTER_CHINGLING_SECONDARY: monster_id = monster_id(1075);
 }
 impl monster_id {
     pub const MONSTER_STUNKY: monster_id = monster_id(476);
 }
 impl monster_id {
+    pub const MONSTER_STUNKY_SECONDARY: monster_id = monster_id(1076);
+}
+impl monster_id {
     pub const MONSTER_SKUNTANK: monster_id = monster_id(477);
+}
+impl monster_id {
+    pub const MONSTER_SKUNTANK_SECONDARY: monster_id = monster_id(1077);
 }
 impl monster_id {
     pub const MONSTER_BRONZOR: monster_id = monster_id(478);
 }
 impl monster_id {
+    pub const MONSTER_BRONZOR_SECONDARY: monster_id = monster_id(1078);
+}
+impl monster_id {
     pub const MONSTER_BRONZONG: monster_id = monster_id(479);
+}
+impl monster_id {
+    pub const MONSTER_BRONZONG_SECONDARY: monster_id = monster_id(1079);
 }
 impl monster_id {
     pub const MONSTER_BONSLY: monster_id = monster_id(480);
 }
 impl monster_id {
+    pub const MONSTER_BONSLY_SECONDARY: monster_id = monster_id(1080);
+}
+impl monster_id {
     pub const MONSTER_MIME_JR: monster_id = monster_id(481);
+}
+impl monster_id {
+    pub const MONSTER_MIME_JR_SECONDARY: monster_id = monster_id(1081);
 }
 impl monster_id {
     pub const MONSTER_HAPPINY: monster_id = monster_id(482);
 }
 impl monster_id {
+    pub const MONSTER_HAPPINY_SECONDARY: monster_id = monster_id(1082);
+}
+impl monster_id {
     pub const MONSTER_CHATOT: monster_id = monster_id(483);
+}
+impl monster_id {
+    pub const MONSTER_CHATOT_SECONDARY: monster_id = monster_id(1083);
 }
 impl monster_id {
     pub const MONSTER_SPIRITOMB: monster_id = monster_id(484);
 }
 impl monster_id {
+    pub const MONSTER_SPIRITOMB_SECONDARY: monster_id = monster_id(1084);
+}
+impl monster_id {
     pub const MONSTER_GIBLE: monster_id = monster_id(485);
+}
+impl monster_id {
+    pub const MONSTER_GIBLE_SECONDARY: monster_id = monster_id(1085);
 }
 impl monster_id {
     pub const MONSTER_GABITE: monster_id = monster_id(486);
 }
 impl monster_id {
+    pub const MONSTER_GABITE_SECONDARY: monster_id = monster_id(1086);
+}
+impl monster_id {
     pub const MONSTER_GARCHOMP: monster_id = monster_id(487);
+}
+impl monster_id {
+    pub const MONSTER_GARCHOMP_SECONDARY: monster_id = monster_id(1087);
 }
 impl monster_id {
     pub const MONSTER_MUNCHLAX: monster_id = monster_id(488);
 }
 impl monster_id {
+    pub const MONSTER_MUNCHLAX_SECONDARY: monster_id = monster_id(1088);
+}
+impl monster_id {
     pub const MONSTER_RIOLU: monster_id = monster_id(489);
+}
+impl monster_id {
+    pub const MONSTER_RIOLU_SECONDARY: monster_id = monster_id(1089);
 }
 impl monster_id {
     pub const MONSTER_LUCARIO: monster_id = monster_id(490);
 }
 impl monster_id {
+    pub const MONSTER_LUCARIO_SECONDARY: monster_id = monster_id(1090);
+}
+impl monster_id {
     pub const MONSTER_HIPPOPOTAS: monster_id = monster_id(491);
+}
+impl monster_id {
+    pub const MONSTER_HIPPOPOTAS_SECONDARY: monster_id = monster_id(1091);
 }
 impl monster_id {
     pub const MONSTER_HIPPOWDON: monster_id = monster_id(492);
 }
 impl monster_id {
+    pub const MONSTER_HIPPOWDON_SECONDARY: monster_id = monster_id(1092);
+}
+impl monster_id {
     pub const MONSTER_SKORUPI: monster_id = monster_id(493);
+}
+impl monster_id {
+    pub const MONSTER_SKORUPI_SECONDARY: monster_id = monster_id(1093);
 }
 impl monster_id {
     pub const MONSTER_DRAPION: monster_id = monster_id(494);
 }
 impl monster_id {
+    pub const MONSTER_DRAPION_SECONDARY: monster_id = monster_id(1094);
+}
+impl monster_id {
     pub const MONSTER_CROAGUNK: monster_id = monster_id(495);
+}
+impl monster_id {
+    pub const MONSTER_CROAGUNK_SECONDARY: monster_id = monster_id(1095);
 }
 impl monster_id {
     pub const MONSTER_TOXICROAK: monster_id = monster_id(496);
 }
 impl monster_id {
+    pub const MONSTER_TOXICROAK_SECONDARY: monster_id = monster_id(1096);
+}
+impl monster_id {
     pub const MONSTER_CARNIVINE: monster_id = monster_id(497);
+}
+impl monster_id {
+    pub const MONSTER_CARNIVINE_SECONDARY: monster_id = monster_id(1097);
 }
 impl monster_id {
     pub const MONSTER_FINNEON: monster_id = monster_id(498);
 }
 impl monster_id {
+    pub const MONSTER_FINNEON_SECONDARY: monster_id = monster_id(1098);
+}
+impl monster_id {
     pub const MONSTER_LUMINEON: monster_id = monster_id(499);
+}
+impl monster_id {
+    pub const MONSTER_LUMINEON_SECONDARY: monster_id = monster_id(1099);
 }
 impl monster_id {
     pub const MONSTER_MANTYKE: monster_id = monster_id(500);
 }
 impl monster_id {
+    pub const MONSTER_MANTYKE_SECONDARY: monster_id = monster_id(1100);
+}
+impl monster_id {
     pub const MONSTER_SNOVER: monster_id = monster_id(501);
+}
+impl monster_id {
+    pub const MONSTER_SNOVER_SECONDARY: monster_id = monster_id(1101);
 }
 impl monster_id {
     pub const MONSTER_ABOMASNOW: monster_id = monster_id(502);
 }
 impl monster_id {
+    pub const MONSTER_ABOMASNOW_SECONDARY: monster_id = monster_id(1102);
+}
+impl monster_id {
     pub const MONSTER_WEAVILE: monster_id = monster_id(503);
+}
+impl monster_id {
+    pub const MONSTER_WEAVILE_SECONDARY: monster_id = monster_id(1103);
 }
 impl monster_id {
     pub const MONSTER_MAGNEZONE: monster_id = monster_id(504);
 }
 impl monster_id {
+    pub const MONSTER_MAGNEZONE_SECONDARY: monster_id = monster_id(1104);
+}
+impl monster_id {
     pub const MONSTER_LICKILICKY: monster_id = monster_id(505);
+}
+impl monster_id {
+    pub const MONSTER_LICKILICKY_SECONDARY: monster_id = monster_id(1105);
 }
 impl monster_id {
     pub const MONSTER_RHYPERIOR: monster_id = monster_id(506);
 }
 impl monster_id {
+    pub const MONSTER_RHYPERIOR_SECONDARY: monster_id = monster_id(1106);
+}
+impl monster_id {
     pub const MONSTER_TANGROWTH: monster_id = monster_id(507);
+}
+impl monster_id {
+    pub const MONSTER_TANGROWTH_SECONDARY: monster_id = monster_id(1107);
 }
 impl monster_id {
     pub const MONSTER_ELECTIVIRE: monster_id = monster_id(508);
 }
 impl monster_id {
+    pub const MONSTER_ELECTIVIRE_SECONDARY: monster_id = monster_id(1108);
+}
+impl monster_id {
     pub const MONSTER_MAGMORTAR: monster_id = monster_id(509);
+}
+impl monster_id {
+    pub const MONSTER_MAGMORTAR_SECONDARY: monster_id = monster_id(1109);
 }
 impl monster_id {
     pub const MONSTER_TOGEKISS: monster_id = monster_id(510);
 }
 impl monster_id {
+    pub const MONSTER_TOGEKISS_SECONDARY: monster_id = monster_id(1110);
+}
+impl monster_id {
     pub const MONSTER_YANMEGA: monster_id = monster_id(511);
+}
+impl monster_id {
+    pub const MONSTER_YANMEGA_SECONDARY: monster_id = monster_id(1111);
 }
 impl monster_id {
     pub const MONSTER_LEAFEON: monster_id = monster_id(512);
 }
 impl monster_id {
+    pub const MONSTER_LEAFEON_SECONDARY: monster_id = monster_id(1112);
+}
+impl monster_id {
     pub const MONSTER_GLACEON: monster_id = monster_id(513);
+}
+impl monster_id {
+    pub const MONSTER_GLACEON_SECONDARY: monster_id = monster_id(1113);
 }
 impl monster_id {
     pub const MONSTER_GLISCOR: monster_id = monster_id(514);
 }
 impl monster_id {
+    pub const MONSTER_GLISCOR_SECONDARY: monster_id = monster_id(1114);
+}
+impl monster_id {
     pub const MONSTER_MAMOSWINE: monster_id = monster_id(515);
+}
+impl monster_id {
+    pub const MONSTER_MAMOSWINE_SECONDARY: monster_id = monster_id(1115);
 }
 impl monster_id {
     pub const MONSTER_PORYGON_Z: monster_id = monster_id(516);
 }
 impl monster_id {
+    pub const MONSTER_PORYGON_Z_SECONDARY: monster_id = monster_id(1116);
+}
+impl monster_id {
     pub const MONSTER_GALLADE: monster_id = monster_id(517);
+}
+impl monster_id {
+    pub const MONSTER_GALLADE_SECONDARY: monster_id = monster_id(1117);
 }
 impl monster_id {
     pub const MONSTER_PROBOPASS: monster_id = monster_id(518);
 }
 impl monster_id {
+    pub const MONSTER_PROBOPASS_SECONDARY: monster_id = monster_id(1118);
+}
+impl monster_id {
     pub const MONSTER_DUSKNOIR: monster_id = monster_id(519);
+}
+impl monster_id {
+    pub const MONSTER_DUSKNOIR_SECONDARY: monster_id = monster_id(1119);
 }
 impl monster_id {
     pub const MONSTER_FROSLASS: monster_id = monster_id(520);
 }
 impl monster_id {
+    pub const MONSTER_FROSLASS_SECONDARY: monster_id = monster_id(1120);
+}
+impl monster_id {
     pub const MONSTER_ROTOM: monster_id = monster_id(521);
+}
+impl monster_id {
+    pub const MONSTER_ROTOM_SECONDARY: monster_id = monster_id(1121);
 }
 impl monster_id {
     pub const MONSTER_UXIE: monster_id = monster_id(522);
 }
 impl monster_id {
+    pub const MONSTER_UXIE_SECONDARY: monster_id = monster_id(1122);
+}
+impl monster_id {
     pub const MONSTER_MESPRIT: monster_id = monster_id(523);
+}
+impl monster_id {
+    pub const MONSTER_MESPRIT_SECONDARY: monster_id = monster_id(1123);
 }
 impl monster_id {
     pub const MONSTER_AZELF: monster_id = monster_id(524);
 }
 impl monster_id {
+    pub const MONSTER_AZELF_SECONDARY: monster_id = monster_id(1124);
+}
+impl monster_id {
     pub const MONSTER_DIALGA: monster_id = monster_id(525);
+}
+impl monster_id {
+    pub const MONSTER_DIALGA_SECONDARY: monster_id = monster_id(1125);
 }
 impl monster_id {
     pub const MONSTER_PALKIA: monster_id = monster_id(526);
 }
 impl monster_id {
+    pub const MONSTER_PALKIA_SECONDARY: monster_id = monster_id(1126);
+}
+impl monster_id {
     pub const MONSTER_HEATRAN: monster_id = monster_id(527);
+}
+impl monster_id {
+    pub const MONSTER_HEATRAN_SECONDARY: monster_id = monster_id(1127);
 }
 impl monster_id {
     pub const MONSTER_REGIGIGAS: monster_id = monster_id(528);
 }
 impl monster_id {
+    pub const MONSTER_REGIGIGAS_SECONDARY: monster_id = monster_id(1128);
+}
+impl monster_id {
     pub const MONSTER_GIRATINA_ALTERED: monster_id = monster_id(529);
+}
+impl monster_id {
+    pub const MONSTER_GIRATINA_ALTERED_SECONDARY: monster_id = monster_id(1129);
 }
 impl monster_id {
     pub const MONSTER_CRESSELIA: monster_id = monster_id(530);
 }
 impl monster_id {
+    pub const MONSTER_CRESSELIA_SECONDARY: monster_id = monster_id(1130);
+}
+impl monster_id {
     pub const MONSTER_PHIONE: monster_id = monster_id(531);
+}
+impl monster_id {
+    pub const MONSTER_PHIONE_SECONDARY: monster_id = monster_id(1131);
 }
 impl monster_id {
     pub const MONSTER_MANAPHY: monster_id = monster_id(532);
 }
 impl monster_id {
+    pub const MONSTER_MANAPHY_SECONDARY: monster_id = monster_id(1132);
+}
+impl monster_id {
     pub const MONSTER_DARKRAI: monster_id = monster_id(533);
+}
+impl monster_id {
+    pub const MONSTER_DARKRAI_SECONDARY: monster_id = monster_id(1133);
 }
 impl monster_id {
     pub const MONSTER_SHAYMIN_LAND: monster_id = monster_id(534);
 }
 impl monster_id {
+    pub const MONSTER_SHAYMIN_LAND_SECONDARY: monster_id = monster_id(1134);
+}
+impl monster_id {
     pub const MONSTER_SHAYMIN_SKY: monster_id = monster_id(535);
+}
+impl monster_id {
+    pub const MONSTER_SHAYMIN_SKY_SECONDARY: monster_id = monster_id(1135);
 }
 impl monster_id {
     pub const MONSTER_GIRATINA_ORIGIN: monster_id = monster_id(536);
 }
 impl monster_id {
+    pub const MONSTER_GIRATINA_ORIGIN_SECONDARY: monster_id = monster_id(1136);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x219: monster_id = monster_id(537);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x219_SECONDARY: monster_id = monster_id(1137);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x21A: monster_id = monster_id(538);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x21A_SECONDARY: monster_id = monster_id(1138);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x21B: monster_id = monster_id(539);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21B_SECONDARY: monster_id = monster_id(1139);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x21C: monster_id = monster_id(540);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x21C_SECONDARY: monster_id = monster_id(1140);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x21D: monster_id = monster_id(541);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21D_SECONDARY: monster_id = monster_id(1141);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x21E: monster_id = monster_id(542);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x21E_SECONDARY: monster_id = monster_id(1142);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x21F: monster_id = monster_id(543);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21F_SECONDARY: monster_id = monster_id(1143);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x220: monster_id = monster_id(544);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x220_SECONDARY: monster_id = monster_id(1144);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x221: monster_id = monster_id(545);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x221_SECONDARY: monster_id = monster_id(1145);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x222: monster_id = monster_id(546);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x222_SECONDARY: monster_id = monster_id(1146);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x223: monster_id = monster_id(547);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x223_SECONDARY: monster_id = monster_id(1147);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x224: monster_id = monster_id(548);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x224_SECONDARY: monster_id = monster_id(1148);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x225: monster_id = monster_id(549);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x225_SECONDARY: monster_id = monster_id(1149);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x226: monster_id = monster_id(550);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x226_SECONDARY: monster_id = monster_id(1150);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x227: monster_id = monster_id(551);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x227_SECONDARY: monster_id = monster_id(1151);
 }
 impl monster_id {
     pub const MONSTER_PRIMAL_DIALGA: monster_id = monster_id(552);
 }
 impl monster_id {
+    pub const MONSTER_PRIMAL_DIALGA_SECONDARY: monster_id = monster_id(1152);
+}
+impl monster_id {
     pub const MONSTER_DECOY: monster_id = monster_id(553);
 }
 impl monster_id {
+    pub const MONSTER_DECOY_SECONDARY: monster_id = monster_id(1153);
+}
+impl monster_id {
     pub const MONSTER_STATUE: monster_id = monster_id(554);
+}
+impl monster_id {
+    pub const MONSTER_STATUE_SECONDARY: monster_id = monster_id(1154);
 }
 impl monster_id {
     pub const MONSTER_WIGGLYTUFF_STORY: monster_id = monster_id(555);
@@ -15432,7 +17097,7 @@ pub struct monster {
     pub field_0x164: undefined,
     pub field_0x165: undefined,
     pub field_0x166: undefined,
-    pub field_0x167: undefined,
+    pub anger_point_flag: bool_,
     pub field_0x168: undefined,
     pub field_0x169: undefined,
     pub force_turn: bool_,
@@ -26520,7 +28185,7 @@ extern "C" {
     pub fn SpawnEnemyTrapAtPos(trap_id: trap_id, x: i16, y: i16, flags: u8, is_visible: bool_);
 }
 extern "C" {
-    pub fn PerformLeaderAction();
+    pub fn SetLeaderAction();
 }
 extern "C" {
     pub fn ChangeLeader();
