@@ -992,6 +992,100 @@ impl<'a> DungeonEffectsEmitter<'a> {
         }
     }
 
+    /// Decrease the target monster's level if possible.
+    ///
+    /// # Arguments
+    /// * `attacker` - The monster that is trying to inflict this status.
+    /// * `defender` - The monster that is being inflicted with this status.
+    /// * `levels` - number of levels to decrease
+    pub fn try_decrease_level(
+        &mut self,
+        attacker: &mut DungeonEntity,
+        defender: &mut DungeonEntity,
+        levels: i32,
+    ) -> bool {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::TryDecreaseLevel(attacker, defender, levels) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Arguments
+    /// * `attacker` - The monster that is trying to inflict this status.
+    /// * `defender` - The monster that is being inflicted with this status.
+    /// * `log_message` - Flag to log a message
+    /// * `levels` - number of levels to decrease
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn level_up(
+        &mut self,
+        attacker: &mut DungeonEntity,
+        defender: &mut DungeonEntity,
+        log_message: bool,
+        param_4: ffi::undefined4,
+    ) -> bool {
+        ffi::LevelUp(attacker, defender, log_message as ffi::bool_, param_4) > 0
+    }
+
+    /// Restore HP of the target monster if possible.
+    ///
+    /// # Arguments
+    /// * `attacker` - The monster that is trying to inflict this status.
+    /// * `defender` - The monster that is being inflicted with this status.
+    /// * `hp` - HP to restore.
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub fn try_restore_hp(
+        &mut self,
+        attacker: &mut DungeonEntity,
+        defender: &mut DungeonEntity,
+        hp: i32,
+    ) -> bool {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::TryRestoreHp(attacker, defender, hp) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Arguments
+    /// * `user` - The monster that is doing the action.
+    /// * `target` - The target entity,
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub fn reveal_items(&mut self, user: &mut DungeonEntity, target: &mut DungeonEntity) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::RevealItems(user, target) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Arguments
+    /// * `user` - The monster that is doing the action.
+    /// * `target` - The target entity,
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub fn reveal_stairs(&mut self, user: &mut DungeonEntity, target: &mut DungeonEntity) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::RevealStairs(user, target) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Arguments
+    /// * `user` - The monster that is doing the action.
+    /// * `target` - The target entity,
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub fn reveal_enemies(&mut self, user: &mut DungeonEntity, target: &mut DungeonEntity) {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::RevealEnemies(user, target) }
+    }
+
     /// Move effect: Deal damage.
     /// Relevant moves: Many!
     ///

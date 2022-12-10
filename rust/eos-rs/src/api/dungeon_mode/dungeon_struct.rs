@@ -1,3 +1,4 @@
+use crate::api::dungeon_mode::sprites::DungeonSpriteHandler;
 use crate::api::dungeon_mode::traps::TrapId;
 use crate::api::dungeon_mode::*;
 use crate::api::dungeons::{DungeonGroupId, DungeonId};
@@ -626,6 +627,7 @@ pub struct GlobalDungeonData<'a>(
     &'a OverlayLoadLease<29>,
     Dungeon<&'a mut ffi::dungeon>,
     DungeonEffectsEmitter<'a>,
+    DungeonSpriteHandler<'a>,
 );
 
 impl<'a> GlobalDungeonData<'a> {
@@ -650,6 +652,7 @@ impl<'a> GlobalDungeonData<'a> {
             ov29,
             Dungeon(&mut *ffi::GetDungeonPtrMaster()),
             DungeonEffectsEmitter(ov29),
+            DungeonSpriteHandler(ov29),
         )
     }
 
@@ -666,12 +669,18 @@ impl<'a> GlobalDungeonData<'a> {
             ov29,
             Dungeon(&mut *ffi::DungeonAlloc()),
             DungeonEffectsEmitter(ov29),
+            DungeonSpriteHandler(ov29),
         )
     }
 
     /// Get the effects handler.
     pub fn effects(&'a mut self) -> &'a mut DungeonEffectsEmitter<'a> {
         &mut self.2
+    }
+
+    /// Get the sprites handler.
+    pub fn sprites(&'a mut self) -> &'a mut DungeonSpriteHandler<'a> {
+        &mut self.3
     }
 
     /// Zeros out the struct pointed to by the global dungeon pointer.
@@ -749,6 +758,21 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn is_substitute_room(&self) -> bool {
         // SAFETY:We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::FixedRoomIsSubstituteRoom() > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_current_fixed_room_boss_fight(&self) -> bool {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::IsCurrentFixedRoomBossFight() > 0 }
+    }
+
+    /// Checks if the current fixed room on the dungeon generation info corresponds to a fixed,
+    /// full-floor layout.
+    ///
+    /// The first non-full-floor fixed room is 0xA5, which is for Sealed Chambers.
+    pub fn is_full_floor_fixed_room(&self) -> bool {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::IsFullFloorFixedRoom() > 0 }
     }
 
     /// Checks if the current dungeon floor number is even.
@@ -907,15 +931,6 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn is_destination_floor_with_monster(&self) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::IsDestinationFloorWithMonster() > 0 }
-    }
-
-    /// Loads the sprites of monsters that appear on the current floor because of a mission,
-    /// if applicable.
-    ///
-    /// This includes monsters to be rescued, outlaws and its minions.
-    pub fn load_mission_monster_sprites(&mut self) {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::LoadMissionMonsterSprites() }
     }
 
     /// Returns the index of the room that contains the stairs.
@@ -1091,6 +1106,21 @@ impl<'a> GlobalDungeonData<'a> {
         ffi::LoadFixedRoomData()
     }
 
+    /// Loads fixed room data from BALANCE/fixed.bin into the buffer pointed to by
+    /// `FIXED_ROOM_DATA_PTR` (see symbol table).
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn load_fixed_room(
+        &mut self,
+        param_1: i32,
+        param_2: i32,
+        param_3: i32,
+        param_4: ffi::undefined4,
+    ) -> i32 {
+        ffi::LoadFixedRoom(param_1, param_2, param_3, param_4)
+    }
+
     /// Sets the forced loss reason to a given value.
     pub fn set_forced_loss_reason(&mut self, reason: ForcedLossReason) {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
@@ -1110,12 +1140,6 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn change_leader(&mut self) {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::ChangeLeader() }
-    }
-
-    /// Gets the sprite index of the specified monster on this floor
-    pub fn get_monster_sprite_index(&self, monster_idx: MonsterSpeciesId) -> u16 {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::GetSpriteIndex(monster_idx) }
     }
 
     /// Handles a fainted monster (reviving does not count as fainting).
@@ -1287,6 +1311,15 @@ impl<'a> GlobalDungeonData<'a> {
         ffi::RunLeaderTurn(param_1) > 0
     }
 
+    /// This appears to be the function that actually performs the leader's action within
+    /// [`Self::run_leader_turn`].
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn perform_leader_action(&mut self) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::PerformLeaderAction() }
+    }
+
     /// Called at the beginning of [`Self::run_fractional_turn`]. Executed only if
     /// FRACTIONAL_TURN_SEQUENCE\[fractional_turn * 2\] is not 0.
     /// First it calls [`Self::try_spawn_monster_and_tick_spawn_counter`], then tries to activate
@@ -1323,18 +1356,6 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::GetKecleonIdToSpawnByFloor() }
     }
 
-    /// Loads the sprite of the specified monster to use it in a dungeon.
-    ///
-    /// # Safety
-    /// The caller must make sure the undefined params are valid for this function.
-    pub unsafe fn load_monster_sprite(
-        &mut self,
-        monster_id: MonsterSpeciesId,
-        param_2: ffi::undefined,
-    ) {
-        ffi::LoadMonsterSprite(monster_id, param_2)
-    }
-
     /// If the monster id parameter is 0x97 (Mew), returns false if either
     /// [`ffi::dungeon::mew_cannot_spawn`] or the second parameter are true.
     ///
@@ -1342,6 +1363,12 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn mew_spawn_check(&self, monster_id: MonsterSpeciesId, force_fail_if_mew: bool) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::MewSpawnCheck(monster_id, force_fail_if_mew as ffi::bool_) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn get_random_spawn_monster_id(&self) -> MonsterSpeciesId {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetRandomSpawnMonsterID() }
     }
 
     /// Returns an entity reference to the first team member which has the specified iq skill.
@@ -1416,6 +1443,14 @@ impl<'a> GlobalDungeonData<'a> {
             param_8,
             param_9,
         )
+    }
+
+    /// Generates the monster ID in the egg from the given mission. Uses the base form of the monster.
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn generate_mission_egg_monster(&mut self, mission: &mut ffi::mission) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GenerateMissionEggMonster(mission) }
     }
 
     /// Spawns the given monster on a tile. Returns None, if the game returned a null-pointer after

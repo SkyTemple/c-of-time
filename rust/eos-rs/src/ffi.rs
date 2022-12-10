@@ -15338,8 +15338,8 @@ pub struct monster {
     pub sp_atk: u8,
     pub def: u8,
     pub sp_def: u8,
-    pub field_0x1e: undefined,
-    pub field_0x1f: undefined,
+    pub field_0x1e: u8,
+    pub field_0x1f: u8,
     pub exp: crate::ctypes::c_int,
     pub stat_modifiers: monster_stat_modifiers,
     pub hidden_power_base_power: i16,
@@ -26319,6 +26319,12 @@ extern "C" {
     pub fn TryForcedLoss(skip_floor_end_check: bool_) -> bool_;
 }
 extern "C" {
+    pub fn IsBossFight(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn IsCurrentFixedRoomBossFight() -> bool_;
+}
+extern "C" {
     pub fn FixedRoomIsSubstituteRoom() -> bool_;
 }
 extern "C" {
@@ -26358,6 +26364,13 @@ extern "C" {
 }
 extern "C" {
     pub fn UpdateStatusIconFlags(entity: *mut entity);
+}
+extern "C" {
+    pub fn LoadMappaFileAttributes(
+        quick_saved: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        special_process: *mut undefined,
+    );
 }
 extern "C" {
     pub fn IsOnMonsterSpawnList(monster_id: monster_id) -> bool_;
@@ -26440,6 +26453,9 @@ extern "C" {
     pub fn DungeonRngSetPrimary();
 }
 extern "C" {
+    pub fn ChangeDungeonMusic(music_id: music_id::Type);
+}
+extern "C" {
     pub fn TrySwitchPlace(user: *mut entity, target: *mut entity);
 }
 extern "C" {
@@ -26504,16 +26520,46 @@ extern "C" {
     pub fn SpawnEnemyTrapAtPos(trap_id: trap_id, x: i16, y: i16, flags: u8, is_visible: bool_);
 }
 extern "C" {
+    pub fn PerformLeaderAction();
+}
+extern "C" {
     pub fn ChangeLeader();
 }
 extern "C" {
     pub fn ResetDamageData(damage: *mut damage_data);
 }
 extern "C" {
+    pub fn GetTotalSpriteFileSize(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn GetSpriteIndex(monster_id: monster_id) -> u16;
 }
 extern "C" {
+    pub fn JoinedAtRangeCheck2Veneer(joined_at: dungeon_id_8) -> bool_;
+}
+extern "C" {
     pub fn FloorNumberIsEven() -> bool_;
+}
+extern "C" {
+    pub fn GetKecleonIdToSpawnByFloor() -> monster_id;
+}
+extern "C" {
+    pub fn StoreSpriteFileIndexBothGenders(monster_id: monster_id, file_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn LoadMonsterSpriteInner(monster_id: monster_id);
+}
+extern "C" {
+    pub fn SwapMonsterWanFileIndex(src_id: crate::ctypes::c_int, dst_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn LoadMonsterSprite(monster_id: monster_id, param_2: undefined);
+}
+extern "C" {
+    pub fn DeleteMonsterSpriteFile(monster_id: monster_id);
+}
+extern "C" {
+    pub fn DeleteAllMonsterSpriteFiles();
 }
 extern "C" {
     pub fn EuFaintCheck(non_team_member_fainted: bool_, set_unk_byte: bool_);
@@ -26529,16 +26575,19 @@ extern "C" {
     pub fn UpdateAiTargetPos(monster: *mut entity);
 }
 extern "C" {
-    pub fn GetKecleonIdToSpawnByFloor() -> monster_id;
-}
-extern "C" {
-    pub fn LoadMonsterSprite(monster_id: monster_id, param_2: undefined);
+    pub fn SetMonsterTypeAndAbility(target: *mut entity);
 }
 extern "C" {
     pub fn TryActivateSlowStart();
 }
 extern "C" {
     pub fn TryActivateArtificialWeatherAbilities();
+}
+extern "C" {
+    pub fn GetMonsterApparentId(
+        target: *mut entity,
+        current_id: monster_id,
+    ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn DefenderAbilityIsActive(
@@ -26579,6 +26628,9 @@ extern "C" {
     pub fn TeamLeaderIqSkillIsEnabled(iq_skill: iq_skill_id) -> bool_;
 }
 extern "C" {
+    pub fn IsSatisfyingScenarioConditionToSpawn(monster_id: monster_id) -> bool_;
+}
+extern "C" {
     pub fn HasLowHealth(entity: *mut entity) -> bool_;
 }
 extern "C" {
@@ -26610,6 +26662,9 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn InitMonster(monster: *mut monster, flag: bool_);
+}
+extern "C" {
     pub fn ExecuteMonsterAction(monster: *mut entity);
 }
 extern "C" {
@@ -26626,6 +26681,9 @@ extern "C" {
 }
 extern "C" {
     pub fn GetNumberOfAttacks(entity: *mut entity) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetMonsterName(buffer: *mut crate::ctypes::c_char, target_info: *mut monster);
 }
 extern "C" {
     pub fn IsMonsterCornered(monster: *mut entity) -> bool_;
@@ -26653,10 +26711,22 @@ extern "C" {
     pub fn AbilityIsActive(entity: *mut entity, ability_id: ability_id) -> bool_;
 }
 extern "C" {
+    pub fn AbilityIsActiveVeneer(entity: *mut entity, ability_id: ability_id) -> bool_;
+}
+extern "C" {
+    pub fn AbilityIsActiveAnyEntity(user: *mut entity, ability_id: ability_id) -> bool_;
+}
+extern "C" {
     pub fn LevitateIsActive(entity: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn MonsterIsType(entity: *mut entity, type_id: type_id) -> bool_;
+}
+extern "C" {
+    pub fn IsTypeAffectedByGravity(entity: *mut entity, type_id: type_id) -> bool_;
+}
+extern "C" {
+    pub fn HasTypeAffectedByGravity(entity: *mut entity, type_id: type_id) -> bool_;
 }
 extern "C" {
     pub fn CanSeeInvisibleMonsters(entity: *mut entity) -> bool_;
@@ -26682,6 +26752,21 @@ extern "C" {
 }
 extern "C" {
     pub fn EnemyEvolution(enemy: *mut entity);
+}
+extern "C" {
+    pub fn TryDecreaseLevel(
+        user: *mut entity,
+        target: *mut entity,
+        n_levels: crate::ctypes::c_int,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn LevelUp(
+        user: *mut entity,
+        target: *mut entity,
+        message: bool_,
+        param_4: undefined4,
+    ) -> bool_;
 }
 extern "C" {
     pub fn EvolveMonster(
@@ -26796,6 +26881,9 @@ extern "C" {
 }
 extern "C" {
     pub fn ResetDamageCalcScratchSpace();
+}
+extern "C" {
+    pub fn IsRecruited(user: *mut entity, target: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn TrySpawnMonsterAndTickSpawnCounter();
@@ -27072,6 +27160,13 @@ extern "C" {
     ) -> bool_;
 }
 extern "C" {
+    pub fn TryRestoreHp(
+        user: *mut entity,
+        target: *mut entity,
+        hp_restoration: crate::ctypes::c_int,
+    ) -> bool_;
+}
+extern "C" {
     pub fn TryIncreaseHp(
         user: *mut entity,
         target: *mut entity,
@@ -27079,6 +27174,15 @@ extern "C" {
         max_hp_boost: crate::ctypes::c_int,
         log_failure: bool_,
     ) -> bool_;
+}
+extern "C" {
+    pub fn RevealItems(user: *mut entity, target: *mut entity);
+}
+extern "C" {
+    pub fn RevealStairs(user: *mut entity, target: *mut entity);
+}
+extern "C" {
+    pub fn RevealEnemies(user: *mut entity, target: *mut entity);
 }
 extern "C" {
     pub fn TryInflictLeechSeedStatus(
@@ -27153,6 +27257,15 @@ extern "C" {
     ) -> move_target_and_range;
 }
 extern "C" {
+    pub fn IsInSpawnList(spawn_list: *mut undefined, monster_id: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn ChangeShayminForme(
+        entity: *mut entity,
+        forme: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn ApplyItemEffect(
         param_1: undefined4,
         param_2: undefined4,
@@ -27200,6 +27313,9 @@ extern "C" {
         move_: *mut move_,
         use_second_accuracy: bool_,
     ) -> bool_;
+}
+extern "C" {
+    pub fn IsHyperBeamVariant(move_: *mut move_) -> bool_;
 }
 extern "C" {
     pub fn DungeonRandOutcomeUserTargetInteraction(
@@ -27296,13 +27412,45 @@ extern "C" {
     pub fn TryWeatherFormChange(entity: *mut entity);
 }
 extern "C" {
+    pub fn DigitCount(n: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn LoadTextureUi();
+}
+extern "C" {
+    pub fn DisplayNumberTextureUi(
+        x: i16,
+        y: i16,
+        n: crate::ctypes::c_int,
+        ally_mode: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DisplayCharTextureUi(
+        call_back_str: *mut undefined,
+        x: i16,
+        y: i16,
+        char_id: crate::ctypes::c_int,
+        param_5: i16,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DisplayUi();
+}
+extern "C" {
     pub fn GetTile(x: crate::ctypes::c_int, y: crate::ctypes::c_int) -> *mut tile;
 }
 extern "C" {
     pub fn GetTileSafe(x: crate::ctypes::c_int, y: crate::ctypes::c_int) -> *mut tile;
 }
 extern "C" {
+    pub fn IsFullFloorFixedRoom() -> bool_;
+}
+extern "C" {
     pub fn GetStairsRoom() -> u8;
+}
+extern "C" {
+    pub fn GetRandomSpawnMonsterID() -> monster_id;
 }
 extern "C" {
     pub fn GravityIsActive() -> bool_;
@@ -27630,6 +27778,48 @@ extern "C" {
     pub fn LoadFixedRoomData();
 }
 extern "C" {
+    pub fn LoadFixedRoom(
+        param_1: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        param_3: crate::ctypes::c_int,
+        param_4: undefined4,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn OpenFixedBin();
+}
+extern "C" {
+    pub fn CloseFixedBin();
+}
+extern "C" {
+    pub fn AreOrbsAllowed(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreTileJumpsAllowed(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreTrawlOrbsAllowed(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreOrbsAllowedVeneer(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreLateGameTrapsEnabled(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreMovesEnabled(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn IsRoomIlluminated(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn GetMatchingMonsterId(
+        monster_id: monster_id,
+        param_2: undefined4,
+        param_3: undefined4,
+    ) -> monster_id;
+}
+extern "C" {
     pub fn GenerateItemExplicit(item: *mut item, item_id: item_id, quantity: u16, sticky: bool_);
 }
 extern "C" {
@@ -27744,6 +27934,9 @@ extern "C" {
     pub fn FloorHasMissionMonster(mission_dst: *mut mission_destination_info) -> bool_;
 }
 extern "C" {
+    pub fn GenerateMissionEggMonster(mission: *mut mission);
+}
+extern "C" {
     pub fn LogMessageByIdWithPopupCheckUser(user: *mut entity, message_id: crate::ctypes::c_int);
 }
 extern "C" {
@@ -27808,6 +28001,9 @@ extern "C" {
     pub fn SetBothScreensWindowColorToDefault();
 }
 extern "C" {
+    pub fn GetPersonalityIndex(monster: *mut monster) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn DisplayMessage(
         param_1: undefined4,
         message_id: crate::ctypes::c_int,
@@ -27838,6 +28034,9 @@ extern "C" {
         param_5: undefined4,
         param_6: undefined4,
     );
+}
+extern "C" {
+    pub fn OpenMenu(param_1: undefined4, param_2: undefined4, param_3: bool_, param_4: undefined4);
 }
 extern "C" {
     pub fn OthersMenuLoop() -> crate::ctypes::c_int;
@@ -29715,6 +29914,9 @@ extern "C" {
     pub static mut FIXED_ROOM_TILE_SPAWN_TABLE: [fixed_room_tile_spawn_entry; 11usize];
 }
 extern "C" {
+    pub static mut TREASURE_BOX_1_ITEM_IDS: [item_id_16; 12usize];
+}
+extern "C" {
     pub static mut FIXED_ROOM_REVISIT_OVERRIDES: [fixed_room_id_8; 256usize];
 }
 extern "C" {
@@ -29830,6 +30032,15 @@ extern "C" {
 }
 extern "C" {
     pub static mut FIXED_ROOM_DATA_PTR: *mut crate::ctypes::c_void;
+}
+extern "C" {
+    pub static mut MONSTER_HEAL_HP_MAX: crate::ctypes::c_int;
+}
+extern "C" {
+    pub static mut ROCK_WRECKER_MOVE_ID: move_id;
+}
+extern "C" {
+    pub static mut MAP_COLOR_TABLE: [rgb; 9usize];
 }
 extern "C" {
     pub static mut DUNGEON_COLORMAP_PTR: *mut rgb;

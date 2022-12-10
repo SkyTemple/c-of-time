@@ -48,6 +48,8 @@ pub trait DungeonMonsterRead: private::Sealed {
     fn entity(&self) -> &DungeonEntity;
     #[doc(hidden)]
     fn monster(&self) -> &ffi::monster;
+    #[doc(hidden)]
+    fn lease(&self) -> OverlayLoadLease<29>;
 
     /// Checks if the monster is a special story ally.
     /// This is a hard-coded check that looks at the monster's "Joined At" field.
@@ -84,6 +86,11 @@ pub trait DungeonMonsterRead: private::Sealed {
     // Checks if the monster has a certain ability that isn't disabled by Gastro Acid.
     fn is_ability_active(&self, ability_id: AbilityId) -> bool {
         unsafe { ffi::AbilityIsActive(force_mut_ptr!(self.entity()), ability_id) > 0 }
+    }
+
+    // Note: unverified, ported from Irdkwia's notes
+    fn is_ability_active_any_entity(&self, ability_id: AbilityId) -> bool {
+        unsafe { ffi::AbilityIsActiveAnyEntity(force_mut_ptr!(self.entity()), ability_id) > 0 }
     }
 
     /// Checks if the monster has a given type.
@@ -453,6 +460,11 @@ pub trait DungeonMonsterRead: private::Sealed {
         unsafe { ffi::GetMovePower(force_mut_ptr!(self.entity()), force_mut_ptr!(the_move)) }
     }
 
+    /// Note: unverified, ported from Irdkwia's notes
+    fn get_personality_index(&self) -> i32 {
+        unsafe { ffi::GetPersonalityIndex(force_mut_ptr!(self.entity())) }
+    }
+
     /// Seems to calculate the duration of a volatile status on a monster.
     ///
     /// Returns the number of turns for the status condition.
@@ -481,6 +493,16 @@ pub trait DungeonMonsterRead: private::Sealed {
     /// Checks if a monster is levitating (has the effect of Levitate and Gravity is not active)
     fn is_levitating(&self) -> bool {
         unsafe { ffi::LevitateIsActive(force_mut_ptr!(self.entity())) > 0 }
+    }
+
+    /// Checks if Gravity is active and that the given type is affected (i.e., Flying type).
+    fn is_type_affected_by_gravity(&self, type_id: ffi::type_id) -> bool {
+        unsafe { ffi::IsTypeAffectedByGravity(force_mut_ptr!(self.entity()), type_id) > 0 }
+    }
+
+    /// Checks if Gravity is active and that this monster is of an affected type (i.e., Flying type).
+    fn has_type_affected_by_gravity(&self, type_id: ffi::type_id) -> bool {
+        unsafe { ffi::HasTypeAffectedByGravity(force_mut_ptr!(self.entity()), type_id) > 0 }
     }
 
     /// Checks if the monster is under the effect of Conversion 2 (its type was changed). Returns
@@ -689,6 +711,44 @@ pub trait DungeonMonsterRead: private::Sealed {
         unsafe {
             ffi::StatusCheckerCheck(force_mut_ptr!(self.entity()), force_mut_ptr!(the_move)) > 0
         }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    fn get_monster_apparent_id(&self, current_id: MonsterSpeciesId) -> i32 {
+        unsafe { ffi::GetMonsterApparentId(force_mut_ptr!(self.entity()), current_id) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Safety
+    /// It's unknown what size the string passed in must be.
+    unsafe fn get_monster_name(&self, output: *mut c_char) {
+        ffi::GetMonsterName(output, force_mut_ptr!(self.monster()))
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    fn is_target_recruited(&self, target: &DungeonEntity) -> bool {
+        // SAFETY: We have a lease on the overlay existing.
+        unsafe { ffi::IsRecruited(force_mut_ptr!(self.entity()), force_mut_ptr!(target)) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    fn is_satisfying_scenario_condition_to_spawn(&self) -> bool {
+        self.monster()
+            .id
+            .val()
+            .is_satisfying_scenario_condition_to_spawn(&self.lease())
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    fn is_in_spawn_list(&self, spawn_list: &mut ffi::undefined) -> bool {
+        self.monster()
+            .id
+            .val()
+            .is_in_spawn_list(spawn_list, &self.lease())
     }
 }
 
@@ -954,6 +1014,28 @@ pub trait DungeonMonsterWrite: private::Sealed {
     fn update_status_icon_flags(&mut self) {
         unsafe { ffi::UpdateStatusIconFlags(self.entity_mut()) }
     }
+
+    /// Checks Forecast ability
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    fn set_monster_type_and_ability(&mut self) {
+        unsafe { ffi::SetMonsterTypeAndAbility(self.entity_mut()) }
+    }
+
+    /// forme:
+    ///    1: change from Land to Sky
+    ///    2: change from Sky to Land
+    ///
+    /// result:
+    ///    0: not Shaymin
+    ///    1: not correct Forme
+    ///    2: frozen
+    ///    3: ok
+    ///         
+    /// Note: unverified, ported from Irdkwia's notes
+    fn change_shaymin_forme(&mut self, mode: i32) -> i32 {
+        unsafe { ffi::ChangeShayminForme(self.entity_mut(), mode) }
+    }
 }
 
 impl<'a> DungeonMonsterRead for DungeonMonsterRef<'a> {
@@ -964,6 +1046,11 @@ impl<'a> DungeonMonsterRead for DungeonMonsterRef<'a> {
     fn monster(&self) -> &ffi::monster {
         self.0
     }
+
+    fn lease(&self) -> OverlayLoadLease<29> {
+        // SAFETY: We can assume that if this object exists the overlay is loaded.
+        unsafe { OverlayLoadLease::acquire_unchecked() }
+    }
 }
 
 impl<'a> DungeonMonsterRead for DungeonMonsterMut<'a> {
@@ -973,6 +1060,11 @@ impl<'a> DungeonMonsterRead for DungeonMonsterMut<'a> {
 
     fn monster(&self) -> &ffi::monster {
         self.0
+    }
+
+    fn lease(&self) -> OverlayLoadLease<29> {
+        // SAFETY: We can assume that if this object exists the overlay is loaded.
+        unsafe { OverlayLoadLease::acquire_unchecked() }
     }
 }
 
@@ -986,6 +1078,16 @@ impl<'a> DungeonMonsterWrite for DungeonMonsterMut<'a> {
     }
 }
 
+impl<'a> DungeonMonsterMut<'a> {
+    /// Initializes a monster struct.
+    ///
+    /// # Safety
+    /// The monster must be a valid pointer to either a valid monster or an uninitialized monster.
+    pub unsafe fn init_monster(monster: *mut ffi::monster, flag: bool) {
+        ffi::InitMonster(monster, flag as ffi::bool_)
+    }
+}
+
 mod private {
     use super::{DungeonMonsterMut, DungeonMonsterRef};
 
@@ -993,4 +1095,34 @@ mod private {
 
     impl<'a> Sealed for DungeonMonsterRef<'a> {}
     impl<'a> Sealed for DungeonMonsterMut<'a> {}
+}
+
+/// Extension trait for [`MonsterSpeciesId`] specific to dungeon mode.
+pub trait DungeonMonsterSpeciesIdExt {
+    /// Note: unverified, ported from Irdkwia's notes
+    fn is_satisfying_scenario_condition_to_spawn(&self, _ov29: &OverlayLoadLease<29>) -> bool;
+
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    fn is_in_spawn_list(
+        &self,
+        spawn_list: &mut ffi::undefined,
+        _ov29: &OverlayLoadLease<29>,
+    ) -> bool;
+}
+
+impl DungeonMonsterSpeciesIdExt for MonsterSpeciesId {
+    fn is_satisfying_scenario_condition_to_spawn(&self, _ov29: &OverlayLoadLease<29>) -> bool {
+        unsafe { ffi::IsSatisfyingScenarioConditionToSpawn(*self) > 0 }
+    }
+
+    fn is_in_spawn_list(
+        &self,
+        spawn_list: &mut ffi::undefined,
+        _ov29: &OverlayLoadLease<29>,
+    ) -> bool {
+        unsafe { ffi::IsInSpawnList(spawn_list, *self) > 0 }
+    }
 }
