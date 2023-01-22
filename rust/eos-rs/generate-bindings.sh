@@ -24,6 +24,7 @@ bindgen \
   --newtype-enum iq_group_id \
   --newtype-enum iq_skill_id \
   --newtype-enum item_id \
+  --newtype-enum trap_id \
   --newtype-enum item_category \
   --newtype-enum monster_id \
   --newtype-enum move_id \
@@ -31,6 +32,7 @@ bindgen \
   --newtype-enum script_var_id \
   --newtype-enum special_process_id \
   --newtype-enum type_id \
+  --default-non-copy-union-style manually_drop \
   $SCRIPT_DIR/include.h \
   -- \
   -target armv5te-none-eabi \
@@ -51,6 +53,7 @@ sed_inplace 's/pub struct fixed_room_id(pub /pub struct fixed_room_id(pub(crate)
 sed_inplace 's/pub struct iq_group_id(pub /pub struct iq_group_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
 sed_inplace 's/pub struct iq_skill_id(pub /pub struct iq_skill_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
 sed_inplace 's/pub struct item_id(pub /pub struct item_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
+sed_inplace 's/pub struct trap_id(pub /pub struct trap_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
 sed_inplace 's/pub struct monster_id(pub /pub struct monster_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
 sed_inplace 's/pub struct move_id(pub /pub struct move_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs
 sed_inplace 's/pub struct script_opcode_id(pub /pub struct script_opcode_id(pub(crate) /g' $SCRIPT_DIR/src/ffi.rs

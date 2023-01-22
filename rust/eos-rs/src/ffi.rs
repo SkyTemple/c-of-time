@@ -85,49 +85,6 @@ where
         }
     }
 }
-#[repr(C)]
-pub struct __BindgenUnionField<T>(::core::marker::PhantomData<T>);
-impl<T> __BindgenUnionField<T> {
-    #[inline]
-    pub const fn new() -> Self {
-        __BindgenUnionField(::core::marker::PhantomData)
-    }
-    #[inline]
-    pub unsafe fn as_ref(&self) -> &T {
-        ::core::mem::transmute(self)
-    }
-    #[inline]
-    pub unsafe fn as_mut(&mut self) -> &mut T {
-        ::core::mem::transmute(self)
-    }
-}
-impl<T> ::core::default::Default for __BindgenUnionField<T> {
-    #[inline]
-    fn default() -> Self {
-        Self::new()
-    }
-}
-impl<T> ::core::clone::Clone for __BindgenUnionField<T> {
-    #[inline]
-    fn clone(&self) -> Self {
-        Self::new()
-    }
-}
-impl<T> ::core::marker::Copy for __BindgenUnionField<T> {}
-impl<T> ::core::fmt::Debug for __BindgenUnionField<T> {
-    fn fmt(&self, fmt: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        fmt.write_str("__BindgenUnionField")
-    }
-}
-impl<T> ::core::hash::Hash for __BindgenUnionField<T> {
-    fn hash<H: ::core::hash::Hasher>(&self, _state: &mut H) {}
-}
-impl<T> ::core::cmp::PartialEq for __BindgenUnionField<T> {
-    fn eq(&self, _other: &__BindgenUnionField<T>) -> bool {
-        true
-    }
-}
-impl<T> ::core::cmp::Eq for __BindgenUnionField<T> {}
 pub type bool_ = u8;
 pub type wchar_t = crate::ctypes::c_short;
 pub type undefined1 = u8;
@@ -196,1666 +153,3331 @@ impl monster_id {
     pub const MONSTER_NONE: monster_id = monster_id(0);
 }
 impl monster_id {
+    pub const MONSTER_NONE_SECONDARY: monster_id = monster_id(600);
+}
+impl monster_id {
     pub const MONSTER_BULBASAUR: monster_id = monster_id(1);
+}
+impl monster_id {
+    pub const MONSTER_BULBASAUR_SECONDARY: monster_id = monster_id(601);
 }
 impl monster_id {
     pub const MONSTER_IVYSAUR: monster_id = monster_id(2);
 }
 impl monster_id {
+    pub const MONSTER_IVYSAUR_SECONDARY: monster_id = monster_id(602);
+}
+impl monster_id {
     pub const MONSTER_VENUSAUR: monster_id = monster_id(3);
+}
+impl monster_id {
+    pub const MONSTER_VENUSAUR_SECONDARY: monster_id = monster_id(603);
 }
 impl monster_id {
     pub const MONSTER_CHARMANDER: monster_id = monster_id(4);
 }
 impl monster_id {
+    pub const MONSTER_CHARMANDER_SECONDARY: monster_id = monster_id(604);
+}
+impl monster_id {
     pub const MONSTER_CHARMELEON: monster_id = monster_id(5);
+}
+impl monster_id {
+    pub const MONSTER_CHARMELEON_SECONDARY: monster_id = monster_id(605);
 }
 impl monster_id {
     pub const MONSTER_CHARIZARD: monster_id = monster_id(6);
 }
 impl monster_id {
+    pub const MONSTER_CHARIZARD_SECONDARY: monster_id = monster_id(606);
+}
+impl monster_id {
     pub const MONSTER_SQUIRTLE: monster_id = monster_id(7);
+}
+impl monster_id {
+    pub const MONSTER_SQUIRTLE_SECONDARY: monster_id = monster_id(607);
 }
 impl monster_id {
     pub const MONSTER_WARTORTLE: monster_id = monster_id(8);
 }
 impl monster_id {
+    pub const MONSTER_WARTORTLE_SECONDARY: monster_id = monster_id(608);
+}
+impl monster_id {
     pub const MONSTER_BLASTOISE: monster_id = monster_id(9);
+}
+impl monster_id {
+    pub const MONSTER_BLASTOISE_SECONDARY: monster_id = monster_id(609);
 }
 impl monster_id {
     pub const MONSTER_CATERPIE: monster_id = monster_id(10);
 }
 impl monster_id {
+    pub const MONSTER_CATERPIE_SECONDARY: monster_id = monster_id(610);
+}
+impl monster_id {
     pub const MONSTER_METAPOD: monster_id = monster_id(11);
+}
+impl monster_id {
+    pub const MONSTER_METAPOD_SECONDARY: monster_id = monster_id(611);
 }
 impl monster_id {
     pub const MONSTER_BUTTERFREE: monster_id = monster_id(12);
 }
 impl monster_id {
+    pub const MONSTER_BUTTERFREE_SECONDARY: monster_id = monster_id(612);
+}
+impl monster_id {
     pub const MONSTER_WEEDLE: monster_id = monster_id(13);
+}
+impl monster_id {
+    pub const MONSTER_WEEDLE_SECONDARY: monster_id = monster_id(613);
 }
 impl monster_id {
     pub const MONSTER_KAKUNA: monster_id = monster_id(14);
 }
 impl monster_id {
+    pub const MONSTER_KAKUNA_SECONDARY: monster_id = monster_id(614);
+}
+impl monster_id {
     pub const MONSTER_BEEDRILL: monster_id = monster_id(15);
+}
+impl monster_id {
+    pub const MONSTER_BEEDRILL_SECONDARY: monster_id = monster_id(615);
 }
 impl monster_id {
     pub const MONSTER_PIDGEY: monster_id = monster_id(16);
 }
 impl monster_id {
+    pub const MONSTER_PIDGEY_SECONDARY: monster_id = monster_id(616);
+}
+impl monster_id {
     pub const MONSTER_PIDGEOTTO: monster_id = monster_id(17);
+}
+impl monster_id {
+    pub const MONSTER_PIDGEOTTO_SECONDARY: monster_id = monster_id(617);
 }
 impl monster_id {
     pub const MONSTER_PIDGEOT: monster_id = monster_id(18);
 }
 impl monster_id {
+    pub const MONSTER_PIDGEOT_SECONDARY: monster_id = monster_id(618);
+}
+impl monster_id {
     pub const MONSTER_RATTATA: monster_id = monster_id(19);
+}
+impl monster_id {
+    pub const MONSTER_RATTATA_SECONDARY: monster_id = monster_id(619);
 }
 impl monster_id {
     pub const MONSTER_RATICATE: monster_id = monster_id(20);
 }
 impl monster_id {
+    pub const MONSTER_RATICATE_SECONDARY: monster_id = monster_id(620);
+}
+impl monster_id {
     pub const MONSTER_SPEAROW: monster_id = monster_id(21);
+}
+impl monster_id {
+    pub const MONSTER_SPEAROW_SECONDARY: monster_id = monster_id(621);
 }
 impl monster_id {
     pub const MONSTER_FEAROW: monster_id = monster_id(22);
 }
 impl monster_id {
+    pub const MONSTER_FEAROW_SECONDARY: monster_id = monster_id(622);
+}
+impl monster_id {
     pub const MONSTER_EKANS: monster_id = monster_id(23);
+}
+impl monster_id {
+    pub const MONSTER_EKANS_SECONDARY: monster_id = monster_id(623);
 }
 impl monster_id {
     pub const MONSTER_ARBOK: monster_id = monster_id(24);
 }
 impl monster_id {
+    pub const MONSTER_ARBOK_SECONDARY: monster_id = monster_id(624);
+}
+impl monster_id {
     pub const MONSTER_PIKACHU: monster_id = monster_id(25);
+}
+impl monster_id {
+    pub const MONSTER_PIKACHU_SECONDARY: monster_id = monster_id(625);
 }
 impl monster_id {
     pub const MONSTER_RAICHU: monster_id = monster_id(26);
 }
 impl monster_id {
+    pub const MONSTER_RAICHU_SECONDARY: monster_id = monster_id(626);
+}
+impl monster_id {
     pub const MONSTER_SANDSHREW: monster_id = monster_id(27);
+}
+impl monster_id {
+    pub const MONSTER_SANDSHREW_SECONDARY: monster_id = monster_id(627);
 }
 impl monster_id {
     pub const MONSTER_SANDSLASH: monster_id = monster_id(28);
 }
 impl monster_id {
+    pub const MONSTER_SANDSLASH_SECONDARY: monster_id = monster_id(628);
+}
+impl monster_id {
     pub const MONSTER_NIDORAN_F: monster_id = monster_id(29);
+}
+impl monster_id {
+    pub const MONSTER_NIDORAN_F_SECONDARY: monster_id = monster_id(629);
 }
 impl monster_id {
     pub const MONSTER_NIDORINA: monster_id = monster_id(30);
 }
 impl monster_id {
+    pub const MONSTER_NIDORINA_SECONDARY: monster_id = monster_id(630);
+}
+impl monster_id {
     pub const MONSTER_NIDOQUEEN: monster_id = monster_id(31);
+}
+impl monster_id {
+    pub const MONSTER_NIDOQUEEN_SECONDARY: monster_id = monster_id(631);
 }
 impl monster_id {
     pub const MONSTER_NIDORAN_M: monster_id = monster_id(32);
 }
 impl monster_id {
+    pub const MONSTER_NIDORAN_M_SECONDARY: monster_id = monster_id(632);
+}
+impl monster_id {
     pub const MONSTER_NIDORINO: monster_id = monster_id(33);
+}
+impl monster_id {
+    pub const MONSTER_NIDORINO_SECONDARY: monster_id = monster_id(633);
 }
 impl monster_id {
     pub const MONSTER_NIDOKING: monster_id = monster_id(34);
 }
 impl monster_id {
+    pub const MONSTER_NIDOKING_SECONDARY: monster_id = monster_id(634);
+}
+impl monster_id {
     pub const MONSTER_CLEFAIRY: monster_id = monster_id(35);
+}
+impl monster_id {
+    pub const MONSTER_CLEFAIRY_SECONDARY: monster_id = monster_id(635);
 }
 impl monster_id {
     pub const MONSTER_CLEFABLE: monster_id = monster_id(36);
 }
 impl monster_id {
+    pub const MONSTER_CLEFABLE_SECONDARY: monster_id = monster_id(636);
+}
+impl monster_id {
     pub const MONSTER_VULPIX: monster_id = monster_id(37);
+}
+impl monster_id {
+    pub const MONSTER_VULPIX_SECONDARY: monster_id = monster_id(637);
 }
 impl monster_id {
     pub const MONSTER_NINETALES: monster_id = monster_id(38);
 }
 impl monster_id {
+    pub const MONSTER_NINETALES_SECONDARY: monster_id = monster_id(638);
+}
+impl monster_id {
     pub const MONSTER_JIGGLYPUFF: monster_id = monster_id(39);
+}
+impl monster_id {
+    pub const MONSTER_JIGGLYPUFF_SECONDARY: monster_id = monster_id(639);
 }
 impl monster_id {
     pub const MONSTER_WIGGLYTUFF: monster_id = monster_id(40);
 }
 impl monster_id {
+    pub const MONSTER_WIGGLYTUFF_SECONDARY: monster_id = monster_id(640);
+}
+impl monster_id {
     pub const MONSTER_ZUBAT: monster_id = monster_id(41);
+}
+impl monster_id {
+    pub const MONSTER_ZUBAT_SECONDARY: monster_id = monster_id(641);
 }
 impl monster_id {
     pub const MONSTER_GOLBAT: monster_id = monster_id(42);
 }
 impl monster_id {
+    pub const MONSTER_GOLBAT_SECONDARY: monster_id = monster_id(642);
+}
+impl monster_id {
     pub const MONSTER_ODDISH: monster_id = monster_id(43);
+}
+impl monster_id {
+    pub const MONSTER_ODDISH_SECONDARY: monster_id = monster_id(643);
 }
 impl monster_id {
     pub const MONSTER_GLOOM: monster_id = monster_id(44);
 }
 impl monster_id {
+    pub const MONSTER_GLOOM_SECONDARY: monster_id = monster_id(644);
+}
+impl monster_id {
     pub const MONSTER_VILEPLUME: monster_id = monster_id(45);
+}
+impl monster_id {
+    pub const MONSTER_VILEPLUME_SECONDARY: monster_id = monster_id(645);
 }
 impl monster_id {
     pub const MONSTER_PARAS: monster_id = monster_id(46);
 }
 impl monster_id {
+    pub const MONSTER_PARAS_SECONDARY: monster_id = monster_id(646);
+}
+impl monster_id {
     pub const MONSTER_PARASECT: monster_id = monster_id(47);
+}
+impl monster_id {
+    pub const MONSTER_PARASECT_SECONDARY: monster_id = monster_id(647);
 }
 impl monster_id {
     pub const MONSTER_VENONAT: monster_id = monster_id(48);
 }
 impl monster_id {
+    pub const MONSTER_VENONAT_SECONDARY: monster_id = monster_id(648);
+}
+impl monster_id {
     pub const MONSTER_VENOMOTH: monster_id = monster_id(49);
+}
+impl monster_id {
+    pub const MONSTER_VENOMOTH_SECONDARY: monster_id = monster_id(649);
 }
 impl monster_id {
     pub const MONSTER_DIGLETT: monster_id = monster_id(50);
 }
 impl monster_id {
+    pub const MONSTER_DIGLETT_SECONDARY: monster_id = monster_id(650);
+}
+impl monster_id {
     pub const MONSTER_DUGTRIO: monster_id = monster_id(51);
+}
+impl monster_id {
+    pub const MONSTER_DUGTRIO_SECONDARY: monster_id = monster_id(651);
 }
 impl monster_id {
     pub const MONSTER_MEOWTH: monster_id = monster_id(52);
 }
 impl monster_id {
+    pub const MONSTER_MEOWTH_SECONDARY: monster_id = monster_id(652);
+}
+impl monster_id {
     pub const MONSTER_PERSIAN: monster_id = monster_id(53);
+}
+impl monster_id {
+    pub const MONSTER_PERSIAN_SECONDARY: monster_id = monster_id(653);
 }
 impl monster_id {
     pub const MONSTER_PSYDUCK: monster_id = monster_id(54);
 }
 impl monster_id {
+    pub const MONSTER_PSYDUCK_SECONDARY: monster_id = monster_id(654);
+}
+impl monster_id {
     pub const MONSTER_GOLDUCK: monster_id = monster_id(55);
+}
+impl monster_id {
+    pub const MONSTER_GOLDUCK_SECONDARY: monster_id = monster_id(655);
 }
 impl monster_id {
     pub const MONSTER_MANKEY: monster_id = monster_id(56);
 }
 impl monster_id {
+    pub const MONSTER_MANKEY_SECONDARY: monster_id = monster_id(656);
+}
+impl monster_id {
     pub const MONSTER_PRIMEAPE: monster_id = monster_id(57);
+}
+impl monster_id {
+    pub const MONSTER_PRIMEAPE_SECONDARY: monster_id = monster_id(657);
 }
 impl monster_id {
     pub const MONSTER_GROWLITHE: monster_id = monster_id(58);
 }
 impl monster_id {
+    pub const MONSTER_GROWLITHE_SECONDARY: monster_id = monster_id(658);
+}
+impl monster_id {
     pub const MONSTER_ARCANINE: monster_id = monster_id(59);
+}
+impl monster_id {
+    pub const MONSTER_ARCANINE_SECONDARY: monster_id = monster_id(659);
 }
 impl monster_id {
     pub const MONSTER_POLIWAG: monster_id = monster_id(60);
 }
 impl monster_id {
+    pub const MONSTER_POLIWAG_SECONDARY: monster_id = monster_id(660);
+}
+impl monster_id {
     pub const MONSTER_POLIWHIRL: monster_id = monster_id(61);
+}
+impl monster_id {
+    pub const MONSTER_POLIWHIRL_SECONDARY: monster_id = monster_id(661);
 }
 impl monster_id {
     pub const MONSTER_POLIWRATH: monster_id = monster_id(62);
 }
 impl monster_id {
+    pub const MONSTER_POLIWRATH_SECONDARY: monster_id = monster_id(662);
+}
+impl monster_id {
     pub const MONSTER_ABRA: monster_id = monster_id(63);
+}
+impl monster_id {
+    pub const MONSTER_ABRA_SECONDARY: monster_id = monster_id(663);
 }
 impl monster_id {
     pub const MONSTER_KADABRA: monster_id = monster_id(64);
 }
 impl monster_id {
+    pub const MONSTER_KADABRA_SECONDARY: monster_id = monster_id(664);
+}
+impl monster_id {
     pub const MONSTER_ALAKAZAM: monster_id = monster_id(65);
+}
+impl monster_id {
+    pub const MONSTER_ALAKAZAM_SECONDARY: monster_id = monster_id(665);
 }
 impl monster_id {
     pub const MONSTER_MACHOP: monster_id = monster_id(66);
 }
 impl monster_id {
+    pub const MONSTER_MACHOP_SECONDARY: monster_id = monster_id(666);
+}
+impl monster_id {
     pub const MONSTER_MACHOKE: monster_id = monster_id(67);
+}
+impl monster_id {
+    pub const MONSTER_MACHOKE_SECONDARY: monster_id = monster_id(667);
 }
 impl monster_id {
     pub const MONSTER_MACHAMP: monster_id = monster_id(68);
 }
 impl monster_id {
+    pub const MONSTER_MACHAMP_SECONDARY: monster_id = monster_id(668);
+}
+impl monster_id {
     pub const MONSTER_BELLSPROUT: monster_id = monster_id(69);
+}
+impl monster_id {
+    pub const MONSTER_BELLSPROUT_SECONDARY: monster_id = monster_id(669);
 }
 impl monster_id {
     pub const MONSTER_WEEPINBELL: monster_id = monster_id(70);
 }
 impl monster_id {
+    pub const MONSTER_WEEPINBELL_SECONDARY: monster_id = monster_id(670);
+}
+impl monster_id {
     pub const MONSTER_VICTREEBEL: monster_id = monster_id(71);
+}
+impl monster_id {
+    pub const MONSTER_VICTREEBEL_SECONDARY: monster_id = monster_id(671);
 }
 impl monster_id {
     pub const MONSTER_TENTACOOL: monster_id = monster_id(72);
 }
 impl monster_id {
+    pub const MONSTER_TENTACOOL_SECONDARY: monster_id = monster_id(672);
+}
+impl monster_id {
     pub const MONSTER_TENTACRUEL: monster_id = monster_id(73);
+}
+impl monster_id {
+    pub const MONSTER_TENTACRUEL_SECONDARY: monster_id = monster_id(673);
 }
 impl monster_id {
     pub const MONSTER_GEODUDE: monster_id = monster_id(74);
 }
 impl monster_id {
+    pub const MONSTER_GEODUDE_SECONDARY: monster_id = monster_id(674);
+}
+impl monster_id {
     pub const MONSTER_GRAVELER: monster_id = monster_id(75);
+}
+impl monster_id {
+    pub const MONSTER_GRAVELER_SECONDARY: monster_id = monster_id(675);
 }
 impl monster_id {
     pub const MONSTER_GOLEM: monster_id = monster_id(76);
 }
 impl monster_id {
+    pub const MONSTER_GOLEM_SECONDARY: monster_id = monster_id(676);
+}
+impl monster_id {
     pub const MONSTER_PONYTA: monster_id = monster_id(77);
+}
+impl monster_id {
+    pub const MONSTER_PONYTA_SECONDARY: monster_id = monster_id(677);
 }
 impl monster_id {
     pub const MONSTER_RAPIDASH: monster_id = monster_id(78);
 }
 impl monster_id {
+    pub const MONSTER_RAPIDASH_SECONDARY: monster_id = monster_id(678);
+}
+impl monster_id {
     pub const MONSTER_SLOWPOKE: monster_id = monster_id(79);
+}
+impl monster_id {
+    pub const MONSTER_SLOWPOKE_SECONDARY: monster_id = monster_id(679);
 }
 impl monster_id {
     pub const MONSTER_SLOWBRO: monster_id = monster_id(80);
 }
 impl monster_id {
+    pub const MONSTER_SLOWBRO_SECONDARY: monster_id = monster_id(680);
+}
+impl monster_id {
     pub const MONSTER_MAGNEMITE: monster_id = monster_id(81);
+}
+impl monster_id {
+    pub const MONSTER_MAGNEMITE_SECONDARY: monster_id = monster_id(681);
 }
 impl monster_id {
     pub const MONSTER_MAGNETON: monster_id = monster_id(82);
 }
 impl monster_id {
+    pub const MONSTER_MAGNETON_SECONDARY: monster_id = monster_id(682);
+}
+impl monster_id {
     pub const MONSTER_FARFETCHD: monster_id = monster_id(83);
+}
+impl monster_id {
+    pub const MONSTER_FARFETCHD_SECONDARY: monster_id = monster_id(683);
 }
 impl monster_id {
     pub const MONSTER_DODUO: monster_id = monster_id(84);
 }
 impl monster_id {
+    pub const MONSTER_DODUO_SECONDARY: monster_id = monster_id(684);
+}
+impl monster_id {
     pub const MONSTER_DODRIO: monster_id = monster_id(85);
+}
+impl monster_id {
+    pub const MONSTER_DODRIO_SECONDARY: monster_id = monster_id(685);
 }
 impl monster_id {
     pub const MONSTER_SEEL: monster_id = monster_id(86);
 }
 impl monster_id {
+    pub const MONSTER_SEEL_SECONDARY: monster_id = monster_id(686);
+}
+impl monster_id {
     pub const MONSTER_DEWGONG: monster_id = monster_id(87);
+}
+impl monster_id {
+    pub const MONSTER_DEWGONG_SECONDARY: monster_id = monster_id(687);
 }
 impl monster_id {
     pub const MONSTER_GRIMER: monster_id = monster_id(88);
 }
 impl monster_id {
+    pub const MONSTER_GRIMER_SECONDARY: monster_id = monster_id(688);
+}
+impl monster_id {
     pub const MONSTER_MUK: monster_id = monster_id(89);
+}
+impl monster_id {
+    pub const MONSTER_MUK_SECONDARY: monster_id = monster_id(689);
 }
 impl monster_id {
     pub const MONSTER_SHELLDER: monster_id = monster_id(90);
 }
 impl monster_id {
+    pub const MONSTER_SHELLDER_SECONDARY: monster_id = monster_id(690);
+}
+impl monster_id {
     pub const MONSTER_CLOYSTER: monster_id = monster_id(91);
+}
+impl monster_id {
+    pub const MONSTER_CLOYSTER_SECONDARY: monster_id = monster_id(691);
 }
 impl monster_id {
     pub const MONSTER_GASTLY: monster_id = monster_id(92);
 }
 impl monster_id {
+    pub const MONSTER_GASTLY_SECONDARY: monster_id = monster_id(692);
+}
+impl monster_id {
     pub const MONSTER_HAUNTER: monster_id = monster_id(93);
+}
+impl monster_id {
+    pub const MONSTER_HAUNTER_SECONDARY: monster_id = monster_id(693);
 }
 impl monster_id {
     pub const MONSTER_GENGAR: monster_id = monster_id(94);
 }
 impl monster_id {
+    pub const MONSTER_GENGAR_SECONDARY: monster_id = monster_id(694);
+}
+impl monster_id {
     pub const MONSTER_ONIX: monster_id = monster_id(95);
+}
+impl monster_id {
+    pub const MONSTER_ONIX_SECONDARY: monster_id = monster_id(695);
 }
 impl monster_id {
     pub const MONSTER_DROWZEE: monster_id = monster_id(96);
 }
 impl monster_id {
+    pub const MONSTER_DROWZEE_SECONDARY: monster_id = monster_id(696);
+}
+impl monster_id {
     pub const MONSTER_HYPNO: monster_id = monster_id(97);
+}
+impl monster_id {
+    pub const MONSTER_HYPNO_SECONDARY: monster_id = monster_id(697);
 }
 impl monster_id {
     pub const MONSTER_KRABBY: monster_id = monster_id(98);
 }
 impl monster_id {
+    pub const MONSTER_KRABBY_SECONDARY: monster_id = monster_id(698);
+}
+impl monster_id {
     pub const MONSTER_KINGLER: monster_id = monster_id(99);
+}
+impl monster_id {
+    pub const MONSTER_KINGLER_SECONDARY: monster_id = monster_id(699);
 }
 impl monster_id {
     pub const MONSTER_VOLTORB: monster_id = monster_id(100);
 }
 impl monster_id {
+    pub const MONSTER_VOLTORB_SECONDARY: monster_id = monster_id(700);
+}
+impl monster_id {
     pub const MONSTER_ELECTRODE: monster_id = monster_id(101);
+}
+impl monster_id {
+    pub const MONSTER_ELECTRODE_SECONDARY: monster_id = monster_id(701);
 }
 impl monster_id {
     pub const MONSTER_EXEGGCUTE: monster_id = monster_id(102);
 }
 impl monster_id {
+    pub const MONSTER_EXEGGCUTE_SECONDARY: monster_id = monster_id(702);
+}
+impl monster_id {
     pub const MONSTER_EXEGGUTOR: monster_id = monster_id(103);
+}
+impl monster_id {
+    pub const MONSTER_EXEGGUTOR_SECONDARY: monster_id = monster_id(703);
 }
 impl monster_id {
     pub const MONSTER_CUBONE: monster_id = monster_id(104);
 }
 impl monster_id {
+    pub const MONSTER_CUBONE_SECONDARY: monster_id = monster_id(704);
+}
+impl monster_id {
     pub const MONSTER_MAROWAK: monster_id = monster_id(105);
+}
+impl monster_id {
+    pub const MONSTER_MAROWAK_SECONDARY: monster_id = monster_id(705);
 }
 impl monster_id {
     pub const MONSTER_HITMONLEE: monster_id = monster_id(106);
 }
 impl monster_id {
+    pub const MONSTER_HITMONLEE_SECONDARY: monster_id = monster_id(706);
+}
+impl monster_id {
     pub const MONSTER_HITMONCHAN: monster_id = monster_id(107);
+}
+impl monster_id {
+    pub const MONSTER_HITMONCHAN_SECONDARY: monster_id = monster_id(707);
 }
 impl monster_id {
     pub const MONSTER_LICKITUNG: monster_id = monster_id(108);
 }
 impl monster_id {
+    pub const MONSTER_LICKITUNG_SECONDARY: monster_id = monster_id(708);
+}
+impl monster_id {
     pub const MONSTER_KOFFING: monster_id = monster_id(109);
+}
+impl monster_id {
+    pub const MONSTER_KOFFING_SECONDARY: monster_id = monster_id(709);
 }
 impl monster_id {
     pub const MONSTER_WEEZING: monster_id = monster_id(110);
 }
 impl monster_id {
+    pub const MONSTER_WEEZING_SECONDARY: monster_id = monster_id(710);
+}
+impl monster_id {
     pub const MONSTER_RHYHORN: monster_id = monster_id(111);
+}
+impl monster_id {
+    pub const MONSTER_RHYHORN_SECONDARY: monster_id = monster_id(711);
 }
 impl monster_id {
     pub const MONSTER_RHYDON: monster_id = monster_id(112);
 }
 impl monster_id {
+    pub const MONSTER_RHYDON_SECONDARY: monster_id = monster_id(712);
+}
+impl monster_id {
     pub const MONSTER_CHANSEY: monster_id = monster_id(113);
+}
+impl monster_id {
+    pub const MONSTER_CHANSEY_SECONDARY: monster_id = monster_id(713);
 }
 impl monster_id {
     pub const MONSTER_TANGELA: monster_id = monster_id(114);
 }
 impl monster_id {
+    pub const MONSTER_TANGELA_SECONDARY: monster_id = monster_id(714);
+}
+impl monster_id {
     pub const MONSTER_KANGASKHAN: monster_id = monster_id(115);
+}
+impl monster_id {
+    pub const MONSTER_KANGASKHAN_SECONDARY: monster_id = monster_id(715);
 }
 impl monster_id {
     pub const MONSTER_HORSEA: monster_id = monster_id(116);
 }
 impl monster_id {
+    pub const MONSTER_HORSEA_SECONDARY: monster_id = monster_id(716);
+}
+impl monster_id {
     pub const MONSTER_SEADRA: monster_id = monster_id(117);
+}
+impl monster_id {
+    pub const MONSTER_SEADRA_SECONDARY: monster_id = monster_id(717);
 }
 impl monster_id {
     pub const MONSTER_GOLDEEN: monster_id = monster_id(118);
 }
 impl monster_id {
+    pub const MONSTER_GOLDEEN_SECONDARY: monster_id = monster_id(718);
+}
+impl monster_id {
     pub const MONSTER_SEAKING: monster_id = monster_id(119);
+}
+impl monster_id {
+    pub const MONSTER_SEAKING_SECONDARY: monster_id = monster_id(719);
 }
 impl monster_id {
     pub const MONSTER_STARYU: monster_id = monster_id(120);
 }
 impl monster_id {
+    pub const MONSTER_STARYU_SECONDARY: monster_id = monster_id(720);
+}
+impl monster_id {
     pub const MONSTER_STARMIE: monster_id = monster_id(121);
+}
+impl monster_id {
+    pub const MONSTER_STARMIE_SECONDARY: monster_id = monster_id(721);
 }
 impl monster_id {
     pub const MONSTER_MR_MIME: monster_id = monster_id(122);
 }
 impl monster_id {
+    pub const MONSTER_MR_MIME_SECONDARY: monster_id = monster_id(722);
+}
+impl monster_id {
     pub const MONSTER_SCYTHER: monster_id = monster_id(123);
+}
+impl monster_id {
+    pub const MONSTER_SCYTHER_SECONDARY: monster_id = monster_id(723);
 }
 impl monster_id {
     pub const MONSTER_JYNX: monster_id = monster_id(124);
 }
 impl monster_id {
+    pub const MONSTER_JYNX_SECONDARY: monster_id = monster_id(724);
+}
+impl monster_id {
     pub const MONSTER_ELECTABUZZ: monster_id = monster_id(125);
+}
+impl monster_id {
+    pub const MONSTER_ELECTABUZZ_SECONDARY: monster_id = monster_id(725);
 }
 impl monster_id {
     pub const MONSTER_MAGMAR: monster_id = monster_id(126);
 }
 impl monster_id {
+    pub const MONSTER_MAGMAR_SECONDARY: monster_id = monster_id(726);
+}
+impl monster_id {
     pub const MONSTER_PINSIR: monster_id = monster_id(127);
+}
+impl monster_id {
+    pub const MONSTER_PINSIR_SECONDARY: monster_id = monster_id(727);
 }
 impl monster_id {
     pub const MONSTER_TAUROS: monster_id = monster_id(128);
 }
 impl monster_id {
+    pub const MONSTER_TAUROS_SECONDARY: monster_id = monster_id(728);
+}
+impl monster_id {
     pub const MONSTER_MAGIKARP: monster_id = monster_id(129);
+}
+impl monster_id {
+    pub const MONSTER_MAGIKARP_SECONDARY: monster_id = monster_id(729);
 }
 impl monster_id {
     pub const MONSTER_GYARADOS: monster_id = monster_id(130);
 }
 impl monster_id {
+    pub const MONSTER_GYARADOS_SECONDARY: monster_id = monster_id(730);
+}
+impl monster_id {
     pub const MONSTER_LAPRAS: monster_id = monster_id(131);
+}
+impl monster_id {
+    pub const MONSTER_LAPRAS_SECONDARY: monster_id = monster_id(731);
 }
 impl monster_id {
     pub const MONSTER_DITTO: monster_id = monster_id(132);
 }
 impl monster_id {
+    pub const MONSTER_DITTO_SECONDARY: monster_id = monster_id(732);
+}
+impl monster_id {
     pub const MONSTER_EEVEE: monster_id = monster_id(133);
+}
+impl monster_id {
+    pub const MONSTER_EEVEE_SECONDARY: monster_id = monster_id(733);
 }
 impl monster_id {
     pub const MONSTER_VAPOREON: monster_id = monster_id(134);
 }
 impl monster_id {
+    pub const MONSTER_VAPOREON_SECONDARY: monster_id = monster_id(734);
+}
+impl monster_id {
     pub const MONSTER_JOLTEON: monster_id = monster_id(135);
+}
+impl monster_id {
+    pub const MONSTER_JOLTEON_SECONDARY: monster_id = monster_id(735);
 }
 impl monster_id {
     pub const MONSTER_FLAREON: monster_id = monster_id(136);
 }
 impl monster_id {
+    pub const MONSTER_FLAREON_SECONDARY: monster_id = monster_id(736);
+}
+impl monster_id {
     pub const MONSTER_PORYGON: monster_id = monster_id(137);
+}
+impl monster_id {
+    pub const MONSTER_PORYGON_SECONDARY: monster_id = monster_id(737);
 }
 impl monster_id {
     pub const MONSTER_OMANYTE: monster_id = monster_id(138);
 }
 impl monster_id {
+    pub const MONSTER_OMANYTE_SECONDARY: monster_id = monster_id(738);
+}
+impl monster_id {
     pub const MONSTER_OMASTAR: monster_id = monster_id(139);
+}
+impl monster_id {
+    pub const MONSTER_OMASTAR_SECONDARY: monster_id = monster_id(739);
 }
 impl monster_id {
     pub const MONSTER_KABUTO: monster_id = monster_id(140);
 }
 impl monster_id {
+    pub const MONSTER_KABUTO_SECONDARY: monster_id = monster_id(740);
+}
+impl monster_id {
     pub const MONSTER_KABUTOPS: monster_id = monster_id(141);
+}
+impl monster_id {
+    pub const MONSTER_KABUTOPS_SECONDARY: monster_id = monster_id(741);
 }
 impl monster_id {
     pub const MONSTER_AERODACTYL: monster_id = monster_id(142);
 }
 impl monster_id {
+    pub const MONSTER_AERODACTYL_SECONDARY: monster_id = monster_id(742);
+}
+impl monster_id {
     pub const MONSTER_SNORLAX: monster_id = monster_id(143);
+}
+impl monster_id {
+    pub const MONSTER_SNORLAX_SECONDARY: monster_id = monster_id(743);
 }
 impl monster_id {
     pub const MONSTER_ARTICUNO: monster_id = monster_id(144);
 }
 impl monster_id {
+    pub const MONSTER_ARTICUNO_SECONDARY: monster_id = monster_id(744);
+}
+impl monster_id {
     pub const MONSTER_ZAPDOS: monster_id = monster_id(145);
+}
+impl monster_id {
+    pub const MONSTER_ZAPDOS_SECONDARY: monster_id = monster_id(745);
 }
 impl monster_id {
     pub const MONSTER_MOLTRES: monster_id = monster_id(146);
 }
 impl monster_id {
+    pub const MONSTER_MOLTRES_SECONDARY: monster_id = monster_id(746);
+}
+impl monster_id {
     pub const MONSTER_DRATINI: monster_id = monster_id(147);
+}
+impl monster_id {
+    pub const MONSTER_DRATINI_SECONDARY: monster_id = monster_id(747);
 }
 impl monster_id {
     pub const MONSTER_DRAGONAIR: monster_id = monster_id(148);
 }
 impl monster_id {
+    pub const MONSTER_DRAGONAIR_SECONDARY: monster_id = monster_id(748);
+}
+impl monster_id {
     pub const MONSTER_DRAGONITE: monster_id = monster_id(149);
+}
+impl monster_id {
+    pub const MONSTER_DRAGONITE_SECONDARY: monster_id = monster_id(749);
 }
 impl monster_id {
     pub const MONSTER_MEWTWO: monster_id = monster_id(150);
 }
 impl monster_id {
+    pub const MONSTER_MEWTWO_SECONDARY: monster_id = monster_id(750);
+}
+impl monster_id {
     pub const MONSTER_MEW: monster_id = monster_id(151);
+}
+impl monster_id {
+    pub const MONSTER_MEW_SECONDARY: monster_id = monster_id(751);
 }
 impl monster_id {
     pub const MONSTER_CHIKORITA: monster_id = monster_id(152);
 }
 impl monster_id {
+    pub const MONSTER_CHIKORITA_SECONDARY: monster_id = monster_id(752);
+}
+impl monster_id {
     pub const MONSTER_BAYLEEF: monster_id = monster_id(153);
+}
+impl monster_id {
+    pub const MONSTER_BAYLEEF_SECONDARY: monster_id = monster_id(753);
 }
 impl monster_id {
     pub const MONSTER_MEGANIUM: monster_id = monster_id(154);
 }
 impl monster_id {
+    pub const MONSTER_MEGANIUM_SECONDARY: monster_id = monster_id(754);
+}
+impl monster_id {
     pub const MONSTER_CYNDAQUIL: monster_id = monster_id(155);
+}
+impl monster_id {
+    pub const MONSTER_CYNDAQUIL_SECONDARY: monster_id = monster_id(755);
 }
 impl monster_id {
     pub const MONSTER_QUILAVA: monster_id = monster_id(156);
 }
 impl monster_id {
+    pub const MONSTER_QUILAVA_SECONDARY: monster_id = monster_id(756);
+}
+impl monster_id {
     pub const MONSTER_TYPHLOSION: monster_id = monster_id(157);
+}
+impl monster_id {
+    pub const MONSTER_TYPHLOSION_SECONDARY: monster_id = monster_id(757);
 }
 impl monster_id {
     pub const MONSTER_TOTODILE: monster_id = monster_id(158);
 }
 impl monster_id {
+    pub const MONSTER_TOTODILE_SECONDARY: monster_id = monster_id(758);
+}
+impl monster_id {
     pub const MONSTER_CROCONAW: monster_id = monster_id(159);
+}
+impl monster_id {
+    pub const MONSTER_CROCONAW_SECONDARY: monster_id = monster_id(759);
 }
 impl monster_id {
     pub const MONSTER_FERALIGATR: monster_id = monster_id(160);
 }
 impl monster_id {
+    pub const MONSTER_FERALIGATR_SECONDARY: monster_id = monster_id(760);
+}
+impl monster_id {
     pub const MONSTER_SENTRET: monster_id = monster_id(161);
+}
+impl monster_id {
+    pub const MONSTER_SENTRET_SECONDARY: monster_id = monster_id(761);
 }
 impl monster_id {
     pub const MONSTER_FURRET: monster_id = monster_id(162);
 }
 impl monster_id {
+    pub const MONSTER_FURRET_SECONDARY: monster_id = monster_id(762);
+}
+impl monster_id {
     pub const MONSTER_HOOTHOOT: monster_id = monster_id(163);
+}
+impl monster_id {
+    pub const MONSTER_HOOTHOOT_SECONDARY: monster_id = monster_id(763);
 }
 impl monster_id {
     pub const MONSTER_NOCTOWL: monster_id = monster_id(164);
 }
 impl monster_id {
+    pub const MONSTER_NOCTOWL_SECONDARY: monster_id = monster_id(764);
+}
+impl monster_id {
     pub const MONSTER_LEDYBA: monster_id = monster_id(165);
+}
+impl monster_id {
+    pub const MONSTER_LEDYBA_SECONDARY: monster_id = monster_id(765);
 }
 impl monster_id {
     pub const MONSTER_LEDIAN: monster_id = monster_id(166);
 }
 impl monster_id {
+    pub const MONSTER_LEDIAN_SECONDARY: monster_id = monster_id(766);
+}
+impl monster_id {
     pub const MONSTER_SPINARAK: monster_id = monster_id(167);
+}
+impl monster_id {
+    pub const MONSTER_SPINARAK_SECONDARY: monster_id = monster_id(767);
 }
 impl monster_id {
     pub const MONSTER_ARIADOS: monster_id = monster_id(168);
 }
 impl monster_id {
+    pub const MONSTER_ARIADOS_SECONDARY: monster_id = monster_id(768);
+}
+impl monster_id {
     pub const MONSTER_CROBAT: monster_id = monster_id(169);
+}
+impl monster_id {
+    pub const MONSTER_CROBAT_SECONDARY: monster_id = monster_id(769);
 }
 impl monster_id {
     pub const MONSTER_CHINCHOU: monster_id = monster_id(170);
 }
 impl monster_id {
+    pub const MONSTER_CHINCHOU_SECONDARY: monster_id = monster_id(770);
+}
+impl monster_id {
     pub const MONSTER_LANTURN: monster_id = monster_id(171);
+}
+impl monster_id {
+    pub const MONSTER_LANTURN_SECONDARY: monster_id = monster_id(771);
 }
 impl monster_id {
     pub const MONSTER_PICHU: monster_id = monster_id(172);
 }
 impl monster_id {
+    pub const MONSTER_PICHU_SECONDARY: monster_id = monster_id(772);
+}
+impl monster_id {
     pub const MONSTER_CLEFFA: monster_id = monster_id(173);
+}
+impl monster_id {
+    pub const MONSTER_CLEFFA_SECONDARY: monster_id = monster_id(773);
 }
 impl monster_id {
     pub const MONSTER_IGGLYBUFF: monster_id = monster_id(174);
 }
 impl monster_id {
+    pub const MONSTER_IGGLYBUFF_SECONDARY: monster_id = monster_id(774);
+}
+impl monster_id {
     pub const MONSTER_TOGEPI: monster_id = monster_id(175);
+}
+impl monster_id {
+    pub const MONSTER_TOGEPI_SECONDARY: monster_id = monster_id(775);
 }
 impl monster_id {
     pub const MONSTER_TOGETIC: monster_id = monster_id(176);
 }
 impl monster_id {
+    pub const MONSTER_TOGETIC_SECONDARY: monster_id = monster_id(776);
+}
+impl monster_id {
     pub const MONSTER_NATU: monster_id = monster_id(177);
+}
+impl monster_id {
+    pub const MONSTER_NATU_SECONDARY: monster_id = monster_id(777);
 }
 impl monster_id {
     pub const MONSTER_XATU: monster_id = monster_id(178);
 }
 impl monster_id {
+    pub const MONSTER_XATU_SECONDARY: monster_id = monster_id(778);
+}
+impl monster_id {
     pub const MONSTER_MAREEP: monster_id = monster_id(179);
+}
+impl monster_id {
+    pub const MONSTER_MAREEP_SECONDARY: monster_id = monster_id(779);
 }
 impl monster_id {
     pub const MONSTER_FLAAFFY: monster_id = monster_id(180);
 }
 impl monster_id {
+    pub const MONSTER_FLAAFFY_SECONDARY: monster_id = monster_id(780);
+}
+impl monster_id {
     pub const MONSTER_AMPHAROS: monster_id = monster_id(181);
+}
+impl monster_id {
+    pub const MONSTER_AMPHAROS_SECONDARY: monster_id = monster_id(781);
 }
 impl monster_id {
     pub const MONSTER_BELLOSSOM: monster_id = monster_id(182);
 }
 impl monster_id {
+    pub const MONSTER_BELLOSSOM_SECONDARY: monster_id = monster_id(782);
+}
+impl monster_id {
     pub const MONSTER_MARILL: monster_id = monster_id(183);
+}
+impl monster_id {
+    pub const MONSTER_MARILL_SECONDARY: monster_id = monster_id(783);
 }
 impl monster_id {
     pub const MONSTER_AZUMARILL: monster_id = monster_id(184);
 }
 impl monster_id {
+    pub const MONSTER_AZUMARILL_SECONDARY: monster_id = monster_id(784);
+}
+impl monster_id {
     pub const MONSTER_SUDOWOODO: monster_id = monster_id(185);
+}
+impl monster_id {
+    pub const MONSTER_SUDOWOODO_SECONDARY: monster_id = monster_id(785);
 }
 impl monster_id {
     pub const MONSTER_POLITOED: monster_id = monster_id(186);
 }
 impl monster_id {
+    pub const MONSTER_POLITOED_SECONDARY: monster_id = monster_id(786);
+}
+impl monster_id {
     pub const MONSTER_HOPPIP: monster_id = monster_id(187);
+}
+impl monster_id {
+    pub const MONSTER_HOPPIP_SECONDARY: monster_id = monster_id(787);
 }
 impl monster_id {
     pub const MONSTER_SKIPLOOM: monster_id = monster_id(188);
 }
 impl monster_id {
+    pub const MONSTER_SKIPLOOM_SECONDARY: monster_id = monster_id(788);
+}
+impl monster_id {
     pub const MONSTER_JUMPLUFF: monster_id = monster_id(189);
+}
+impl monster_id {
+    pub const MONSTER_JUMPLUFF_SECONDARY: monster_id = monster_id(789);
 }
 impl monster_id {
     pub const MONSTER_AIPOM: monster_id = monster_id(190);
 }
 impl monster_id {
+    pub const MONSTER_AIPOM_SECONDARY: monster_id = monster_id(790);
+}
+impl monster_id {
     pub const MONSTER_SUNKERN: monster_id = monster_id(191);
+}
+impl monster_id {
+    pub const MONSTER_SUNKERN_SECONDARY: monster_id = monster_id(791);
 }
 impl monster_id {
     pub const MONSTER_SUNFLORA: monster_id = monster_id(192);
 }
 impl monster_id {
+    pub const MONSTER_SUNFLORA_SECONDARY: monster_id = monster_id(792);
+}
+impl monster_id {
     pub const MONSTER_YANMA: monster_id = monster_id(193);
+}
+impl monster_id {
+    pub const MONSTER_YANMA_SECONDARY: monster_id = monster_id(793);
 }
 impl monster_id {
     pub const MONSTER_WOOPER: monster_id = monster_id(194);
 }
 impl monster_id {
+    pub const MONSTER_WOOPER_SECONDARY: monster_id = monster_id(794);
+}
+impl monster_id {
     pub const MONSTER_QUAGSIRE: monster_id = monster_id(195);
+}
+impl monster_id {
+    pub const MONSTER_QUAGSIRE_SECONDARY: monster_id = monster_id(795);
 }
 impl monster_id {
     pub const MONSTER_ESPEON: monster_id = monster_id(196);
 }
 impl monster_id {
+    pub const MONSTER_ESPEON_SECONDARY: monster_id = monster_id(796);
+}
+impl monster_id {
     pub const MONSTER_UMBREON: monster_id = monster_id(197);
+}
+impl monster_id {
+    pub const MONSTER_UMBREON_SECONDARY: monster_id = monster_id(797);
 }
 impl monster_id {
     pub const MONSTER_MURKROW: monster_id = monster_id(198);
 }
 impl monster_id {
+    pub const MONSTER_MURKROW_SECONDARY: monster_id = monster_id(798);
+}
+impl monster_id {
     pub const MONSTER_SLOWKING: monster_id = monster_id(199);
+}
+impl monster_id {
+    pub const MONSTER_SLOWKING_SECONDARY: monster_id = monster_id(799);
 }
 impl monster_id {
     pub const MONSTER_MISDREAVUS: monster_id = monster_id(200);
 }
 impl monster_id {
+    pub const MONSTER_MISDREAVUS_SECONDARY: monster_id = monster_id(800);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_A: monster_id = monster_id(201);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_A_SECONDARY: monster_id = monster_id(801);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_B: monster_id = monster_id(202);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_B_SECONDARY: monster_id = monster_id(802);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_C: monster_id = monster_id(203);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_C_SECONDARY: monster_id = monster_id(803);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_D: monster_id = monster_id(204);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_D_SECONDARY: monster_id = monster_id(804);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_E: monster_id = monster_id(205);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_E_SECONDARY: monster_id = monster_id(805);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_F: monster_id = monster_id(206);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_F_SECONDARY: monster_id = monster_id(806);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_G: monster_id = monster_id(207);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_G_SECONDARY: monster_id = monster_id(807);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_H: monster_id = monster_id(208);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_H_SECONDARY: monster_id = monster_id(808);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_I: monster_id = monster_id(209);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_I_SECONDARY: monster_id = monster_id(809);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_J: monster_id = monster_id(210);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_J_SECONDARY: monster_id = monster_id(810);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_K: monster_id = monster_id(211);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_K_SECONDARY: monster_id = monster_id(811);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_L: monster_id = monster_id(212);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_L_SECONDARY: monster_id = monster_id(812);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_M: monster_id = monster_id(213);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_M_SECONDARY: monster_id = monster_id(813);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_N: monster_id = monster_id(214);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_N_SECONDARY: monster_id = monster_id(814);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_O: monster_id = monster_id(215);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_O_SECONDARY: monster_id = monster_id(815);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_P: monster_id = monster_id(216);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_P_SECONDARY: monster_id = monster_id(816);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_Q: monster_id = monster_id(217);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_Q_SECONDARY: monster_id = monster_id(817);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_R: monster_id = monster_id(218);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_R_SECONDARY: monster_id = monster_id(818);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_S: monster_id = monster_id(219);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_S_SECONDARY: monster_id = monster_id(819);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_T: monster_id = monster_id(220);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_T_SECONDARY: monster_id = monster_id(820);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_U: monster_id = monster_id(221);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_U_SECONDARY: monster_id = monster_id(821);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_V: monster_id = monster_id(222);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_V_SECONDARY: monster_id = monster_id(822);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_W: monster_id = monster_id(223);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_W_SECONDARY: monster_id = monster_id(823);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_X: monster_id = monster_id(224);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_X_SECONDARY: monster_id = monster_id(824);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_Y: monster_id = monster_id(225);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_Y_SECONDARY: monster_id = monster_id(825);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_Z: monster_id = monster_id(226);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_Z_SECONDARY: monster_id = monster_id(826);
+}
+impl monster_id {
     pub const MONSTER_UNOWN_EXCLAMATION: monster_id = monster_id(227);
+}
+impl monster_id {
+    pub const MONSTER_UNOWN_EXCLAMATION_SECONDARY: monster_id = monster_id(827);
 }
 impl monster_id {
     pub const MONSTER_UNOWN_QUESTION: monster_id = monster_id(228);
 }
 impl monster_id {
+    pub const MONSTER_UNOWN_QUESTION_SECONDARY: monster_id = monster_id(828);
+}
+impl monster_id {
     pub const MONSTER_WOBBUFFET: monster_id = monster_id(229);
+}
+impl monster_id {
+    pub const MONSTER_WOBBUFFET_SECONDARY: monster_id = monster_id(829);
 }
 impl monster_id {
     pub const MONSTER_GIRAFARIG: monster_id = monster_id(230);
 }
 impl monster_id {
+    pub const MONSTER_GIRAFARIG_SECONDARY: monster_id = monster_id(830);
+}
+impl monster_id {
     pub const MONSTER_PINECO: monster_id = monster_id(231);
+}
+impl monster_id {
+    pub const MONSTER_PINECO_SECONDARY: monster_id = monster_id(831);
 }
 impl monster_id {
     pub const MONSTER_FORRETRESS: monster_id = monster_id(232);
 }
 impl monster_id {
+    pub const MONSTER_FORRETRESS_SECONDARY: monster_id = monster_id(832);
+}
+impl monster_id {
     pub const MONSTER_DUNSPARCE: monster_id = monster_id(233);
+}
+impl monster_id {
+    pub const MONSTER_DUNSPARCE_SECONDARY: monster_id = monster_id(833);
 }
 impl monster_id {
     pub const MONSTER_GLIGAR: monster_id = monster_id(234);
 }
 impl monster_id {
+    pub const MONSTER_GLIGAR_SECONDARY: monster_id = monster_id(834);
+}
+impl monster_id {
     pub const MONSTER_STEELIX: monster_id = monster_id(235);
+}
+impl monster_id {
+    pub const MONSTER_STEELIX_SECONDARY: monster_id = monster_id(835);
 }
 impl monster_id {
     pub const MONSTER_SNUBBULL: monster_id = monster_id(236);
 }
 impl monster_id {
+    pub const MONSTER_SNUBBULL_SECONDARY: monster_id = monster_id(836);
+}
+impl monster_id {
     pub const MONSTER_GRANBULL: monster_id = monster_id(237);
+}
+impl monster_id {
+    pub const MONSTER_GRANBULL_SECONDARY: monster_id = monster_id(837);
 }
 impl monster_id {
     pub const MONSTER_QWILFISH: monster_id = monster_id(238);
 }
 impl monster_id {
+    pub const MONSTER_QWILFISH_SECONDARY: monster_id = monster_id(838);
+}
+impl monster_id {
     pub const MONSTER_SCIZOR: monster_id = monster_id(239);
+}
+impl monster_id {
+    pub const MONSTER_SCIZOR_SECONDARY: monster_id = monster_id(839);
 }
 impl monster_id {
     pub const MONSTER_SHUCKLE: monster_id = monster_id(240);
 }
 impl monster_id {
+    pub const MONSTER_SHUCKLE_SECONDARY: monster_id = monster_id(840);
+}
+impl monster_id {
     pub const MONSTER_HERACROSS: monster_id = monster_id(241);
+}
+impl monster_id {
+    pub const MONSTER_HERACROSS_SECONDARY: monster_id = monster_id(841);
 }
 impl monster_id {
     pub const MONSTER_SNEASEL: monster_id = monster_id(242);
 }
 impl monster_id {
+    pub const MONSTER_SNEASEL_SECONDARY: monster_id = monster_id(842);
+}
+impl monster_id {
     pub const MONSTER_TEDDIURSA: monster_id = monster_id(243);
+}
+impl monster_id {
+    pub const MONSTER_TEDDIURSA_SECONDARY: monster_id = monster_id(843);
 }
 impl monster_id {
     pub const MONSTER_URSARING: monster_id = monster_id(244);
 }
 impl monster_id {
+    pub const MONSTER_URSARING_SECONDARY: monster_id = monster_id(844);
+}
+impl monster_id {
     pub const MONSTER_SLUGMA: monster_id = monster_id(245);
+}
+impl monster_id {
+    pub const MONSTER_SLUGMA_SECONDARY: monster_id = monster_id(845);
 }
 impl monster_id {
     pub const MONSTER_MAGCARGO: monster_id = monster_id(246);
 }
 impl monster_id {
+    pub const MONSTER_MAGCARGO_SECONDARY: monster_id = monster_id(846);
+}
+impl monster_id {
     pub const MONSTER_SWINUB: monster_id = monster_id(247);
+}
+impl monster_id {
+    pub const MONSTER_SWINUB_SECONDARY: monster_id = monster_id(847);
 }
 impl monster_id {
     pub const MONSTER_PILOSWINE: monster_id = monster_id(248);
 }
 impl monster_id {
+    pub const MONSTER_PILOSWINE_SECONDARY: monster_id = monster_id(848);
+}
+impl monster_id {
     pub const MONSTER_CORSOLA: monster_id = monster_id(249);
+}
+impl monster_id {
+    pub const MONSTER_CORSOLA_SECONDARY: monster_id = monster_id(849);
 }
 impl monster_id {
     pub const MONSTER_REMORAID: monster_id = monster_id(250);
 }
 impl monster_id {
+    pub const MONSTER_REMORAID_SECONDARY: monster_id = monster_id(850);
+}
+impl monster_id {
     pub const MONSTER_OCTILLERY: monster_id = monster_id(251);
+}
+impl monster_id {
+    pub const MONSTER_OCTILLERY_SECONDARY: monster_id = monster_id(851);
 }
 impl monster_id {
     pub const MONSTER_DELIBIRD: monster_id = monster_id(252);
 }
 impl monster_id {
+    pub const MONSTER_DELIBIRD_SECONDARY: monster_id = monster_id(852);
+}
+impl monster_id {
     pub const MONSTER_MANTINE: monster_id = monster_id(253);
+}
+impl monster_id {
+    pub const MONSTER_MANTINE_SECONDARY: monster_id = monster_id(853);
 }
 impl monster_id {
     pub const MONSTER_SKARMORY: monster_id = monster_id(254);
 }
 impl monster_id {
+    pub const MONSTER_SKARMORY_SECONDARY: monster_id = monster_id(854);
+}
+impl monster_id {
     pub const MONSTER_HOUNDOUR: monster_id = monster_id(255);
+}
+impl monster_id {
+    pub const MONSTER_HOUNDOUR_SECONDARY: monster_id = monster_id(855);
 }
 impl monster_id {
     pub const MONSTER_HOUNDOOM: monster_id = monster_id(256);
 }
 impl monster_id {
+    pub const MONSTER_HOUNDOOM_SECONDARY: monster_id = monster_id(856);
+}
+impl monster_id {
     pub const MONSTER_KINGDRA: monster_id = monster_id(257);
+}
+impl monster_id {
+    pub const MONSTER_KINGDRA_SECONDARY: monster_id = monster_id(857);
 }
 impl monster_id {
     pub const MONSTER_PHANPY: monster_id = monster_id(258);
 }
 impl monster_id {
+    pub const MONSTER_PHANPY_SECONDARY: monster_id = monster_id(858);
+}
+impl monster_id {
     pub const MONSTER_DONPHAN: monster_id = monster_id(259);
+}
+impl monster_id {
+    pub const MONSTER_DONPHAN_SECONDARY: monster_id = monster_id(859);
 }
 impl monster_id {
     pub const MONSTER_PORYGON2: monster_id = monster_id(260);
 }
 impl monster_id {
+    pub const MONSTER_PORYGON2_SECONDARY: monster_id = monster_id(860);
+}
+impl monster_id {
     pub const MONSTER_STANTLER: monster_id = monster_id(261);
+}
+impl monster_id {
+    pub const MONSTER_STANTLER_SECONDARY: monster_id = monster_id(861);
 }
 impl monster_id {
     pub const MONSTER_SMEARGLE: monster_id = monster_id(262);
 }
 impl monster_id {
+    pub const MONSTER_SMEARGLE_SECONDARY: monster_id = monster_id(862);
+}
+impl monster_id {
     pub const MONSTER_TYROGUE: monster_id = monster_id(263);
+}
+impl monster_id {
+    pub const MONSTER_TYROGUE_SECONDARY: monster_id = monster_id(863);
 }
 impl monster_id {
     pub const MONSTER_HITMONTOP: monster_id = monster_id(264);
 }
 impl monster_id {
+    pub const MONSTER_HITMONTOP_SECONDARY: monster_id = monster_id(864);
+}
+impl monster_id {
     pub const MONSTER_SMOOCHUM: monster_id = monster_id(265);
+}
+impl monster_id {
+    pub const MONSTER_SMOOCHUM_SECONDARY: monster_id = monster_id(865);
 }
 impl monster_id {
     pub const MONSTER_ELEKID: monster_id = monster_id(266);
 }
 impl monster_id {
+    pub const MONSTER_ELEKID_SECONDARY: monster_id = monster_id(866);
+}
+impl monster_id {
     pub const MONSTER_MAGBY: monster_id = monster_id(267);
+}
+impl monster_id {
+    pub const MONSTER_MAGBY_SECONDARY: monster_id = monster_id(867);
 }
 impl monster_id {
     pub const MONSTER_MILTANK: monster_id = monster_id(268);
 }
 impl monster_id {
+    pub const MONSTER_MILTANK_SECONDARY: monster_id = monster_id(868);
+}
+impl monster_id {
     pub const MONSTER_BLISSEY: monster_id = monster_id(269);
+}
+impl monster_id {
+    pub const MONSTER_BLISSEY_SECONDARY: monster_id = monster_id(869);
 }
 impl monster_id {
     pub const MONSTER_RAIKOU: monster_id = monster_id(270);
 }
 impl monster_id {
+    pub const MONSTER_RAIKOU_SECONDARY: monster_id = monster_id(870);
+}
+impl monster_id {
     pub const MONSTER_ENTEI: monster_id = monster_id(271);
+}
+impl monster_id {
+    pub const MONSTER_ENTEI_SECONDARY: monster_id = monster_id(871);
 }
 impl monster_id {
     pub const MONSTER_SUICUNE: monster_id = monster_id(272);
 }
 impl monster_id {
+    pub const MONSTER_SUICUNE_SECONDARY: monster_id = monster_id(872);
+}
+impl monster_id {
     pub const MONSTER_LARVITAR: monster_id = monster_id(273);
+}
+impl monster_id {
+    pub const MONSTER_LARVITAR_SECONDARY: monster_id = monster_id(873);
 }
 impl monster_id {
     pub const MONSTER_PUPITAR: monster_id = monster_id(274);
 }
 impl monster_id {
+    pub const MONSTER_PUPITAR_SECONDARY: monster_id = monster_id(874);
+}
+impl monster_id {
     pub const MONSTER_TYRANITAR: monster_id = monster_id(275);
+}
+impl monster_id {
+    pub const MONSTER_TYRANITAR_SECONDARY: monster_id = monster_id(875);
 }
 impl monster_id {
     pub const MONSTER_LUGIA: monster_id = monster_id(276);
 }
 impl monster_id {
+    pub const MONSTER_LUGIA_SECONDARY: monster_id = monster_id(876);
+}
+impl monster_id {
     pub const MONSTER_HO_OH: monster_id = monster_id(277);
+}
+impl monster_id {
+    pub const MONSTER_HO_OH_SECONDARY: monster_id = monster_id(877);
 }
 impl monster_id {
     pub const MONSTER_CELEBI: monster_id = monster_id(278);
 }
 impl monster_id {
+    pub const MONSTER_CELEBI_SECONDARY: monster_id = monster_id(878);
+}
+impl monster_id {
     pub const MONSTER_SHINY_CELEBI: monster_id = monster_id(279);
+}
+impl monster_id {
+    pub const MONSTER_SHINY_CELEBI_SECONDARY: monster_id = monster_id(879);
 }
 impl monster_id {
     pub const MONSTER_TREECKO: monster_id = monster_id(280);
 }
 impl monster_id {
+    pub const MONSTER_TREECKO_SECONDARY: monster_id = monster_id(880);
+}
+impl monster_id {
     pub const MONSTER_GROVYLE: monster_id = monster_id(281);
+}
+impl monster_id {
+    pub const MONSTER_GROVYLE_SECONDARY: monster_id = monster_id(881);
 }
 impl monster_id {
     pub const MONSTER_SCEPTILE: monster_id = monster_id(282);
 }
 impl monster_id {
+    pub const MONSTER_SCEPTILE_SECONDARY: monster_id = monster_id(882);
+}
+impl monster_id {
     pub const MONSTER_TORCHIC: monster_id = monster_id(283);
+}
+impl monster_id {
+    pub const MONSTER_TORCHIC_SECONDARY: monster_id = monster_id(883);
 }
 impl monster_id {
     pub const MONSTER_COMBUSKEN: monster_id = monster_id(284);
 }
 impl monster_id {
+    pub const MONSTER_COMBUSKEN_SECONDARY: monster_id = monster_id(884);
+}
+impl monster_id {
     pub const MONSTER_BLAZIKEN: monster_id = monster_id(285);
+}
+impl monster_id {
+    pub const MONSTER_BLAZIKEN_SECONDARY: monster_id = monster_id(885);
 }
 impl monster_id {
     pub const MONSTER_MUDKIP: monster_id = monster_id(286);
 }
 impl monster_id {
+    pub const MONSTER_MUDKIP_SECONDARY: monster_id = monster_id(886);
+}
+impl monster_id {
     pub const MONSTER_MARSHTOMP: monster_id = monster_id(287);
+}
+impl monster_id {
+    pub const MONSTER_MARSHTOMP_SECONDARY: monster_id = monster_id(887);
 }
 impl monster_id {
     pub const MONSTER_SWAMPERT: monster_id = monster_id(288);
 }
 impl monster_id {
+    pub const MONSTER_SWAMPERT_SECONDARY: monster_id = monster_id(888);
+}
+impl monster_id {
     pub const MONSTER_POOCHYENA: monster_id = monster_id(289);
+}
+impl monster_id {
+    pub const MONSTER_POOCHYENA_SECONDARY: monster_id = monster_id(889);
 }
 impl monster_id {
     pub const MONSTER_MIGHTYENA: monster_id = monster_id(290);
 }
 impl monster_id {
+    pub const MONSTER_MIGHTYENA_SECONDARY: monster_id = monster_id(890);
+}
+impl monster_id {
     pub const MONSTER_ZIGZAGOON: monster_id = monster_id(291);
+}
+impl monster_id {
+    pub const MONSTER_ZIGZAGOON_SECONDARY: monster_id = monster_id(891);
 }
 impl monster_id {
     pub const MONSTER_LINOONE: monster_id = monster_id(292);
 }
 impl monster_id {
+    pub const MONSTER_LINOONE_SECONDARY: monster_id = monster_id(892);
+}
+impl monster_id {
     pub const MONSTER_WURMPLE: monster_id = monster_id(293);
+}
+impl monster_id {
+    pub const MONSTER_WURMPLE_SECONDARY: monster_id = monster_id(893);
 }
 impl monster_id {
     pub const MONSTER_SILCOON: monster_id = monster_id(294);
 }
 impl monster_id {
+    pub const MONSTER_SILCOON_SECONDARY: monster_id = monster_id(894);
+}
+impl monster_id {
     pub const MONSTER_BEAUTIFLY: monster_id = monster_id(295);
+}
+impl monster_id {
+    pub const MONSTER_BEAUTIFLY_SECONDARY: monster_id = monster_id(895);
 }
 impl monster_id {
     pub const MONSTER_CASCOON: monster_id = monster_id(296);
 }
 impl monster_id {
+    pub const MONSTER_CASCOON_SECONDARY: monster_id = monster_id(896);
+}
+impl monster_id {
     pub const MONSTER_DUSTOX: monster_id = monster_id(297);
+}
+impl monster_id {
+    pub const MONSTER_DUSTOX_SECONDARY: monster_id = monster_id(897);
 }
 impl monster_id {
     pub const MONSTER_LOTAD: monster_id = monster_id(298);
 }
 impl monster_id {
+    pub const MONSTER_LOTAD_SECONDARY: monster_id = monster_id(898);
+}
+impl monster_id {
     pub const MONSTER_LOMBRE: monster_id = monster_id(299);
+}
+impl monster_id {
+    pub const MONSTER_LOMBRE_SECONDARY: monster_id = monster_id(899);
 }
 impl monster_id {
     pub const MONSTER_LUDICOLO: monster_id = monster_id(300);
 }
 impl monster_id {
+    pub const MONSTER_LUDICOLO_SECONDARY: monster_id = monster_id(900);
+}
+impl monster_id {
     pub const MONSTER_SEEDOT: monster_id = monster_id(301);
+}
+impl monster_id {
+    pub const MONSTER_SEEDOT_SECONDARY: monster_id = monster_id(901);
 }
 impl monster_id {
     pub const MONSTER_NUZLEAF: monster_id = monster_id(302);
 }
 impl monster_id {
+    pub const MONSTER_NUZLEAF_SECONDARY: monster_id = monster_id(902);
+}
+impl monster_id {
     pub const MONSTER_SHIFTRY: monster_id = monster_id(303);
+}
+impl monster_id {
+    pub const MONSTER_SHIFTRY_SECONDARY: monster_id = monster_id(903);
 }
 impl monster_id {
     pub const MONSTER_TAILLOW: monster_id = monster_id(304);
 }
 impl monster_id {
+    pub const MONSTER_TAILLOW_SECONDARY: monster_id = monster_id(904);
+}
+impl monster_id {
     pub const MONSTER_SWELLOW: monster_id = monster_id(305);
+}
+impl monster_id {
+    pub const MONSTER_SWELLOW_SECONDARY: monster_id = monster_id(905);
 }
 impl monster_id {
     pub const MONSTER_WINGULL: monster_id = monster_id(306);
 }
 impl monster_id {
+    pub const MONSTER_WINGULL_SECONDARY: monster_id = monster_id(906);
+}
+impl monster_id {
     pub const MONSTER_PELIPPER: monster_id = monster_id(307);
+}
+impl monster_id {
+    pub const MONSTER_PELIPPER_SECONDARY: monster_id = monster_id(907);
 }
 impl monster_id {
     pub const MONSTER_RALTS: monster_id = monster_id(308);
 }
 impl monster_id {
+    pub const MONSTER_RALTS_SECONDARY: monster_id = monster_id(908);
+}
+impl monster_id {
     pub const MONSTER_KIRLIA: monster_id = monster_id(309);
+}
+impl monster_id {
+    pub const MONSTER_KIRLIA_SECONDARY: monster_id = monster_id(909);
 }
 impl monster_id {
     pub const MONSTER_GARDEVOIR: monster_id = monster_id(310);
 }
 impl monster_id {
+    pub const MONSTER_GARDEVOIR_SECONDARY: monster_id = monster_id(910);
+}
+impl monster_id {
     pub const MONSTER_SURSKIT: monster_id = monster_id(311);
+}
+impl monster_id {
+    pub const MONSTER_SURSKIT_SECONDARY: monster_id = monster_id(911);
 }
 impl monster_id {
     pub const MONSTER_MASQUERAIN: monster_id = monster_id(312);
 }
 impl monster_id {
+    pub const MONSTER_MASQUERAIN_SECONDARY: monster_id = monster_id(912);
+}
+impl monster_id {
     pub const MONSTER_SHROOMISH: monster_id = monster_id(313);
+}
+impl monster_id {
+    pub const MONSTER_SHROOMISH_SECONDARY: monster_id = monster_id(913);
 }
 impl monster_id {
     pub const MONSTER_BRELOOM: monster_id = monster_id(314);
 }
 impl monster_id {
+    pub const MONSTER_BRELOOM_SECONDARY: monster_id = monster_id(914);
+}
+impl monster_id {
     pub const MONSTER_SLAKOTH: monster_id = monster_id(315);
+}
+impl monster_id {
+    pub const MONSTER_SLAKOTH_SECONDARY: monster_id = monster_id(915);
 }
 impl monster_id {
     pub const MONSTER_VIGOROTH: monster_id = monster_id(316);
 }
 impl monster_id {
+    pub const MONSTER_VIGOROTH_SECONDARY: monster_id = monster_id(916);
+}
+impl monster_id {
     pub const MONSTER_SLAKING: monster_id = monster_id(317);
+}
+impl monster_id {
+    pub const MONSTER_SLAKING_SECONDARY: monster_id = monster_id(917);
 }
 impl monster_id {
     pub const MONSTER_NINCADA: monster_id = monster_id(318);
 }
 impl monster_id {
+    pub const MONSTER_NINCADA_SECONDARY: monster_id = monster_id(918);
+}
+impl monster_id {
     pub const MONSTER_NINJASK: monster_id = monster_id(319);
+}
+impl monster_id {
+    pub const MONSTER_NINJASK_SECONDARY: monster_id = monster_id(919);
 }
 impl monster_id {
     pub const MONSTER_SHEDINJA: monster_id = monster_id(320);
 }
 impl monster_id {
+    pub const MONSTER_SHEDINJA_SECONDARY: monster_id = monster_id(920);
+}
+impl monster_id {
     pub const MONSTER_WHISMUR: monster_id = monster_id(321);
+}
+impl monster_id {
+    pub const MONSTER_WHISMUR_SECONDARY: monster_id = monster_id(921);
 }
 impl monster_id {
     pub const MONSTER_LOUDRED: monster_id = monster_id(322);
 }
 impl monster_id {
+    pub const MONSTER_LOUDRED_SECONDARY: monster_id = monster_id(922);
+}
+impl monster_id {
     pub const MONSTER_EXPLOUD: monster_id = monster_id(323);
+}
+impl monster_id {
+    pub const MONSTER_EXPLOUD_SECONDARY: monster_id = monster_id(923);
 }
 impl monster_id {
     pub const MONSTER_MAKUHITA: monster_id = monster_id(324);
 }
 impl monster_id {
+    pub const MONSTER_MAKUHITA_SECONDARY: monster_id = monster_id(924);
+}
+impl monster_id {
     pub const MONSTER_HARIYAMA: monster_id = monster_id(325);
+}
+impl monster_id {
+    pub const MONSTER_HARIYAMA_SECONDARY: monster_id = monster_id(925);
 }
 impl monster_id {
     pub const MONSTER_AZURILL: monster_id = monster_id(326);
 }
 impl monster_id {
+    pub const MONSTER_AZURILL_SECONDARY: monster_id = monster_id(926);
+}
+impl monster_id {
     pub const MONSTER_NOSEPASS: monster_id = monster_id(327);
+}
+impl monster_id {
+    pub const MONSTER_NOSEPASS_SECONDARY: monster_id = monster_id(927);
 }
 impl monster_id {
     pub const MONSTER_SKITTY: monster_id = monster_id(328);
 }
 impl monster_id {
+    pub const MONSTER_SKITTY_SECONDARY: monster_id = monster_id(928);
+}
+impl monster_id {
     pub const MONSTER_DELCATTY: monster_id = monster_id(329);
+}
+impl monster_id {
+    pub const MONSTER_DELCATTY_SECONDARY: monster_id = monster_id(929);
 }
 impl monster_id {
     pub const MONSTER_SABLEYE: monster_id = monster_id(330);
 }
 impl monster_id {
+    pub const MONSTER_SABLEYE_SECONDARY: monster_id = monster_id(930);
+}
+impl monster_id {
     pub const MONSTER_MAWILE: monster_id = monster_id(331);
+}
+impl monster_id {
+    pub const MONSTER_MAWILE_SECONDARY: monster_id = monster_id(931);
 }
 impl monster_id {
     pub const MONSTER_ARON: monster_id = monster_id(332);
 }
 impl monster_id {
+    pub const MONSTER_ARON_SECONDARY: monster_id = monster_id(932);
+}
+impl monster_id {
     pub const MONSTER_LAIRON: monster_id = monster_id(333);
+}
+impl monster_id {
+    pub const MONSTER_LAIRON_SECONDARY: monster_id = monster_id(933);
 }
 impl monster_id {
     pub const MONSTER_AGGRON: monster_id = monster_id(334);
 }
 impl monster_id {
+    pub const MONSTER_AGGRON_SECONDARY: monster_id = monster_id(934);
+}
+impl monster_id {
     pub const MONSTER_MEDITITE: monster_id = monster_id(335);
+}
+impl monster_id {
+    pub const MONSTER_MEDITITE_SECONDARY: monster_id = monster_id(935);
 }
 impl monster_id {
     pub const MONSTER_MEDICHAM: monster_id = monster_id(336);
 }
 impl monster_id {
+    pub const MONSTER_MEDICHAM_SECONDARY: monster_id = monster_id(936);
+}
+impl monster_id {
     pub const MONSTER_ELECTRIKE: monster_id = monster_id(337);
+}
+impl monster_id {
+    pub const MONSTER_ELECTRIKE_SECONDARY: monster_id = monster_id(937);
 }
 impl monster_id {
     pub const MONSTER_MANECTRIC: monster_id = monster_id(338);
 }
 impl monster_id {
+    pub const MONSTER_MANECTRIC_SECONDARY: monster_id = monster_id(938);
+}
+impl monster_id {
     pub const MONSTER_PLUSLE: monster_id = monster_id(339);
+}
+impl monster_id {
+    pub const MONSTER_PLUSLE_SECONDARY: monster_id = monster_id(939);
 }
 impl monster_id {
     pub const MONSTER_MINUN: monster_id = monster_id(340);
 }
 impl monster_id {
+    pub const MONSTER_MINUN_SECONDARY: monster_id = monster_id(940);
+}
+impl monster_id {
     pub const MONSTER_VOLBEAT: monster_id = monster_id(341);
+}
+impl monster_id {
+    pub const MONSTER_VOLBEAT_SECONDARY: monster_id = monster_id(941);
 }
 impl monster_id {
     pub const MONSTER_ILLUMISE: monster_id = monster_id(342);
 }
 impl monster_id {
+    pub const MONSTER_ILLUMISE_SECONDARY: monster_id = monster_id(942);
+}
+impl monster_id {
     pub const MONSTER_ROSELIA: monster_id = monster_id(343);
+}
+impl monster_id {
+    pub const MONSTER_ROSELIA_SECONDARY: monster_id = monster_id(943);
 }
 impl monster_id {
     pub const MONSTER_GULPIN: monster_id = monster_id(344);
 }
 impl monster_id {
+    pub const MONSTER_GULPIN_SECONDARY: monster_id = monster_id(944);
+}
+impl monster_id {
     pub const MONSTER_SWALOT: monster_id = monster_id(345);
+}
+impl monster_id {
+    pub const MONSTER_SWALOT_SECONDARY: monster_id = monster_id(945);
 }
 impl monster_id {
     pub const MONSTER_CARVANHA: monster_id = monster_id(346);
 }
 impl monster_id {
+    pub const MONSTER_CARVANHA_SECONDARY: monster_id = monster_id(946);
+}
+impl monster_id {
     pub const MONSTER_SHARPEDO: monster_id = monster_id(347);
+}
+impl monster_id {
+    pub const MONSTER_SHARPEDO_SECONDARY: monster_id = monster_id(947);
 }
 impl monster_id {
     pub const MONSTER_WAILMER: monster_id = monster_id(348);
 }
 impl monster_id {
+    pub const MONSTER_WAILMER_SECONDARY: monster_id = monster_id(948);
+}
+impl monster_id {
     pub const MONSTER_WAILORD: monster_id = monster_id(349);
+}
+impl monster_id {
+    pub const MONSTER_WAILORD_SECONDARY: monster_id = monster_id(949);
 }
 impl monster_id {
     pub const MONSTER_NUMEL: monster_id = monster_id(350);
 }
 impl monster_id {
+    pub const MONSTER_NUMEL_SECONDARY: monster_id = monster_id(950);
+}
+impl monster_id {
     pub const MONSTER_CAMERUPT: monster_id = monster_id(351);
+}
+impl monster_id {
+    pub const MONSTER_CAMERUPT_SECONDARY: monster_id = monster_id(951);
 }
 impl monster_id {
     pub const MONSTER_TORKOAL: monster_id = monster_id(352);
 }
 impl monster_id {
+    pub const MONSTER_TORKOAL_SECONDARY: monster_id = monster_id(952);
+}
+impl monster_id {
     pub const MONSTER_SPOINK: monster_id = monster_id(353);
+}
+impl monster_id {
+    pub const MONSTER_SPOINK_SECONDARY: monster_id = monster_id(953);
 }
 impl monster_id {
     pub const MONSTER_GRUMPIG: monster_id = monster_id(354);
 }
 impl monster_id {
+    pub const MONSTER_GRUMPIG_SECONDARY: monster_id = monster_id(954);
+}
+impl monster_id {
     pub const MONSTER_SPINDA: monster_id = monster_id(355);
+}
+impl monster_id {
+    pub const MONSTER_SPINDA_SECONDARY: monster_id = monster_id(955);
 }
 impl monster_id {
     pub const MONSTER_TRAPINCH: monster_id = monster_id(356);
 }
 impl monster_id {
+    pub const MONSTER_TRAPINCH_SECONDARY: monster_id = monster_id(956);
+}
+impl monster_id {
     pub const MONSTER_VIBRAVA: monster_id = monster_id(357);
+}
+impl monster_id {
+    pub const MONSTER_VIBRAVA_SECONDARY: monster_id = monster_id(957);
 }
 impl monster_id {
     pub const MONSTER_FLYGON: monster_id = monster_id(358);
 }
 impl monster_id {
+    pub const MONSTER_FLYGON_SECONDARY: monster_id = monster_id(958);
+}
+impl monster_id {
     pub const MONSTER_CACNEA: monster_id = monster_id(359);
+}
+impl monster_id {
+    pub const MONSTER_CACNEA_SECONDARY: monster_id = monster_id(959);
 }
 impl monster_id {
     pub const MONSTER_CACTURNE: monster_id = monster_id(360);
 }
 impl monster_id {
+    pub const MONSTER_CACTURNE_SECONDARY: monster_id = monster_id(960);
+}
+impl monster_id {
     pub const MONSTER_SWABLU: monster_id = monster_id(361);
+}
+impl monster_id {
+    pub const MONSTER_SWABLU_SECONDARY: monster_id = monster_id(961);
 }
 impl monster_id {
     pub const MONSTER_ALTARIA: monster_id = monster_id(362);
 }
 impl monster_id {
+    pub const MONSTER_ALTARIA_SECONDARY: monster_id = monster_id(962);
+}
+impl monster_id {
     pub const MONSTER_ZANGOOSE: monster_id = monster_id(363);
+}
+impl monster_id {
+    pub const MONSTER_ZANGOOSE_SECONDARY: monster_id = monster_id(963);
 }
 impl monster_id {
     pub const MONSTER_SEVIPER: monster_id = monster_id(364);
 }
 impl monster_id {
+    pub const MONSTER_SEVIPER_SECONDARY: monster_id = monster_id(964);
+}
+impl monster_id {
     pub const MONSTER_LUNATONE: monster_id = monster_id(365);
+}
+impl monster_id {
+    pub const MONSTER_LUNATONE_SECONDARY: monster_id = monster_id(965);
 }
 impl monster_id {
     pub const MONSTER_SOLROCK: monster_id = monster_id(366);
 }
 impl monster_id {
+    pub const MONSTER_SOLROCK_SECONDARY: monster_id = monster_id(966);
+}
+impl monster_id {
     pub const MONSTER_BARBOACH: monster_id = monster_id(367);
+}
+impl monster_id {
+    pub const MONSTER_BARBOACH_SECONDARY: monster_id = monster_id(967);
 }
 impl monster_id {
     pub const MONSTER_WHISCASH: monster_id = monster_id(368);
 }
 impl monster_id {
+    pub const MONSTER_WHISCASH_SECONDARY: monster_id = monster_id(968);
+}
+impl monster_id {
     pub const MONSTER_CORPHISH: monster_id = monster_id(369);
+}
+impl monster_id {
+    pub const MONSTER_CORPHISH_SECONDARY: monster_id = monster_id(969);
 }
 impl monster_id {
     pub const MONSTER_CRAWDAUNT: monster_id = monster_id(370);
 }
 impl monster_id {
+    pub const MONSTER_CRAWDAUNT_SECONDARY: monster_id = monster_id(970);
+}
+impl monster_id {
     pub const MONSTER_BALTOY: monster_id = monster_id(371);
+}
+impl monster_id {
+    pub const MONSTER_BALTOY_SECONDARY: monster_id = monster_id(971);
 }
 impl monster_id {
     pub const MONSTER_CLAYDOL: monster_id = monster_id(372);
 }
 impl monster_id {
+    pub const MONSTER_CLAYDOL_SECONDARY: monster_id = monster_id(972);
+}
+impl monster_id {
     pub const MONSTER_LILEEP: monster_id = monster_id(373);
+}
+impl monster_id {
+    pub const MONSTER_LILEEP_SECONDARY: monster_id = monster_id(973);
 }
 impl monster_id {
     pub const MONSTER_CRADILY: monster_id = monster_id(374);
 }
 impl monster_id {
+    pub const MONSTER_CRADILY_SECONDARY: monster_id = monster_id(974);
+}
+impl monster_id {
     pub const MONSTER_ANORITH: monster_id = monster_id(375);
+}
+impl monster_id {
+    pub const MONSTER_ANORITH_SECONDARY: monster_id = monster_id(975);
 }
 impl monster_id {
     pub const MONSTER_ARMALDO: monster_id = monster_id(376);
 }
 impl monster_id {
+    pub const MONSTER_ARMALDO_SECONDARY: monster_id = monster_id(976);
+}
+impl monster_id {
     pub const MONSTER_FEEBAS: monster_id = monster_id(377);
+}
+impl monster_id {
+    pub const MONSTER_FEEBAS_SECONDARY: monster_id = monster_id(977);
 }
 impl monster_id {
     pub const MONSTER_MILOTIC: monster_id = monster_id(378);
 }
 impl monster_id {
+    pub const MONSTER_MILOTIC_SECONDARY: monster_id = monster_id(978);
+}
+impl monster_id {
     pub const MONSTER_CASTFORM_NORMAL: monster_id = monster_id(379);
+}
+impl monster_id {
+    pub const MONSTER_CASTFORM_NORMAL_SECONDARY: monster_id = monster_id(979);
 }
 impl monster_id {
     pub const MONSTER_CASTFORM_SNOWY: monster_id = monster_id(380);
 }
 impl monster_id {
+    pub const MONSTER_CASTFORM_SNOWY_SECONDARY: monster_id = monster_id(980);
+}
+impl monster_id {
     pub const MONSTER_CASTFORM_SUNNY: monster_id = monster_id(381);
+}
+impl monster_id {
+    pub const MONSTER_CASTFORM_SUNNY_SECONDARY: monster_id = monster_id(981);
 }
 impl monster_id {
     pub const MONSTER_CASTFORM_RAINY: monster_id = monster_id(382);
 }
 impl monster_id {
+    pub const MONSTER_CASTFORM_RAINY_SECONDARY: monster_id = monster_id(982);
+}
+impl monster_id {
     pub const MONSTER_KECLEON: monster_id = monster_id(383);
+}
+impl monster_id {
+    pub const MONSTER_KECLEON_SECONDARY: monster_id = monster_id(983);
 }
 impl monster_id {
     pub const MONSTER_PURPLE_KECLEON: monster_id = monster_id(384);
 }
 impl monster_id {
+    pub const MONSTER_PURPLE_KECLEON_SECONDARY: monster_id = monster_id(984);
+}
+impl monster_id {
     pub const MONSTER_SHUPPET: monster_id = monster_id(385);
+}
+impl monster_id {
+    pub const MONSTER_SHUPPET_SECONDARY: monster_id = monster_id(985);
 }
 impl monster_id {
     pub const MONSTER_BANETTE: monster_id = monster_id(386);
 }
 impl monster_id {
+    pub const MONSTER_BANETTE_SECONDARY: monster_id = monster_id(986);
+}
+impl monster_id {
     pub const MONSTER_DUSKULL: monster_id = monster_id(387);
+}
+impl monster_id {
+    pub const MONSTER_DUSKULL_SECONDARY: monster_id = monster_id(987);
 }
 impl monster_id {
     pub const MONSTER_DUSCLOPS: monster_id = monster_id(388);
 }
 impl monster_id {
+    pub const MONSTER_DUSCLOPS_SECONDARY: monster_id = monster_id(988);
+}
+impl monster_id {
     pub const MONSTER_TROPIUS: monster_id = monster_id(389);
+}
+impl monster_id {
+    pub const MONSTER_TROPIUS_SECONDARY: monster_id = monster_id(989);
 }
 impl monster_id {
     pub const MONSTER_CHIMECHO: monster_id = monster_id(390);
 }
 impl monster_id {
+    pub const MONSTER_CHIMECHO_SECONDARY: monster_id = monster_id(990);
+}
+impl monster_id {
     pub const MONSTER_ABSOL: monster_id = monster_id(391);
+}
+impl monster_id {
+    pub const MONSTER_ABSOL_SECONDARY: monster_id = monster_id(991);
 }
 impl monster_id {
     pub const MONSTER_WYNAUT: monster_id = monster_id(392);
 }
 impl monster_id {
+    pub const MONSTER_WYNAUT_SECONDARY: monster_id = monster_id(992);
+}
+impl monster_id {
     pub const MONSTER_SNORUNT: monster_id = monster_id(393);
+}
+impl monster_id {
+    pub const MONSTER_SNORUNT_SECONDARY: monster_id = monster_id(993);
 }
 impl monster_id {
     pub const MONSTER_GLALIE: monster_id = monster_id(394);
 }
 impl monster_id {
+    pub const MONSTER_GLALIE_SECONDARY: monster_id = monster_id(994);
+}
+impl monster_id {
     pub const MONSTER_SPHEAL: monster_id = monster_id(395);
+}
+impl monster_id {
+    pub const MONSTER_SPHEAL_SECONDARY: monster_id = monster_id(995);
 }
 impl monster_id {
     pub const MONSTER_SEALEO: monster_id = monster_id(396);
 }
 impl monster_id {
+    pub const MONSTER_SEALEO_SECONDARY: monster_id = monster_id(996);
+}
+impl monster_id {
     pub const MONSTER_WALREIN: monster_id = monster_id(397);
+}
+impl monster_id {
+    pub const MONSTER_WALREIN_SECONDARY: monster_id = monster_id(997);
 }
 impl monster_id {
     pub const MONSTER_CLAMPERL: monster_id = monster_id(398);
 }
 impl monster_id {
+    pub const MONSTER_CLAMPERL_SECONDARY: monster_id = monster_id(998);
+}
+impl monster_id {
     pub const MONSTER_HUNTAIL: monster_id = monster_id(399);
+}
+impl monster_id {
+    pub const MONSTER_HUNTAIL_SECONDARY: monster_id = monster_id(999);
 }
 impl monster_id {
     pub const MONSTER_GOREBYSS: monster_id = monster_id(400);
 }
 impl monster_id {
+    pub const MONSTER_GOREBYSS_SECONDARY: monster_id = monster_id(1000);
+}
+impl monster_id {
     pub const MONSTER_RELICANTH: monster_id = monster_id(401);
+}
+impl monster_id {
+    pub const MONSTER_RELICANTH_SECONDARY: monster_id = monster_id(1001);
 }
 impl monster_id {
     pub const MONSTER_LUVDISC: monster_id = monster_id(402);
 }
 impl monster_id {
+    pub const MONSTER_LUVDISC_SECONDARY: monster_id = monster_id(1002);
+}
+impl monster_id {
     pub const MONSTER_BAGON: monster_id = monster_id(403);
+}
+impl monster_id {
+    pub const MONSTER_BAGON_SECONDARY: monster_id = monster_id(1003);
 }
 impl monster_id {
     pub const MONSTER_SHELGON: monster_id = monster_id(404);
 }
 impl monster_id {
+    pub const MONSTER_SHELGON_SECONDARY: monster_id = monster_id(1004);
+}
+impl monster_id {
     pub const MONSTER_SALAMENCE: monster_id = monster_id(405);
+}
+impl monster_id {
+    pub const MONSTER_SALAMENCE_SECONDARY: monster_id = monster_id(1005);
 }
 impl monster_id {
     pub const MONSTER_BELDUM: monster_id = monster_id(406);
 }
 impl monster_id {
+    pub const MONSTER_BELDUM_SECONDARY: monster_id = monster_id(1006);
+}
+impl monster_id {
     pub const MONSTER_METANG: monster_id = monster_id(407);
+}
+impl monster_id {
+    pub const MONSTER_METANG_SECONDARY: monster_id = monster_id(1007);
 }
 impl monster_id {
     pub const MONSTER_METAGROSS: monster_id = monster_id(408);
 }
 impl monster_id {
+    pub const MONSTER_METAGROSS_SECONDARY: monster_id = monster_id(1008);
+}
+impl monster_id {
     pub const MONSTER_REGIROCK: monster_id = monster_id(409);
+}
+impl monster_id {
+    pub const MONSTER_REGIROCK_SECONDARY: monster_id = monster_id(1009);
 }
 impl monster_id {
     pub const MONSTER_REGICE: monster_id = monster_id(410);
 }
 impl monster_id {
+    pub const MONSTER_REGICE_SECONDARY: monster_id = monster_id(1010);
+}
+impl monster_id {
     pub const MONSTER_REGISTEEL: monster_id = monster_id(411);
+}
+impl monster_id {
+    pub const MONSTER_REGISTEEL_SECONDARY: monster_id = monster_id(1011);
 }
 impl monster_id {
     pub const MONSTER_LATIAS: monster_id = monster_id(412);
 }
 impl monster_id {
+    pub const MONSTER_LATIAS_SECONDARY: monster_id = monster_id(1012);
+}
+impl monster_id {
     pub const MONSTER_LATIOS: monster_id = monster_id(413);
+}
+impl monster_id {
+    pub const MONSTER_LATIOS_SECONDARY: monster_id = monster_id(1013);
 }
 impl monster_id {
     pub const MONSTER_KYOGRE: monster_id = monster_id(414);
 }
 impl monster_id {
+    pub const MONSTER_KYOGRE_SECONDARY: monster_id = monster_id(1014);
+}
+impl monster_id {
     pub const MONSTER_GROUDON: monster_id = monster_id(415);
+}
+impl monster_id {
+    pub const MONSTER_GROUDON_SECONDARY: monster_id = monster_id(1015);
 }
 impl monster_id {
     pub const MONSTER_RAYQUAZA: monster_id = monster_id(416);
 }
 impl monster_id {
+    pub const MONSTER_RAYQUAZA_SECONDARY: monster_id = monster_id(1016);
+}
+impl monster_id {
     pub const MONSTER_JIRACHI: monster_id = monster_id(417);
+}
+impl monster_id {
+    pub const MONSTER_JIRACHI_SECONDARY: monster_id = monster_id(1017);
 }
 impl monster_id {
     pub const MONSTER_DEOXYS_NORMAL: monster_id = monster_id(418);
 }
 impl monster_id {
+    pub const MONSTER_DEOXYS_NORMAL_SECONDARY: monster_id = monster_id(1018);
+}
+impl monster_id {
     pub const MONSTER_DEOXYS_ATTACH: monster_id = monster_id(419);
+}
+impl monster_id {
+    pub const MONSTER_DEOXYS_ATTACH_SECONDARY: monster_id = monster_id(1019);
 }
 impl monster_id {
     pub const MONSTER_DEOXYS_DEFENSE: monster_id = monster_id(420);
 }
 impl monster_id {
+    pub const MONSTER_DEOXYS_DEFENSE_SECONDARY: monster_id = monster_id(1020);
+}
+impl monster_id {
     pub const MONSTER_DEOXYS_SPEED: monster_id = monster_id(421);
+}
+impl monster_id {
+    pub const MONSTER_DEOXYS_SPEED_SECONDARY: monster_id = monster_id(1021);
 }
 impl monster_id {
     pub const MONSTER_TURTWIG: monster_id = monster_id(422);
 }
 impl monster_id {
+    pub const MONSTER_TURTWIG_SECONDARY: monster_id = monster_id(1022);
+}
+impl monster_id {
     pub const MONSTER_GROTLE: monster_id = monster_id(423);
+}
+impl monster_id {
+    pub const MONSTER_GROTLE_SECONDARY: monster_id = monster_id(1023);
 }
 impl monster_id {
     pub const MONSTER_TORTERRA: monster_id = monster_id(424);
 }
 impl monster_id {
+    pub const MONSTER_TORTERRA_SECONDARY: monster_id = monster_id(1024);
+}
+impl monster_id {
     pub const MONSTER_CHIMCHAR: monster_id = monster_id(425);
+}
+impl monster_id {
+    pub const MONSTER_CHIMCHAR_SECONDARY: monster_id = monster_id(1025);
 }
 impl monster_id {
     pub const MONSTER_MONFERNO: monster_id = monster_id(426);
 }
 impl monster_id {
+    pub const MONSTER_MONFERNO_SECONDARY: monster_id = monster_id(1026);
+}
+impl monster_id {
     pub const MONSTER_INFERNAPE: monster_id = monster_id(427);
+}
+impl monster_id {
+    pub const MONSTER_INFERNAPE_SECONDARY: monster_id = monster_id(1027);
 }
 impl monster_id {
     pub const MONSTER_PIPLUP: monster_id = monster_id(428);
 }
 impl monster_id {
+    pub const MONSTER_PIPLUP_SECONDARY: monster_id = monster_id(1028);
+}
+impl monster_id {
     pub const MONSTER_PRINPLUP: monster_id = monster_id(429);
+}
+impl monster_id {
+    pub const MONSTER_PRINPLUP_SECONDARY: monster_id = monster_id(1029);
 }
 impl monster_id {
     pub const MONSTER_EMPOLEON: monster_id = monster_id(430);
 }
 impl monster_id {
+    pub const MONSTER_EMPOLEON_SECONDARY: monster_id = monster_id(1030);
+}
+impl monster_id {
     pub const MONSTER_STARLY: monster_id = monster_id(431);
+}
+impl monster_id {
+    pub const MONSTER_STARLY_SECONDARY: monster_id = monster_id(1031);
 }
 impl monster_id {
     pub const MONSTER_STARAVIA: monster_id = monster_id(432);
 }
 impl monster_id {
+    pub const MONSTER_STARAVIA_SECONDARY: monster_id = monster_id(1032);
+}
+impl monster_id {
     pub const MONSTER_STARAPTOR: monster_id = monster_id(433);
+}
+impl monster_id {
+    pub const MONSTER_STARAPTOR_SECONDARY: monster_id = monster_id(1033);
 }
 impl monster_id {
     pub const MONSTER_BIDOOF: monster_id = monster_id(434);
 }
 impl monster_id {
+    pub const MONSTER_BIDOOF_SECONDARY: monster_id = monster_id(1034);
+}
+impl monster_id {
     pub const MONSTER_BIBAREL: monster_id = monster_id(435);
+}
+impl monster_id {
+    pub const MONSTER_BIBAREL_SECONDARY: monster_id = monster_id(1035);
 }
 impl monster_id {
     pub const MONSTER_KRICKETOT: monster_id = monster_id(436);
 }
 impl monster_id {
+    pub const MONSTER_KRICKETOT_SECONDARY: monster_id = monster_id(1036);
+}
+impl monster_id {
     pub const MONSTER_KRICKETUNE: monster_id = monster_id(437);
+}
+impl monster_id {
+    pub const MONSTER_KRICKETUNE_SECONDARY: monster_id = monster_id(1037);
 }
 impl monster_id {
     pub const MONSTER_SHINX: monster_id = monster_id(438);
 }
 impl monster_id {
+    pub const MONSTER_SHINX_SECONDARY: monster_id = monster_id(1038);
+}
+impl monster_id {
     pub const MONSTER_LUXIO: monster_id = monster_id(439);
+}
+impl monster_id {
+    pub const MONSTER_LUXIO_SECONDARY: monster_id = monster_id(1039);
 }
 impl monster_id {
     pub const MONSTER_LUXRAY: monster_id = monster_id(440);
 }
 impl monster_id {
+    pub const MONSTER_LUXRAY_SECONDARY: monster_id = monster_id(1040);
+}
+impl monster_id {
     pub const MONSTER_BUDEW: monster_id = monster_id(441);
+}
+impl monster_id {
+    pub const MONSTER_BUDEW_SECONDARY: monster_id = monster_id(1041);
 }
 impl monster_id {
     pub const MONSTER_ROSERADE: monster_id = monster_id(442);
 }
 impl monster_id {
+    pub const MONSTER_ROSERADE_SECONDARY: monster_id = monster_id(1042);
+}
+impl monster_id {
     pub const MONSTER_CRANIDOS: monster_id = monster_id(443);
+}
+impl monster_id {
+    pub const MONSTER_CRANIDOS_SECONDARY: monster_id = monster_id(1043);
 }
 impl monster_id {
     pub const MONSTER_RAMPARDOS: monster_id = monster_id(444);
 }
 impl monster_id {
+    pub const MONSTER_RAMPARDOS_SECONDARY: monster_id = monster_id(1044);
+}
+impl monster_id {
     pub const MONSTER_SHIELDON: monster_id = monster_id(445);
+}
+impl monster_id {
+    pub const MONSTER_SHIELDON_SECONDARY: monster_id = monster_id(1045);
 }
 impl monster_id {
     pub const MONSTER_BASTIODON: monster_id = monster_id(446);
 }
 impl monster_id {
+    pub const MONSTER_BASTIODON_SECONDARY: monster_id = monster_id(1046);
+}
+impl monster_id {
     pub const MONSTER_BURMY_SANDY: monster_id = monster_id(447);
+}
+impl monster_id {
+    pub const MONSTER_BURMY_SANDY_SECONDARY: monster_id = monster_id(1047);
 }
 impl monster_id {
     pub const MONSTER_BURMY_PLANT: monster_id = monster_id(448);
 }
 impl monster_id {
+    pub const MONSTER_BURMY_PLANT_SECONDARY: monster_id = monster_id(1048);
+}
+impl monster_id {
     pub const MONSTER_BURMY_TRASH: monster_id = monster_id(449);
+}
+impl monster_id {
+    pub const MONSTER_BURMY_TRASH_SECONDARY: monster_id = monster_id(1049);
 }
 impl monster_id {
     pub const MONSTER_WORMADAM_SANDY: monster_id = monster_id(450);
 }
 impl monster_id {
+    pub const MONSTER_WORMADAM_SANDY_SECONDARY: monster_id = monster_id(1050);
+}
+impl monster_id {
     pub const MONSTER_WORMADAM_PLANT: monster_id = monster_id(451);
+}
+impl monster_id {
+    pub const MONSTER_WORMADAM_PLANT_SECONDARY: monster_id = monster_id(1051);
 }
 impl monster_id {
     pub const MONSTER_WORMADAM_TRASH: monster_id = monster_id(452);
 }
 impl monster_id {
+    pub const MONSTER_WORMADAM_TRASH_SECONDARY: monster_id = monster_id(1052);
+}
+impl monster_id {
     pub const MONSTER_MOTHIM: monster_id = monster_id(453);
+}
+impl monster_id {
+    pub const MONSTER_MOTHIM_SECONDARY: monster_id = monster_id(1053);
 }
 impl monster_id {
     pub const MONSTER_COMBEE: monster_id = monster_id(454);
 }
 impl monster_id {
+    pub const MONSTER_COMBEE_SECONDARY: monster_id = monster_id(1054);
+}
+impl monster_id {
     pub const MONSTER_VESPIQUEN: monster_id = monster_id(455);
+}
+impl monster_id {
+    pub const MONSTER_VESPIQUEN_SECONDARY: monster_id = monster_id(1055);
 }
 impl monster_id {
     pub const MONSTER_PACHIRISU: monster_id = monster_id(456);
 }
 impl monster_id {
+    pub const MONSTER_PACHIRISU_SECONDARY: monster_id = monster_id(1056);
+}
+impl monster_id {
     pub const MONSTER_BUIZEL: monster_id = monster_id(457);
+}
+impl monster_id {
+    pub const MONSTER_BUIZEL_SECONDARY: monster_id = monster_id(1057);
 }
 impl monster_id {
     pub const MONSTER_FLOATZEL: monster_id = monster_id(458);
 }
 impl monster_id {
+    pub const MONSTER_FLOATZEL_SECONDARY: monster_id = monster_id(1058);
+}
+impl monster_id {
     pub const MONSTER_CHERUBI: monster_id = monster_id(459);
+}
+impl monster_id {
+    pub const MONSTER_CHERUBI_SECONDARY: monster_id = monster_id(1059);
 }
 impl monster_id {
     pub const MONSTER_CHERRIM_OVERCAST: monster_id = monster_id(460);
 }
 impl monster_id {
+    pub const MONSTER_CHERRIM_OVERCAST_SECONDARY: monster_id = monster_id(1060);
+}
+impl monster_id {
     pub const MONSTER_CHERRIM_SUNSHINE: monster_id = monster_id(461);
+}
+impl monster_id {
+    pub const MONSTER_CHERRIM_SUNSHINE_SECONDARY: monster_id = monster_id(1061);
 }
 impl monster_id {
     pub const MONSTER_SHELLOS_EAST: monster_id = monster_id(462);
 }
 impl monster_id {
+    pub const MONSTER_SHELLOS_EAST_SECONDARY: monster_id = monster_id(1062);
+}
+impl monster_id {
     pub const MONSTER_SHELLOS_WEST: monster_id = monster_id(463);
+}
+impl monster_id {
+    pub const MONSTER_SHELLOS_WEST_SECONDARY: monster_id = monster_id(1063);
 }
 impl monster_id {
     pub const MONSTER_GASTRODON_EAST: monster_id = monster_id(464);
 }
 impl monster_id {
+    pub const MONSTER_GASTRODON_EAST_SECONDARY: monster_id = monster_id(1064);
+}
+impl monster_id {
     pub const MONSTER_GASTRODON_WEST: monster_id = monster_id(465);
+}
+impl monster_id {
+    pub const MONSTER_GASTRODON_WEST_SECONDARY: monster_id = monster_id(1065);
 }
 impl monster_id {
     pub const MONSTER_AMBIPOM: monster_id = monster_id(466);
 }
 impl monster_id {
+    pub const MONSTER_AMBIPOM_SECONDARY: monster_id = monster_id(1066);
+}
+impl monster_id {
     pub const MONSTER_DRIFLOON: monster_id = monster_id(467);
+}
+impl monster_id {
+    pub const MONSTER_DRIFLOON_SECONDARY: monster_id = monster_id(1067);
 }
 impl monster_id {
     pub const MONSTER_DRIFBLIM: monster_id = monster_id(468);
 }
 impl monster_id {
+    pub const MONSTER_DRIFBLIM_SECONDARY: monster_id = monster_id(1068);
+}
+impl monster_id {
     pub const MONSTER_BUNEARY: monster_id = monster_id(469);
+}
+impl monster_id {
+    pub const MONSTER_BUNEARY_SECONDARY: monster_id = monster_id(1069);
 }
 impl monster_id {
     pub const MONSTER_LOPUNNY: monster_id = monster_id(470);
 }
 impl monster_id {
+    pub const MONSTER_LOPUNNY_SECONDARY: monster_id = monster_id(1070);
+}
+impl monster_id {
     pub const MONSTER_MISMAGIUS: monster_id = monster_id(471);
+}
+impl monster_id {
+    pub const MONSTER_MISMAGIUS_SECONDARY: monster_id = monster_id(1071);
 }
 impl monster_id {
     pub const MONSTER_HONCHKROW: monster_id = monster_id(472);
 }
 impl monster_id {
+    pub const MONSTER_HONCHKROW_SECONDARY: monster_id = monster_id(1072);
+}
+impl monster_id {
     pub const MONSTER_GLAMEOW: monster_id = monster_id(473);
+}
+impl monster_id {
+    pub const MONSTER_GLAMEOW_SECONDARY: monster_id = monster_id(1073);
 }
 impl monster_id {
     pub const MONSTER_PURUGLY: monster_id = monster_id(474);
 }
 impl monster_id {
+    pub const MONSTER_PURUGLY_SECONDARY: monster_id = monster_id(1074);
+}
+impl monster_id {
     pub const MONSTER_CHINGLING: monster_id = monster_id(475);
+}
+impl monster_id {
+    pub const MONSTER_CHINGLING_SECONDARY: monster_id = monster_id(1075);
 }
 impl monster_id {
     pub const MONSTER_STUNKY: monster_id = monster_id(476);
 }
 impl monster_id {
+    pub const MONSTER_STUNKY_SECONDARY: monster_id = monster_id(1076);
+}
+impl monster_id {
     pub const MONSTER_SKUNTANK: monster_id = monster_id(477);
+}
+impl monster_id {
+    pub const MONSTER_SKUNTANK_SECONDARY: monster_id = monster_id(1077);
 }
 impl monster_id {
     pub const MONSTER_BRONZOR: monster_id = monster_id(478);
 }
 impl monster_id {
+    pub const MONSTER_BRONZOR_SECONDARY: monster_id = monster_id(1078);
+}
+impl monster_id {
     pub const MONSTER_BRONZONG: monster_id = monster_id(479);
+}
+impl monster_id {
+    pub const MONSTER_BRONZONG_SECONDARY: monster_id = monster_id(1079);
 }
 impl monster_id {
     pub const MONSTER_BONSLY: monster_id = monster_id(480);
 }
 impl monster_id {
+    pub const MONSTER_BONSLY_SECONDARY: monster_id = monster_id(1080);
+}
+impl monster_id {
     pub const MONSTER_MIME_JR: monster_id = monster_id(481);
+}
+impl monster_id {
+    pub const MONSTER_MIME_JR_SECONDARY: monster_id = monster_id(1081);
 }
 impl monster_id {
     pub const MONSTER_HAPPINY: monster_id = monster_id(482);
 }
 impl monster_id {
+    pub const MONSTER_HAPPINY_SECONDARY: monster_id = monster_id(1082);
+}
+impl monster_id {
     pub const MONSTER_CHATOT: monster_id = monster_id(483);
+}
+impl monster_id {
+    pub const MONSTER_CHATOT_SECONDARY: monster_id = monster_id(1083);
 }
 impl monster_id {
     pub const MONSTER_SPIRITOMB: monster_id = monster_id(484);
 }
 impl monster_id {
+    pub const MONSTER_SPIRITOMB_SECONDARY: monster_id = monster_id(1084);
+}
+impl monster_id {
     pub const MONSTER_GIBLE: monster_id = monster_id(485);
+}
+impl monster_id {
+    pub const MONSTER_GIBLE_SECONDARY: monster_id = monster_id(1085);
 }
 impl monster_id {
     pub const MONSTER_GABITE: monster_id = monster_id(486);
 }
 impl monster_id {
+    pub const MONSTER_GABITE_SECONDARY: monster_id = monster_id(1086);
+}
+impl monster_id {
     pub const MONSTER_GARCHOMP: monster_id = monster_id(487);
+}
+impl monster_id {
+    pub const MONSTER_GARCHOMP_SECONDARY: monster_id = monster_id(1087);
 }
 impl monster_id {
     pub const MONSTER_MUNCHLAX: monster_id = monster_id(488);
 }
 impl monster_id {
+    pub const MONSTER_MUNCHLAX_SECONDARY: monster_id = monster_id(1088);
+}
+impl monster_id {
     pub const MONSTER_RIOLU: monster_id = monster_id(489);
+}
+impl monster_id {
+    pub const MONSTER_RIOLU_SECONDARY: monster_id = monster_id(1089);
 }
 impl monster_id {
     pub const MONSTER_LUCARIO: monster_id = monster_id(490);
 }
 impl monster_id {
+    pub const MONSTER_LUCARIO_SECONDARY: monster_id = monster_id(1090);
+}
+impl monster_id {
     pub const MONSTER_HIPPOPOTAS: monster_id = monster_id(491);
+}
+impl monster_id {
+    pub const MONSTER_HIPPOPOTAS_SECONDARY: monster_id = monster_id(1091);
 }
 impl monster_id {
     pub const MONSTER_HIPPOWDON: monster_id = monster_id(492);
 }
 impl monster_id {
+    pub const MONSTER_HIPPOWDON_SECONDARY: monster_id = monster_id(1092);
+}
+impl monster_id {
     pub const MONSTER_SKORUPI: monster_id = monster_id(493);
+}
+impl monster_id {
+    pub const MONSTER_SKORUPI_SECONDARY: monster_id = monster_id(1093);
 }
 impl monster_id {
     pub const MONSTER_DRAPION: monster_id = monster_id(494);
 }
 impl monster_id {
+    pub const MONSTER_DRAPION_SECONDARY: monster_id = monster_id(1094);
+}
+impl monster_id {
     pub const MONSTER_CROAGUNK: monster_id = monster_id(495);
+}
+impl monster_id {
+    pub const MONSTER_CROAGUNK_SECONDARY: monster_id = monster_id(1095);
 }
 impl monster_id {
     pub const MONSTER_TOXICROAK: monster_id = monster_id(496);
 }
 impl monster_id {
+    pub const MONSTER_TOXICROAK_SECONDARY: monster_id = monster_id(1096);
+}
+impl monster_id {
     pub const MONSTER_CARNIVINE: monster_id = monster_id(497);
+}
+impl monster_id {
+    pub const MONSTER_CARNIVINE_SECONDARY: monster_id = monster_id(1097);
 }
 impl monster_id {
     pub const MONSTER_FINNEON: monster_id = monster_id(498);
 }
 impl monster_id {
+    pub const MONSTER_FINNEON_SECONDARY: monster_id = monster_id(1098);
+}
+impl monster_id {
     pub const MONSTER_LUMINEON: monster_id = monster_id(499);
+}
+impl monster_id {
+    pub const MONSTER_LUMINEON_SECONDARY: monster_id = monster_id(1099);
 }
 impl monster_id {
     pub const MONSTER_MANTYKE: monster_id = monster_id(500);
 }
 impl monster_id {
+    pub const MONSTER_MANTYKE_SECONDARY: monster_id = monster_id(1100);
+}
+impl monster_id {
     pub const MONSTER_SNOVER: monster_id = monster_id(501);
+}
+impl monster_id {
+    pub const MONSTER_SNOVER_SECONDARY: monster_id = monster_id(1101);
 }
 impl monster_id {
     pub const MONSTER_ABOMASNOW: monster_id = monster_id(502);
 }
 impl monster_id {
+    pub const MONSTER_ABOMASNOW_SECONDARY: monster_id = monster_id(1102);
+}
+impl monster_id {
     pub const MONSTER_WEAVILE: monster_id = monster_id(503);
+}
+impl monster_id {
+    pub const MONSTER_WEAVILE_SECONDARY: monster_id = monster_id(1103);
 }
 impl monster_id {
     pub const MONSTER_MAGNEZONE: monster_id = monster_id(504);
 }
 impl monster_id {
+    pub const MONSTER_MAGNEZONE_SECONDARY: monster_id = monster_id(1104);
+}
+impl monster_id {
     pub const MONSTER_LICKILICKY: monster_id = monster_id(505);
+}
+impl monster_id {
+    pub const MONSTER_LICKILICKY_SECONDARY: monster_id = monster_id(1105);
 }
 impl monster_id {
     pub const MONSTER_RHYPERIOR: monster_id = monster_id(506);
 }
 impl monster_id {
+    pub const MONSTER_RHYPERIOR_SECONDARY: monster_id = monster_id(1106);
+}
+impl monster_id {
     pub const MONSTER_TANGROWTH: monster_id = monster_id(507);
+}
+impl monster_id {
+    pub const MONSTER_TANGROWTH_SECONDARY: monster_id = monster_id(1107);
 }
 impl monster_id {
     pub const MONSTER_ELECTIVIRE: monster_id = monster_id(508);
 }
 impl monster_id {
+    pub const MONSTER_ELECTIVIRE_SECONDARY: monster_id = monster_id(1108);
+}
+impl monster_id {
     pub const MONSTER_MAGMORTAR: monster_id = monster_id(509);
+}
+impl monster_id {
+    pub const MONSTER_MAGMORTAR_SECONDARY: monster_id = monster_id(1109);
 }
 impl monster_id {
     pub const MONSTER_TOGEKISS: monster_id = monster_id(510);
 }
 impl monster_id {
+    pub const MONSTER_TOGEKISS_SECONDARY: monster_id = monster_id(1110);
+}
+impl monster_id {
     pub const MONSTER_YANMEGA: monster_id = monster_id(511);
+}
+impl monster_id {
+    pub const MONSTER_YANMEGA_SECONDARY: monster_id = monster_id(1111);
 }
 impl monster_id {
     pub const MONSTER_LEAFEON: monster_id = monster_id(512);
 }
 impl monster_id {
+    pub const MONSTER_LEAFEON_SECONDARY: monster_id = monster_id(1112);
+}
+impl monster_id {
     pub const MONSTER_GLACEON: monster_id = monster_id(513);
+}
+impl monster_id {
+    pub const MONSTER_GLACEON_SECONDARY: monster_id = monster_id(1113);
 }
 impl monster_id {
     pub const MONSTER_GLISCOR: monster_id = monster_id(514);
 }
 impl monster_id {
+    pub const MONSTER_GLISCOR_SECONDARY: monster_id = monster_id(1114);
+}
+impl monster_id {
     pub const MONSTER_MAMOSWINE: monster_id = monster_id(515);
+}
+impl monster_id {
+    pub const MONSTER_MAMOSWINE_SECONDARY: monster_id = monster_id(1115);
 }
 impl monster_id {
     pub const MONSTER_PORYGON_Z: monster_id = monster_id(516);
 }
 impl monster_id {
+    pub const MONSTER_PORYGON_Z_SECONDARY: monster_id = monster_id(1116);
+}
+impl monster_id {
     pub const MONSTER_GALLADE: monster_id = monster_id(517);
+}
+impl monster_id {
+    pub const MONSTER_GALLADE_SECONDARY: monster_id = monster_id(1117);
 }
 impl monster_id {
     pub const MONSTER_PROBOPASS: monster_id = monster_id(518);
 }
 impl monster_id {
+    pub const MONSTER_PROBOPASS_SECONDARY: monster_id = monster_id(1118);
+}
+impl monster_id {
     pub const MONSTER_DUSKNOIR: monster_id = monster_id(519);
+}
+impl monster_id {
+    pub const MONSTER_DUSKNOIR_SECONDARY: monster_id = monster_id(1119);
 }
 impl monster_id {
     pub const MONSTER_FROSLASS: monster_id = monster_id(520);
 }
 impl monster_id {
+    pub const MONSTER_FROSLASS_SECONDARY: monster_id = monster_id(1120);
+}
+impl monster_id {
     pub const MONSTER_ROTOM: monster_id = monster_id(521);
+}
+impl monster_id {
+    pub const MONSTER_ROTOM_SECONDARY: monster_id = monster_id(1121);
 }
 impl monster_id {
     pub const MONSTER_UXIE: monster_id = monster_id(522);
 }
 impl monster_id {
+    pub const MONSTER_UXIE_SECONDARY: monster_id = monster_id(1122);
+}
+impl monster_id {
     pub const MONSTER_MESPRIT: monster_id = monster_id(523);
+}
+impl monster_id {
+    pub const MONSTER_MESPRIT_SECONDARY: monster_id = monster_id(1123);
 }
 impl monster_id {
     pub const MONSTER_AZELF: monster_id = monster_id(524);
 }
 impl monster_id {
+    pub const MONSTER_AZELF_SECONDARY: monster_id = monster_id(1124);
+}
+impl monster_id {
     pub const MONSTER_DIALGA: monster_id = monster_id(525);
+}
+impl monster_id {
+    pub const MONSTER_DIALGA_SECONDARY: monster_id = monster_id(1125);
 }
 impl monster_id {
     pub const MONSTER_PALKIA: monster_id = monster_id(526);
 }
 impl monster_id {
+    pub const MONSTER_PALKIA_SECONDARY: monster_id = monster_id(1126);
+}
+impl monster_id {
     pub const MONSTER_HEATRAN: monster_id = monster_id(527);
+}
+impl monster_id {
+    pub const MONSTER_HEATRAN_SECONDARY: monster_id = monster_id(1127);
 }
 impl monster_id {
     pub const MONSTER_REGIGIGAS: monster_id = monster_id(528);
 }
 impl monster_id {
+    pub const MONSTER_REGIGIGAS_SECONDARY: monster_id = monster_id(1128);
+}
+impl monster_id {
     pub const MONSTER_GIRATINA_ALTERED: monster_id = monster_id(529);
+}
+impl monster_id {
+    pub const MONSTER_GIRATINA_ALTERED_SECONDARY: monster_id = monster_id(1129);
 }
 impl monster_id {
     pub const MONSTER_CRESSELIA: monster_id = monster_id(530);
 }
 impl monster_id {
+    pub const MONSTER_CRESSELIA_SECONDARY: monster_id = monster_id(1130);
+}
+impl monster_id {
     pub const MONSTER_PHIONE: monster_id = monster_id(531);
+}
+impl monster_id {
+    pub const MONSTER_PHIONE_SECONDARY: monster_id = monster_id(1131);
 }
 impl monster_id {
     pub const MONSTER_MANAPHY: monster_id = monster_id(532);
 }
 impl monster_id {
+    pub const MONSTER_MANAPHY_SECONDARY: monster_id = monster_id(1132);
+}
+impl monster_id {
     pub const MONSTER_DARKRAI: monster_id = monster_id(533);
+}
+impl monster_id {
+    pub const MONSTER_DARKRAI_SECONDARY: monster_id = monster_id(1133);
 }
 impl monster_id {
     pub const MONSTER_SHAYMIN_LAND: monster_id = monster_id(534);
 }
 impl monster_id {
+    pub const MONSTER_SHAYMIN_LAND_SECONDARY: monster_id = monster_id(1134);
+}
+impl monster_id {
     pub const MONSTER_SHAYMIN_SKY: monster_id = monster_id(535);
+}
+impl monster_id {
+    pub const MONSTER_SHAYMIN_SKY_SECONDARY: monster_id = monster_id(1135);
 }
 impl monster_id {
     pub const MONSTER_GIRATINA_ORIGIN: monster_id = monster_id(536);
 }
 impl monster_id {
+    pub const MONSTER_GIRATINA_ORIGIN_SECONDARY: monster_id = monster_id(1136);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x219: monster_id = monster_id(537);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x219_SECONDARY: monster_id = monster_id(1137);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x21A: monster_id = monster_id(538);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x21A_SECONDARY: monster_id = monster_id(1138);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x21B: monster_id = monster_id(539);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21B_SECONDARY: monster_id = monster_id(1139);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x21C: monster_id = monster_id(540);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x21C_SECONDARY: monster_id = monster_id(1140);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x21D: monster_id = monster_id(541);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21D_SECONDARY: monster_id = monster_id(1141);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x21E: monster_id = monster_id(542);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x21E_SECONDARY: monster_id = monster_id(1142);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x21F: monster_id = monster_id(543);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x21F_SECONDARY: monster_id = monster_id(1143);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x220: monster_id = monster_id(544);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x220_SECONDARY: monster_id = monster_id(1144);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x221: monster_id = monster_id(545);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x221_SECONDARY: monster_id = monster_id(1145);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x222: monster_id = monster_id(546);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x222_SECONDARY: monster_id = monster_id(1146);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x223: monster_id = monster_id(547);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x223_SECONDARY: monster_id = monster_id(1147);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x224: monster_id = monster_id(548);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x224_SECONDARY: monster_id = monster_id(1148);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x225: monster_id = monster_id(549);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x225_SECONDARY: monster_id = monster_id(1149);
 }
 impl monster_id {
     pub const MONSTER_UNNAMED_0x226: monster_id = monster_id(550);
 }
 impl monster_id {
+    pub const MONSTER_UNNAMED_0x226_SECONDARY: monster_id = monster_id(1150);
+}
+impl monster_id {
     pub const MONSTER_UNNAMED_0x227: monster_id = monster_id(551);
+}
+impl monster_id {
+    pub const MONSTER_UNNAMED_0x227_SECONDARY: monster_id = monster_id(1151);
 }
 impl monster_id {
     pub const MONSTER_PRIMAL_DIALGA: monster_id = monster_id(552);
 }
 impl monster_id {
+    pub const MONSTER_PRIMAL_DIALGA_SECONDARY: monster_id = monster_id(1152);
+}
+impl monster_id {
     pub const MONSTER_DECOY: monster_id = monster_id(553);
 }
 impl monster_id {
+    pub const MONSTER_DECOY_SECONDARY: monster_id = monster_id(1153);
+}
+impl monster_id {
     pub const MONSTER_STATUE: monster_id = monster_id(554);
+}
+impl monster_id {
+    pub const MONSTER_STATUE_SECONDARY: monster_id = monster_id(1154);
 }
 impl monster_id {
     pub const MONSTER_WIGGLYTUFF_STORY: monster_id = monster_id(555);
@@ -10374,6 +11996,52 @@ impl secondary_terrain_type_8 {
         __bindgen_bitfield_unit
     }
 }
+pub mod nature_power_variant {
+    pub type Type = crate::ctypes::c_uint;
+    pub const NATURE_POWER_SURF: Type = 0;
+    pub const NATURE_POWER_STUN_SPORE: Type = 1;
+    pub const NATURE_POWER_SHADOW_BALL: Type = 2;
+    pub const NATURE_POWER_SWIFT: Type = 3;
+    pub const NATURE_POWER_EARTHQUAKE: Type = 4;
+    pub const NATURE_POWER_RAZOR_LEAF: Type = 5;
+    pub const NATURE_POWER_BUBBLEBEAM: Type = 6;
+    pub const NATURE_POWER_ROCK_SLIDE: Type = 7;
+    pub const NATURE_POWER_EARTHQUAKE_2: Type = 8;
+    pub const NATURE_POWER_TRI_ATTACK: Type = 9;
+    pub const NATURE_POWER_HYDRO_PUMP: Type = 10;
+    pub const NATURE_POWER_BLIZZARD: Type = 11;
+    pub const NATURE_POWER_ICE_BEAM: Type = 12;
+    pub const NATURE_POWER_SEED_BOMB: Type = 13;
+    pub const NATURE_POWER_MUD_BOMB: Type = 14;
+}
+#[repr(C)]
+#[repr(align(2))]
+pub struct nature_power_variant_16 {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 2usize]>,
+}
+impl nature_power_variant_16 {
+    #[inline]
+    pub fn val(&self) -> nature_power_variant::Type {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 16u8) as u32) }
+    }
+    #[inline]
+    pub fn set_val(&mut self, val: nature_power_variant::Type) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 16u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(val: nature_power_variant::Type) -> __BindgenBitfieldUnit<[u8; 2usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 16u8, {
+            let val: u32 = unsafe { ::core::mem::transmute(val) };
+            val as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
 pub mod mobility_type {
     pub type Type = crate::ctypes::c_uint;
     pub const MOBILITY_NORMAL: Type = 0;
@@ -10392,35 +12060,87 @@ pub mod entity_type {
     pub const ENTITY_HIDDEN_STAIRS: Type = 5;
     pub const ENTITY_TEMPORARY: Type = 6;
 }
-pub mod trap_id {
-    pub type Type = crate::ctypes::c_uint;
-    pub const TRAP_NULL_TRAP: Type = 0;
-    pub const TRAP_MUD_TRAP: Type = 1;
-    pub const TRAP_STICKY_TRAP: Type = 2;
-    pub const TRAP_GRIMY_TRAP: Type = 3;
-    pub const TRAP_SUMMON_TRAP: Type = 4;
-    pub const TRAP_PITFALL_TRAP: Type = 5;
-    pub const TRAP_WARP_TRAP: Type = 6;
-    pub const TRAP_GUST_TRAP: Type = 7;
-    pub const TRAP_SPIN_TRAP: Type = 8;
-    pub const TRAP_SLUMBER_TRAP: Type = 9;
-    pub const TRAP_SLOW_TRAP: Type = 10;
-    pub const TRAP_SEAL_TRAP: Type = 11;
-    pub const TRAP_POISON_TRAP: Type = 12;
-    pub const TRAP_SELFDESTRUCT_TRAP: Type = 13;
-    pub const TRAP_EXPLOSION_TRAP: Type = 14;
-    pub const TRAP_PP_ZERO_TRAP: Type = 15;
-    pub const TRAP_CHESTNUT_TRAP: Type = 16;
-    pub const TRAP_WONDER_TILE: Type = 17;
-    pub const TRAP_POKEMON_TRAP: Type = 18;
-    pub const TRAP_SPIKED_TILE: Type = 19;
-    pub const TRAP_STEALTH_ROCK: Type = 20;
-    pub const TRAP_TOXIC_SPIKES: Type = 21;
-    pub const TRAP_TRIP_TRAP: Type = 22;
-    pub const TRAP_RANDOM_TRAP: Type = 23;
-    pub const TRAP_GRUDGE_TRAP: Type = 24;
-    pub const TRAP_NONE: Type = 25;
+impl trap_id {
+    pub const TRAP_NULL_TRAP: trap_id = trap_id(0);
 }
+impl trap_id {
+    pub const TRAP_MUD_TRAP: trap_id = trap_id(1);
+}
+impl trap_id {
+    pub const TRAP_STICKY_TRAP: trap_id = trap_id(2);
+}
+impl trap_id {
+    pub const TRAP_GRIMY_TRAP: trap_id = trap_id(3);
+}
+impl trap_id {
+    pub const TRAP_SUMMON_TRAP: trap_id = trap_id(4);
+}
+impl trap_id {
+    pub const TRAP_PITFALL_TRAP: trap_id = trap_id(5);
+}
+impl trap_id {
+    pub const TRAP_WARP_TRAP: trap_id = trap_id(6);
+}
+impl trap_id {
+    pub const TRAP_GUST_TRAP: trap_id = trap_id(7);
+}
+impl trap_id {
+    pub const TRAP_SPIN_TRAP: trap_id = trap_id(8);
+}
+impl trap_id {
+    pub const TRAP_SLUMBER_TRAP: trap_id = trap_id(9);
+}
+impl trap_id {
+    pub const TRAP_SLOW_TRAP: trap_id = trap_id(10);
+}
+impl trap_id {
+    pub const TRAP_SEAL_TRAP: trap_id = trap_id(11);
+}
+impl trap_id {
+    pub const TRAP_POISON_TRAP: trap_id = trap_id(12);
+}
+impl trap_id {
+    pub const TRAP_SELFDESTRUCT_TRAP: trap_id = trap_id(13);
+}
+impl trap_id {
+    pub const TRAP_EXPLOSION_TRAP: trap_id = trap_id(14);
+}
+impl trap_id {
+    pub const TRAP_PP_ZERO_TRAP: trap_id = trap_id(15);
+}
+impl trap_id {
+    pub const TRAP_CHESTNUT_TRAP: trap_id = trap_id(16);
+}
+impl trap_id {
+    pub const TRAP_WONDER_TILE: trap_id = trap_id(17);
+}
+impl trap_id {
+    pub const TRAP_POKEMON_TRAP: trap_id = trap_id(18);
+}
+impl trap_id {
+    pub const TRAP_SPIKED_TILE: trap_id = trap_id(19);
+}
+impl trap_id {
+    pub const TRAP_STEALTH_ROCK: trap_id = trap_id(20);
+}
+impl trap_id {
+    pub const TRAP_TOXIC_SPIKES: trap_id = trap_id(21);
+}
+impl trap_id {
+    pub const TRAP_TRIP_TRAP: trap_id = trap_id(22);
+}
+impl trap_id {
+    pub const TRAP_RANDOM_TRAP: trap_id = trap_id(23);
+}
+impl trap_id {
+    pub const TRAP_GRUDGE_TRAP: trap_id = trap_id(24);
+}
+impl trap_id {
+    pub const TRAP_NONE: trap_id = trap_id(25);
+}
+#[repr(transparent)]
+#[derive(Clone, Hash, PartialEq, Eq)]
+pub struct trap_id(pub(crate) crate::ctypes::c_uint);
 #[repr(C, packed)]
 pub struct trap_id_8 {
     pub _bitfield_align_1: [u8; 0],
@@ -10428,18 +12148,18 @@ pub struct trap_id_8 {
 }
 impl trap_id_8 {
     #[inline]
-    pub fn val(&self) -> trap_id::Type {
+    pub fn val(&self) -> trap_id {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 8u8) as u32) }
     }
     #[inline]
-    pub fn set_val(&mut self, val: trap_id::Type) {
+    pub fn set_val(&mut self, val: trap_id) {
         unsafe {
             let val: u32 = ::core::mem::transmute(val);
             self._bitfield_1.set(0usize, 8u8, val as u64)
         }
     }
     #[inline]
-    pub fn new_bitfield_1(val: trap_id::Type) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+    pub fn new_bitfield_1(val: trap_id) -> __BindgenBitfieldUnit<[u8; 1usize]> {
         let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
         __bindgen_bitfield_unit.set(0usize, 8u8, {
             let val: u32 = unsafe { ::core::mem::transmute(val) };
@@ -11701,13 +13421,12 @@ impl mission_subtype_challenge_8 {
     }
 }
 #[repr(C)]
-pub struct mission_subtype {
-    pub none: __BindgenUnionField<u8>,
-    pub explore: __BindgenUnionField<mission_subtype_explore_8>,
-    pub take_item: __BindgenUnionField<mission_subtype_take_item_8>,
-    pub outlaw: __BindgenUnionField<mission_subtype_outlaw_8>,
-    pub challenge: __BindgenUnionField<mission_subtype_challenge_8>,
-    pub bindgen_union_field: u8,
+pub union mission_subtype {
+    pub none: ::core::mem::ManuallyDrop<u8>,
+    pub explore: ::core::mem::ManuallyDrop<mission_subtype_explore_8>,
+    pub take_item: ::core::mem::ManuallyDrop<mission_subtype_take_item_8>,
+    pub outlaw: ::core::mem::ManuallyDrop<mission_subtype_outlaw_8>,
+    pub challenge: ::core::mem::ManuallyDrop<mission_subtype_challenge_8>,
 }
 pub mod mission_reward_type {
     pub type Type = crate::ctypes::c_uint;
@@ -11782,10 +13501,9 @@ impl mission_restriction_type_8 {
     }
 }
 #[repr(C)]
-pub struct mission_restriction {
-    pub monster_id: __BindgenUnionField<monster_id_16>,
-    pub type_id: __BindgenUnionField<type_id_8>,
-    pub bindgen_union_field: u16,
+pub union mission_restriction {
+    pub monster_id: ::core::mem::ManuallyDrop<monster_id_16>,
+    pub type_id: ::core::mem::ManuallyDrop<type_id_8>,
 }
 pub mod mission_status {
     pub type Type = crate::ctypes::c_uint;
@@ -11825,6 +13543,16 @@ impl mission_status_8 {
         });
         __bindgen_bitfield_unit
     }
+}
+pub mod faint_reason_non_move {
+    pub type Type = crate::ctypes::c_uint;
+    pub const FAINT_REASON_ITEM_ORB: Type = 610;
+    pub const FAINT_REASON_ITEM_NON_ORB: Type = 611;
+}
+#[repr(C)]
+pub union faint_reason {
+    pub move_: ::core::mem::ManuallyDrop<move_id>,
+    pub other: ::core::mem::ManuallyDrop<faint_reason_non_move::Type>,
 }
 pub mod forced_loss_reason {
     pub type Type = crate::ctypes::c_uint;
@@ -12744,6 +14472,423 @@ impl floor_layout_8 {
         __bindgen_bitfield_unit
     }
 }
+pub mod gen_item_stickiness {
+    pub type Type = crate::ctypes::c_uint;
+    pub const GEN_ITEM_STICKY_RANDOM: Type = 0;
+    pub const GEN_ITEM_STICKY_ALWAYS: Type = 1;
+    pub const GEN_ITEM_STICKY_NEVER: Type = 2;
+}
+#[repr(C)]
+pub struct item {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+    pub held_by: u8,
+    pub quantity: u16,
+    pub id: item_id_16,
+}
+impl item {
+    #[inline]
+    pub fn f_exists(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_exists(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_in_shop(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_in_shop(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_unpaid(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_unpaid(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_sticky(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_sticky(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_set(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_set(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(4usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags_unk5(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 3u8) as u8) }
+    }
+    #[inline]
+    pub fn set_flags_unk5(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(5usize, 3u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        f_exists: bool_,
+        f_in_shop: bool_,
+        f_unpaid: bool_,
+        f_sticky: bool_,
+        f_set: bool_,
+        flags_unk5: u8,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let f_exists: u8 = unsafe { ::core::mem::transmute(f_exists) };
+            f_exists as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let f_in_shop: u8 = unsafe { ::core::mem::transmute(f_in_shop) };
+            f_in_shop as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 1u8, {
+            let f_unpaid: u8 = unsafe { ::core::mem::transmute(f_unpaid) };
+            f_unpaid as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let f_sticky: u8 = unsafe { ::core::mem::transmute(f_sticky) };
+            f_sticky as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 1u8, {
+            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
+            f_set as u64
+        });
+        __bindgen_bitfield_unit.set(5usize, 3u8, {
+            let flags_unk5: u8 = unsafe { ::core::mem::transmute(flags_unk5) };
+            flags_unk5 as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+pub struct move_ {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+    pub field_0x1: undefined,
+    pub _bitfield_align_2: [u8; 0],
+    pub _bitfield_2: __BindgenBitfieldUnit<[u8; 2usize]>,
+    pub id: move_id_16,
+    pub pp: u8,
+    pub ginseng: u8,
+}
+impl move_ {
+    #[inline]
+    pub fn f_exists(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_exists(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_subsequent_in_link_chain(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_subsequent_in_link_chain(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_enabled_for_ai(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_enabled_for_ai(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_set(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_set(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_last_used(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_last_used(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(4usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_disabled(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_disabled(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(5usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags0_unk6(&self) -> u8 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(6usize, 2u8) as u8) }
+    }
+    #[inline]
+    pub fn set_flags0_unk6(&mut self, val: u8) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_1.set(6usize, 2u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        f_exists: bool_,
+        f_subsequent_in_link_chain: bool_,
+        f_enabled_for_ai: bool_,
+        f_set: bool_,
+        f_last_used: bool_,
+        f_disabled: bool_,
+        flags0_unk6: u8,
+    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let f_exists: u8 = unsafe { ::core::mem::transmute(f_exists) };
+            f_exists as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let f_subsequent_in_link_chain: u8 =
+                unsafe { ::core::mem::transmute(f_subsequent_in_link_chain) };
+            f_subsequent_in_link_chain as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 1u8, {
+            let f_enabled_for_ai: u8 = unsafe { ::core::mem::transmute(f_enabled_for_ai) };
+            f_enabled_for_ai as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
+            f_set as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 1u8, {
+            let f_last_used: u8 = unsafe { ::core::mem::transmute(f_last_used) };
+            f_last_used as u64
+        });
+        __bindgen_bitfield_unit.set(5usize, 1u8, {
+            let f_disabled: u8 = unsafe { ::core::mem::transmute(f_disabled) };
+            f_disabled as u64
+        });
+        __bindgen_bitfield_unit.set(6usize, 2u8, {
+            let flags0_unk6: u8 = unsafe { ::core::mem::transmute(flags0_unk6) };
+            flags0_unk6 as u64
+        });
+        __bindgen_bitfield_unit
+    }
+    #[inline]
+    pub fn f_sealed(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(0usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_sealed(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags2_unk1(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(1usize, 2u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags2_unk1(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(1usize, 2u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_consume_pp(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(3usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_consume_pp(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_consume_2_pp(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(4usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_consume_2_pp(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(4usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags2_unk5(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(5usize, 1u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags2_unk5(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(5usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_consume_4_pp(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(6usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_consume_4_pp(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(6usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags2_unk7(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(7usize, 1u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags2_unk7(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(7usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags2_unk8(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(8usize, 1u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags2_unk8(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(8usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn f_exclusive_item_pp_boost(&self) -> bool_ {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(9usize, 1u8) as u8) }
+    }
+    #[inline]
+    pub fn set_f_exclusive_item_pp_boost(&mut self, val: bool_) {
+        unsafe {
+            let val: u8 = ::core::mem::transmute(val);
+            self._bitfield_2.set(9usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn flags3_unk10(&self) -> u16 {
+        unsafe { ::core::mem::transmute(self._bitfield_2.get(10usize, 6u8) as u16) }
+    }
+    #[inline]
+    pub fn set_flags3_unk10(&mut self, val: u16) {
+        unsafe {
+            let val: u16 = ::core::mem::transmute(val);
+            self._bitfield_2.set(10usize, 6u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_2(
+        f_sealed: bool_,
+        flags2_unk1: u16,
+        f_consume_pp: bool_,
+        f_consume_2_pp: bool_,
+        flags2_unk5: u16,
+        f_consume_4_pp: bool_,
+        flags2_unk7: u16,
+        flags2_unk8: u16,
+        f_exclusive_item_pp_boost: bool_,
+        flags3_unk10: u16,
+    ) -> __BindgenBitfieldUnit<[u8; 2usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let f_sealed: u8 = unsafe { ::core::mem::transmute(f_sealed) };
+            f_sealed as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 2u8, {
+            let flags2_unk1: u16 = unsafe { ::core::mem::transmute(flags2_unk1) };
+            flags2_unk1 as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let f_consume_pp: u8 = unsafe { ::core::mem::transmute(f_consume_pp) };
+            f_consume_pp as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 1u8, {
+            let f_consume_2_pp: u8 = unsafe { ::core::mem::transmute(f_consume_2_pp) };
+            f_consume_2_pp as u64
+        });
+        __bindgen_bitfield_unit.set(5usize, 1u8, {
+            let flags2_unk5: u16 = unsafe { ::core::mem::transmute(flags2_unk5) };
+            flags2_unk5 as u64
+        });
+        __bindgen_bitfield_unit.set(6usize, 1u8, {
+            let f_consume_4_pp: u8 = unsafe { ::core::mem::transmute(f_consume_4_pp) };
+            f_consume_4_pp as u64
+        });
+        __bindgen_bitfield_unit.set(7usize, 1u8, {
+            let flags2_unk7: u16 = unsafe { ::core::mem::transmute(flags2_unk7) };
+            flags2_unk7 as u64
+        });
+        __bindgen_bitfield_unit.set(8usize, 1u8, {
+            let flags2_unk8: u16 = unsafe { ::core::mem::transmute(flags2_unk8) };
+            flags2_unk8 as u64
+        });
+        __bindgen_bitfield_unit.set(9usize, 1u8, {
+            let f_exclusive_item_pp_boost: u8 =
+                unsafe { ::core::mem::transmute(f_exclusive_item_pp_boost) };
+            f_exclusive_item_pp_boost as u64
+        });
+        __bindgen_bitfield_unit.set(10usize, 6u8, {
+            let flags3_unk10: u16 = unsafe { ::core::mem::transmute(flags3_unk10) };
+            flags3_unk10 as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
 #[repr(C)]
 pub struct iovec {
     pub iov_base: *mut crate::ctypes::c_void,
@@ -13493,22 +15638,22 @@ impl ground_move {
         }
     }
     #[inline]
-    pub fn flags_unk3(&self) -> bool_ {
+    pub fn f_set(&self) -> bool_ {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
     }
     #[inline]
-    pub fn set_flags_unk3(&mut self, val: bool_) {
+    pub fn set_f_set(&mut self, val: bool_) {
         unsafe {
             let val: u8 = ::core::mem::transmute(val);
             self._bitfield_1.set(3usize, 1u8, val as u64)
         }
     }
     #[inline]
-    pub fn flags_unk4(&self) -> bool_ {
+    pub fn f_last_used(&self) -> bool_ {
         unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
     }
     #[inline]
-    pub fn set_flags_unk4(&mut self, val: bool_) {
+    pub fn set_f_last_used(&mut self, val: bool_) {
         unsafe {
             let val: u8 = ::core::mem::transmute(val);
             self._bitfield_1.set(4usize, 1u8, val as u64)
@@ -13541,8 +15686,8 @@ impl ground_move {
         f_exists: bool_,
         f_subsequent_in_link_chain: bool_,
         f_enabled_for_ai: bool_,
-        flags_unk3: bool_,
-        flags_unk4: bool_,
+        f_set: bool_,
+        f_last_used: bool_,
         f_disabled: bool_,
         flags_unk6: u8,
     ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
@@ -13561,12 +15706,12 @@ impl ground_move {
             f_enabled_for_ai as u64
         });
         __bindgen_bitfield_unit.set(3usize, 1u8, {
-            let flags_unk3: u8 = unsafe { ::core::mem::transmute(flags_unk3) };
-            flags_unk3 as u64
+            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
+            f_set as u64
         });
         __bindgen_bitfield_unit.set(4usize, 1u8, {
-            let flags_unk4: u8 = unsafe { ::core::mem::transmute(flags_unk4) };
-            flags_unk4 as u64
+            let f_last_used: u8 = unsafe { ::core::mem::transmute(f_last_used) };
+            f_last_used as u64
         });
         __bindgen_bitfield_unit.set(5usize, 1u8, {
             let f_disabled: u8 = unsafe { ::core::mem::transmute(f_disabled) };
@@ -13584,10 +15729,10 @@ pub struct ground_monster {
     pub is_valid: bool_,
     pub level: i8,
     pub joined_at: dungeon_id_8,
-    pub field_0x3: undefined,
+    pub joined_at_floor: u8,
     pub id: monster_id_16,
-    pub field_0x6: undefined,
-    pub field_0x7: undefined,
+    pub level_at_first_evo: i8,
+    pub level_at_second_evo: i8,
     pub iq: u16,
     pub max_hp: u16,
     pub atk: i8,
@@ -13607,15 +15752,13 @@ pub struct team_member {
     pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
     pub is_leader: bool_,
     pub level: u8,
-    pub field_0x3: undefined,
-    pub field_0x4: undefined,
+    pub joined_at: dungeon_id_8,
+    pub joined_at_floor: u8,
     pub field_0x5: undefined,
     pub iq: u16,
-    pub field_0x8: undefined2,
-    pub field_0xA: undefined,
-    pub field_0xB: undefined,
-    pub field_0xC: undefined,
-    pub field_0xD: undefined,
+    pub member_index: i16,
+    pub team_index: i16,
+    pub id: monster_id_16,
     pub current_hp: u16,
     pub max_hp: u16,
     pub atk: i8,
@@ -13625,67 +15768,16 @@ pub struct team_member {
     pub field_0x16: undefined,
     pub field_0x17: undefined,
     pub exp: crate::ctypes::c_int,
-    pub field_0x1C: undefined,
-    pub field_0x1D: undefined,
-    pub field_0x1E: undefined,
-    pub field_0x1F: undefined,
-    pub field_0x20: undefined,
-    pub field_0x21: undefined,
-    pub field_0x22: undefined,
-    pub field_0x23: undefined,
-    pub field_0x24: undefined,
-    pub field_0x25: undefined,
-    pub field_0x26: undefined,
-    pub field_0x27: undefined,
-    pub field_0x28: undefined,
-    pub field_0x29: undefined,
-    pub field_0x2A: undefined,
-    pub field_0x2B: undefined,
-    pub field_0x2C: undefined,
-    pub field_0x2D: undefined,
-    pub field_0x2E: undefined,
-    pub field_0x2F: undefined,
-    pub field_0x30: undefined,
-    pub field_0x31: undefined,
-    pub field_0x32: undefined,
-    pub field_0x33: undefined,
-    pub field_0x34: undefined,
-    pub field_0x35: undefined,
-    pub field_0x36: undefined,
-    pub field_0x37: undefined,
-    pub field_0x38: undefined,
-    pub field_0x39: undefined,
-    pub field_0x3A: undefined,
-    pub field_0x3B: undefined,
+    pub moves: [move_; 4usize],
     pub field_0x3C: undefined,
     pub field_0x3D: undefined,
-    pub field_0x3E: undefined,
-    pub field_0x3F: undefined,
-    pub field_0x40: undefined,
-    pub field_0x41: undefined,
-    pub field_0x42: undefined,
-    pub field_0x43: undefined,
-    pub field_0x44: undefined,
-    pub field_0x45: undefined,
-    pub field_0x46: undefined,
-    pub field_0x47: undefined,
-    pub field_0x48: undefined,
-    pub field_0x49: undefined,
-    pub field_0x4A: undefined,
-    pub field_0x4B: undefined,
-    pub field_0x4C: undefined,
-    pub field_0x4D: undefined,
-    pub field_0x4E: undefined,
-    pub field_0x4F: undefined,
-    pub field_0x50: undefined,
-    pub field_0x51: undefined,
-    pub field_0x52: undefined,
-    pub field_0x53: undefined,
-    pub field_0x54: undefined,
-    pub field_0x55: undefined,
-    pub field_0x56: undefined,
-    pub field_0x57: undefined,
-    pub field_0x58: undefined,
+    pub held_item: item,
+    pub belly: i16,
+    pub belly_thousandths: i16,
+    pub max_belly: i16,
+    pub max_belly_thousandths: i16,
+    pub iq_skill_flags: [u32; 3usize],
+    pub tactic: tactic_id_8,
     pub field_0x59: undefined,
     pub field_0x5A: undefined,
     pub field_0x5B: undefined,
@@ -14025,6 +16117,17 @@ pub struct dungeon_init {
     pub field_0x1AB: undefined,
 }
 #[repr(C)]
+pub struct global_progress {
+    pub unk_pokemon_flags1: [undefined; 148usize],
+    pub field_0x94: [undefined; 4usize],
+    pub unk_pokemon_flags2: [undefined; 148usize],
+    pub exclusive_pokemon_flags: [undefined; 23usize],
+    pub dungeon_max_reached_floor: [undefined; 180usize],
+    pub field_0x1f7: undefined,
+    pub nb_adventures: undefined4,
+    pub field_0x1fc: [undefined; 16usize],
+}
+#[repr(C)]
 pub struct adventure_log {
     pub completion_flags: [u32; 4usize],
     pub nb_dungeons_cleared: u32,
@@ -14110,121 +16213,28 @@ pub struct mission {
     pub field_0x1f: undefined,
 }
 #[repr(C)]
+pub struct quiz_answer_points_entry {
+    pub field_0x0: undefined,
+    pub field_0x1: undefined,
+    pub field_0x2: undefined,
+    pub field_0x3: undefined,
+    pub field_0x4: undefined,
+    pub field_0x5: undefined,
+    pub field_0x6: undefined,
+    pub field_0x7: undefined,
+    pub field_0x8: undefined,
+    pub field_0x9: undefined,
+    pub field_0xa: undefined,
+    pub field_0xb: undefined,
+    pub field_0xc: undefined,
+    pub field_0xd: undefined,
+    pub field_0xe: undefined,
+    pub field_0xf: undefined,
+}
+#[repr(C)]
 pub struct position {
     pub x: i16,
     pub y: i16,
-}
-#[repr(C)]
-pub struct item {
-    pub _bitfield_align_1: [u8; 0],
-    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
-    pub held_by: u8,
-    pub quantity: u16,
-    pub id: item_id_16,
-}
-impl item {
-    #[inline]
-    pub fn f_exists(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_exists(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(0usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_in_shop(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_in_shop(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(1usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_unpaid(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_unpaid(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(2usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_sticky(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_sticky(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(3usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_set(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_set(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(4usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags_unk5(&self) -> u8 {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 3u8) as u8) }
-    }
-    #[inline]
-    pub fn set_flags_unk5(&mut self, val: u8) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(5usize, 3u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn new_bitfield_1(
-        f_exists: bool_,
-        f_in_shop: bool_,
-        f_unpaid: bool_,
-        f_sticky: bool_,
-        f_set: bool_,
-        flags_unk5: u8,
-    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
-        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
-        __bindgen_bitfield_unit.set(0usize, 1u8, {
-            let f_exists: u8 = unsafe { ::core::mem::transmute(f_exists) };
-            f_exists as u64
-        });
-        __bindgen_bitfield_unit.set(1usize, 1u8, {
-            let f_in_shop: u8 = unsafe { ::core::mem::transmute(f_in_shop) };
-            f_in_shop as u64
-        });
-        __bindgen_bitfield_unit.set(2usize, 1u8, {
-            let f_unpaid: u8 = unsafe { ::core::mem::transmute(f_unpaid) };
-            f_unpaid as u64
-        });
-        __bindgen_bitfield_unit.set(3usize, 1u8, {
-            let f_sticky: u8 = unsafe { ::core::mem::transmute(f_sticky) };
-            f_sticky as u64
-        });
-        __bindgen_bitfield_unit.set(4usize, 1u8, {
-            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
-            f_set as u64
-        });
-        __bindgen_bitfield_unit.set(5usize, 3u8, {
-            let flags_unk5: u8 = unsafe { ::core::mem::transmute(flags_unk5) };
-            flags_unk5 as u64
-        });
-        __bindgen_bitfield_unit
-    }
 }
 #[repr(C)]
 pub struct trap {
@@ -14270,305 +16280,6 @@ impl trap {
         __bindgen_bitfield_unit.set(1usize, 7u8, {
             let flags_unk1: u8 = unsafe { ::core::mem::transmute(flags_unk1) };
             flags_unk1 as u64
-        });
-        __bindgen_bitfield_unit
-    }
-}
-#[repr(C)]
-pub struct move_ {
-    pub _bitfield_align_1: [u8; 0],
-    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
-    pub field_0x1: undefined,
-    pub _bitfield_align_2: [u8; 0],
-    pub _bitfield_2: __BindgenBitfieldUnit<[u8; 2usize]>,
-    pub id: move_id_16,
-    pub pp: u8,
-    pub ginseng: u8,
-}
-impl move_ {
-    #[inline]
-    pub fn f_exists(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_exists(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(0usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_subsequent_in_link_chain(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_subsequent_in_link_chain(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(1usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_enabled_for_ai(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_enabled_for_ai(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(2usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_set(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_set(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(3usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_last_used(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_last_used(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(4usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_disabled(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_disabled(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(5usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags0_unk6(&self) -> u8 {
-        unsafe { ::core::mem::transmute(self._bitfield_1.get(6usize, 2u8) as u8) }
-    }
-    #[inline]
-    pub fn set_flags0_unk6(&mut self, val: u8) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_1.set(6usize, 2u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn new_bitfield_1(
-        f_exists: bool_,
-        f_subsequent_in_link_chain: bool_,
-        f_enabled_for_ai: bool_,
-        f_set: bool_,
-        f_last_used: bool_,
-        f_disabled: bool_,
-        flags0_unk6: u8,
-    ) -> __BindgenBitfieldUnit<[u8; 1usize]> {
-        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 1usize]> = Default::default();
-        __bindgen_bitfield_unit.set(0usize, 1u8, {
-            let f_exists: u8 = unsafe { ::core::mem::transmute(f_exists) };
-            f_exists as u64
-        });
-        __bindgen_bitfield_unit.set(1usize, 1u8, {
-            let f_subsequent_in_link_chain: u8 =
-                unsafe { ::core::mem::transmute(f_subsequent_in_link_chain) };
-            f_subsequent_in_link_chain as u64
-        });
-        __bindgen_bitfield_unit.set(2usize, 1u8, {
-            let f_enabled_for_ai: u8 = unsafe { ::core::mem::transmute(f_enabled_for_ai) };
-            f_enabled_for_ai as u64
-        });
-        __bindgen_bitfield_unit.set(3usize, 1u8, {
-            let f_set: u8 = unsafe { ::core::mem::transmute(f_set) };
-            f_set as u64
-        });
-        __bindgen_bitfield_unit.set(4usize, 1u8, {
-            let f_last_used: u8 = unsafe { ::core::mem::transmute(f_last_used) };
-            f_last_used as u64
-        });
-        __bindgen_bitfield_unit.set(5usize, 1u8, {
-            let f_disabled: u8 = unsafe { ::core::mem::transmute(f_disabled) };
-            f_disabled as u64
-        });
-        __bindgen_bitfield_unit.set(6usize, 2u8, {
-            let flags0_unk6: u8 = unsafe { ::core::mem::transmute(flags0_unk6) };
-            flags0_unk6 as u64
-        });
-        __bindgen_bitfield_unit
-    }
-    #[inline]
-    pub fn f_sealed(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(0usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_sealed(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(0usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags2_unk1(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(1usize, 2u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags2_unk1(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(1usize, 2u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_consume_pp(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(3usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_consume_pp(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(3usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_consume_2_pp(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(4usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_consume_2_pp(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(4usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags2_unk5(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(5usize, 1u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags2_unk5(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(5usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_consume_4_pp(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(6usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_consume_4_pp(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(6usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags2_unk7(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(7usize, 1u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags2_unk7(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(7usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags2_unk8(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(8usize, 1u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags2_unk8(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(8usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn f_exclusive_item_pp_boost(&self) -> bool_ {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(9usize, 1u8) as u8) }
-    }
-    #[inline]
-    pub fn set_f_exclusive_item_pp_boost(&mut self, val: bool_) {
-        unsafe {
-            let val: u8 = ::core::mem::transmute(val);
-            self._bitfield_2.set(9usize, 1u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn flags3_unk10(&self) -> u16 {
-        unsafe { ::core::mem::transmute(self._bitfield_2.get(10usize, 6u8) as u16) }
-    }
-    #[inline]
-    pub fn set_flags3_unk10(&mut self, val: u16) {
-        unsafe {
-            let val: u16 = ::core::mem::transmute(val);
-            self._bitfield_2.set(10usize, 6u8, val as u64)
-        }
-    }
-    #[inline]
-    pub fn new_bitfield_2(
-        f_sealed: bool_,
-        flags2_unk1: u16,
-        f_consume_pp: bool_,
-        f_consume_2_pp: bool_,
-        flags2_unk5: u16,
-        f_consume_4_pp: bool_,
-        flags2_unk7: u16,
-        flags2_unk8: u16,
-        f_exclusive_item_pp_boost: bool_,
-        flags3_unk10: u16,
-    ) -> __BindgenBitfieldUnit<[u8; 2usize]> {
-        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 2usize]> = Default::default();
-        __bindgen_bitfield_unit.set(0usize, 1u8, {
-            let f_sealed: u8 = unsafe { ::core::mem::transmute(f_sealed) };
-            f_sealed as u64
-        });
-        __bindgen_bitfield_unit.set(1usize, 2u8, {
-            let flags2_unk1: u16 = unsafe { ::core::mem::transmute(flags2_unk1) };
-            flags2_unk1 as u64
-        });
-        __bindgen_bitfield_unit.set(3usize, 1u8, {
-            let f_consume_pp: u8 = unsafe { ::core::mem::transmute(f_consume_pp) };
-            f_consume_pp as u64
-        });
-        __bindgen_bitfield_unit.set(4usize, 1u8, {
-            let f_consume_2_pp: u8 = unsafe { ::core::mem::transmute(f_consume_2_pp) };
-            f_consume_2_pp as u64
-        });
-        __bindgen_bitfield_unit.set(5usize, 1u8, {
-            let flags2_unk5: u16 = unsafe { ::core::mem::transmute(flags2_unk5) };
-            flags2_unk5 as u64
-        });
-        __bindgen_bitfield_unit.set(6usize, 1u8, {
-            let f_consume_4_pp: u8 = unsafe { ::core::mem::transmute(f_consume_4_pp) };
-            f_consume_4_pp as u64
-        });
-        __bindgen_bitfield_unit.set(7usize, 1u8, {
-            let flags2_unk7: u16 = unsafe { ::core::mem::transmute(flags2_unk7) };
-            flags2_unk7 as u64
-        });
-        __bindgen_bitfield_unit.set(8usize, 1u8, {
-            let flags2_unk8: u16 = unsafe { ::core::mem::transmute(flags2_unk8) };
-            flags2_unk8 as u64
-        });
-        __bindgen_bitfield_unit.set(9usize, 1u8, {
-            let f_exclusive_item_pp_boost: u8 =
-                unsafe { ::core::mem::transmute(f_exclusive_item_pp_boost) };
-            f_exclusive_item_pp_boost as u64
-        });
-        __bindgen_bitfield_unit.set(10usize, 6u8, {
-            let flags3_unk10: u16 = unsafe { ::core::mem::transmute(flags3_unk10) };
-            flags3_unk10 as u64
         });
         __bindgen_bitfield_unit
     }
@@ -15292,15 +17003,15 @@ pub struct monster {
     pub sp_atk: u8,
     pub def: u8,
     pub sp_def: u8,
-    pub field_0x1e: undefined,
-    pub field_0x1f: undefined,
+    pub field_0x1e: u8,
+    pub field_0x1f: u8,
     pub exp: crate::ctypes::c_int,
     pub stat_modifiers: monster_stat_modifiers,
     pub hidden_power_base_power: i16,
     pub hidden_power_type: type_id_8,
     pub field_0x47: undefined,
     pub joined_at: dungeon_id_8,
-    pub field_0x49: undefined,
+    pub joined_at_floor: u8,
     pub action_id: action_16,
     pub direction: direction_id_8,
     pub field_0x4d: undefined,
@@ -15325,7 +17036,7 @@ pub struct monster {
     pub ability1: ability_id_8,
     pub ability2: ability_id_8,
     pub held_item: item,
-    pub held_item_id: u16,
+    pub held_item_id: item_id_16,
     pub prev_pos: position,
     pub prev_pos2: position,
     pub prev_pos3: position,
@@ -15386,7 +17097,7 @@ pub struct monster {
     pub field_0x164: undefined,
     pub field_0x165: undefined,
     pub field_0x166: undefined,
-    pub field_0x167: undefined,
+    pub anger_point_flag: bool_,
     pub field_0x168: undefined,
     pub field_0x169: undefined,
     pub force_turn: bool_,
@@ -16009,10 +17720,9 @@ impl visibility_flags {
     }
 }
 #[repr(C)]
-pub struct spawn_or_visibility_flags {
-    pub spawn: __BindgenUnionField<spawn_flags>,
-    pub visibility: __BindgenUnionField<visibility_flags>,
-    pub bindgen_union_field: u16,
+pub union spawn_or_visibility_flags {
+    pub spawn: ::core::mem::ManuallyDrop<spawn_flags>,
+    pub visibility: ::core::mem::ManuallyDrop<visibility_flags>,
 }
 #[repr(C)]
 pub struct tile {
@@ -16460,10 +18170,8 @@ pub struct floor_generation_status {
     pub field_0x13: undefined,
     pub n_rooms: crate::ctypes::c_int,
     pub secondary_structures_budget: crate::ctypes::c_int,
-    pub hidden_stairs_spawn_x: u16,
-    pub hidden_stairs_spawn_y: u16,
-    pub kecleon_shop_middle_x: u16,
-    pub kecleon_shop_middle_y: u16,
+    pub hidden_stairs_spawn: position,
+    pub kecleon_shop_middle: position,
     pub n_tiles_reachable_from_stairs: crate::ctypes::c_int,
     pub layout: floor_layout::Type,
     pub hidden_stairs_type: hidden_stairs_type::Type,
@@ -16591,7 +18299,7 @@ pub struct tileset_property {
     pub field_0x5: u8,
     pub field_0x6: u8,
     pub _padding: u8,
-    pub field_0x8: i16,
+    pub nature_power_variant: nature_power_variant_16,
     pub field_0xa: u8,
     pub field_0xb: u8,
 }
@@ -16601,6 +18309,55 @@ pub struct level_tilemap_list_entry {
     pub field_0x2: u8,
     pub field_0x3: u8,
     pub field_0x4: undefined4,
+}
+#[repr(C)]
+pub struct move_animation {
+    pub field_0x0: i16,
+    pub field_0x2: i16,
+    pub field_0x4: i16,
+    pub field_0x6: i16,
+    pub field_0x8: u8,
+    pub field_0x9: undefined,
+    pub field_0xa: undefined,
+    pub field_0xb: undefined,
+    pub field_0xc: undefined,
+    pub field_0xd: undefined,
+    pub field_0xe: undefined,
+    pub field_0xf: undefined,
+    pub field_0x10: undefined,
+    pub field_0x11: i8,
+    pub field_0x12: u16,
+    pub field_0x14: i16,
+    pub field_0x16: u16,
+}
+#[repr(C)]
+pub struct special_monster_move_animation {
+    pub field_0x0: i16,
+    pub field_0x2: undefined,
+    pub field_0x3: i8,
+    pub field_0x4: i16,
+}
+#[repr(C)]
+pub struct item_animation {
+    pub field_0x0: i16,
+    pub field_0x2: i16,
+}
+#[repr(C)]
+pub struct trap_animation {
+    pub field_0x0: i16,
+}
+#[repr(C)]
+pub struct effect_animation {
+    pub field_0x0: crate::ctypes::c_int,
+    pub field_0x4: crate::ctypes::c_int,
+    pub field_0x8: crate::ctypes::c_int,
+    pub field_0xc: crate::ctypes::c_int,
+    pub field_0x10: crate::ctypes::c_int,
+    pub field_0x14: crate::ctypes::c_int,
+    pub field_0x18: u8,
+    pub field_0x19: i8,
+    pub field_0x1a: u8,
+    pub field_0x1b: u8,
 }
 #[repr(C)]
 pub struct monster_spawn_entry {
@@ -17000,7 +18757,7 @@ pub struct guest_monster {
     pub name: *mut crate::ctypes::c_char,
     pub id: monster_id_16,
     pub joined_at: dungeon_id_8,
-    pub field_0x7: undefined,
+    pub joined_at_floor: u8,
     pub moves: [move_id_16; 4usize],
     pub max_hp: i16,
     pub level: u8,
@@ -17025,6 +18782,34 @@ pub struct ai_possible_move {
     pub field_0x2: undefined,
     pub field_0x3: undefined,
     pub weight: crate::ctypes::c_int,
+}
+#[repr(C)]
+pub struct weather_attributes {
+    pub weather_ball_type: type_id_8,
+    pub _padding: u8,
+    pub castform_male_id: monster_id_16,
+    pub castform_female_id: monster_id_16,
+}
+pub type move_effect_fn_t = ::core::option::Option<
+    unsafe extern "C" fn(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_,
+>;
+#[repr(C)]
+pub struct wildcard_move_desc {
+    pub move_id: move_id_16,
+    pub _padding: u16,
+    pub do_move: move_effect_fn_t,
+}
+#[repr(C)]
+pub struct natural_gift_item_info {
+    pub item_id: item_id_16,
+    pub type_id: type_id_8,
+    pub _padding: u8,
+    pub base_power_minus_one: i16,
 }
 #[repr(C)]
 pub struct dungeon_menu_entry {
@@ -17812,10 +19597,8 @@ pub struct dungeon {
     pub field_0x7c9: undefined,
     pub field_0x7ca: undefined,
     pub field_0x7cb: undefined,
-    pub field_0x7cc: undefined,
-    pub field_0x7cd: undefined,
-    pub field_0x7ce: undefined,
-    pub field_0x7cf: undefined,
+    pub boost_max_money_amount: bool_,
+    pub _padding_0x7cd: [u8; 3usize],
     pub field_0x7d0: undefined,
     pub field_0x7d1: undefined,
     pub field_0x7d2: undefined,
@@ -18688,7 +20471,7 @@ pub struct dungeon {
     pub field_0x12b22: undefined,
     pub field_0x12b23: undefined,
     pub field_0x12b24: undefined,
-    pub field_0x12b25: undefined,
+    pub boost_hidden_stairs_spawn_chance: bool_,
     pub field_0x12b26: undefined,
     pub field_0x12b27: undefined,
     pub entity_table: entity_table,
@@ -21989,6 +23772,15 @@ pub mod mission_generation_result {
     pub const MISSION_GENERATION_FAILURE: Type = 1;
     pub const MISSION_GENERATION_GLOBAL_FAILURE: Type = 2;
 }
+pub mod talk_kind {
+    pub type Type = crate::ctypes::c_uint;
+    pub const TALK_NONE: Type = 0;
+    pub const TALK_PARTNER_MALE_SPECIAL: Type = 1;
+    pub const TALK_PARTNER_DEFAULT: Type = 2;
+    pub const TALK_PARTNER_FEMALE_SPECIAL: Type = 3;
+    pub const TALK_HERO_MALE: Type = 4;
+    pub const TALK_HERO_FEMALE: Type = 5;
+}
 pub mod script_level_id_na {
     pub type Type = crate::ctypes::c_uint;
     pub const LEVEL_NA_S00P01A: Type = 0;
@@ -24872,6 +26664,27 @@ pub struct main_ground_data {
     pub performers: *mut undefined,
     pub events: *mut undefined,
 }
+#[repr(C)]
+pub struct partner_talk_kind_table_entry {
+    pub talk_kind: talk_kind::Type,
+    pub id: monster_id,
+}
+#[repr(C)]
+pub struct bar_item {
+    pub id: item_id_16,
+    pub field_0x2: i16,
+    pub field_0x4: i16,
+    pub field_0x6: i16,
+    pub field_0x8: i16,
+    pub field_0xa: i16,
+    pub field_0xc: i16,
+    pub field_0xe: [undefined; 8usize],
+}
+#[repr(C)]
+pub struct ground_weather_entry {
+    pub field_0x0: i16,
+    pub field_0x2: i16,
+}
 extern "C" {
     pub fn ShouldMonsterRunAwayVariationOutlawCheck(
         monster: *mut entity,
@@ -24886,6 +26699,9 @@ extern "C" {
 }
 extern "C" {
     pub fn ChooseAiMove(monster: *mut entity);
+}
+extern "C" {
+    pub fn EntryArm9();
 }
 extern "C" {
     pub fn InitMemAllocTable();
@@ -25145,7 +26961,19 @@ extern "C" {
     pub fn GetItemCategoryVeneer(item_id: item_id) -> item_category;
 }
 extern "C" {
+    pub fn IsThrownItem(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn IsNotMoney(item_id: item_id) -> bool_;
+}
+extern "C" {
     pub fn IsAuraBow(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn InitItem(item: *mut item, item_id: item_id, quantity: u16, sticky: bool_);
+}
+extern "C" {
+    pub fn InitStandardItem(item: *mut item, item_id: item_id, sticky: bool_);
 }
 extern "C" {
     pub fn SprintfStatic(
@@ -25155,7 +26983,19 @@ extern "C" {
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn GetExclusiveItemOffsetEnsureValid(item_id: item_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsItemValid(arg1: item_id) -> bool_;
+}
+extern "C" {
     pub fn GetItemCategory(item_id: item_id) -> item_category;
+}
+extern "C" {
+    pub fn EnsureValidItem(arg1: item_id) -> item_id;
+}
+extern "C" {
+    pub fn GetThrownItemQuantityLimit(arg1: item_id, limit_idx: crate::ctypes::c_int) -> u8;
 }
 extern "C" {
     pub fn SetMoneyCarried(amount: crate::ctypes::c_int);
@@ -25164,7 +27004,10 @@ extern "C" {
     pub fn IsBagFull() -> bool_;
 }
 extern "C" {
-    pub fn CountItemTypeInBag(arg1: item_id) -> crate::ctypes::c_int;
+    pub fn CountItemTypeInBag(item_id: item_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsItemInBag(item_id: item_id) -> bool_;
 }
 extern "C" {
     pub fn AddItemToBag(item: *mut bulk_item) -> bool_;
@@ -25422,6 +27265,12 @@ extern "C" {
     pub fn InitDungeonListScriptVars();
 }
 extern "C" {
+    pub fn GlobalProgressAlloc() -> *mut global_progress;
+}
+extern "C" {
+    pub fn ResetGlobalProgress();
+}
+extern "C" {
     pub fn HasMonsterBeenAttackedInDungeons(monster_id: monster_id) -> bool_;
 }
 extern "C" {
@@ -25585,6 +27434,9 @@ extern "C" {
 }
 extern "C" {
     pub fn DungeonGoesUp(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn TreasureBoxDropsEnabled(dungeon_id: dungeon_id) -> bool_;
 }
 extern "C" {
     pub fn GetMaxRescueAttempts(dungeon_id: dungeon_id) -> i8;
@@ -25936,6 +27788,18 @@ extern "C" {
     pub fn DivideUIntNoZeroCheck(dividend: u32, divisor: u32) -> crate::ctypes::c_ulonglong;
 }
 extern "C" {
+    pub fn GetFaintReason(arg1: move_id, arg2: item_id) -> faint_reason;
+}
+extern "C" {
+    pub fn InitMove(move_: *mut move_, arg1: move_id);
+}
+extern "C" {
+    pub fn GetLowKickMultiplier(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn EntryArm7();
+}
+extern "C" {
     pub fn CreateMainMenus();
 }
 extern "C" {
@@ -25943,6 +27807,32 @@ extern "C" {
 }
 extern "C" {
     pub fn AddSubMenuOption(action_id: crate::ctypes::c_int, enabled: bool_);
+}
+extern "C" {
+    pub fn GetEffectAnimation(anim_id: crate::ctypes::c_int) -> *mut effect_animation;
+}
+extern "C" {
+    pub fn GetMoveAnimation(move_id: move_id) -> *mut move_animation;
+}
+extern "C" {
+    pub fn GetSpecialMonsterMoveAnimation(
+        ent_id: crate::ctypes::c_int,
+    ) -> *mut special_monster_move_animation;
+}
+extern "C" {
+    pub fn GetTrapAnimation(trap_id: trap_id) -> i16;
+}
+extern "C" {
+    pub fn GetItemAnimation1(item_id: item_id) -> i16;
+}
+extern "C" {
+    pub fn GetItemAnimation2(item_id: item_id) -> i16;
+}
+extern "C" {
+    pub fn GetMoveAnimationSpeed(move_id: move_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CheckEndDungeon(end_cond: crate::ctypes::c_int) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn ScriptSpecialProcessCall(
@@ -25998,10 +27888,73 @@ extern "C" {
     pub fn ScriptSpecialProcess0x16(param_1: bool_);
 }
 extern "C" {
+    pub fn LoadBackgroundAttributes(
+        bg_attr_str: *mut crate::ctypes::c_char,
+        bg_id: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn LoadMapType10(
+        buf: *mut crate::ctypes::c_void,
+        map_id: crate::ctypes::c_int,
+        dungeon_info_str: *mut undefined,
+        additional_info: undefined4,
+    );
+}
+extern "C" {
+    pub fn LoadMapType11(
+        buf: *mut crate::ctypes::c_void,
+        map_id: crate::ctypes::c_int,
+        dungeon_info_str: *mut undefined,
+        additional_info: undefined4,
+    );
+}
+extern "C" {
+    pub fn GetSpecialLayoutBackground(
+        bg_id: crate::ctypes::c_int,
+        dungeon_info_str: *mut undefined,
+        additional_info: undefined4,
+        copy_fixed_room_layout: bool_,
+    );
+}
+extern "C" {
     pub fn StatusUpdate();
 }
 extern "C" {
+    pub fn EntryOverlay13();
+}
+extern "C" {
+    pub fn ExitOverlay13();
+}
+extern "C" {
+    pub fn Overlay13SwitchFunctionNa238A1C8() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn Overlay13SwitchFunctionNa238A574();
+}
+extern "C" {
     pub fn GetPersonality() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetOptionStringFromID(
+        output: *mut crate::ctypes::c_char,
+        option_id: crate::ctypes::c_int,
+    ) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
+    pub fn WaitForNextStep(switch_case: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetBarItem(item_id: item_id) -> *mut bar_item;
+}
+extern "C" {
+    pub fn GetRecruitableMonsterAll() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetRecruitableMonsterList() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetRecruitableMonsterListRestricted() -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn DungeonAlloc() -> *mut dungeon;
@@ -26031,6 +27984,12 @@ extern "C" {
     pub fn TryForcedLoss(skip_floor_end_check: bool_) -> bool_;
 }
 extern "C" {
+    pub fn IsBossFight(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn IsCurrentFixedRoomBossFight() -> bool_;
+}
+extern "C" {
     pub fn FixedRoomIsSubstituteRoom() -> bool_;
 }
 extern "C" {
@@ -26041,6 +28000,13 @@ extern "C" {
 }
 extern "C" {
     pub fn GetTileAtEntity(entity: *mut entity) -> *mut tile;
+}
+extern "C" {
+    pub fn SpawnTrap(trap_id: trap_id, position: *mut position, team: u8, flags: u8)
+        -> *mut entity;
+}
+extern "C" {
+    pub fn SpawnItemEntity(position: *mut position) -> *mut entity;
 }
 extern "C" {
     pub fn CanTargetEntity(user: *mut entity, target: *mut entity) -> bool_;
@@ -26063,6 +28029,13 @@ extern "C" {
 }
 extern "C" {
     pub fn UpdateStatusIconFlags(entity: *mut entity);
+}
+extern "C" {
+    pub fn LoadMappaFileAttributes(
+        quick_saved: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        special_process: *mut undefined,
+    );
 }
 extern "C" {
     pub fn IsOnMonsterSpawnList(monster_id: monster_id) -> bool_;
@@ -26145,6 +28118,9 @@ extern "C" {
     pub fn DungeonRngSetPrimary();
 }
 extern "C" {
+    pub fn ChangeDungeonMusic(music_id: music_id::Type);
+}
+extern "C" {
     pub fn TrySwitchPlace(user: *mut entity, target: *mut entity);
 }
 extern "C" {
@@ -26203,16 +28179,52 @@ extern "C" {
     pub fn GetForcedLossReason() -> forced_loss_reason::Type;
 }
 extern "C" {
+    pub fn BindTrapToTile(tile: *mut tile, trap: *mut entity, is_visible: bool_);
+}
+extern "C" {
+    pub fn SpawnEnemyTrapAtPos(trap_id: trap_id, x: i16, y: i16, flags: u8, is_visible: bool_);
+}
+extern "C" {
+    pub fn SetLeaderAction();
+}
+extern "C" {
     pub fn ChangeLeader();
 }
 extern "C" {
-    pub fn ResetDamageDesc(damage_desc: *mut undefined4);
+    pub fn ResetDamageData(damage: *mut damage_data);
+}
+extern "C" {
+    pub fn GetTotalSpriteFileSize(monster_id: monster_id) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetSpriteIndex(monster_id: monster_id) -> u16;
 }
 extern "C" {
+    pub fn JoinedAtRangeCheck2Veneer(joined_at: dungeon_id_8) -> bool_;
+}
+extern "C" {
     pub fn FloorNumberIsEven() -> bool_;
+}
+extern "C" {
+    pub fn GetKecleonIdToSpawnByFloor() -> monster_id;
+}
+extern "C" {
+    pub fn StoreSpriteFileIndexBothGenders(monster_id: monster_id, file_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn LoadMonsterSpriteInner(monster_id: monster_id);
+}
+extern "C" {
+    pub fn SwapMonsterWanFileIndex(src_id: crate::ctypes::c_int, dst_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn LoadMonsterSprite(monster_id: monster_id, param_2: undefined);
+}
+extern "C" {
+    pub fn DeleteMonsterSpriteFile(monster_id: monster_id);
+}
+extern "C" {
+    pub fn DeleteAllMonsterSpriteFiles();
 }
 extern "C" {
     pub fn EuFaintCheck(non_team_member_fainted: bool_, set_unk_byte: bool_);
@@ -26220,7 +28232,7 @@ extern "C" {
 extern "C" {
     pub fn HandleFaint(
         fainted_entity: *mut entity,
-        faint_reason: crate::ctypes::c_int,
+        faint_reason: faint_reason,
         killer: *mut entity,
     );
 }
@@ -26228,16 +28240,19 @@ extern "C" {
     pub fn UpdateAiTargetPos(monster: *mut entity);
 }
 extern "C" {
-    pub fn GetKecleonIdToSpawnByFloor() -> monster_id;
-}
-extern "C" {
-    pub fn LoadMonsterSprite(monster_id: monster_id, param_2: undefined);
+    pub fn SetMonsterTypeAndAbility(target: *mut entity);
 }
 extern "C" {
     pub fn TryActivateSlowStart();
 }
 extern "C" {
     pub fn TryActivateArtificialWeatherAbilities();
+}
+extern "C" {
+    pub fn GetMonsterApparentId(
+        target: *mut entity,
+        current_id: monster_id,
+    ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn DefenderAbilityIsActive(
@@ -26278,6 +28293,9 @@ extern "C" {
     pub fn TeamLeaderIqSkillIsEnabled(iq_skill: iq_skill_id) -> bool_;
 }
 extern "C" {
+    pub fn IsSatisfyingScenarioConditionToSpawn(monster_id: monster_id) -> bool_;
+}
+extern "C" {
     pub fn HasLowHealth(entity: *mut entity) -> bool_;
 }
 extern "C" {
@@ -26309,6 +28327,9 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn InitMonster(monster: *mut monster, flag: bool_);
+}
+extern "C" {
     pub fn ExecuteMonsterAction(monster: *mut entity);
 }
 extern "C" {
@@ -26325,6 +28346,9 @@ extern "C" {
 }
 extern "C" {
     pub fn GetNumberOfAttacks(entity: *mut entity) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetMonsterName(buffer: *mut crate::ctypes::c_char, target_info: *mut monster);
 }
 extern "C" {
     pub fn IsMonsterCornered(monster: *mut entity) -> bool_;
@@ -26352,10 +28376,22 @@ extern "C" {
     pub fn AbilityIsActive(entity: *mut entity, ability_id: ability_id) -> bool_;
 }
 extern "C" {
+    pub fn AbilityIsActiveVeneer(entity: *mut entity, ability_id: ability_id) -> bool_;
+}
+extern "C" {
+    pub fn AbilityIsActiveAnyEntity(user: *mut entity, ability_id: ability_id) -> bool_;
+}
+extern "C" {
     pub fn LevitateIsActive(entity: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn MonsterIsType(entity: *mut entity, type_id: type_id) -> bool_;
+}
+extern "C" {
+    pub fn IsTypeAffectedByGravity(entity: *mut entity, type_id: type_id) -> bool_;
+}
+extern "C" {
+    pub fn HasTypeAffectedByGravity(entity: *mut entity, type_id: type_id) -> bool_;
 }
 extern "C" {
     pub fn CanSeeInvisibleMonsters(entity: *mut entity) -> bool_;
@@ -26383,6 +28419,21 @@ extern "C" {
     pub fn EnemyEvolution(enemy: *mut entity);
 }
 extern "C" {
+    pub fn TryDecreaseLevel(
+        user: *mut entity,
+        target: *mut entity,
+        n_levels: crate::ctypes::c_int,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn LevelUp(
+        user: *mut entity,
+        target: *mut entity,
+        message: bool_,
+        param_4: undefined4,
+    ) -> bool_;
+}
+extern "C" {
     pub fn EvolveMonster(
         monster: *mut entity,
         param_2: *mut undefined4,
@@ -26399,7 +28450,7 @@ extern "C" {
         damage_data: *mut damage_data,
         param_4: undefined4,
         param_5: *mut undefined4,
-        param_6: *mut undefined4,
+        faint_reason: faint_reason,
     ) -> bool_;
 }
 extern "C" {
@@ -26495,6 +28546,9 @@ extern "C" {
 }
 extern "C" {
     pub fn ResetDamageCalcScratchSpace();
+}
+extern "C" {
+    pub fn IsRecruited(user: *mut entity, target: *mut entity) -> bool_;
 }
 extern "C" {
     pub fn TrySpawnMonsterAndTickSpawnCounter();
@@ -26771,6 +28825,13 @@ extern "C" {
     ) -> bool_;
 }
 extern "C" {
+    pub fn TryRestoreHp(
+        user: *mut entity,
+        target: *mut entity,
+        hp_restoration: crate::ctypes::c_int,
+    ) -> bool_;
+}
+extern "C" {
     pub fn TryIncreaseHp(
         user: *mut entity,
         target: *mut entity,
@@ -26778,6 +28839,15 @@ extern "C" {
         max_hp_boost: crate::ctypes::c_int,
         log_failure: bool_,
     ) -> bool_;
+}
+extern "C" {
+    pub fn RevealItems(user: *mut entity, target: *mut entity);
+}
+extern "C" {
+    pub fn RevealStairs(user: *mut entity, target: *mut entity);
+}
+extern "C" {
+    pub fn RevealEnemies(user: *mut entity, target: *mut entity);
 }
 extern "C" {
     pub fn TryInflictLeechSeedStatus(
@@ -26852,6 +28922,15 @@ extern "C" {
     ) -> move_target_and_range;
 }
 extern "C" {
+    pub fn IsInSpawnList(spawn_list: *mut undefined, monster_id: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn ChangeShayminForme(
+        entity: *mut entity,
+        forme: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn ApplyItemEffect(
         param_1: undefined4,
         param_2: undefined4,
@@ -26901,6 +28980,9 @@ extern "C" {
     ) -> bool_;
 }
 extern "C" {
+    pub fn IsHyperBeamVariant(move_: *mut move_) -> bool_;
+}
+extern "C" {
     pub fn DungeonRandOutcomeUserTargetInteraction(
         user: *mut entity,
         target: *mut entity,
@@ -26941,7 +29023,7 @@ extern "C" {
     pub fn ShouldMovePlayAlternativeAnimation(user: *mut entity, move_: *mut move_) -> bool_;
 }
 extern "C" {
-    pub fn DealDamageWithRecoil(
+    pub fn DoMoveDamageWithRecoil(
         attacker: *mut entity,
         defender: *mut entity,
         move_: *mut move_,
@@ -26972,17 +29054,17 @@ extern "C" {
         defender: *mut entity,
         move_: *mut move_,
         power: crate::ctypes::c_int,
-        param_5: undefined4,
-        param_6: undefined4,
-    );
+        damage_mult_fp: crate::ctypes::c_int,
+        item_id: item_id,
+    ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn CalcDamageFinal(
         attacker: *mut entity,
         defender: *mut entity,
         move_: *mut move_,
-        param_4: undefined4,
-        param_5: *mut undefined4,
+        damage_out: *mut damage_data,
+        faint_reason: faint_reason,
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
@@ -26995,19 +29077,57 @@ extern "C" {
     pub fn TryWeatherFormChange(entity: *mut entity);
 }
 extern "C" {
+    pub fn DigitCount(n: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn LoadTextureUi();
+}
+extern "C" {
+    pub fn DisplayNumberTextureUi(
+        x: i16,
+        y: i16,
+        n: crate::ctypes::c_int,
+        ally_mode: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DisplayCharTextureUi(
+        call_back_str: *mut undefined,
+        x: i16,
+        y: i16,
+        char_id: crate::ctypes::c_int,
+        param_5: i16,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DisplayUi();
+}
+extern "C" {
     pub fn GetTile(x: crate::ctypes::c_int, y: crate::ctypes::c_int) -> *mut tile;
 }
 extern "C" {
     pub fn GetTileSafe(x: crate::ctypes::c_int, y: crate::ctypes::c_int) -> *mut tile;
 }
 extern "C" {
+    pub fn IsFullFloorFixedRoom() -> bool_;
+}
+extern "C" {
     pub fn GetStairsRoom() -> u8;
+}
+extern "C" {
+    pub fn GetRandomSpawnMonsterID() -> monster_id;
 }
 extern "C" {
     pub fn GravityIsActive() -> bool_;
 }
 extern "C" {
     pub fn IsSecretBazaar() -> bool_;
+}
+extern "C" {
+    pub fn ShouldBoostHiddenStairsSpawnChance() -> bool_;
+}
+extern "C" {
+    pub fn SetShouldBoostHiddenStairsSpawnChance(value: bool_);
 }
 extern "C" {
     pub fn IsSecretRoom() -> bool_;
@@ -27044,6 +29164,9 @@ extern "C" {
 }
 extern "C" {
     pub fn DungeonRand100() -> u32;
+}
+extern "C" {
+    pub fn ClearHiddenStairs();
 }
 extern "C" {
     pub fn FlagHallwayJunctions(
@@ -27301,25 +29424,113 @@ extern "C" {
     pub fn ResetInnerBoundaryTileRows();
 }
 extern "C" {
-    pub fn SpawnStairs(pos: *mut u8, gen_info: *mut dungeon_generation_info, hidden_stairs: bool_);
+    pub fn SpawnStairs(
+        pos: *mut u8,
+        gen_info: *mut dungeon_generation_info,
+        hidden_stairs_type: hidden_stairs_type::Type,
+    );
+}
+extern "C" {
+    pub fn GetHiddenStairsType(
+        gen_info: *mut dungeon_generation_info,
+        floor_props: *mut floor_properties,
+    ) -> hidden_stairs_type::Type;
+}
+extern "C" {
+    pub fn ResetHiddenStairsSpawn();
 }
 extern "C" {
     pub fn LoadFixedRoomData();
 }
 extern "C" {
+    pub fn LoadFixedRoom(
+        param_1: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        param_3: crate::ctypes::c_int,
+        param_4: undefined4,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn OpenFixedBin();
+}
+extern "C" {
+    pub fn CloseFixedBin();
+}
+extern "C" {
+    pub fn AreOrbsAllowed(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreTileJumpsAllowed(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreTrawlOrbsAllowed(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreOrbsAllowedVeneer(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreLateGameTrapsEnabled(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn AreMovesEnabled(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn IsRoomIlluminated(fixed_room_id: fixed_room_id) -> bool_;
+}
+extern "C" {
+    pub fn GetMatchingMonsterId(
+        monster_id: monster_id,
+        param_2: undefined4,
+        param_3: undefined4,
+    ) -> monster_id;
+}
+extern "C" {
+    pub fn GenerateItemExplicit(item: *mut item, item_id: item_id, quantity: u16, sticky: bool_);
+}
+extern "C" {
+    pub fn GenerateAndSpawnItem(
+        item_id: item_id,
+        x: i16,
+        y: i16,
+        quantity: u16,
+        sticky: bool_,
+        check_in_bag: bool_,
+    );
+}
+extern "C" {
     pub fn IsHiddenStairsFloor() -> bool_;
+}
+extern "C" {
+    pub fn GenerateCleanItem(item: *mut item, item_id: item_id);
+}
+extern "C" {
+    pub fn SpawnItem(position: *mut position, item: *mut item, flag: bool_) -> bool_;
 }
 extern "C" {
     pub fn HasHeldItem(entity: *mut entity, item_id: item_id) -> bool_;
 }
 extern "C" {
+    pub fn GenerateMoneyQuantity(item: *mut item, max_amount: crate::ctypes::c_int);
+}
+extern "C" {
     pub fn CheckTeamItemsFlags(flags: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn GenerateItem(
+        item: *mut item,
+        item_id: item_id,
+        quantity: u16,
+        sticky_type: gen_item_stickiness::Type,
+    );
 }
 extern "C" {
     pub fn CheckActiveChallengeRequest() -> bool_;
 }
 extern "C" {
     pub fn IsOutlawOrChallengeRequestFloor() -> bool_;
+}
+extern "C" {
+    pub fn IsDestinationFloor() -> bool_;
 }
 extern "C" {
     pub fn IsCurrentMissionType(type_: mission_type::Type) -> bool_;
@@ -27388,6 +29599,9 @@ extern "C" {
     pub fn FloorHasMissionMonster(mission_dst: *mut mission_destination_info) -> bool_;
 }
 extern "C" {
+    pub fn GenerateMissionEggMonster(mission: *mut mission);
+}
+extern "C" {
     pub fn LogMessageByIdWithPopupCheckUser(user: *mut entity, message_id: crate::ctypes::c_int);
 }
 extern "C" {
@@ -27452,6 +29666,9 @@ extern "C" {
     pub fn SetBothScreensWindowColorToDefault();
 }
 extern "C" {
+    pub fn GetPersonalityIndex(monster: *mut monster) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn DisplayMessage(
         param_1: undefined4,
         message_id: crate::ctypes::c_int,
@@ -27484,10 +29701,1125 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn OpenMenu(param_1: undefined4, param_2: undefined4, param_3: bool_, param_4: undefined4);
+}
+extern "C" {
     pub fn OthersMenuLoop() -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn OthersMenu() -> undefined;
+}
+extern "C" {
+    pub fn IsMarowakTrainingMaze() -> bool_;
+}
+extern "C" {
+    pub fn TrySpawnEnemyItemDrop(attacker: *mut entity, defender: *mut entity);
+}
+extern "C" {
+    pub fn GetFaintReasonWrapper(move_: *mut move_, item_id: item_id) -> faint_reason;
+}
+extern "C" {
+    pub fn DoMoveDamage(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveIronTail(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveYawn(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveNightmare(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCharm(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEncore(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSuperFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePainSplit(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTorment(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSwagger(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageCringe30(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveWhirlpool(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFakeTears(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSpite(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSmokescreen(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFlatter(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveWillOWisp(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveReturn(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFlameWheel(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveGust(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveParalyze(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageLowerDef20(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBite(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageParalyze20(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEndeavor(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFacade(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageLowerSpeed20(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBrickBreak(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRockTomb(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageDrain(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveReversal(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSmellingSalt(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMetalSound(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTickle(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveOutrage(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageWeightDependent(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveAncientPower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRapidSpin(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageFreeze15(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveScaryFace(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRockClimb(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEarthquake(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn GetNaturePowerVariant() -> nature_power_variant::Type;
+}
+extern "C" {
+    pub fn DoMoveNaturePower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveLick(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFissure(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveExtrasensory(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveAbsorb(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSkillSwap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHeadbutt(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDoubleEdge(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSandAttack(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamagePoison40(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSacredFire(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSheerCold(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageLowerAccuracy40(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTwister(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTwineedle(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSeismicToss(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSupersonic(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTaunt(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHornDrill(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveThundershock(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveThunderWave(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBlock(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePoisonGas(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveToxic(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePoisonFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePoisonSting(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTriAttack(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSwapItems(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTripleKick(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMudSlap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveThief(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRolePlay(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveLeer(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFakeOut(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePayDay(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCurse(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSuperpower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDynamicPunch(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveKnockOff(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveSecretPower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDizzyPunch(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveImprison(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFeatherDance(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBeatUp(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBlastBurn(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCrushClaw(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBlazeKick(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePresent(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEruption(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePoisonTail(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveRoar(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageConstrict10(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveWrap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMagnitude(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMistBall(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDestinyBond(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHiddenPower(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveAttract(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCopycat(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFrustration(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveLeechSeed(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDreamEater(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDragonRage(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageLowerSpecialDefense50(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFling(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoHammerArm(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveGastroAcid(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCloseCombat(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveGuardSwap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveThunderFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDefog(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveTrumpCard(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveIceFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePsychoShift(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveEmbargo(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveBrine(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveNaturalGift(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveGyroBall(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveChargeBeam(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageEatItem(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveLastResort(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageHpDependent(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHeartSwap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMovePowerSwap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFeint(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFlareBlitz(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveFireFang(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveMiracleEye(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveWakeUpSlap(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveHeadSmash(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveCaptivate(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn DoMoveDamageInlined(
+        attacker: *mut entity,
+        defender: *mut entity,
+        move_: *mut move_,
+        item_id: item_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn GenerateStandardItem(
+        item: *mut item,
+        item_id: item_id,
+        sticky_type: gen_item_stickiness::Type,
+    );
+}
+extern "C" {
+    pub fn SpawnEnemyItemDropWrapper(
+        entity: *mut entity,
+        pos: *mut position,
+        item: *mut item,
+        param_4: undefined4,
+    );
+}
+extern "C" {
+    pub fn SpawnEnemyItemDrop(
+        entity: *mut entity,
+        item_entity: *mut entity,
+        item: *mut item,
+        param_4: crate::ctypes::c_int,
+        dir_xy: *mut i16,
+        param_6: undefined,
+    );
+}
+extern "C" {
+    pub fn TryGenerateUnownStoneDrop(item: *mut item, monster_id: monster_id) -> bool_;
 }
 extern "C" {
     pub fn TeamMenu(leader: *mut entity) -> undefined;
@@ -27500,6 +30832,15 @@ extern "C" {
 }
 extern "C" {
     pub fn HelpMenuLoop() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn EntryOverlay31();
+}
+extern "C" {
+    pub fn DungeonMenuSwitch(idx: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn ExplorersOfSkyMain(mode: crate::ctypes::c_int) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub static mut MEMORY_ALLOCATION_TABLE: mem_alloc_table;
@@ -27548,6 +30889,9 @@ extern "C" {
 }
 extern "C" {
     pub static mut PUNCH_MOVE_LIST: [move_id_16; 16usize];
+}
+extern "C" {
+    pub static mut PARTNER_TALK_KIND_TABLE: [partner_talk_kind_table_entry; 11usize];
 }
 extern "C" {
     pub static mut SCRIPT_VARS_LOCALS: script_local_var_table;
@@ -27616,6 +30960,9 @@ extern "C" {
     pub static mut IQ_GROUP_SKILLS: [u8; 400usize];
 }
 extern "C" {
+    pub static mut MONEY_QUANTITY_TABLE: [crate::ctypes::c_int; 100usize];
+}
+extern "C" {
     pub static mut IQ_GUMMI_GAIN_TABLE: [[i16; 18usize]; 18usize];
 }
 extern "C" {
@@ -27673,6 +31020,9 @@ extern "C" {
     pub static mut PACK_FILE_PATHS_TABLE: [*const crate::ctypes::c_char; 6usize];
 }
 extern "C" {
+    pub static mut ITEM_DATA_TABLE_PTRS: [*mut crate::ctypes::c_void; 3usize];
+}
+extern "C" {
     pub static mut MOVE_DATA_TABLE_PTR: *mut move_data_table;
 }
 extern "C" {
@@ -27688,6 +31038,9 @@ extern "C" {
     pub static mut GAME_MODE: u8;
 }
 extern "C" {
+    pub static mut GLOBAL_PROGRESS_PTR: *mut global_progress;
+}
+extern "C" {
     pub static mut ADVENTURE_LOG_PTR: *mut adventure_log;
 }
 extern "C" {
@@ -27695,6 +31048,12 @@ extern "C" {
 }
 extern "C" {
     pub static mut SMD_EVENTS_FUN_TABLE: [*mut crate::ctypes::c_void; 127usize];
+}
+extern "C" {
+    pub static mut FAINT_REASON_CODE_ORB_ITEM: faint_reason_non_move::Type;
+}
+extern "C" {
+    pub static mut FAINT_REASON_CODE_NON_ORB_ITEM: faint_reason_non_move::Type;
 }
 extern "C" {
     pub static mut FIRST_DUNGEON_WITH_MONSTER_HOUSE_TRAPS: dungeon_id_8;
@@ -27710,6 +31069,9 @@ extern "C" {
 }
 extern "C" {
     pub static mut OREN_BERRY_DAMAGE: i16;
+}
+extern "C" {
+    pub static mut UNOWN_STONE_DROP_CHANCE: i16;
 }
 extern "C" {
     pub static mut SITRUS_BERRY_HP_RESTORATION: i16;
@@ -27817,7 +31179,13 @@ extern "C" {
     pub static mut AIR_BLADE_DAMAGE_MULTIPLIER: crate::ctypes::c_int;
 }
 extern "C" {
+    pub static mut HIDDEN_STAIRS_SPAWN_CHANCE_MULTIPLIER: crate::ctypes::c_int;
+}
+extern "C" {
     pub static mut SPEED_BOOST_DURATION_RANGE: [i16; 2usize];
+}
+extern "C" {
+    pub static mut WEATHER_ATTRIBUTE_TABLE: [weather_attributes; 8usize];
 }
 extern "C" {
     pub static mut OFFENSIVE_STAT_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
@@ -27826,7 +31194,22 @@ extern "C" {
     pub static mut DEFENSIVE_STAT_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
 }
 extern "C" {
+    pub static mut NATURE_POWER_TABLE: [wildcard_move_desc; 15usize];
+}
+extern "C" {
+    pub static mut APPLES_AND_BERRIES_ITEM_IDS: [item_id_16; 66usize];
+}
+extern "C" {
+    pub static mut RECRUITMENT_LEVEL_BOOST_TABLE: [i16; 102usize];
+}
+extern "C" {
+    pub static mut NATURAL_GIFT_ITEM_TABLE: [natural_gift_item_info; 34usize];
+}
+extern "C" {
     pub static mut RANDOM_MUSIC_ID_TABLE: [[music_id_16; 4usize]; 30usize];
+}
+extern "C" {
+    pub static mut SHOP_ITEM_CHANCES: [i16; 144usize];
 }
 extern "C" {
     pub static mut MALE_ACCURACY_STAGE_MULTIPLIERS: [crate::ctypes::c_int; 21usize];
@@ -27851,16 +31234,169 @@ extern "C" {
         [fixed_room_monster_spawn_stats_entry; 99usize];
 }
 extern "C" {
+    pub static mut METRONOME_TABLE: [wildcard_move_desc; 168usize];
+}
+extern "C" {
     pub static mut TILESET_PROPERTIES: [tileset_property; 199usize];
 }
 extern "C" {
     pub static mut FIXED_ROOM_PROPERTIES_TABLE: [fixed_room_properties_entry; 256usize];
 }
 extern "C" {
+    pub static mut TRAP_ANIMATION_INFO: [trap_animation; 26usize];
+}
+extern "C" {
+    pub static mut ITEM_ANIMATION_INFO: [item_animation; 1400usize];
+}
+extern "C" {
+    pub static mut MOVE_ANIMATION_INFO: [move_animation; 563usize];
+}
+extern "C" {
+    pub static mut EFFECT_ANIMATION_INFO: [effect_animation; 700usize];
+}
+extern "C" {
+    pub static mut SPECIAL_MONSTER_MOVE_ANIMATION_INFO: [special_monster_move_animation; 7422usize];
+}
+extern "C" {
+    pub static mut IRON_TAIL_LOWER_DEFENSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut TWINEEDLE_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut EXTRASENSORY_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ROCK_SLIDE_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut CRUNCH_LOWER_DEFENSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut MUDDY_WATER_LOWER_ACCURACY_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ANCIENTPOWER_BOOST_CHANCE: i16;
+}
+extern "C" {
+    pub static mut POISON_TAIL_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut THUNDERSHOCK_PARALYZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut HEADBUTT_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut FIRE_FANG_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut SACRED_FIRE_BURN_CHANCE: i16;
+}
+extern "C" {
+    pub static mut WHIRLPOOL_CONSTRICTION_CHANCE: i16;
+}
+extern "C" {
+    pub static mut MIST_BALL_LOWER_SPECIAL_ATTACK_CHANCE: i16;
+}
+extern "C" {
+    pub static mut CHARGE_BEAM_BOOST_SPECIAL_ATTACK_CHANCE: i16;
+}
+extern "C" {
+    pub static mut LUSTER_PURGE_LOWER_SPECIAL_DEFENSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut CONSTRICT_LOWER_SPEED_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ICE_FANG_FREEZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut SMOG_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut LICK_PARALYZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut THUNDER_FANG_PARALYZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut BITE_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ICE_FANG_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut BLAZE_KICK_BURN_CHANCE: i16;
+}
+extern "C" {
+    pub static mut DIZZY_PUNCH_CONFUSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut SECRET_POWER_EFFECT_CHANCE: i16;
+}
+extern "C" {
+    pub static mut CRUSH_CLAW_LOWER_DEFENSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut BLIZZARD_FREEZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut POISON_STING_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut POISON_FANG_POISON_CHANCE: i16;
+}
+extern "C" {
+    pub static mut THUNDER_PARALYZE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut TWISTER_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut FAKE_OUT_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut THUNDER_FANG_CRINGE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut FLARE_BLITZ_BURN_CHANCE: i16;
+}
+extern "C" {
+    pub static mut FLAME_WHEEL_BURN_CHANCE: i16;
+}
+extern "C" {
+    pub static mut ROCK_CLIMB_CONFUSE_CHANCE: i16;
+}
+extern "C" {
+    pub static mut TRI_ATTACK_STATUS_CHANCE: i16;
+}
+extern "C" {
+    pub static mut DRAGON_RAGE_FIXED_DAMAGE: i16;
+}
+extern "C" {
+    pub static mut FACADE_DAMAGE_MULTIPLIER: crate::ctypes::c_int;
+}
+extern "C" {
+    pub static mut IMPRISON_TURN_RANGE: [i16; 2usize];
+}
+extern "C" {
+    pub static mut NIGHTMARE_TURN_RANGE: [i16; 2usize];
+}
+extern "C" {
+    pub static mut SMOKESCREEN_TURN_RANGE: [i16; 2usize];
+}
+extern "C" {
+    pub static mut YAWN_TURN_RANGE: [i16; 2usize];
+}
+extern "C" {
     pub static mut SCRIPT_OP_CODES: script_opcode_table;
 }
 extern "C" {
     pub static mut C_ROUTINES: common_routine_table;
+}
+extern "C" {
+    pub static mut GROUND_WAN_FILES_TABLE: [[crate::ctypes::c_char; 12usize]; 343usize];
 }
 extern "C" {
     pub static mut OBJECTS: [script_object; 0usize];
@@ -27884,6 +31420,21 @@ extern "C" {
     pub static mut GROUND_STATE_PTRS: main_ground_data;
 }
 extern "C" {
+    pub static mut SCRIPT_COMMAND_PARSING_DATA: [undefined; 32usize];
+}
+extern "C" {
+    pub static mut SCRIPT_OP_CODE_NAMES: [crate::ctypes::c_char; 0usize];
+}
+extern "C" {
+    pub static mut OVERLAY11_DEBUG_STRINGS: [crate::ctypes::c_char; 0usize];
+}
+extern "C" {
+    pub static mut C_ROUTINE_NAMES: [crate::ctypes::c_char; 0usize];
+}
+extern "C" {
+    pub static mut GROUND_WEATHER_TABLE: [ground_weather_entry; 12usize];
+}
+extern "C" {
     pub static mut STARTERS_PARTNER_IDS: [monster_id_16; 21usize];
 }
 extern "C" {
@@ -27899,7 +31450,31 @@ extern "C" {
     pub static mut QUIZ_ANSWER_STRINGS: [u16; 176usize];
 }
 extern "C" {
-    pub static mut UNKNOWN_MENU_1: [undefined; 72usize];
+    pub static mut QUIZ_ANSWER_POINTS: [quiz_answer_points_entry; 174usize];
+}
+extern "C" {
+    pub static mut QUIZ_DEBUG_MENU: [undefined; 72usize];
+}
+extern "C" {
+    pub static mut QUIZ_QUESTION_ANSWER_ASSOCIATIONS: [u16; 66usize];
+}
+extern "C" {
+    pub static mut EVO_MENU_STRING_IDS: [u16; 26usize];
+}
+extern "C" {
+    pub static mut OVERLAY17_FUNCTION_POINTER_TABLE: [*mut crate::ctypes::c_void; 42usize];
+}
+extern "C" {
+    pub static mut OVERLAY18_FUNCTION_POINTER_TABLE: [*mut crate::ctypes::c_void; 76usize];
+}
+extern "C" {
+    pub static mut BAR_UNLOCKABLE_DUNGEONS_TABLE: [dungeon_id_16; 6usize];
+}
+extern "C" {
+    pub static mut BAR_RECRUITABLE_MONSTER_TABLE: [monster_id_16; 108usize];
+}
+extern "C" {
+    pub static mut BAR_AVAILABLE_ITEMS: [bar_item; 66usize];
 }
 extern "C" {
     pub static mut DUNGEON_STRUCT_SIZE: u32;
@@ -28002,6 +31577,9 @@ extern "C" {
 }
 extern "C" {
     pub static mut FIXED_ROOM_TILE_SPAWN_TABLE: [fixed_room_tile_spawn_entry; 11usize];
+}
+extern "C" {
+    pub static mut TREASURE_BOX_1_ITEM_IDS: [item_id_16; 12usize];
 }
 extern "C" {
     pub static mut FIXED_ROOM_REVISIT_OVERRIDES: [fixed_room_id_8; 256usize];
@@ -28115,7 +31693,19 @@ extern "C" {
     pub static mut DEFAULT_TILE: tile;
 }
 extern "C" {
+    pub static mut HIDDEN_STAIRS_SPAWN_BLOCKED: bool_;
+}
+extern "C" {
     pub static mut FIXED_ROOM_DATA_PTR: *mut crate::ctypes::c_void;
+}
+extern "C" {
+    pub static mut MONSTER_HEAL_HP_MAX: crate::ctypes::c_int;
+}
+extern "C" {
+    pub static mut ROCK_WRECKER_MOVE_ID: move_id;
+}
+extern "C" {
+    pub static mut MAP_COLOR_TABLE: [rgb; 9usize];
 }
 extern "C" {
     pub static mut DUNGEON_COLORMAP_PTR: *mut rgb;
@@ -28193,22 +31783,10 @@ extern "C" {
     pub static mut TEAM_NAME: [crate::ctypes::c_char; 10usize];
 }
 extern "C" {
-    pub static mut HERO_SPECIES_ID: monster_id_16;
+    pub static mut TEAM_MEMBER_LIST: [ground_monster; 555usize];
 }
 extern "C" {
-    pub static mut HERO_NICKNAME: [crate::ctypes::c_char; 10usize];
-}
-extern "C" {
-    pub static mut PARTNER_SPECIES_ID: monster_id_16;
-}
-extern "C" {
-    pub static mut LEADER_IQ_SKILLS: [u32; 3usize];
-}
-extern "C" {
-    pub static mut LEADER_NICKNAME: [crate::ctypes::c_char; 10usize];
-}
-extern "C" {
-    pub static mut PARTY_MEMBER_2_IQ_SKILLS: [u32; 3usize];
+    pub static mut TEAM_ACTIVE_ROSTER: [team_member; 7usize];
 }
 extern "C" {
     pub static mut FRAMES_SINCE_LAUNCH_TIMES_THREE: u32;

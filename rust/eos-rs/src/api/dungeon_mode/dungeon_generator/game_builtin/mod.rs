@@ -20,6 +20,7 @@ use crate::api::dungeon_mode::dungeon_generator::{
     DungeonEntityGeneration, DungeonFloorGeneration,
 };
 use crate::api::dungeons::FixedRoomId;
+use crate::api::enums::HiddenStairsType;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ctypes::c_int;
 use crate::ffi;
@@ -262,25 +263,54 @@ impl<'a> GlobalDungeonStructureGenerator<'a> {
         unsafe { ffi::ResetInnerBoundaryTileRows() }
     }
 
+    /// Gets the hidden stairs type for a given floor.
+    ///
+    /// This function reads the floor properties and resolves any randomness
+    /// into a concrete hidden stairs type.    
+    ///
+    /// Returns None if the game returns an invalid/unknown value.
+    pub fn get_hidden_stairs_type(
+        &self,
+        gen_info: &ffi::dungeon_generation_info,
+        floor_props: &ffi::floor_properties,
+    ) -> Option<HiddenStairsType> {
+        unsafe {
+            ffi::GetHiddenStairsType(force_mut_ptr!(gen_info), force_mut_ptr!(floor_props))
+                .try_into()
+                .ok()
+        }
+    }
+
+    /// Resets hidden stairs spawn information for the floor. This includes the position on the
+    /// floor generation status as well as the flag indicating whether the spawn was blocked.
+    pub fn reset_hidden_stairs_spawn(&mut self) {
+        unsafe { ffi::ResetHiddenStairsSpawn() }
+    }
+
     /// Spawn stairs at the given location.
     ///
-    /// If the hidden stairs flag is set, hidden stairs will be spawned instead of normal stairs.
+    /// If the hidden stairs type is something other than HIDDEN_STAIRS_NONE, hidden stairs of the
+    /// specified type will be spawned instead of normal stairs.
     ///
     /// If spawning normal stairs and the current floor is a rescue floor, the room containing
     /// the stairs will be converted into a Monster House.
+    ///
+    /// If attempting to spawn hidden stairs but the spawn is blocked, the floor generation
+    /// status's hidden stairs spawn position will be updated, but it won't be transferred to the
+    /// dungeon generation info struct.
     pub fn spawn_stairs(
         &mut self,
         x: u8,
         y: u8,
         gen_info: &ffi::dungeon_generation_info,
-        is_hidden_stairs: bool,
+        hidden_stairs_type: HiddenStairsType,
     ) {
         // SAFETY: We have a mutable reference to the dungeon.
         unsafe {
             ffi::SpawnStairs(
                 [x, y].as_mut_ptr(),
                 force_mut_ptr!(gen_info),
-                is_hidden_stairs as ffi::bool_,
+                hidden_stairs_type as ffi::hidden_stairs_type::Type,
             )
         }
     }

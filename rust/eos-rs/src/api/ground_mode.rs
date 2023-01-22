@@ -8,6 +8,7 @@ use crate::api::monsters::MonsterSpeciesId;
 use crate::api::overlay::{CreatableWithLease, OverlayLoadLease};
 #[allow(unused_imports)] // for easier reference in the docs of script_special_process_call
 use crate::api::script_vars::ScriptOpcodeId;
+use crate::ctypes::{c_char, c_void};
 use crate::ffi;
 
 /// A special process ID with associated methods to get metadata.
@@ -230,5 +231,70 @@ impl GroundModeContext {
         flags: u32,
     ) -> *mut ffi::mem_arena {
         unsafe { ffi::GetFreeArenaGround(arena, flags) }
+    }
+
+    /// No description available.
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Safety
+    /// Passes the pointers to the game's function, unchecked.
+    pub unsafe fn load_background_attributes(&mut self, output: *mut c_char, bg_id: i32) {
+        ffi::LoadBackgroundAttributes(output, bg_id)
+    }
+
+    /// No description available.
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Safety
+    /// Passes the pointers to the game's function, unchecked. Contains undefined parameters.
+    pub unsafe fn load_map_type_10(
+        &mut self,
+        buf: *mut c_void,
+        map_id: i32,
+        dungeon_info_str: *mut ffi::undefined,
+        additional_info: ffi::undefined4,
+    ) {
+        unsafe { ffi::LoadMapType10(buf, map_id, dungeon_info_str, additional_info) }
+    }
+
+    /// No description available.
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Safety
+    /// Passes the pointers to the game's function, unchecked. Contains undefined parameters.
+    pub unsafe fn load_map_type_11(
+        &mut self,
+        buf: *mut c_void,
+        map_id: i32,
+        dungeon_info_str: *mut ffi::undefined,
+        additional_info: ffi::undefined4,
+    ) {
+        unsafe { ffi::LoadMapType11(buf, map_id, dungeon_info_str, additional_info) }
+    }
+
+    /// No description available.
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    ///
+    /// # Safety
+    /// Passes the pointers to the game's function, unchecked. Contains undefined parameters.
+    pub unsafe fn get_special_layout_background(
+        &mut self,
+        bg_id: i32,
+        dungeon_info_str: *mut ffi::undefined,
+        additional_info: ffi::undefined4,
+        copy_fixed_room_layout: bool,
+    ) {
+        unsafe {
+            ffi::GetSpecialLayoutBackground(
+                bg_id,
+                dungeon_info_str,
+                additional_info,
+                copy_fixed_room_layout as ffi::bool_,
+            )
+        }
     }
 }

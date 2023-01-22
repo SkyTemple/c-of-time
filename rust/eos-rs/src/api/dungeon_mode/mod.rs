@@ -9,8 +9,13 @@ mod moves;
 mod random;
 mod tile;
 
+pub mod animations;
 pub mod dungeon_generator;
+pub mod fixed_room;
+pub mod items;
 pub mod menus;
+pub mod sprites;
+pub mod traps;
 
 use crate::api::enums::Direction;
 use core::ptr;
@@ -29,16 +34,11 @@ use crate::ffi;
 
 // Misc dungeon functions.
 
-/// Seems to zero some damage description struct, which is output by the damage
-/// calculation function.
-///
-/// # Safety
-/// This resets some global data. The caller needs to make sure pointers to this space
-/// are set up correctly and no references to the area exist.
-///
-/// The caller must make sure the undefined params are valid for this function.
-pub unsafe fn reset_damage_desc(damage_desc: *mut ffi::undefined4, _ov29: &OverlayLoadLease<29>) {
-    ffi::ResetDamageDesc(damage_desc);
+/// Zeroes the damage data struct, which is output by the damage calculation function.
+pub fn reset_damage_data(damage_data: &mut ffi::damage_data, _ov29: &OverlayLoadLease<29>) {
+    unsafe {
+        ffi::ResetDamageData(damage_data);
+    }
 }
 
 /// [`DungeonMonsterRef::calc_damage`] seems to use scratch space of
@@ -122,4 +122,89 @@ pub fn is_position_in_sight(
 pub fn display_actions(_ov29: &OverlayLoadLease<29>, entity: Option<&DungeonEntity>) -> bool {
     let ptr = entity.map(|e| force_mut_ptr!(e)).unwrap_or(ptr::null_mut());
     unsafe { ffi::DisplayActions(ptr) > 0 }
+}
+
+/// Do the stuff when you lose in a dungeon.
+///
+/// end_cond: End condition code? Seems to control what tasks get run and what transition happens
+///           when the dungeon ends.
+///
+/// Note: unverified, ported from Irdkwia's notes
+pub fn check_end_dungeon(end_cond: i32, _ov10: &OverlayLoadLease<10>) -> i32 {
+    unsafe { ffi::CheckEndDungeon(end_cond) }
+}
+
+/// Note: unverified, ported from Irdkwia's notes
+pub fn change_dungeon_music(_ov29: &OverlayLoadLease<29>, music_id: ffi::music_id::Type) {
+    unsafe { ffi::ChangeDungeonMusic(music_id) }
+}
+
+/// Counts the number of digits in a nonnegative integer.
+///
+/// If the number is negative, it is cast to a u16 before counting digits.
+pub fn digit_count(_ov29: &OverlayLoadLease<29>, n: i32) -> i32 {
+    unsafe { ffi::DigitCount(n) }
+}
+
+/// Note: unverified, ported from Irdkwia's notes
+pub fn load_texture_ui(_ov29: &OverlayLoadLease<29>) {
+    unsafe { ffi::LoadTextureUi() }
+}
+
+/// Note: unverified, ported from Irdkwia's notes
+///
+/// Returns xsize.
+pub fn display_number_texture_ui(
+    _ov29: &OverlayLoadLease<29>,
+    x: i16,
+    y: i16,
+    n: i32,
+    ally_mode: i32,
+) -> i32 {
+    unsafe { ffi::DisplayNumberTextureUi(x, y, n, ally_mode) }
+}
+
+/// Note: unverified, ported from Irdkwia's notes
+///
+/// Return unknown.
+///
+/// # Safety
+/// The caller must make sure the undefined params are valid for this function.
+pub unsafe fn display_char_texture_ui(
+    call_back_str: *mut ffi::undefined,
+    x: i16,
+    y: i16,
+    char_id: i32,
+    param_5: i16,
+) -> i32 {
+    ffi::DisplayCharTextureUi(call_back_str, x, y, char_id, param_5)
+}
+
+/// Note: unverified, ported from Irdkwia's notes
+pub fn display_ui(_ov29: &OverlayLoadLease<29>) {
+    unsafe { ffi::DisplayUi() }
+}
+
+/// Note: unverified, ported from Irdkwia's notes
+pub fn open_fixed_bin(_ov29: &OverlayLoadLease<29>) {
+    unsafe { ffi::OpenFixedBin() }
+}
+
+/// Note: unverified, ported from Irdkwia's notes
+pub fn close_fixed_bin(_ov29: &OverlayLoadLease<29>) {
+    unsafe { ffi::CloseFixedBin() }
+}
+
+/// Note: unverified, ported from Irdkwia's notes
+///
+/// # Safety
+/// The caller must make sure the undefined params are valid for this function.
+pub unsafe fn open_menu(
+    _ov29: &OverlayLoadLease<29>,
+    param_1: ffi::undefined4,
+    param_2: ffi::undefined4,
+    param_3: bool,
+    param_4: ffi::undefined4,
+) {
+    ffi::OpenMenu(param_1, param_2, param_3 as ffi::bool_, param_4)
 }

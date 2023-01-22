@@ -32,7 +32,7 @@ unsafe impl GlobalAlloc for EoSDefaultAllocator {
     }
 }
 
-/// On allocation errors, you should call [`alloc_error_handler`].
+/// On allocation errors, you should call [`alloc_error_handler()`].
 unsafe impl Allocator for EoSDefaultAllocator {
     fn allocate(&self, layout: Layout) -> Result<NonNull<[u8]>, AllocError> {
         unsafe {
@@ -73,7 +73,7 @@ unsafe impl GlobalAlloc for EoSCustomAllocator {
     }
 }
 
-/// On allocation errors, you should call [`alloc_error_handler`].
+/// On allocation errors, you should call [`alloc_error_handler()`].
 unsafe impl Allocator for EoSCustomAllocator {
     fn allocate(&self, layout: Layout) -> Result<NonNull<[u8]>, AllocError> {
         unsafe {

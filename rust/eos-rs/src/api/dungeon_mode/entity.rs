@@ -1,11 +1,13 @@
 use crate::api::dungeon_mode::*;
 use crate::api::enums::DungeonEntityType;
+use crate::api::items::Item;
 
 /// Entity in a dungeon. Has a [`DungeonEntityType`].
 pub type DungeonEntity = ffi::entity;
 
 /// Extended info struct for [`DungeonEntity`] objects that are items.
-pub type DungeonItem = ffi::item;
+#[deprecated(note = "Use eos_rs::api::items::Item instead.")]
+pub type DungeonItem = crate::api::items::Item;
 /// Extended info struct for [`DungeonEntity`] objects that are traps.
 pub type DungeonTrap = ffi::trap;
 /// A struct representing a single dungeon tile.
@@ -50,9 +52,9 @@ impl DungeonEntity {
 
     /// This returns the item info struct for the entity,
     /// returns None if the entity is not an item.
-    pub fn info_for_item(&self) -> Option<&DungeonItem> {
+    pub fn info_for_item(&self) -> Option<&Item> {
         if self.entity_type() == Some(DungeonEntityType::Item) {
-            unsafe { Some(&*(self.info as *const DungeonItem)) }
+            unsafe { Some(&*(self.info as *const Item)) }
         } else {
             None
         }
@@ -85,9 +87,9 @@ impl DungeonEntity {
 
     /// This returns the item info struct for the entity,
     /// returns None if the entity is not an item.
-    pub fn info_for_item_mut(&mut self) -> Option<&mut DungeonItem> {
+    pub fn info_for_item_mut(&mut self) -> Option<&mut Item> {
         if self.entity_type() == Some(DungeonEntityType::Item) {
-            unsafe { Some(&mut *(self.info as *mut DungeonItem)) }
+            unsafe { Some(&mut *(self.info as *mut Item)) }
         } else {
             None
         }

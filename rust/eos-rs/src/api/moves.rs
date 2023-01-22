@@ -1,7 +1,9 @@
 //! Functions related to getting information about monster moves.
 
+use crate::api::_common::get_faint_reason;
 use crate::api::dungeon_mode::DungeonEntity;
 use crate::api::enums::{MoveCategory, Weather};
+use crate::api::items::ItemId;
 use crate::api::types::MonsterTypeId;
 use crate::ffi;
 
@@ -170,6 +172,16 @@ impl TryFrom<MoveTargetAndRange> for ffi::move_target_and_range {
 
 /// See [`MoveId`] for additional metadata methods.
 impl Move {
+    /// Initializes a move info struct.
+    ///
+    /// This sets f_exists and f_enabled_for_ai on the flags, the ID to the given ID,
+    /// the PP to the max PP for the move ID, and the ginseng boost to 0.
+    ///
+    /// # Safety
+    /// The pointer must point to a valid Move or uninitialized Move.
+    pub unsafe fn init(move_pnt: *mut Self, move_id: MoveId) {
+        ffi::InitMove(move_pnt, move_id)
+    }
     /// Returns the move ID
     pub fn id(&self) -> MoveId {
         self.id.val()
@@ -290,6 +302,14 @@ impl MoveId {
     /// Gets a move's category (physical, special, status). Returns None if the category is invalid.
     pub fn get_category(&self) -> Option<MoveCategory> {
         unsafe { ffi::GetMoveCategory(*self) }.try_into().ok()
+    }
+
+    /// Gets the faint reason code (see HandleFaint) for a given move-item combination.
+    ///         
+    /// If there's no item, the reason code is the move ID. If the item is an orb, return
+    /// FAINT_REASON_ORB_ITEM. Otherwise, return FAINT_REASON_NON_ORB_ITEM.
+    pub fn get_faint_reason(&self, item_id: ItemId) -> ffi::faint_reason {
+        get_faint_reason(*self, item_id)
     }
 }
 

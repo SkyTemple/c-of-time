@@ -145,6 +145,11 @@ impl DungeonId {
             }) > 0
         }
     }
+
+    /// Checks if enemy Treasure Box drops are enabled in the dungeon.
+    pub fn are_treasure_box_drops_enabled(&self) -> bool {
+        unsafe { ffi::TreasureBoxDropsEnabled(*self) > 0 }
+    }
 }
 
 impl From<DungeonId> for u32 {

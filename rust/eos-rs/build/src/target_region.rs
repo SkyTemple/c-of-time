@@ -12,7 +12,7 @@ impl Display for TargetRegionError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             TargetRegionError::Unknown(reg) => {
-                write!(f, "The game region '{}' is unknown.", reg)
+                write!(f, "The game region '{reg}' is unknown.")
             }
             TargetRegionError::Missing => {
                 write!(f, "The game region could not be determined from the target name. Make sure the target name ends in -na, -eu or -ja.")

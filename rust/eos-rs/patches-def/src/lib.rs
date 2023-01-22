@@ -75,7 +75,7 @@ impl Parse for PatchesDef {
                     x => {
                         return Err(syn::Error::new(
                             input.span(),
-                            format!("Unknown patch type for patch {}: {}", name, x),
+                            format!("Unknown patch type for patch {name}: {x}"),
                         ));
                     }
                 }

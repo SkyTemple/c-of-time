@@ -481,7 +481,7 @@ impl MissionType {
             mission_subtype = s.assume_init();
             match self {
                 MissionType::ExploreWithClient(v) => {
-                    *mission_subtype.explore.as_mut() = ffi::mission_subtype_explore_8 {
+                    *mission_subtype.explore = ffi::mission_subtype_explore_8 {
                         _bitfield_align_1: [],
                         _bitfield_1: ffi::mission_subtype_explore_8::new_bitfield_1(
                             (*v) as ffi::mission_subtype_explore::Type,
@@ -489,7 +489,7 @@ impl MissionType {
                     };
                 }
                 MissionType::TakeItemFromOutlaw(v) => {
-                    *mission_subtype.take_item.as_mut() = ffi::mission_subtype_take_item_8 {
+                    *mission_subtype.take_item = ffi::mission_subtype_take_item_8 {
                         _bitfield_align_1: [],
                         _bitfield_1: ffi::mission_subtype_take_item_8::new_bitfield_1(
                             (*v) as ffi::mission_subtype_take_item::Type,
@@ -497,7 +497,7 @@ impl MissionType {
                     };
                 }
                 MissionType::ArrestOutlaw(v) => {
-                    *mission_subtype.outlaw.as_mut() = ffi::mission_subtype_outlaw_8 {
+                    *mission_subtype.outlaw = ffi::mission_subtype_outlaw_8 {
                         _bitfield_align_1: [],
                         _bitfield_1: ffi::mission_subtype_outlaw_8::new_bitfield_1(
                             (*v) as ffi::mission_subtype_outlaw::Type,
@@ -505,14 +505,14 @@ impl MissionType {
                     };
                 }
                 MissionType::ChallengeRequest(v) => {
-                    *mission_subtype.challenge.as_mut() = ffi::mission_subtype_challenge_8 {
+                    *mission_subtype.challenge = ffi::mission_subtype_challenge_8 {
                         _bitfield_align_1: [],
                         _bitfield_1: ffi::mission_subtype_challenge_8::new_bitfield_1(
                             (*v) as ffi::mission_subtype_challenge::Type,
                         ),
                     };
                 }
-                _ => *mission_subtype.none.as_mut() = 0,
+                _ => *mission_subtype.none = 0,
             }
         }
         mission_subtype
@@ -552,7 +552,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeExplore {
 
     fn try_from(value: ffi::mission_subtype) -> Result<Self, Self::Error> {
         // SAFETY: We just copy the value and we check if it's a valid enum value.
-        Self::try_from(unsafe { value.explore.as_ref().val() })
+        Self::try_from(unsafe { value.explore.val() })
     }
 }
 
@@ -589,7 +589,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeTakeItem {
 
     fn try_from(value: ffi::mission_subtype) -> Result<Self, Self::Error> {
         // SAFETY: We just copy the value and we check if it's a valid enum value.
-        Self::try_from(unsafe { value.take_item.as_ref().val() })
+        Self::try_from(unsafe { value.take_item.val() })
     }
 }
 
@@ -644,7 +644,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeOutlaw {
 
     fn try_from(value: ffi::mission_subtype) -> Result<Self, Self::Error> {
         // SAFETY: We just copy the value and we check if it's a valid enum value.
-        Self::try_from(unsafe { value.outlaw.as_ref().val() })
+        Self::try_from(unsafe { value.outlaw.val() })
     }
 }
 
@@ -693,7 +693,7 @@ impl TryFrom<ffi::mission_subtype> for MissionSubtypeChallenge {
 
     fn try_from(value: ffi::mission_subtype) -> Result<Self, Self::Error> {
         // SAFETY: We just copy the value and we check if it's a valid enum value.
-        Self::try_from(unsafe { value.challenge.as_ref().val() })
+        Self::try_from(unsafe { value.challenge.val() })
     }
 }
 
@@ -730,6 +730,38 @@ impl TryFrom<ffi::forced_loss_reason::Type> for ForcedLossReason {
             }
             ffi::forced_loss_reason::FORCED_LOSS_CLIENT_CANT_JOIN => {
                 Ok(ForcedLossReason::ClientCantJoin)
+            }
+            _ => Err(()),
+        }
+    }
+}
+
+#[repr(u32)]
+#[derive(PartialEq, Eq, Clone, Copy)]
+/// Type of hidden stairs.
+pub enum HiddenStairsType {
+    /// No hidden stairs.
+    None = ffi::hidden_stairs_type::HIDDEN_STAIRS_NONE,
+    /// Stairs lead to the secret bazar.
+    SecretBazar = ffi::hidden_stairs_type::HIDDEN_STAIRS_SECRET_BAZAAR,
+    /// Stairs lead to the secret room.
+    SecretRoom = ffi::hidden_stairs_type::HIDDEN_STAIRS_SECRET_ROOM,
+    /// Stairs lead to a random location.
+    Random = ffi::hidden_stairs_type::HIDDEN_STAIRS_RANDOM_SECRET_BAZAAR_OR_SECRET_ROOM,
+}
+
+impl TryFrom<ffi::hidden_stairs_type::Type> for HiddenStairsType {
+    type Error = ();
+
+    fn try_from(value: Type) -> Result<Self, Self::Error> {
+        match value {
+            ffi::hidden_stairs_type::HIDDEN_STAIRS_NONE => Ok(HiddenStairsType::None),
+            ffi::hidden_stairs_type::HIDDEN_STAIRS_SECRET_BAZAAR => {
+                Ok(HiddenStairsType::SecretBazar)
+            }
+            ffi::hidden_stairs_type::HIDDEN_STAIRS_SECRET_ROOM => Ok(HiddenStairsType::SecretRoom),
+            ffi::hidden_stairs_type::HIDDEN_STAIRS_RANDOM_SECRET_BAZAAR_OR_SECRET_ROOM => {
+                Ok(HiddenStairsType::Random)
             }
             _ => Err(()),
         }

@@ -1,3 +1,5 @@
+use crate::api::dungeon_mode::sprites::DungeonSpriteHandler;
+use crate::api::dungeon_mode::traps::TrapId;
 use crate::api::dungeon_mode::*;
 use crate::api::dungeons::{DungeonGroupId, DungeonId};
 use crate::api::enums::{
@@ -5,11 +7,12 @@ use crate::api::enums::{
     Weather,
 };
 use crate::api::iq::IqSkillId;
-use crate::api::items::ItemId;
+use crate::api::items::{Item, ItemId};
 use crate::api::monsters::MonsterSpeciesId;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ffi;
 use alloc::vec::Vec;
+use core::mem::MaybeUninit;
 
 /// The Rust-safe wrapped master struct that contains the state of the dungeon.
 /// Can be owned or mutably borrowed from a low-level [`ffi::dungeon`].
@@ -20,7 +23,7 @@ use alloc::vec::Vec;
 /// To access the raw struct, use [`Self::inner`].
 pub struct Dungeon<T: AsRef<ffi::dungeon> + AsMut<ffi::dungeon>>(T);
 
-/// Create new dungeon structs.
+/// Dungeon structs.
 ///
 /// To get a reference to the global dungeon struct instead, use [`GlobalDungeonData::get`]
 /// and then [`GlobalDungeonData::inner`].
@@ -620,7 +623,12 @@ impl Default for ffi::dungeon {
 /// To generate dungeons and manipulate floors layouts, you can get the game's
 /// builtin generator with [`Self::get_builtin_dungeon_generator`], or configure the global
 /// state of the current floor correctly and use [`Self::generate_floor`].
-pub struct GlobalDungeonData<'a>(&'a OverlayLoadLease<29>, Dungeon<&'a mut ffi::dungeon>);
+pub struct GlobalDungeonData<'a>(
+    &'a OverlayLoadLease<29>,
+    Dungeon<&'a mut ffi::dungeon>,
+    DungeonEffectsEmitter<'a>,
+    DungeonSpriteHandler<'a>,
+);
 
 impl<'a> GlobalDungeonData<'a> {
     /// Checks if the global dungeon pointer is null.
@@ -640,7 +648,12 @@ impl<'a> GlobalDungeonData<'a> {
     pub unsafe fn get(ov29: &'a OverlayLoadLease<29>) -> Self {
         let ptr = ffi::GetDungeonPtrMaster();
         assert!(!ptr.is_null(), "Global dungeon pointer is null!");
-        Self(ov29, Dungeon(&mut *ffi::GetDungeonPtrMaster()))
+        Self(
+            ov29,
+            Dungeon(&mut *ffi::GetDungeonPtrMaster()),
+            DungeonEffectsEmitter(ov29),
+            DungeonSpriteHandler(ov29),
+        )
     }
 
     /// This will allocate a new dungeon struct and update the global dungeon pointer to it.
@@ -652,7 +665,22 @@ impl<'a> GlobalDungeonData<'a> {
     /// You need to make sure no other borrows over the global dungeon struct
     /// (or any of it's values) exist.
     pub unsafe fn alloc(ov29: &'a OverlayLoadLease<29>) -> Self {
-        Self(ov29, Dungeon(&mut *ffi::DungeonAlloc()))
+        Self(
+            ov29,
+            Dungeon(&mut *ffi::DungeonAlloc()),
+            DungeonEffectsEmitter(ov29),
+            DungeonSpriteHandler(ov29),
+        )
+    }
+
+    /// Get the effects handler.
+    pub fn effects(&'a mut self) -> &'a mut DungeonEffectsEmitter<'a> {
+        &mut self.2
+    }
+
+    /// Get the sprites handler.
+    pub fn sprites(&'a mut self) -> &'a mut DungeonSpriteHandler<'a> {
+        &mut self.3
     }
 
     /// Zeros out the struct pointed to by the global dungeon pointer.
@@ -732,6 +760,21 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::FixedRoomIsSubstituteRoom() > 0 }
     }
 
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_current_fixed_room_boss_fight(&self) -> bool {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::IsCurrentFixedRoomBossFight() > 0 }
+    }
+
+    /// Checks if the current fixed room on the dungeon generation info corresponds to a fixed,
+    /// full-floor layout.
+    ///
+    /// The first non-full-floor fixed room is 0xA5, which is for Sealed Chambers.
+    pub fn is_full_floor_fixed_room(&self) -> bool {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::IsFullFloorFixedRoom() > 0 }
+    }
+
     /// Checks if the current dungeon floor number is even.
     /// This is probably, among other things(?), used to determine whether male or female monsters
     /// should be spawned.
@@ -795,6 +838,24 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::IsNormalFloor() > 0 }
     }
 
+    /// Gets the boost_hidden_stairs_spawn_chance field on the dungeon struct.
+    pub fn should_boost_hidden_stairs_spawn_chance(&self) -> bool {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::ShouldBoostHiddenStairsSpawnChance() > 0 }
+    }
+
+    /// Sets the boost_hidden_stairs_spawn_chance field on the dungeon struct to the given value.
+    pub fn set_should_boost_hidden_stairs_spawn_chance(&mut self, value: bool) {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::SetShouldBoostHiddenStairsSpawnChance(value as ffi::bool_) }
+    }
+
+    /// Clears the tile (terrain and spawns) on which Hidden Stairs are spawned, if applicable.
+    pub fn clear_hidden_stairs(&mut self) {
+        // SAFETY:We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::ClearHiddenStairs() }
+    }
+
     /// Checks if a position (x, y) is out of bounds on the map:
     /// !((0 <= x <= 55) && (0 <= y <= 31)).
     pub fn is_pos_out_of_bounds(&self, x: i32, y: i32) -> bool {
@@ -814,6 +875,12 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn is_outlaw_or_challenge_request_floor(&self) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::IsOutlawOrChallengeRequestFloor() > 0 }
+    }
+
+    /// Checks if the current floor is a mission destination floor.
+    pub fn is_destination_floor(&self) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::IsDestinationFloor() > 0 }
     }
 
     /// Checks if the current floor is an active mission destination of a given type group.
@@ -864,15 +931,6 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn is_destination_floor_with_monster(&self) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::IsDestinationFloorWithMonster() > 0 }
-    }
-
-    /// Loads the sprites of monsters that appear on the current floor because of a mission,
-    /// if applicable.
-    ///
-    /// This includes monsters to be rescued, outlaws and its minions.
-    pub fn load_mission_monster_sprites(&mut self) {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::LoadMissionMonsterSprites() }
     }
 
     /// Returns the index of the room that contains the stairs.
@@ -1048,6 +1106,21 @@ impl<'a> GlobalDungeonData<'a> {
         ffi::LoadFixedRoomData()
     }
 
+    /// Loads fixed room data from BALANCE/fixed.bin into the buffer pointed to by
+    /// `FIXED_ROOM_DATA_PTR` (see symbol table).
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn load_fixed_room(
+        &mut self,
+        param_1: i32,
+        param_2: i32,
+        param_3: i32,
+        param_4: ffi::undefined4,
+    ) -> i32 {
+        ffi::LoadFixedRoom(param_1, param_2, param_3, param_4)
+    }
+
     /// Sets the forced loss reason to a given value.
     pub fn set_forced_loss_reason(&mut self, reason: ForcedLossReason) {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
@@ -1069,12 +1142,6 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::ChangeLeader() }
     }
 
-    /// Gets the sprite index of the specified monster on this floor
-    pub fn get_monster_sprite_index(&self, monster_idx: MonsterSpeciesId) -> u16 {
-        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::GetSpriteIndex(monster_idx) }
-    }
-
     /// Handles a fainted monster (reviving does not count as fainting).
     ///
     /// # Arguments
@@ -1084,7 +1151,7 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn handle_faint(
         &mut self,
         fainted_entity: &mut DungeonEntity,
-        faint_reason: i32,
+        faint_reason: ffi::faint_reason,
         killer: &mut DungeonEntity,
     ) {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
@@ -1244,6 +1311,18 @@ impl<'a> GlobalDungeonData<'a> {
         ffi::RunLeaderTurn(param_1) > 0
     }
 
+    /// Sets the leader's action field depending on the inputs given by the player.
+    ///
+    /// This function also accounts for other special situations that can force a certain action,
+    /// such as when the leader is running. The function also takes care of opening the main menu
+    /// when X is pressed.
+    ///
+    /// The function generally doesn't return until the player has an action set.
+    pub fn set_leader_action(&mut self) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::SetLeaderAction() }
+    }
+
     /// Called at the beginning of [`Self::run_fractional_turn`]. Executed only if
     /// FRACTIONAL_TURN_SEQUENCE\[fractional_turn * 2\] is not 0.
     /// First it calls [`Self::try_spawn_monster_and_tick_spawn_counter`], then tries to activate
@@ -1280,18 +1359,6 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::GetKecleonIdToSpawnByFloor() }
     }
 
-    /// Loads the sprite of the specified monster to use it in a dungeon.
-    ///
-    /// # Safety
-    /// The caller must make sure the undefined params are valid for this function.
-    pub unsafe fn load_monster_sprite(
-        &mut self,
-        monster_id: MonsterSpeciesId,
-        param_2: ffi::undefined,
-    ) {
-        ffi::LoadMonsterSprite(monster_id, param_2)
-    }
-
     /// If the monster id parameter is 0x97 (Mew), returns false if either
     /// [`ffi::dungeon::mew_cannot_spawn`] or the second parameter are true.
     ///
@@ -1299,6 +1366,12 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn mew_spawn_check(&self, monster_id: MonsterSpeciesId, force_fail_if_mew: bool) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::MewSpawnCheck(monster_id, force_fail_if_mew as ffi::bool_) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn get_random_spawn_monster_id(&self) -> MonsterSpeciesId {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GetRandomSpawnMonsterID() }
     }
 
     /// Returns an entity reference to the first team member which has the specified iq skill.
@@ -1375,6 +1448,14 @@ impl<'a> GlobalDungeonData<'a> {
         )
     }
 
+    /// Generates the monster ID in the egg from the given mission. Uses the base form of the monster.
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn generate_mission_egg_monster(&mut self, mission: &mut ffi::mission) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::GenerateMissionEggMonster(mission) }
+    }
+
     /// Spawns the given monster on a tile. Returns None, if the game returned a null-pointer after
     /// the spawn.
     pub fn spawn_monster(
@@ -1388,6 +1469,157 @@ impl<'a> GlobalDungeonData<'a> {
             None
         } else {
             Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// A convenience wrapper around `Self::spawn_trap` and `DungeonTile::bind_trap`
+    /// (or to be precise the game's functions, see implementation!).
+    ///
+    /// Always passes 0 for the team parameter (making it an enemy trap).
+    pub fn spawn_enemy_trap_bound(
+        &mut self,
+        trap_id: TrapId,
+        x_position: i16,
+        y_position: i16,
+        flags: u8,
+        is_visible: bool,
+    ) {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe {
+            ffi::SpawnEnemyTrapAtPos(
+                trap_id,
+                x_position,
+                y_position,
+                flags,
+                is_visible as ffi::bool_,
+            )
+        };
+    }
+
+    /// Spawns a trap on the floor. Fails if there are more than 64 traps already on the floor.
+    ///
+    /// This modifies the appropriate fields on the dungeon struct, initializing new entries
+    /// in the entity table and the trap info list.
+    pub fn spawn_trap(
+        &mut self,
+        trap_id: TrapId,
+        position: &ffi::position,
+        team: u8,
+        flags: u8,
+    ) -> Option<&mut DungeonEntity> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        let ptr = unsafe { ffi::SpawnTrap(trap_id, force_mut_ptr!(position), team, flags) };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// Spawns an item on the floor. Fails if there are more than 64 items already on the floor.
+    ///
+    /// This calls [`Self::spawn_item_entity`], fills in the item info struct, sets the entity to
+    /// be visible, binds the entity to the tile it occupies, updates the n_items counter on the
+    /// dungeon struct, and various other bits of bookkeeping.
+    ///
+    /// Hint: Consider using [`Self::generate_and_spawn_item`] instead for ease of use.
+    pub fn spawn_item(
+        &'a mut self,
+        position: &ffi::position,
+        item: &'a mut Item,
+        flag: bool,
+    ) -> bool {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        unsafe { ffi::SpawnItem(force_mut_ptr!(position), item, flag as ffi::bool_) > 0 }
+    }
+
+    /// Generates an item with [`Item::generate_explicit`], then spawns it with
+    /// [`Self::spawn_item`].
+    ///
+    /// If the check-in-bag flag is set and the player's bag already contains an item with the
+    /// given ID, a Reviver Seed will be spawned instead.
+    ///
+    /// It seems like this function is only ever called in one place, with an item ID of 0x49
+    /// (Reviver Seed).
+    pub fn generate_and_spawn_item(
+        &mut self,
+        item_id: ItemId,
+        x: i16,
+        y: i16,
+        quantity: u16,
+        sticky: bool,
+        check_in_bag: bool,
+    ) {
+        unsafe {
+            ffi::GenerateAndSpawnItem(
+                item_id,
+                x,
+                y,
+                quantity,
+                sticky as ffi::bool_,
+                check_in_bag as ffi::bool_,
+            )
+        }
+    }
+
+    /// Spawns a blank item entity on the floor.
+    /// Fails if there are more than 64 items already on the floor.
+    ///
+    /// This initializes a new entry in the entity table and points it to the corresponding
+    /// slot in the item info list.
+    pub fn spawn_item_entity(&mut self, position: &ffi::position) -> Option<&mut DungeonEntity> {
+        // SAFETY: We hold a valid mutable reference to the global dungeon struct.
+        let ptr = unsafe { ffi::SpawnItemEntity(force_mut_ptr!(position)) };
+        if ptr.is_null() {
+            None
+        } else {
+            Some(unsafe { &mut *ptr })
+        }
+    }
+
+    /// Appears to spawn an enemy item drop at a specified location, with a log message.
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn spawn_enemy_item_drop(
+        &mut self,
+        entity: &mut DungeonEntity,
+        item_entity: &mut DungeonEntity,
+        item: &mut Item,
+        param_4: i32,
+        dir_xy: &mut i16,
+        param_6: ffi::undefined,
+    ) {
+        ffi::SpawnEnemyItemDrop(entity, item_entity, item, param_4, dir_xy, param_6)
+    }
+
+    /// Wraps [`Self::spawn_enemy_item_drop`] in a more convenient interface.
+    ///
+    /// # Safety
+    /// The caller must make sure the undefined params are valid for this function.
+    pub unsafe fn spawn_enemy_item_drop_wrapper(
+        &mut self,
+        entity: &mut DungeonEntity,
+        pos: &mut ffi::position,
+        item: &mut Item,
+        param_4: ffi::undefined4,
+    ) {
+        ffi::SpawnEnemyItemDropWrapper(entity, pos, item, param_4)
+    }
+
+    /// Determine if a defeated monster should drop a Unown Stone, and generate the item if so.
+    ///
+    /// Checks that the current dungeon isn't a Marowak Dojo training maze, and that the monster
+    /// is an Unown. If so, there's a 21% chance that an Unown Stone will be generated.
+    pub fn try_generate_unown_drop(monster_id: MonsterSpeciesId) -> Option<Item> {
+        unsafe {
+            let mut res: MaybeUninit<Item> = MaybeUninit::zeroed();
+            let generated = ffi::TryGenerateUnownStoneDrop(res.as_mut_ptr(), monster_id) > 0;
+            if generated {
+                Some(res.assume_init())
+            } else {
+                None
+            }
         }
     }
 
@@ -1421,15 +1653,16 @@ impl<'a> GlobalDungeonData<'a> {
         unsafe { ffi::GetDungeonGenInfoUnk0C() }
     }
 
-    /// Checks if a value obtained from [`ffi::team_member::field_0x8`] is equal to certain values.
+    /// Checks if a value obtained from [`ffi::team_member::member_index`] is equal to certain
+    /// values.
     ///
     /// This is known to return true for some or all of the guest monsters (if the value is equal
     /// to 0x55AA or 0x5AA5).
     ///
     /// # Note
     /// The underlying function [`ffi::CheckTeamMemberField8`] does not need overlay29 to be loaded.
-    pub fn check_team_member_field_8(&self, team_member: &ffi::team_member) -> bool {
-        unsafe { ffi::CheckTeamMemberField8(team_member.field_0x8) > 0 }
+    pub fn check_team_member_index(&self, team_member: &ffi::team_member) -> bool {
+        unsafe { ffi::CheckTeamMemberField8(team_member.member_index as ffi::undefined2) > 0 }
     }
 
     /// Checks whether any of the items in the bag or any of the items carried by team members has
@@ -1447,6 +1680,12 @@ impl<'a> GlobalDungeonData<'a> {
     pub fn check_active_challenge_request(&self) -> bool {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
         unsafe { ffi::CheckActiveChallengeRequest() > 0 }
+    }
+
+    /// Check if the current dungeon is one of the training mazes in Marowak Dojo
+    /// (this excludes Final Maze).
+    pub fn is_marowak_training_maze(&self) -> bool {
+        unsafe { ffi::IsMarowakTrainingMaze() > 0 }
     }
 
     #[cfg_attr(docsrs, doc(cfg(feature = "eu")))]

@@ -432,6 +432,24 @@ impl ScriptVariables {
         unsafe { ffi::InitDungeonListScriptVars() }
     }
 
+    /// Allocates a new global progress struct.
+    ///
+    /// This updates the global pointer and returns a copy of that pointer.
+    ///
+    /// # Safety
+    /// Calls to this function may deallocate old global progress structs.
+    pub unsafe fn global_progress_alloc<'a, 'b>(&'a mut self) -> &'b mut ffi::global_progress
+    where
+        'b: 'a,
+    {
+        unsafe { &mut *ffi::GlobalProgressAlloc() }
+    }
+
+    /// Zero-initializes the global progress struct.
+    pub fn reset_global_progress(&mut self) {
+        unsafe { ffi::ResetGlobalProgress() }
+    }
+
     /// Saves scenario flag script variables (SCENARIO_SELECT, SCENARIO_MAIN_BIT_FLAG) to their
     /// respective BACKUP script variables, but only in certain game modes.
     ///
