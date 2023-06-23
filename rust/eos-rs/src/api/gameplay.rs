@@ -3,7 +3,7 @@
 use crate::api::dungeons::DungeonId;
 use crate::api::enums::{MissionGenerationResult, MissionType};
 use crate::api::iq::IqSkillId;
-use crate::api::items::ItemId;
+use crate::api::items::Item;
 use crate::api::monsters::MonsterSpeciesId;
 use crate::ctypes::c_int;
 use crate::ffi;
@@ -74,6 +74,41 @@ pub fn get_language() -> i32 {
 /// from there, otherwise the default fallback team will be set.
 pub fn init_main_team_after_quiz() {
     unsafe { ffi::InitMainTeamAfterQuiz() }
+}
+
+/// Implements SPECIAL_PROC_ADD_ITEM_TO_BAG.
+///
+/// See [`crate::api::items::InventoryBag::add_item`].
+pub fn script_special_process_add_item_to_bag(item: &mut ffi::bulk_item) -> bool {
+    unsafe { ffi::SpecialProcAddItemToBag(item) > 0 }
+}
+
+/// Implements SPECIAL_PROC_0x39.
+///
+/// See [`crate::api::items::InventoryStorage::is_full`].
+pub fn script_special_process_0x39() -> bool {
+    unsafe { ffi::ScriptSpecialProcess0x39() > 0 }
+}
+
+/// Implements SPECIAL_PROC_COUNT_ITEM_TYPE_IN_STORAGE.
+///
+/// See [`crate::api::items::InventoryStorage::count_item_type`].
+pub fn script_special_process_count_item_type_in_storage(item: &ffi::bulk_item) -> i32 {
+    unsafe { ffi::CountItemTypeInStorage(force_mut_ptr!(item)) }
+}
+
+/// Implements SPECIAL_PROC_0x2A.
+///
+/// See [`crate::api::items::InventoryStorage::remove_item`].
+pub fn script_special_process_remove_items_type_in_storage(item: &mut ffi::bulk_item) -> bool {
+    unsafe { ffi::RemoveItemsTypeInStorage(item) > 0 }
+}
+
+/// Implements SPECIAL_PROC_ADD_ITEM_TO_STORAGE.
+///
+/// See [`crate::api::items::InventoryStorage::add_item`].
+pub fn script_special_process_add_item_to_storage(item: &mut ffi::bulk_item) -> bool {
+    unsafe { ffi::AddItemToStorage(item) > 0 }
 }
 
 /// Implements SPECIAL_PROC_0x3.
@@ -305,8 +340,8 @@ impl AdventureLog {
     }
 
     /// Marks one specific item as acquired.
-    pub fn set_item_acquired(&mut self, item_id: ItemId) {
-        unsafe { ffi::SetItemAcquired(item_id) };
+    pub fn set_item_acquired(&mut self, item: &Item) {
+        unsafe { ffi::SetItemAcquired(force_mut_ptr!(item)) };
     }
 
     /// Sets a challenge letter as cleared.

@@ -128,17 +128,26 @@ pub fn set_debug_flag2(flag_id: u32, value: u32) {
     unsafe { ffi::SetDebugFlag2(flag_id, value) }
 }
 
-/// Unpatched this function will always returns true.
+/// Check whether the given button is held.
 ///
-/// # Background information
-/// This function seems to be a debug switch that the developers may have used to disable the
-/// random enemy spawn.
-/// If it returned false, the call to `[GlobalDungeonData::spawn_monster]` inside
-/// `[GlobalDungeonData::try_spawn_monster_and_tick_spawn_counter]` would not be executed.
+/// # Safety
+/// The caller must make sure the undefined params are valid for this function.
+pub unsafe fn is_button_held(controller_id: i32, button: &mut ffi::undefined) -> bool {
+    unsafe { ffi::GetHeldButtons(controller_id, button) > 0 }
+}
+
+/// Check whether the given button is pressed.
 ///
-/// [GlobalDungeonData::spawn_monster]: crate::api::dungeon_mode::dungeon_struct::GlobalDungeonData::spawn_monster
-/// [GlobalDungeonData::try_spawn_monster_and_tick_spawn_counter]: crate::api::dungeon_mode::dungeon_struct::GlobalDungeonData::try_spawn_monster_and_tick_spawn_counter
-pub fn is_debug_flag_monster_spawns_enabled() -> bool {
-    // SAFETY: This is more or less an "atomic" operation.
-    unsafe { ffi::MonsterSpawnsEnabled() > 0 }
+/// # Safety
+/// The caller must make sure the undefined params are valid for this function.
+pub unsafe fn is_button_pressed(controller_id: i32, button: &mut ffi::undefined) -> bool {
+    unsafe { ffi::GetPressedButtons(controller_id, button) > 0 }
+}
+
+/// Check whether the touch screen is released.
+///
+/// # Safety
+/// The caller must make sure the undefined params are valid for this function.
+pub unsafe fn is_touch_screen_released(stylus: &mut ffi::undefined) -> bool {
+    unsafe { ffi::GetReleasedStylus(stylus) > 0 }
 }

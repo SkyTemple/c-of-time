@@ -117,7 +117,7 @@ impl<'a, const W: usize, const H: usize> DungeonTileGridWrite<W, H>
     }
 
     fn insert(&mut self, x: usize, y: usize, tile: DungeonTile) {
-        let mut otile = unsafe { &mut *self.0[y][x] };
+        let otile = unsafe { &mut *self.0[y][x] };
         otile._bitfield_align_1 = tile._bitfield_align_1;
         otile._bitfield_1 = tile._bitfield_1;
         otile.spawn_or_visibility_flags = tile.spawn_or_visibility_flags;

@@ -6,9 +6,14 @@ use crate::api::enums::{MoveCategory, Weather};
 use crate::api::items::ItemId;
 use crate::api::types::MonsterTypeId;
 use crate::ffi;
+use core::ffi::CStr;
+use core::mem::MaybeUninit;
 
 /// A monster move.
 pub type Move = ffi::move_;
+
+/// A monster move in ground move.
+pub type GroundMove = ffi::ground_move;
 
 /// A move ID with associated methods to get metadata.
 ///
@@ -182,30 +187,36 @@ impl Move {
     pub unsafe fn init(move_pnt: *mut Self, move_id: MoveId) {
         ffi::InitMove(move_pnt, move_id)
     }
+
     /// Returns the move ID
     pub fn id(&self) -> MoveId {
         self.id.val()
     }
 
     /// Gets the move target-and-range field. See struct move_target_and_range in the C headers.
-    pub fn get_target_and_range(&self, is_ai: bool) -> MoveTargetAndRange {
+    pub fn tarand_range(&self, is_ai: bool) -> MoveTargetAndRange {
         unsafe { ffi::GetMoveTargetAndRange(force_mut_ptr!(self), is_ai as ffi::bool_) }.into()
     }
 
     /// Gets the base power of the move.
-    pub fn get_base_power(&self) -> i32 {
+    pub fn base_power(&self) -> i32 {
         unsafe { ffi::GetMoveBasePower(force_mut_ptr!(self)) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn base_pp(&self) -> u8 {
+        unsafe { ffi::GetMoveBasePp(force_mut_ptr!(self)) }
     }
 
     /// Gets the maximum PP for the move.
     ///
     /// Returns max PP for the given move, capped at 99.
-    pub fn get_max_pp(&self) -> i32 {
+    pub fn max_pp(&self) -> i32 {
         unsafe { ffi::GetMaxPp(force_mut_ptr!(self)) }
     }
 
     /// Gets the critical hit chance of the move.
-    pub fn get_crit_chance(&self) -> i32 {
+    pub fn crit_chance(&self) -> i32 {
         unsafe { ffi::GetMoveCritChance(force_mut_ptr!(self)) }
     }
 
@@ -220,22 +231,22 @@ impl Move {
     }
 
     /// Gets the AI weight of a move.
-    pub fn get_ai_weight(&self) -> u8 {
+    pub fn ai_weight(&self) -> u8 {
         unsafe { ffi::GetMoveAiWeight(force_mut_ptr!(self)) }
     }
 
     /// Gets the accuracy1 value for the move.
-    pub fn get_accuracy1(&self) -> u8 {
+    pub fn accuracy1(&self) -> u8 {
         unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 0) }
     }
 
     /// Gets the accuracy2 value for the move.
-    pub fn get_accuracy2(&self) -> u8 {
+    pub fn accuracy2(&self) -> u8 {
         unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 1) }
     }
 
     /// Gets the `ai_condition_random_chance` value for the move.
-    pub fn get_ai_condition_random_chance(&self) -> u8 {
+    pub fn ai_condition_random_chance(&self) -> u8 {
         unsafe { ffi::GetMoveAccuracyOrAiChance(force_mut_ptr!(self), 2) }
     }
 
@@ -256,7 +267,7 @@ impl Move {
     ///
     /// If it's true, there's a bunch of manual ID checks that result on a certain hardcoded return
     /// value.
-    pub fn get_animation_id(
+    pub fn animation_id(
         &self,
         apparent_weather: Weather,
         should_play_alternative_animation: bool,
@@ -268,6 +279,62 @@ impl Move {
                 should_play_alternative_animation as ffi::bool_,
             )
         }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn strikes(&self) -> u8 {
+        unsafe { ffi::GetMoveNbStrikes(force_mut_ptr!(self)) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn max_ginseng_boost(&self) -> u8 {
+        unsafe { ffi::GetMoveMaxGinsengBoost(force_mut_ptr!(self)) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_thawing(&self) -> bool {
+        unsafe { ffi::IsThawingMove(force_mut_ptr!(self)) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_affected_by_taunt(&self) -> bool {
+        unsafe { ffi::IsAffectedByTaunt(force_mut_ptr!(self)) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn range_id(&self) -> u8 {
+        unsafe { ffi::GetMoveRangeId(force_mut_ptr!(self)) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn range_is_user(&self) -> bool {
+        unsafe { ffi::IsMoveRangeString19(force_mut_ptr!(self)) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_sound_move(&self) -> bool {
+        unsafe { ffi::IsSoundMove(force_mut_ptr!(self)) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn to_ground_move(&self) -> GroundMove {
+        let mut out: MaybeUninit<GroundMove> = MaybeUninit::zeroed();
+        unsafe {
+            ffi::DungeonMoveToGroundMove(out.as_mut_ptr(), force_mut_ptr!(self));
+            out.assume_init()
+        }
+    }
+}
+
+impl GroundMove {
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn base_power(&self) -> i16 {
+        unsafe { ffi::GetMoveBasePowerGround(force_mut_ptr!(self)) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn max_ginseng_boost(&self) -> u8 {
+        unsafe { ffi::GetMoveMaxGinsengBoostGround(force_mut_ptr!(self)) }
     }
 }
 
@@ -304,12 +371,104 @@ impl MoveId {
         unsafe { ffi::GetMoveCategory(*self) }.try_into().ok()
     }
 
+    /// Gets the base power of the move.
+    pub fn base_power(&self) -> i32 {
+        unsafe { ffi::GetMoveBasePowerFromId(*self) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn actual_accuracy(&self) -> i32 {
+        unsafe { ffi::GetMoveActualAccuracy(*self) }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn reflected_by_magic_coat(&self) -> bool {
+        unsafe { ffi::IsReflectedByMagicCoat(*self) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn can_be_snatched(&self) -> bool {
+        unsafe { ffi::CanBeSnatched(*self) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn fails_while_muffles(&self) -> bool {
+        unsafe { ffi::FailsWhileMuzzled(*self) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_two_turns(&self) -> bool {
+        unsafe { ffi::Is2TurnsMove(*self) > 0 }
+    }
+
+    /// Checks if a move ID is MOVE_REGULAR_ATTACK or MOVE_PROJECTILE.
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_regular_attack_or_projectile(&self) -> bool {
+        unsafe { ffi::IsRegularAttackOrProjectile(*self) > 0 }
+    }
+
+    /// CheckChecks if a move ID is MOVE_HEALING_WISH or MOVE_LUNAR_DANCE.
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_healing_wish_or_lunar_dance(&self) -> bool {
+        unsafe { ffi::IsHealingWishOrLunarDance(*self) > 0 }
+    }
+
+    /// Checks if a move ID is MOVE_MIMIC, MOVE_SKETCH, or MOVE_COPYCAT.
+    ///
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_copying(&self) -> bool {
+        unsafe { ffi::IsCopyingMove(*self) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_trapping(&self) -> bool {
+        unsafe { ffi::IsTrappingMove(*self) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_one_hit_ko(&self) -> bool {
+        unsafe { ffi::IsOneHitKoMove(*self) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_not_two_turns_or_sketch(&self) -> bool {
+        unsafe { ffi::IsNot2TurnsMoveOrSketch(*self) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_real_move(&self) -> bool {
+        unsafe { ffi::IsRealMove(*self) > 0 }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn is_real_move_in_time_darkness(&self) -> bool {
+        unsafe { ffi::IsRealMoveInTimeDarkness(*self) > 0 }
+    }
+
     /// Gets the faint reason code (see HandleFaint) for a given move-item combination.
     ///         
     /// If there's no item, the reason code is the move ID. If the item is an orb, return
     /// FAINT_REASON_ORB_ITEM. Otherwise, return FAINT_REASON_NON_ORB_ITEM.
     pub fn get_faint_reason(&self, item_id: ItemId) -> ffi::faint_reason {
         get_faint_reason(*self, item_id)
+    }
+
+    /// Returns the name of this move
+    pub fn name(&self) -> &CStr {
+        unsafe {
+            let cstr_raw = &mut *ffi::GetMoveName(*self);
+            CStr::from_ptr(cstr_raw)
+        }
+    }
+
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn message(&self) -> &CStr {
+        unsafe {
+            let cstr_raw = &mut *ffi::GetMoveMessageFromId(*self);
+            CStr::from_ptr(cstr_raw)
+        }
     }
 }
 

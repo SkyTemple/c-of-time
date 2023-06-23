@@ -1,0 +1,1980 @@
+arm9
+
+commit d374078fcf4fe01f667375916476dd59bf0a55e9
+
+    - name: ManipBgmPlayback
+      address:
+        EU: 0x2018F40
+        NA: 0x2018EA4
+        JP: 0x2018EFC
+      description: |-
+        Uncertain. More like bgm1&2 end
+
+        Note: unverified, ported from Irdkwia's notes
+    - name: SoundDriverReset
+      address:
+        EU: 0x2019164
+        NA: 0x20190C8
+        JP: 0x2019120
+      description: |-
+        Uncertain.
+
+        Note: unverified, ported from Irdkwia's notes
+    - name: LoadDseFile
+      address:
+        EU: 0x2019428
+        NA: 0x201938C
+        JP: 0x20193E4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: [output] iovec
+        r1: filename
+        return: bytes read
+    - name: PlaySeLoad
+      address:
+        EU: 0x2019610
+        NA: 0x2019574
+        JP: 0x20195CC
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: PlayBgm
+      address:
+        EU: 0x2019954
+        NA: 0x20198B8
+        JP: 0x2019910
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: StopBgm
+      address:
+        EU: 0x2019BC4
+        NA: 0x2019B28
+        JP: 0x2019B80
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: ChangeBgm
+      address:
+        EU: 0x2019CEC
+        NA: 0x2019C50
+        JP: 0x2019CA8
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: PlayBgm2
+      address:
+        EU: 0x2019E20
+        NA: 0x2019D84
+        JP: 0x2019DDC
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: StopBgm2
+      address:
+        EU: 0x201A084
+        NA: 0x2019FE8
+        JP: 0x201A040
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: ChangeBgm2
+      address:
+        EU: 0x201A184
+        NA: 0x201A0E8
+        JP: 0x201A140
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: PlayME
+      address:
+        EU: 0x201A264
+        NA: 0x201A1C8
+        JP: 0x201A220
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: StopME
+      address:
+        EU: 0x201A4A8
+        NA: 0x201A40C
+        JP: 0x201A464
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: fade_out
+    - name: PlaySe
+      address:
+        EU: 0x201A598
+        NA: 0x201A4FC
+        JP: 0x201A554
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: PlaySeFullSpec
+      address:
+        EU: 0x201A708
+        NA: 0x201A66C
+        JP: 0x201A6C4
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: SeChangeVolume
+      address:
+        EU: 0x201A8C4
+        NA: 0x201A828
+        JP: 0x201A880
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: SeChangePan
+      address:
+        EU: 0x201A99C
+        NA: 0x201A900
+        JP: 0x201A958
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: StopSe
+      address:
+        EU: 0x201AA80
+        NA: 0x201A9E4
+        JP: 0x201AA3C
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: ConvertPointersSir0
+      address:
+        EU: 0x201F5D0
+        NA: 0x201F534
+        JP: 0x201F58C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: sir0_ptr
+    - name: DecompressAtNormal
+      address:
+        EU: 0x201F668
+        NA: 0x201F5CC
+        JP: 0x201F624
+      description: |-
+        Overwrites r3 probably passed to match DecompressAtHalf's definition.
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: addr_decomp
+        r1: expected_size
+        r2: AT pointer
+        return: ?
+    - name: DecompressAtHalf
+      address:
+        EU: 0x201FAAC
+        NA: 0x201FA10
+        JP: 0x201FA68
+      description: |-
+        Same as DecompressAtNormal, except it stores each nibble as a byte
+        and adds the high nibble (r3).
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: addr_decomp
+        r1: expected_size
+        r2: AT pointer
+        r3: high_nibble
+        return: ?
+    - name: DecompressAtFromMemoryPointer
+      address:
+        EU: 0x201FFF4
+        NA: 0x201FF58
+        JP: 0x201FFB0
+      description: |-
+        Overwrites r3 probably passed to match DecompressAtHalf's definition.
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: addr_decomp
+        r1: expected_size
+        r2: AT pointer
+        return: ?
+    - name: WriteByteFromMemoryPointer
+      address:
+        EU: 0x202050C
+        NA: 0x2020470
+        JP: 0x20204C8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: byte
+    - name: GetAtSize
+      address:
+        EU: 0x2020588
+        NA: 0x20204EC
+        JP: 0x2020544
+      description: |-
+        Doesn't work for AT3PX and AT4PN
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: AT pointer
+        r1: ?
+        return: ?
+    - name: GetStringFromFile
+      address:
+        EU: 0x2025A54
+        NA: 0x2025788
+        JP: 0x2025768
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: Buffer
+        r1: String ID
+    - name: LoadStringFile
+      address:
+        EU: 0x2025AE4
+        NA: 0x2025818
+        JP: 0x20257F8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: GetTalkLine
+      address:
+        EU: 0x2025C58
+        NA: 0x202598C
+        JP: 0x202596C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: personality_index
+        r1: group_id
+        r2: restrictions
+        return: ?
+    - name: CreateNormalMenu
+      address:
+        EU: 0x202B3E0
+        NA: 0x202B0EC
+        JP: 0x202B444
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: layout_struct_ptr
+        r1: menu_flags
+        r2: additional_info_ptr
+        r3: menu_struct_ptr
+        stack[0]: option_id
+        return: menu_id
+    - name: FreeNormalMenu
+      address:
+        EU: 0x202B7B8
+        NA: 0x202B4C4
+        JP: 0x202B81C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: menu_id
+    - name: IsNormalMenuActive
+      address:
+        EU: 0x202B7E4
+        NA: 0x202B4F0
+        JP: 0x202B848
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: menu_id
+        return: bool
+    - name: GetNormalMenuResult
+      address:
+        EU: 0x202B870
+        NA: 0x202B57C
+        JP: 0x202B8D4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: menu_id
+        return: ?
+    - name: CreateAdvancedMenu
+      address:
+        EU: 0x202BD14
+        NA: 0x202BA20
+        JP: 0x202BD78
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: layout_struct_ptr
+        r1: menu_flags
+        r2: additional_info_ptr
+        r3: entry_function
+        stack[0]: nb_options
+        stack[1]: nb_opt_pp
+        return: menu_id
+    - name: FreeAdvancedMenu
+      address:
+        EU: 0x202BF38
+        NA: 0x202BC44
+        JP: 0x202BF9C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: menu_id
+    - name: IsAdvancedMenuActive
+      address:
+        EU: 0x202BFD0
+        NA: 0x202BCDC
+        JP: 0x202C034
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: menu_id
+        return: bool
+    - name: GetAdvancedMenuCurrentOption
+      address:
+        EU: 0x202BFF0
+        NA: 0x202BCFC
+        JP: 0x202C054
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: menu_id
+        return: ?
+    - name: GetAdvancedMenuResult
+      address:
+        EU: 0x202C004
+        NA: 0x202BD10
+        JP: 0x202C068
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: menu_id
+        return: ?
+    - name: CreateDBox
+      address:
+        EU: 0x202F3A4
+        NA: 0x202F0B0
+        JP: 0x202F3F4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: layout_struct_ptr
+        return: dbox_id
+    - name: FreeDBox
+      address:
+        EU: 0x202F43C
+        NA: 0x202F148
+        JP: 0x202F48C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dbox_id
+    - name: IsDBoxActive
+      address:
+        EU: 0x202F474
+        NA: 0x202F180
+        JP: 0x202F4C4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dbox_id
+        return: bool
+    - name: ShowMessageInDBox
+      address:
+        EU: 0x202F4A8
+        NA: 0x202F1B4
+        JP: 0x202F4F8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dbox_id
+        r1: ???
+        r2: string_id
+        r3: ???
+    - name: ShowDBox
+      address:
+        EU: 0x202F698
+        NA: 0x202F3A4
+        JP: 0x202F6E8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dbox_id
+    - name: CreatePortraitBox
+      address:
+        EU: 0x202F8A0
+        NA: 0x202F5AC
+        JP: 0x202F8F0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: ???
+        r1: ???
+        r2: ???
+        return: dbox_id
+    - name: FreePortraitBox
+      address:
+        EU: 0x202F944
+        NA: 0x202F650
+        JP: 0x202F994
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dbox_id
+    - name: ShowPortraitBox
+      address:
+        EU: 0x202F984
+        NA: 0x202F690
+        JP: 0x202F9D4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dbox_id
+        r1: portrait_ptr
+    - name: HidePortraitBox
+      address:
+        EU: 0x202F9D0
+        NA: 0x202F6DC
+        JP: 0x202FA20
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dbox_id
+    - name: ShowKeyboard
+      address:
+        EU: 0x2036AE4
+        NA: 0x20367F0
+        JP: 0x2036B08
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: MessageID
+        r1: buffer1
+        r2: ???
+        r3: buffer2
+        return: ?
+    - name: GetKeyboardStatus
+      address:
+        EU: 0x2036FD0
+        NA: 0x2036CD4
+        JP: 0x2036FF0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: GetKeyboardStringResult
+      address:
+        EU: 0x2037858
+        NA: 0x203755C
+        JP: 0x203789C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: PrintMoveOptionMenu
+      address:
+        EU: 0x20405BC
+        NA: 0x20402C0
+        JP: 0x204064C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: ReadStringSave
+      address:
+        EU: 0x2048ED0
+        NA: 0x2048BB4
+        JP: 0x2048F20
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+    - name: CheckStringSave
+      address:
+        EU: 0x2048EEC
+        NA: 0x2048BD0
+        JP: 0x2048F3C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+        return: bool
+    - name: WriteSaveFile
+      address:
+        EU: 0x2049190
+        NA: 0x2048E74
+        JP: 0x20491E0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: save_info
+        r1: buffer
+        r2: size
+        return: status code
+    - name: ReadSaveFile
+      address:
+        EU: 0x20491EC
+        NA: 0x2048ED0
+        JP: 0x204923C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: save_info
+        r1: buffer
+        r2: size
+        return: status code
+    - name: CalcChecksum
+      address:
+        EU: 0x2049240
+        NA: 0x2048F24
+        JP: 0x2049290
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+        r1: size
+    - name: CheckChecksum
+      address:
+        EU: 0x2049268
+        NA: 0x2048F4C
+        JP: 0x20492B8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+        r1: size
+        return: check_ok
+    - name: WriteQuickSaveInfo
+      address:
+        EU: 0x2049564
+        NA: 0x2049248
+        JP: 0x20495B4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+        r1: size
+    - name: ReadSaveHeader
+      address:
+        EU: 0x2049588
+        NA: 0x204926C
+        JP: 0x20495D8
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: ReadQuickSaveInfo
+      address:
+        EU: 0x2049960
+        NA: 0x2049628
+        JP: 0x2049994
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+        r1: size
+    - name: HasPlayedOldGame
+      address:
+        EU: 0x204CDA8
+        NA: 0x204CA70
+        JP: 0x204CDD0
+      description: |-
+        Returns the value of the VAR_PLAY_OLD_GAME script variable.
+
+        return: bool
+    - name: GetPerformanceFlagWithChecks
+      address:
+        EU: 0x204CDCC
+        NA: 0x204CA94
+        JP: 0x204CDF4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: flag_id
+        return: ?
+    - name: GetScenarioBalance
+      address:
+        EU: 0x204CECC
+        NA: 0x204CB94
+        JP: 0x204CEF4
+      description: |-
+        Includes special cases such as special episodes
+
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: SetDungeonConquest
+      address:
+        EU: 0x204D270
+        NA: 0x204CF38
+        JP: 0x204D298
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        r1: bit_value
+    - name: CheckDungeonOpen
+      address:
+        EU: 0x204D2D4
+        NA: 0x204CF9C
+        JP: 0x204D2FC
+      description: |-
+        Related to dungeon open list
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: status code?
+    - name: SetMonsterFlag1
+      address:
+        EU: 0x204D484
+        NA: 0x204D14C
+        JP: 0x204D4AC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: monster ID
+    - name: GetMonsterFlag1
+      address:
+        EU: 0x204D4C0
+        NA: 0x204D188
+        JP: 0x204D4E8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: monster ID
+        return: ?
+    - name: SetMonsterFlag2
+      address:
+        EU: 0x204D4FC
+        NA: 0x204D1C4
+        JP: 0x204D524
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: monster ID
+    - name: SetMaxReachedFloor
+      address:
+        EU: 0x204D614
+        NA: 0x204D2DC
+        JP: 0x204D63C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        r1: max floor
+    - name: GetMaxReachedFloor
+      address:
+        EU: 0x204D630
+        NA: 0x204D2F8
+        JP: 0x204D658
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: max floor
+    - name: IncrementNbAdventures
+      address:
+        EU: 0x204D650
+        NA: 0x204D318
+        JP: 0x204D678
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: GetNbAdventures
+      address:
+        EU: 0x204D684
+        NA: 0x204D34C
+        JP: 0x204D6AC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: # adventures
+    - name: IncrementExclusiveMonsterCounts
+      address:
+        EU: 0x204D6A0
+        NA: 0x204D368
+        JP: 0x204D6C8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: monster ID
+    - name: CopyProgressInfoTo
+      address:
+        EU: 0x204D6F8
+        NA: 0x204D3C0
+        JP: 0x204D720
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: write_info
+        others: ?
+    - name: CopyProgressInfoFromScratchTo
+      address:
+        EU: 0x204D880
+        NA: 0x204D548
+        JP: 0x204D8A8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: start_address
+        r1: total_length
+        return: ?
+    - name: CopyProgressInfoFrom
+      address:
+        EU: 0x204D8B8
+        NA: 0x204D580
+        JP: 0x204D8E0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: read_info
+    - name: CopyProgressInfoFromScratchFrom
+      address:
+        EU: 0x204DA80
+        NA: 0x204D748
+        JP: 0x204DAA8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: start_address
+        r1: total_length
+    - name: SetPortraitMonsterId
+      address:
+        EU: 0x204DB0C
+        NA: 0x204D7D4
+        JP: 0x204DB34
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: portrait_ptr
+        r1: monster ID
+    - name: SetPortraitExpressionId
+      address:
+        EU: 0x204DB2C
+        NA: 0x204D7F4
+        JP: 0x204DB54
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: portrait_ptr
+        r1: expression_id
+    - name: SetPortraitUnknownAttr
+      address:
+        EU: 0x204DB3C
+        NA: 0x204D804
+        JP: 0x204DB64
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: portrait_ptr
+        r1: attr
+    - name: SetPortraitAttrStruct
+      address:
+        EU: 0x204DB80
+        NA: 0x204D848
+        JP: 0x204DBA8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: portrait_ptr
+        r1: attr_ptr
+    - name: LoadPortrait
+      address:
+        EU: 0x204DBF4
+        NA: 0x204D8BC
+        JP: 0x204DC1C
+      description: |-
+        If buffer_portrait is null, it only checks if it exists
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: portrait_ptr
+        r1: buffer_portrait
+        return: exists
+    - name: GetGroundNameId
+      address:
+        EU: 0x204FC90
+        NA: 0x204F958
+        JP: 0x204FCAC
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: CopyLogTo
+      address:
+        EU: 0x2050884
+        NA: 0x205054C
+        JP: 0x2050898
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: write_info
+    - name: CopyLogFrom
+      address:
+        EU: 0x2050A70
+        NA: 0x2050738
+        JP: 0x2050A84
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: read_info
+    - name: GetAbilityString
+      address:
+        EU: 0x2050C54
+        NA: 0x205091C
+        JP: 0x2050C68
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+        r1: ability ID
+    - name: GetAbilityDescStringId
+      address:
+        EU: 0x2050C74
+        NA: 0x205093C
+        JP: 0x2050C88
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: ability ID
+        return: string ID
+    - name: GetTypeStringId
+      address:
+        EU: 0x2050C88
+        NA: 0x2050950
+        JP: 0x2050C9C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: type ID
+        return: string ID
+    - name: CopyBitsTo
+      address:
+        EU: 0x2050CF8
+        NA: 0x20509C0
+        JP: 0x2050D0C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: write_info
+        r1: buffer_write
+        r2: nb_bits
+    - name: CopyBitsFrom
+      address:
+        EU: 0x2050D78
+        NA: 0x2050A40
+        JP: 0x2050D8C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: read_info
+        r1: buffer_read
+        r2: nb_bits
+    - name: StoreDefaultTeamName
+      address:
+        EU: 0x2050E04
+        NA: 0x2050ACC
+        JP: 0x2050E18
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: GetTeamNameCheck
+      address:
+        EU: 0x2050E48
+        NA: 0x2050B10
+        JP: 0x2050E60
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+    - name: GetTeamName
+      address:
+        EU: 0x2050EB4
+        NA: 0x2050B7C
+        JP: 0x2050ECC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+    - name: SetTeamName
+      address:
+        EU: 0x2050ECC
+        NA: 0x2050B94
+        JP: 0x2050EE4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: buffer
+    - name: GetTurnLimit
+      address:
+        EU: 0x20515E8
+        NA: 0x20512B0
+        JP: 0x2051600
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: turn limit
+    - name: DoesNotSaveWhenEntering
+      address:
+        EU: 0x2051600
+        NA: 0x20512C8
+        JP: 0x2051618
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: TreasureBoxDropsEnabled
+      address:
+        EU: 0x2051628
+        NA: 0x20512F0
+        JP: 0x2051640
+      description: |-
+        Checks if enemy Treasure Box drops are enabled in the dungeon.
+
+        r0: dungeon ID
+        return: bool
+    - name: IsLevelResetDungeon
+      address:
+        EU: 0x2051650
+        NA: 0x2051318
+        JP: 0x2051668
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: GetMaxItemsAllowed
+      address:
+        EU: 0x2051678
+        NA: 0x2051340
+        JP: 0x2051690
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: max items allowed
+    - name: IsMoneyAllowed
+      address:
+        EU: 0x2051690
+        NA: 0x2051358
+        JP: 0x20516A8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: IsRecruitingAllowed
+      address:
+        EU: 0x20516D0
+        NA: 0x2051398
+        JP: 0x20516E8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: GetUnknownDungeonOption
+      address:
+        EU: 0x2051720
+        NA: 0x20513E8
+        JP: 0x2051738
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: ?
+    - name: CanEnemyEvolve
+      address:
+        EU: 0x2051738
+        NA: 0x2051400
+        JP: 0x2051750
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: GetMaxMembersAllowed
+      address:
+        EU: 0x2051760
+        NA: 0x2051428
+        JP: 0x2051778
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: max members allowed
+    - name: IsIqEnabled
+      address:
+        EU: 0x2051778
+        NA: 0x2051440
+        JP: 0x2051790
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: IsTrapInvisibleWhenAttacking
+      address:
+        EU: 0x20517A0
+        NA: 0x2051468
+        JP: 0x20517B8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: GetUnknownDungeonOption
+      address:
+        EU: 0x2051720
+        NA: 0x20513E8
+        JP: 0x2051738
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: ?
+    - name: CanEnemyEvolve
+      address:
+        EU: 0x2051738
+        NA: 0x2051400
+        JP: 0x2051750
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: GetMaxMembersAllowed
+      address:
+        EU: 0x2051760
+        NA: 0x2051428
+        JP: 0x2051778
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: max members allowed
+    - name: IsIqEnabled
+      address:
+        EU: 0x2051778
+        NA: 0x2051440
+        JP: 0x2051790
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: IsTrapInvisibleWhenAttacking
+      address:
+        EU: 0x20517A0
+        NA: 0x2051468
+        JP: 0x20517B8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+        return: bool
+    - name: GetBagCapacity
+      address:
+        EU: 0x2051B0C
+        NA: 0x20517D4
+        JP: 0x2051B24
+      description: |-
+        Returns the player's bag capacity for a given point in the game.
+
+        r0: scenario_balance
+        return: bag capacity
+    - name: GetBagCapacitySpecialEpisode
+      address:
+        EU: 0x2051B1C
+        NA: 0x20517E4
+        JP: 0x2051B34
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: se_type
+        return: bag capacity
+    - name: GetBgRegionArea
+      address:
+        EU: 0x20521C4
+        NA: 0x2051E8C
+        JP: 0x20521DC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: offset
+        r1: subregion_id
+        r2: region_id
+        return: ?
+    - name: LoadMonsterMd
+      address:
+        EU: 0x2052690
+        NA: 0x2052358
+        JP: 0x20526A8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: GetNameRaw
+      address:
+        EU: 0x20526CC
+        NA: 0x2052394
+        JP: 0x20526E4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dst_ptr
+        r1: id
+    - name: GetName
+      address:
+        EU: 0x2052708
+        NA: 0x20523D0
+        JP: 0x2052720
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dst_ptr
+        r1: id
+        r2: color_id
+    - name: GetNameWithGender
+      address:
+        EU: 0x2052778
+        NA: 0x2052440
+        JP: 0x2052790
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dst_ptr
+        r1: id
+        r2: color_id
+    - name: GetSpeciesString
+      address:
+        EU: 0x2052838
+        NA: 0x2052500
+        JP: 0x205283C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dst_ptr
+        r1: id
+    - name: GetNameString
+      address:
+        EU: 0x2052A00
+        NA: 0x20526C8
+        JP: 0x2052A04
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: name
+    - name: GetSpriteIndex
+      address:
+        EU:
+          - 0x2052A24
+          - 0x2052A40
+          - 0x2052A5C
+        NA:
+          - 0x20526EC
+          - 0x2052708
+          - 0x2052724
+        JP:
+          - 0x2052A28
+          - 0x2052A44
+          - 0x2052A60
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: sprite index
+    - name: GetDexNumber
+      address:
+        EU: 0x2052A78
+        NA: 0x2052740
+        JP: 0x2052A7C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: dex number
+    - name: GetCategoryString
+      address:
+        EU: 0x2052A94
+        NA: 0x205275C
+        JP: 0x2052A98
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: category
+    - name: GetBodySize
+      address:
+        EU: 0x2052AFC
+        NA: 0x20527C4
+        JP: 0x2052AFC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: body size
+    - name: GetShadowSize
+      address:
+        EU: 0x2052B74
+        NA: 0x205283C
+        JP: 0x2052B74
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: shadow size
+    - name: GetSpeedStatus
+      address:
+        EU: 0x2052B90
+        NA: 0x2052858
+        JP: 0x2052B90
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: speed status
+    - name: GetMovementType
+      address:
+        EU: 0x2052BAC
+        NA: 0x2052874
+        JP: 0x2052BAC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: movement type
+    - name: GetRegenSpeed
+      address:
+        EU: 0x2052BC8
+        NA: 0x2052890
+        JP: 0x2052BC8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: regen speed
+    - name: GetShadowSize
+      address:
+        EU: 0x2052B74
+        NA: 0x205283C
+        JP: 0x2052B74
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: shadow size
+    - name: GetSpeedStatus
+      address:
+        EU: 0x2052B90
+        NA: 0x2052858
+        JP: 0x2052B90
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: speed status
+    - name: GetMovementType
+      address:
+        EU: 0x2052BAC
+        NA: 0x2052874
+        JP: 0x2052BAC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: movement type
+    - name: GetRegenSpeed
+      address:
+        EU: 0x2052BC8
+        NA: 0x2052890
+        JP: 0x2052BC8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: regen speed
+    - name: GetBaseOffensiveStat
+      address:
+        EU: 0x2052CFC
+        NA: 0x20529C4
+        JP: 0x2052CFC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        r1: stat index
+        return: base attack/special attack stat
+    - name: GetBaseDefensiveStat
+      address:
+        EU: 0x2052D1C
+        NA: 0x20529E4
+        JP: 0x2052D1C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        r1: stat index
+        return: base defense/special defense stat
+    - name: GetType
+      address:
+        EU: 0x2052D3C
+        NA: 0x2052A04
+        JP: 0x2052D3C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        r1: type index (0 for primary type or 1 for secondary type)
+        return: type
+    - name: GetAbility
+      address:
+        EU: 0x2052D5C
+        NA: 0x2052A24
+        JP: 0x2052D5C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        r1: ability index (0 for primary ability or 1 for secondary ability)
+        return: ability
+    - name: GetRecruitRate2
+      address:
+        EU: 0x2052D7C
+        NA: 0x2052A44
+        JP: 0x2052D7C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: recruit rate 2
+    - name: GetRecruitRate1
+      address:
+        EU: 0x2052D98
+        NA: 0x2052A60
+        JP: 0x2052D98
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: recruit rate 1
+    - name: GetExp
+      address:
+        EU: 0x2052DB4
+        NA: 0x2052A7C
+        JP: 0x2052DB4
+      description: |-
+        Base Formula = ((Level-1)*ExpYield)//10+ExpYield
+        Note: Defeating an enemy without using a move will divide this amount by 2
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        r1: level
+        return: exp
+    - name: GetEvoParameters
+      address:
+        EU: 0x2052DE8
+        NA: 0x2052AB0
+        JP: 0x2052DE8
+      description: |-
+        Bx
+        Has something to do with evolution
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: [output] struct_evo_param
+        r1: id
+    - name: GetTreasureBoxChances
+      address:
+        EU: 0x2052E18
+        NA: 0x2052AE0
+        JP: 0x2052E18
+      description: |-
+        Has something to do with bytes 3C-3E
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        r1: [output] struct_chances
+    - name: GetIqGroup
+      address:
+        EU: 0x2052E60
+        NA: 0x2052B28
+        JP: 0x2052E60
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: IQ group
+    - name: GetScenarioSpawn
+      address:
+        EU: 0x2052E7C
+        NA: 0x2052B44
+        JP: 0x2052E7C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: scenario spawn
+    - name: NeedsItemToSpawn
+      address:
+        EU: 0x2052E98
+        NA: 0x2052B60
+        JP: 0x2052E98
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: bool
+    - name: GetExclusiveItem
+      address:
+        EU: 0x2052EC4
+        NA: 0x2052B8C
+        JP: 0x2052EC4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        r1: determines which exclusive item
+        return: exclusive item
+    - name: GetFamilyIndex
+      address:
+        EU: 0x2052EF0
+        NA: 0x2052BB8
+        JP: 0x2052EF0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: family index
+    - name: LoadM2nAndN2m
+      address:
+        EU: 0x2052F0C
+        NA: 0x2052BD4
+        JP: 0x2052F0C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: IsNotNickname
+      address:
+        EU: 0x205332C
+        NA: 0x2052FB0
+        JP: 0x20532E8
+      description: |-
+        Checks if the string_buffer matches the name of the species
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: string_buffer
+        r1: monster ID
+        return: bool
+    - name: GetLvlStats
+      address:
+        EU: 0x2053B18
+        NA: 0x205379C
+        JP: 0x2053AD4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: [output] level stats
+        r1: monster ID
+        r2: level
+    - name: GetEvoFamily
+      address:
+        EU: 0x205414C
+        NA: 0x2053DD0
+        JP: 0x2054108
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: monster_str
+        r1: evo_family_str
+        return: nb_family
+    - name: ShuffleHiddenPower
+      address:
+        EU: 0x2054344
+        NA: 0x2053FC8
+        JP: 0x2054300
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dmons_addr
+    - name: GetBaseFormBurmyWormadamShellosGastrodonCherrim
+      address:
+        EU: 0x20545CC
+        NA: 0x2054250
+        JP: 0x2054588
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: base form
+    - name: GetBaseFormCastformCherrimDeoxys
+      address:
+        EU: 0x2054714
+        NA: 0x2054398
+        JP: 0x20546D0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: base form
+    - name: GetAllBaseForms
+      address:
+        EU: 0x20547E0
+        NA: 0x2054464
+        JP: 0x205479C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: base form
+    - name: SetMonsterId
+      address:
+        EU: 0x205481C
+        NA: 0x20544A0
+        JP: 0x20547D8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: mons_spawn_str
+        r1: monster ID
+    - name: SetMonsterLevelAndId
+      address:
+        EU: 0x2054824
+        NA: 0x20544A8
+        JP: 0x20547E0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: mons_spawn_str
+        r1: level
+        r2: monster ID
+    - name: IsMonsterValid
+      address:
+        EU: 0x2054AE8
+        NA: 0x205476C
+        JP: 0x2054AA4
+      description: |-
+        Checks if an monster ID is valid.
+
+        r0: monster ID
+        return: bool
+    - name: GetSecondFormIfValid
+      address:
+        EU: 0x2054F20
+        NA: 0x2054BA4
+        JP: 0x2054EDC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: monster ID
+        return: second form
+    - name: GetBaseFormCastformDeoxysCherrim
+      address:
+        EU: 0x2054FA0
+        NA: 0x2054C24
+        JP: 0x2054F5C
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id
+        return: base form
+    - name: BaseFormsEqual
+      address:
+        EU: 0x2055054
+        NA: 0x2054CD8
+        JP: 0x2055010
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id1
+        r1: id2
+        return: if the base forms are the same
+    - name: DexNumbersEqual
+      address:
+        EU: 0x2055140
+        NA: 0x2054DC4
+        JP: 0x20550FC
+      description: |-
+        Each Unown is considered as different
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: id1
+        r1: id2
+        return: bool
+    - name: GendersEqual
+      address:
+        EU: 0x20551C8
+        NA: 0x2054E4C
+        JP: 0x2055184
+      description: |-
+        Checks if the genders for two monster IDs are equal.
+
+        r0: id1
+        r1: id2
+        return: bool
+    - name: GendersEqualNotGenderless
+      address:
+        EU: 0x20551F4
+        NA: 0x2054E78
+        JP: 0x20551B0
+      description: |-
+        Checks if the genders for two monster IDs are equal. Always returns false if either gender is GENDER_GENDERLESS.
+
+        r0: id1
+        r1: id2
+        return: bool
+    - name: GetNbRecruited
+      address:
+        EU: 0x20555F0
+        NA: 0x2055274
+        JP: 0x2055610
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: recruit_str
+    - name: GetMember
+      address:
+        EU: 0x2055924
+        NA: 0x20555A8
+        JP: 0x2055944
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: member_idx
+        return: ?
+    - name: GetHeroStrIdIfExists
+      address:
+        EU: 0x20559CC
+        NA: 0x2055650
+        JP: 0x20559EC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: GetPartnerStrIdIfExists
+      address:
+        EU: 0x20559F8
+        NA: 0x205567C
+        JP: 0x2055A18
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: GetFirstTeamMemberStrIdIfExists
+      address:
+        EU: 0x2055A24
+        NA: 0x20556A8
+        JP: 0x2055A44
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: GetSecondTeamMemberStrIdIfExists
+      address:
+        EU: 0x2055A68
+        NA: 0x20556EC
+        JP: 0x2055A88
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: GetThirdTeamMemberStrIdIfExists
+      address:
+        EU: 0x2055AAC
+        NA: 0x2055730
+        JP: 0x2055ACC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: GetFirstTeamMemberData
+      address:
+        EU: 0x2055B40
+        NA: 0x20557C4
+        JP: 0x2055B60
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: Monster data
+    - name: GetSecondTeamMemberData
+      address:
+        EU: 0x2055B88
+        NA: 0x205580C
+        JP: 0x2055BA8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: Monster data
+    - name: GetThirdTeamMemberData
+      address:
+        EU: 0x2055BD0
+        NA: 0x2055854
+        JP: 0x2055BF0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: Monster data
+    - name: GetFirstEmptyRecruitSlot
+      address:
+        EU: 0x2055CE0
+        NA: 0x2055964
+        JP: 0x2055D00
+      description: |-
+        Returns -1 if there is none
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: ?
+        return: ?
+    - name: IsMonsterIdInNormalRange
+      address:
+        EU: 0x2056610
+        NA: 0x2056294
+        JP: 0x2056630
+      description: |-
+        Checks if a monster ID is in the range [0, 554], meaning it's before the special story monster IDs and secondary gender IDs.
+
+        r0: monster ID
+        return: bool
+    - name: GetTeamMember
+      address:
+        EU: 0x2056738
+        NA: 0x20563BC
+        JP: 0x2056758
+      description: |-
+        Null pointer if -1
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: team_id
+        return: team member
+    - name: RefillTeam
+      address:
+        EU: 0x20580D4
+        NA: 0x2057D58
+        JP: 0x20580EC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: ClearItem
+      address:
+        EU: 0x205856C
+        NA: 0x20581F0
+        JP: 0x20584F0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: team_id
+        r1: check
+    - name: ChangeGiratinaFormIfSkyDungeon
+      address:
+        EU: 0x2058954
+        NA: 0x20585D8
+        JP: 0x20588D8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: dungeon ID
+    - name: WriteMonsterInfoToSave
+      address:
+        EU: 0x2059494
+        NA: 0x2059118
+        JP: 0x2059414
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: start_address
+        r1: total_length
+        return: ?
+    - name: ReadMonsterInfoFromSave
+      address:
+        EU: 0x20595A0
+        NA: 0x2059224
+        JP: 0x2059520
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: start_address
+        r1: total_length
+    - name: WriteMonsterToSave
+      address:
+        EU: 0x20596B0
+        NA: 0x2059334
+        JP: 0x2059630
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: write_info
+        r1: ground_monster
+    - name: ReadMonsterFromSave
+      address:
+        EU: 0x20597C0
+        NA: 0x2059444
+        JP: 0x2059740
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: read_info
+        r1: ground_monster
+    - name: GetEvolutionPossibilities
+      address:
+        EU: 0x2059E94
+        NA: 0x2059B18
+        JP: 0x2059E14
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: ground_monster
+        r1: evo_struct_addr
+    - name: GetMonsterEvoStatus
+      address:
+        EU: 0x205A58C
+        NA: 0x205A210
+        JP: 0x205A50C
+      description: |-
+        evo_status = 0: Not possible now
+        evo_status = 1: Possible now
+        evo_status = 2: No further
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: ground_monster
+        return: evo_status
+    - name: IsMissionValid
+      address:
+        EU: 0x205CDBC
+        NA: 0x205CA40
+        JP: 0x205CD40
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: mission
+        return: bool
+    - name: GetAcceptedMission
+      address:
+        EU: 0x205F454
+        NA: 0x205F0D8
+        JP: 0x205F3D8
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: mission_id
+        return: mission
+    - name: GenerateAllPossibleMonstersList
+      address:
+        EU: 0x205FAD4
+        NA: 0x205F758
+        JP: 0x205FA48
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: DeleteAllPossibleMonstersList
+      address:
+        EU: 0x205FB40
+        NA: 0x205F7C4
+        JP: 0x205FAB4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: GenerateAllPossibleDungeonsList
+      address:
+        EU: 0x205FB70
+        NA: 0x205F7F4
+        JP: 0x205FAE4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: DeleteAllPossibleDungeonsList
+      address:
+        EU: 0x205FC1C
+        NA: 0x205F8A0
+        JP: 0x205FB90
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: GenerateAllPossibleDeliverList
+      address:
+        EU: 0x205FC4C
+        NA: 0x205F8D0
+        JP: 0x205FBC0
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        return: ?
+    - name: DeleteAllPossibleDeliverList
+      address:
+        EU: 0x205FC88
+        NA: 0x205F90C
+        JP: 0x205FBFC
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.
+    - name: CanSendItem
+      address:
+        EU: 0x2063158
+        NA: 0x2062DDC
+        JP: 0x20630C4
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: item ID
+        r1: to_sky
+        return: bool
+    - name: IsAvailableItem
+      address:
+        EU: 0x20637D8
+        NA: 0x206345C
+        JP: 0x2063744
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: item ID
+        return: bool
+    - name: GetAvailableItemDeliveryList
+      address:
+        EU: 0x2063824
+        NA: 0x20634A8
+        JP: 0x2063790
+      description: |-
+        Uncertain.
+
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: item_buffer
+        return: nb_items
+    - name: GetActorMatchingStorageId
+      address:
+        EU: 0x2065D14
+        NA: 0x2065998
+        JP: 0x2065C80
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        r0: actor_id
+        return: storage ID
+    - name: DungeonSwapIdToIdx
+      address:
+        EU: 0x206AAAC
+        NA: 0x206A714
+        JP: 0x206AA08
+      description: |-
+        Converts a dungeon ID to its corresponding index in DUNGEON_SWAP_ID_TABLE, or -1 if not found.
+
+        r0: dungeon ID
+        return: index
+    - name: DungeonSwapIdxToId
+      address:
+        EU: 0x206AAE8
+        NA: 0x206A750
+        JP: 0x206AA44
+      description: |-
+        Converts an index in DUNGEON_SWAP_ID_TABLE to the corresponding dungeon ID, or DUNGEON_DUMMY_0xFF if the index is -1.
+
+        r0: index
+        return: dungeon ID
+    - name: ResumeBgm
+      address:
+        EU: 0x206DD54
+        NA: 0x206D9BC
+        JP: 0x206DCA4
+      description: |-
+        Uncertain.
+
+        Note: unverified, ported from Irdkwia's notes
+    - name: FlushChannels
+      address:
+        EU: 0x2070A0C
+        NA: 0x2070674
+        JP: 0x207095C
+      description: "Note: unverified, ported from Irdkwia's notes"
+    - name: UpdateChannels
+      address:
+        EU: 0x2074824
+        NA: 0x207448C
+        JP: 0x2074774
+      description: |-
+        Note: unverified, ported from Irdkwia's notes
+
+        No params.

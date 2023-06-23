@@ -1,5 +1,6 @@
 //! Structs and functions to interact with the data of dungeons, dungeon groups and fixed rooms
 //! in a general context.
+use crate::api::items::ItemId;
 use crate::api::overlay::OverlayLoadLease;
 use crate::ffi;
 use core::mem::MaybeUninit;
@@ -149,6 +150,11 @@ impl DungeonId {
     /// Checks if enemy Treasure Box drops are enabled in the dungeon.
     pub fn are_treasure_box_drops_enabled(&self) -> bool {
         unsafe { ffi::TreasureBoxDropsEnabled(*self) > 0 }
+    }
+
+    /// Returns whether the given item is available in the dungeon (group?).
+    pub fn is_item_available(&self, item_id: ItemId) -> bool {
+        unsafe { ffi::IsItemAvailableInDungeonGroup(*self, item_id) > 0 }
     }
 }
 

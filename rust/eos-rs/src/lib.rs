@@ -32,7 +32,6 @@
 #![cfg_attr(not(test), no_std)]
 #![feature(alloc_error_handler)]
 #![feature(allocator_api)]
-#![feature(nonnull_slice_from_raw_parts)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 #![allow(clippy::too_many_arguments)]
 

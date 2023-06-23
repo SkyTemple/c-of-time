@@ -20,7 +20,7 @@ impl<'a> DungeonSpriteHandler<'a> {
     /// Gets the sprite index of the specified monster on this floor
     pub fn get_monster_sprite_index(&self, monster_idx: MonsterSpeciesId) -> u16 {
         // SAFETY: We hold a valid mutable reference to the global dungeon struct.
-        unsafe { ffi::GetSpriteIndex(monster_idx) }
+        unsafe { ffi::DungeonGetSpriteIndex(monster_idx) }
     }
 
     /// Loads the sprite of the specified monster to use it in a dungeon.
@@ -39,7 +39,7 @@ impl<'a> DungeonSpriteHandler<'a> {
     ///
     /// Note: unverified, ported from Irdkwia's notes
     pub fn get_total_sprite_file_size(&self, monster_id: MonsterSpeciesId) -> i32 {
-        unsafe { ffi::GetTotalSpriteFileSize(monster_id) }
+        unsafe { ffi::DungeonGetTotalSpriteFileSize(monster_id) }
     }
 
     /// Note: unverified, ported from Irdkwia's notes

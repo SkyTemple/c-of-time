@@ -547,12 +547,9 @@ pub trait ScriptVariableRead: PartialEq + Eq {
     }
 
     /// Returns the name of the variable.
-    fn name(&self) -> &str {
+    fn name(&self) -> &CStr {
         let desc = self.descriptor();
-        unsafe {
-            let c_str = CStr::from_ptr(desc.name);
-            c_str.to_str().unwrap()
-        }
+        unsafe { CStr::from_ptr(desc.name) }
     }
 
     /// Loads the value of a script variable. If this variable is an array, the value at index 0

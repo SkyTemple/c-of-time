@@ -67,6 +67,11 @@ impl MonsterSpeciesId {
         unsafe { ffi::GetMonsterPreEvolution(*self) }
     }
 
+    /// Note: unverified, ported from Irdkwia's notes
+    pub fn pp_increase(&self, iq_skill_flags: &mut u32) -> i32 {
+        unsafe { ffi::GetPpIncrease(*self, iq_skill_flags) }
+    }
+
     /// Returns a list of all the possible evolutions.
     ///
     /// This will panic if the monster has more than 32 evolutions.
@@ -168,6 +173,21 @@ impl MonsterSpeciesId {
     /// Gets the Low Kick (and Grass Knot) damage multiplier for the given species.
     pub fn get_low_kick_multiplier(&self) -> I24F8 {
         unsafe { I24F8::from_num(GetLowKickMultiplier(*self)) }
+    }
+
+    /// Unpatched this function will always returns true.
+    ///
+    /// # Background information
+    /// This function seems to be a debug switch that the developers may have used to disable the
+    /// random enemy spawn.
+    /// If it returned false, the call to `[GlobalDungeonData::spawn_monster]` inside
+    /// `[GlobalDungeonData::try_spawn_monster_and_tick_spawn_counter]` would not be executed.
+    ///
+    /// [GlobalDungeonData::spawn_monster]: crate::api::dungeon_mode::dungeon_struct::GlobalDungeonData::spawn_monster
+    /// [GlobalDungeonData::try_spawn_monster_and_tick_spawn_counter]: crate::api::dungeon_mode::dungeon_struct::GlobalDungeonData::try_spawn_monster_and_tick_spawn_counter
+    pub fn can_spawn(&self) -> bool {
+        // SAFETY: This is more or less an "atomic" operation.
+        unsafe { ffi::CanMonsterSpawn(*self) > 0 }
     }
 }
 

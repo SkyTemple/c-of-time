@@ -16117,6 +16117,17 @@ pub struct dungeon_init {
     pub field_0x1AB: undefined,
 }
 #[repr(C)]
+pub struct dungeon_unlock_entry {
+    pub dungeon_id: dungeon_id_8,
+    pub scenario_balance_min: u8,
+}
+#[repr(C)]
+pub struct dungeon_return_status {
+    pub flag: bool_,
+    pub _padding: u8,
+    pub string_id: i16,
+}
+#[repr(C)]
 pub struct global_progress {
     pub unk_pokemon_flags1: [undefined; 148usize],
     pub field_0x94: [undefined; 4usize],
@@ -16213,6 +16224,11 @@ pub struct mission {
     pub field_0x1f: undefined,
 }
 #[repr(C)]
+pub struct mission_floors_forbidden {
+    pub field_0x0: u8,
+    pub field_0x1: u8,
+}
+#[repr(C)]
 pub struct quiz_answer_points_entry {
     pub field_0x0: undefined,
     pub field_0x1: undefined,
@@ -16230,6 +16246,30 @@ pub struct quiz_answer_points_entry {
     pub field_0xd: undefined,
     pub field_0xe: undefined,
     pub field_0xf: undefined,
+}
+#[repr(C)]
+pub struct portrait_data_entry {
+    pub xpos: i16,
+    pub ypos: i16,
+    pub portrait: u8,
+    pub _padding: u8,
+}
+#[repr(C)]
+pub struct status_description {
+    pub name_str_id: i16,
+    pub desc_str_id: i16,
+}
+#[repr(C)]
+pub struct forbidden_forgot_move_entry {
+    pub monster_id: monster_id_16,
+    pub origin_id: dungeon_id_16,
+    pub move_id: move_id_16,
+}
+#[repr(C)]
+pub struct version_exclusive_monster {
+    pub id: monster_id_16,
+    pub in_eot: bool_,
+    pub in_eod: bool_,
 }
 #[repr(C)]
 pub struct position {
@@ -26686,6 +26726,24 @@ pub struct ground_weather_entry {
     pub field_0x2: i16,
 }
 extern "C" {
+    pub fn GetKeyN2MSwitch(key: crate::ctypes::c_int, sw: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetKeyN2M(key: crate::ctypes::c_int) -> monster_id;
+}
+extern "C" {
+    pub fn GetKeyN2MBaseForm(key: crate::ctypes::c_int) -> monster_id;
+}
+extern "C" {
+    pub fn GetKeyM2NSwitch(monster_id: monster_id, sw: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetKeyM2N(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetKeyM2NBaseForm(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn ShouldMonsterRunAwayVariationOutlawCheck(
         monster: *mut entity,
         param_2: undefined,
@@ -26808,13 +26866,55 @@ extern "C" {
     pub fn WaitForever();
 }
 extern "C" {
+    pub fn InterruptMasterDisable() -> u16;
+}
+extern "C" {
+    pub fn InterruptMasterEnable() -> u16;
+}
+extern "C" {
     pub fn InitMemAllocTableVeneer();
+}
+extern "C" {
+    pub fn ZInit8(ptr: *mut crate::ctypes::c_void);
+}
+extern "C" {
+    pub fn PointsToZero(ptr: *mut crate::ctypes::c_int) -> bool_;
 }
 extern "C" {
     pub fn MemZero(ptr: *mut crate::ctypes::c_void, len: u32);
 }
 extern "C" {
+    pub fn MemZero16(ptr: *mut crate::ctypes::c_void, len: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn MemZero32(ptr: *mut crate::ctypes::c_void, len: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn MemsetSimple(ptr: *mut crate::ctypes::c_void, val: crate::ctypes::c_char, len: u32);
+}
+extern "C" {
+    pub fn Memset32(
+        ptr: *mut crate::ctypes::c_void,
+        val: crate::ctypes::c_int,
+        len: crate::ctypes::c_int,
+    );
+}
+extern "C" {
     pub fn MemcpySimple(dest: *mut crate::ctypes::c_void, src: *mut crate::ctypes::c_void, n: u32);
+}
+extern "C" {
+    pub fn Memcpy16(
+        dest: *mut crate::ctypes::c_void,
+        src: *mut crate::ctypes::c_void,
+        n: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn Memcpy32(
+        dest: *mut crate::ctypes::c_void,
+        src: *mut crate::ctypes::c_void,
+        n: crate::ctypes::c_int,
+    );
 }
 extern "C" {
     pub fn TaskProcBoot();
@@ -26859,6 +26959,15 @@ extern "C" {
     pub fn ClampComponentAbs(vec2: *mut crate::ctypes::c_int, max: crate::ctypes::c_int);
 }
 extern "C" {
+    pub fn GetHeldButtons(controller: crate::ctypes::c_int, btn_ptr: *mut undefined) -> bool_;
+}
+extern "C" {
+    pub fn GetPressedButtons(controller: crate::ctypes::c_int, btn_ptr: *mut undefined) -> bool_;
+}
+extern "C" {
+    pub fn GetReleasedStylus(stylus_ptr: *mut undefined) -> bool_;
+}
+extern "C" {
     pub fn KeyWaitInit();
 }
 extern "C" {
@@ -26888,6 +26997,9 @@ extern "C" {
 }
 extern "C" {
     pub fn FileClose(file: *mut file_stream);
+}
+extern "C" {
+    pub fn UnloadFile(ptr: *mut crate::ctypes::c_void);
 }
 extern "C" {
     pub fn LoadFileFromRom(iov: *mut iovec, filepath: *const crate::ctypes::c_char, flags: u32);
@@ -26951,6 +27063,9 @@ extern "C" {
     pub fn GetFileLengthInPack(pack_file: *mut pack_file_opened, file_index: u32) -> u32;
 }
 extern "C" {
+    pub fn GetFaintReason(arg1: move_id, arg2: item_id) -> faint_reason;
+}
+extern "C" {
     pub fn LoadFileInPack(
         pack_file: *mut pack_file_opened,
         output_buffer: *mut crate::ctypes::c_void,
@@ -26961,10 +27076,22 @@ extern "C" {
     pub fn GetItemCategoryVeneer(item_id: item_id) -> item_category;
 }
 extern "C" {
+    pub fn GetItemMoveId16(item_id: item_id) -> move_id;
+}
+extern "C" {
     pub fn IsThrownItem(item_id: item_id) -> bool_;
 }
 extern "C" {
     pub fn IsNotMoney(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn IsEdible(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn IsHM(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn IsGummi(item_id: item_id) -> bool_;
 }
 extern "C" {
     pub fn IsAuraBow(item_id: item_id) -> bool_;
@@ -26976,6 +27103,21 @@ extern "C" {
     pub fn InitStandardItem(item: *mut item, item_id: item_id, sticky: bool_);
 }
 extern "C" {
+    pub fn GetDisplayedBuyPrice(item: *mut item) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetDisplayedSellPrice(item: *mut item) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetActualBuyPrice(item: *mut item) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetActualSellPrice(item: *mut item) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn FindItemInInventory(item_id: item_id) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn SprintfStatic(
         str_: *mut crate::ctypes::c_char,
         format: *const crate::ctypes::c_char,
@@ -26983,10 +27125,50 @@ extern "C" {
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn ItemZInit(item: *mut item);
+}
+extern "C" {
+    pub fn WriteItemsToSave(
+        start_address: *mut crate::ctypes::c_void,
+        total_length: u32,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn ReadItemsFromSave(
+        start_address: *mut crate::ctypes::c_void,
+        total_length: u32,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsItemAvailableInDungeonGroup(dungeon_id: dungeon_id, item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn GetItemIdFromList(
+        list_id: crate::ctypes::c_int,
+        category_num: crate::ctypes::c_int,
+        item_num: crate::ctypes::c_int,
+    ) -> item_id;
+}
+extern "C" {
+    pub fn NormalizeTreasureBox(item_id: item_id) -> item_id;
+}
+extern "C" {
+    pub fn RemoveEmptyItems(list: *mut item, size: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn LoadItemPspi2n();
+}
+extern "C" {
+    pub fn GetExclusiveItemType(item_id: item_id) -> u8;
+}
+extern "C" {
     pub fn GetExclusiveItemOffsetEnsureValid(item_id: item_id) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn IsItemValid(arg1: item_id) -> bool_;
+    pub fn IsItemValid(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn GetExclusiveItemParameter(item_id: item_id) -> i16;
 }
 extern "C" {
     pub fn GetItemCategory(item_id: item_id) -> item_category;
@@ -26995,13 +27177,66 @@ extern "C" {
     pub fn EnsureValidItem(arg1: item_id) -> item_id;
 }
 extern "C" {
+    pub fn GetItemName(item_id: item_id) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
+    pub fn GetItemNameFormatted(
+        name_out: *mut crate::ctypes::c_char,
+        item_id: item_id,
+        flag1: bool_,
+        flag2: bool_,
+    );
+}
+extern "C" {
+    pub fn GetItemBuyPrice(item_id: item_id) -> u16;
+}
+extern "C" {
+    pub fn GetItemSellPrice(item_id: item_id) -> u16;
+}
+extern "C" {
+    pub fn GetItemSpriteId(item_id: item_id) -> u8;
+}
+extern "C" {
+    pub fn GetItemPaletteId(item_id: item_id) -> u8;
+}
+extern "C" {
+    pub fn GetItemActionName(item_id: item_id) -> u8;
+}
+extern "C" {
     pub fn GetThrownItemQuantityLimit(arg1: item_id, limit_idx: crate::ctypes::c_int) -> u8;
+}
+extern "C" {
+    pub fn GetItemMoveId(item_id: item_id) -> move_id;
+}
+extern "C" {
+    pub fn TestItemFlag0xE(item_id: item_id, bit_id: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn IsItemInTimeDarkness(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn IsItemValidVeneer(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn SetGold(val: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetGold() -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn SetMoneyCarried(amount: crate::ctypes::c_int);
 }
 extern "C" {
+    pub fn GetCurrentBagCapacity() -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn IsBagFull() -> bool_;
+}
+extern "C" {
+    pub fn GetNbItemsInBag() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CountNbItemsOfTypeInBag(item_id: item_id) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn CountItemTypeInBag(item_id: item_id) -> crate::ctypes::c_int;
@@ -27010,7 +27245,82 @@ extern "C" {
     pub fn IsItemInBag(item_id: item_id) -> bool_;
 }
 extern "C" {
-    pub fn AddItemToBag(item: *mut bulk_item) -> bool_;
+    pub fn IsItemWithFlagsInBag(item_id: item_id, flags: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn IsItemInTreasureBoxes(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn IsHeldItemInBag(item: *mut item) -> bool_;
+}
+extern "C" {
+    pub fn IsItemForSpecialSpawnInBag() -> bool_;
+}
+extern "C" {
+    pub fn HasStorableItems() -> bool_;
+}
+extern "C" {
+    pub fn GetItemIndex(item: *mut item) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetEquivItemIndex(item: *mut item) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetEquippedThrowableItem() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetFirstUnequippedItemOfType(item_id: item_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CopyItemAtIdx(idx: crate::ctypes::c_int, item_out: *mut item) -> bool_;
+}
+extern "C" {
+    pub fn GetItemAtIdx(idx: crate::ctypes::c_int) -> *mut item;
+}
+extern "C" {
+    pub fn RemoveEmptyItemsInBag();
+}
+extern "C" {
+    pub fn RemoveItemNoHole(idx: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn RemoveItem(idx: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn RemoveHeldItemNoHole(held_idx: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn RemoveItemByIdAndStackNoHole(item: *mut item) -> bool_;
+}
+extern "C" {
+    pub fn RemoveEquivItem(item: *mut item) -> bool_;
+}
+extern "C" {
+    pub fn RemoveEquivItemNoHole(item: *mut item) -> bool_;
+}
+extern "C" {
+    pub fn DecrementStackItem(item: *mut item) -> bool_;
+}
+extern "C" {
+    pub fn RemoveItemNoHoleCheck(idx: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn RemoveFirstUnequippedItemOfType(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn RemoveAllItems();
+}
+extern "C" {
+    pub fn RemoveAllItemsStartingAt(idx: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn SpecialProcAddItemToBag(item: *mut bulk_item) -> bool_;
+}
+extern "C" {
+    pub fn AddItemToBagNoHeld(item: *mut item) -> bool_;
+}
+extern "C" {
+    pub fn AddItemToBag(item: *mut item, held_by: crate::ctypes::c_int) -> bool_;
 }
 extern "C" {
     pub fn ScriptSpecialProcess0x39() -> bool_;
@@ -27026,6 +27336,12 @@ extern "C" {
 }
 extern "C" {
     pub fn SetMoneyStored(amount: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetKecleonItems1(param_1: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetKecleonItems2(param_1: crate::ctypes::c_int);
 }
 extern "C" {
     pub fn GetExclusiveItemOffset(item_id: item_id) -> crate::ctypes::c_int;
@@ -27049,6 +27365,37 @@ extern "C" {
     ) -> bool_;
 }
 extern "C" {
+    pub fn IsExclusiveItemIdForMonster(
+        item_id: item_id,
+        monster_id: monster_id,
+        type1: type_id,
+        type2: type_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn IsExclusiveItemForMonster(
+        item: *mut item,
+        monster_id: monster_id,
+        type1: type_id,
+        type2: type_id,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn BagHasExclusiveItemTypeForMonster(
+        excl_type: crate::ctypes::c_int,
+        monster_id: monster_id,
+        type1: type_id,
+        type2: type_id,
+    ) -> item_id;
+}
+extern "C" {
+    pub fn ProcessGinsengOverworld(
+        target: *mut undefined,
+        move_id_out: *mut move_id_16,
+        move_boost_out: *mut crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn ApplyGummiBoostsGroundMode(
         param_1: *mut undefined2,
         param_2: *mut undefined2,
@@ -27060,37 +27407,339 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn LoadSynthBin() -> bool_;
+}
+extern "C" {
+    pub fn CloseSynthBin();
+}
+extern "C" {
+    pub fn GetSynthItem(param_1: crate::ctypes::c_int) -> *mut undefined;
+}
+extern "C" {
+    pub fn LoadWazaP();
+}
+extern "C" {
+    pub fn LoadWazaP2();
+}
+extern "C" {
+    pub fn UnloadCurrentWazaP();
+}
+extern "C" {
+    pub fn GetMoveName(move_id: move_id) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
+    pub fn FormatMoveString(
+        string: *mut crate::ctypes::c_char,
+        move_: *mut move_,
+        type_print: *mut undefined,
+    );
+}
+extern "C" {
+    pub fn FormatMoveStringMore(
+        param_1: *mut undefined,
+        param_2: crate::ctypes::c_int,
+        move_: *mut move_,
+        type_print: *mut undefined,
+    );
+}
+extern "C" {
+    pub fn InitMove(move_: *mut move_, arg1: move_id);
+}
+extern "C" {
     pub fn GetMoveTargetAndRange(move_: *mut move_, is_ai: bool_) -> move_target_and_range;
+}
+extern "C" {
+    pub fn GetInfoMoveCheckId(move_: *mut move_, move_id: move_id);
+}
+extern "C" {
+    pub fn GetInfoMoveGround(move_: *mut ground_move, move_id: move_id);
 }
 extern "C" {
     pub fn GetMoveType(move_: *mut move_) -> type_id;
 }
 extern "C" {
+    pub fn GetMovesetLevelUpPtr(monster_id: monster_id) -> *mut undefined;
+}
+extern "C" {
+    pub fn IsInvalidMoveset(moveset_id: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn GetMovesetHmTmPtr(monster_id: monster_id) -> *mut undefined;
+}
+extern "C" {
+    pub fn GetMovesetEggPtr(monster_id: monster_id) -> *mut undefined;
+}
+extern "C" {
     pub fn GetMoveAiWeight(move_: *mut move_) -> u8;
+}
+extern "C" {
+    pub fn GetMoveNbStrikes(move_: *mut move_) -> u8;
 }
 extern "C" {
     pub fn GetMoveBasePower(move_: *mut move_) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn GetMoveBasePowerGround(move_: *mut ground_move) -> i16;
+}
+extern "C" {
     pub fn GetMoveAccuracyOrAiChance(move_: *mut move_, which: crate::ctypes::c_int) -> u8;
+}
+extern "C" {
+    pub fn GetMoveBasePp(move_: *mut move_) -> u8;
 }
 extern "C" {
     pub fn GetMaxPp(move_: *mut move_) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn GetMoveMaxGinsengBoost(move_: *mut move_) -> u8;
+}
+extern "C" {
+    pub fn GetMoveMaxGinsengBoostGround(move_: *mut ground_move) -> u8;
+}
+extern "C" {
     pub fn GetMoveCritChance(move_: *mut move_) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsThawingMove(move_: *mut move_) -> bool_;
+}
+extern "C" {
+    pub fn IsAffectedByTaunt(move_: *mut move_) -> bool_;
+}
+extern "C" {
+    pub fn GetMoveRangeId(move_: *mut move_) -> u8;
+}
+extern "C" {
+    pub fn GetMoveActualAccuracy(move_id: move_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetMoveBasePowerFromId(move_id: move_id) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn IsMoveRangeString19(move_: *mut move_) -> bool_;
 }
 extern "C" {
+    pub fn GetMoveMessageFromId(move_id: move_id) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
+    pub fn GetNbMoves(moveset: *mut undefined) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetMovesetIdx(moveset: *mut undefined, move_id: move_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsReflectedByMagicCoat(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn CanBeSnatched(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn FailsWhileMuzzled(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn IsSoundMove(move_: *mut move_) -> bool_;
+}
+extern "C" {
     pub fn IsRecoilMove(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn AllManip1(param_1: undefined4);
+}
+extern "C" {
+    pub fn AllManip2(param_1: undefined4);
+}
+extern "C" {
+    pub fn ManipMoves1v1(param_1: *mut undefined, param_2: *mut undefined);
+}
+extern "C" {
+    pub fn ManipMoves1v2(param_1: *mut undefined, param_2: *mut undefined);
+}
+extern "C" {
+    pub fn ManipMoves2v1(param_1: *mut undefined, param_2: *mut undefined);
+}
+extern "C" {
+    pub fn ManipMoves2v2(param_1: *mut undefined, param_2: *mut undefined);
+}
+extern "C" {
+    pub fn DungeonMoveToGroundMove(dst: *mut ground_move, src: *mut move_);
+}
+extern "C" {
+    pub fn GroundToDungeonMoveset(dst: *mut undefined, src: *mut undefined);
+}
+extern "C" {
+    pub fn DungeonToGroundMoveset(dst: *mut undefined, src: *mut undefined);
+}
+extern "C" {
+    pub fn GetInfoGroundMoveset(moveset: *mut undefined, moves: *mut move_id_16);
+}
+extern "C" {
+    pub fn FindFirstFreeMovesetIdx(moveset: *mut undefined) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn LearnMoves(moveset: *mut undefined, moves: *mut move_id_16);
+}
+extern "C" {
+    pub fn CopyMoveTo(write_info: *mut undefined, buffer_write: *mut crate::ctypes::c_void);
+}
+extern "C" {
+    pub fn CopyMoveFrom(read_info: *mut undefined, buffer_read: *mut crate::ctypes::c_void);
+}
+extern "C" {
+    pub fn CopyMovesetTo(write_info: *mut undefined, buffer_write: *mut crate::ctypes::c_void);
+}
+extern "C" {
+    pub fn CopyMovesetFrom(read_info: *mut undefined, buffer_read: *mut crate::ctypes::c_void);
+}
+extern "C" {
+    pub fn Is2TurnsMove(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn IsRegularAttackOrProjectile(move_id: move_id) -> bool_;
 }
 extern "C" {
     pub fn IsPunchMove(move_id: move_id) -> bool_;
 }
 extern "C" {
+    pub fn IsHealingWishOrLunarDance(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn IsCopyingMove(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn IsTrappingMove(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn IsOneHitKoMove(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn IsNot2TurnsMoveOrSketch(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn IsRealMove(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn IsMovesetValid(moveset: *mut undefined) -> bool_;
+}
+extern "C" {
+    pub fn IsRealMoveInTimeDarkness(move_id: move_id) -> bool_;
+}
+extern "C" {
+    pub fn IsMovesetValidInTimeDarkness(moveset: *mut undefined) -> bool_;
+}
+extern "C" {
+    pub fn GetFirstNotRealMoveInTimeDarkness(moveset: *mut undefined) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsSameMove(moveset: *mut undefined, move_: *mut move_) -> bool_;
+}
+extern "C" {
     pub fn GetMoveCategory(move_id: move_id) -> move_category::Type;
+}
+extern "C" {
+    pub fn GetPpIncrease(monster_id: monster_id, iq_skill_flags: *mut u32) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn OpenWaza(waza_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn SelectWaza(waza_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn ManipBgmPlayback();
+}
+extern "C" {
+    pub fn SoundDriverReset();
+}
+extern "C" {
+    pub fn LoadDseFile(iov: *mut iovec, filename: *const crate::ctypes::c_char) -> u32;
+}
+extern "C" {
+    pub fn PlaySeLoad(param_1: crate::ctypes::c_int) -> undefined4;
+}
+extern "C" {
+    pub fn PlayBgm(
+        param_1: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        param_3: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn StopBgm(param_1: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn ChangeBgm(param_1: crate::ctypes::c_int, param_2: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn PlayBgm2(
+        param_1: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        param_3: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn StopBgm2(param_1: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn ChangeBgm2(param_1: crate::ctypes::c_int, param_2: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn PlayME(
+        param_1: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        param_3: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn StopME(fade_out: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn PlaySe(param_1: crate::ctypes::c_int, param_2: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn PlaySeFullSpec(
+        param_1: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        param_3: crate::ctypes::c_int,
+        param_4: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn SeChangeVolume(
+        param_1: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        param_3: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn SeChangePan(
+        param_1: crate::ctypes::c_int,
+        param_2: crate::ctypes::c_int,
+        param_3: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn StopSe(param_1: crate::ctypes::c_int, param_2: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn DeleteWanTableEntry(wan_table: *mut undefined, wan_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetLoadedWanTableEntry(
+        wan_table: *mut undefined,
+        bin_file_id: crate::ctypes::c_int,
+        file_id: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn ReplaceWanFromBinFile(
+        wan_table: *mut undefined,
+        wan_id: crate::ctypes::c_int,
+        bin_file_id: crate::ctypes::c_int,
+        file_id: crate::ctypes::c_int,
+        compressed: bool_,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DeleteWanTableEntryVeneer(wan_table: *mut undefined, wan_id: crate::ctypes::c_int);
 }
 extern "C" {
     pub fn LoadWteFromRom(handle: *mut wte_handle, path: *const crate::ctypes::c_char, flags: u32);
@@ -27107,16 +27756,86 @@ extern "C" {
     pub fn UnloadWte(handle: *mut wte_handle);
 }
 extern "C" {
-    pub fn HandleSir0Translation(dst: *mut *mut u8, src: *mut u8);
+    pub fn LoadWtuFromBin(
+        bin_file_id: crate::ctypes::c_int,
+        file_id: crate::ctypes::c_int,
+        load_type: crate::ctypes::c_int,
+    ) -> *mut undefined;
 }
 extern "C" {
-    pub fn HandleSir0TranslationVeneer(dst: *mut *mut u8, src: *mut u8);
+    pub fn ProcessWte(
+        header: *mut undefined,
+        unk_pal: undefined4,
+        unk_tex: undefined4,
+        unk_tex_param: undefined4,
+    );
+}
+extern "C" {
+    pub fn HandleSir0Translation(dst: *mut *mut u8, src: *mut u8) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn ConvertPointersSir0(sir0_ptr: *mut undefined);
+}
+extern "C" {
+    pub fn HandleSir0TranslationVeneer(dst: *mut *mut u8, src: *mut u8) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DecompressAtNormalVeneer(
+        addr_decomp: *mut undefined,
+        expected_size: crate::ctypes::c_int,
+        at_ptr: *mut undefined,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DecompressAtNormal(
+        addr_decomp: *mut undefined,
+        expected_size: crate::ctypes::c_int,
+        at_ptr: *mut undefined,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DecompressAtHalf(
+        addr_decomp: *mut undefined,
+        expected_size: crate::ctypes::c_int,
+        at_ptr: *mut undefined,
+        high_nibble: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DecompressAtFromMemoryPointerVeneer(
+        addr_decomp: *mut undefined,
+        expected_size: crate::ctypes::c_int,
+        at_ptr: *mut undefined,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DecompressAtFromMemoryPointer(
+        addr_decomp: *mut undefined,
+        expected_size: crate::ctypes::c_int,
+        at_ptr: *mut undefined,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn WriteByteFromMemoryPointer(byte: u8);
+}
+extern "C" {
+    pub fn GetAtSize(at_ptr: *mut undefined, param_2: crate::ctypes::c_int)
+        -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetLanguageType() -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetLanguage() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn StrcmpTag(s1: *const crate::ctypes::c_char, s2: *const crate::ctypes::c_char) -> bool_;
+}
+extern "C" {
+    pub fn StoiTag(s: *const crate::ctypes::c_char) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn AnalyzeText(buf: *mut undefined) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn PreprocessString(
@@ -27126,6 +27845,21 @@ extern "C" {
         flags: preprocessor_flags,
         args: *mut preprocessor_args,
     ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn SetStringAccuracy(
+        s: *mut crate::ctypes::c_char,
+        param_2: crate::ctypes::c_int,
+    ) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
+    pub fn SetStringPower(
+        s: *mut crate::ctypes::c_char,
+        param_2: crate::ctypes::c_int,
+    ) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
+    pub fn SetQuestionMarks(s: *mut crate::ctypes::c_char);
 }
 extern "C" {
     pub fn StrcpySimple(dest: *mut crate::ctypes::c_char, src: *const crate::ctypes::c_char);
@@ -27138,13 +27872,152 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn StrncpySimpleNoPad(
+        dest: *mut crate::ctypes::c_char,
+        src: *const crate::ctypes::c_char,
+        n: u32,
+    );
+}
+extern "C" {
+    pub fn StrncmpSimple(
+        s1: *const crate::ctypes::c_char,
+        s2: *const crate::ctypes::c_char,
+        n: u32,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn StrncpySimpleNoPadSafe(
+        dest: *mut crate::ctypes::c_char,
+        src: *const crate::ctypes::c_char,
+        n: u32,
+    );
+}
+extern "C" {
+    pub fn SpecialStrcpy(dest: *mut crate::ctypes::c_char, src: *const crate::ctypes::c_char);
+}
+extern "C" {
+    pub fn GetStringFromFile(buf: *mut crate::ctypes::c_char, string_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn LoadStringFile();
+}
+extern "C" {
+    pub fn GetStringFromFileVeneer(
+        buf: *mut crate::ctypes::c_char,
+        string_id: crate::ctypes::c_int,
+    );
+}
+extern "C" {
     pub fn StringFromMessageId(message_id: crate::ctypes::c_int) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
+    pub fn LoadTblTalk();
+}
+extern "C" {
+    pub fn GetTalkLine(
+        personality_idx: crate::ctypes::c_int,
+        group_id: crate::ctypes::c_int,
+        restrictions: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn SetScreenWindowsColor(palette_idx: crate::ctypes::c_int, upper_screen: bool_);
 }
 extern "C" {
     pub fn SetBothScreensWindowsColor(palette_idx: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn CreateNormalMenu(
+        layout: *mut undefined,
+        menu_flags: crate::ctypes::c_int,
+        additional_info: *mut undefined,
+        menu: *mut undefined,
+        option_id: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn FreeNormalMenu(menu_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn IsNormalMenuActive(menu_id: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn GetNormalMenuResult(menu_id: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CreateAdvancedMenu(
+        layout: *mut undefined,
+        menu_flags: crate::ctypes::c_int,
+        additional_info: *mut undefined,
+        entry_fn: *mut undefined,
+        n_options: crate::ctypes::c_int,
+        n_opt_pp: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn FreeAdvancedMenu(menu_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn IsAdvancedMenuActive(menu_id: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn GetAdvancedMenuCurrentOption(menu_id: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetAdvancedMenuResult(menu_id: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CreateDBox(layout: *mut undefined) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn FreeDBox(dbox_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn IsDBoxActive(dbox_id: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
+    pub fn ShowMessageInDBox(
+        dbox_id: crate::ctypes::c_int,
+        param_2: undefined4,
+        string_id: crate::ctypes::c_int,
+        param_4: undefined4,
+    );
+}
+extern "C" {
+    pub fn ShowDBox(dbox_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn CreatePortraitBox(
+        param_1: undefined,
+        param_2: undefined4,
+        param_3: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn FreePortraitBox(dbox_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn ShowPortraitBox(dbox_id: crate::ctypes::c_int, portrait: *mut undefined);
+}
+extern "C" {
+    pub fn HidePortraitBox(dbox_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn ShowKeyboard(
+        message_id: crate::ctypes::c_int,
+        buffer1: *mut crate::ctypes::c_char,
+        param_3: crate::ctypes::c_int,
+        buffer2: *mut crate::ctypes::c_char,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetKeyboardStatus() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetKeyboardStringResult() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn PrintMoveOptionMenu();
 }
 extern "C" {
     pub fn GetNotifyNote() -> bool_;
@@ -27162,10 +28035,53 @@ extern "C" {
     pub fn ScriptSpecialProcess0x4();
 }
 extern "C" {
+    pub fn ReadStringSave(buf: *mut crate::ctypes::c_char);
+}
+extern "C" {
+    pub fn CheckStringSave(buf: *const crate::ctypes::c_char) -> bool_;
+}
+extern "C" {
+    pub fn WriteSaveFile(
+        save_info: *mut undefined,
+        buf: *mut undefined,
+        size: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn ReadSaveFile(
+        save_info: *mut undefined,
+        buf: *mut undefined,
+        size: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CalcChecksum(buf: *mut crate::ctypes::c_int, size: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn CheckChecksum(buf: *mut crate::ctypes::c_int, size: crate::ctypes::c_int) -> bool_;
+}
+extern "C" {
     pub fn NoteSaveBase(param_1: crate::ctypes::c_int) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn WriteQuickSaveInfo(buf: *mut undefined, size: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn ReadSaveHeader(
+        param_1: *mut undefined4,
+        param_2: undefined4,
+        param_3: undefined4,
+        param_4: undefined4,
+    ) -> undefined4;
+}
+extern "C" {
     pub fn NoteLoadBase() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn ReadQuickSaveInfo(
+        buf: *mut undefined,
+        size: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetGameMode() -> crate::ctypes::c_int;
@@ -27256,6 +28172,15 @@ extern "C" {
     pub fn GetSpecialEpisodeType() -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn HasPlayedOldGame() -> bool_;
+}
+extern "C" {
+    pub fn GetPerformanceFlagWithChecks(flag_id: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetScenarioBalance() -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn ScenarioFlagBackup();
 }
 extern "C" {
@@ -27265,10 +28190,25 @@ extern "C" {
     pub fn InitDungeonListScriptVars();
 }
 extern "C" {
+    pub fn SetDungeonConquest(dungeon_id: dungeon_id, bit_value: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn CheckDungeonOpen(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn GlobalProgressAlloc() -> *mut global_progress;
 }
 extern "C" {
     pub fn ResetGlobalProgress();
+}
+extern "C" {
+    pub fn SetMonsterFlag1(monster_id: monster_id);
+}
+extern "C" {
+    pub fn GetMonsterFlag1(monster_id: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn SetMonsterFlag2(monster_id: monster_id);
 }
 extern "C" {
     pub fn HasMonsterBeenAttackedInDungeons(monster_id: monster_id) -> bool_;
@@ -27280,7 +28220,60 @@ extern "C" {
     pub fn GetDungeonTipShown(tip_id: crate::ctypes::c_int) -> bool_;
 }
 extern "C" {
-    pub fn MonsterSpawnsEnabled() -> bool_;
+    pub fn SetMaxReachedFloor(dungeon_id: dungeon_id, max_floor: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn GetMaxReachedFloor(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IncrementNbAdventures();
+}
+extern "C" {
+    pub fn GetNbAdventures() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CanMonsterSpawn(monster_id: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn IncrementExclusiveMonsterCounts(monster_id: monster_id);
+}
+extern "C" {
+    pub fn CopyProgressInfoTo(
+        write_info: *mut undefined,
+        param_2: undefined4,
+        param_3: undefined4,
+        param_4: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn CopyProgressInfoFromScratchTo(
+        start_addr: *mut crate::ctypes::c_void,
+        total_len: u32,
+    ) -> undefined4;
+}
+extern "C" {
+    pub fn CopyProgressInfoFrom(read_info: *mut undefined);
+}
+extern "C" {
+    pub fn CopyProgressInfoFromScratchFrom(
+        start_addr: *mut crate::ctypes::c_void,
+        total_len: u32,
+    ) -> undefined4;
+}
+extern "C" {
+    pub fn SetPortraitMonsterId(portrait: *mut undefined, monster_id: monster_id);
+}
+extern "C" {
+    pub fn SetPortraitExpressionId(portrait: *mut undefined, expression_id: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn SetPortraitUnknownAttr(portrait: *mut undefined, attr: crate::ctypes::c_int);
+}
+extern "C" {
+    pub fn SetPortraitAttrStruct(portrait: *mut undefined, attr: *mut undefined);
+}
+extern "C" {
+    pub fn LoadPortrait(portrait: *mut undefined, buf: *mut crate::ctypes::c_void) -> bool_;
 }
 extern "C" {
     pub fn GetNbFloors(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
@@ -27302,6 +28295,9 @@ extern "C" {
         out_group_data: *mut dungeon_group_and_group_floor,
         dungeon_and_floor: *mut dungeon_floor_pair,
     );
+}
+extern "C" {
+    pub fn GetGroundNameId(param_1: crate::ctypes::c_int) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn SetAdventureLogStructLocation();
@@ -27409,7 +28405,7 @@ extern "C" {
     pub fn GetNbFainted() -> u32;
 }
 extern "C" {
-    pub fn SetItemAcquired(item_id: item_id);
+    pub fn SetItemAcquired(item: *mut item);
 }
 extern "C" {
     pub fn GetNbItemAcquired() -> u32;
@@ -27424,6 +28420,47 @@ extern "C" {
     pub fn SetSentryDutyGamePoints(points: u32) -> i32;
 }
 extern "C" {
+    pub fn CopyLogTo(write_info: *mut undefined);
+}
+extern "C" {
+    pub fn CopyLogFrom(read_info: *mut undefined);
+}
+extern "C" {
+    pub fn GetAbilityString(buf: *mut undefined, ability_id: ability_id);
+}
+extern "C" {
+    pub fn GetAbilityDescStringId(ability_id: ability_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetTypeStringId(type_id: type_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CopyBitsTo(
+        write_info: *mut undefined,
+        buf_write: *mut crate::ctypes::c_void,
+        nbits: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn CopyBitsFrom(
+        read_info: *mut undefined,
+        buf_read: *mut crate::ctypes::c_void,
+        nbits: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn StoreDefaultTeamName();
+}
+extern "C" {
+    pub fn GetTeamNameCheck(buf: *mut undefined);
+}
+extern "C" {
+    pub fn GetTeamName(buf: *mut undefined);
+}
+extern "C" {
+    pub fn SetTeamName(buf: *mut undefined);
+}
+extern "C" {
     pub fn SubFixedPoint(val_fp: u32, dec_fp: u32) -> u32;
 }
 extern "C" {
@@ -27436,25 +28473,144 @@ extern "C" {
     pub fn DungeonGoesUp(dungeon_id: dungeon_id) -> bool_;
 }
 extern "C" {
+    pub fn GetTurnLimit(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DoesNotSaveWhenEntering(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
     pub fn TreasureBoxDropsEnabled(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn IsLevelResetDungeon(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn GetMaxItemsAllowed(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsMoneyAllowed(dungeon_id: dungeon_id) -> bool_;
 }
 extern "C" {
     pub fn GetMaxRescueAttempts(dungeon_id: dungeon_id) -> i8;
 }
 extern "C" {
+    pub fn IsRecruitingAllowed(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
     pub fn GetLeaderChangeFlag(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn GetUnknownDungeonOption(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CanEnemyEvolve(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn GetMaxMembersAllowed(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsIqEnabled(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn IsTrapInvisibleWhenAttacking(dungeon_id: dungeon_id) -> bool_;
 }
 extern "C" {
     pub fn JoinedAtRangeCheck(joined_at: dungeon_id_8) -> bool_;
 }
 extern "C" {
+    pub fn IsDojoDungeon(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn IsFutureDungeon(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn IsSpecialEpisodeDungeon(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn RetrieveFromItemList1(dungeon_info: *mut undefined, param_2: undefined4) -> item_id;
+}
+extern "C" {
+    pub fn IsForbiddenFloor(
+        dungeon_info: *mut undefined,
+        param_2: undefined4,
+        param_3: undefined4,
+        param_4: undefined4,
+    ) -> bool_;
+}
+extern "C" {
+    pub fn Copy16BitsFrom(read_info: *mut undefined, buf_read: *mut crate::ctypes::c_void);
+}
+extern "C" {
+    pub fn RetrieveFromItemList2(dungeon_info: *mut undefined, param_2: undefined4) -> item_id;
+}
+extern "C" {
+    pub fn IsInvalidForMission(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn IsExpEnabledInDungeon(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
+    pub fn IsSkyExclusiveDungeon(dungeon_id: dungeon_id) -> bool_;
+}
+extern "C" {
     pub fn JoinedAtRangeCheck2(joined_at: dungeon_id_8) -> bool_;
+}
+extern "C" {
+    pub fn GetBagCapacity(scenario_balance: crate::ctypes::c_int) -> u32;
+}
+extern "C" {
+    pub fn GetBagCapacitySpecialEpisode(se_type: crate::ctypes::c_int) -> u32;
 }
 extern "C" {
     pub fn GetRankUpEntry(rank: crate::ctypes::c_int) -> *mut rankup_table_entry;
 }
 extern "C" {
+    pub fn GetBgRegionArea(
+        offset: crate::ctypes::c_int,
+        subregion_id: crate::ctypes::c_int,
+        region_id: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn LoadMonsterMd();
+}
+extern "C" {
+    pub fn GetNameRaw(dst: *mut crate::ctypes::c_char, monster_id: monster_id);
+}
+extern "C" {
+    pub fn GetName(
+        dst: *mut crate::ctypes::c_char,
+        monster_id: monster_id,
+        color_id: crate::ctypes::c_char,
+    );
+}
+extern "C" {
+    pub fn GetNameWithGender(
+        dst: *mut crate::ctypes::c_char,
+        monster_id: monster_id,
+        color_id: crate::ctypes::c_char,
+    );
+}
+extern "C" {
+    pub fn GetSpeciesString(dst: *mut crate::ctypes::c_char, monster_id: monster_id);
+}
+extern "C" {
+    pub fn GetNameString(monster_id: monster_id) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
+    pub fn GetSpriteIndex(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetDexNumber(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetCategoryString(monster_id: monster_id) -> *mut crate::ctypes::c_char;
+}
+extern "C" {
     pub fn GetMonsterGender(monster_id: monster_id) -> monster_gender::Type;
+}
+extern "C" {
+    pub fn GetBodySize(monster_id: monster_id) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetSpriteSize(monster_id: monster_id) -> u8;
@@ -27463,10 +28619,113 @@ extern "C" {
     pub fn GetSpriteFileSize(monster_id: monster_id) -> u8;
 }
 extern "C" {
+    pub fn GetShadowSize(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetSpeedStatus(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetMovementType(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetRegenSpeed(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn GetCanMoveFlag(monster_id: monster_id) -> bool_;
 }
 extern "C" {
+    pub fn GetChanceAsleep(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetLowKickMultiplier(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetSize(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetBaseHp(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn CanThrowItems(monster_id: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn CanEvolve(monster_id: monster_id) -> bool_;
+}
+extern "C" {
     pub fn GetMonsterPreEvolution(monster_id: monster_id) -> monster_id;
+}
+extern "C" {
+    pub fn GetBaseOffensiveStat(
+        monster_id: monster_id,
+        stat_idx: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetBaseDefensiveStat(
+        monster_id: monster_id,
+        stat_idx: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetType(monster_id: monster_id, type_idx: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetAbility(
+        monster_id: monster_id,
+        ability_idx: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetRecruitRate2(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetRecruitRate1(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetExp(monster_id: monster_id, level: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetEvoParameters(evo_params: *mut undefined, monster_id: monster_id);
+}
+extern "C" {
+    pub fn GetTreasureBoxChances(monster_id: monster_id, chances: *mut undefined);
+}
+extern "C" {
+    pub fn GetIqGroup(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetScenarioSpawn(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn NeedsItemToSpawn(monster_id: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn GetExclusiveItem(
+        monster_id: monster_id,
+        excl_idx: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetFamilyIndex(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn LoadM2nAndN2m();
+}
+extern "C" {
+    pub fn IsNotNickname(string: *mut crate::ctypes::c_char, monster_id: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn GetLvlStats(
+        level_stats: *mut undefined,
+        monster_id: monster_id,
+        level: crate::ctypes::c_int,
+    );
+}
+extern "C" {
+    pub fn GetEvoFamily(
+        monster: *mut undefined,
+        evo_family: *mut undefined,
+    ) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetEvolutions(
@@ -27477,7 +28736,22 @@ extern "C" {
     ) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn ShuffleHiddenPower(dmons_addr: *mut undefined);
+}
+extern "C" {
     pub fn GetBaseForm(arg1: monster_id) -> monster_id;
+}
+extern "C" {
+    pub fn GetBaseFormBurmyWormadamShellosGastrodonCherrim(monster_id: monster_id) -> monster_id;
+}
+extern "C" {
+    pub fn GetBaseFormCastformCherrimDeoxys(monster_id: monster_id) -> monster_id;
+}
+extern "C" {
+    pub fn GetAllBaseForms(monster_id: monster_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetDexNumberVeneer(monster_id: monster_id) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetMonsterIdFromSpawnEntry(arg1: *mut monster_spawn_entry) -> monster_id;
@@ -27486,7 +28760,20 @@ extern "C" {
     pub fn GetMonsterGenderVeneer(monster_id: monster_id) -> monster_gender::Type;
 }
 extern "C" {
+    pub fn SetMonsterId(monster_spawn: *mut monster_spawn_entry, monster_id: monster_id);
+}
+extern "C" {
+    pub fn SetMonsterLevelAndId(
+        monster_spawn: *mut monster_spawn_entry,
+        level: crate::ctypes::c_int,
+        monster_id: monster_id,
+    );
+}
+extern "C" {
     pub fn GetMonsterLevelFromSpawnEntry(entry: *mut monster_spawn_entry) -> u8;
+}
+extern "C" {
+    pub fn IsMonsterValid(monster_id: monster_id) -> bool_;
 }
 extern "C" {
     pub fn IsUnown(monster_id: monster_id) -> bool_;
@@ -27504,10 +28791,50 @@ extern "C" {
     pub fn IsDeoxys(monster_id: monster_id) -> bool_;
 }
 extern "C" {
+    pub fn GetSecondFormIfValid(monster_id: monster_id) -> monster_id;
+}
+extern "C" {
     pub fn FemaleToMaleForm(monster_id: monster_id) -> monster_id;
 }
 extern "C" {
-    pub fn IsMonsterOnTeam(monster_id: monster_id, param_2: crate::ctypes::c_int) -> bool_;
+    pub fn GetBaseFormCastformDeoxysCherrim(monster_id: monster_id) -> monster_id;
+}
+extern "C" {
+    pub fn BaseFormsEqual(monster1: monster_id, monster2: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn DexNumbersEqual(monster1: monster_id, monster2: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn GendersEqual(monster1: monster_id, monster2: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn GendersEqualNotGenderless(monster1: monster_id, monster2: monster_id) -> bool_;
+}
+extern "C" {
+    pub fn IsMonsterOnTeam(monster_id: monster_id, recruit_strategy: crate::ctypes::c_int)
+        -> bool_;
+}
+extern "C" {
+    pub fn GetNbRecruited(recruit: *mut undefined);
+}
+extern "C" {
+    pub fn GetMember(member_idx: crate::ctypes::c_int) -> undefined4;
+}
+extern "C" {
+    pub fn GetHeroStrIdIfExists() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetPartnerStrIdIfExists() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetFirstTeamMemberStrIdIfExists() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetSecondTeamMemberStrIdIfExists() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetThirdTeamMemberStrIdIfExists() -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn GetHeroData() -> *mut ground_monster;
@@ -27516,10 +28843,28 @@ extern "C" {
     pub fn GetPartnerData() -> *mut ground_monster;
 }
 extern "C" {
+    pub fn GetFirstTeamMemberData() -> *mut ground_monster;
+}
+extern "C" {
+    pub fn GetSecondTeamMemberData() -> *mut ground_monster;
+}
+extern "C" {
+    pub fn GetThirdTeamMemberData() -> *mut ground_monster;
+}
+extern "C" {
+    pub fn GetFirstEmptyRecruitSlot(param_1: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn CheckTeamMemberField8(param_1: undefined2) -> bool_;
 }
 extern "C" {
+    pub fn IsMonsterIdInNormalRange(monster_id: monster_id) -> bool_;
+}
+extern "C" {
     pub fn GetTeamMemberData(index: u8) -> *mut team_member;
+}
+extern "C" {
+    pub fn GetTeamMember(team_id: crate::ctypes::c_int) -> *mut undefined;
 }
 extern "C" {
     pub fn SetTeamSetupHeroAndPartnerOnly();
@@ -27531,13 +28876,49 @@ extern "C" {
     pub fn GetPartyMembers(party_members: *mut u16) -> crate::ctypes::c_int;
 }
 extern "C" {
+    pub fn RefillTeam();
+}
+extern "C" {
+    pub fn ClearItem(team_id: crate::ctypes::c_int, check: bool_) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn ChangeGiratinaFormIfSkyDungeon(dungeon_id: dungeon_id);
+}
+extern "C" {
     pub fn IqSkillFlagTest(iq_skill_flags: *mut u32, iq_id: iq_skill_id) -> bool_;
 }
 extern "C" {
     pub fn GetExplorerMazeMonster(entry_number: u8) -> *mut ground_monster;
 }
 extern "C" {
+    pub fn WriteMonsterInfoToSave(
+        start_addr: *mut crate::ctypes::c_void,
+        total_len: u32,
+    ) -> undefined4;
+}
+extern "C" {
+    pub fn ReadMonsterInfoFromSave(
+        start_addr: *mut crate::ctypes::c_void,
+        total_len: u32,
+    ) -> undefined4;
+}
+extern "C" {
+    pub fn WriteMonsterToSave(write_info: *mut undefined, monster: *mut ground_monster);
+}
+extern "C" {
+    pub fn ReadMonsterFromSave(read_info: *mut undefined, monster: *mut ground_monster);
+}
+extern "C" {
+    pub fn GetEvolutionPossibilities(monster: *mut ground_monster, evo: *mut undefined);
+}
+extern "C" {
+    pub fn GetMonsterEvoStatus(monster: *mut ground_monster) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn GetSosMailCount(param_1: crate::ctypes::c_int, param_2: bool_) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn IsMissionValid(mission: *mut mission) -> bool_;
 }
 extern "C" {
     pub fn GenerateMission(
@@ -27558,6 +28939,9 @@ extern "C" {
     pub fn AnyDungeonRequestsDone(param_1: u8) -> bool_;
 }
 extern "C" {
+    pub fn GetAcceptedMission(mission_id: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn GetMissionByTypeAndDungeon(
         start_index: crate::ctypes::c_int,
         mission_type: mission_type::Type,
@@ -27571,6 +28955,24 @@ extern "C" {
         subtype_struct: *mut undefined,
         dungeon_id: dungeon_id,
     ) -> bool_;
+}
+extern "C" {
+    pub fn GenerateAllPossibleMonstersList() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DeleteAllPossibleMonstersList();
+}
+extern "C" {
+    pub fn GenerateAllPossibleDungeonsList() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DeleteAllPossibleDungeonsList();
+}
+extern "C" {
+    pub fn GenerateAllPossibleDeliverList() -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DeleteAllPossibleDeliverList();
 }
 extern "C" {
     pub fn ClearMissionData(mission: *mut mission);
@@ -27588,6 +28990,18 @@ extern "C" {
     pub fn IsMonsterMissionAllowedStory(monster_id: monster_id) -> bool_;
 }
 extern "C" {
+    pub fn CanSendItem(item_id: item_id, to_sky: bool_) -> bool_;
+}
+extern "C" {
+    pub fn IsAvailableItem(item_id: item_id) -> bool_;
+}
+extern "C" {
+    pub fn GetAvailableItemDeliveryList(item_buffer: *mut undefined) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn GetActorMatchingStorageId(actor_id: crate::ctypes::c_int) -> crate::ctypes::c_int;
+}
+extern "C" {
     pub fn ScriptSpecialProcess0x3D();
 }
 extern "C" {
@@ -27598,6 +29012,29 @@ extern "C" {
 }
 extern "C" {
     pub fn ItemAtTableIdx(idx: crate::ctypes::c_int, item: *mut bulk_item);
+}
+extern "C" {
+    pub fn DungeonSwapIdToIdx(dungeon_id: dungeon_id) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn DungeonSwapIdxToId(idx: crate::ctypes::c_int) -> dungeon_id;
+}
+extern "C" {
+    pub fn ResumeBgm(
+        param_1: undefined4,
+        param_2: undefined4,
+        param_3: undefined4,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn FlushChannels(
+        param_1: *mut undefined,
+        param_2: crate::ctypes::c_int,
+        param_3: crate::ctypes::c_int,
+    ) -> crate::ctypes::c_int;
+}
+extern "C" {
+    pub fn UpdateChannels();
 }
 extern "C" {
     pub fn WaitForInterrupt();
@@ -27786,15 +29223,6 @@ extern "C" {
 }
 extern "C" {
     pub fn DivideUIntNoZeroCheck(dividend: u32, divisor: u32) -> crate::ctypes::c_ulonglong;
-}
-extern "C" {
-    pub fn GetFaintReason(arg1: move_id, arg2: item_id) -> faint_reason;
-}
-extern "C" {
-    pub fn InitMove(move_: *mut move_, arg1: move_id);
-}
-extern "C" {
-    pub fn GetLowKickMultiplier(monster_id: monster_id) -> crate::ctypes::c_int;
 }
 extern "C" {
     pub fn EntryArm7();
@@ -28194,10 +29622,10 @@ extern "C" {
     pub fn ResetDamageData(damage: *mut damage_data);
 }
 extern "C" {
-    pub fn GetTotalSpriteFileSize(monster_id: monster_id) -> crate::ctypes::c_int;
+    pub fn DungeonGetTotalSpriteFileSize(monster_id: monster_id) -> crate::ctypes::c_int;
 }
 extern "C" {
-    pub fn GetSpriteIndex(monster_id: monster_id) -> u16;
+    pub fn DungeonGetSpriteIndex(monster_id: monster_id) -> u16;
 }
 extern "C" {
     pub fn JoinedAtRangeCheck2Veneer(joined_at: dungeon_id_8) -> bool_;
@@ -30879,10 +32307,19 @@ extern "C" {
     pub static mut CART_REMOVED_IMG_DATA: [undefined; 0usize];
 }
 extern "C" {
+    pub static mut KECLEON_SHOP_ITEM_TABLE_LISTS_1: [item_id; 4usize];
+}
+extern "C" {
+    pub static mut KECLEON_SHOP_ITEM_TABLE_LISTS_2: [item_id; 4usize];
+}
+extern "C" {
     pub static mut EXCLUSIVE_ITEM_STAT_BOOST_DATA: [exclusive_item_stat_boost_entry; 15usize];
 }
 extern "C" {
     pub static mut EXCLUSIVE_ITEM_EFFECT_DATA: [exclusive_item_effect_entry; 956usize];
+}
+extern "C" {
+    pub static mut TYPE_SPECIFIC_EXCLUSIVE_ITEMS: [[item_id_16; 4usize]; 17usize];
 }
 extern "C" {
     pub static mut RECOIL_MOVE_LIST: [move_id_16; 11usize];
@@ -30900,7 +32337,40 @@ extern "C" {
     pub static mut SCRIPT_VARS: script_var_table;
 }
 extern "C" {
+    pub static mut HARDCODED_PORTRAIT_DATA_TABLE: [portrait_data_entry; 32usize];
+}
+extern "C" {
+    pub static mut WONDER_MAIL_BITS_MAP: [u8; 32usize];
+}
+extern "C" {
+    pub static mut WONDER_MAIL_BITS_SWAP: [u8; 36usize];
+}
+extern "C" {
+    pub static mut WONDER_MAIL_ENCRYPTION_TABLE: [u8; 256usize];
+}
+extern "C" {
     pub static mut DUNGEON_DATA_LIST: [dungeon_data_list_entry; 180usize];
+}
+extern "C" {
+    pub static mut ADVENTURE_LOG_ENCOUNTERS_MONSTER_IDS: [monster_id_16; 38usize];
+}
+extern "C" {
+    pub static mut TACTIC_NAME_STRING_IDS: [i16; 12usize];
+}
+extern "C" {
+    pub static mut STATUS_NAME_STRING_IDS: [i16; 102usize];
+}
+extern "C" {
+    pub static mut DUNGEON_RETURN_STATUS_TABLE: [dungeon_return_status; 91usize];
+}
+extern "C" {
+    pub static mut STATUSES_FULL_DESCRIPTION_STRING_IDS: [status_description; 103usize];
+}
+extern "C" {
+    pub static mut MISSION_FLOORS_FORBIDDEN: [mission_floors_forbidden; 100usize];
+}
+extern "C" {
+    pub static mut MISSION_FLOOR_RANKS_PTRS: [*mut undefined; 100usize];
 }
 extern "C" {
     pub static mut DUNGEON_RESTRICTIONS: [dungeon_restriction; 256usize];
@@ -30939,13 +32409,40 @@ extern "C" {
     pub static mut ZINC_BAND_STAT_BOOST: i16;
 }
 extern "C" {
+    pub static mut EGG_HP_BONUS: i16;
+}
+extern "C" {
+    pub static mut EVOLUTION_HP_BONUS: i16;
+}
+extern "C" {
+    pub static mut EVOLUTION_PHYSICAL_STAT_BONUSES: [i16; 2usize];
+}
+extern "C" {
+    pub static mut EGG_STAT_BONUSES: [i16; 4usize];
+}
+extern "C" {
+    pub static mut EVOLUTION_SPECIAL_STAT_BONUSES: [i16; 2usize];
+}
+extern "C" {
+    pub static mut FORBIDDEN_FORGOT_MOVE_LIST: [forbidden_forgot_move_entry; 3usize];
+}
+extern "C" {
     pub static mut TACTICS_UNLOCK_LEVEL_TABLE: [i16; 12usize];
+}
+extern "C" {
+    pub static mut CLIENT_LEVEL_TABLE: [i16; 16usize];
 }
 extern "C" {
     pub static mut OUTLAW_LEVEL_TABLE: [i16; 16usize];
 }
 extern "C" {
     pub static mut OUTLAW_MINION_LEVEL_TABLE: [i16; 16usize];
+}
+extern "C" {
+    pub static mut HIDDEN_POWER_BASE_POWER_TABLE: [crate::ctypes::c_int; 10usize];
+}
+extern "C" {
+    pub static mut VERSION_EXCLUSIVE_MONSTERS: [version_exclusive_monster; 23usize];
 }
 extern "C" {
     pub static mut IQ_SKILL_RESTRICTIONS: [i16; 69usize];
@@ -30969,6 +32466,9 @@ extern "C" {
     pub static mut GUMMI_BELLY_RESTORE_TABLE: [[i16; 18usize]; 18usize];
 }
 extern "C" {
+    pub static mut BAG_CAPACITY_TABLE_SPECIAL_EPISODES: [u32; 5usize];
+}
+extern "C" {
     pub static mut BAG_CAPACITY_TABLE: [u32; 8usize];
 }
 extern "C" {
@@ -30981,19 +32481,52 @@ extern "C" {
     pub static mut RANK_UP_TABLE: [rankup_table_entry; 13usize];
 }
 extern "C" {
+    pub static mut DS_DOWNLOAD_TEAMS: [monster_id_16; 56usize];
+}
+extern "C" {
+    pub static mut UNOWN_SPECIES_ADDITIONAL_CHARS: [monster_id; 28usize];
+}
+extern "C" {
     pub static mut MONSTER_SPRITE_DATA: [undefined; 1200usize];
+}
+extern "C" {
+    pub static mut MISSION_MENU_STRING_IDS_1: [i16; 8usize];
+}
+extern "C" {
+    pub static mut MISSION_MENU_STRING_IDS_2: [i16; 8usize];
+}
+extern "C" {
+    pub static mut MISSION_DUNGEON_UNLOCK_TABLE: [dungeon_unlock_entry; 3usize];
+}
+extern "C" {
+    pub static mut NO_SEND_ITEM_TABLE: [item_id_16; 3usize];
 }
 extern "C" {
     pub static mut MISSION_BANNED_STORY_MONSTERS: [monster_id_16; 21usize];
 }
 extern "C" {
+    pub static mut ITEM_DELIVERY_TABLE: [item_id_16; 23usize];
+}
+extern "C" {
+    pub static mut MISSION_RANK_POINTS: [crate::ctypes::c_int; 16usize];
+}
+extern "C" {
     pub static mut MISSION_BANNED_MONSTERS: [monster_id_16; 124usize];
+}
+extern "C" {
+    pub static mut MISSION_STRING_IDS: [i16; 964usize];
 }
 extern "C" {
     pub static mut EVENTS: [script_level; 0usize];
 }
 extern "C" {
+    pub static mut DEMO_TEAMS: [[monster_id_16; 2usize]; 18usize];
+}
+extern "C" {
     pub static mut ENTITIES: [script_entity; 386usize];
+}
+extern "C" {
+    pub static mut DUNGEON_SWAP_ID_TABLE: [dungeon_id_8; 212usize];
 }
 extern "C" {
     pub static mut MAP_MARKER_PLACEMENTS: [map_marker; 310usize];
@@ -31020,10 +32553,16 @@ extern "C" {
     pub static mut PACK_FILE_PATHS_TABLE: [*const crate::ctypes::c_char; 6usize];
 }
 extern "C" {
+    pub static mut BAG_ITEMS_PTR_MIRROR: *mut item;
+}
+extern "C" {
     pub static mut ITEM_DATA_TABLE_PTRS: [*mut crate::ctypes::c_void; 3usize];
 }
 extern "C" {
     pub static mut MOVE_DATA_TABLE_PTR: *mut move_data_table;
+}
+extern "C" {
+    pub static mut KEYBOARD_STRING_IDS: [i16; 30usize];
 }
 extern "C" {
     pub static mut NOTIFY_NOTE: bool_;
@@ -31047,13 +32586,46 @@ extern "C" {
     pub static mut ITEM_TABLES_PTRS_1: [*mut crate::ctypes::c_void; 26usize];
 }
 extern "C" {
+    pub static mut UNOWN_SPECIES_ADDITIONAL_CHAR_PTR_TABLE: [*mut monster_id; 28usize];
+}
+extern "C" {
+    pub static mut PARTY_MONSTERS_PTR: *mut undefined;
+}
+extern "C" {
+    pub static mut MISSION_LIST_PTR: *mut undefined;
+}
+extern "C" {
+    pub static mut REMOTE_STRING_PTR_TABLE: [*const crate::ctypes::c_char; 7usize];
+}
+extern "C" {
+    pub static mut RANK_STRING_PTR_TABLE: [*const crate::ctypes::c_char; 16usize];
+}
+extern "C" {
     pub static mut SMD_EVENTS_FUN_TABLE: [*mut crate::ctypes::c_void; 127usize];
+}
+extern "C" {
+    pub static mut MUSIC_DURATION_LOOKUP_TABLE_1: [i16; 128usize];
+}
+extern "C" {
+    pub static mut MUSIC_DURATION_LOOKUP_TABLE_2: [i32; 128usize];
 }
 extern "C" {
     pub static mut FAINT_REASON_CODE_ORB_ITEM: faint_reason_non_move::Type;
 }
 extern "C" {
     pub static mut FAINT_REASON_CODE_NON_ORB_ITEM: faint_reason_non_move::Type;
+}
+extern "C" {
+    pub static mut MOVE_POWER_STARS_TABLE: [crate::ctypes::c_int; 6usize];
+}
+extern "C" {
+    pub static mut MOVE_ACCURACY_STARS_TABLE: [crate::ctypes::c_int; 8usize];
+}
+extern "C" {
+    pub static mut LOADED_WAN_TABLE_PTR: *mut undefined;
+}
+extern "C" {
+    pub static mut TBL_TALK_GROUP_STRING_ID_START: [i16; 6usize];
 }
 extern "C" {
     pub static mut FIRST_DUNGEON_WITH_MONSTER_HOUSE_TRAPS: dungeon_id_8;
