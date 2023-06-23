@@ -8,6 +8,11 @@ This project is loosely based on [EternalCode's template](https://github.com/Ete
 Special thanks to [UsernameFodder](https://github.com/UsernameFodder) for the [pmdsky-debug](https://github.com/UsernameFodder/pmdsky-debug) project, [End45](https://github.com/End45) for the *ExtraSpace* patch and irdkwia for their research on item, move and special process effects.
 
 ## Rust subsystem
+**NOTE: The `main` branch does currently not contain the Rust subsystem anymore**, as it's support
+for symbols for `pmdsky-debug` is outdated and we eventually want to split the Rust subsytem
+off so we can keep `c-of-time` up-to-date with `pmdsky-debug` more easily. Use the `rust` branch
+if you want to use the Rust subsystem.
+
 c-of-time can also be used with Rust projects. If you want to use Rust (including mixed Rust + C projects),
 continue reading the `README.md` in the `rust` directory.
 
