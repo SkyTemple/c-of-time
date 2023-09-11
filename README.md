@@ -22,13 +22,18 @@ If you want to build pure C projects, continue below.
 1. Install [Python](https://www.python.org/downloads/).
 2. Install GCC and Binutils for `arm-none-eabi`. See [install_gcc.md](install_gcc.md) for information on how to install it.
 3. Clone this repository *recursively* with `git clone --recursive https://github.com/tech-ticks/c-of-time.git`. Make sure that you enter the correct directory before continuing (e.g. `cd c-of-time`).
-4. Install Python dependencies: `pip3 install pyyaml keystone-engine ndspy`
+  - If you don't have Git installed, click the green "Code" button on GitHub to download this repository, then do the same for [pmdsky-debug](https://github.com/UsernameFodder/pmdsky-debug). Finally, extract both .zip files and copy the `pmdsky-debug` folder into the `c-of-time` folder.
+4. Install Python dependencies: `pip3 install pyyaml ndspy`
 5. Patch a Pokémon Mystery Dungeon: Explorers of Sky ROM with the [`ExtraSpace` patch by End45](https://github.com/End45/EoS-asm-hacks/blob/main/src/ExtraSpace.asm). You can apply the patch with [SkyTemple](https://skytemple.org):
     1. Open the ROM in SkyTemple
     2. Click *ASM Patches* (*Patches > ASM* in SkyTemple 1.4+) and switch to the *Utility* tab
     3. Select the *ExtraSpace* patch and click *Apply*
 6. Place the ROM in `[project root]/rom.nds`
     - **US ROM offsets are used by default.** If you're using a EU ROM, change the `REGION` variable in `Makefile` to `EU`.
+7. If you are using Linux, install [armips](https://github.com/Kingcom/armips) manually. On macOS, you might need to do the following:
+  - Navigate to the folder `bin/armips` in Finder
+  - Right-click `armips-mac-x64`, click "Open" and confirm
+8. (optional) Run `make header-comments` to generate documentation comments for IDEs.
 
 ## Building
 To build the project, run `make patch`. This command will build your code, inject it into an overlay in the provided ROM and apply the patches in the `patches` directory. The output ROM will be saved as `out.nds` by default.
@@ -36,7 +41,7 @@ To build the project, run `make patch`. This command will build your code, injec
 If you want to check the generated assembly, run `make asmdump`. A file `out.asm` will be generated, which contains an assembly listing annotated with the corresponding source code lines.
 
 ## Usage
-Patches can be added to `.cotpatch` files inside the `patches` directory. These patch files contain offsets into functions that should be patched and assembly instructions, which allow calling into custom code. See `src/main.c` and `patches/patches.cotpatch` for examples.
+Patches can be added to `.asm` files inside the `patches` directory. These patch files contain offsets into functions that should be patched and assembly instructions, which allow calling into custom code. See `src/main.c` and `patches/patches.asm` for examples.
 
 ### Logging and assertions
 You can use the logging macros `COT_LOG`, `COT_WARN` and `COT_ERROR`. To view the logs, open the ROM in the SkyTemple debugger and check "Game Internal" in the log window. A macro for assertions `COT_ASSERT(expr)` is also available.

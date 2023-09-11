@@ -68,7 +68,7 @@ ARCH	:=	-marm -mno-thumb-interwork
 
 CFLAGS	:=	-g -Wall $(OPT_LEVEL) $(RELEASE_CONFIG) $(SP_EFFECT_COMPAT) \
  			-march=armv5te -mtune=arm946e-s -fomit-frame-pointer -fno-short-enums \
-			-ffast-math \
+			-ffast-math -fno-builtin \
 			$(ARCH)
 
 CFLAGS	+=	$(INCLUDE) -DARM9 -flto
@@ -162,7 +162,7 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 
 $(OUTPUT).bin : $(OUTPUT).elf
-	$(DEVKITARM)/bin/arm-none-eabi-objcopy -O binary $(OUTPUT).elf $(OUTPUT).bin
+	arm-none-eabi-objcopy -O binary $(OUTPUT).elf $(OUTPUT).bin
 
 $(OUTPUT).elf	:	$(OFILES)
 
@@ -184,4 +184,8 @@ patch: build
 
 .PHONY: asmdump
 asmdump: build
-	$(DEVKITARM)/bin/arm-none-eabi-objdump -S -d $(OUTPUT).elf > $(OUTPUT).asm
+	arm-none-eabi-objdump -S -d $(OUTPUT).elf > $(OUTPUT).asm
+
+.PHONY: header-comments
+header-comments:
+	cd pmdsky-debug/headers && $(PYTHON) add_header_docstrings.py

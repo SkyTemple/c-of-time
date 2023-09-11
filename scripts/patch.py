@@ -4,9 +4,9 @@ import ndspy.code
 import sys
 import os
 import re
-import keystone
 from subprocess import Popen, PIPE
 import glob
+import platform
 
 OVERLAY_INDEX = 36
 
@@ -21,42 +21,9 @@ overlay_elf_path = sys.argv[4]
 rom_out_path = sys.argv[5]
 
 overlay_symbols_lookup = {} # Key = symbol_name: string, value = offset: int
-rom_symbols_lookup = {}     # Key = symbol_name: string, value = offset_and_overlay_id: Tuple<int, int>
 
 rom = ndspy.rom.NintendoDSRom.fromFile(rom_path)
 overlays = rom.loadArm9Overlays()
-
-linkerscript_file_regex = re.compile('\/\* !file (arm9|overlay(\d\d?))', re.IGNORECASE)
-linkerscript_symbol_regex = re.compile('(.+) = 0x(.+);', re.IGNORECASE)
-
-def load_linkerscript_symbols():
-  for file in [f"symbols/generated_{region}.ld", f"symbols/custom_{region}.ld"]:    
-    with open(file, 'r') as f:
-      overlay_index = None
-      for line in f:
-        line = line.strip()
-        match = linkerscript_file_regex.match(line)
-
-        if match:
-          # Line in format: /* !file overlayXX */:
-          file, overlay_id_str = match.groups()
-          if file == 'arm9':
-            overlay_index = -1
-          elif overlay_id_str:
-            overlay_index = int(overlay_id_str)
-            assert overlay_index != OVERLAY_INDEX, "Linker script must not contain symbols from the custom overlay."
-
-        else:
-          match = linkerscript_symbol_regex.match(line)
-          if match:
-            assert overlay_index != None, "No file specified in linker script. " \
-              "Add a comment: '/* !file overlayXX */' or '/* !file arm9 */'"
-            symbol_name, offset_str = match.groups()
-            offset = int(offset_str, 16)
-
-            if symbol_name in rom_symbols_lookup:
-              print(f"Warning: Duplicate symbol: '{symbol_name}'")
-            rom_symbols_lookup[symbol_name] = (offset, overlay_index)
 
 def load_overlay_symbols():
   process = Popen(["arm-none-eabi-nm", overlay_elf_path], stdout=PIPE)
@@ -76,14 +43,6 @@ def load_overlay_symbols():
     name = parts[2]
     overlay_symbols_lookup[name] = offset
 
-def resolve_symbol(symbol):
-  # Returns address and overlay ID
-  if symbol in overlay_symbols_lookup:
-    return (overlay_symbols_lookup[symbol], OVERLAY_INDEX)
-  if symbol in rom_symbols_lookup:
-    return rom_symbols_lookup[symbol]
-
-  return None
 
 def apply_overlay():
   assert OVERLAY_INDEX in overlays, "No overlay 36 found, apply the ExtraSpace patch first."
@@ -110,71 +69,68 @@ def apply_overlay():
   rom.arm9OverlayTable = ndspy.code.saveOverlayTable(overlays)
 
 def apply_binary_patches():
-  overlay_bytes = { -1: (bytearray(rom.arm9), rom.arm9RamAddress) }
+  if not os.path.exists("build/binaries"):
+    os.mkdir("build/binaries")
+
+  # Write all symbols to a file that can be included in patches
+  with open("build/binaries/symbols.asm", "w") as f:
+    # Write symbols
+    for symbol, offset in overlay_symbols_lookup.items():
+      f.write(f".definelabel {symbol},{hex(offset)}\n")
+
+    # Write binary and overlay RAM offsets
+    f.write(f"arm9_start equ {hex(rom.arm9RamAddress)}\n")
+    f.write(f"arm9_end equ {hex(rom.arm9RamAddress + len(rom.arm9))}\n")
+    f.write(f"arm7_start equ {hex(rom.arm7RamAddress)}\n")
+    f.write(f"arm7_end equ {hex(rom.arm7RamAddress + len(rom.arm7))}\n")
+
+    for index, overlay in overlays.items():
+      if index != OVERLAY_INDEX:
+        f.write(f"overlay{index}_start equ {hex(overlay.ramAddress)}\n")
+        f.write(f"overlay{index}_end equ {hex(overlay.ramAddress + overlay.ramSize)}\n")
+
+  # Write the main binaries
+  with open("build/binaries/arm9.bin", "wb") as f:
+    f.write(rom.arm9)
+  with open("build/binaries/arm7.bin", "wb") as f:
+    f.write(rom.arm7)
+
+  # Write overlay binaries
   for index, overlay in overlays.items():
     if index != OVERLAY_INDEX:
-      overlay_bytes[index] = (bytearray(rom.files[overlay.fileID]), overlay.ramAddress)
+      with open(f"build/binaries/overlay{index}.bin", "wb") as f:
+        f.write(rom.files[overlay.fileID])
 
-  for file in glob.glob("patches/*.cotpatch"):
-    apply_binary_patch(file, overlay_bytes)
+  for file in glob.glob("patches/*.asm"):
+    apply_binary_patch(file)
 
-  file, ram_address = overlay_bytes[-1]
-  rom.arm9 = bytes(file)
+  # Apply the main binaries
+  with open("build/binaries/arm9.bin", "rb") as f:
+    rom.arm9 = f.read()
+  with open("build/binaries/arm7.bin", "rb") as f:
+    rom.arm7 = f.read()
+  
+  # Apply overlay binaries
   for index, overlay in overlays.items():
     if index != OVERLAY_INDEX:
-      file, ram_address = overlay_bytes[index]
-      rom.files[overlay.fileID] = bytes(file)
+      with open(f"build/binaries/overlay{index}.bin", "rb") as f:
+        rom.files[overlay.fileID] = f.read()
 
-offset_regex = re.compile('(.+)\+(\d):', re.IGNORECASE)
-branch_regex = re.compile('^bl?(eq|ne|cs|hs|cc|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)?$', re.IGNORECASE)
-
-def apply_binary_patch(file_path, overlay_bytes):
+def apply_binary_patch(file_path):
   print("Applying binary patch: " + file_path)
-  assembler = keystone.Ks(keystone.KS_ARCH_ARM, keystone.KS_MODE_ARM)
+  
+  armips_path = "armips"
+  if platform.system() == 'Darwin':
+    armips_path = "bin/armips/armips-mac-x64"
+  elif platform.system() == 'Windows':
+    armips_path = "bin/armips/armips-win-x64.exe"
+  patch_file_path = os.path.join('../../', file_path) # Relative to the root `build/binaries`
 
-  with open(file_path, 'r') as f:
-    current_offset = -1
-    overlay_index = -1
-    for line in f:
-      line = line.split("//")[0] # Remove "//" comments
-      line = line.split("#")[0] # Remove "#" comments
-      line = line.split(";")[0] # Remove ";" comments
-      line = line.strip()
-      if line == "":
-        continue
+  process = Popen([armips_path, patch_file_path, '-root', 'build/binaries'])
+  exit_code = process.wait()
 
-      match = offset_regex.match(line)
-      if match:
-        # Line in format: [symbol]+[hex offset]:
-        symbol, offset_str = match.groups()
-        offset = int(offset_str, 16)
-        assert symbol in rom_symbols_lookup, f"No symbol '{symbol}' found"
-        symbol_offset, overlay_index = rom_symbols_lookup[symbol]
-        current_offset = symbol_offset + offset
-      else:
-        # Instruction
-        assert current_offset != -1, "Symbol and offset must be specified before instructions"
+  assert exit_code == 0, f"armips failed with code {exit_code}"
 
-        split_line = line.split()
-        if branch_regex.match(split_line[0]):
-          assert len(split_line) >= 2, "Branch must have an operand"
-
-          if not split_line[1].isnumeric() and not split_line[1].startswith("0x"):
-            # The branch is not numeric, so it points to a symbol
-            resolved = resolve_symbol(split_line[1])
-            assert resolved, f"Failed to resolve symbol: '{split_line[1]}'"
-
-            sym_offset, _ = resolved
-            if sym_offset:
-              line = f"{split_line[0]} {hex(sym_offset - current_offset)}"
-
-        bytes, instruction_count = assembler.asm(line)
-        overlay_file, ram_offset = overlay_bytes[overlay_index]
-        for byte in bytes:
-          overlay_file[current_offset - ram_offset] = byte
-          current_offset += 1
-
-load_linkerscript_symbols()
 load_overlay_symbols()
 apply_overlay()
 apply_binary_patches()

@@ -9,5 +9,3 @@ out.asm
 *.nds.skytemple
 
 symbols/generated_*.ld
-
-patches/generated_by_rust.cotpatch
