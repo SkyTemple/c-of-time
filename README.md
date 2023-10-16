@@ -30,9 +30,12 @@ If you want to build pure C projects, continue below.
     3. Select the *ExtraSpace* patch and click *Apply*
 6. Place the ROM in `[project root]/rom.nds`
     - **US ROM offsets are used by default.** If you're using a EU ROM, change the `REGION` variable in `Makefile` to `EU`.
-7. If you are using Linux, install [armips](https://github.com/Kingcom/armips) manually. On macOS, you might need to do the following:
-  - Navigate to the folder `bin/armips` in Finder
-  - Right-click `armips-mac-x64`, click "Open" and confirm
+7. Follow these steps depending on your operating system:
+    - If you are using Linux, install [armips](https://github.com/Kingcom/armips) manually.
+    - If you are encountering errors with armips on Windows, you might need to install the [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-US/download/details.aspx?id=48145).
+    - On macOS, you might need to do the following:
+      - Navigate to the folder `bin/armips` in Finder
+      - Right-click `armips-mac-x64`, click "Open" and confirm
 8. (optional) Run `make header-comments` to generate documentation comments for IDEs.
 
 ## Building
