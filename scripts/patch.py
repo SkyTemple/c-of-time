@@ -73,7 +73,7 @@ def apply_binary_patches():
     os.mkdir("build/binaries")
 
   # Write all symbols to a file that can be included in patches
-  with open("build/binaries/symbols.asm", "w") as f:
+  with open("build/binaries/symbols.asm", "w", encoding="utf-8") as f:
     # Write symbols
     for symbol, offset in overlay_symbols_lookup.items():
       f.write(f".definelabel {symbol},{hex(offset)}\n")
