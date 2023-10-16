@@ -24,7 +24,7 @@
 #define COT_ASSERT(expr) \
   if (!(expr)) {\
     DebugPrint(2, "ASSERTION FAILED: " #expr " (" __FILE__ ":" _COT_INTERNAL_STRINGIZE(__LINE__) ")"); \
-    *((char*) 0) = 1; \
+    WaitForever(); \
   }
 
 #else
