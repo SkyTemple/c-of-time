@@ -14,7 +14,7 @@ all_symbols = set()
 linkerscript_lines.append("/* THIS FILE IS AUTO-GENERATED. DO NOT MODIFY! */")
 
 for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
-  with open(yaml_file_path, 'r') as f:
+  with open(yaml_file_path, 'r', encoding="utf-8") as f:
     linkerscript_lines.append("")
     linkerscript_lines.append(f"/* --- {yaml_file_path} --- */")
     yaml_string = f.read()
@@ -60,7 +60,7 @@ for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
           linkerscript_lines.append(f"{name} = {hex(addr)};")
           all_symbols.add(name)
 
-with open(f"symbols/generated_{region}.ld", "w") as f:
+with open(f"symbols/generated_{region}.ld", "w", encoding="utf-8") as f:
   for line in linkerscript_lines:
     f.write(line)
     f.write('\n')
