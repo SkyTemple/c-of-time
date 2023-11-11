@@ -10,8 +10,13 @@
 
 #ifndef NDEBUG
 
+// Uncomment this to include file and line number in log messages (risk of doxxing!)
+/* #define _COT_INTERNAL_LOG_MESSAGE(category, format) \
+ *   "[" category "] " format " (" __FILE__ ":" _COT_INTERNAL_STRINGIZE(__LINE__) ")"
+ */
+
 #define _COT_INTERNAL_LOG_MESSAGE(category, format) \
-  "[" category "] " format " (" __FILE__ ":" _COT_INTERNAL_STRINGIZE(__LINE__) ")"
+  "[" category "] " format
 
 #define COT_LOG(category, format)           DebugPrint(0, _COT_INTERNAL_LOG_MESSAGE(category, format))
 #define COT_WARN(category, format)          DebugPrint(1, _COT_INTERNAL_LOG_MESSAGE(category, format))
@@ -23,9 +28,17 @@
 
 #define COT_ASSERT(expr) \
   if (!(expr)) {\
-    DebugPrint(2, "ASSERTION FAILED: " #expr " (" __FILE__ ":" _COT_INTERNAL_STRINGIZE(__LINE__) ")"); \
+    DebugPrint(2, "ASSERTION FAILED: " #expr); \
     WaitForever(); \
   }
+
+// Uncomment this to include file and line number in assertion messages (risk of doxxing!)
+/* #define COT_ASSERT(expr) \
+ *   if (!(expr)) {\
+ *     DebugPrint(2, "ASSERTION FAILED: " #expr " (" __FILE__ ":" _COT_INTERNAL_STRINGIZE(__LINE__) ")"); \
+ *     WaitForever(); \
+ *   }
+ */
 
 #else
 
