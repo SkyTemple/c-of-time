@@ -69,6 +69,7 @@ ARCH	:=	-marm -mno-thumb-interwork
 CFLAGS	:=	-g -Wall $(OPT_LEVEL) $(RELEASE_CONFIG) $(SP_EFFECT_COMPAT) \
  			-march=armv5te -mtune=arm946e-s -fomit-frame-pointer -fno-short-enums \
 			-ffast-math -fno-builtin \
+			-fmacro-prefix-map=$(realpath $(CURDIR)/..)=. \
 			$(ARCH)
 
 CFLAGS	+=	$(INCLUDE) -DARM9 -flto
