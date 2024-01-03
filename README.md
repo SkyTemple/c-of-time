@@ -1,5 +1,8 @@
 # c-of-time
 
+![c-of-time logo by Irdkwia](./cot-logo.png)
+*Logo by [Irdkwia](https://github.com/irdkwia)*
+
 An environment for hooking and linking to Pokémon Mystery Dungeon: Explorers of Sky.
 
 ## Credits
