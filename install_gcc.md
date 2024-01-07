@@ -9,6 +9,8 @@ Follow any ONE of these guides.
 After reading the guide for your platform, make sure to read the section `Updating PATH`,
 since the tools need to be in your platform's `PATH`.
 
+In addition to this guide, you will also need to make sure `make` is installed. Other common Unix build tools may also be needed.
+
 ### Windows
 - Download it from ARM, see `All Platforms` below.
 - Download it as part of devkitpro, see `All Platforms` below.
@@ -43,7 +45,7 @@ You need to make sure the tools you just installed are in your system's PATH:
 - If you installed it via brew under macOS, a package manager under Linux or Msys2 under Windows,
   you don't need to do anything except maybe restarting your shell.
 - Otherwise you may need to add the directory which contains the
- `arm-none-eabi-gcc[.exe]` and `arm-none-eabi-binutils[.exe]` binaries to your PATH:
+ `arm-none-eabi-gcc[.exe]` and `arm-none-eabi-binutils` binaries (`arm-none-eabi-objdump[.exe]` etc.) to your PATH:
   - Windows: https://www.computerhope.com/issues/ch000549.htm
   - MacOS: https://www.cyberciti.biz/faq/appleosx-bash-unix-change-set-path-environment-variable/
   - Linux: https://opensource.com/article/17/6/set-path-linux
