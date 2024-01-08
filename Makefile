@@ -187,6 +187,6 @@ patch: build
 asmdump: build
 	arm-none-eabi-objdump -S -d $(OUTPUT).elf > $(OUTPUT).asm
 
-.PHONY: header-comments
-header-comments:
-	cd pmdsky-debug/headers && $(PYTHON) add_header_docstrings.py
+.PHONY: headers
+headers:
+	cd pmdsky-debug/headers && $(PYTHON) augment_headers.py --aliases --docstrings

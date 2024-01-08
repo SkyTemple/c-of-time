@@ -39,9 +39,13 @@ for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
       if 'data' in contents:
         symbols.extend(contents['data'])
       
-      for function in symbols:
-        name = function['name']
-        addresses = function['address']
+      for sym in symbols:
+        # Define symbols for all aliases on this symbol
+        names = [sym['name']]
+        if 'aliases' in sym:
+          names.extend(sym['aliases'])
+
+        addresses = sym['address']
         addr = None
         # *-ITCM regions are runtime overrides for the normal addresses
         if itcm_region in addresses:
@@ -55,10 +59,11 @@ for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
               continue
             addr = addr[0]
 
-          if name in all_symbols:
-            print(f"Warning: Duplicate symbol: '{name}'")
-          linkerscript_lines.append(f"{name} = {hex(addr)};")
-          all_symbols.add(name)
+          for name in names:
+            if name in all_symbols:
+              print(f"Warning: Duplicate symbol: '{name}'")
+            linkerscript_lines.append(f"{name} = {hex(addr)};")
+            all_symbols.add(name)
 
 with open(f"symbols/generated_{region}.ld", "w", encoding="utf-8") as f:
   for line in linkerscript_lines:

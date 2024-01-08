@@ -39,7 +39,7 @@ If you want to build pure C projects, continue below.
     - On macOS, you might need to do the following:
       - Navigate to the folder `bin/armips` in Finder
       - Right-click `armips-mac-x64`, click "Open" and confirm
-8. (optional) Run `make header-comments` to generate documentation comments for IDEs.
+8. Run `make headers` to add aliases and documentation comments to headers for increased compatibility.
 
 ## Building
 To build the project, run `make patch`. This command will build your code, inject it into an overlay in the provided ROM and apply the patches in the `patches` directory. The output ROM will be saved as `out.nds` by default.
