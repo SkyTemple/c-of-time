@@ -22,24 +22,20 @@ continue reading the `README.md` in the `rust` directory.
 If you want to build pure C projects, continue below.
 
 ## Project setup
-1. Install [Python](https://www.python.org/downloads/).
-2. Install GCC and Binutils for `arm-none-eabi`. See [install_gcc.md](install_gcc.md) for information on how to install it.
-3. Clone this repository *recursively* with `git clone --recursive https://github.com/tech-ticks/c-of-time.git`. Make sure that you enter the correct directory before continuing (e.g. `cd c-of-time`).
-  - If you don't have Git installed, click the green "Code" button on GitHub to download this repository, then do the same for [pmdsky-debug](https://github.com/UsernameFodder/pmdsky-debug). Finally, extract both .zip files and copy the `pmdsky-debug` folder into the `c-of-time` folder.
-4. Install Python dependencies: `pip3 install pyyaml ndspy`
-5. Patch a Pokémon Mystery Dungeon: Explorers of Sky ROM with the [`ExtraSpace` patch by End45](https://github.com/End45/EoS-asm-hacks/blob/main/src/ExtraSpace.asm). You can apply the patch with [SkyTemple](https://skytemple.org):
-    1. Open the ROM in SkyTemple
-    2. Click *ASM Patches* (*Patches > ASM* in SkyTemple 1.4+) and switch to the *Utility* tab
-    3. Select the *ExtraSpace* patch and click *Apply*
-6. Place the ROM in `[project root]/rom.nds`
-    - **US ROM offsets are used by default.** If you're using a EU ROM, change the `REGION` variable in `Makefile` to `EU`.
-7. Follow these steps depending on your operating system:
-    - If you are using Linux, install [armips](https://github.com/Kingcom/armips) manually.
-    - If you are encountering errors with armips on Windows, you might need to install the [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-US/download/details.aspx?id=48145).
-    - On macOS, you might need to do the following:
-      - Navigate to the folder `bin/armips` in Finder
-      - Right-click `armips-mac-x64`, click "Open" and confirm
-8. Run `make headers` to add aliases and documentation comments to headers for increased compatibility.
+
+### Preparing the ROM
+
+You need a US or EU ROM of Pokémon Mystery Dungeon: Explorers of Sky. The ROM must be patched with the [`ExtraSpace` patch by End45](https://github.com/End45/EoS-asm-hacks/blob/main/src/ExtraSpace.asm). You can apply the patch with [SkyTemple](https://skytemple.org):
+  1. Open the ROM in SkyTemple
+  2. Click *ASM Patches* (*Patches > ASM* in SkyTemple 1.4+) and switch to the *Utility* tab
+  3. Select the *ExtraSpace* patch and click *Apply*
+
+### Installing dependencies
+
+Refer to the setup guide for your platform:
+- [Windows](./install_windows.md)
+- [Linux](./install_linux.md)
+- [macOS](./install_macos.md)
 
 ## Building
 To build the project, run `make patch`. This command will build your code, inject it into an overlay in the provided ROM and apply the patches in the `patches` directory. The output ROM will be saved as `out.nds` by default.
