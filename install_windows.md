@@ -11,7 +11,7 @@ You can install c-of-time on Windows using the following methods. The steps deta
 MSYS2 is a Unix-like environment for Windows. It provides a terminal and a package manager that allows you to install the required tools on Windows with a few commands. This is the recommended method for installing c-of-time on Windows.
 
 1. Download and install [MSYS2](https://www.msys2.org/wiki/MSYS2-installation/) by following the instructions on their website. This guide assumes that you installed MSYS2 to `C:\msys64`, adjust the paths accordingly if you installed it to a different location.
-2. Press the Windows key, search for "MSYS2" and open the "MSYS2 MINGW64" shortcut to open a terminal. Note that the other MSYS shortcuts will not work.
+2. Press the Windows key, search for "MINGW64" and open the "MSYS2 MINGW64" shortcut to open a terminal. **Note that the other MSYS shortcuts will not work, always open the "MSYS2 MINGW64" one.**
 3. Run `pacman -S git make mingw-w64-x86_64-arm-none-eabi-toolchain mingw-w64-x86_64-python-pip` to install Git, Make, the ARM toolchain and the Python package manager. Confirm that you want to install all packages by pressing enter, then type `y` and press Enter.
 4. Install Python dependencies: `pip3 install pyyaml ndspy`
 5. Navigate to the directory where you want to install c-of-time. You can use `cd` to change the directory and `ls` to list the contents of the current directory. For example, if you want to install c-of-time to `C:\Users\YourName\Documents\c-of-time`, run `cd /c/Users/YourName/Documents`.
