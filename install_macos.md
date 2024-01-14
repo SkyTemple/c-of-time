@@ -44,6 +44,7 @@ This method is slightly more involved, but it's more lightweight and doesn't req
     - You will need the "AArch32 bare-metal target" version, not the "AArch64 bare-metal target" version.
     - Download and open the `.pkg` file. Follow the instructions in the installer.
 4. Run the command `export VERSION=` in the terminal, followed by the version number of the toolchain you just installed. This version number should match the folder name of the toolchain in `/Applications/ArmGNUToolchain`. For example, if you installed version 13.2.rel1, run `export VERSION=13.2.rel1`. Then, run `echo 'export PATH="/Applications/ArmGNUToolchain/$VERSION/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc` to add the toolchain to your `PATH` environment variable.
+    - If you're using another shell than zsh (the default on macOS), replace `~/.zshrc` with the path to your shell's configuration file. For example, if you're using bash, replace `~/.zshrc` with `~/.bashrc`.
 5. You can now continue with the steps 5-9 of the Homebrew method above.
 
 ## Other methods (advanced)

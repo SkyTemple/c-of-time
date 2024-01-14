@@ -4,6 +4,7 @@ You can install c-of-time on Linux using the following methods. Instructions var
 
 - [Ubuntu/Debian](#ubuntu-debian)
 - [Fedora](#fedora)
+- [Arch Linux](#arch-linux)
 - [Other methods (advanced)](#other-methods-advanced)
 
 ## Ubuntu/Debian
@@ -33,6 +34,14 @@ You can install c-of-time on Ubuntu or Debian using the following methods. The s
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
 2. Run the following command to install the required tools: `sudo dnf install @development-tools gcc-c++ cmake python3-pip arm-none-eabi-binutils-cs arm-none-eabi-gcc-cs`. You will need to enter your password during the installation.
 3. You can now continue with the steps 3-10 of the Ubuntu/Debian method above.
+
+## Arch Linux
+
+1. Open the Terminal app. The exact steps vary based on your desktop environment.
+2. Run the following command to install the required tools: `sudo pacman -Syu base-devel git python python-pip arm-none-eabi-gcc arm-none-eabi-binutils`. You will need to enter your password during the installation.
+3. Install Python dependencies: `pip3 install pyyaml ndspy`
+4. Install the [armips package](https://aur.archlinux.org/packages/armips) via the Arch User Repository (AUR). Please refer to the [Arch Wiki](https://wiki.archlinux.org/title/Arch_User_Repository) for instructions.
+5. You can now continue with the steps 5-10 of the Ubuntu/Debian method above.
 
 ## Other methods (advanced)
 
