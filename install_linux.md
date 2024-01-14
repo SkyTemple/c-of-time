@@ -1,6 +1,6 @@
 # Linux setup guide
 
-You can install c-of-time on Windows using the following methods. Instructions vary based on your Linux distribution.
+You can install c-of-time on Linux using the following methods. Instructions vary based on your Linux distribution.
 
 - [Ubuntu/Debian](#ubuntu-debian)
 - [Fedora](#fedora)
@@ -21,9 +21,9 @@ You can install c-of-time on Ubuntu or Debian using the following methods. The s
     5. Run `cd ../..` to return to the previous directory.
 5. Navigate to the directory where you want to install c-of-time. You can use `cd` to change the directory and `ls` to list the contents of the current directory. For example, if you want to install c-of-time to `/home/YourName/Documents/c-of-time`, run `cd /home/YourName/Documents`.
     - **Note:** You can also use the file manager to navigate to the directory where you want to install c-of-time. Right-click the name of the directory and select "Open in Terminal".
-6. Download this repository by running `git clone --recursive https://github.com/SkyTemple/c-of-time.git` in the MSYS2 terminal. c-of-time will be downloaded in a folder called `c-of-time` inside the current directory.
+6. Download this repository by running `git clone --recursive https://github.com/SkyTemple/c-of-time.git` in the terminal. c-of-time will be downloaded in a folder called `c-of-time` inside the current directory.
 7. Enter the `c-of-time` directory with `cd c-of-time`.
-8. Copy the ROM you have prepared into the `c-of-time` directory and rename it to `rom.nds`. You can open Windows Explorer in the current directory by running `explorer .` in the MSYS2 terminal.
+8. Copy the ROM you have prepared into the `c-of-time` directory and rename it to `rom.nds`. You can open the file manager in the current directory by running `xdg-open .` in the terminal.
     - **US ROM offsets are used by default.** If you're using a EU ROM, change the `REGION` variable in `Makefile` to `EU`.
 9. Run `make headers` to add aliases and documentation comments to headers for increased compatibility.
 10. Run `make patch` to build the project. The output ROM will be saved as `out.nds` by default.

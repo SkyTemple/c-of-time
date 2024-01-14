@@ -1,6 +1,6 @@
 # macOS setup guide
 
-You can install c-of-time on Windows using the following methods. The steps detailed in this guide were tested on macOS Sonoma (14.2).
+You can install c-of-time on macOS using the following methods. The steps detailed in this guide were tested on macOS Sonoma (14.2).
 
 - [Method 1: Homebrew (recommended)](#method-1-homebrew-recommended)
 - [Method 2: Downloading the toolchain from ARM](#method-2-downloading-the-toolchain-from-arm)
