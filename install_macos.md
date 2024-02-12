@@ -28,9 +28,7 @@ You can install c-of-time on macOS using the following methods. The steps detail
 
 If you are encountering errors with armips, try the following:
 - Navigate to the folder `c-of-time/bin/armips` in Finder
-- Right-click `armips-mac-x64`, click "Open" and confirm
-
-If you encounter the error message that says "Bad CPU type in executable" on an Apple Silicon Mac, install Rosetta 2 by running `softwareupdate --install-rosetta` in the terminal.
+- Right-click `armips-mac-arm64` if you're on Apple Silicon or `armips-mac-x64` if you're on an Intel-based Mac, click "Open" and confirm
 
 ## Method 2: Downloading the toolchain from ARM
 

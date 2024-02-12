@@ -121,7 +121,10 @@ def apply_binary_patch(file_path):
   
   armips_path = "armips"
   if platform.system() == 'Darwin':
-    armips_path = "bin/armips/armips-mac-x64"
+    if platform.machine() == 'arm64':
+      armips_path = "bin/armips/armips-mac-arm64"
+    else:
+      armips_path = "bin/armips/armips-mac-x64"
   elif platform.system() == 'Windows':
     armips_path = "bin/armips/armips-win-x64.exe"
   patch_file_path = os.path.join('../../', file_path) # Relative to the root `build/binaries`
