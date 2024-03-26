@@ -82,7 +82,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-T $(CURDIR)/../symbols/generated_$(REGION).ld \
 			-T $(CURDIR)/../symbols/custom_$(REGION).ld -T $(CURDIR)/../linker.ld \
-			-g $(ARCH) -Wl,-Map,$(notdir $*.map) -Xlinker -no-enum-size-warning -nostdlib
+			-g $(ARCH) -Wl,-Map,$(notdir $*.map) -Xlinker -no-enum-size-warning -nostdlib  -Xlinker --no-check-sections
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
@@ -151,7 +151,7 @@ buildobjs:
 .PHONY: clean
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).bin $(TARGET).asm $(ROM_OUT).nds symbols/generated_*.ld
+	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).asm $(ROM_OUT).nds symbols/generated_*.ld
  
 #---------------------------------------------------------------------------------
 else
@@ -162,10 +162,7 @@ DEPENDS	:=	$(OFILES:.o=.d)
 # main targets
 #---------------------------------------------------------------------------------
 
-$(OUTPUT).bin : $(OUTPUT).elf
-	arm-none-eabi-objcopy -O binary $(OUTPUT).elf $(OUTPUT).bin
-
-$(OUTPUT).elf	:	$(OFILES)
+$(OUTPUT).elf	:	$(CURDIR)/../linker.ld $(OFILES)
 
 .PHONY: buildobjs
 buildobjs: $(OFILES)
@@ -181,7 +178,7 @@ symbols/generated_$(REGION).ld:
 
 .PHONY: patch
 patch: build
-	$(PYTHON) scripts/patch.py $(REGION) $(ROM) $(OUTPUT).bin $(OUTPUT).elf $(ROM_OUT)
+	$(PYTHON) scripts/patch.py $(REGION) $(ROM) $(OUTPUT).elf $(ROM_OUT)
 
 .PHONY: asmdump
 asmdump: build

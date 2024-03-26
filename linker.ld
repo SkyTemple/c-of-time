@@ -1,30 +1,31 @@
 OUTPUT_ARCH(arm)
 MEMORY {
-        out     : ORIGIN = 0x23D7FF0, LENGTH = 0x8010
+        main    : ORIGIN = 0x23D7FF0, LENGTH = 0x8010
+        /* Change/Add memory locations here */
+        /* NEW    : ORIGIN = 0x2000000, LENGTH = 0x800 */
 }
 
 SECTIONS {
-        .text : {
-
-                FILL (0xABCD)
-
-                __exidx_start = .;
-                __exidx_end = .;
-                abort = .;
-
-                __text_start = . ;
-
-                __init_array_start = .;
-                KEEP (*(SORT_BY_INIT_PRIORITY(.init_array.*)))
-                KEEP (*(.init_array))
-                __init_array_end = .;
-                __fini_array_start = .;
-                KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.*)))
-                KEEP (*(.fini_array))
-                __fini_array_end = .;
-                
+        /*
+                Add more sections for the linker, each section using a different memory location
+                This allows to spread your code on different overlays
+                You can change the section of one symbol (function or variable) in your C code using: __attribute__((section(".YOURSECTIONNAME")))
+                Note that section names are standardized and in the form ".text.OV.NB.SPECIAL"
+                Where OV is between 'ov9' (ARM9 Overlay) and 'arm' (Main ARM Binary)
+                NB is the OV number (7 or 9 for 'arm', any ARM9 Overlay number for 'ov9')
+                SPECIAL is a distinct name, this is only to distinguish between 2 sections on the same overlay
+        */
+        /*.text.OV.NB.SPECIAL : {
+                *(.YOURSECTIONNAME)
+        } >NEW = 0xff*/
+        /*
+                Main Section (Default section, in ARM9 overlay 36)
+                Note that you should add your special sections before that
+        */
+        .text.ov9.36.main : {
                 *(.init)
                 *(.text)
+                *(.text.*)
                 *(.fini)
                 *(.ctors)
                 *(.dtors)
@@ -33,13 +34,7 @@ SECTIONS {
                 *(.data)
                 *(.data.*)
                 *(COMMON)
-                __text_end  = . ;
                 . = ALIGN(4);
-                __bss_start__ = . ;
                 *(.bss)
-                __bss_end__ = . ;
-
-                _end = __bss_end__ ;
-                __end__ = __bss_end__ ;
-        } >out = 0xff
+        } >main = 0xff
 }
