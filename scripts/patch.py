@@ -11,9 +11,6 @@ import tempfile
 
 OVERLAY_EXTRA = 36
 
-# Overlay load address + offset to common area
-# see https://docs.google.com/document/d/1Rs4icdYtiM6KYnWxMkdlw7jpWrH7qw5v6LOfDWIiYho
-
 region = sys.argv[1]
 rom_path = sys.argv[2]
 overlay_elf_path = sys.argv[3]
@@ -70,11 +67,14 @@ def apply_overlay():
           if hierarchy[2] == "ov9":
             overlay = overlays[bank_number]
             overlay_bytes = rom.files[overlay.fileID]
+            ram_address = overlay.ramAddress
           elif hierarchy[2] == "arm":
             if bank_number == 9:
               overlay_bytes = rom.arm9
+              ram_address = rom.arm9RamAddress
             elif bank_number == 7:
               overlay_bytes = rom.arm7
+              ram_address = rom.arm7RamAddress
             else:
               raise ValueError("Invalid arm binary '%d'"%bank_number)
           else:
@@ -93,7 +93,7 @@ def apply_overlay():
           assert size == len(custom_code_bytes), f"Size mismatch"
           
           # Combine the existing overlay bytes with the custom code
-          padding = vma - overlay.ramAddress
+          padding = vma - ram_address
           new_overlay_bytes = bytearray(overlay_bytes)
           new_overlay_bytes[padding:padding + size] = custom_code_bytes
 
