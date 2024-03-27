@@ -94,7 +94,8 @@ def apply_overlay():
           
           # Combine the existing overlay bytes with the custom code
           padding = vma - ram_address
-          new_overlay_bytes = bytearray(overlay_bytes)
+          new_overlay_bytes = bytearray(padding + size)
+          new_overlay_bytes[0:len(overlay_bytes)] = overlay_bytes
           new_overlay_bytes[padding:padding + size] = custom_code_bytes
 
           if hierarchy[2] == "ov9":
