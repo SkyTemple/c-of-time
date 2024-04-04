@@ -64,7 +64,7 @@ def apply_overlay():
           vma = int(section[3], 16)
           offset = int(section[5], 16)
           bank_number = int(hierarchy[3])
-          if hierarchy[2] == "ov9":
+          if hierarchy[2] == "ov":
             overlay = overlays[bank_number]
             overlay_bytes = rom.files[overlay.fileID]
             ram_address = overlay.ramAddress
@@ -98,7 +98,7 @@ def apply_overlay():
           new_overlay_bytes[0:len(overlay_bytes)] = overlay_bytes
           new_overlay_bytes[padding:padding + size] = custom_code_bytes
 
-          if hierarchy[2] == "ov9":
+          if hierarchy[2] == "ov":
             overlay.data = new_overlay_bytes
             overlay.save()
             rom.files[overlay.fileID] = new_overlay_bytes

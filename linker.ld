@@ -15,8 +15,8 @@ SECTIONS {
                 This allows to spread your code on different overlays
                 You can change the section of one symbol (function or variable) in your C code using: __attribute__((section(".YOURSECTIONNAME")))
                 Note that section names are standardized and in the form ".text.OV.NB.SPECIAL"
-                Where OV is between 'ov9' (ARM9 Overlay) and 'arm' (Main ARM Binary)
-                NB is the OV number (7 or 9 for 'arm', any ARM9 Overlay number for 'ov9')
+                Where OV is between 'ov' (ARM9 Overlay) and 'arm' (Main ARM Binary)
+                NB is the OV number (7 or 9 for 'arm', any ARM9 Overlay number for 'ov')
                 SPECIAL is a distinct name, this is only to distinguish between 2 sections on the same overlay
         */
         /*.text.OV.NB.SPECIAL : {
@@ -26,7 +26,7 @@ SECTIONS {
                 Main Section (Default section, in ARM9 overlay 36)
                 Note that you should add your special sections before that
         */
-        .text.ov9.36.main : {
+        .text.ov.36.main : {
                 *(.init)
                 *(.text)
                 *(.text.*)
