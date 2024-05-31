@@ -1,3 +1,8 @@
+/* !file overlay11 */
+OpcodeCheck = 0x022DDDD4;
+GetParameterCount = 0x022DDD8C;
+ScriptEngineReturnTwo = 0x022e246c;
+
 /* !file overlay29 */
 ApplyMoveEffect = 0x0232E864;
 ApplyMoveEffectHookAddr = 0x0232F8A4;
