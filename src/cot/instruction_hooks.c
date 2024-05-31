@@ -14,7 +14,7 @@ __attribute((naked)) void HookOpcodeCheck(void) {
     asm volatile("cmp r5,r7");
     asm volatile("bge NewInstructions");
     asm volatile("cmp r5,r0");
-	asm volatile("b OpcodeCheck+4");
+    asm volatile("b OpcodeCheck+4");
 }
 
 __attribute((naked)) void NewInstructions(void) {
@@ -23,26 +23,26 @@ __attribute((naked)) void NewInstructions(void) {
 
     asm volatile("mov r0,r5"); // Opcode (offset from FIRST_CUSTOM_OPCODE)
     asm volatile("mov r1,r6"); // Argument list
-	asm volatile("bl DispatchCustomInstruction");
+    asm volatile("bl DispatchCustomInstruction");
 
     asm volatile("pop {r0-r1}");
-	asm volatile("b ScriptEngineReturnTwo");
+    asm volatile("b ScriptEngineReturnTwo");
 }
 
 __attribute((naked)) void HookGetParameterCount(void) {
-	asm volatile("ldr r7,=FIRST_CUSTOM_OPCODE");
-	asm volatile("ldr r7,[r7]");
-	asm volatile("cmp r5,r7");
-	asm volatile("ldrge r0,=CUSTOM_INSTRUCTIONS");
-	asm volatile("subge r1,r5,r7");
-	asm volatile("ldrge r8,=12");   // Struct size
-	asm volatile("mulge r8,r1,r8"); // Scale index by struct size
-	asm volatile("movge r1,r8");
-	asm volatile("ldrsb r0,[r0,r1]");
-	asm volatile("bx r14");
+    asm volatile("ldr r7,=FIRST_CUSTOM_OPCODE");
+    asm volatile("ldr r7,[r7]");
+    asm volatile("cmp r5,r7");
+    asm volatile("ldrge r0,=CUSTOM_INSTRUCTIONS");
+    asm volatile("subge r1,r5,r7");
+    asm volatile("ldrge r8,=12");   // Struct size
+    asm volatile("mulge r8,r1,r8"); // Scale index by struct size
+    asm volatile("movge r1,r8");
+    asm volatile("ldrsb r0,[r0,r1]");
+    asm volatile("bx r14");
 
     // workaround for "invalid literal constant: pool needs to be closer"
-	asm volatile(".ltorg");
+    asm volatile(".ltorg");
 }
 
 __attribute((used)) void DispatchCustomInstruction(int index, uint16_t* args) {
