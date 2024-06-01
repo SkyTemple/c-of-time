@@ -5,10 +5,10 @@
 
 // Loosely based on https://github.com/Adex-8x/jam-patches/blob/master/strung-up-by-sketches/CustomOpcodes/asm_patches/patch_ov36.asm#L137
 
-#if 0
+#if CUSTOM_GROUND_INSTRUCTIONS
 
 // const instead of #define so the constant can be referenced in Assembly
-__attribute((used)) static const int FIRST_CUSTOM_OPCODE = 0x1000;
+__attribute((used)) const int FIRST_CUSTOM_OPCODE = 0x1000;
 
 __attribute((naked)) void HookOpcodeCheck(void) {
     asm volatile("cmp r5,r7");
@@ -19,13 +19,11 @@ __attribute((naked)) void HookOpcodeCheck(void) {
 
 __attribute((naked)) void NewInstructions(void) {
     asm volatile("sub r5,r5,r7");
-    asm volatile("push {r0-r1}");
 
     asm volatile("mov r0,r5"); // Opcode (offset from FIRST_CUSTOM_OPCODE)
     asm volatile("mov r1,r6"); // Argument list
     asm volatile("bl DispatchCustomInstruction");
 
-    asm volatile("pop {r0-r1}");
     asm volatile("b ScriptEngineReturnTwo");
 }
 

@@ -59,7 +59,7 @@ Please note that custom move effects are currently *not* handled by the *Metrono
 
 #### Compatiblity with existing patches
 
-**Note: ROMs patched with c-of-time currently experience crashes with the `ExtractSpCode` and `ExtractMoveCode` patch.**
+**Note: ROMs patched with c-of-time currently experience crashes with the `ExtractItemCode` and `ExtractMoveCode` patch.**
 
 You can work around the crash by removing `.open "overlay29.bin", overlay29_start` and all following lines in `patches/internal.asm`.
 However, doing so will cause custom effects written in C to have no effect.
@@ -80,9 +80,8 @@ Disadvantages:
 - No support for return values at the moment (the variable $EVENT_LOCAL is used as a "return register" by convention)
 
 Custom instructions are disabled by default. Follow these steps to enable support for custom instructions in c-of-time:
-1. Remove `#if 0` and `#endif` in `src/ground_instructions.c`
-2. Remove `#if 0` and `#endif` in `src/cot/instruction_hooks.c`
-3. Restore the commented-out code in `patches/internal.asm`
+1. Open the file `include/cot/custom_instructions.h` and change the line `#define CUSTOM_GROUND_INSTRUCTIONS 0` to `#define CUSTOM_GROUND_INSTRUCTIONS 1`.
+2. Restore the commented-out code in `patches/internal.asm`
 
 You can now add your own instructions to the `CUSTOM_INSTRUCTIONS` array in `ground_instructions.c`.
 

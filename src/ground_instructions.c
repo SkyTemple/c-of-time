@@ -4,7 +4,7 @@
 // Custom script engine instructions are disabled by default.
 // Refer to README.md for more information.
 
-#if 0
+#if CUSTOM_GROUND_INSTRUCTIONS
 
 // Overwrites the default dialogue box attributes with the given values.
 //
@@ -16,12 +16,12 @@
 // - `screen`: 0 = bottom screen, 1 = top screen
 // - `frame`: 0xFD = default, 0xFA = invisible, ...
 void OpSetDialogueBoxAttributes(uint16_t* args) {
-    int x = ProcessScriptParam(args[0]);
-    int y = ProcessScriptParam(args[1]);
-    int width = ProcessScriptParam(args[2]);
-    int height = ProcessScriptParam(args[3]);
-    int screen = ProcessScriptParam(args[4]);
-    int frame = ProcessScriptParam(args[5]);
+    int x = ScriptParamToInt(args[0]);
+    int y = ScriptParamToInt(args[1]);
+    int width = ScriptParamToInt(args[2]);
+    int height = ScriptParamToInt(args[3]);
+    int screen = ScriptParamToInt(args[4]);
+    int frame = ScriptParamToInt(args[5]);
 
     DIALOGUE_BOX_DEFAULT_WINDOW_PARAMS.x_offset = x;
     DIALOGUE_BOX_DEFAULT_WINDOW_PARAMS.y_offset = y;
@@ -38,7 +38,7 @@ void OpSetDialogueBoxAttributes(uint16_t* args) {
 // # Arguments
 // - `mode`: 0 = pressed buttons, 1 = held buttons
 void OpCheckInputStatus(uint16_t* args) {
-    int mode = ProcessScriptParam(args[0]);
+    int mode = ScriptParamToInt(args[0]);
 
     int buttons = 0;
     if (mode == 0) {
@@ -51,7 +51,8 @@ void OpCheckInputStatus(uint16_t* args) {
 
 // Add your custom instructions to the list below.
 // `handler` is a pointer to your handler function (see the examples above).
-// `n_params` must match the number of instructions used in your handler function.
+// `n_params` must match the number of parameters used in your handler function
+// (must be 0 or a positive number, instructions with variadic arguments are not supported).
 // Custom instructions use ID 0x1000 + <array index>.
 //
 // Refer to README.md for instructions on how to access custom instructions in SkyTemple!
