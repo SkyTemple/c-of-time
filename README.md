@@ -55,8 +55,61 @@ To create custom special processes, add them into the `switch` statement in `Cus
 
 You can add custom item or move effects in `CustomApplyItemEffect` and `CustomApplyMoveEffect`.
 
+Please note that custom move effects are currently *not* handled by the *Metronome* move.
+
 #### Compatiblity with existing patches
-This project aims to keep compatibility with existing patches for move, item and special process effects to some degree. Special process effects using the `ExtractSpCode` patch can be reused without problems if they were imported with an ID lower than 100. Compatiblity with the `ExtractMoveCode` has not been thoroughly tested yet and might potentially cause issues with the *Metronome* move.
+
+**Note: ROMs patched with c-of-time currently experience crashes with the `ExtractItemCode` and `ExtractMoveCode` patch.**
+
+You can work around the crash by removing `.open "overlay29.bin", overlay29_start` and all following lines in `patches/internal.asm`.
+However, doing so will cause custom effects written in C to have no effect.
+
+Please reach out to us [on Discord](https://discord.gg/skytemple) for potential workarounds if you need to use the aforementioned patches while also adding effects via c-of-time.
+
+### Custom script engine instructions
+
+Custom script engine instructions are a more complex, but more powerful alternative to special processes.
+
+Advantages over special processes include:
+- No frame delay (especially beneficial when building complex minigames or other real-time interactions)
+- Custom instructions can be used inside targeted routines, while `ProcessSpecial` doesn't work
+- Cleaner script code overall without resorting to macros
+
+Disadvantages:
+- No built-in support in SkyTemple (workaround provided below)
+- No support for return values at the moment (the variable $EVENT_LOCAL is used as a "return register" by convention)
+
+Custom instructions are disabled by default. Follow these steps to enable support for custom instructions in c-of-time:
+1. Open the file `include/cot/custom_instructions.h` and change the line `#define CUSTOM_GROUND_INSTRUCTIONS 0` to `#define CUSTOM_GROUND_INSTRUCTIONS 1`.
+2. Restore the commented-out code in `patches/internal.asm`
+
+You can now add your own instructions to the `CUSTOM_INSTRUCTIONS` array in `ground_instructions.c`.
+
+#### Accessing custom script engine instructions in SkyTemple
+
+SkyTemple will not recognize custom script engine instructions by default.
+Trying to save a script that references a custom instruction will lead to an error, and scripts containing custom instructions won't decompile.
+To use custom instructions in SkyTemple, open the folder where SkyTemple is installed, edit the file
+`<SkyTemple installation directory>/skytemple_files/_resources/ppmdu_config/pmd2scriptdata.xml` and add the following lines under the `<OpCodes>` tag:
+
+```xml
+  <!-- Custom instructions start at ID 0x1000 -->
+  <OpCode id="0x1000" name="SetDialogueBoxAttributes"              params="6"  stringidx="-1" unk2="0"  unk3="0"   >
+    <Argument id="0" type="uint" name="offset_x"/>
+    <Argument id="1" type="uint" name="offset_y"/>
+    <Argument id="2" type="uint" name="width"/>
+    <Argument id="3" type="uint" name="height"/>
+    <Argument id="4" type="uint" name="screen"/>
+    <Argument id="5" type="uint" name="frame"/>
+  </OpCode>
+  <OpCode id="0x1001" name="CheckInputStatus"                      params="1"  stringidx="-1" unk2="0"  unk3="0"   >
+    <Argument id="0" type="uint" name="mode"/>
+  </OpCode>
+  (add additional instructions here...)
+</OpCodes>
+```
+
+We're planning to provide a SkyTemple plug-in that will make this process easier in the future.
 
 ## Updating symbol definitions and headers
 To update symbol data from `pmdsky-debug`, run `git submodule foreach git pull origin master`,

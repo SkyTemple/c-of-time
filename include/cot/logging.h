@@ -3,6 +3,7 @@
 #define COT_LOG_CAT_DEFAULT "cot"
 #define COT_LOG_CAT_SPECIAL_PROCESS "cot.special_process"
 #define COT_LOG_CAT_EFFECTS "cot.effects"
+#define COT_LOG_CAT_INSTRUCTIONS "cot.ground_instructions"
 
 // Needs two macros for some reason
 #define _COT_INTERNAL_STRINGIZE_DETAIL(x) #x

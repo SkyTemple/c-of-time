@@ -1,3 +1,8 @@
+/* !file overlay11 */
+/* OpcodeCheck = ?????; unknown */
+/* GetParameterCount = ?????; unknown */
+/* ScriptEngineReturnTwo = ?????; unknown */
+
 /* !file overlay29 */
 /* ApplyMoveEffect = ?????; unknown */
 ApplyMoveEffectHookAddr = 0x023302E4;

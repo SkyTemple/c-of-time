@@ -9,14 +9,7 @@ bool cotInternalDispatchApplyItemEffect(
 ) {
     COT_LOGFMT(COT_LOG_CAT_EFFECTS, "Running item effect %d", item->id.val);
 
-    bool handled = CustomApplyItemEffect(user, target, item, is_thrown);
-#ifdef COT_RUST
-    // If the Rust runtime of c-of-time is used, ask the Rust implementation to process the effect.
-    if (!handled) {
-      handled = eos_rs_apply_item_effect(user, target, item, is_thrown);
-    }
-#endif
-    return handled;
+    return CustomApplyItemEffect(user, target, item, is_thrown);
 }
 
 bool cotInternalDispatchApplyMoveEffect(
@@ -24,14 +17,7 @@ bool cotInternalDispatchApplyMoveEffect(
 ) {
     COT_LOGFMT(COT_LOG_CAT_EFFECTS, "Running move effect %d", data->move_id);
 
-    bool handled = CustomApplyMoveEffect(data, user, target, move);
-#ifdef COT_RUST
-    // If the Rust runtime of c-of-time is used, ask the Rust implementation to process the effect.
-    if (!handled) {
-      handled = eos_rs_apply_move_effect(data, user, target, move);
-    }
-#endif
-    return handled;
+    return CustomApplyMoveEffect(data, user, target, move);
 }
 
 int cotInternalDispatchScriptSpecialProcessCall(
@@ -44,13 +30,8 @@ int cotInternalDispatchScriptSpecialProcessCall(
     int return_val = 0;
     bool handled = CustomScriptSpecialProcessCall(unknown, special_process_id, arg1, arg2, &return_val);
     if (!handled) {
-#ifdef COT_RUST
-      // If the Rust runtime of c-of-time is used, ask it to take over from here.
-      eos_rs_call_special_process(unknown, special_process_id, arg1, arg2, &return_val);
-#else
-      // Otherwise: Log a warning that the special processed went unhandled.
+      // Log a warning that the special processed went unhandled.
       COT_WARNFMT(COT_LOG_CAT_SPECIAL_PROCESS, "Unhandled special process ID %d", special_process_id);
-#endif
     }
     return return_val;
 }
