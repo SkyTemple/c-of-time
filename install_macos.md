@@ -20,7 +20,7 @@ You can install c-of-time on macOS using the following methods. The steps detail
 5. Download this repository by running `git clone --recursive https://github.com/SkyTemple/c-of-time.git` in the terminal. c-of-time will be downloaded in a folder called `c-of-time` inside the current directory.
 6. Enter the `c-of-time` directory with `cd c-of-time`.
 7. Copy the ROM you have prepared into the `c-of-time` directory and rename it to `rom.nds`.
-    - **US ROM offsets are used by default.** If you're using a EU ROM, change the `REGION` variable in `Makefile` to `EU`.
+    - **US ROM offsets are used by default.** If you're using a EU or JP ROM, change the `REGION` variable in `Makefile` to `EU` or `JP` accordingly.
 8. Run `make headers` to add aliases and documentation comments to headers for increased compatibility.
 9. Run `make patch` to build the project. The output ROM will be saved as `out.nds` by default.
 

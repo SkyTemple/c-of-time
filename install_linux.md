@@ -25,7 +25,7 @@ You can install c-of-time on Ubuntu or Debian using the following methods. The s
 6. Download this repository by running `git clone --recursive https://github.com/SkyTemple/c-of-time.git` in the terminal. c-of-time will be downloaded in a folder called `c-of-time` inside the current directory.
 7. Enter the `c-of-time` directory with `cd c-of-time`.
 8. Copy the ROM you have prepared into the `c-of-time` directory and rename it to `rom.nds`. You can open the file manager in the current directory by running `xdg-open .` in the terminal.
-    - **US ROM offsets are used by default.** If you're using a EU ROM, change the `REGION` variable in `Makefile` to `EU`.
+    - **US ROM offsets are used by default.** If you're using a EU or JP ROM, change the `REGION` variable in `Makefile` to `EU` or `JP` accordingly.
 9. Run `make headers` to add aliases and documentation comments to headers for increased compatibility.
 10. Run `make patch` to build the project. The output ROM will be saved as `out.nds` by default.
 
