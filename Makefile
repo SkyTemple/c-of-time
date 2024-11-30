@@ -45,7 +45,7 @@ export RANLIB   :=      $(PREFIX)gcc-ranlib
 # INCLUDES is a list of directories containing extra header files
 #---------------------------------------------------------------------------------
 
-#             <-- Change to EU if required
+#             <-- Change to EU or JP if required
 REGION := NA
 ROM := rom.nds
 ROM_OUT := out.nds
