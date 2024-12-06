@@ -8,7 +8,7 @@ An environment for hooking and linking to Pokémon Mystery Dungeon: Explorers of
 ## Credits
 This project is loosely based on [EternalCode's template](https://github.com/EternalCode/Empty-Template). The build configuration is based on scripts provided by [devkitPro](https://devkitpro.org). The patch format was inspired by [Starlight](https://github.com/shadowninja108/Starlight).
 
-Special thanks to [UsernameFodder](https://github.com/UsernameFodder) for the [pmdsky-debug](https://github.com/UsernameFodder/pmdsky-debug) project, [End45](https://github.com/End45) for the *ExtraSpace* patch and irdkwia for their research on item, move and special process effects.
+Special thanks to [UsernameFodder](https://github.com/UsernameFodder) for the [pmdsky-debug](https://github.com/UsernameFodder/pmdsky-debug) project, [Frostbyte](https://github.com/Frostbyte0x70) for the *ExtraSpace* patch and [irdkwia](https://github.com/irdkwia) for their research on item, move and special process effects.
 
 ## Rust subsystem
 **NOTE: The `main` branch does currently not contain the Rust subsystem anymore**, as it's support
@@ -110,6 +110,35 @@ To use custom instructions in SkyTemple, open the folder where SkyTemple is inst
 ```
 
 We're planning to provide a SkyTemple plug-in that will make this process easier in the future.
+
+### Custom script menus
+
+Custom script engine menus are a method of creating new, complex menus that would otherwise be inefficient with special processes or custom script engine instructions. They also serve as a more powerful alternative to the script engine's existing `message_SwitchMenu` and `message_SwitchMenu2` instructions, which do allow for simple menus, but are limited in functionality.
+
+By default, the first new menu ID is 80; this can be changed in `src/cot/menu_hooks.c`. To call a custom script menu, simply use the `message_Menu` instruction in a script; custom menus also support return values, which can be checked with a switch-statement in ExplorerScript like:
+
+```c
+switch(message_Menu(81)) {
+    case 0:
+      debug_Print("ACCESS GRANTED.");
+      break;
+    default:
+      debug_Print("INCORRECT PASSWORD. CARD EJECTION IMMINENT.");
+}
+```
+
+Generally, custom script menus are more complex to create than special processes or instructions. Instead of a single handler being defined for each menu, each menu has three functions to handle its creation, maintenance, and destruction. See `include/cot/menus.h` and `src/menus.c` for information regarding these functions, as well as the definition of a global menu information structure.
+
+Despite the name, a custom script "menu" could technically be used for anything that needs to follow this general outline:
+1. An initial phase that calls a function once, meant to allocate or create certain structures
+2. An update phase that calls a function every frame until it finally returns `true`, meant to continuously check the status of anything created in the initial phase
+3. A final phase that calls a function once (only run after the update phase is complete), meant to deallocate any structures that were created in the initial phase
+
+Custom script menus are disabled by default. Follow these steps to enable support for custom menus in c-of-time:
+1. Open the file `include/cot/menus.h` and change the line `#define CUSTOM_SCRIPT_MENUS 0` to `#define CUSTOM_SCRIPT_MENUS 1`.
+2. Restore the commented-out code in `patches/internal.asm`
+
+You can now add your own menus to the `CUSTOM_SCRIPT_MENUS` array in `menus.c`.
 
 ## Updating symbol definitions and headers
 To update symbol data from `pmdsky-debug`, run `git submodule foreach git pull origin master`,
