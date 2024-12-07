@@ -2,6 +2,11 @@
 OpcodeCheck = 0x022DF474;
 GetParameterCount = 0x022DF42C;
 ScriptEngineReturnTwo = 0x022E3A98;
+ScriptMenuRequestDefaultCase = 0x022E771C;
+ScriptMenuRequestFinalize = 0x022E7ED8;
+ScriptMenuUpdateDefaultCase = 0x022E7F24;
+ScriptMenuUpdateFinalize = 0x022E8484;
+IS_BASE_GAME_MENU_FINISHED = 0x023261FC;
 
 /* !file overlay29 */
 ApplyMoveEffect = 0x0232FC60;
@@ -14,3 +19,10 @@ ApplyItemEffectJumpAddr = 0x0231DFE0;
 
 /* !file arm9 */
 ChangeGlobalBorderColor = 0x02027DE0;
+InitGroundMonsterBaseStats = 0x02053234;
+InitGroundMonsterStatsAndMoveset = 0x02054800;
+SetupKeyboard = 0x02036ACC;
+ShowKeyboardTypeCase3 = 0x02036C34;
+ShowKeyboardTypeDefaultCase = 0x02036D54;
+ShowKeyboardReturn = 0x02036FC0;
+PreprocessStringFromIdCallsite = 0x02039804;
