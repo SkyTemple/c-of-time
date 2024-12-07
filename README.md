@@ -127,15 +127,17 @@ switch(message_Menu(81)) {
 }
 ```
 
-Generally, custom script menus are more complex to create than special processes or instructions. Instead of a single handler being defined for each menu, each menu has three functions to handle its creation, maintenance, and destruction. See `include/cot/menus.h` and `src/menus.c` for information regarding these functions, as well as the definition of a global menu information structure.
+Generally, custom script menus are more complicated to create than special processes or instructions. Instead of a single handler being defined for each menu, each menu has three functions to handle its creation, maintenance, and destruction. See `include/cot/menus.h` and `src/menus.c` for information regarding these functions, as well as the definition of a global menu information structure.
 
 Despite the name, a custom script "menu" could technically be used for anything that needs to follow this general outline:
 1. An initial phase that calls a function once, meant to allocate or create certain structures
 2. An update phase that calls a function every frame until it finally returns `true`, meant to continuously check the status of anything created in the initial phase
 3. A final phase that calls a function once (only run after the update phase is complete), meant to deallocate any structures that were created in the initial phase
 
+Additionally, keep in mind that when a script calls `message_Menu`, the current routine will hang, waiting for the menu to complete the three aforementioned phases in order.
+
 Custom script menus are disabled by default. Follow these steps to enable support for custom menus in c-of-time:
-1. Open the file `include/cot/menus.h` and change the line `#define CUSTOM_SCRIPT_MENUS 0` to `#define CUSTOM_SCRIPT_MENUS 1`.
+1. Open the file `include/cot/menus.h` and change the line `#define CUSTOM_SCRIPT_MENUS 0` to `#define CUSTOM_SCRIPT_MENUS 1`
 2. Restore the commented-out code in `patches/internal.asm`
 
 You can now add your own menus to the `CUSTOM_SCRIPT_MENUS` array in `menus.c`.

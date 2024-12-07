@@ -218,6 +218,7 @@ void ClosePartnerNameMenu() {
 // Refer to menus.h for more information on the fields of `custom_menu` and `global_menu_info`!
 struct custom_menu CUSTOM_MENUS[] = {
     // ID 80
+    // Attempts to add a chosen Pokémon as a new member of Chimecho Assembly!
     // Returns: Chimecho Assembly index of the new recruit if successful. -1 if the player exits the menu, -2 if a new recruit could not be added.
     {
         .create = CreateRecruitAnyMonsterMenu,
@@ -225,6 +226,7 @@ struct custom_menu CUSTOM_MENUS[] = {
         .update = UpdateRecruitAnyMonsterMenu
     },
     // ID 81
+    // Prompts the player to input a password.
     // Returns: 0 if the player enters "shard" in the keyboard prompt, else otherwise.
     {
         #ifdef REGION_JP
@@ -239,6 +241,7 @@ struct custom_menu CUSTOM_MENUS[] = {
         .update = UpdateSimpleKeyboardMenu
     },
     // ID 82
+    // Prompts the player to rename the partner.
     // Returns: Nothing.
     {
         #ifdef REGION_JP

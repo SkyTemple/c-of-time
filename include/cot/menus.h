@@ -11,7 +11,7 @@ struct custom_menu {
   uint16_t keyboard_confirm_string_id; // The string used for the final Yes/No confirmation prompt upon inputting a string, e.g., "Is the name [string0] OK?"
   void (*create)(); // Called only once; initializes the script menu.
   void (*close)(); // Called only once, when the update function returns true.
-  bool (*update)(); // Called every frame while the script menu is active. Returns true if the script menu should close. Its sole argument is a pointer to the value message_Menu will return in a script.
+  bool (*update)(); // Called every frame while the script menu is active. Returns true if the script menu should close.
 };
 
 struct global_menu_info {
