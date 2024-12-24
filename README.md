@@ -79,11 +79,7 @@ Disadvantages:
 - No built-in support in SkyTemple (workaround provided below)
 - No support for return values at the moment (the variable $EVENT_LOCAL is used as a "return register" by convention)
 
-Custom instructions are disabled by default. Follow these steps to enable support for custom instructions in c-of-time:
-1. Open the file `include/cot/custom_instructions.h` and change the line `#define CUSTOM_GROUND_INSTRUCTIONS 0` to `#define CUSTOM_GROUND_INSTRUCTIONS 1`.
-2. Restore the commented-out code in `patches/internal.asm`
-
-You can now add your own instructions to the `CUSTOM_INSTRUCTIONS` array in `ground_instructions.c`.
+Custom instructions are disabled by default. To enable support for custom instructions in c-of-time, open the file `include/cot/custom_instructions.h` and change the line `#define CUSTOM_GROUND_INSTRUCTIONS 0` to `#define CUSTOM_GROUND_INSTRUCTIONS 1`. You can now add your own instructions to the `CUSTOM_INSTRUCTIONS` array in `ground_instructions.c`.
 
 #### Accessing custom script engine instructions in SkyTemple
 
@@ -136,11 +132,7 @@ Despite the name, a custom script "menu" could technically be used for anything 
 
 Additionally, keep in mind that when a script calls `message_Menu`, the current routine will hang, waiting for the menu to complete the three aforementioned phases in order.
 
-Custom script menus are disabled by default. Follow these steps to enable support for custom menus in c-of-time:
-1. Open the file `include/cot/menus.h` and change the line `#define CUSTOM_SCRIPT_MENUS 0` to `#define CUSTOM_SCRIPT_MENUS 1`
-2. Restore the commented-out code in `patches/internal.asm`
-
-You can now add your own menus to the `CUSTOM_SCRIPT_MENUS` array in `menus.c`.
+Custom script menus are disabled by default. To enable support for custom menus in c-of-time, open the file `include/cot/menus.h` and change the line `#define CUSTOM_SCRIPT_MENUS 0` to `#define CUSTOM_SCRIPT_MENUS 1`. You can now add your own menus to the `CUSTOM_SCRIPT_MENUS` array in `menus.c`.
 
 ## Updating symbol definitions and headers
 To update symbol data from `pmdsky-debug`, run `git submodule foreach git pull origin master`,
