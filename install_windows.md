@@ -2,13 +2,21 @@
 
 You can install c-of-time on Windows using the following methods. The steps detailed in this guide were tested with Windows 11. This guide assumes that you have a 64-bit version of Windows installed.
 
-- [Method 1: MSYS2 (recommended)](#method-1-msys2-recommended)
-- [Method 2: WSL](#method-2-wsl)
+- [Method 1: WSL (recommended)](#method-1-wsl-recommended)
+- [Method 2: MSYS2](#method-2-msys2)
 - [Other methods (advanced)](#other-methods-advanced)
 
-## Method 1: MSYS2 (recommended)
+## Method 2: WSL (recommended)
+
+You can run c-of-time in the Windows Subsystem for Linux (WSL). WSL 2 is recommended for maximum compatibility.
+
+Refer to [this guide by Microsoft](https://learn.microsoft.com/en-us/windows/wsl/install) to install WSL. After the installation is finished, open a terminal such as the Windows Command Prompt or Windows PowerShell and run `wsl.exe` to enter WSL. You can now install follow the [setup instructions for Linux](./install_linux.md).
+
+## Method 2: MSYS2
 
 MSYS2 is a Unix-like environment for Windows. It provides a terminal and a package manager that allows you to install the required tools on Windows with a few commands. This is the recommended method for installing c-of-time on Windows.
+
+Note: There are known issues with package installation using this method (see [this thread in the SkyTemple Discord server](https://discord.com/channels/710190644152369162/1320206615475130399/1320206615475130399)).
 
 1. Download and install [MSYS2](https://www.msys2.org/wiki/MSYS2-installation/) by following the instructions on their website. This guide assumes that you installed MSYS2 to `C:\msys64`, adjust the paths accordingly if you installed it to a different location.
 2. Press the Windows key, search for "MINGW64" and open the "MSYS2 MINGW64" shortcut to open a terminal. **Note that the other MSYS shortcuts will not work, always open the "MSYS2 MINGW64" one.**
@@ -23,12 +31,6 @@ MSYS2 is a Unix-like environment for Windows. It provides a terminal and a packa
 9. Run `make headers` to add aliases and documentation comments to headers for increased compatibility.
 10. Run `make patch` to build the project. The output ROM will be saved as `out.nds` by default.
     - If you are encountering errors with armips, you might need to install the [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-US/download/details.aspx?id=48145). Make sure to download the 64-bit version (`vc_redist.x64.exe`).
-
-## Method 2: WSL
-
-You can run c-of-time in the Windows Subsystem for Linux (WSL). WSL 2 is recommended for maximum compatibility.
-
-Refer to [this guide by Microsoft](https://learn.microsoft.com/en-us/windows/wsl/install) to install WSL. After the installation is finished, open a terminal such as the Windows Command Prompt or Windows PowerShell and run `wsl.exe` to enter WSL. You can now install follow the [setup instructions for Linux](./install_linux.md).
 
 ## Other methods (advanced)
 
