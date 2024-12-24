@@ -22,7 +22,7 @@ char* RecruitAnyMonsterOptionEntryFn(char* buffer, int option_id) {
 
 // The initial menu function called when `message_Menu(80);` is executed in a script, responsible for the creation of the main Advanced Menu and a portrait.
 // Like any `create` function, this is only called once.
-void CreateRecruitAnyMonsterMenu() {
+void CreateRecruitAnyMonsterMenu(void) {
     struct window_params menu_params = { .x_offset = 2, .y_offset = 2, .box_type = {0xFF} };
     struct window_flags menu_flags = { .a_accept = true, .b_cancel = true, .se_on = true, .partial_menu = true, .menu_lower_bar = true, .no_accept_button = true };
     struct portrait_params* portrait_params = &(GLOBAL_MENU_INFO.portrait_params);
@@ -37,7 +37,7 @@ void CreateRecruitAnyMonsterMenu() {
 
 // The final menu function called when `message_Menu(80);` is executed in a script, responsible for the closing of any and all active windows.
 // Like any `close` function, this is only called once.
-void CloseRecruitAnyMonsterMenu() {
+void CloseRecruitAnyMonsterMenu(void) {
     if(GLOBAL_MENU_INFO.window_ids[0] >= 0)
         CloseAdvancedMenu(GLOBAL_MENU_INFO.window_ids[0]);
     if(GLOBAL_MENU_INFO.window_ids[1] >= 0)
@@ -48,7 +48,7 @@ void CloseRecruitAnyMonsterMenu() {
 
 // The menu function called repeatedly while `message_Menu(80);` is active in a script, responsible for continuously checking the status of any menus and handling the logic of what should occur upon player input.
 // Like any `update` function, this is called every frame until it returns true.
-bool UpdateRecruitAnyMonsterMenu() {
+bool UpdateRecruitAnyMonsterMenu(void) {
     bool is_menu_finished = false;
     int adv_menu_id = GLOBAL_MENU_INFO.window_ids[0];
     int portrait_id = GLOBAL_MENU_INFO.window_ids[1];
@@ -170,19 +170,19 @@ bool UpdateRecruitAnyMonsterMenu() {
 
 // The initial menu function called to show a keyboard prompt for the player to type in a string.
 // This is intended to be used by a variety of menus.
-void CreateSimpleKeyboardMenu() {
+void CreateSimpleKeyboardMenu(void) {
     SetupKeyboard(GLOBAL_MENU_INFO.id, NULL, NULL);
 }
 
 // The menu function called repeatedly to check if the player has finished entering a string.
 // This is intended to be used by a variety of menus.
-bool UpdateSimpleKeyboardMenu() {
+bool UpdateSimpleKeyboardMenu(void) {
     return IS_BASE_GAME_MENU_FINISHED;
 }
 
 // The final menu function called when `message_Menu(81);` is executed in a script, responsible for checking the result of the player-inputted string.
 // Simply does a `strncmp` with "shard" and the keyboard string, i.e., returns 0 if the player has inputted "shard" in the keyboard prompt.
-void ClosePasswordMenu() {
+void ClosePasswordMenu(void) {
     #ifdef REGION_JP
     GLOBAL_MENU_INFO.return_val = strncmp((char*)GetKeyboardStringResult(), "L6(J.", 10); // This is still actually "shard"
     #else
@@ -193,7 +193,7 @@ void ClosePasswordMenu() {
 // The final menu function called when `message_Menu(82);` is executed in a script, responsible for checking the result of the player-inputted string.
 // Renames the partner across both its `ground_monster` and `team_member` structs using the string the player inputted in the keyboard prompt.
 // Based off of https://github.com/Chesyon/StarterMenuTool/blob/main/skypatches/FixPartnerNameMenu.skypatch
-void ClosePartnerNameMenu() {
+void ClosePartnerNameMenu(void) {
     char* result = (char*)GetKeyboardStringResult();
     int index = GetMainCharacter2MemberIdx();
     int roster_index = GetActiveRosterIndex(index);
