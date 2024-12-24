@@ -186,4 +186,4 @@ asmdump: build
 
 .PHONY: headers
 headers:
-	cd pmdsky-debug/headers && $(PYTHON) augment_headers.py --aliases --docstrings
+	cd pmdsky-debug/headers && $(PYTHON) augment_headers.py --aliases --deprecate-aliases --docstrings
