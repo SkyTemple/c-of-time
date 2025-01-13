@@ -25,7 +25,7 @@ If you want to build pure C projects, continue below.
 
 ### Preparing the ROM
 
-You need a US or EU ROM of Pokémon Mystery Dungeon: Explorers of Sky. The ROM must be patched with the [`ExtraSpace` patch by End45](https://github.com/End45/EoS-asm-hacks/blob/main/src/ExtraSpace.asm). You can apply the patch with [SkyTemple](https://skytemple.org):
+You need a US, EU, or JP ROM of Pokémon Mystery Dungeon: Explorers of Sky. The ROM must be patched with the [`ExtraSpace` patch by Frostbyte](https://github.com/Frostbyte0x70/EoS-asm-patches/blob/main/src/ExtraSpace.asm). You can apply the patch with [SkyTemple](https://skytemple.org):
   1. Open the ROM in SkyTemple
   2. Click *ASM Patches* (*Patches > ASM* in SkyTemple 1.4+) and switch to the *Utility* tab
   3. Select the *ExtraSpace* patch and click *Apply*
@@ -77,7 +77,6 @@ Advantages over special processes include:
 
 Disadvantages:
 - No built-in support in SkyTemple (workaround provided below)
-- No support for return values at the moment (the variable $EVENT_LOCAL is used as a "return register" by convention)
 
 Custom instructions are disabled by default. To enable support for custom instructions in c-of-time, open the file `include/cot/custom_instructions.h` and change the line `#define CUSTOM_GROUND_INSTRUCTIONS 0` to `#define CUSTOM_GROUND_INSTRUCTIONS 1`. You can now add your own instructions to the `CUSTOM_INSTRUCTIONS` array in `ground_instructions.c`.
 

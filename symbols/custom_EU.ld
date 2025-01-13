@@ -18,10 +18,6 @@ ApplyItemEffectJumpAddr = 0x0231D574;
 /* Add your own symbols here... */
 
 /* !file arm9 */
-ChangeGlobalBorderColor = 0x02027D74;
-InitGroundMonsterBaseStats = 0x02053278;
-InitGroundMonsterStatsAndMoveset = 0x02054844;
-SetupKeyboard = 0x02036AA8;
 ShowKeyboardTypeCase3 = 0x02036C10;
 ShowKeyboardTypeDefaultCase = 0x02036D3C;
 ShowKeyboardReturn = 0x02036FA8;

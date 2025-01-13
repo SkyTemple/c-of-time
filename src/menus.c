@@ -6,12 +6,6 @@
 
 #if CUSTOM_SCRIPT_MENUS
 
-// The following functions aren't in pmdsky-debug yet, so we have to declare them
-// here and add their offsets in "symbols/custom_[region].ld".
-extern void InitGroundMonsterBaseStats(struct ground_monster* ground_monster);
-extern void InitGroundMonsterStatsAndMoveset(struct ground_monster* ground_monster, int level, bool flag);
-extern void SetupKeyboard(int index, char* buffer1, char* buffer2);
-
 // The "entry" function called for every single option of the Advanced Menu created by CreateRecruitAnyMonsterMenu. The resulting buffer will be used as the option string for the given `option_id`.
 // In this instance, the goal is to make a menu that consists of every Pokémon, so every option will need to show each Pokémon's name!
 // `option_id` starts at 0, but the first Pokémon (Bulbasaur) starts at 1, hence the +1.
@@ -151,8 +145,8 @@ bool UpdateRecruitAnyMonsterMenu(void) {
                 new_recruit->joined_at.val = DUNGEON_TEST_DUNGEON;
                 new_recruit->joined_at_floor = 1;
                 StrncpyName(new_recruit->name, GetNameString(monster_id), 10);
-                InitGroundMonsterBaseStats(new_recruit);
-                InitGroundMonsterStatsAndMoveset(new_recruit, 1, false);
+                SetBaseStatsMovesGroundMonster(new_recruit);
+                ApplyLevelUpBoostsToGroundMonster(new_recruit, 1, false);
                 SetPokemonJoined(monster_id);
                 GLOBAL_MENU_INFO.return_val = index;
             }
@@ -171,7 +165,7 @@ bool UpdateRecruitAnyMonsterMenu(void) {
 // The initial menu function called to show a keyboard prompt for the player to type in a string.
 // This is intended to be used by a variety of menus.
 void CreateSimpleKeyboardMenu(void) {
-    SetupKeyboard(GLOBAL_MENU_INFO.id, NULL, NULL);
+    SetupAndShowKeyboard(GLOBAL_MENU_INFO.id, NULL, NULL);
 }
 
 // The menu function called repeatedly to check if the player has finished entering a string.
