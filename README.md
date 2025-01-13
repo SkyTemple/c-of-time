@@ -74,9 +74,13 @@ Advantages over special processes include:
 - No frame delay (especially beneficial when building complex minigames or other real-time interactions)
 - Custom instructions can be used inside targeted routines, while `ProcessSpecial` doesn't work
 - Cleaner script code overall without resorting to macros
+- Performing entity-specific operations
 
 Disadvantages:
+- At the moment, routines cannot conditionally hang on custom instructions (as opposed to special processes, which can hang the routine and loop its code upon returning -1)
 - No built-in support in SkyTemple (workaround provided below)
+
+Like special processes, custom instructions are capable of returning a value that can then be checked with a switch-statement. For an example, see the custom instruction `CheckInputStatus` in `ground_instructions.c`.
 
 Custom instructions are disabled by default. To enable support for custom instructions in c-of-time, open the file `include/cot/custom_instructions.h` and change the line `#define CUSTOM_GROUND_INSTRUCTIONS 0` to `#define CUSTOM_GROUND_INSTRUCTIONS 1`. You can now add your own instructions to the `CUSTOM_INSTRUCTIONS` array in `ground_instructions.c`.
 
