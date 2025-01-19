@@ -1,14 +1,10 @@
 #include <pmdsky.h>
 #include <cot.h>
 
-// This function isn't in pmdsky-debug yet, so we have to declare it
-// here and add its offset in "symbols/custom_[region].ld".
-extern void ChangeGlobalBorderColor(int color_type);
-
 // Special process 100: Change border color
 // Based on https://github.com/SkyTemple/eos-move-effects/blob/master/example/process/set_frame_color.asm
 static int SpChangeBorderColor(short arg1) {
-  ChangeGlobalBorderColor(arg1);
+  SetBothScreensWindowsColor(arg1);
   return 0;
 }
 

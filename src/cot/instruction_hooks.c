@@ -21,7 +21,8 @@ __attribute((naked)) void NewInstructions(void) {
     asm volatile("sub r5,r5,r7");
 
     asm volatile("mov r0,r5"); // Opcode (offset from FIRST_CUSTOM_OPCODE)
-    asm volatile("mov r1,r6"); // Argument list
+    asm volatile("mov r1,r4"); // Current script routine pointer
+    asm volatile("mov r2,r6"); // Argument list
     asm volatile("bl DispatchCustomInstruction");
 
     asm volatile("b ScriptEngineReturnTwo");
@@ -43,7 +44,7 @@ __attribute((naked)) void HookGetParameterCount(void) {
     asm volatile(".ltorg");
 }
 
-__attribute((used)) void DispatchCustomInstruction(int index, uint16_t* args) {
+__attribute((used)) void DispatchCustomInstruction(int index, struct script_routine* routine, uint16_t* args) {
     if (index < 0 || index >= CUSTOM_INSTRUCTION_AMOUNT) {
         COT_ERRORFMT(COT_LOG_CAT_INSTRUCTIONS, "Custom opcode %d out of bounds", index);
         return;
@@ -51,7 +52,7 @@ __attribute((used)) void DispatchCustomInstruction(int index, uint16_t* args) {
 
     struct custom_instruction* instruction = &CUSTOM_INSTRUCTIONS[index];
     COT_LOGFMT(COT_LOG_CAT_INSTRUCTIONS, "Running custom instruction '%s' with %d arguments (opcode %d, index %d)", instruction->name, instruction->n_params, FIRST_CUSTOM_OPCODE + index, index);
-    instruction->handler(args);
+    instruction->handler(routine, args);
 }
 
 #endif

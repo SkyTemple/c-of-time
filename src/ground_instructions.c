@@ -15,7 +15,7 @@
 // - `height`: dialogue box height
 // - `screen`: 0 = bottom screen, 1 = top screen
 // - `frame`: 0xFD = default, 0xFA = invisible, ...
-void OpSetDialogueBoxAttributes(uint16_t* args) {
+void OpSetDialogueBoxAttributes(struct script_routine* routine, uint16_t* args) {
     int x = ScriptParamToInt(args[0]);
     int y = ScriptParamToInt(args[1]);
     int width = ScriptParamToInt(args[2]);
@@ -33,11 +33,11 @@ void OpSetDialogueBoxAttributes(uint16_t* args) {
     COT_LOGFMT(COT_LOG_CAT_INSTRUCTIONS, "Setting dialogue box attributes: x=%d, y=%d, width=%d, height=%d, screen=%d, frame=%d", x, y, width, height, screen, frame);
 }
 
-// Saves the set of held/pressed buttons into $EVENT_LOCAL as a bitfield.
+// Returns the set of held/pressed buttons as a bitfield.
 //
 // # Arguments
 // - `mode`: 0 = pressed buttons, 1 = held buttons
-void OpCheckInputStatus(uint16_t* args) {
+void OpCheckInputStatus(struct script_routine* routine, uint16_t* args) {
     int mode = ScriptParamToInt(args[0]);
 
     int buttons = 0;
@@ -46,7 +46,7 @@ void OpCheckInputStatus(uint16_t* args) {
     } else {
         GetHeldButtons(0, (undefined*) &buttons);
     }
-    SaveScriptVariableValue(NULL, VAR_EVENT_LOCAL, buttons);
+    routine->states[0].ssb_info[0].next_opcode_addr = ScriptCaseProcess(routine, buttons);
 }
 
 // Add your custom instructions to the list below.
