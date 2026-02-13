@@ -37,42 +37,23 @@ cotInternalTrampolineApplyItemEffect:
 
 .align 4
 cotInternalTrampolineApplyMoveEffect:
-  // Backup registers
-  push {r0-r9, r11, r12}
-
-  // Setup move_effect_input struct
-  ldr r10, =move_effect_input
-  str r6, [r10] // move_id
-  str r7, [r10, #0x4] // item_id
-  mov r0, #0
-  str r0, [r10, #0x8] // out_dealt_damage
-
-  // Call the hook function
-  mov r0, r10
-  mov r1, r9
-  mov r2, r4
-  mov r3, r8
-  bl cotInternalDispatchApplyMoveEffect
-
-  // Check if true was returned
-  cmp r0, #1
-
-  // Load saved registers
-  popeq {r0-r9, r11, r12}
-  ldreq r10, =move_effect_input_out_dealt_damage
-
-  // If yes, exit the original function
-  beq ApplyMoveEffectJumpAddr
-
-  pop {r0-r9, r11, r12}
-
-  // Restore the instruction that was replaced with the patch and call the original function
-  mov r1, #0x1
-  b ApplyMoveEffectHookAddr+4
-
-.align 4
-move_effect_input:
-  .word 0
-  .word 0
-move_effect_input_out_dealt_damage:
-  .word 0
+  push  {lr}
+  bne   TryHandleMove
+  mov   r0,r9
+  mov   r1,r4
+  bl    UpdateShopkeeperModeAfterAttack
+  TryHandleMove:
+  // Stack was already configured to set up data before, EXCEPT out_dealt_damage, which we init to 0 now.
+  // Initializing this may be redundant; it should only really matter if you forget to assign out_dealt_damage for a handled move in CustomApplyMoveEffect. If you're an optimization freak like I am, you can comment out the next 2 lines.
+  mov   r0,#0
+  str   r0,[sp,#0xC]            // Would be #0x8, but SP decreased by 4 when we pushed lr, so we need to counteract that by adding 4 here
+  add   r0,sp,#4                // data (would be mov r0,sp if not for the same point mentioned above)
+  mov   r1,r9                   // user
+  mov   r2,r4                   // target
+  mov   r3,r8                   // move
+  bl    cotInternalDispatchApplyMoveEffect
+  pop   {r1,r2,r3,r10}          // Get original LR (into r1) so we can return to vanilla flow if needed, put data->out_dealt_damage in r10, and reset SP to where it was before we hooked. (We don't do anything with r1/r2, we just need to pop 4 registers so r10 comes from the correct place and the SP is increased by 0x10.) We use r1 instead of lr, because using actual lr will try to pop that LAST.
+  cmp   r0,#0                   // Was the move handled?
+  bxeq  r1                      // If not, return to vanilla flow
+  cmp   r10,#0                  // Instruction right before return point (We don't jump straight to this instruction due for ExtractMoveCode compatibility)
+  b     ApplyMoveEffectJumpAddr // Otherwise, we're done!
