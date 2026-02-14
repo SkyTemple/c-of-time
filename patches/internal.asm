@@ -41,10 +41,10 @@
 
 .open "overlay29.bin", overlay29_start
   .org ApplyItemEffectHookAddr
-    b cotInternalTrampolineApplyItemEffect
+    bl cotInternalTrampolineApplyItemEffect
   .org ApplyMoveEffectHookAddr
     sub sp,sp,#0xC   // allocate stack space for data param of cotInternalDispatchApplyMoveEffect
     str r6,[sp]      // data->move_id
     str r7,[sp,#0x4] // data->item_id
-    bl cotInternalTrampolineApplyMoveEffect
+    bl  cotInternalTrampolineApplyMoveEffect
 .close

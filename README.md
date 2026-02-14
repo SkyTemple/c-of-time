@@ -59,12 +59,7 @@ Please note that custom move effects are currently *not* handled by the *Metrono
 
 #### Compatiblity with existing patches
 
-**Note: ROMs patched with c-of-time currently experience crashes with the `ExtractItemCode` patch.**
-
-You can work around the crash by removing `.org ApplyItemEffectHookAddr` and `b cotInternalTrampolineApplyItemEffect` in `patches/internal.asm`.
-However, doing so will cause custom item effects written in C to have no effect.
-
-Please reach out to us [on Discord](https://discord.gg/skytemple) for potential workarounds if you need to use the aforementioned patches while also adding effects via c-of-time.
+If a move/item is given an effect in c-of-time, that will take priority over any ASM effect given to it through ExtractMoveCode or ExtractItemCode.
 
 ### Custom script engine instructions
 

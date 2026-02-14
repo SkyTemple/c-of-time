@@ -11,29 +11,17 @@ cotInternalTrampolineScriptSpecialProcessCall:
 
 .align 4
 cotInternalTrampolineApplyItemEffect:
-  // Backup registers
-  push {r0-r9, r11, r12}
-
-  // Call the hook function
-  mov r0, r8
-  mov r1, r7
-  mov r2, r6
-  mov r3, r9
-  bl cotInternalDispatchApplyItemEffect
-  // Check if true was returned
-  cmp r0, #1
-
-  // Load saved registers
-  popeq {r0-r9, r11, r12}
-
-  // If yes, exit the original function
-  beq ApplyItemEffectJumpAddr
-
-  pop {r0-r9, r11, r12}
-
-  // Restore the instruction that was replaced with the patch and call the original function
-  cmp r0, #0
-  b ApplyItemEffectHookAddr+4
+  push    {lr}
+  mov     r0,r8 // user
+  mov     r1,r7 // target
+  mov     r2,r6 // item
+  mov     r3,r9 // is_thrown
+  bl      cotInternalDispatchApplyItemEffect
+  pop     {lr}
+  cmp     r0,#0 // Was the effect handled?
+  ldreqsh r0,[r6,#0x4] // original instruction
+  bxeq    lr
+  b       ApplyItemEffectJumpAddr
 
 .align 4
 cotInternalTrampolineApplyMoveEffect:
