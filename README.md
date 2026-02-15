@@ -59,7 +59,7 @@ Please note that custom move effects are currently *not* handled by the *Metrono
 
 #### Compatiblity with existing patches
 
-If a move/item is given an effect in c-of-time, that will take priority over any ASM effect given to it through ExtractMoveCode or ExtractItemCode.
+If a move/item is given an effect in c-of-time, that will take priority over any ASM effect given to it through ExtractMoveCode or ExtractItemCode. Specifically, the game will only try to run a vanilla/ASM effect for a move/item if `CustomApplyMoveEffect`/`CustomApplyItemEffect` returns false. Other than that, ExtractMoveCode, ExtractItemCode, and ExtractSPCode are fully compatible with c-of-time.
 
 ### Custom script engine instructions
 
