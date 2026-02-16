@@ -25,23 +25,16 @@ cotInternalTrampolineApplyItemEffect:
 
 .align 4
 cotInternalTrampolineApplyMoveEffect:
-  push  {lr}
-  bne   TryHandleMove
-  mov   r0,r9
-  mov   r1,r4
-  bl    UpdateShopkeeperModeAfterAttack
-  TryHandleMove:
-  // Stack was already configured to set up data before, EXCEPT out_dealt_damage, which we init to 0 now.
-  // Initializing this may be redundant; it should only really matter if you forget to assign out_dealt_damage for a handled move in CustomApplyMoveEffect. If you're an optimization freak like I am, you can comment out the next 2 lines.
-  mov   r0,#0
-  str   r0,[sp,#0xC]            // Would be #0x8, but SP decreased by 4 when we pushed lr, so we need to counteract that by adding 4 here
-  add   r0,sp,#4                // data (would be mov r0,sp if not for the same point mentioned above)
-  mov   r1,r9                   // user
-  mov   r2,r4                   // target
-  mov   r3,r8                   // move
+  mov   r10,#0                          // Redundancy; only really matters if the user forgets to assign out_dealt_damage in CustomApplyMoveEffect.
+  push  {r6,r7,r10,lr}                  // Create move_effect_input struct from move_id, item_id, and out_dealt_damage. Save lr for later so we can return from where we hooked.
+  bleq  UpdateShopkeeperModeAfterAttack // Condition is "GetEntityMoveTargetAndRange(attacker,move,NULL) & 0xF == 0" from vanilla code; condition flags were set by tst r0,#0
+  mov   r0,sp                           // data (put in the stack by the previous push)
+  mov   r1,r9                           // user
+  mov   r2,r4                           // target
+  mov   r3,r8                           // move
   bl    cotInternalDispatchApplyMoveEffect
-  pop   {r1,r2,r3,r10}          // Get original LR (into r1) so we can return to vanilla flow if needed, put data->out_dealt_damage in r10, and reset SP to where it was before we hooked. (We don't do anything with r1/r2, we just need to pop 4 registers so r10 comes from the correct place and the SP is increased by 0x10.) We use r1 instead of lr, because using actual lr will try to pop that LAST.
-  cmp   r0,#0                   // Was the move handled?
-  bxeq  r1                      // If not, return to vanilla flow
-  cmp   r10,#0                  // Instruction right before return point (We don't jump straight to this instruction due for ExtractMoveCode compatibility)
-  b     ApplyMoveEffectJumpAddr // Otherwise, we're done!
+  pop   {r6,r7,r10,lr}                  // Put move_effect_input back into r6, r7, and r10. Restore lr to what it was coming in so we can return from where we hooked.
+  cmp   r0,#0                           // Was the move handled?
+  bxeq  lr                              // If not, return to vanilla flow; let vanilla code / ExtractMoveCode handle the move.
+  cmp   r10,#0                          // Instruction right before return point (We don't jump straight to this instruction due for ExtractMoveCode compatibility)
+  b     ApplyMoveEffectJumpAddr         // Otherwise, we're done! Jump towards the end of ExecuteMoveEffect after the move handling code for finalization

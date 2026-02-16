@@ -43,8 +43,8 @@
   .org ApplyItemEffectHookAddr
     bl cotInternalTrampolineApplyItemEffect
   .org ApplyMoveEffectHookAddr
-    sub sp,sp,#0xC   // allocate stack space for data param of cotInternalDispatchApplyMoveEffect
-    str r6,[sp]      // data->move_id
-    str r7,[sp,#0x4] // data->item_id
+    nop       // Normally there would be a bne here that skips the next three lines; we don't want to do that, because we want to always run the hook. We still use the condition flags to skip the function that needs to be skipped in trampolines.s.
+    mov r0,r9 // UNCHANGED
+    mov r1,r4 // UNCHANGED
     bl  cotInternalTrampolineApplyMoveEffect
 .close
