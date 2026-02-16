@@ -20,8 +20,8 @@ cotInternalTrampolineApplyItemEffect:
   pop     {lr}
   cmp     r0,#0 // Was the effect handled?
   ldreqsh r0,[r6,#0x4] // original instruction
-  bxeq    lr
-  b       ApplyItemEffectJumpAddr
+  bxeq    lr                      // If not, return to vanilla flow; let vanilla code / ExtractItemCode handle the Item.
+  b       ApplyItemEffectJumpAddr // Otherwise, we're done! Jump towards the end of ApplyItemEffect after the item handling code for finalization
 
 .align 4
 cotInternalTrampolineApplyMoveEffect:
