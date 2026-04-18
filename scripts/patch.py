@@ -10,6 +10,7 @@ import platform
 import tempfile
 
 OVERLAY_EXTRA = 36
+OVERLAY_DUNGEON = 29
 
 region = sys.argv[1]
 rom_path = sys.argv[2]
@@ -20,6 +21,14 @@ overlay_symbols_lookup = {} # Key = symbol_name: string, value = offset: int
 
 rom = ndspy.rom.NintendoDSRom.fromFile(rom_path)
 overlays = rom.loadArm9Overlays()
+
+# Migration data for old CoT move/item effect hooks applied before https://github.com/SkyTemple/c-of-time/pull/268.
+EMC_OLD_HOOK_ADDR = { "EU": 0x023302E4, "NA": 0x0232F8A4, "JP": 0x02330C98 }
+EIC_OLD_HOOK_ADDR = { "EU": 0x0231C438, "NA": 0x0231B9D8, "JP": 0x0231CEA4 }
+EMC_MIGRATION_PATCHED_BYTES = 0xE59FB0FC
+EMC_MIGRATION_VANILLA_BYTES = 0xE3A01001
+EIC_MIGRATION_PATCHED_BYTES = 0x0A000029
+EIC_MIGRATION_VANILLA_BYTES = 0xE3500000
 
 def load_overlay_symbols():
   process = Popen(["arm-none-eabi-nm", overlay_elf_path], stdout=PIPE)
@@ -112,7 +121,44 @@ def apply_overlay():
     if readline>0:
       readline -= 1
 
+def migrate_eimc_hooks():
+  move_addr = EMC_OLD_HOOK_ADDR.get(region)
+  item_addr = EIC_OLD_HOOK_ADDR.get(region)
+  if move_addr is None or item_addr is None:
+    # Unknown region, skip migration
+    return
+
+  overlay = overlays[OVERLAY_DUNGEON]
+  data = bytearray(rom.files[overlay.fileID])
+  ram_base = overlay.ramAddress
+
+  emc_applied = rom.filenames.idOf("BALANCE/waza_cd.bin") is not None
+  eic_applied = rom.filenames.idOf("BALANCE/item_cd.bin") is not None
+
+  move_expected = EMC_MIGRATION_PATCHED_BYTES if emc_applied else EMC_MIGRATION_VANILLA_BYTES
+  item_expected = EIC_MIGRATION_PATCHED_BYTES if eic_applied else EIC_MIGRATION_VANILLA_BYTES
+
+  move_offset = move_addr - ram_base
+  item_offset = item_addr - ram_base
+  move_current = int.from_bytes(data[move_offset:move_offset + 4], "little")
+  item_current = int.from_bytes(data[item_offset:item_offset + 4], "little")
+
+  changed = False
+  if move_current != move_expected:
+    print(f"!!! Patching old CoT move effect hook detected at {hex(move_addr)}")
+    data[move_offset:move_offset + 4] = move_expected.to_bytes(4, "little")
+    changed = True
+  if item_current != item_expected:
+    print(f"!!! Patching old CoT item effect hook detected at {hex(item_addr)}")
+    data[item_offset:item_offset + 4] = item_expected.to_bytes(4, "little")
+    changed = True
+
+  if changed:
+    rom.files[overlay.fileID] = bytes(data)
+
 def apply_binary_patches():
+  migrate_eimc_hooks() # Fixup old CoT move/item effect hooks
+
   if not os.path.exists("build/binaries"):
     os.mkdir("build/binaries")
 
