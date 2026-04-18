@@ -143,7 +143,7 @@ def apply_binary_patches():
     with open(f"build/binaries/overlay{index}.bin", "wb") as f:
       f.write(rom.files[overlay.fileID])
 
-  for file in glob.glob("patches/*.asm"):
+  for file in glob.glob("patches/*.asm") + glob.glob("modules/*/patches/*.asm"):
     apply_binary_patch(file)
 
   # Apply the main binaries
