@@ -80,8 +80,10 @@ CFLAGS  +=  $(EXTRA_CFLAGS)
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
 
 ASFLAGS	:=	-g $(ARCH)
+CUSTOM_LDS := $(wildcard $(CURDIR)/../symbols/custom_$(REGION).ld) \
+              $(wildcard $(CURDIR)/../symbols/custom_$(REGION)_*.ld)
 LDFLAGS	=	-T $(CURDIR)/../symbols/generated_$(REGION).ld \
-			-T $(CURDIR)/../symbols/custom_$(REGION).ld -T $(CURDIR)/../linker.ld \
+			$(foreach ld,$(CUSTOM_LDS),-T $(ld)) -T $(CURDIR)/../linker.ld \
 			-g $(ARCH) -Wl,-Map,$(notdir $*.map) -Xlinker -no-enum-size-warning -nostdlib  -Xlinker --no-check-sections
 
 #---------------------------------------------------------------------------------

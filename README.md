@@ -144,7 +144,7 @@ then clean the build with `make clean`.
 ## Adding custom symbols
 If you've found symbols that are currently missing, consider contributing them to [pmdsky-debug](https://github.com/UsernameFodder/pmdsky-debug). You can find instructions in the repository's [contribution docs](https://github.com/UsernameFodder/pmdsky-debug/blob/master/docs/contributing.md).
 
-For quick testing, you can also add symbols to `symbols/custom_[region].ld` (`symbols/generated_[region].ld` is auto-generated and should not be modified). You need to specify the file each symbol belongs to in comments:
+For quick testing, you can also add symbols to `symbols/custom_[region].ld` (`symbols/generated_[region].ld` is auto-generated and should not be modified). You can also add additional linker scripts that match `symbols/custom_[region]_*.ld`. You need to specify the file each symbol belongs to in comments:
 
 ```
 /* !file arm9 */
