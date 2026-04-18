@@ -177,6 +177,16 @@ Subtract the amount of additional bytes you want to allocate from `ORIGIN` and a
 ### Optimizing for size
 You can also change the compiler flags to optimize for size instead of speed. To do so, set `OPT_LEVEL := Os` in `Makefile`. Effectiveness varies per project.
 
+## Submodules
+
+You can add external c-of-time compatible libraries as Git submodules:
+
+```bash
+git submodule add https://github.com/user/module-name modules/module-name
+```
+
+**Caveat:** File names currently must be unique across all modules and code in the main repository.
+
 ## Licensing
 - Build scripts (everything under the `scripts` directory) are licensed under GPLv3. Review the file `LICENSE_GPLv3` for more information.
 - All other code is licensed under MIT. Review the file `LICENSE_MIT` for more information.
