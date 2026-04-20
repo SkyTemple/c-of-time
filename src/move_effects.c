@@ -1,6 +1,8 @@
 #include <pmdsky.h>
 #include <cot.h>
 
+// A move effect function should return a bool for whether or not the move succeeded; this is used to determine whether Wary Fighter will activate.
+
 // Implements the "Body Press" move
 // Based on https://github.com/Adex-8x/EoS-ASM-Effects/blob/main/moves/gen8/body_press.asm
 // Deals damage based on the user's defense instead of attack stat

@@ -41,7 +41,10 @@
 
 .open "overlay29.bin", overlay29_start
   .org ApplyItemEffectHookAddr
-    b cotInternalTrampolineApplyItemEffect
+    bl cotInternalTrampolineApplyItemEffect
   .org ApplyMoveEffectHookAddr
-    b cotInternalTrampolineApplyMoveEffect
+    nop       // Normally there would be a bne here that skips the next three lines; we don't want to do that, because we want to always run the hook. We still use the condition flags to skip the function that needs to be skipped in trampolines.s.
+    mov r0,r9 // UNCHANGED
+    mov r1,r4 // UNCHANGED
+    bl  cotInternalTrampolineApplyMoveEffect
 .close

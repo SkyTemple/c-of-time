@@ -59,12 +59,7 @@ Please note that custom move effects are currently *not* handled by the *Metrono
 
 #### Compatiblity with existing patches
 
-**Note: ROMs patched with c-of-time currently experience crashes with the `ExtractItemCode` and `ExtractMoveCode` patch.**
-
-You can work around the crash by removing `.open "overlay29.bin", overlay29_start` and all following lines in `patches/internal.asm`.
-However, doing so will cause custom effects written in C to have no effect.
-
-Please reach out to us [on Discord](https://discord.gg/skytemple) for potential workarounds if you need to use the aforementioned patches while also adding effects via c-of-time.
+If a move/item is given an effect in c-of-time, that will take priority over any ASM effect given to it through ExtractMoveCode or ExtractItemCode. Specifically, the game will only try to run a vanilla/ASM effect for a move/item if `CustomApplyMoveEffect`/`CustomApplyItemEffect` returns false. Other than that, ExtractMoveCode, ExtractItemCode, and ExtractSPCode are fully compatible with c-of-time.
 
 ### Custom script engine instructions
 

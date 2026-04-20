@@ -10,9 +10,9 @@ IS_BASE_GAME_MENU_FINISHED = 0x023261FC;
 
 /* !file overlay29 */
 ApplyMoveEffect = 0x0232FC60;
-ApplyMoveEffectHookAddr = 0x02330C98;
-ApplyMoveEffectJumpAddr = 0x02333AC0;
-ApplyItemEffectHookAddr = 0x0231CEA4;
+ApplyMoveEffectHookAddr = 0x02330C84;
+ApplyMoveEffectJumpAddr = 0x02333AC4;
+ApplyItemEffectHookAddr = 0x0231CE74;
 ApplyItemEffectJumpAddr = 0x0231DFE0;
 
 /* Add your own symbols here... */
