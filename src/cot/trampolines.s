@@ -25,9 +25,9 @@ cotInternalTrampolineApplyItemEffect:
 
 .align 4
 cotInternalTrampolineApplyMoveEffect:
-  bleq  UpdateShopkeeperModeAfterAttack // Original instruction from vanilla code; condition flags were set before our hook
   mov   r10,#0                          // Redundancy; only really matters if the user forgets to assign out_dealt_damage in CustomApplyMoveEffect.
   push  {r6,r7,r10,lr}                  // Create move_effect_input struct from move_id, item_id, and out_dealt_damage. Save lr for later so we can return from where we hooked.
+  bleq  UpdateShopkeeperModeAfterAttack // Original instruction from vanilla code; condition flags were set before our hook
   mov   r0,sp                           // data (put in the stack by the previous push)
   mov   r1,r9                           // user
   mov   r2,r4                           // target
