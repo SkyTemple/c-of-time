@@ -38,7 +38,7 @@ You can install c-of-time on Ubuntu or Debian using the following methods. The s
 ## Fedora
 
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
-2. Run the following command to install the required tools: `sudo dnf install @development-tools gcc-c++ cmake gif git python3-pip arm-none-eabi-binutils-cs arm-none-eabi-gcc-cs`. You will need to enter your password during the installation.
+2. Run the following command to install the required tools: `sudo dnf install @development-tools gcc-c++ cmake git python3-pip arm-none-eabi-binutils-cs arm-none-eabi-gcc-cs`. You will need to enter your password during the installation.
 3. You can now continue with the steps 3-10 of the Ubuntu/Debian method above.
 
 ## Arch Linux
