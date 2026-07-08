@@ -9,11 +9,17 @@ You can install c-of-time on Linux using the following methods. Instructions var
 
 ## Ubuntu/Debian
 
-You can install c-of-time on Ubuntu or Debian using the following methods. The steps detailed in this guide were tested on Ubuntu 22.04.
+You can install c-of-time on Ubuntu or Debian using the following methods. The steps detailed in this guide were tested on Ubuntu 24.04.
+> [!WARNING]
+>
+> Link-time optimization is known to fail on older versions of gcc-arm-none-eabi, such as 10.3.1,
+> the last version published on Ubuntu Universe for Ubuntu 22 (Jammy). As such, Ubuntu 24 or later
+> is recommended, but if using this version is not possible, link-time optimization can be disabled
+> by removing the `-flto` flag from `CFLAGS` in `Makefile` to circumvent the error. 
 
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
-2. Run the following command to install the required tools: `sudo apt install build-essential cmake python3-pip gcc-arm-none-eabi binutils-arm-none-eabi`. You will need to enter your password during the installation.
-3. Install Python dependencies: `pip3 install pyyaml ndspy`
+2. Run the following command to install the required tools: `sudo apt install build-essential cmake git python3-pip gcc-arm-none-eabi binutils-arm-none-eabi`. You will need to enter your password during the installation.
+3. Install Python dependencies: `pip3 install pyyaml ndspy --break-system-packages`
 4. Compile `armips`:
     1. Run `git clone --recursive https://github.com/Kingcom/armips.git` to download the source code.
     2. Run `cd armips` to enter the directory.
@@ -32,14 +38,14 @@ You can install c-of-time on Ubuntu or Debian using the following methods. The s
 ## Fedora
 
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
-2. Run the following command to install the required tools: `sudo dnf install @development-tools gcc-c++ cmake python3-pip arm-none-eabi-binutils-cs arm-none-eabi-gcc-cs`. You will need to enter your password during the installation.
+2. Run the following command to install the required tools: `sudo dnf install @development-tools gcc-c++ cmake gif git python3-pip arm-none-eabi-binutils-cs arm-none-eabi-gcc-cs`. You will need to enter your password during the installation.
 3. You can now continue with the steps 3-10 of the Ubuntu/Debian method above.
 
 ## Arch Linux
 
 1. Open the Terminal app. The exact steps vary based on your desktop environment.
 2. Run the following command to install the required tools: `sudo pacman -Syu base-devel git python python-pip arm-none-eabi-gcc arm-none-eabi-binutils`. You will need to enter your password during the installation.
-3. Install Python dependencies: `pip3 install pyyaml ndspy`
+3. Install Python dependencies: `pip3 install pyyaml ndspy --break-system-packages`
 4. Install the [armips package](https://aur.archlinux.org/packages/armips) via the Arch User Repository (AUR). Please refer to the [Arch Wiki](https://wiki.archlinux.org/title/Arch_User_Repository) for instructions.
 5. You can now continue with the steps 5-10 of the Ubuntu/Debian method above.
 
