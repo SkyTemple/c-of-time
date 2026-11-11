@@ -1,11 +1,14 @@
 /build
 /.venv
+**/__pycache__
 
 out.bin
 out.elf
 out.asm
+out.sav
 
 *.nds
 *.nds.skytemple
 
 symbols/generated_*.ld
+fragments

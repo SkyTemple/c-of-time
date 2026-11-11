@@ -4,7 +4,7 @@
 // Elixir: Refills 10 PP of each move
 static void ItemElixir(struct entity* target) {
   if (target->type == ENTITY_MONSTER) {
-    struct monster* target_monster = (struct monster*) target->info;
+    struct monster* target_monster = target->info.monster;
     for (int i = 0; i < 4; i++) {
       struct move* current_move = &target_monster->moves[i];
       uint8_t max_pp = GetMaxPp(current_move);
