@@ -27,9 +27,9 @@ SECTIONS {
         /*
                 Extensions are of format ".text.EXT.[]" where EXT is the extension name
                 as described in EXTENSIONS list in 'script/extensions.py', [] are per extension sub params
-                Extensions example:
+                Extensions example (this will be handled by registered extension "myextension"):
         
-        .text.myextension.param1.param2 : { // This will be handled by extension "myextension" in 'patch.py'
+        .text.myextension.param1.param2 : {
                 *(.myextension.init)
                 *(.myextension)
         } >NEW = 0xff

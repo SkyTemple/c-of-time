@@ -182,6 +182,11 @@ git submodule add https://github.com/user/module-name modules/module-name
 
 **Caveat:** File names currently must be unique across all modules and code in the main repository.
 
+### Useful Submodules
+
+- SND Stream C: https://github.com/irdkwia/snd-stream-c
+- External Code Extension: https://github.com/irdkwia/external-code-extension
+
 ## Licensing
 - Build scripts (everything under the `scripts` directory) are licensed under GPLv3. Review the file `LICENSE_GPLv3` for more information.
 - All other code is licensed under MIT. Review the file `LICENSE_MIT` for more information.
