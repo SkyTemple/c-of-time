@@ -85,7 +85,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
 
 ASFLAGS	:=	-g $(ARCH)
 
-EXTENSIONS := $(wildcard $(CURDIR)/modules/*/script/extensions.py)
+EXTENSIONS := $(wildcard $(CURDIR)/modules/*/scripts/extensions.py)
 
 CUSTOM_LDS := $(wildcard $(CURDIR)/../symbols/custom_$(REGION).ld) \
               $(wildcard $(CURDIR)/../symbols/custom_$(REGION)_*.ld) \
