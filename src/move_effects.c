@@ -10,7 +10,7 @@ static bool MoveBodyPress(struct entity *user, struct entity *target, struct mov
 {
   if (user->type == ENTITY_MONSTER)
   {
-    struct monster *user_monster = (struct monster *)user->info;
+    struct monster *user_monster = user->info.monster;
 
     int old_attack = user_monster->offensive_stats[0];
     user_monster->offensive_stats[0] = user_monster->defensive_stats[0];

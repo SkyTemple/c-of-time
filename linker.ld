@@ -19,9 +19,21 @@ SECTIONS {
                 NB is the OV number (7 or 9 for 'arm', any ARM9 Overlay number for 'ov')
                 SPECIAL is a distinct name, this is only to distinguish between 2 sections on the same overlay
         */
-        /*.text.OV.NB.SPECIAL : {
+        /*
+        .text.OV.NB.SPECIAL : {
                 *(.YOURSECTIONNAME)
-        } >NEW = 0xff*/
+        } >NEW = 0xff
+        */
+        /*
+                Extensions are of format ".text.EXT.[]" where EXT is the extension name
+                as described in EXTENSIONS list in 'script/extensions.py', [] are per extension sub params
+                Extensions example (this will be handled by registered extension "myextension"):
+        
+        .text.myextension.param1.param2 : {
+                *(.myextension.init)
+                *(.myextension)
+        } >NEW = 0xff
+        */
         /*
                 Main Section (Default section, in ARM9 overlay 36)
                 Note that you should add your special sections before that
