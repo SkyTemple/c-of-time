@@ -7,10 +7,8 @@ MEMORY {
         main    : ORIGIN = 0x23D7FF0, LENGTH = 0x8010
         /* Change/Add memory locations here */
         /* NEW    : ORIGIN = 0x2000000, LENGTH = 0x800 */
-        cbmove  : ORIGIN = MoveStartAddress, LENGTH = 0x2598
-        cbitem  : ORIGIN = ItemStartAddress, LENGTH = 0xCC4
-        cbsp    : ORIGIN = ProcStartAddress, LENGTH = 0x810
 }
+
 SECTIONS {
         /*
                 Add more sections for the linker, each section using a different memory location
@@ -21,50 +19,20 @@ SECTIONS {
                 NB is the OV number (7 or 9 for 'arm', any ARM9 Overlay number for 'ov')
                 SPECIAL is a distinct name, this is only to distinguish between 2 sections on the same overlay
         */
-        /*.text.OV.NB.SPECIAL : {
+        /*
+        .text.OV.NB.SPECIAL : {
                 *(.YOURSECTIONNAME)
-        } >NEW = 0xff*/
+        } >NEW = 0xff
+        */
         /*
                 Extensions are of format ".text.EXT.[]" where EXT is the extension name
-                as described in EXTENSIONS in 'patch.py', [] are per extension sub params
-                Two extensions are preloaded:
-                - 'file' lets you output compiled binary to a separate file in 'fragments' folder
-                  Exact file name is described by sub params
-                  You are free to use any memory area for this extension
-                - 'codebin' lets you output compiled binary directly to 'BALANCE/waza_cd.bin',
-                  'BALANCE/item_cd.bin' and 'BALANCE/process.bin' effects file slots
-                  sub params are 'CTYPE.SLOT', where CTYPE is ('move', 'item', 'sp') and
-                  SLOT the slot number to replace
-                  Memory areas to use are already defined in this file for all three types
-                  NOTE: Moves/Items/SPs must be placed inside their dedicated
-                  OVERLAY block to share their virtual address
-        */
-        /*
+                as described in EXTENSIONS list in 'script/extensions.py', [] are per extension sub params
                 Extensions example:
-        */
-        /*.text.file.out.bin : {
-                *(.myout.init)
-                *(.myout)
-        } >NEW = 0xff*/
-        /*
-        OVERLAY : {
-                .text.codebin.move.23 {
-                        *(.codebin.mymove.init)
-                        *(.codebin.mymove)
-                }
-        } >cbmove = 0xff
-        OVERLAY : {
-                .text.codebin.item.45 {
-                        *(.codebin.myitem.init)
-                        *(.codebin.myitem)
-                }
-        } >cbitem = 0xff
-        OVERLAY : {
-                .text.codebin.sp.67 {
-                        *(.codebin.mysp.init)
-                        *(.codebin.mysp)
-                }
-        } >cbsp = 0xff
+        
+        .text.myextension.param1.param2 : { // This will be handled by extension "myextension" in 'patch.py'
+                *(.myextension.init)
+                *(.myextension)
+        } >NEW = 0xff
         */
         /*
                 Main Section (Default section, in ARM9 overlay 36)

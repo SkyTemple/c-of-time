@@ -84,10 +84,14 @@ CFLAGS  +=  $(EXTRA_CFLAGS)
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
 
 ASFLAGS	:=	-g $(ARCH)
+
+EXTENSIONS := $(wildcard $(CURDIR)/modules/*/script/extensions.py)
+
 CUSTOM_LDS := $(wildcard $(CURDIR)/../symbols/custom_$(REGION).ld) \
               $(wildcard $(CURDIR)/../symbols/custom_$(REGION)_*.ld) \
               $(wildcard $(CURDIR)/../modules/*/symbols/custom_$(REGION).ld) \
-              $(wildcard $(CURDIR)/../modules/*/symbols/custom_$(REGION)_*.ld)
+              $(wildcard $(CURDIR)/../modules/*/symbols/custom_$(REGION)_*.ld) \
+              $(wildcard $(CURDIR)/../modules/*/linker.ld)
 LDFLAGS	=	-T $(CURDIR)/../symbols/generated_$(REGION).ld \
 			$(foreach ld,$(CUSTOM_LDS),-T $(ld)) -T $(CURDIR)/../linker.ld \
 			-g $(ARCH) -Wl,-Map,$(notdir $*.map) -Xlinker -no-enum-size-warning -nostdlib  -Xlinker --no-check-sections
@@ -186,7 +190,7 @@ symbols/generated_$(REGION).ld:
 
 .PHONY: patch
 patch: build
-	$(PYTHON) scripts/patch.py $(REGION) $(ROM) $(OUTPUT).elf $(ROM_OUT)
+	$(PYTHON) scripts/patch.py $(REGION) $(ROM) $(OUTPUT).elf $(ROM_OUT) $(foreach ext,$(EXTENSIONS),-X $(ext))
 
 .PHONY: asmdump
 asmdump: build

@@ -8,22 +8,43 @@ from subprocess import Popen, PIPE
 import glob
 import platform
 import tempfile
-
-from extensions import external_file, code_bin
+import argparse
+import importlib.util
 
 OVERLAY_EXTRA = 36
 OVERLAY_DUNGEON = 29
 
+parser = argparse.ArgumentParser(description="")
+parser.add_argument("region")
+parser.add_argument("rom_in")
+parser.add_argument("overlay_elf")
+parser.add_argument("rom_out")
+parser.add_argument(
+    "-X",
+    "--extension",
+    help="Register an extension python file",
+    action='append',
+)
 
-EXTENSIONS = {
-  "file": external_file.dofile,
-  "codebin": code_bin.dofile,
-}
+args = parser.parse_args()
 
-region = sys.argv[1]
-rom_path = sys.argv[2]
-overlay_elf_path = sys.argv[3]
-rom_out_path = sys.argv[4]
+region = args.region
+rom_path = args.rom_in
+overlay_elf_path = args.overlay_elf
+rom_out_path = args.rom_out
+
+EXTENSIONS = {}
+if args.extension is not None:
+  for i, file_path in enumerate(args.extension):
+    module_name = f"patch_extension_{i}"
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+    for n, f in module.EXTENSIONS:
+      if n in EXTENSIONS:
+        raise ValueError(f"Extension '{n}' is defined several times!")
+      EXTENSIONS[n] = f
 
 overlay_symbols_lookup = {} # Key = symbol_name: string, value = offset: int
 
