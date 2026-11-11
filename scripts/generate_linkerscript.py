@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 import sys
-import glob
 from pathlib import Path
 
-from yaml import load, Loader
+from yaml import Loader, load
 
 region = sys.argv[1]
 itcm_region = region + "-ITCM"
@@ -14,7 +13,7 @@ all_symbols = set()
 linkerscript_lines.append("/* THIS FILE IS AUTO-GENERATED. DO NOT MODIFY! */")
 
 for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
-  with open(yaml_file_path, 'r', encoding="utf-8") as f:
+  with open(yaml_file_path, "r", encoding="utf-8") as f:
     linkerscript_lines.append("")
     linkerscript_lines.append(f"/* --- {yaml_file_path} --- */")
     yaml_string = f.read()
@@ -22,8 +21,8 @@ for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
     for file_name, contents in symbol_def.items():
       linkerscript_lines.append("")
       linkerscript_lines.append(f"/* !file {file_name} */")
-      if 'address' in contents:
-        addresses = contents['address']
+      if "address" in contents:
+        addresses = contents["address"]
         if region in addresses:
           symbol = f"{file_name.upper()}_LOAD_ADDR"
 
@@ -34,18 +33,18 @@ for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
             all_symbols.add(symbol)
 
       symbols = []
-      if 'functions' in contents:
-        symbols.extend(contents['functions'])
-      if 'data' in contents:
-        symbols.extend(contents['data'])
-      
+      if "functions" in contents:
+        symbols.extend(contents["functions"])
+      if "data" in contents:
+        symbols.extend(contents["data"])
+
       for sym in symbols:
         # Define symbols for all aliases on this symbol
-        names = [sym['name']]
-        if 'aliases' in sym:
-          names.extend(sym['aliases'])
+        names = [sym["name"]]
+        if "aliases" in sym:
+          names.extend(sym["aliases"])
 
-        addresses = sym['address']
+        addresses = sym["address"]
         addr = None
         # *-ITCM regions are runtime overrides for the normal addresses
         if itcm_region in addresses:
@@ -68,4 +67,4 @@ for yaml_file_path in Path("pmdsky-debug/symbols").rglob("*.yml"):
 with open(f"symbols/generated_{region}.ld", "w", encoding="utf-8") as f:
   for line in linkerscript_lines:
     f.write(line)
-    f.write('\n')
+    f.write("\n")
